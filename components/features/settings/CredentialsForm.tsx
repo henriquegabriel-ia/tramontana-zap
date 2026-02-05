@@ -134,6 +134,7 @@ export const CredentialsForm = forwardRef<HTMLDivElement, CredentialsFormProps>(
               onSave={handleSave}
               showMetaApp={true}
               showAppSecret={true}
+              hasAppSecretSaved={metaApp?.hasAppSecret ?? false}
               showValidateButton={true}
               showSaveButton={true}
               showTestButton={true}
