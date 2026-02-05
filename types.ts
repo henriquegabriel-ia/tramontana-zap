@@ -131,6 +131,7 @@ export interface Contact {
   phone: string;
   email?: string | null;
   status: ContactStatus;
+  originalStatus?: ContactStatus; // Status real do banco (antes de calcular supressão)
   tags: string[];
   lastActive: string;
   createdAt?: string;
