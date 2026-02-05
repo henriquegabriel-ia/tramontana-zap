@@ -184,8 +184,9 @@ export async function POST(request: NextRequest) {
     let appId = body.appId?.trim()
     let appSecret = body.appSecret?.trim()
 
-    // Se não veio no body, busca do banco
-    if (!accessToken) {
+    // Se não veio no body OU é o placeholder mascarado, busca do banco
+    const isPlaceholder = !accessToken || accessToken === '***configured***'
+    if (isPlaceholder) {
       const whatsappCreds = await getWhatsAppCredentials()
       accessToken = whatsappCreds?.accessToken
     }
