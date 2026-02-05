@@ -1,7 +1,7 @@
 'use client';
 
 import React from 'react';
-import { Edit2, Trash2, Tag, ChevronLeft, ChevronRight } from 'lucide-react';
+import { Edit2, Trash2, Tag, ChevronLeft, ChevronRight, ShieldOff } from 'lucide-react';
 import { Tooltip, TooltipContent, TooltipTrigger } from '@/components/ui/tooltip';
 import { StatusBadge } from '@/components/ui/status-badge';
 import { Button } from '@/components/ui/button';
@@ -21,6 +21,7 @@ export interface ContactTableProps {
   onToggleSelectAll: () => void;
   onEditContact: (contact: Contact) => void;
   onDeleteClick: (id: string) => void;
+  onUnsuppress?: (phone: string) => void;
 }
 
 export const ContactTable: React.FC<ContactTableProps> = ({
@@ -32,7 +33,8 @@ export const ContactTable: React.FC<ContactTableProps> = ({
   onToggleSelect,
   onToggleSelectAll,
   onEditContact,
-  onDeleteClick
+  onDeleteClick,
+  onUnsuppress
 }) => {
   const isMobile = useIsMobile();
   const tableColSpan = showSuppressionDetails ? 8 : 7;
@@ -48,6 +50,7 @@ export const ContactTable: React.FC<ContactTableProps> = ({
         onToggleSelect={onToggleSelect}
         onEditContact={onEditContact}
         onDeleteClick={onDeleteClick}
+        onUnsuppress={onUnsuppress}
       />
     );
   }
@@ -103,6 +106,7 @@ export const ContactTable: React.FC<ContactTableProps> = ({
                 onToggleSelect={onToggleSelect}
                 onEdit={onEditContact}
                 onDelete={onDeleteClick}
+                onUnsuppress={onUnsuppress}
               />
             ))
           )}
@@ -119,6 +123,7 @@ interface ContactTableRowProps {
   onToggleSelect: (id: string) => void;
   onEdit: (contact: Contact) => void;
   onDelete: (id: string) => void;
+  onUnsuppress?: (phone: string) => void;
 }
 
 // Memoized row component - prevents re-render when other rows change
@@ -129,7 +134,8 @@ const ContactTableRow = React.memo(
     showSuppressionDetails,
     onToggleSelect,
     onEdit,
-    onDelete
+    onDelete,
+    onUnsuppress
   }: ContactTableRowProps) {
     const displayName = contact.name || contact.phone;
 
@@ -182,9 +188,29 @@ const ContactTableRow = React.memo(
         </td>
         {showSuppressionDetails && (
           <td className="px-6 py-5 text-xs text-[var(--ds-text-secondary)]">
-            <div className="text-sm text-[var(--ds-text-primary)]">{contact.suppressionReason || '—'}</div>
-            <div className="text-[10px] text-[var(--ds-text-muted)]">
-              {contact.suppressionSource ? `Fonte: ${contact.suppressionSource}` : 'Fonte: —'}
+            <div className="flex items-start gap-2">
+              <div className="flex-1 min-w-0">
+                <div className="text-sm text-[var(--ds-text-primary)]">{contact.suppressionReason || '—'}</div>
+                <div className="text-[10px] text-[var(--ds-text-muted)]">
+                  {contact.suppressionSource ? `Fonte: ${contact.suppressionSource}` : 'Fonte: —'}
+                </div>
+              </div>
+              {onUnsuppress && contact.suppressionReason && (
+                <Tooltip>
+                  <TooltipTrigger asChild>
+                    <Button
+                      variant="ghost"
+                      size="icon-sm"
+                      className="shrink-0 text-red-400 hover:text-red-300 hover:bg-red-500/20"
+                      onClick={() => onUnsuppress(contact.phone)}
+                      aria-label="Remover supressão"
+                    >
+                      <ShieldOff size={14} aria-hidden="true" />
+                    </Button>
+                  </TooltipTrigger>
+                  <TooltipContent><p>Remover supressão</p></TooltipContent>
+                </Tooltip>
+              )}
             </div>
           </td>
         )}

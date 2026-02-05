@@ -1,7 +1,7 @@
 'use client'
 
 import React from 'react'
-import { Edit2, Trash2, Tag, Check, User } from 'lucide-react'
+import { Edit2, Trash2, Tag, Check, User, ShieldOff } from 'lucide-react'
 import { Tooltip, TooltipContent, TooltipTrigger } from '@/components/ui/tooltip'
 import { StatusBadge } from '@/components/ui/status-badge'
 import { Button } from '@/components/ui/button'
@@ -20,6 +20,7 @@ interface ContactCardProps {
   onToggleSelect: (id: string) => void
   onEdit: (contact: Contact) => void
   onDelete: (id: string) => void
+  onUnsuppress?: (phone: string) => void
 }
 
 export const ContactCard = React.memo(
@@ -29,7 +30,8 @@ export const ContactCard = React.memo(
     showSuppressionDetails,
     onToggleSelect,
     onEdit,
-    onDelete
+    onDelete,
+    onUnsuppress
   }: ContactCardProps) {
     const displayName = contact.name || contact.phone
 
@@ -111,12 +113,35 @@ export const ContactCard = React.memo(
         {/* Suppression details (optional) */}
         {showSuppressionDetails && contact.suppressionReason && (
           <div className="mt-3 p-2 rounded-lg bg-red-500/10 border border-red-500/20">
-            <p className="text-xs text-red-300">{contact.suppressionReason}</p>
-            {contact.suppressionSource && (
-              <p className="text-[10px] text-red-400/60 mt-0.5">
-                Fonte: {contact.suppressionSource}
-              </p>
-            )}
+            <div className="flex items-start justify-between gap-2">
+              <div className="flex-1 min-w-0">
+                <p className="text-xs text-red-300">{contact.suppressionReason}</p>
+                {contact.suppressionSource && (
+                  <p className="text-[10px] text-red-400/60 mt-0.5">
+                    Fonte: {contact.suppressionSource}
+                  </p>
+                )}
+              </div>
+              {onUnsuppress && (
+                <Tooltip>
+                  <TooltipTrigger asChild>
+                    <Button
+                      variant="ghost"
+                      size="icon-sm"
+                      className="shrink-0 text-red-300 hover:text-red-200 hover:bg-red-500/20"
+                      onClick={(e) => {
+                        e.stopPropagation()
+                        onUnsuppress(contact.phone)
+                      }}
+                      aria-label="Remover supressão"
+                    >
+                      <ShieldOff size={14} />
+                    </Button>
+                  </TooltipTrigger>
+                  <TooltipContent><p>Remover supressão</p></TooltipContent>
+                </Tooltip>
+              )}
+            </div>
           </div>
         )}
 
@@ -196,6 +221,7 @@ interface ContactCardListProps {
   onToggleSelect: (id: string) => void
   onEditContact: (contact: Contact) => void
   onDeleteClick: (id: string) => void
+  onUnsuppress?: (phone: string) => void
 }
 
 export const ContactCardList: React.FC<ContactCardListProps> = ({
@@ -205,7 +231,8 @@ export const ContactCardList: React.FC<ContactCardListProps> = ({
   selectedIds,
   onToggleSelect,
   onEditContact,
-  onDeleteClick
+  onDeleteClick,
+  onUnsuppress
 }) => {
   if (isLoading) {
     return (
@@ -240,6 +267,7 @@ export const ContactCardList: React.FC<ContactCardListProps> = ({
           onToggleSelect={onToggleSelect}
           onEdit={onEditContact}
           onDelete={onDeleteClick}
+          onUnsuppress={onUnsuppress}
         />
       ))}
     </div>
