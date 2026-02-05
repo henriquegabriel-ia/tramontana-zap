@@ -179,12 +179,37 @@ const ContactTableRow = React.memo(
           </div>
         </td>
         <td className="px-6 py-5">
-          <StatusBadge
-            status={contact.status === ContactStatus.OPT_IN ? 'success' : contact.status === ContactStatus.OPT_OUT ? 'error' : 'default'}
-            size="sm"
-          >
-            {contact.status === ContactStatus.OPT_IN ? 'OPT_IN' : contact.status === ContactStatus.OPT_OUT ? 'OPT_OUT' : 'DESCONHECIDO'}
-          </StatusBadge>
+          <div className="flex items-center gap-2">
+            <StatusBadge
+              status={
+                contact.status === ContactStatus.SUPPRESSED ? 'error' :
+                contact.status === ContactStatus.OPT_IN ? 'success' :
+                contact.status === ContactStatus.OPT_OUT ? 'error' : 'default'
+              }
+              size="sm"
+            >
+              {contact.status === ContactStatus.SUPPRESSED ? 'SUPRIMIDO' :
+               contact.status === ContactStatus.OPT_IN ? 'OPT_IN' :
+               contact.status === ContactStatus.OPT_OUT ? 'OPT_OUT' : 'DESCONHECIDO'}
+            </StatusBadge>
+            {/* Botão de desuprimir aparece quando status é SUPPRESSED */}
+            {contact.status === ContactStatus.SUPPRESSED && onUnsuppress && (
+              <Tooltip>
+                <TooltipTrigger asChild>
+                  <Button
+                    variant="ghost"
+                    size="icon-sm"
+                    className="shrink-0 text-red-400 hover:text-red-300 hover:bg-red-500/20"
+                    onClick={() => onUnsuppress(contact.phone)}
+                    aria-label="Remover supressão"
+                  >
+                    <ShieldOff size={14} aria-hidden="true" />
+                  </Button>
+                </TooltipTrigger>
+                <TooltipContent><p>Remover supressão</p></TooltipContent>
+              </Tooltip>
+            )}
+          </div>
         </td>
         {showSuppressionDetails && (
           <td className="px-6 py-5 text-xs text-[var(--ds-text-secondary)]">

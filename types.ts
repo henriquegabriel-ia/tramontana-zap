@@ -17,7 +17,8 @@ export enum CampaignStatus {
 export enum ContactStatus {
   OPT_IN = 'Opt-in',
   OPT_OUT = 'Opt-out',
-  UNKNOWN = 'Desconhecido'
+  UNKNOWN = 'Desconhecido',
+  SUPPRESSED = 'Suprimido'
 }
 
 export enum MessageStatus {

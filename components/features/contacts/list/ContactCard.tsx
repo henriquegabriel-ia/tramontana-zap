@@ -76,23 +76,39 @@ export const ContactCard = React.memo(
           </div>
 
           {/* Status */}
-          <div className="shrink-0">
+          <div className="shrink-0 flex items-center gap-1">
             <StatusBadge
               status={
-                contact.status === ContactStatus.OPT_IN
-                  ? 'success'
-                  : contact.status === ContactStatus.OPT_OUT
-                    ? 'error'
-                    : 'default'
+                contact.status === ContactStatus.SUPPRESSED ? 'error' :
+                contact.status === ContactStatus.OPT_IN ? 'success' :
+                contact.status === ContactStatus.OPT_OUT ? 'error' : 'default'
               }
               size="sm"
             >
-              {contact.status === ContactStatus.OPT_IN
-                ? 'OPT_IN'
-                : contact.status === ContactStatus.OPT_OUT
-                  ? 'OPT_OUT'
-                  : 'DESCONHECIDO'}
+              {contact.status === ContactStatus.SUPPRESSED ? 'SUPRIMIDO' :
+               contact.status === ContactStatus.OPT_IN ? 'OPT_IN' :
+               contact.status === ContactStatus.OPT_OUT ? 'OPT_OUT' : 'DESCONHECIDO'}
             </StatusBadge>
+            {/* Botão de desuprimir */}
+            {contact.status === ContactStatus.SUPPRESSED && onUnsuppress && (
+              <Tooltip>
+                <TooltipTrigger asChild>
+                  <Button
+                    variant="ghost"
+                    size="icon-sm"
+                    className="shrink-0 text-red-400 hover:text-red-300 hover:bg-red-500/20"
+                    onClick={(e) => {
+                      e.stopPropagation()
+                      onUnsuppress(contact.phone)
+                    }}
+                    aria-label="Remover supressão"
+                  >
+                    <ShieldOff size={14} />
+                  </Button>
+                </TooltipTrigger>
+                <TooltipContent><p>Remover supressão</p></TooltipContent>
+              </Tooltip>
+            )}
           </div>
         </div>
 
