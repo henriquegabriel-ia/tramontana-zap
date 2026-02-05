@@ -215,11 +215,11 @@ export function WhatsAppCredentialsForm({
   )
 
   // Verifica se pode validar permissões (precisa de Meta App configurado)
-  // Permite validar se: tem token, tem appId, E (tem appSecret OU o secret já está salvo no banco)
+  const appSecretValue = values.metaAppSecret || (hasAppSecretSaved ? '***configured***' : '')
   const canValidatePermissions = Boolean(
     values.accessToken?.trim() &&
     values.metaAppId?.trim() &&
-    (values.metaAppSecret?.trim() || hasAppSecretSaved)
+    appSecretValue.trim()
   )
 
   // Handler para mudança de campo
@@ -488,19 +488,18 @@ export function WhatsAppCredentialsForm({
           <div className="space-y-2">
             <Label htmlFor="metaAppSecret" className="flex items-center gap-2">
               App Secret
-              {hasAppSecretSaved && !values.metaAppSecret && (
-                <span className="text-xs px-2 py-0.5 rounded-full bg-emerald-500/20 text-emerald-300 font-normal">
-                  Configurado
-                </span>
-              )}
             </Label>
             <div className="relative">
               <Input
                 id="metaAppSecret"
                 type={showSecret ? 'text' : 'password'}
-                placeholder={hasAppSecretSaved ? '(deixe vazio para manter o atual)' : '••••••••••••••••'}
-                value={values.metaAppSecret || ''}
-                onChange={(e) => handleFieldChange('metaAppSecret', e.target.value)}
+                placeholder="••••••••••••••••"
+                value={values.metaAppSecret || (hasAppSecretSaved ? '***configured***' : '')}
+                onChange={(e) => {
+                  // Se o usuário começa a digitar, limpa o placeholder
+                  const newValue = e.target.value === '***configured***' ? '' : e.target.value
+                  handleFieldChange('metaAppSecret', newValue)
+                }}
                 disabled={isTesting || isSaving}
                 className="font-mono pr-10"
               />
@@ -515,10 +514,7 @@ export function WhatsAppCredentialsForm({
             </div>
             {variant !== 'minimal' && (
               <p className="text-xs text-zinc-500">
-                {hasAppSecretSaved
-                  ? 'Por segurança, o valor atual não é exibido. Preencha apenas se quiser trocar.'
-                  : 'Necessário para validação de permissões. Encontre em: developers.facebook.com → Seu App → Configurações → Básico'
-                }
+                Necessário para validação de permissões. Encontre em: developers.facebook.com → Seu App → Configurações → Básico
               </p>
             )}
           </div>

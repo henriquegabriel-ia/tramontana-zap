@@ -191,11 +191,14 @@ export async function POST(request: NextRequest) {
       accessToken = whatsappCreds?.accessToken
     }
 
-    if (!appId || !appSecret) {
+    // Se não veio appId/appSecret OU são placeholders, busca do banco
+    const appIdMissing = !appId
+    const appSecretMissing = !appSecret || appSecret === '***configured***'
+    if (appIdMissing || appSecretMissing) {
       const metaAppCreds = await getMetaAppCredentials()
       if (metaAppCreds) {
-        appId = appId || metaAppCreds.appId
-        appSecret = appSecret || metaAppCreds.appSecret
+        if (appIdMissing) appId = metaAppCreds.appId
+        if (appSecretMissing) appSecret = metaAppCreds.appSecret
       }
     }
 
