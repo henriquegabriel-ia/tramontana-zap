@@ -623,7 +623,7 @@ export const contactDb = {
 
                 // Status efetivo: SUPRIMIDO tem prioridade sobre qualquer outro status
                 const dbStatus = (row.status as ContactStatus) || ContactStatus.OPT_IN
-                const effectiveStatus = isSuppressed ? 'SUPPRESSED' as ContactStatus : dbStatus
+                const effectiveStatus = isSuppressed ? ContactStatus.SUPPRESSED : dbStatus
 
                 return ({
                     id: row.id,
