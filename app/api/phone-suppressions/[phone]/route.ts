@@ -1,7 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { supabase } from '@/lib/supabase'
 import { normalizePhoneNumber } from '@/lib/phone-formatter'
-import { verifyApiKey } from '@/lib/auth'
+import { requireSessionOrApiKey } from '@/lib/request-auth'
 
 export const dynamic = 'force-dynamic'
 
@@ -42,11 +42,9 @@ export async function GET(request: NextRequest, { params }: RouteParams) {
  * - Clientes que pediram para voltar a receber mensagens
  */
 export async function DELETE(request: NextRequest, { params }: RouteParams) {
-  // Requer autenticação (API key)
-  const authResult = await verifyApiKey(request)
-  if (!authResult.valid) {
-    return NextResponse.json({ error: 'Não autorizado' }, { status: 401 })
-  }
+  // Requer autenticação (sessão ou API key)
+  const authError = await requireSessionOrApiKey(request)
+  if (authError) return authError
 
   const { phone: phoneRaw } = await params
   const phone = normalizePhoneNumber(phoneRaw)
