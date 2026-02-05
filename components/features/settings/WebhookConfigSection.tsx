@@ -16,6 +16,7 @@ import {
   DomainOption,
   WebhookSubscription,
 } from './webhook';
+import { WebhookStatusIndicator } from './webhook/WebhookStatusIndicator';
 
 export interface WebhookConfigSectionProps {
   webhookUrl?: string;
@@ -41,6 +42,8 @@ export function WebhookConfigSection({
   webhookToken,
   webhookStats,
   webhookPath,
+  webhookSubscription,
+  webhookSubscriptionLoading,
   webhookSubscriptionMutating,
   onRefreshWebhookSubscription,
   onSubscribeWebhookMessages,
@@ -182,6 +185,15 @@ export function WebhookConfigSection({
           ) : undefined
         }
       />
+
+      {/* Indicador de Status */}
+      <div className="mt-4">
+        <WebhookStatusIndicator
+          webhookSubscription={webhookSubscription}
+          isLoading={webhookSubscriptionLoading}
+          onRefresh={onRefreshWebhookSubscription}
+        />
+      </div>
 
       {/* Versão Simples (sempre visível) */}
       <div className="mt-4 mb-6 space-y-3">
