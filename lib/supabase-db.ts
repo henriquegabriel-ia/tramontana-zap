@@ -585,20 +585,28 @@ export const contactDb = {
             for (const row of suppressionRows || []) {
                 const phone = String(row.phone || '').trim()
                 if (phone) {
-                    suppressedPhones.push(phone)
+                    // Armazena no mapa com o formato original
                     suppressionMap.set(phone, {
                         reason: row.reason ?? null,
                         source: row.source ?? null,
                         expiresAt: row.expires_at ?? null,
                     })
+                    // Adiciona variações do formato para o filtro IN
+                    // (contacts pode ter +55... enquanto phone_suppressions pode ter 55...)
+                    const withoutPlus = phone.startsWith('+') ? phone.slice(1) : phone
+                    const withPlus = phone.startsWith('+') ? phone : '+' + phone
+                    suppressedPhones.push(withoutPlus, withPlus)
                 }
             }
 
-            if (!suppressedPhones.length) {
+            // Remove duplicatas
+            const uniquePhones = Array.from(new Set(suppressedPhones))
+
+            if (!uniquePhones.length) {
                 return { data: [], total: 0 }
             }
 
-            query = query.in('phone', suppressedPhones)
+            query = query.in('phone', uniquePhones)
         }
 
         const { data, error, count } = await query
@@ -609,7 +617,11 @@ export const contactDb = {
 
         return {
             data: (data || []).map(row => {
-                const suppression = suppressionMap.get(String(row.phone || '').trim()) || null
+                // Normaliza telefone para E.164 antes de buscar no mapa
+                // (phone_suppressions pode ter telefone sem +, contacts pode ter com +)
+                const rowPhone = String(row.phone || '').trim()
+                const normalizedRowPhone = rowPhone.startsWith('+') ? rowPhone.slice(1) : rowPhone
+                const suppression = suppressionMap.get(rowPhone) || suppressionMap.get(normalizedRowPhone) || suppressionMap.get('+' + normalizedRowPhone) || null
                 return ({
                 id: row.id,
                 name: row.name,
