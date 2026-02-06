@@ -1,7 +1,13 @@
 'use client';
 
 import React from 'react';
-import { CheckCircle2, XCircle, Loader2, RefreshCw, Circle } from 'lucide-react';
+import { CheckCircle2, XCircle, Loader2, RefreshCw } from 'lucide-react';
+
+interface WebhookHierarchy {
+  phoneNumberOverride: string | null;
+  wabaOverride: string | null;
+  appWebhook: string | null;
+}
 
 interface WebhookSubscription {
   ok: boolean;
@@ -11,6 +17,7 @@ interface WebhookSubscription {
     isSmartZap: boolean;
     url: string | null;
   };
+  hierarchy?: WebhookHierarchy | null;
   smartzapWebhookUrl?: string;
   error?: string;
 }
@@ -22,8 +29,52 @@ interface WebhookStatusIndicatorProps {
 }
 
 /**
+ * Verifica se uma URL é do SmartZap
+ */
+function isSmartZapUrl(url: string | null | undefined): boolean {
+  if (!url) return false;
+  return url.includes('/api/webhook');
+}
+
+/**
+ * Encontra qual nível da hierarquia está configurado com a URL do SmartZap
+ */
+function findActiveLevel(hierarchy: WebhookHierarchy | null | undefined): {
+  level: '#1 Número' | '#2 WABA' | '#3 APP' | null;
+  url: string | null;
+  isSmartZap: boolean;
+} {
+  if (!hierarchy) return { level: null, url: null, isSmartZap: false };
+
+  // Prioridade: #1 Phone > #2 WABA > #3 APP
+  if (hierarchy.phoneNumberOverride) {
+    return {
+      level: '#1 Número',
+      url: hierarchy.phoneNumberOverride,
+      isSmartZap: isSmartZapUrl(hierarchy.phoneNumberOverride),
+    };
+  }
+  if (hierarchy.wabaOverride) {
+    return {
+      level: '#2 WABA',
+      url: hierarchy.wabaOverride,
+      isSmartZap: isSmartZapUrl(hierarchy.wabaOverride),
+    };
+  }
+  if (hierarchy.appWebhook) {
+    return {
+      level: '#3 APP',
+      url: hierarchy.appWebhook,
+      isSmartZap: isSmartZapUrl(hierarchy.appWebhook),
+    };
+  }
+
+  return { level: null, url: null, isSmartZap: false };
+}
+
+/**
  * Indicador de status do webhook com diagnóstico completo.
- * Mostra checklist de cada requisito e URLs configuradas.
+ * Verifica toda a hierarquia: Phone (#1) > WABA (#2) > APP (#3)
  */
 export function WebhookStatusIndicator({
   webhookSubscription,
@@ -67,13 +118,12 @@ export function WebhookStatusIndicator({
     );
   }
 
-  const hasUrl = webhookSubscription.wabaOverride?.isConfigured;
-  const isSmartZap = webhookSubscription.wabaOverride?.isSmartZap;
+  // Analisa hierarquia completa
+  const active = findActiveLevel(webhookSubscription.hierarchy);
   const hasMessages = webhookSubscription.messagesSubscribed;
-  const configuredUrl = webhookSubscription.wabaOverride?.url;
   const expectedUrl = webhookSubscription.smartzapWebhookUrl;
 
-  const allGood = hasMessages && isSmartZap;
+  const allGood = hasMessages && active.isSmartZap;
 
   // Tudo OK - versão compacta
   if (allGood) {
@@ -81,9 +131,14 @@ export function WebhookStatusIndicator({
       <div className="flex items-center justify-between gap-3 px-4 py-3 bg-emerald-500/10 border border-emerald-500/20 rounded-lg">
         <div className="flex items-center gap-2">
           <CheckCircle2 size={18} className="text-emerald-500" />
-          <span className="text-sm font-medium text-emerald-400">
-            Webhook configurado corretamente
-          </span>
+          <div className="flex flex-col">
+            <span className="text-sm font-medium text-emerald-400">
+              Webhook configurado corretamente
+            </span>
+            <span className="text-xs text-emerald-400/70">
+              Nível {active.level} ativo
+            </span>
+          </div>
         </div>
         {onRefresh && (
           <button
@@ -124,17 +179,17 @@ export function WebhookStatusIndicator({
       <div className="space-y-2 text-sm">
         {/* URL configurada? */}
         <ChecklistItem
-          ok={hasUrl}
+          ok={!!active.url}
           label="URL configurada"
-          detail={hasUrl ? 'Sim' : 'Não'}
+          detail={active.url ? `Sim (${active.level})` : 'Não'}
         />
 
-        {/* URL correta? */}
-        {hasUrl && (
+        {/* URL é do SmartZap? */}
+        {active.url && (
           <ChecklistItem
-            ok={isSmartZap}
+            ok={active.isSmartZap}
             label="URL é do SmartZap"
-            detail={isSmartZap ? 'Sim' : 'Não'}
+            detail={active.isSmartZap ? 'Sim' : 'Não'}
           />
         )}
 
@@ -148,16 +203,16 @@ export function WebhookStatusIndicator({
 
       {/* URLs */}
       <div className="pt-2 border-t border-red-500/20 space-y-1.5 text-xs">
-        {configuredUrl && (
-          <div>
-            <span className="text-zinc-500">URL atual: </span>
-            <code className={`${isSmartZap ? 'text-emerald-400' : 'text-red-400'}`}>
-              {configuredUrl}
+        {active.url && (
+          <div className="break-all">
+            <span className="text-zinc-500">URL atual ({active.level}): </span>
+            <code className={active.isSmartZap ? 'text-emerald-400' : 'text-red-400'}>
+              {active.url}
             </code>
           </div>
         )}
-        {!isSmartZap && expectedUrl && (
-          <div>
+        {!active.isSmartZap && expectedUrl && (
+          <div className="break-all">
             <span className="text-zinc-500">URL esperada: </span>
             <code className="text-emerald-400">{expectedUrl}</code>
           </div>

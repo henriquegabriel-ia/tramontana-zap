@@ -8,13 +8,40 @@ import { useQuery } from '@tanstack/react-query';
 const DISMISS_KEY = 'webhook_alert_dismissed';
 const DISMISS_DURATION = 24 * 60 * 60 * 1000; // 24 horas
 
+interface WebhookHierarchy {
+  phoneNumberOverride: string | null;
+  wabaOverride: string | null;
+  appWebhook: string | null;
+}
+
 interface WebhookSubscription {
   ok: boolean;
   messagesSubscribed?: boolean;
-  wabaOverride?: {
-    isConfigured: boolean;
-    isSmartZap: boolean;
-    url: string | null;
+  hierarchy?: WebhookHierarchy | null;
+}
+
+/**
+ * Verifica se uma URL é do SmartZap
+ */
+function isSmartZapUrl(url: string | null | undefined): boolean {
+  if (!url) return false;
+  return url.includes('/api/webhook');
+}
+
+/**
+ * Encontra o nível ativo da hierarquia
+ */
+function findActiveUrl(hierarchy: WebhookHierarchy | null | undefined): {
+  url: string | null;
+  isSmartZap: boolean;
+} {
+  if (!hierarchy) return { url: null, isSmartZap: false };
+
+  // Prioridade: #1 Phone > #2 WABA > #3 APP
+  const activeUrl = hierarchy.phoneNumberOverride || hierarchy.wabaOverride || hierarchy.appWebhook;
+  return {
+    url: activeUrl,
+    isSmartZap: isSmartZapUrl(activeUrl),
   };
 }
 
@@ -60,17 +87,16 @@ export function WebhookAlertBanner() {
       return null; // Erro na API, não mostra banner
     }
 
-    const hasUrl = webhookSubscription?.wabaOverride?.isConfigured;
-    const isSmartZap = webhookSubscription?.wabaOverride?.isSmartZap;
-    const hasMessages = webhookSubscription?.messagesSubscribed;
+    const active = findActiveUrl(webhookSubscription.hierarchy);
+    const hasMessages = webhookSubscription.messagesSubscribed;
 
     // Tudo OK
-    if (hasMessages && isSmartZap) {
+    if (hasMessages && active.isSmartZap) {
       return null;
     }
 
     // URL configurada mas não é do SmartZap
-    if (hasUrl && !isSmartZap) {
+    if (active.url && !active.isSmartZap) {
       return {
         title: 'Webhook apontando para outro sistema.',
         description: 'A URL configurada não é do SmartZap.',
@@ -78,7 +104,7 @@ export function WebhookAlertBanner() {
     }
 
     // URL do SmartZap mas messages não inscrito
-    if (isSmartZap && !hasMessages) {
+    if (active.isSmartZap && !hasMessages) {
       return {
         title: 'Campo "messages" não inscrito.',
         description: 'O webhook precisa ter o campo "messages" ativado.',
