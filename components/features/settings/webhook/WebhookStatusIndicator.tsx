@@ -1,7 +1,7 @@
 'use client';
 
 import React from 'react';
-import { CheckCircle2, XCircle, Loader2, RefreshCw } from 'lucide-react';
+import { CheckCircle2, XCircle, Loader2, RefreshCw, Info } from 'lucide-react';
 
 interface WebhookHierarchy {
   phoneNumberOverride: string | null;
@@ -11,12 +11,6 @@ interface WebhookHierarchy {
 
 interface WebhookSubscription {
   ok: boolean;
-  messagesSubscribed?: boolean;
-  wabaOverride?: {
-    isConfigured: boolean;
-    isSmartZap: boolean;
-    url: string | null;
-  };
   hierarchy?: WebhookHierarchy | null;
   smartzapWebhookUrl?: string;
   error?: string;
@@ -127,39 +121,45 @@ export function WebhookStatusIndicator({
   // Analisa hierarquia completa
   const expectedUrl = webhookSubscription.smartzapWebhookUrl;
   const active = findActiveLevel(webhookSubscription.hierarchy, expectedUrl);
-  const hasMessages = webhookSubscription.messagesSubscribed;
 
-  const allGood = hasMessages && active.isSmartZap;
-
-  // Tudo OK - versão compacta
-  if (allGood) {
+  // URL do SmartZap configurada = sucesso
+  if (active.isSmartZap) {
     return (
-      <div className="flex items-center justify-between gap-3 px-4 py-3 bg-emerald-500/10 border border-emerald-500/20 rounded-lg">
-        <div className="flex items-center gap-2">
-          <CheckCircle2 size={18} className="text-emerald-500" />
-          <div className="flex flex-col">
-            <span className="text-sm font-medium text-emerald-400">
-              Webhook configurado corretamente
-            </span>
-            <span className="text-xs text-emerald-400/70">
-              Nível {active.level} ativo
-            </span>
+      <div className="px-4 py-3 bg-emerald-500/10 border border-emerald-500/20 rounded-lg space-y-3">
+        <div className="flex items-center justify-between gap-3">
+          <div className="flex items-center gap-2">
+            <CheckCircle2 size={18} className="text-emerald-500" />
+            <div className="flex flex-col">
+              <span className="text-sm font-medium text-emerald-400">
+                Webhook configurado
+              </span>
+              <span className="text-xs text-emerald-400/70">
+                Nível {active.level} ativo
+              </span>
+            </div>
           </div>
+          {onRefresh && (
+            <button
+              onClick={onRefresh}
+              className="p-1.5 text-emerald-400/60 hover:text-emerald-400 hover:bg-emerald-500/10 rounded transition-colors"
+              title="Verificar novamente"
+            >
+              <RefreshCw size={14} />
+            </button>
+          )}
         </div>
-        {onRefresh && (
-          <button
-            onClick={onRefresh}
-            className="p-1.5 text-emerald-400/60 hover:text-emerald-400 hover:bg-emerald-500/10 rounded transition-colors"
-            title="Verificar novamente"
-          >
-            <RefreshCw size={14} />
-          </button>
-        )}
+        {/* Nota informativa */}
+        <div className="flex items-start gap-2 pt-2 border-t border-emerald-500/20">
+          <Info size={14} className="text-emerald-400/60 mt-0.5 shrink-0" />
+          <p className="text-xs text-emerald-400/70">
+            Certifique-se de que o campo &quot;messages&quot; está ativo no Dashboard da Meta.
+          </p>
+        </div>
       </div>
     );
   }
 
-  // Problema - mostrar checklist detalhado
+  // Problema - URL não é do SmartZap ou não existe
   return (
     <div className="px-4 py-3 bg-red-500/10 border border-red-500/20 rounded-lg space-y-3">
       {/* Header */}
@@ -167,7 +167,7 @@ export function WebhookStatusIndicator({
         <div className="flex items-center gap-2">
           <XCircle size={18} className="text-red-500" />
           <span className="text-sm font-medium text-red-400">
-            Webhook com problema
+            Webhook não configurado
           </span>
         </div>
         {onRefresh && (
@@ -181,43 +181,15 @@ export function WebhookStatusIndicator({
         )}
       </div>
 
-      {/* Checklist */}
-      <div className="space-y-2 text-sm">
-        {/* URL configurada? */}
-        <ChecklistItem
-          ok={!!active.url}
-          label="URL configurada"
-          detail={active.url ? `Sim (${active.level})` : 'Não'}
-        />
-
-        {/* URL é do SmartZap? */}
-        {active.url && (
-          <ChecklistItem
-            ok={active.isSmartZap}
-            label="URL é do SmartZap"
-            detail={active.isSmartZap ? 'Sim' : 'Não'}
-          />
-        )}
-
-        {/* Messages inscrito? */}
-        <ChecklistItem
-          ok={hasMessages}
-          label='Campo "messages" inscrito'
-          detail={hasMessages ? 'Sim' : 'Não'}
-        />
-      </div>
-
       {/* URLs */}
-      <div className="pt-2 border-t border-red-500/20 space-y-1.5 text-xs">
+      <div className="space-y-1.5 text-xs">
         {active.url && (
           <div className="break-all">
-            <span className="text-zinc-500">URL atual ({active.level}): </span>
-            <code className={active.isSmartZap ? 'text-emerald-400' : 'text-red-400'}>
-              {active.url}
-            </code>
+            <span className="text-zinc-500">URL atual: </span>
+            <code className="text-red-400">{active.url}</code>
           </div>
         )}
-        {!active.isSmartZap && expectedUrl && (
+        {expectedUrl && (
           <div className="break-all">
             <span className="text-zinc-500">URL esperada: </span>
             <code className="text-emerald-400">{expectedUrl}</code>
@@ -228,20 +200,3 @@ export function WebhookStatusIndicator({
   );
 }
 
-function ChecklistItem({ ok, label, detail }: { ok?: boolean; label: string; detail: string }) {
-  return (
-    <div className="flex items-center justify-between">
-      <div className="flex items-center gap-2">
-        {ok ? (
-          <CheckCircle2 size={14} className="text-emerald-500" />
-        ) : (
-          <XCircle size={14} className="text-red-500" />
-        )}
-        <span className={ok ? 'text-zinc-300' : 'text-red-400'}>{label}</span>
-      </div>
-      <span className={`font-mono ${ok ? 'text-emerald-400' : 'text-red-400'}`}>
-        {detail}
-      </span>
-    </div>
-  );
-}

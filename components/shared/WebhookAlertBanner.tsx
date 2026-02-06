@@ -16,7 +16,6 @@ interface WebhookHierarchy {
 
 interface WebhookSubscription {
   ok: boolean;
-  messagesSubscribed?: boolean;
   hierarchy?: WebhookHierarchy | null;
   smartzapWebhookUrl?: string;
 }
@@ -93,10 +92,9 @@ export function WebhookAlertBanner() {
     }
 
     const active = findActiveUrl(webhookSubscription.hierarchy, webhookSubscription.smartzapWebhookUrl);
-    const hasMessages = webhookSubscription.messagesSubscribed;
 
-    // Tudo OK
-    if (hasMessages && active.isSmartZap) {
+    // URL do SmartZap configurada = OK
+    if (active.isSmartZap) {
       return null;
     }
 
@@ -105,14 +103,6 @@ export function WebhookAlertBanner() {
       return {
         title: 'Webhook apontando para outro sistema.',
         description: 'A URL configurada não é do SmartZap.',
-      };
-    }
-
-    // URL do SmartZap mas messages não inscrito
-    if (active.isSmartZap && !hasMessages) {
-      return {
-        title: 'Campo "messages" não inscrito.',
-        description: 'O webhook precisa ter o campo "messages" ativado.',
       };
     }
 
