@@ -1,7 +1,7 @@
 'use client';
 
 import React, { useState, useEffect } from 'react';
-import { AlertTriangle, X, Settings } from 'lucide-react';
+import { X } from 'lucide-react';
 import Link from 'next/link';
 import { useQuery } from '@tanstack/react-query';
 
@@ -74,32 +74,28 @@ export function WebhookAlertBanner() {
   };
 
   return (
-    <div className="bg-zinc-900/80 border-b border-zinc-800">
-      <div className="max-w-7xl mx-auto px-4 py-2">
-        <div className="flex items-center justify-between gap-4">
-          <div className="flex items-center gap-2">
-            <AlertTriangle size={14} className="text-amber-500 shrink-0" />
-            <p className="text-xs text-zinc-400">
-              <span className="text-amber-500 font-medium">Webhook não configurado</span>
-              <span className="hidden sm:inline"> — você não receberá respostas dos contatos</span>
-            </p>
-          </div>
-          <div className="flex items-center gap-1.5 shrink-0">
-            <Link
-              href="/settings"
-              className="text-xs text-zinc-400 hover:text-white transition-colors underline underline-offset-2"
-            >
-              Configurar
-            </Link>
-            <button
-              onClick={handleDismiss}
-              className="p-1 text-zinc-500 hover:text-zinc-300 rounded transition-colors"
-              title="Fechar por 24h"
-            >
-              <X size={14} />
-            </button>
-          </div>
+    <div className="bg-amber-500/5 border-b border-amber-500/10">
+      <div className="flex items-center justify-center gap-3 px-4 py-1.5 text-xs">
+        <div className="flex items-center gap-2">
+          <span className="w-1.5 h-1.5 bg-amber-500 rounded-full animate-pulse" />
+          <span className="text-amber-400/90">
+            Webhook não configurado
+          </span>
+          <span className="text-zinc-500">·</span>
+          <Link
+            href="/settings"
+            className="text-amber-400 hover:text-amber-300 underline underline-offset-2"
+          >
+            Configurar
+          </Link>
         </div>
+        <button
+          onClick={handleDismiss}
+          className="p-0.5 text-zinc-500 hover:text-zinc-400 rounded transition-colors"
+          title="Fechar por 24h"
+        >
+          <X size={12} />
+        </button>
       </div>
     </div>
   );
