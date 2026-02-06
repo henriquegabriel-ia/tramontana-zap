@@ -1,7 +1,7 @@
 'use client';
 
 import React, { useState, useEffect } from 'react';
-import { X } from 'lucide-react';
+import { AlertTriangle, X, Settings } from 'lucide-react';
 import Link from 'next/link';
 import { useQuery } from '@tanstack/react-query';
 
@@ -74,28 +74,35 @@ export function WebhookAlertBanner() {
   };
 
   return (
-    <div className="bg-amber-500/5 border-b border-amber-500/10">
-      <div className="flex items-center justify-center gap-3 px-4 py-1.5 text-xs">
-        <div className="flex items-center gap-2">
-          <span className="w-1.5 h-1.5 bg-amber-500 rounded-full animate-pulse" />
-          <span className="text-amber-400/90">
-            Webhook não configurado
-          </span>
-          <span className="text-zinc-500">·</span>
-          <Link
-            href="/settings"
-            className="text-amber-400 hover:text-amber-300 underline underline-offset-2"
-          >
-            Configurar
-          </Link>
+    <div className="bg-red-500/10 border-b border-red-500/20">
+      <div className="max-w-7xl mx-auto px-4 py-3">
+        <div className="flex items-center justify-between gap-4">
+          <div className="flex items-center gap-3">
+            <AlertTriangle size={18} className="text-red-500 shrink-0" />
+            <p className="text-sm text-red-400">
+              <strong>Webhook não configurado.</strong>{' '}
+              <span className="text-red-400/80">
+                Você não receberá respostas dos contatos nem confirmações de entrega.
+              </span>
+            </p>
+          </div>
+          <div className="flex items-center gap-2 shrink-0">
+            <Link
+              href="/settings#webhooks"
+              className="flex items-center gap-1.5 px-3 py-1.5 text-sm font-medium text-white bg-red-500/20 hover:bg-red-500/30 rounded-lg transition-colors"
+            >
+              <Settings size={14} />
+              Configurar
+            </Link>
+            <button
+              onClick={handleDismiss}
+              className="p-1.5 text-red-400/60 hover:text-red-400 hover:bg-red-500/10 rounded transition-colors"
+              title="Fechar por 24h"
+            >
+              <X size={16} />
+            </button>
+          </div>
         </div>
-        <button
-          onClick={handleDismiss}
-          className="p-0.5 text-zinc-500 hover:text-zinc-400 rounded transition-colors"
-          title="Fechar por 24h"
-        >
-          <X size={12} />
-        </button>
       </div>
     </div>
   );
