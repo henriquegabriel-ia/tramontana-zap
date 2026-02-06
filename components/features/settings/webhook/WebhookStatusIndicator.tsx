@@ -29,17 +29,23 @@ interface WebhookStatusIndicatorProps {
 }
 
 /**
- * Verifica se uma URL é do SmartZap
+ * Compara se duas URLs são equivalentes (ignora trailing slash e protocolo http/https)
  */
-function isSmartZapUrl(url: string | null | undefined): boolean {
-  if (!url) return false;
-  return url.includes('/api/webhook');
+function urlsMatch(url1: string | null | undefined, url2: string | null | undefined): boolean {
+  if (!url1 || !url2) return false;
+
+  // Normaliza: remove trailing slash, lowercase
+  const normalize = (u: string) => u.replace(/\/$/, '').toLowerCase();
+  return normalize(url1) === normalize(url2);
 }
 
 /**
- * Encontra qual nível da hierarquia está configurado com a URL do SmartZap
+ * Encontra qual nível da hierarquia está configurado
  */
-function findActiveLevel(hierarchy: WebhookHierarchy | null | undefined): {
+function findActiveLevel(
+  hierarchy: WebhookHierarchy | null | undefined,
+  expectedUrl: string | null | undefined
+): {
   level: '#1 Número' | '#2 WABA' | '#3 APP' | null;
   url: string | null;
   isSmartZap: boolean;
@@ -51,21 +57,21 @@ function findActiveLevel(hierarchy: WebhookHierarchy | null | undefined): {
     return {
       level: '#1 Número',
       url: hierarchy.phoneNumberOverride,
-      isSmartZap: isSmartZapUrl(hierarchy.phoneNumberOverride),
+      isSmartZap: urlsMatch(hierarchy.phoneNumberOverride, expectedUrl),
     };
   }
   if (hierarchy.wabaOverride) {
     return {
       level: '#2 WABA',
       url: hierarchy.wabaOverride,
-      isSmartZap: isSmartZapUrl(hierarchy.wabaOverride),
+      isSmartZap: urlsMatch(hierarchy.wabaOverride, expectedUrl),
     };
   }
   if (hierarchy.appWebhook) {
     return {
       level: '#3 APP',
       url: hierarchy.appWebhook,
-      isSmartZap: isSmartZapUrl(hierarchy.appWebhook),
+      isSmartZap: urlsMatch(hierarchy.appWebhook, expectedUrl),
     };
   }
 
@@ -119,9 +125,9 @@ export function WebhookStatusIndicator({
   }
 
   // Analisa hierarquia completa
-  const active = findActiveLevel(webhookSubscription.hierarchy);
-  const hasMessages = webhookSubscription.messagesSubscribed;
   const expectedUrl = webhookSubscription.smartzapWebhookUrl;
+  const active = findActiveLevel(webhookSubscription.hierarchy, expectedUrl);
+  const hasMessages = webhookSubscription.messagesSubscribed;
 
   const allGood = hasMessages && active.isSmartZap;
 

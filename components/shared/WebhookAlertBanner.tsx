@@ -18,20 +18,25 @@ interface WebhookSubscription {
   ok: boolean;
   messagesSubscribed?: boolean;
   hierarchy?: WebhookHierarchy | null;
+  smartzapWebhookUrl?: string;
 }
 
 /**
- * Verifica se uma URL é do SmartZap
+ * Compara se duas URLs são equivalentes
  */
-function isSmartZapUrl(url: string | null | undefined): boolean {
-  if (!url) return false;
-  return url.includes('/api/webhook');
+function urlsMatch(url1: string | null | undefined, url2: string | null | undefined): boolean {
+  if (!url1 || !url2) return false;
+  const normalize = (u: string) => u.replace(/\/$/, '').toLowerCase();
+  return normalize(url1) === normalize(url2);
 }
 
 /**
  * Encontra o nível ativo da hierarquia
  */
-function findActiveUrl(hierarchy: WebhookHierarchy | null | undefined): {
+function findActiveUrl(
+  hierarchy: WebhookHierarchy | null | undefined,
+  expectedUrl: string | null | undefined
+): {
   url: string | null;
   isSmartZap: boolean;
 } {
@@ -41,7 +46,7 @@ function findActiveUrl(hierarchy: WebhookHierarchy | null | undefined): {
   const activeUrl = hierarchy.phoneNumberOverride || hierarchy.wabaOverride || hierarchy.appWebhook;
   return {
     url: activeUrl,
-    isSmartZap: isSmartZapUrl(activeUrl),
+    isSmartZap: urlsMatch(activeUrl, expectedUrl),
   };
 }
 
@@ -87,7 +92,7 @@ export function WebhookAlertBanner() {
       return null; // Erro na API, não mostra banner
     }
 
-    const active = findActiveUrl(webhookSubscription.hierarchy);
+    const active = findActiveUrl(webhookSubscription.hierarchy, webhookSubscription.smartzapWebhookUrl);
     const hasMessages = webhookSubscription.messagesSubscribed;
 
     // Tudo OK
