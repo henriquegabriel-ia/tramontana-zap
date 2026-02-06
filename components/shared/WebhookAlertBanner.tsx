@@ -54,17 +54,51 @@ export function WebhookAlertBanner() {
     retry: false,
   });
 
-  // Verifica se webhook está configurado
-  const isConfigured =
-    webhookSubscription?.ok &&
-    webhookSubscription?.messagesSubscribed &&
-    webhookSubscription?.wabaOverride?.isSmartZap;
+  // Diagnóstico específico do problema
+  const getDiagnosis = (): { title: string; description: string } | null => {
+    if (!webhookSubscription?.ok) {
+      return null; // Erro na API, não mostra banner
+    }
+
+    const hasUrl = webhookSubscription?.wabaOverride?.isConfigured;
+    const isSmartZap = webhookSubscription?.wabaOverride?.isSmartZap;
+    const hasMessages = webhookSubscription?.messagesSubscribed;
+
+    // Tudo OK
+    if (hasMessages && isSmartZap) {
+      return null;
+    }
+
+    // URL configurada mas não é do SmartZap
+    if (hasUrl && !isSmartZap) {
+      return {
+        title: 'Webhook apontando para outro sistema.',
+        description: 'A URL configurada não é do SmartZap.',
+      };
+    }
+
+    // URL do SmartZap mas messages não inscrito
+    if (isSmartZap && !hasMessages) {
+      return {
+        title: 'Campo "messages" não inscrito.',
+        description: 'O webhook precisa ter o campo "messages" ativado.',
+      };
+    }
+
+    // Nada configurado
+    return {
+      title: 'Webhook não configurado.',
+      description: 'Você não receberá respostas dos contatos nem confirmações de entrega.',
+    };
+  };
+
+  const diagnosis = getDiagnosis();
 
   // Não mostra se:
   // - Ainda carregando
-  // - Está configurado
+  // - Está tudo OK (diagnosis null)
   // - Foi dismissado
-  if (isLoading || isConfigured || isDismissed) {
+  if (isLoading || !diagnosis || isDismissed) {
     return null;
   }
 
@@ -80,9 +114,9 @@ export function WebhookAlertBanner() {
           <div className="flex items-center gap-3">
             <AlertTriangle size={18} className="text-red-500 shrink-0" />
             <p className="text-sm text-red-400">
-              <strong>Webhook não configurado.</strong>{' '}
+              <strong>{diagnosis.title}</strong>{' '}
               <span className="text-red-400/80">
-                Você não receberá respostas dos contatos nem confirmações de entrega.
+                {diagnosis.description}
               </span>
             </p>
           </div>
