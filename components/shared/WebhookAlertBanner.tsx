@@ -74,32 +74,29 @@ export function WebhookAlertBanner() {
   };
 
   return (
-    <div className="bg-red-500/10 border-b border-red-500/20">
-      <div className="max-w-7xl mx-auto px-4 py-3">
+    <div className="bg-zinc-900/80 border-b border-zinc-800">
+      <div className="max-w-7xl mx-auto px-4 py-2">
         <div className="flex items-center justify-between gap-4">
-          <div className="flex items-center gap-3">
-            <AlertTriangle size={18} className="text-red-500 shrink-0" />
-            <p className="text-sm text-red-400">
-              <strong>Webhook não configurado.</strong>{' '}
-              <span className="text-red-400/80">
-                Você não receberá respostas dos contatos nem confirmações de entrega.
-              </span>
+          <div className="flex items-center gap-2">
+            <AlertTriangle size={14} className="text-amber-500 shrink-0" />
+            <p className="text-xs text-zinc-400">
+              <span className="text-amber-500 font-medium">Webhook não configurado</span>
+              <span className="hidden sm:inline"> — você não receberá respostas dos contatos</span>
             </p>
           </div>
-          <div className="flex items-center gap-2 shrink-0">
+          <div className="flex items-center gap-1.5 shrink-0">
             <Link
               href="/settings"
-              className="flex items-center gap-1.5 px-3 py-1.5 text-sm font-medium text-white bg-red-500/20 hover:bg-red-500/30 rounded-lg transition-colors"
+              className="text-xs text-zinc-400 hover:text-white transition-colors underline underline-offset-2"
             >
-              <Settings size={14} />
               Configurar
             </Link>
             <button
               onClick={handleDismiss}
-              className="p-1.5 text-red-400/60 hover:text-red-400 hover:bg-red-500/10 rounded transition-colors"
+              className="p-1 text-zinc-500 hover:text-zinc-300 rounded transition-colors"
               title="Fechar por 24h"
             >
-              <X size={16} />
+              <X size={14} />
             </button>
           </div>
         </div>
