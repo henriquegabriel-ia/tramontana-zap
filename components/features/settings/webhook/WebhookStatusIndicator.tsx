@@ -1,7 +1,7 @@
 'use client';
 
 import React from 'react';
-import { CheckCircle2, XCircle, Loader2, RefreshCw } from 'lucide-react';
+import { CheckCircle2, XCircle, Loader2, RefreshCw, Circle } from 'lucide-react';
 
 interface WebhookSubscription {
   ok: boolean;
@@ -11,6 +11,7 @@ interface WebhookSubscription {
     isSmartZap: boolean;
     url: string | null;
   };
+  smartzapWebhookUrl?: string;
   error?: string;
 }
 
@@ -21,60 +22,14 @@ interface WebhookStatusIndicatorProps {
 }
 
 /**
- * Indicador de status do webhook.
- * Verde = configurado corretamente (messagesSubscribed + isSmartZap)
- * Vermelho = não configurado ou URL errada (com diagnóstico específico)
+ * Indicador de status do webhook com diagnóstico completo.
+ * Mostra checklist de cada requisito e URLs configuradas.
  */
 export function WebhookStatusIndicator({
   webhookSubscription,
   isLoading,
   onRefresh,
 }: WebhookStatusIndicatorProps) {
-  // Diagnóstico específico do problema
-  const getDiagnosis = (): { status: 'ok' | 'error'; title: string; description?: string } => {
-    if (!webhookSubscription?.ok) {
-      return {
-        status: 'error',
-        title: 'Erro ao verificar',
-        description: webhookSubscription?.error || 'Não foi possível consultar status',
-      };
-    }
-
-    const hasUrl = webhookSubscription?.wabaOverride?.isConfigured;
-    const isSmartZap = webhookSubscription?.wabaOverride?.isSmartZap;
-    const hasMessages = webhookSubscription?.messagesSubscribed;
-
-    // Tudo OK
-    if (hasMessages && isSmartZap) {
-      return { status: 'ok', title: 'Webhook configurado' };
-    }
-
-    // URL configurada mas não é do SmartZap
-    if (hasUrl && !isSmartZap) {
-      return {
-        status: 'error',
-        title: 'URL incorreta',
-        description: 'Webhook apontando para outro sistema',
-      };
-    }
-
-    // URL do SmartZap mas messages não inscrito
-    if (isSmartZap && !hasMessages) {
-      return {
-        status: 'error',
-        title: 'Campo "messages" não inscrito',
-        description: 'Ative o campo "messages" na Meta',
-      };
-    }
-
-    // Nada configurado
-    return {
-      status: 'error',
-      title: 'Webhook não configurado',
-      description: 'Configure a URL na Meta',
-    };
-  };
-
   if (isLoading) {
     return (
       <div className="flex items-center gap-2 px-3 py-2 bg-zinc-800/50 rounded-lg">
@@ -84,15 +39,50 @@ export function WebhookStatusIndicator({
     );
   }
 
-  const diagnosis = getDiagnosis();
+  // Erro na API
+  if (!webhookSubscription?.ok) {
+    return (
+      <div className="px-4 py-3 bg-red-500/10 border border-red-500/20 rounded-lg">
+        <div className="flex items-center justify-between">
+          <div className="flex items-center gap-2">
+            <XCircle size={18} className="text-red-500" />
+            <span className="text-sm font-medium text-red-400">
+              Erro ao verificar webhook
+            </span>
+          </div>
+          {onRefresh && (
+            <button
+              onClick={onRefresh}
+              className="p-1.5 text-red-400/60 hover:text-red-400 hover:bg-red-500/10 rounded transition-colors"
+              title="Tentar novamente"
+            >
+              <RefreshCw size={14} />
+            </button>
+          )}
+        </div>
+        {webhookSubscription?.error && (
+          <p className="mt-2 text-xs text-red-400/70">{webhookSubscription.error}</p>
+        )}
+      </div>
+    );
+  }
 
-  if (diagnosis.status === 'ok') {
+  const hasUrl = webhookSubscription.wabaOverride?.isConfigured;
+  const isSmartZap = webhookSubscription.wabaOverride?.isSmartZap;
+  const hasMessages = webhookSubscription.messagesSubscribed;
+  const configuredUrl = webhookSubscription.wabaOverride?.url;
+  const expectedUrl = webhookSubscription.smartzapWebhookUrl;
+
+  const allGood = hasMessages && isSmartZap;
+
+  // Tudo OK - versão compacta
+  if (allGood) {
     return (
       <div className="flex items-center justify-between gap-3 px-4 py-3 bg-emerald-500/10 border border-emerald-500/20 rounded-lg">
         <div className="flex items-center gap-2">
           <CheckCircle2 size={18} className="text-emerald-500" />
           <span className="text-sm font-medium text-emerald-400">
-            {diagnosis.title}
+            Webhook configurado corretamente
           </span>
         </div>
         {onRefresh && (
@@ -108,30 +98,89 @@ export function WebhookStatusIndicator({
     );
   }
 
+  // Problema - mostrar checklist detalhado
   return (
-    <div className="flex items-center justify-between gap-3 px-4 py-3 bg-red-500/10 border border-red-500/20 rounded-lg">
-      <div className="flex items-center gap-2">
-        <XCircle size={18} className="text-red-500" />
-        <div className="flex flex-col">
+    <div className="px-4 py-3 bg-red-500/10 border border-red-500/20 rounded-lg space-y-3">
+      {/* Header */}
+      <div className="flex items-center justify-between">
+        <div className="flex items-center gap-2">
+          <XCircle size={18} className="text-red-500" />
           <span className="text-sm font-medium text-red-400">
-            {diagnosis.title}
+            Webhook com problema
           </span>
-          {diagnosis.description && (
-            <span className="text-xs text-red-400/70">
-              {diagnosis.description}
-            </span>
-          )}
         </div>
+        {onRefresh && (
+          <button
+            onClick={onRefresh}
+            className="p-1.5 text-red-400/60 hover:text-red-400 hover:bg-red-500/10 rounded transition-colors"
+            title="Verificar novamente"
+          >
+            <RefreshCw size={14} />
+          </button>
+        )}
       </div>
-      {onRefresh && (
-        <button
-          onClick={onRefresh}
-          className="p-1.5 text-red-400/60 hover:text-red-400 hover:bg-red-500/10 rounded transition-colors"
-          title="Verificar novamente"
-        >
-          <RefreshCw size={14} />
-        </button>
-      )}
+
+      {/* Checklist */}
+      <div className="space-y-2 text-sm">
+        {/* URL configurada? */}
+        <ChecklistItem
+          ok={hasUrl}
+          label="URL configurada"
+          detail={hasUrl ? 'Sim' : 'Não'}
+        />
+
+        {/* URL correta? */}
+        {hasUrl && (
+          <ChecklistItem
+            ok={isSmartZap}
+            label="URL é do SmartZap"
+            detail={isSmartZap ? 'Sim' : 'Não'}
+          />
+        )}
+
+        {/* Messages inscrito? */}
+        <ChecklistItem
+          ok={hasMessages}
+          label='Campo "messages" inscrito'
+          detail={hasMessages ? 'Sim' : 'Não'}
+        />
+      </div>
+
+      {/* URLs */}
+      <div className="pt-2 border-t border-red-500/20 space-y-1.5 text-xs">
+        {configuredUrl && (
+          <div>
+            <span className="text-zinc-500">URL atual: </span>
+            <code className={`${isSmartZap ? 'text-emerald-400' : 'text-red-400'}`}>
+              {configuredUrl}
+            </code>
+          </div>
+        )}
+        {!isSmartZap && expectedUrl && (
+          <div>
+            <span className="text-zinc-500">URL esperada: </span>
+            <code className="text-emerald-400">{expectedUrl}</code>
+          </div>
+        )}
+      </div>
+    </div>
+  );
+}
+
+function ChecklistItem({ ok, label, detail }: { ok?: boolean; label: string; detail: string }) {
+  return (
+    <div className="flex items-center justify-between">
+      <div className="flex items-center gap-2">
+        {ok ? (
+          <CheckCircle2 size={14} className="text-emerald-500" />
+        ) : (
+          <XCircle size={14} className="text-red-500" />
+        )}
+        <span className={ok ? 'text-zinc-300' : 'text-red-400'}>{label}</span>
+      </div>
+      <span className={`font-mono ${ok ? 'text-emerald-400' : 'text-red-400'}`}>
+        {detail}
+      </span>
     </div>
   );
 }
