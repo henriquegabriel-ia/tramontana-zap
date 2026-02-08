@@ -40,7 +40,7 @@
   "dependencies": {
     "@ai-sdk/anthropic": "^3.0.9",
     "@ai-sdk/cohere": "^3.0.8",
-    "@ai-sdk/devtools": "^0.0.6",
+    "@ai-sdk/devtools": "^0.0.12",
     "@ai-sdk/google": "^3.0.10",
     "@ai-sdk/openai": "^3.0.7",
     "@ai-sdk/react": "^3.0.43",
@@ -134,7 +134,7 @@
     "zustand": "^5.0.9"
   },
   "devDependencies": {
-    "@next/eslint-plugin-next": "16.0.10",
+    "@next/eslint-plugin-next": "^16.1.6",
     "@playwright/test": "^1.49.0",
     "@testing-library/jest-dom": "^6.6.3",
     "@testing-library/react": "^16.0.1",
