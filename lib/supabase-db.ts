@@ -1036,11 +1036,13 @@ export const contactDb = {
 
         // Normaliza telefone para E.164 usando a mesma lógica do normalizePhoneNumber
         // Garante que números como "5524999402004" virem "+5524999402004"
+        // Sempre usa só os dígitos para evitar mismatch de deduplicação
+        // ex: "+55 (11) 9999-0001" e "+5511999990001" seriam tratados como contatos diferentes
         const normalizePhone = (p: string): string => {
             if (!p || typeof p !== 'string') return ''
             const digits = p.replace(/\D/g, '')
             if (!digits) return ''
-            return p.startsWith('+') ? p : `+${digits}`
+            return `+${digits}`
         }
 
         // Normaliza e filtra contatos com telefone inválido (vazio ou só "+")
