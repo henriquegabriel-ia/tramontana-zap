@@ -52,6 +52,7 @@ export function ContactBulkTagsModal({
     onApply(tagsToAdd, tagsToRemove)
     setTagsToAdd([])
     setTagsToRemove([])
+    setAddInput('')
   }
 
   const hasChanges = tagsToAdd.length > 0 || tagsToRemove.length > 0
@@ -78,7 +79,7 @@ export function ContactBulkTagsModal({
                 onKeyDown={(e) => e.key === 'Enter' && handleAddTag(addInput)}
                 className="h-8 text-sm"
               />
-              <Button size="sm" variant="outline" onClick={() => handleAddTag(addInput)}>
+              <Button size="sm" variant="outline" onClick={() => handleAddTag(addInput)} aria-label="Adicionar tag">
                 <Plus size={14} />
               </Button>
             </div>
@@ -87,7 +88,7 @@ export function ContactBulkTagsModal({
                 {tagsToAdd.map((t) => (
                   <Badge key={t} variant="secondary" className="gap-1 text-xs">
                     {t}
-                    <button onClick={() => setTagsToAdd((p) => p.filter((x) => x !== t))}>
+                    <button onClick={() => setTagsToAdd((p) => p.filter((x) => x !== t))} aria-label={`Remover tag ${t}`}>
                       <X size={10} />
                     </button>
                   </Badge>
@@ -119,7 +120,7 @@ export function ContactBulkTagsModal({
                   {tagsToRemove.map((t) => (
                     <Badge key={t} variant="destructive" className="gap-1 text-xs">
                       {t}
-                      <button onClick={() => setTagsToRemove((p) => p.filter((x) => x !== t))}>
+                      <button onClick={() => setTagsToRemove((p) => p.filter((x) => x !== t))} aria-label={`Desfazer remoção da tag ${t}`}>
                         <X size={10} />
                       </button>
                     </Badge>
