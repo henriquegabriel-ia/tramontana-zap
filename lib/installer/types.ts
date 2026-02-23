@@ -210,7 +210,7 @@ export const actions = {
     title,
     subtitle,
   }),
-  error: (error: string, returnToStep: InstallStep, errorDetails?: string, errorType?: InstallErrorType): InstallAction => ({
+  error: (error: string, returnToStep: InstallStep, errorType?: InstallErrorType, errorDetails?: string): InstallAction => ({
     type: 'ERROR',
     error,
     returnToStep,
