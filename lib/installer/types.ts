@@ -87,11 +87,31 @@ export function isValidEmail(email: string): boolean {
 
 /** Funções que validam se um step está completo */
 export const stepValidators: Record<InstallStep, (data: InstallData) => boolean> = {
-  1: (data) => Boolean(data.name && isValidEmail(data.email) && data.password),
-  2: (data) => Boolean(data.vercelToken),
-  3: (data) => Boolean(data.supabasePat),
-  4: (data) => Boolean(data.qstashToken),
-  5: (data) => Boolean(data.redisRestUrl && data.redisRestToken),
+  1: (data) => {
+    const name = data.name?.trim() ?? '';
+    const email = data.email?.trim() ?? '';
+    const password = data.password?.trim() ?? '';
+    return Boolean(name.length >= VALIDATION.NAME_MIN_LENGTH && isValidEmail(email) && password.length >= VALIDATION.PASSWORD_MIN_LENGTH);
+  },
+  2: (data) => {
+    const token = data.vercelToken?.trim() ?? '';
+    return token.length >= VALIDATION.VERCEL_TOKEN_MIN_LENGTH;
+  },
+  3: (data) => {
+    const pat = data.supabasePat?.trim() ?? '';
+    return pat.startsWith(VALIDATION.SUPABASE_PAT_PREFIX) && pat.length >= VALIDATION.SUPABASE_PAT_MIN_LENGTH;
+  },
+  4: (data) => {
+    const token = data.qstashToken?.trim() ?? '';
+    return token.length >= VALIDATION.QSTASH_TOKEN_MIN_LENGTH;
+  },
+  5: (data) => {
+    const url = data.redisRestUrl?.trim() ?? '';
+    const token = data.redisRestToken?.trim() ?? '';
+    return /^https:\/\/[a-z0-9][a-z0-9-]*\.upstash\.io\/?$/i.test(url)
+      && token.length >= VALIDATION.REDIS_TOKEN_MIN_LENGTH
+      && /^[A-Za-z0-9_=+/-]+$/.test(token);
+  },
 };
 
 /** Campos requeridos por step (para mensagens de erro) */
