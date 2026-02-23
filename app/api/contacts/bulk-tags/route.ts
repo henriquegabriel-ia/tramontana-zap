@@ -9,17 +9,17 @@ export const revalidate = 0
 
 const BulkUpdateTagsSchema = z.object({
   ids: z.array(z.string().min(1, 'ID inválido')).min(1, 'Selecione pelo menos um contato'),
-  tagsToAdd: z.array(z.string()).optional().default([]),
-  tagsToRemove: z.array(z.string()).optional().default([]),
+  tagsToAdd: z.array(z.string().min(1, 'Tag não pode ser vazia')).optional().default([]),
+  tagsToRemove: z.array(z.string().min(1, 'Tag não pode ser vazia')).optional().default([]),
 })
 
 /**
  * POST /api/contacts/bulk-tags
  * Adiciona e/ou remove tags em massa em múltiplos contatos.
  */
-export async function POST(request: Request) {
+export async function POST(request: NextRequest) {
   try {
-    const auth = await requireSessionOrApiKey(request as NextRequest)
+    const auth = await requireSessionOrApiKey(request)
     if (auth) return auth
 
     const body = await request.json().catch(() => ({}))
@@ -39,12 +39,12 @@ export async function POST(request: Request) {
       return NextResponse.json({ updated: 0 })
     }
 
-    await contactDb.bulkUpdateTags(ids, tagsToAdd, tagsToRemove)
-    return NextResponse.json({ updated: ids.length })
+    const updated = await contactDb.bulkUpdateTags(ids, tagsToAdd, tagsToRemove)
+    return NextResponse.json({ updated })
   } catch (error) {
     console.error('Failed to bulk update tags:', error)
     return NextResponse.json(
-      { error: 'Falha ao atualizar tags em massa', details: (error as Error).message },
+      { error: 'Falha ao atualizar tags em massa', details: error instanceof Error ? error.message : String(error) },
       { status: 500 }
     )
   }

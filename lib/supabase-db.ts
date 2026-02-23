@@ -1051,8 +1051,8 @@ export const contactDb = {
         ids: string[],
         tagsToAdd: string[],
         tagsToRemove: string[]
-    ): Promise<void> => {
-        if (ids.length === 0) return
+    ): Promise<number> => {
+        if (ids.length === 0) return 0
 
         const { data, error } = await supabase
             .from('contacts')
@@ -1077,6 +1077,7 @@ export const contactDb = {
             .upsert(updates, { onConflict: 'id' })
 
         if (upsertError) throw upsertError
+        return updates.length
     },
 
     import: async (contacts: Omit<Contact, 'id' | 'lastActive'>[]): Promise<{ inserted: number; updated: number }> => {
