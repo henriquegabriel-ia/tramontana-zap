@@ -325,16 +325,16 @@ export const contactService = {
     tagsToAdd: string[],
     tagsToRemove: string[]
   ): Promise<number> => {
-    const res = await fetch('/api/contacts/bulk-tags', {
+    const response = await fetch('/api/contacts/bulk-tags', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ ids, tagsToAdd, tagsToRemove }),
     });
-    if (!res.ok) {
-      const { error } = await res.json();
-      throw new Error(error || 'Erro ao atualizar tags');
+    if (!response.ok) {
+      const errorData = await response.json().catch(() => ({}));
+      throw new Error((errorData as { error?: string }).error || 'Erro ao atualizar tags');
     }
-    const { updated } = await res.json();
+    const { updated } = await response.json();
     return updated;
   },
 
