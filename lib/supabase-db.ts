@@ -1044,6 +1044,41 @@ export const contactDb = {
         return ids.length
     },
 
+    // Atualiza as tags de vários contatos em lote.
+    // Estratégia: (tags_atuais ∪ tagsToAdd) − tagsToRemove para cada contato.
+    // Usa upsert com linha completa para evitar violação de constraints NOT NULL.
+    bulkUpdateTags: async (
+        ids: string[],
+        tagsToAdd: string[],
+        tagsToRemove: string[]
+    ): Promise<void> => {
+        if (ids.length === 0) return
+
+        const { data, error } = await supabase
+            .from('contacts')
+            .select('id, tags')
+            .in('id', ids)
+
+        if (error) throw error
+
+        // Calcula novas tags: (atual ∪ tagsToAdd) − tagsToRemove
+        const updates = (data || []).map((c) => ({
+            id: c.id,
+            tags: [
+                ...new Set(
+                    [...(c.tags ?? []), ...tagsToAdd]
+                        .filter((t) => !tagsToRemove.includes(t))
+                ),
+            ],
+        }))
+
+        const { error: upsertError } = await supabase
+            .from('contacts')
+            .upsert(updates, { onConflict: 'id' })
+
+        if (upsertError) throw upsertError
+    },
+
     import: async (contacts: Omit<Contact, 'id' | 'lastActive'>[]): Promise<{ inserted: number; updated: number }> => {
         if (contacts.length === 0) return { inserted: 0, updated: 0 }
 
