@@ -32,7 +32,7 @@ import {
   createSupabaseProject,
   detectSupabaseRegion,
 } from '@/lib/installer/supabase';
-import type { InstallStep } from '@/lib/installer/types';
+import type { InstallStep, InstallErrorType } from '@/lib/installer/types';
 
 export const maxDuration = 300;
 export const runtime = 'nodejs';
@@ -72,6 +72,7 @@ interface StreamEvent {
   title?: string;
   subtitle?: string;
   error?: string;
+  errorType?: InstallErrorType;
   errorDetails?: string;
   returnToStep?: InstallStep;
 }
@@ -787,9 +788,22 @@ export async function POST(req: Request) {
       });
       if (stack) console.error('[provision] ❌ Stack:', stack);
 
+      // Derivar errorType a partir do step que falhou e se foi timeout de rede
+      const isTimeout = err instanceof Error && err.message.toLowerCase().includes('timeout');
+      const errorTypeMap: Record<string, InstallErrorType> = {
+        validate_vercel: 'vercel_token',
+        validate_supabase: 'supabase_pat',
+        validate_qstash: 'qstash_token',
+        validate_redis: 'redis_url',
+      };
+      const derivedErrorType: InstallErrorType = isTimeout
+        ? 'network'
+        : (errorTypeMap[currentStep.id] ?? 'unknown');
+
       await sendEvent({
         type: 'error',
         error: message,
+        errorType: derivedErrorType,
         errorDetails: stack,
         returnToStep: currentStep.returnToStep,
       });
