@@ -1,4 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server';
+import { fetchWithTimeout } from '@/lib/installer/fetch-with-timeout';
 
 /**
  * POST /api/installer/redis/validate
@@ -42,12 +43,12 @@ export async function POST(req: NextRequest) {
 
     // Fazer PING via REST API
     // Upstash REST API: GET {url}/ping ou POST {url} com command ["PING"]
-    const pingRes = await fetch(`${normalizedUrl}/ping`, {
+    const pingRes = await fetchWithTimeout(`${normalizedUrl}/ping`, {
       method: 'GET',
       headers: {
         Authorization: `Bearer ${restToken}`,
       },
-    });
+    }, 8_000); // Redis PING deve responder em < 8s
 
     if (!pingRes.ok) {
       if (pingRes.status === 401 || pingRes.status === 403) {
