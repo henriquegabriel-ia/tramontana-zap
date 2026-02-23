@@ -242,6 +242,7 @@ export default function InstallPage() {
       <InstallLayout showDots={false}>
         <ErrorView
           error={state.error}
+          errorType={state.errorType}
           errorDetails={state.errorDetails}
           onRetry={handleRetry}
           onGoToStep={handleGoToStep}
