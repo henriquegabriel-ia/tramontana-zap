@@ -28,8 +28,9 @@ export async function POST(req: NextRequest) {
     }
 
     // Validar formato da URL — regex garante domínio real, não substring
+    const trimmedUrl = restUrl.trim();
     const validUpstashUrl = /^https:\/\/[a-z0-9][a-z0-9-]*\.upstash\.io\/?$/i;
-    if (!validUpstashUrl.test(restUrl.trim())) {
+    if (!validUpstashUrl.test(trimmedUrl)) {
       return NextResponse.json(
         { error: 'URL inválida. Formato esperado: https://[nome].upstash.io' },
         { status: 400 }
@@ -37,7 +38,7 @@ export async function POST(req: NextRequest) {
     }
 
     // Normalizar URL (remover trailing slash)
-    const normalizedUrl = restUrl.replace(/\/$/, '');
+    const normalizedUrl = trimmedUrl.replace(/\/$/, '');
 
     // Fazer PING via REST API
     // Upstash REST API: GET {url}/ping ou POST {url} com command ["PING"]
