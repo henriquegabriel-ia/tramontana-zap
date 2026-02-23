@@ -43,6 +43,19 @@ export const VALIDATION = {
 } as const;
 
 // =============================================================================
+// TIPOS DE ERRO (para mensagens específicas no ErrorView)
+// =============================================================================
+
+export type InstallErrorType =
+  | 'vercel_token'
+  | 'supabase_pat'
+  | 'qstash_token'
+  | 'redis_url'
+  | 'redis_token'
+  | 'network'
+  | 'unknown';
+
+// =============================================================================
 // DADOS COLETADOS (sem mudanças)
 // =============================================================================
 
@@ -147,6 +160,7 @@ export interface ErrorState {
   data: InstallData;           // ✅ Mantém data para retry
   returnToStep: InstallStep;
   error: string;
+  errorType?: InstallErrorType;
   errorDetails?: string;
 }
 
@@ -173,7 +187,7 @@ export type InstallAction =
   | { type: 'SUBMIT_STEP'; data: Partial<InstallData> }  // ✅ Atômico: update + next
   | { type: 'START_PROVISIONING' }
   | { type: 'PROGRESS'; progress: number; title: string; subtitle: string }
-  | { type: 'ERROR'; returnToStep: InstallStep; error: string; errorDetails?: string }
+  | { type: 'ERROR'; returnToStep: InstallStep; error: string; errorType?: InstallErrorType; errorDetails?: string }
   | { type: 'COMPLETE' }
   | { type: 'RETRY' }
   | { type: 'RESET' };  // ✅ Recomeça instalação do zero
@@ -196,10 +210,11 @@ export const actions = {
     title,
     subtitle,
   }),
-  error: (error: string, returnToStep: InstallStep, errorDetails?: string): InstallAction => ({
+  error: (error: string, returnToStep: InstallStep, errorDetails?: string, errorType?: InstallErrorType): InstallAction => ({
     type: 'ERROR',
     error,
     returnToStep,
+    errorType,
     errorDetails,
   }),
   complete: (): InstallAction => ({ type: 'COMPLETE' }),
@@ -214,7 +229,7 @@ export const actions = {
 
 export type ProvisionStreamEvent =
   | { type: 'progress'; progress: number; title: string; subtitle: string }
-  | { type: 'error'; error: string; returnToStep: InstallStep; errorDetails?: string }
+  | { type: 'error'; error: string; returnToStep: InstallStep; errorType?: InstallErrorType; errorDetails?: string }
   | { type: 'complete' };
 
 // Type guards para ProvisionStreamEvent
@@ -222,7 +237,7 @@ export function isProgressEvent(e: ProvisionStreamEvent): e is { type: 'progress
   return e.type === 'progress';
 }
 
-export function isErrorEvent(e: ProvisionStreamEvent): e is { type: 'error'; error: string; returnToStep: InstallStep; errorDetails?: string } {
+export function isErrorEvent(e: ProvisionStreamEvent): e is { type: 'error'; error: string; returnToStep: InstallStep; errorType?: InstallErrorType; errorDetails?: string } {
   return e.type === 'error';
 }
 
