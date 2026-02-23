@@ -27,10 +27,11 @@ export async function POST(req: NextRequest) {
       );
     }
 
-    // Validar formato da URL
-    if (!restUrl.includes('.upstash.io')) {
+    // Validar formato da URL — regex garante domínio real, não substring
+    const validUpstashUrl = /^https:\/\/[a-z0-9][a-z0-9-]*\.upstash\.io\/?$/i;
+    if (!validUpstashUrl.test(restUrl.trim())) {
       return NextResponse.json(
-        { error: 'URL deve ser do Upstash (*.upstash.io)' },
+        { error: 'URL inválida. Formato esperado: https://[nome].upstash.io' },
         { status: 400 }
       );
     }
