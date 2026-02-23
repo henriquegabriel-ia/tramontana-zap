@@ -7,6 +7,8 @@
  * @param url URL para a requisição
  * @param init Opções do fetch (headers, method, body, etc.)
  * @param timeoutMs Timeout em ms (padrão: 15000 = 15 segundos)
+ * @note Não passe `signal` em `init` — fetchWithTimeout gerencia o AbortController internamente.
+ *       Um `signal` passado pelo caller será substituído silenciosamente.
  */
 export async function fetchWithTimeout(
   url: string,
@@ -19,7 +21,7 @@ export async function fetchWithTimeout(
   try {
     return await fetch(url, { ...init, signal: controller.signal });
   } catch (err) {
-    if (err instanceof DOMException && err.name === 'AbortError') {
+    if ((err instanceof DOMException || err instanceof Error) && (err as Error).name === 'AbortError') {
       const hostname = (() => {
         try { return new URL(url).hostname; } catch { return url; }
       })();
