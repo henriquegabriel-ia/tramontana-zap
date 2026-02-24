@@ -1082,10 +1082,10 @@ export const contactDb = {
 
     // Atualiza o status de vários contatos em lote para o mesmo valor.
     // Estratégia OPT_IN: desativa phone_suppressions para os números atualizados.
-    async bulkUpdateStatus(
+    bulkUpdateStatus: async (
         ids: string[],
         status: ContactStatus
-    ): Promise<number> {
+    ): Promise<number> => {
         if (ids.length === 0) return 0
 
         const { data, error } = await supabase
@@ -1093,13 +1093,14 @@ export const contactDb = {
             .update({ status, updated_at: new Date().toISOString() })
             .in('id', ids)
             .select('id, phone')
+
         if (error) throw error
 
         const updated = data?.length ?? 0
 
         // OPT_IN: desativar phone_suppressions para esses números
         if (status === ContactStatus.OPT_IN && updated > 0) {
-            const phones = (data || []).map((c: { id: string; phone: string }) => c.phone).filter(Boolean)
+            const phones = (data || []).map((c) => c.phone).filter(Boolean)
             if (phones.length > 0) {
                 const { error: suppressionError } = await supabase
                     .from('phone_suppressions')
