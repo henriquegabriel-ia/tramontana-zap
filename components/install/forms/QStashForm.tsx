@@ -5,7 +5,7 @@ import { ChevronDown } from 'lucide-react';
 import { TokenInput } from '../TokenInput';
 import { ValidatingOverlay } from '../ValidatingOverlay';
 import { SuccessCheckmark } from '../SuccessCheckmark';
-import { VALIDATION } from '@/lib/installer/types';
+import { VALIDATION, normalizeToken } from '@/lib/installer/types';
 import type { FormProps } from './types';
 
 /**
@@ -18,12 +18,13 @@ export function QStashForm({ data, onComplete, onBack, showBack }: FormProps) {
   const [success, setSuccess] = useState(false);
   const [error, setError] = useState<string | null>(null);
 
+  const normalized = normalizeToken(token);
   const isValidFormat =
-    token.trim().startsWith('eyJ') ||
-    token.trim().startsWith('qstash_') ||
-    token.trim().split('.').length === 3;
+    normalized.startsWith('eyJ') ||
+    normalized.startsWith('qstash_') ||
+    normalized.split('.').length === 3;
 
-  const canValidate = isValidFormat && token.trim().length >= VALIDATION.QSTASH_TOKEN_MIN_LENGTH;
+  const canValidate = isValidFormat && normalized.length >= VALIDATION.QSTASH_TOKEN_MIN_LENGTH;
 
   const handleValidate = async () => {
     if (!canValidate) {
@@ -42,7 +43,7 @@ export function QStashForm({ data, onComplete, onBack, showBack }: FormProps) {
       const res = await fetch('/api/installer/qstash/validate', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ token: token.trim() }),
+        body: JSON.stringify({ token: normalized }),
       });
 
       const result = await res.json();
@@ -71,7 +72,7 @@ export function QStashForm({ data, onComplete, onBack, showBack }: FormProps) {
   };
 
   const handleSuccessComplete = () => {
-    onComplete({ qstashToken: token.trim() });
+    onComplete({ qstashToken: normalized });
   };
 
   const handleAutoSubmit = () => {

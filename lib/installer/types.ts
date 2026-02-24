@@ -98,6 +98,15 @@ export function isValidEmail(email: string): boolean {
   return emailRegex.test(email);
 }
 
+/**
+ * Normaliza tokens copiados pelo aluno.
+ * Remove espaços e aspas extras (simples, duplas ou backtick) que ficam quando
+ * o token é copiado de um arquivo .env ou documentação — ex: QSTASH_TOKEN="eyJ..."
+ */
+export function normalizeToken(value: string): string {
+  return value.trim().replace(/^["'`]|["'`]$/g, '');
+}
+
 /** Funções que validam se um step está completo */
 export const stepValidators: Record<InstallStep, (data: InstallData) => boolean> = {
   1: (data) => {
@@ -107,20 +116,20 @@ export const stepValidators: Record<InstallStep, (data: InstallData) => boolean>
     return Boolean(name.length >= VALIDATION.NAME_MIN_LENGTH && isValidEmail(email) && password.length >= VALIDATION.PASSWORD_MIN_LENGTH);
   },
   2: (data) => {
-    const token = data.vercelToken?.trim() ?? '';
+    const token = normalizeToken(data.vercelToken ?? '');
     return token.length >= VALIDATION.VERCEL_TOKEN_MIN_LENGTH;
   },
   3: (data) => {
-    const pat = data.supabasePat?.trim() ?? '';
+    const pat = normalizeToken(data.supabasePat ?? '');
     return pat.startsWith(VALIDATION.SUPABASE_PAT_PREFIX) && pat.length >= VALIDATION.SUPABASE_PAT_MIN_LENGTH;
   },
   4: (data) => {
-    const token = data.qstashToken?.trim() ?? '';
+    const token = normalizeToken(data.qstashToken ?? '');
     return token.length >= VALIDATION.QSTASH_TOKEN_MIN_LENGTH;
   },
   5: (data) => {
     const url = data.redisRestUrl?.trim() ?? '';
-    const token = data.redisRestToken?.trim() ?? '';
+    const token = normalizeToken(data.redisRestToken ?? '');
     return /^https:\/\/[a-z0-9][a-z0-9-]*\.upstash\.io\/?$/i.test(url)
       && token.length >= VALIDATION.REDIS_TOKEN_MIN_LENGTH
       && /^[A-Za-z0-9_=+/-]+$/.test(token);

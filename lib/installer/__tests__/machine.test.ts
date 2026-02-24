@@ -19,7 +19,7 @@ import {
   isSuccess,
 } from '../machine';
 import type { InstallState, InstallAction, InstallData } from '../types';
-import { EMPTY_INSTALL_DATA, isValidEmail, SCHEMA_VERSION } from '../types';
+import { EMPTY_INSTALL_DATA, isValidEmail, normalizeToken, stepValidators, SCHEMA_VERSION } from '../types';
 
 // =============================================================================
 // HELPERS
@@ -463,6 +463,50 @@ describe('Email Validation', () => {
     if (isCollecting(next)) {
       expect(next.step).toBe(1);
     }
+  });
+});
+
+// =============================================================================
+// TOKEN NORMALIZATION
+// =============================================================================
+
+describe('normalizeToken', () => {
+  it('should strip leading/trailing whitespace', () => {
+    expect(normalizeToken('  abc  ')).toBe('abc');
+  });
+
+  it('should strip double quotes', () => {
+    expect(normalizeToken('"eyJhbGciOiJSUzI1NiJ9"')).toBe('eyJhbGciOiJSUzI1NiJ9');
+    expect(normalizeToken('"sbp_token"')).toBe('sbp_token');
+  });
+
+  it('should strip single quotes', () => {
+    expect(normalizeToken("'qstash_token'")).toBe('qstash_token');
+  });
+
+  it('should strip backtick quotes', () => {
+    expect(normalizeToken('`AEIMAHitoken`')).toBe('AEIMAHitoken');
+  });
+
+  it('should strip quotes AND whitespace together', () => {
+    // Caso real: aluno copia da linha do .env com espaço depois das aspas
+    expect(normalizeToken('  "eyJhbGci"  ')).toBe('eyJhbGci');
+  });
+
+  it('should not strip quotes in the middle of a token', () => {
+    // Tokens reais nunca têm aspas no meio — mas garantir que não quebramos
+    expect(normalizeToken('"abc"def"')).toBe('abc"def');
+  });
+
+  it('should allow step 5 validator to pass with quoted token', () => {
+    // Regressão: aluno cola '"AEIMAHiXXXXXXXXXXXXXXXXXXXXXXXXXXXXX"' do .env
+    const data = {
+      ...EMPTY_INSTALL_DATA,
+      redisRestUrl: 'https://my-redis.upstash.io',
+      redisRestToken: '"redis_test_token_1234567890_abcdef01"',
+    };
+    // stepValidators[5] usa normalizeToken internamente
+    expect(stepValidators[5](data)).toBe(true);
   });
 });
 

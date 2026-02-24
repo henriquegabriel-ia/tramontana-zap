@@ -5,7 +5,7 @@ import { ChevronDown } from 'lucide-react';
 import { TokenInput } from '../TokenInput';
 import { ValidatingOverlay } from '../ValidatingOverlay';
 import { SuccessCheckmark } from '../SuccessCheckmark';
-import { VALIDATION } from '@/lib/installer/types';
+import { VALIDATION, normalizeToken } from '@/lib/installer/types';
 import type { FormProps } from './types';
 
 /**
@@ -20,7 +20,7 @@ export function VercelForm({ data, onComplete, onBack, showBack }: FormProps) {
   const [projectName, setProjectName] = useState<string | null>(null);
 
   const handleValidate = async () => {
-    if (token.trim().length < VALIDATION.VERCEL_TOKEN_MIN_LENGTH) {
+    if (normalizeToken(token).length < VALIDATION.VERCEL_TOKEN_MIN_LENGTH) {
       setError('Credenciais insuficientes');
       return;
     }
@@ -37,7 +37,7 @@ export function VercelForm({ data, onComplete, onBack, showBack }: FormProps) {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
-          token: token.trim(),
+          token: normalizeToken(token),
           domain: window.location.hostname,
         }),
       });
@@ -70,7 +70,7 @@ export function VercelForm({ data, onComplete, onBack, showBack }: FormProps) {
   };
 
   const handleSuccessComplete = () => {
-    onComplete({ vercelToken: token.trim() });
+    onComplete({ vercelToken: normalizeToken(token) });
   };
 
   if (success) {
