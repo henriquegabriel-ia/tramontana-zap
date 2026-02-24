@@ -49,8 +49,8 @@ const validStep4Data: Partial<InstallData> = {
 const validAllData: InstallData = {
   ...EMPTY_INSTALL_DATA,
   ...validStep4Data,
-  redisRestUrl: 'https://redis.example.com',
-  redisRestToken: 'redis_token_123',
+  redisRestUrl: 'https://my-redis.upstash.io',
+  redisRestToken: 'redis_test_token_1234567890_abcdef01',
 };
 
 function dispatch(state: InstallState, action: InstallAction): InstallState {
@@ -558,8 +558,8 @@ describe('SUBMIT_STEP Action', () => {
     const next = dispatch(state, {
       type: 'SUBMIT_STEP',
       data: {
-        redisRestUrl: 'https://redis.example.com',
-        redisRestToken: 'redis_token_123',
+        redisRestUrl: 'https://my-redis.upstash.io',
+        redisRestToken: 'redis_test_token_1234567890_abcdef01',
       },
     });
 
