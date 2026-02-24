@@ -338,6 +338,22 @@ export const contactService = {
     return updated;
   },
 
+
+  bulkUpdateStatus: async (ids: string[], status: ContactStatus): Promise<number> => {
+    const response = await fetch('/api/contacts/bulk-status', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ ids, status }),
+    });
+    if (!response.ok) {
+      const errorData = await response.json().catch(() => ({}));
+      throw new Error((errorData as { error?: string }).error || 'Erro ao atualizar status');
+    }
+    const { updated } = await response.json();
+    return updated;
+  },
+
+
   /**
    * Remove a supressão global de um telefone.
    * Útil para números de teste ou clientes que pediram para voltar a receber.

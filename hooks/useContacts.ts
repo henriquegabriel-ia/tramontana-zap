@@ -299,10 +299,22 @@ export const useContactsController = (initialData?: ContactsInitialData) => {
       tagsToRemove: string[]
     }) => contactService.bulkUpdateTags(ids, tagsToAdd, tagsToRemove),
     onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ['contacts'] })
-      queryClient.invalidateQueries({ queryKey: ['contactTags'] })
+      invalidateContacts(queryClient)
       clearSelection()
       toast.success('Tags atualizadas com sucesso')
+    },
+    onError: (err: Error) => {
+      toast.error(err.message)
+    },
+  })
+
+  const bulkUpdateStatusMutation = useMutation({
+    mutationFn: ({ ids, status }: { ids: string[]; status: ContactStatus }) =>
+      contactService.bulkUpdateStatus(ids, status),
+    onSuccess: () => {
+      invalidateContacts(queryClient)
+      clearSelection()
+      toast.success('Status atualizado com sucesso')
     },
     onError: (err: Error) => {
       toast.error(err.message)
@@ -534,6 +546,12 @@ export const useContactsController = (initialData?: ContactsInitialData) => {
         tagsToRemove,
       }),
     isBulkUpdatingTags: bulkUpdateTagsMutation.isPending,
+    onBulkUpdateStatus: (status: ContactStatus) =>
+      bulkUpdateStatusMutation.mutate({
+        ids: Array.from(selectedIds),
+        status,
+      }),
+    isBulkUpdatingStatus: bulkUpdateStatusMutation.isPending,
     onUnsuppress: handleUnsuppress,
 
     // Import report
