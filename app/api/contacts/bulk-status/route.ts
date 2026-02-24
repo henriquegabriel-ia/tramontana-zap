@@ -10,7 +10,11 @@ export const revalidate = 0
 
 const BulkUpdateStatusSchema = z.object({
   ids: z.array(z.string().min(1, 'ID inválido')).min(1, 'Selecione pelo menos um contato'),
-  status: z.nativeEnum(ContactStatus),
+  status: z.enum([
+    ContactStatus.OPT_IN,
+    ContactStatus.OPT_OUT,
+    ContactStatus.UNKNOWN,
+  ] as [string, ...string[]]),
 })
 
 /**
@@ -34,7 +38,7 @@ export async function POST(request: NextRequest) {
 
     const { ids, status } = validation.data
 
-    const updated = await contactDb.bulkUpdateStatus(ids, status)
+    const updated = await contactDb.bulkUpdateStatus(ids, status as ContactStatus)
     return NextResponse.json({ updated })
   } catch (error) {
     console.error('Failed to bulk update status:', error)
