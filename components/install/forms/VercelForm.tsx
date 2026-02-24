@@ -112,7 +112,7 @@ export function VercelForm({ data, onComplete, onBack, showBack }: FormProps) {
           setToken(val);
           setError(null);
         }}
-        placeholder="cole as credenciais aqui..."
+        placeholder="paste_xxxxxxxxxxxxxxxxxxxxxxxxxxxx"
         validating={validating}
         error={error || undefined}
         minLength={VALIDATION.VERCEL_TOKEN_MIN_LENGTH}
