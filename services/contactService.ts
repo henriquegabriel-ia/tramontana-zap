@@ -343,13 +343,13 @@ export const contactService = {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ ids, status }),
-    })
+    });
     if (!response.ok) {
-      const errorData = await response.json().catch(() => ({}))
-      throw new Error((errorData as { error?: string }).error || 'Erro ao atualizar status')
+      const errorData = await response.json().catch(() => ({}));
+      throw new Error((errorData as { error?: string }).error || 'Erro ao atualizar status');
     }
-    const { updated } = await response.json()
-    return updated as number
+    const { updated } = await response.json();
+    return updated;
   },
 
   /**
