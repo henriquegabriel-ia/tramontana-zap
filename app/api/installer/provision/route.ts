@@ -255,7 +255,7 @@ async function findOrCreateSupabaseProject(
   const dbPass = Array.from(array, (b) => charset[b % charset.length]).join('');
 
   // Get first org
-  const orgsRes = await fetch('https://api.supabase.com/v1/organizations', {
+  const orgsRes = await fetchWithTimeout('https://api.supabase.com/v1/organizations', {
     headers: { Authorization: `Bearer ${pat}` },
   });
 
@@ -794,11 +794,18 @@ export async function POST(req: Request) {
         validate_vercel: 'vercel_token',
         validate_supabase: 'supabase_pat',
         validate_qstash: 'qstash_token',
-        validate_redis: 'redis_url',
       };
-      const derivedErrorType: InstallErrorType = isTimeout
-        ? 'network'
-        : (errorTypeMap[currentStep.id] ?? 'unknown');
+
+      // Para redis, distingue URL vs token pelo conteúdo da mensagem de erro
+      let derivedErrorType: InstallErrorType;
+      if (currentStep.id === 'validate_redis') {
+        const msg = message.toLowerCase();
+        derivedErrorType = isTimeout ? 'network'
+          : msg.includes('token') || msg.includes('inválido') || msg.includes('permiss') ? 'redis_token'
+          : 'redis_url';
+      } else {
+        derivedErrorType = isTimeout ? 'network' : (errorTypeMap[currentStep.id] ?? 'unknown');
+      }
 
       await sendEvent({
         type: 'error',
