@@ -292,6 +292,7 @@ export const ContactListView: React.FC<ContactListViewProps> = ({
               variant="outline"
               size="sm"
               onClick={() => setIsBulkTagsModalOpen(true)}
+              disabled={isBulkUpdatingTags}
               className="gap-2"
             >
               <Tag size={14} />
@@ -305,6 +306,7 @@ export const ContactListView: React.FC<ContactListViewProps> = ({
               variant="outline"
               size="sm"
               onClick={() => setIsBulkStatusModalOpen(true)}
+              disabled={isBulkUpdatingStatus}
               className="gap-2"
             >
               <CircleUser size={14} />
