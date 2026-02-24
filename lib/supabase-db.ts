@@ -31,6 +31,7 @@ import {
 } from '../types'
 import { isSuppressionActive } from '@/lib/phone-suppressions'
 import { canonicalTemplateCategory } from '@/lib/template-category'
+import { normalizePhoneNumber, validatePhoneNumber } from '@/lib/phone-formatter'
 
 // Gera um ID compatível com ambientes que usam UUID (preferencial) e também funciona como TEXT.
 // - Em Supabase, muitos schemas antigos usam `uuid` como PK.
@@ -1075,6 +1076,9 @@ export const contactDb = {
             updated_at: now,
         }))
 
+        // Todos os contatos podem ter sido deletados entre SELECT e UPSERT (race condition)
+        if (updates.length === 0) return 0
+
         const { error: upsertError } = await supabase
             .from('contacts')
             .upsert(updates, { onConflict: 'id' })
@@ -1101,9 +1105,13 @@ export const contactDb = {
 
         const updated = data?.length ?? 0
 
-        // OPT_IN: desativar phone_suppressions para esses números
+        // OPT_IN: desativar phone_suppressions para esses números (normaliza para E.164)
         if (status === ContactStatus.OPT_IN && updated > 0) {
-            const phones = (data || []).map((c) => c.phone).filter(Boolean)
+            const phones = (data || [])
+                .map((c) => c.phone)
+                .filter(Boolean)
+                .map((p) => normalizePhoneNumber(p))
+                .filter((p) => validatePhoneNumber(p))
             if (phones.length > 0) {
                 const { error: suppressionError } = await supabase
                     .from('phone_suppressions')
