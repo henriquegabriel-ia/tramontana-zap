@@ -1062,6 +1062,7 @@ export const contactDb = {
 
         if (error) throw error
 
+        const now = new Date().toISOString()
         // Calcula novas tags: (atual ∪ tagsToAdd) − tagsToRemove
         const updates = (data || []).map((c) => ({
             ...c,
@@ -1071,6 +1072,7 @@ export const contactDb = {
                         .filter((t) => !tagsToRemove.includes(t))
                 ),
             ],
+            updated_at: now,
         }))
 
         const { error: upsertError } = await supabase
@@ -1108,8 +1110,12 @@ export const contactDb = {
                     .update({ is_active: false })
                     .in('phone', phones)
                 if (suppressionError) {
+                    // Falha intencional não-propagada: o UPDATE de contacts já foi commitado
+                    // e não pode ser revertido sem uma transação atômica (RPC). Lançar aqui
+                    // retornaria 500 ao caller mas o status já estaria alterado no DB, o que
+                    // seria mais confuso do que um soft-failure silencioso.
+                    // TODO: mover ambos os UPDATEs para uma RPC Supabase para garantir atomicidade.
                     console.error('Erro ao desativar phone_suppressions:', suppressionError)
-                    // Não lança erro: o status já foi atualizado com sucesso
                 }
             }
         }
