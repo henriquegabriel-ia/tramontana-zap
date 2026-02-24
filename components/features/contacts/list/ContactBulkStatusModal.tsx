@@ -39,6 +39,7 @@ export function ContactBulkStatusModal({
   const handleApply = () => {
     if (!selectedStatus) return
     onApply(selectedStatus)
+    setSelectedStatus(null)
   }
 
   const handleOpenChange = (isOpen: boolean) => {
@@ -56,7 +57,7 @@ export function ContactBulkStatusModal({
           </DialogTitle>
         </DialogHeader>
 
-        <div className="space-y-4 py-2">
+        <div className="space-y-5 py-2">
           <Select
             value={selectedStatus ?? ''}
             onValueChange={(v) => setSelectedStatus(v as ContactStatus)}
@@ -68,19 +69,22 @@ export function ContactBulkStatusModal({
               <SelectItem value={ContactStatus.OPT_IN}>Opt-in</SelectItem>
               <SelectItem value={ContactStatus.OPT_OUT}>Opt-out</SelectItem>
               <SelectItem value={ContactStatus.UNKNOWN}>Desconhecido</SelectItem>
+              {/* ContactStatus.SUPPRESSED é gerenciado internamente e não exposto ao usuário */}
             </SelectContent>
           </Select>
 
-          {selectedStatus && (
-            <div className="flex items-start gap-2 rounded-md border border-amber-500/30 bg-amber-500/10 px-3 py-2 text-sm text-amber-600 dark:text-amber-400">
-              <AlertTriangle size={16} className="mt-0.5 shrink-0" />
-              <span>
-                Isso vai <strong>substituir</strong> o status atual de{' '}
-                <strong>{selectedCount} contato{selectedCount !== 1 ? 's' : ''}</strong>.
-                Esta ação não pode ser desfeita.
-              </span>
-            </div>
-          )}
+          <div className={`flex items-start gap-2 rounded-md border px-3 py-2 text-sm transition-opacity ${
+            selectedStatus
+              ? 'border-amber-500/30 bg-amber-500/10 text-amber-600 dark:text-amber-400 opacity-100'
+              : 'opacity-0 pointer-events-none border-transparent'
+          }`}>
+            <AlertTriangle size={16} className="mt-0.5 shrink-0" />
+            <span>
+              Isso vai <strong>substituir</strong> o status atual de{' '}
+              <strong>{selectedCount} contato{selectedCount !== 1 ? 's' : ''}</strong>.
+              Esta ação não pode ser desfeita.
+            </span>
+          </div>
         </div>
 
         <DialogFooter>
