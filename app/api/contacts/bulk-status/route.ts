@@ -10,11 +10,10 @@ export const revalidate = 0
 
 const BulkUpdateStatusSchema = z.object({
   ids: z.array(z.string().min(1, 'ID inválido')).min(1, 'Selecione pelo menos um contato'),
-  status: z.enum([
-    ContactStatus.OPT_IN,
-    ContactStatus.OPT_OUT,
-    ContactStatus.UNKNOWN,
-  ] as [string, ...string[]]),
+  status: z.nativeEnum(ContactStatus).refine(
+    (v) => v !== ContactStatus.SUPPRESSED,
+    { message: 'Status SUPPRESSED não pode ser definido manualmente' }
+  ),
 })
 
 /**
@@ -38,7 +37,7 @@ export async function POST(request: NextRequest) {
 
     const { ids, status } = validation.data
 
-    const updated = await contactDb.bulkUpdateStatus(ids, status as ContactStatus)
+    const updated = await contactDb.bulkUpdateStatus(ids, status)
     return NextResponse.json({ updated })
   } catch (error) {
     console.error('Failed to bulk update status:', error)
