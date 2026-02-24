@@ -299,8 +299,7 @@ export const useContactsController = (initialData?: ContactsInitialData) => {
       tagsToRemove: string[]
     }) => contactService.bulkUpdateTags(ids, tagsToAdd, tagsToRemove),
     onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ['contacts'] })
-      queryClient.invalidateQueries({ queryKey: ['contactTags'] })
+      invalidateContacts(queryClient)
       clearSelection()
       toast.success('Tags atualizadas com sucesso')
     },
@@ -313,8 +312,7 @@ export const useContactsController = (initialData?: ContactsInitialData) => {
     mutationFn: ({ ids, status }: { ids: string[]; status: ContactStatus }) =>
       contactService.bulkUpdateStatus(ids, status),
     onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ['contacts'] })
-      queryClient.invalidateQueries({ queryKey: ['contactStats'] })
+      invalidateContacts(queryClient)
       clearSelection()
       toast.success('Status atualizado com sucesso')
     },
