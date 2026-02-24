@@ -75,7 +75,7 @@ export function ContactBulkStatusModal({
 
           <div className={`flex items-start gap-2 rounded-md border px-3 py-2 text-sm transition-opacity ${
             selectedStatus
-              ? 'border-amber-500/30 bg-amber-500/10 text-amber-600 dark:text-amber-400 opacity-100'
+              ? 'border-primary-500/30 bg-primary-500/10 text-primary-600 dark:text-primary-400 opacity-100'
               : 'opacity-0 pointer-events-none border-transparent'
           }`}>
             <AlertTriangle size={16} className="mt-0.5 shrink-0" />
