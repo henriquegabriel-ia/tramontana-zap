@@ -61,6 +61,8 @@ export function ContactsClientWrapper({ initialData }: ContactsClientWrapperProp
       onUnsuppress={controller.onUnsuppress}
       onBulkUpdateTags={controller.onBulkUpdateTags}
       isBulkUpdatingTags={controller.isBulkUpdatingTags}
+      onBulkUpdateStatus={controller.onBulkUpdateStatus}
+      isBulkUpdatingStatus={controller.isBulkUpdatingStatus}
     />
   )
 }
