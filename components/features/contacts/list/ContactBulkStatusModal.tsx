@@ -1,0 +1,97 @@
+'use client'
+
+import { useState } from 'react'
+import {
+  Dialog,
+  DialogContent,
+  DialogHeader,
+  DialogTitle,
+  DialogFooter,
+} from '@/components/ui/dialog'
+import { Button } from '@/components/ui/button'
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from '@/components/ui/select'
+import { AlertTriangle, CircleUser } from 'lucide-react'
+import { ContactStatus } from '@/types'
+
+interface ContactBulkStatusModalProps {
+  open: boolean
+  onOpenChange: (open: boolean) => void
+  selectedCount: number
+  onApply: (status: ContactStatus) => void
+  isLoading?: boolean
+}
+
+export function ContactBulkStatusModal({
+  open,
+  onOpenChange,
+  selectedCount,
+  onApply,
+  isLoading,
+}: ContactBulkStatusModalProps) {
+  const [selectedStatus, setSelectedStatus] = useState<ContactStatus | null>(null)
+
+  const handleApply = () => {
+    if (!selectedStatus) return
+    onApply(selectedStatus)
+  }
+
+  const handleOpenChange = (isOpen: boolean) => {
+    if (!isOpen) setSelectedStatus(null)
+    onOpenChange(isOpen)
+  }
+
+  return (
+    <Dialog open={open} onOpenChange={handleOpenChange}>
+      <DialogContent className="max-w-md">
+        <DialogHeader>
+          <DialogTitle className="flex items-center gap-2">
+            <CircleUser size={18} />
+            Editar status — {selectedCount} contato{selectedCount !== 1 ? 's' : ''}
+          </DialogTitle>
+        </DialogHeader>
+
+        <div className="space-y-4 py-2">
+          <Select
+            value={selectedStatus ?? ''}
+            onValueChange={(v) => setSelectedStatus(v as ContactStatus)}
+          >
+            <SelectTrigger className="w-full">
+              <SelectValue placeholder="Selecione o novo status..." />
+            </SelectTrigger>
+            <SelectContent>
+              <SelectItem value={ContactStatus.OPT_IN}>Opt-in</SelectItem>
+              <SelectItem value={ContactStatus.OPT_OUT}>Opt-out</SelectItem>
+              <SelectItem value={ContactStatus.UNKNOWN}>Desconhecido</SelectItem>
+            </SelectContent>
+          </Select>
+
+          {selectedStatus && (
+            <div className="flex items-start gap-2 rounded-md border border-amber-500/30 bg-amber-500/10 px-3 py-2 text-sm text-amber-600 dark:text-amber-400">
+              <AlertTriangle size={16} className="mt-0.5 shrink-0" />
+              <span>
+                Isso vai <strong>substituir</strong> o status atual de{' '}
+                <strong>{selectedCount} contato{selectedCount !== 1 ? 's' : ''}</strong>.
+                Esta ação não pode ser desfeita.
+              </span>
+            </div>
+          )}
+        </div>
+
+        <DialogFooter>
+          <Button variant="outline" onClick={() => handleOpenChange(false)} disabled={isLoading}>
+            Cancelar
+          </Button>
+          <Button onClick={handleApply} disabled={!selectedStatus || isLoading}>
+            {isLoading ? 'Aplicando...' : 'Aplicar'}
+          </Button>
+        </DialogFooter>
+      </DialogContent>
+    </Dialog>
+  )
+}
