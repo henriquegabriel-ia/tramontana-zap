@@ -123,6 +123,13 @@ export function VercelForm({ data, onComplete, onBack, showBack }: FormProps) {
         autoFocus
       />
 
+      {/* Dica de formato */}
+      {!validating && !error && !token && (
+        <p className="text-center text-xs font-mono text-[var(--br-dust-gray)]/60">
+          Token começa com letras e números (24+ caracteres)
+        </p>
+      )}
+
       {/* Collapsible help - esconde durante validação */}
       {!validating && (
       <details className="w-full group">
