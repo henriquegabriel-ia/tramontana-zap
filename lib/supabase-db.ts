@@ -6,16 +6,6 @@
 
 import { supabase } from './supabase'
 import { redis } from './redis'
-
-// Divide array em chunks de tamanho n para evitar 414 Request-URI Too Large
-// no PostgREST: .in('field', array) serializa todos os valores na URL.
-function chunk<T>(array: T[], size: number): T[][] {
-    const chunks: T[][] = []
-    for (let i = 0; i < array.length; i += size) {
-        chunks.push(array.slice(i, i + size))
-    }
-    return chunks
-}
 import {
     Campaign,
     Contact,
@@ -41,6 +31,16 @@ import {
 } from '../types'
 import { isSuppressionActive } from '@/lib/phone-suppressions'
 import { canonicalTemplateCategory } from '@/lib/template-category'
+
+// Divide array em chunks de tamanho n para evitar 414 Request-URI Too Large
+// no PostgREST: .in('field', array) serializa todos os valores na URL.
+function chunk<T>(array: T[], size: number): T[][] {
+    const chunks: T[][] = []
+    for (let i = 0; i < array.length; i += size) {
+        chunks.push(array.slice(i, i + size))
+    }
+    return chunks
+}
 
 /**
  * Normaliza tags que podem estar aninhadas como [["tag"]] → ["tag"].
@@ -418,6 +418,7 @@ export const campaignDb = {
                 .from('campaign_contacts')
                 .select('contact_id, phone, name, email, custom_fields')
                 .eq('campaign_id', id)
+                .order('id', { ascending: true })
                 .range(dupOffset, dupOffset + DUP_PAGE_SIZE - 1)
 
             if (existingContactsError) throw existingContactsError
@@ -626,6 +627,10 @@ export const contactDb = {
 
             if (preSupError) throw preSupError
 
+            if ((preSupRows?.length ?? 0) >= 5000) {
+                console.warn('contactDb.list(): limite de 5000 supressões atingido — filtro SUPPRESSED pode estar incompleto')
+            }
+
             for (const row of preSupRows || []) {
                 const phone = String(row.phone || '').trim()
                 if (phone) preSuppressedPhonesNormalized.add(normalizePhone(phone))
@@ -642,8 +647,8 @@ export const contactDb = {
         }
 
         if (tag && tag !== 'ALL') {
-            if (tag === 'NONE') {
-                query = query.filter('tags', 'eq', '[]')
+            if (tag === 'NONE' || tag === '__NO_TAGS__') {
+                query = query.or('tags.is.null,tags.eq.[]')
             } else {
                 query = query.filter('tags', 'cs', JSON.stringify([tag]))
             }
@@ -675,12 +680,26 @@ export const contactDb = {
         const suppressionMap = new Map<string, { reason: string | null; source: string | null; expiresAt: string | null }>()
 
         if (phonesOnPage.length > 0) {
+            // Gera variantes com/sem '+' para garantir match independente do formato armazenado
+            const phoneVariants = new Set<string>()
+            for (const phone of phonesOnPage) {
+                const p = phone.trim()
+                if (!p) continue
+                phoneVariants.add(p)
+                if (p.startsWith('+')) {
+                    phoneVariants.add(p.slice(1))
+                } else {
+                    phoneVariants.add('+' + p)
+                }
+            }
+            const phonesForSuppressionLookup = Array.from(phoneVariants)
+
             const { data: suppressionRows, error: suppressionError } = await supabase
                 .from('phone_suppressions')
                 .select('phone,is_active,expires_at,reason,source')
                 .eq('is_active', true)
                 .or('expires_at.is.null,expires_at.gt.' + new Date().toISOString())
-                .in('phone', phonesOnPage)
+                .in('phone', phonesForSuppressionLookup)
                 .limit(5000)
 
             if (suppressionError) throw suppressionError
@@ -779,7 +798,7 @@ export const contactDb = {
 
         // Função que reconstrói a query com todos os filtros + range (evita mutação do builder)
         const buildQuery = (from: number, to: number) => {
-            let q = supabase.from('contacts').select('id').range(from, to)
+            let q = supabase.from('contacts').select('id').order('id', { ascending: true }).range(from, to)
 
             if (search) q = q.or(buildContactSearchOr(search))
 
@@ -788,8 +807,8 @@ export const contactDb = {
             }
 
             if (tag && tag !== 'ALL') {
-                if (tag === 'NONE') {
-                    q = q.filter('tags', 'eq', '[]')
+                if (tag === 'NONE' || tag === '__NO_TAGS__') {
+                    q = q.or('tags.is.null,tags.eq.[]')
                 } else {
                     q = q.filter('tags', 'cs', JSON.stringify([tag]))
                 }
@@ -811,41 +830,47 @@ export const contactDb = {
             const allIds: string[] = []
             const seen = new Set<string>()
 
-            // Processa cada chunk de phones em paralelo para obter os IDs de contatos
-            const chunkResults = await Promise.all(
-                phoneChunks.map(async (phones) => {
-                    const chunkIds: string[] = []
-                    let chunkOffset = 0
-                    const PAGE_SIZE = 1000
+            // Processa cada chunk de phones com concorrência limitada para obter os IDs de contatos
+            const CONCURRENT_LIMIT = 5
+            const chunkResults: string[][] = []
+            for (let i = 0; i < phoneChunks.length; i += CONCURRENT_LIMIT) {
+                const batch = phoneChunks.slice(i, i + CONCURRENT_LIMIT)
+                const batchResults = await Promise.all(
+                    batch.map(async (phones) => {
+                        const chunkIds: string[] = []
+                        let chunkOffset = 0
+                        const PAGE_SIZE = 1000
 
-                    while (true) {
-                        let q = supabase.from('contacts').select('id').range(chunkOffset, chunkOffset + PAGE_SIZE - 1)
+                        while (true) {
+                            let q = supabase.from('contacts').select('id').range(chunkOffset, chunkOffset + PAGE_SIZE - 1)
 
-                        if (search) q = q.or(buildContactSearchOr(search))
+                            if (search) q = q.or(buildContactSearchOr(search))
 
-                        if (tag && tag !== 'ALL') {
-                            if (tag === 'NONE') {
-                                q = q.filter('tags', 'eq', '[]')
-                            } else {
-                                q = q.filter('tags', 'cs', JSON.stringify([tag]))
+                            if (tag && tag !== 'ALL') {
+                                if (tag === 'NONE' || tag === '__NO_TAGS__') {
+                                    q = q.or('tags.is.null,tags.eq.[]')
+                                } else {
+                                    q = q.filter('tags', 'cs', JSON.stringify([tag]))
+                                }
                             }
+
+                            q = q.in('phone', phones)
+
+                            const { data, error } = await q
+                            if (error) throw error
+
+                            const rows = data || []
+                            chunkIds.push(...rows.map((row: any) => String(row.id)))
+
+                            if (rows.length < PAGE_SIZE) break
+                            chunkOffset += PAGE_SIZE
                         }
 
-                        q = q.in('phone', phones)
-
-                        const { data, error } = await q
-                        if (error) throw error
-
-                        const rows = data || []
-                        chunkIds.push(...rows.map((row: any) => String(row.id)))
-
-                        if (rows.length < PAGE_SIZE) break
-                        chunkOffset += PAGE_SIZE
-                    }
-
-                    return chunkIds
-                })
-            )
+                        return chunkIds
+                    })
+                )
+                chunkResults.push(...batchResults)
+            }
 
             for (const ids of chunkResults) {
                 for (const id of ids) {
@@ -1362,7 +1387,7 @@ export const contactDb = {
         if (typeof data === 'string') {
             try {
                 const parsed = JSON.parse(data)
-                return Array.isArray(parsed) ? parsed : []
+                return Array.isArray(parsed) ? flattenTags(parsed) : []
             } catch {
                 return []
             }

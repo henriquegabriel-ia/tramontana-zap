@@ -53,26 +53,29 @@ BEGIN
 END;
 $$;
 
--- Também corrige tags que são strings JSON dentro do array: ["[\"tag\"]"]
--- Estas são strings que parecem arrays mas foram serializadas como texto.
+-- Step 1b: Fix string-encoded JSON arrays (e.g., '["vip"]' stored as text inside the array)
 UPDATE contacts
 SET tags = (
-    SELECT COALESCE(jsonb_agg(
-        CASE
-            WHEN jsonb_typeof(elem) = 'string'
-                 AND (elem #>> '{}') LIKE '[%]'
-                 AND (elem #>> '{}') LIKE '%]'
-            THEN (
-                -- Tenta parsear como JSON array e extrair elementos
-                SELECT COALESCE(
-                    (SELECT jsonb_agg(sub_elem) FROM jsonb_array_elements(((elem #>> '{}')::jsonb)) AS sub_elem),
-                    elem
-                )
-            )
-            ELSE elem
-        END
-    ), '[]'::jsonb)
-    FROM jsonb_array_elements(tags) AS elem
+    SELECT COALESCE(jsonb_agg(flat_val), '[]'::jsonb)
+    FROM (
+        SELECT DISTINCT expanded.flat_val
+        FROM jsonb_array_elements(tags) AS elem
+        LEFT JOIN LATERAL (
+            SELECT sub_elem AS flat_val
+            FROM jsonb_array_elements(
+                CASE
+                    WHEN jsonb_typeof(elem) = 'string'
+                         AND (elem #>> '{}') LIKE '[%'
+                         AND (elem #>> '{}') LIKE '%]'
+                    THEN ((elem #>> '{}')::jsonb)
+                    ELSE jsonb_build_array(elem)
+                END
+            ) AS sub_elem
+        ) expanded ON true
+        WHERE expanded.flat_val IS NOT NULL
+          AND jsonb_typeof(expanded.flat_val) = 'string'
+          AND length(trim(expanded.flat_val #>> '{}')) > 0
+    ) unique_vals
 )
 WHERE tags IS NOT NULL
   AND jsonb_array_length(tags) > 0
@@ -167,11 +170,11 @@ BEGIN
                 UNION ALL
                 -- Adiciona novas tags
                 SELECT t AS elem
-                FROM UNNEST(p_tags_to_add) AS t
+                FROM UNNEST(COALESCE(p_tags_to_add, ARRAY[]::text[])) AS t
             ) all_tags
             WHERE elem IS NOT NULL
               AND length(trim(elem)) > 0
-              AND NOT (elem = ANY(p_tags_to_remove))
+              AND NOT (elem = ANY(COALESCE(p_tags_to_remove, ARRAY[]::text[])))
         ) unique_tags
     )
     WHERE c.id = ANY(p_ids);

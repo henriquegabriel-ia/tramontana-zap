@@ -1792,11 +1792,11 @@ BEGIN
                 UNION ALL
                 -- Adiciona novas tags
                 SELECT t AS elem
-                FROM UNNEST(p_tags_to_add) AS t
+                FROM UNNEST(COALESCE(p_tags_to_add, ARRAY[]::text[])) AS t
             ) all_tags
             WHERE elem IS NOT NULL
               AND length(trim(elem)) > 0
-              AND NOT (elem = ANY(p_tags_to_remove))
+              AND NOT (elem = ANY(COALESCE(p_tags_to_remove, ARRAY[]::text[])))
         ) unique_tags
     )
     WHERE c.id = ANY(p_ids);

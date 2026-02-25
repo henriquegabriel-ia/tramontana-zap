@@ -14,12 +14,18 @@ export const dynamic = 'force-dynamic'
 
 // Divide um array em pedaços de tamanho fixo para evitar URLs longas no PostgREST
 function chunk<T>(array: T[], size: number): T[][] {
+  if (!Number.isInteger(size) || size <= 0) {
+    throw new RangeError('chunk size must be a positive integer')
+  }
   const chunks: T[][] = []
   for (let i = 0; i < array.length; i += size) {
     chunks.push(array.slice(i, i + size))
   }
   return chunks
 }
+
+// Limite de concorrência para Promise.all em batches de queries ao PostgREST
+const MAX_PARALLEL = 5
 
 function isHttpUrl(value: string): boolean {
   const v = String(value || '').trim()
@@ -286,14 +292,18 @@ export async function POST(_request: Request, { params }: Params) {
     if (contactIds.length > 0) {
       // BUG 1 FIX: batch de 150 ids para evitar HTTP 414 (URL muito longa no PostgREST)
       const idChunks = chunk(contactIds, 150)
-      const chunkResults = await Promise.all(
-        idChunks.map((ids) =>
-          supabase
-            .from('contacts')
-            .select('id, name, phone, email, custom_fields')
-            .in('id', ids)
-        )
-      )
+      const chunkResults = []
+      for (let i = 0; i < idChunks.length; i += MAX_PARALLEL) {
+        const batch = idChunks.slice(i, i + MAX_PARALLEL)
+        chunkResults.push(...(await Promise.all(
+          batch.map((ids) =>
+            supabase
+              .from('contacts')
+              .select('id, name, phone, email, custom_fields')
+              .in('id', ids)
+          )
+        )))
+      }
 
       for (const { data, error: latestContactsError } of chunkResults) {
         if (latestContactsError) {
@@ -335,14 +345,18 @@ export async function POST(_request: Request, { params }: Params) {
     if (missingIdPhones.length > 0) {
       // BUG 2 FIX: batch de 100 phones para evitar HTTP 414 (URL muito longa no PostgREST)
       const phoneChunks = chunk(missingIdPhones, 100)
-      const phoneChunkResults = await Promise.all(
-        phoneChunks.map((phones) =>
-          supabase
-            .from('contacts')
-            .select('id, phone')
-            .in('phone', phones)
-        )
-      )
+      const phoneChunkResults = []
+      for (let i = 0; i < phoneChunks.length; i += MAX_PARALLEL) {
+        const batch = phoneChunks.slice(i, i + MAX_PARALLEL)
+        phoneChunkResults.push(...(await Promise.all(
+          batch.map((phones) =>
+            supabase
+              .from('contacts')
+              .select('id, phone')
+              .in('phone', phones)
+          )
+        )))
+      }
 
       for (const { data, error: resolvedByPhoneError } of phoneChunkResults) {
         if (resolvedByPhoneError) {
@@ -470,15 +484,19 @@ export async function POST(_request: Request, { params }: Params) {
       // Cada chunk precisa manter o filtro .eq('campaign_id', campaignId) para não retornar
       // registros de outras campanhas com o mesmo telefone
       const desiredPhoneChunks = chunk(desiredPhones, 100)
-      const desiredPhoneChunkResults = await Promise.all(
-        desiredPhoneChunks.map((phones) =>
-          supabase
-            .from('campaign_contacts')
-            .select('id, phone')
-            .eq('campaign_id', campaignId)
-            .in('phone', phones)
-        )
-      )
+      const desiredPhoneChunkResults = []
+      for (let i = 0; i < desiredPhoneChunks.length; i += MAX_PARALLEL) {
+        const batch = desiredPhoneChunks.slice(i, i + MAX_PARALLEL)
+        desiredPhoneChunkResults.push(...(await Promise.all(
+          batch.map((phones) =>
+            supabase
+              .from('campaign_contacts')
+              .select('id, phone')
+              .eq('campaign_id', campaignId)
+              .in('phone', phones)
+          )
+        )))
+      }
 
       for (const { data, error: existingError } of desiredPhoneChunkResults) {
         if (existingError) {

@@ -50,13 +50,16 @@ export async function GET(request: Request) {
       .from('contacts')
       .select('phone,tags', { count: 'exact' })
 
-    if (tags.length > 0) {
+    // Validate tags to prevent PostgREST filter injection
+    const safeTags = tags.filter(tag => /^[\w\s\-áàãâéêíóôõúüçÁÀÃÂÉÊÍÓÔÕÚÜÇ]+$/i.test(tag))
+
+    if (safeTags.length > 0) {
       if (combine === 'and') {
         // @>: tags deve conter TODAS as tags especificadas (uma chamada com array completo)
-        query = query.filter('tags', 'cs', JSON.stringify(tags))
+        query = query.filter('tags', 'cs', JSON.stringify(safeTags))
       } else {
         // OR: cada tag gera um filtro @> separado, combinados via .or()
-        const orConditions = tags
+        const orConditions = safeTags
           .map((tag) => `tags.cs.${JSON.stringify([tag])}`)
           .join(',')
         query = query.or(orConditions)
@@ -93,7 +96,18 @@ export async function GET(request: Request) {
 
       const countryMatches = countries.map((code) => Boolean(country && country === code))
       const stateMatches = states.map((code) => Boolean(uf && uf === code))
-      const filters = [...countryMatches, ...stateMatches]
+
+      // Em modo OR com tags + localização, incluir match de tag no filtro in-memory.
+      // O SQL já pré-filtrou por tag (OR), mas o reducer precisa saber se o contato
+      // passou pela tag para contar corretamente no OR (tag OU localização).
+      const tagMatches: boolean[] = []
+      if (combine === 'or' && safeTags.length > 0) {
+        const contactTags: string[] = Array.isArray((contact as any).tags) ? (contact as any).tags : []
+        const hasTagMatch = safeTags.some((t) => contactTags.includes(t))
+        tagMatches.push(hasTagMatch)
+      }
+
+      const filters = [...tagMatches, ...countryMatches, ...stateMatches]
 
       if (!filters.length) return count + 1
       const isMatch = combine === 'or' ? filters.some(Boolean) : filters.every(Boolean)
