@@ -545,32 +545,47 @@ export const campaignDb = {
 // ============================================================================
 
 export const contactDb = {
-    // LEGADO: esta função carrega no máximo 1000 contatos e deve ser evitada.
-    // Use contactDb.list() para paginação adequada em grandes datasets.
+    // Busca TODOS os contatos com paginação interna para evitar truncamento do PostgREST.
+    // Usado pelo wizard de campanhas que precisa do dataset completo para calcular audiência.
     getAll: async (): Promise<Contact[]> => {
-        console.warn('contactDb.getAll() called - use contactDb.list() for large datasets')
+        const PAGE_SIZE = 1000
+        const allRows: Record<string, unknown>[] = []
+        let from = 0
 
-        // Limite explícito: sem .limit() o PostgREST silenciosamente trunca em 1000 rows.
-        const { data, error } = await supabase
-            .from('contacts')
-            .select('*')
-            .order('created_at', { ascending: false })
-            .limit(1000)
+        // Paginação interna: busca em lotes de PAGE_SIZE até esgotar os registros.
+        // O PostgREST trunca silenciosamente em 1000 rows sem .range(), então
+        // usamos .range() explícito e iteramos até receber menos que PAGE_SIZE.
+        while (true) {
+            const to = from + PAGE_SIZE - 1
+            const { data, error } = await supabase
+                .from('contacts')
+                .select('*')
+                .order('id', { ascending: true })
+                .range(from, to)
 
-        if (error) throw error
+            if (error) throw error
 
-        return (data || []).map(row => ({
-            id: row.id,
-            name: row.name,
-            phone: row.phone,
-            email: row.email,
+            const rows = data || []
+            allRows.push(...rows)
+
+            // Se recebemos menos que PAGE_SIZE, não há mais páginas
+            if (rows.length < PAGE_SIZE) break
+
+            from += PAGE_SIZE
+        }
+
+        return allRows.map(row => ({
+            id: row.id as string,
+            name: row.name as string,
+            phone: row.phone as string,
+            email: row.email as string | undefined,
             status: (row.status as ContactStatus) || ContactStatus.OPT_IN,
             tags: flattenTags(row.tags),
             lastActive: row.updated_at
-                ? new Date(row.updated_at).toLocaleDateString()
-                : (row.created_at ? new Date(row.created_at).toLocaleDateString() : '-'),
-            createdAt: row.created_at,
-            updatedAt: row.updated_at,
+                ? new Date(row.updated_at as string).toLocaleDateString()
+                : (row.created_at ? new Date(row.created_at as string).toLocaleDateString() : '-'),
+            createdAt: row.created_at as string,
+            updatedAt: row.updated_at as string,
             custom_fields: row.custom_fields,
         }))
     },
