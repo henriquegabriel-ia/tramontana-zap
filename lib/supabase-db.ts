@@ -6,6 +6,16 @@
 
 import { supabase } from './supabase'
 import { redis } from './redis'
+
+// Divide array em chunks de tamanho n para evitar 414 Request-URI Too Large
+// no PostgREST: .in('field', array) serializa todos os valores na URL.
+function chunk<T>(array: T[], size: number): T[][] {
+    const chunks: T[][] = []
+    for (let i = 0; i < array.length; i += size) {
+        chunks.push(array.slice(i, i + size))
+    }
+    return chunks
+}
 import {
     Campaign,
     Contact,
@@ -373,12 +383,28 @@ export const campaignDb = {
         // Copy campaign contacts first so we can set total_recipients accurately.
         // Observação: Supabase JS não oferece transação multi-step facilmente aqui;
         // então tentamos manter o estado consistente (rollback best-effort em falhas).
-        const { data: existingContacts, error: existingContactsError } = await supabase
-            .from('campaign_contacts')
-            .select('contact_id, phone, name, email, custom_fields')
-            .eq('campaign_id', id)
+        //
+        // BUG FIX: sem .limit() o PostgREST silenciosamente trunca em 1000 rows, fazendo
+        // a cópia perder contatos. Paginamos em blocos de 1000 até buscar todos os contatos.
+        const existingContacts: any[] = []
+        let dupOffset = 0
+        const DUP_PAGE_SIZE = 1000
 
-        if (existingContactsError) throw existingContactsError
+        while (true) {
+            const { data: page, error: existingContactsError } = await supabase
+                .from('campaign_contacts')
+                .select('contact_id, phone, name, email, custom_fields')
+                .eq('campaign_id', id)
+                .range(dupOffset, dupOffset + DUP_PAGE_SIZE - 1)
+
+            if (existingContactsError) throw existingContactsError
+
+            const rows = page || []
+            existingContacts.push(...rows)
+
+            if (rows.length < DUP_PAGE_SIZE) break
+            dupOffset += DUP_PAGE_SIZE
+        }
 
         const recipientsCount = existingContacts?.length ?? original.recipients ?? 0
 
@@ -495,11 +521,17 @@ export const campaignDb = {
 // ============================================================================
 
 export const contactDb = {
+    // LEGADO: esta função carrega no máximo 1000 contatos e deve ser evitada.
+    // Use contactDb.list() para paginação adequada em grandes datasets.
     getAll: async (): Promise<Contact[]> => {
+        console.warn('contactDb.getAll() called - use contactDb.list() for large datasets')
+
+        // Limite explícito: sem .limit() o PostgREST silenciosamente trunca em 1000 rows.
         const { data, error } = await supabase
             .from('contacts')
             .select('*')
             .order('created_at', { ascending: false })
+            .limit(1000)
 
         if (error) throw error
 
@@ -556,29 +588,24 @@ export const contactDb = {
             return p.startsWith('+') ? p.slice(1) : p
         }
 
-        // SEMPRE busca supressões ativas para calcular status efetivo
-        const { data: suppressionRows, error: suppressionError } = await supabase
-            .from('phone_suppressions')
-            .select('phone,is_active,expires_at,reason,source')
-            .eq('is_active', true)
-            .or('expires_at.is.null,expires_at.gt.' + new Date().toISOString())
+        // Pré-carrega supressões apenas para o filtro SUPPRESSED (precisa antes da query principal)
+        // Para outros status, as supressões são carregadas depois da query para escopo por página.
+        let preSuppressedPhonesNormalized = new Set<string>()
+        if (status === 'SUPPRESSED') {
+            // Busca todas as supressões ativas para montar o filtro IN da query principal.
+            // Limitado a 5000 para evitar truncação silenciosa do PostgREST.
+            const { data: preSupRows, error: preSupError } = await supabase
+                .from('phone_suppressions')
+                .select('phone')
+                .eq('is_active', true)
+                .or('expires_at.is.null,expires_at.gt.' + new Date().toISOString())
+                .limit(5000)
 
-        if (suppressionError) throw suppressionError
+            if (preSupError) throw preSupError
 
-        // Mapa de supressões indexado por telefone normalizado (sem +)
-        const suppressionMap = new Map<string, { reason: string | null; source: string | null; expiresAt: string | null }>()
-        const suppressedPhonesNormalized = new Set<string>()
-
-        for (const row of suppressionRows || []) {
-            const phone = String(row.phone || '').trim()
-            if (phone) {
-                const normalized = normalizePhone(phone)
-                suppressedPhonesNormalized.add(normalized)
-                suppressionMap.set(normalized, {
-                    reason: row.reason ?? null,
-                    source: row.source ?? null,
-                    expiresAt: row.expires_at ?? null,
-                })
+            for (const row of preSupRows || []) {
+                const phone = String(row.phone || '').trim()
+                if (phone) preSuppressedPhonesNormalized.add(normalizePhone(phone))
             }
         }
 
@@ -602,11 +629,11 @@ export const contactDb = {
         // Filtro de status com lógica especial para SUPPRESSED
         if (status === 'SUPPRESSED') {
             // Filtra apenas contatos que estão suprimidos
-            if (suppressedPhonesNormalized.size === 0) {
+            if (preSuppressedPhonesNormalized.size === 0) {
                 return { data: [], total: 0 }
             }
             // Gera variações com e sem + para o filtro IN
-            const phoneVariations = Array.from(suppressedPhonesNormalized).flatMap(p => [p, '+' + p])
+            const phoneVariations = Array.from(preSuppressedPhonesNormalized).flatMap(p => [p, '+' + p])
             query = query.in('phone', phoneVariations)
         } else if (status && status !== 'ALL') {
             query = query.eq('status', status)
@@ -617,6 +644,36 @@ export const contactDb = {
             .range(offset, offset + limit - 1)
 
         if (error) throw error
+
+        // Busca supressões apenas para os phones da página atual.
+        // Evita carregar 10.000+ supressões para exibir 10 contatos.
+        const phonesOnPage = (data || []).map((c: any) => String(c.phone || '').trim()).filter(Boolean)
+
+        const suppressionMap = new Map<string, { reason: string | null; source: string | null; expiresAt: string | null }>()
+
+        if (phonesOnPage.length > 0) {
+            const { data: suppressionRows, error: suppressionError } = await supabase
+                .from('phone_suppressions')
+                .select('phone,is_active,expires_at,reason,source')
+                .eq('is_active', true)
+                .or('expires_at.is.null,expires_at.gt.' + new Date().toISOString())
+                .in('phone', phonesOnPage)
+                .limit(5000)
+
+            if (suppressionError) throw suppressionError
+
+            for (const row of suppressionRows || []) {
+                const phone = String(row.phone || '').trim()
+                if (phone) {
+                    const normalized = normalizePhone(phone)
+                    suppressionMap.set(normalized, {
+                        reason: row.reason ?? null,
+                        source: row.source ?? null,
+                        expiresAt: row.expires_at ?? null,
+                    })
+                }
+            }
+        }
 
         return {
             data: (data || []).map(row => {
@@ -715,11 +772,68 @@ export const contactDb = {
                 }
             }
 
-            if (status === 'SUPPRESSED') {
-                q = q.in('phone', suppressedPhones)
-            }
+            // SUPPRESSED é tratado no caminho separado com chunking (ver abaixo).
+            // Esta função só é chamada para status != 'SUPPRESSED'.
 
             return q
+        }
+
+        // Para status SUPPRESSED com muitos phones suprimidos, .in('phone', suppressedPhones)
+        // serializa todos na URL e estoura o limite de 8KB do Cloudflare (HTTP 414).
+        // Fix: divide em chunks de 100 phones, faz queries paralelas e une os IDs únicos.
+        if (status === 'SUPPRESSED' && suppressedPhones.length > 0) {
+            const PHONE_CHUNK_SIZE = 100
+            const phoneChunks = chunk(suppressedPhones, PHONE_CHUNK_SIZE)
+
+            const allIds: string[] = []
+            const seen = new Set<string>()
+
+            // Processa cada chunk de phones em paralelo para obter os IDs de contatos
+            const chunkResults = await Promise.all(
+                phoneChunks.map(async (phones) => {
+                    const chunkIds: string[] = []
+                    let chunkOffset = 0
+                    const PAGE_SIZE = 1000
+
+                    while (true) {
+                        let q = supabase.from('contacts').select('id').range(chunkOffset, chunkOffset + PAGE_SIZE - 1)
+
+                        if (search) q = q.or(buildContactSearchOr(search))
+
+                        if (tag && tag !== 'ALL') {
+                            if (tag === 'NONE') {
+                                q = q.filter('tags', 'eq', '[]')
+                            } else {
+                                q = q.filter('tags', 'cs', JSON.stringify([tag]))
+                            }
+                        }
+
+                        q = q.in('phone', phones)
+
+                        const { data, error } = await q
+                        if (error) throw error
+
+                        const rows = data || []
+                        chunkIds.push(...rows.map((row: any) => String(row.id)))
+
+                        if (rows.length < PAGE_SIZE) break
+                        chunkOffset += PAGE_SIZE
+                    }
+
+                    return chunkIds
+                })
+            )
+
+            for (const ids of chunkResults) {
+                for (const id of ids) {
+                    if (!seen.has(id)) {
+                        seen.add(id)
+                        allIds.push(id)
+                    }
+                }
+            }
+
+            return allIds
         }
 
         // Pagina em blocos de 1000 para contornar o limite padrão do PostgREST
@@ -999,13 +1113,29 @@ export const contactDb = {
         if (!k) return { updated: 0, notFound: contactIds }
         if (!v) return { updated: 0, notFound: [] }
 
-        const { data, error } = await supabase
-            .from('contacts')
-            .select('*')
-            .in('id', contactIds)
+        // BUG FIX: .in('id', contactIds) com centenas de IDs serializa todos na URL
+        // e estoura o limite de 8KB do Cloudflare (HTTP 414).
+        // Fix: divide em chunks de 150 IDs, faz queries paralelas, une os resultados.
+        const ID_CHUNK_SIZE = 150
+        const allData: any[] = []
+        const idChunks = chunk(contactIds, ID_CHUNK_SIZE)
 
-        if (error) throw error
+        const chunkResults = await Promise.all(
+            idChunks.map(async (idBatch) => {
+                const { data: batchData, error: batchError } = await supabase
+                    .from('contacts')
+                    .select('*')
+                    .in('id', idBatch)
+                if (batchError) throw batchError
+                return batchData || []
+            })
+        )
 
+        for (const batchResult of chunkResults) {
+            allData.push(...batchResult)
+        }
+
+        const data = allData
         const now = new Date().toISOString()
         const rows = (data || []).map((row: any) => {
             const base = (row.custom_fields && typeof row.custom_fields === 'object') ? row.custom_fields : {}
@@ -1419,12 +1549,16 @@ export const campaignContactDb = {
         if (error) throw error
     },
 
+    // LEGADO: esta função carrega no máximo 1000 registros e deve ser evitada
+    // para campanhas com muitos contatos. Implemente paginação no consumidor se necessário.
     getContacts: async (campaignId: string) => {
+        // Limite explícito: sem .limit() o PostgREST silenciosamente trunca em 1000 rows.
         const { data, error } = await supabase
             .from('campaign_contacts')
             .select('*')
             .eq('campaign_id', campaignId)
             .order('sent_at', { ascending: false })
+            .limit(1000)
 
         if (error) throw error
 
@@ -2126,12 +2260,19 @@ export const campaignFolderDb = {
 
         if (foldersError) throw foldersError
 
-        // Get campaign counts per folder
+        // Get campaign counts per folder.
+        // Limite explícito de 5000: sem .limit() o PostgREST trunca silenciosamente em 1000
+        // rows, fazendo as contagens ficarem incorretas para instalações com muitas campanhas.
         const { data: campaigns, error: campaignsError } = await supabase
             .from('campaigns')
             .select('folder_id')
+            .limit(5000)
 
         if (campaignsError) throw campaignsError
+
+        if ((campaigns?.length ?? 0) >= 5000) {
+            console.warn('campaignFolderDb.getAllWithCounts(): limite de 5000 campanhas atingido — contagens de pasta podem estar incompletas')
+        }
 
         // Count campaigns per folder
         const countMap = new Map<string, number>()

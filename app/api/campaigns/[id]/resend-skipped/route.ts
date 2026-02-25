@@ -12,6 +12,15 @@ import { createHash } from 'crypto'
 export const runtime = 'nodejs'
 export const dynamic = 'force-dynamic'
 
+// Divide um array em pedaços de tamanho fixo para evitar URLs longas no PostgREST
+function chunk<T>(array: T[], size: number): T[][] {
+  const chunks: T[][] = []
+  for (let i = 0; i < array.length; i += size) {
+    chunks.push(array.slice(i, i + size))
+  }
+  return chunks
+}
+
 function isHttpUrl(value: string): boolean {
   const v = String(value || '').trim()
   return /^https?:\/\//i.test(v)
@@ -275,27 +284,35 @@ export async function POST(_request: Request, { params }: Params) {
 
     const contactById = new Map<string, ContactRow>()
     if (contactIds.length > 0) {
-      const { data: latestContacts, error: latestContactsError } = await supabase
-        .from('contacts')
-        .select('id, name, phone, email, custom_fields')
-        .in('id', contactIds)
-
-      if (latestContactsError) {
-        return NextResponse.json(
-          { error: 'Falha ao carregar contatos', details: latestContactsError.message },
-          { status: 500 }
+      // BUG 1 FIX: batch de 150 ids para evitar HTTP 414 (URL muito longa no PostgREST)
+      const idChunks = chunk(contactIds, 150)
+      const chunkResults = await Promise.all(
+        idChunks.map((ids) =>
+          supabase
+            .from('contacts')
+            .select('id, name, phone, email, custom_fields')
+            .in('id', ids)
         )
-      }
+      )
 
-      for (const c of (latestContacts || []) as any[]) {
-        if (!c?.id) continue
-        contactById.set(String(c.id), {
-          id: String(c.id),
-          name: (c.name as string | null) ?? null,
-          phone: String(c.phone || ''),
-          email: (c.email as string | null) ?? null,
-          custom_fields: (c.custom_fields as Record<string, unknown> | null) ?? null,
-        })
+      for (const { data, error: latestContactsError } of chunkResults) {
+        if (latestContactsError) {
+          return NextResponse.json(
+            { error: 'Falha ao carregar contatos', details: latestContactsError.message },
+            { status: 500 }
+          )
+        }
+
+        for (const c of (data || []) as any[]) {
+          if (!c?.id) continue
+          contactById.set(String(c.id), {
+            id: String(c.id),
+            name: (c.name as string | null) ?? null,
+            phone: String(c.phone || ''),
+            email: (c.email as string | null) ?? null,
+            custom_fields: (c.custom_fields as Record<string, unknown> | null) ?? null,
+          })
+        }
       }
     }
 
@@ -316,21 +333,29 @@ export async function POST(_request: Request, { params }: Params) {
 
     const idByPhone = new Map<string, string>()
     if (missingIdPhones.length > 0) {
-      const { data: resolvedByPhone, error: resolvedByPhoneError } = await supabase
-        .from('contacts')
-        .select('id, phone')
-        .in('phone', missingIdPhones)
-
-      if (resolvedByPhoneError) {
-        return NextResponse.json(
-          { error: 'Falha ao resolver contatos por telefone', details: resolvedByPhoneError.message },
-          { status: 500 }
+      // BUG 2 FIX: batch de 100 phones para evitar HTTP 414 (URL muito longa no PostgREST)
+      const phoneChunks = chunk(missingIdPhones, 100)
+      const phoneChunkResults = await Promise.all(
+        phoneChunks.map((phones) =>
+          supabase
+            .from('contacts')
+            .select('id, phone')
+            .in('phone', phones)
         )
-      }
+      )
 
-      for (const r of (resolvedByPhone || []) as any[]) {
-        if (!r?.id || !r?.phone) continue
-        idByPhone.set(String(r.phone), String(r.id))
+      for (const { data, error: resolvedByPhoneError } of phoneChunkResults) {
+        if (resolvedByPhoneError) {
+          return NextResponse.json(
+            { error: 'Falha ao resolver contatos por telefone', details: resolvedByPhoneError.message },
+            { status: 500 }
+          )
+        }
+
+        for (const r of (data || []) as any[]) {
+          if (!r?.id || !r?.phone) continue
+          idByPhone.set(String(r.phone), String(r.id))
+        }
       }
     }
 
@@ -441,22 +466,32 @@ export async function POST(_request: Request, { params }: Params) {
     const desiredPhones = Array.from(desiredPhoneToRowIds.keys())
     const existingPhoneToId = new Map<string, string>()
     if (desiredPhones.length > 0) {
-      const { data: existingRows, error: existingError } = await supabase
-        .from('campaign_contacts')
-        .select('id, phone')
-        .eq('campaign_id', campaignId)
-        .in('phone', desiredPhones)
-
-      if (existingError) {
-        return NextResponse.json(
-          { error: 'Falha ao validar conflitos de telefone', details: existingError.message },
-          { status: 500 }
+      // BUG 3 FIX: batch de 100 phones para evitar HTTP 414 (URL muito longa no PostgREST)
+      // Cada chunk precisa manter o filtro .eq('campaign_id', campaignId) para não retornar
+      // registros de outras campanhas com o mesmo telefone
+      const desiredPhoneChunks = chunk(desiredPhones, 100)
+      const desiredPhoneChunkResults = await Promise.all(
+        desiredPhoneChunks.map((phones) =>
+          supabase
+            .from('campaign_contacts')
+            .select('id, phone')
+            .eq('campaign_id', campaignId)
+            .in('phone', phones)
         )
-      }
+      )
 
-      for (const r of (existingRows || []) as any[]) {
-        if (!r?.id || !r?.phone) continue
-        existingPhoneToId.set(String(r.phone), String(r.id))
+      for (const { data, error: existingError } of desiredPhoneChunkResults) {
+        if (existingError) {
+          return NextResponse.json(
+            { error: 'Falha ao validar conflitos de telefone', details: existingError.message },
+            { status: 500 }
+          )
+        }
+
+        for (const r of (data || []) as any[]) {
+          if (!r?.id || !r?.phone) continue
+          existingPhoneToId.set(String(r.phone), String(r.id))
+        }
       }
 
       for (const [phone, rowIds] of desiredPhoneToRowIds.entries()) {
