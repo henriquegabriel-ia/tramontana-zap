@@ -2,8 +2,9 @@
 -- Substitui a abordagem SELECT + upsert (que gerava 414 por URLs longas com UUIDs).
 -- IDs são passados no body do POST → sem limite de URL.
 -- UPDATE direto em SQL → sem violação de NOT NULL constraints.
+-- p_ids é text[] (JS passa strings) com cast explícito para uuid[] no WHERE.
 CREATE OR REPLACE FUNCTION public.bulk_update_contact_tags(
-    p_ids uuid[],
+    p_ids text[],
     p_tags_to_add text[],
     p_tags_to_remove text[]
 ) RETURNS integer
@@ -32,14 +33,14 @@ BEGIN
             ORDER BY elem
         ) unique_tags
     )
-    WHERE c.id = ANY(p_ids);
+    WHERE c.id = ANY(p_ids::uuid[]);
 
     GET DIAGNOSTICS v_count = ROW_COUNT;
     RETURN v_count;
 END;
 $$;
 
-REVOKE ALL ON FUNCTION public.bulk_update_contact_tags(uuid[], text[], text[]) FROM PUBLIC;
-REVOKE ALL ON FUNCTION public.bulk_update_contact_tags(uuid[], text[], text[]) FROM anon;
-REVOKE ALL ON FUNCTION public.bulk_update_contact_tags(uuid[], text[], text[]) FROM authenticated;
-GRANT EXECUTE ON FUNCTION public.bulk_update_contact_tags(uuid[], text[], text[]) TO service_role;
+REVOKE ALL ON FUNCTION public.bulk_update_contact_tags(text[], text[], text[]) FROM PUBLIC;
+REVOKE ALL ON FUNCTION public.bulk_update_contact_tags(text[], text[], text[]) FROM anon;
+REVOKE ALL ON FUNCTION public.bulk_update_contact_tags(text[], text[], text[]) FROM authenticated;
+GRANT EXECUTE ON FUNCTION public.bulk_update_contact_tags(text[], text[], text[]) TO service_role;

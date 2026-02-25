@@ -1757,7 +1757,7 @@ REVOKE ALL ON FUNCTION public.get_contact_tags() FROM authenticated;
 GRANT EXECUTE ON FUNCTION public.get_contact_tags() TO service_role;
 
 CREATE OR REPLACE FUNCTION public.bulk_update_contact_tags(
-    p_ids uuid[],
+    p_ids text[],
     p_tags_to_add text[],
     p_tags_to_remove text[]
 ) RETURNS integer
@@ -1783,17 +1783,17 @@ BEGIN
             ORDER BY elem
         ) unique_tags
     )
-    WHERE c.id = ANY(p_ids);
+    WHERE c.id = ANY(p_ids::uuid[]);
 
     GET DIAGNOSTICS v_count = ROW_COUNT;
     RETURN v_count;
 END;
 $$;
 
-REVOKE ALL ON FUNCTION public.bulk_update_contact_tags(uuid[], text[], text[]) FROM PUBLIC;
-REVOKE ALL ON FUNCTION public.bulk_update_contact_tags(uuid[], text[], text[]) FROM anon;
-REVOKE ALL ON FUNCTION public.bulk_update_contact_tags(uuid[], text[], text[]) FROM authenticated;
-GRANT EXECUTE ON FUNCTION public.bulk_update_contact_tags(uuid[], text[], text[]) TO service_role;
+REVOKE ALL ON FUNCTION public.bulk_update_contact_tags(text[], text[], text[]) FROM PUBLIC;
+REVOKE ALL ON FUNCTION public.bulk_update_contact_tags(text[], text[], text[]) FROM anon;
+REVOKE ALL ON FUNCTION public.bulk_update_contact_tags(text[], text[], text[]) FROM authenticated;
+GRANT EXECUTE ON FUNCTION public.bulk_update_contact_tags(text[], text[], text[]) TO service_role;
 
 REVOKE ALL ON FUNCTION public.get_dashboard_stats() FROM PUBLIC;
 REVOKE ALL ON FUNCTION public.get_dashboard_stats() FROM anon;
