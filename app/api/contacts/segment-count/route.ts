@@ -43,20 +43,23 @@ export async function GET(request: Request) {
     const hasLocationFilters = countries.length > 0 || states.length > 0
 
     // Construir query base com filtro de tags no SQL
-    // Usa operadores JSONB nativos do PostgreSQL:
-    //   cs (@>) = contains (AND: contém TODAS as tags)
-    //   ov (&&) = overlap  (OR:  contém QUALQUER tag)
+    // Usa operador JSONB cs (@>) do PostgreSQL.
+    // Nota: && (ov) não funciona em colunas JSONB — apenas em arrays nativos (text[]).
+    // Para OR: múltiplos @> combinados via .or()
     let query = supabase
       .from('contacts')
       .select('phone,tags', { count: 'exact' })
 
     if (tags.length > 0) {
       if (combine === 'and') {
-        // @>: tags deve conter TODAS as tags especificadas (uma chamada, não loop)
+        // @>: tags deve conter TODAS as tags especificadas (uma chamada com array completo)
         query = query.filter('tags', 'cs', JSON.stringify(tags))
       } else {
-        // &&: tags deve conter pelo menos UMA das tags especificadas
-        query = query.filter('tags', 'ov', JSON.stringify(tags))
+        // OR: cada tag gera um filtro @> separado, combinados via .or()
+        const orConditions = tags
+          .map((tag) => `tags.cs.${JSON.stringify([tag])}`)
+          .join(',')
+        query = query.or(orConditions)
       }
     }
 
