@@ -805,10 +805,13 @@ export const contactDb = {
             if (suppressionError) throw suppressionError
 
             suppressedPhones = (suppressionRows || [])
-                .map((row: any) => String(row.phone || '').trim())
+                .map((row: any) => String(row.phone || '').trim().replace(/^\+/, ''))
                 .filter(Boolean)
 
             if (!suppressedPhones.length) return []
+
+            // Gera variantes com/sem '+' para match com contacts.phone (formato inconsistente)
+            suppressedPhones = suppressedPhones.flatMap(p => [p, '+' + p])
         }
 
         // Função que reconstrói a query com todos os filtros + range (evita mutação do builder)
@@ -1183,19 +1186,22 @@ export const contactDb = {
         const allData: any[] = []
         const idChunks = chunk(contactIds, ID_CHUNK_SIZE)
 
-        const chunkResults = await Promise.all(
-            idChunks.map(async (idBatch) => {
-                const { data: batchData, error: batchError } = await supabase
-                    .from('contacts')
-                    .select('*')
-                    .in('id', idBatch)
-                if (batchError) throw batchError
-                return batchData || []
-            })
-        )
-
-        for (const batchResult of chunkResults) {
-            allData.push(...batchResult)
+        const CONCURRENT_LIMIT = 5
+        for (let i = 0; i < idChunks.length; i += CONCURRENT_LIMIT) {
+            const batch = idChunks.slice(i, i + CONCURRENT_LIMIT)
+            const batchResults = await Promise.all(
+                batch.map(async (idBatch) => {
+                    const { data: batchData, error: batchError } = await supabase
+                        .from('contacts')
+                        .select('*')
+                        .in('id', idBatch)
+                    if (batchError) throw batchError
+                    return batchData || []
+                })
+            )
+            for (const result of batchResults) {
+                allData.push(...result)
+            }
         }
 
         const data = allData

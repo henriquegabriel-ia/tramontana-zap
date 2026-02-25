@@ -125,7 +125,12 @@ export const getContactsInitialData = cache(async (): Promise<ContactsInitialDat
   })
 
   // Tags via RPC — retorna string[] com todas as tags únicas do banco (sem limite PostgREST)
-  const rawTags: unknown[] = Array.isArray(tagsResult.data) ? tagsResult.data : []
+  const rawTagsData = tagsResult.data
+  const rawTags: unknown[] = Array.isArray(rawTagsData)
+    ? rawTagsData
+    : (typeof rawTagsData === 'string'
+        ? (() => { try { const p = JSON.parse(rawTagsData); return Array.isArray(p) ? p : [] } catch { return [] } })()
+        : [])
   const allTags: string[] = rawTags
     .flat(Infinity)
     .flatMap(t => sanitizeTag(t))

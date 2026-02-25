@@ -53,12 +53,14 @@ export async function GET(request: Request) {
     // Validate tags to prevent PostgREST filter injection
     const safeTags = tags.filter(tag => /^[\w\s\-áàãâéêíóôõúüçÁÀÃÂÉÊÍÓÔÕÚÜÇ]+$/i.test(tag))
 
-    if (safeTags.length > 0) {
+    // Em modo AND, filtro de tags no SQL é seguro (reduz dataset).
+    // Em modo OR com localização, NÃO filtra tags no SQL — senão elimina contatos
+    // que matcham apenas localização. O filtro de tag é feito in-memory junto com os demais.
+    const applyTagFilterInSql = safeTags.length > 0 && (combine === 'and' || !hasLocationFilters)
+    if (applyTagFilterInSql) {
       if (combine === 'and') {
-        // @>: tags deve conter TODAS as tags especificadas (uma chamada com array completo)
         query = query.filter('tags', 'cs', JSON.stringify(safeTags))
       } else {
-        // OR: cada tag gera um filtro @> separado, combinados via .or()
         const orConditions = safeTags
           .map((tag) => `tags.cs.${JSON.stringify([tag])}`)
           .join(',')
@@ -97,11 +99,10 @@ export async function GET(request: Request) {
       const countryMatches = countries.map((code) => Boolean(country && country === code))
       const stateMatches = states.map((code) => Boolean(uf && uf === code))
 
-      // Em modo OR com tags + localização, incluir match de tag no filtro in-memory.
-      // O SQL já pré-filtrou por tag (OR), mas o reducer precisa saber se o contato
-      // passou pela tag para contar corretamente no OR (tag OU localização).
+      // Quando tags NÃO foram filtradas no SQL (OR + localização), avaliar in-memory.
+      // Quando tags JÁ foram filtradas no SQL (AND, ou OR sem localização), não duplicar filtro.
       const tagMatches: boolean[] = []
-      if (combine === 'or' && safeTags.length > 0) {
+      if (!applyTagFilterInSql && safeTags.length > 0) {
         const contactTags: string[] = Array.isArray((contact as any).tags) ? (contact as any).tags : []
         const hasTagMatch = safeTags.some((t) => contactTags.includes(t))
         tagMatches.push(hasTagMatch)
