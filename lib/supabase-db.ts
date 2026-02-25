@@ -31,6 +31,7 @@ import {
 } from '../types'
 import { isSuppressionActive } from '@/lib/phone-suppressions'
 import { canonicalTemplateCategory } from '@/lib/template-category'
+import { normalizePhoneNumber, validatePhoneNumber } from '@/lib/phone-formatter'
 
 // Divide array em chunks de tamanho n para evitar 414 Request-URI Too Large
 // no PostgREST: .in('field', array) serializa todos os valores na URL.
@@ -1276,6 +1277,50 @@ export const contactDb = {
 
         if (error) throw error
         return (data as number) || 0
+    },
+
+    // Atualiza o status de vários contatos em lote para o mesmo valor.
+    // Estratégia OPT_IN: desativa phone_suppressions para os números atualizados.
+    bulkUpdateStatus: async (
+        ids: string[],
+        status: ContactStatus
+    ): Promise<number> => {
+        if (ids.length === 0) return 0
+
+        const { data, error } = await supabase
+            .from('contacts')
+            .update({ status, updated_at: new Date().toISOString() })
+            .in('id', ids)
+            .select('id, phone')
+
+        if (error) throw error
+
+        const updated = data?.length ?? 0
+
+        // OPT_IN: desativar phone_suppressions para esses números (normaliza para E.164)
+        if (status === ContactStatus.OPT_IN && updated > 0) {
+            const phones = (data || [])
+                .map((c) => c.phone)
+                .filter(Boolean)
+                .map((p) => normalizePhoneNumber(p))
+                .filter((p) => validatePhoneNumber(p))
+            if (phones.length > 0) {
+                const { error: suppressionError } = await supabase
+                    .from('phone_suppressions')
+                    .update({ is_active: false })
+                    .in('phone', phones)
+                if (suppressionError) {
+                    // Falha intencional não-propagada: o UPDATE de contacts já foi commitado
+                    // e não pode ser revertido sem uma transação atômica (RPC). Lançar aqui
+                    // retornaria 500 ao caller mas o status já estaria alterado no DB, o que
+                    // seria mais confuso do que um soft-failure silencioso.
+                    // TODO: mover ambos os UPDATEs para uma RPC Supabase para garantir atomicidade.
+                    console.error('Erro ao desativar phone_suppressions:', suppressionError)
+                }
+            }
+        }
+
+        return updated
     },
 
     import: async (contacts: Omit<Contact, 'id' | 'lastActive'>[]): Promise<{ inserted: number; updated: number }> => {
