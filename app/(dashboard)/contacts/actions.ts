@@ -119,12 +119,12 @@ export const getContactsInitialData = cache(async (): Promise<ContactsInitialDat
 
   // Calcular stats com effectiveStatus (supressão tem prioridade)
   // Precisamos buscar os telefones de TODOS os contatos para calcular corretamente
-  const { data: allContactsPhones } = await supabase
+  const { data: allContactsPhones, count: totalContactsCount } = await supabase
     .from('contacts')
-    .select('phone,status')
+    .select('phone,status', { count: 'exact' })
 
   const computedStats = {
-    total: allContactsPhones?.length || 0,
+    total: totalContactsCount || 0,
     active: 0,
     optOut: 0,
     suppressed: 0
