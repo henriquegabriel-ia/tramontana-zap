@@ -1208,7 +1208,12 @@ export const contactDb = {
         if (Array.isArray(data)) return data
         // Fallback: PostgREST pode retornar JSON string em versões diferentes
         if (typeof data === 'string') {
-            try { return JSON.parse(data) as string[] } catch { return [] }
+            try {
+                const parsed = JSON.parse(data)
+                return Array.isArray(parsed) ? parsed : []
+            } catch {
+                return []
+            }
         }
         return []
     },
