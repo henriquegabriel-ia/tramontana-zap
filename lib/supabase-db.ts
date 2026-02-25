@@ -679,29 +679,9 @@ export const contactDb = {
             return Array.from(new Set(parts.map((p) => p.trim()).filter(Boolean))).join(',')
         }
 
-        let query = supabase
-            .from('contacts')
-            .select('id')
-
-        if (search) {
-            query = query.or(buildContactSearchOr(search))
-        }
-
-        if (status && status !== 'ALL' && status !== 'SUPPRESSED') {
-            query = query.eq('status', status)
-        }
-
-        if (tag && tag !== 'ALL') {
-            if (tag === 'NONE') {
-                query = query.filter('tags', 'eq', '[]')
-            } else {
-                // PostgREST usa 'cs' (contains) que traduz para @> no PostgreSQL
-                query = query.filter('tags', 'cs', JSON.stringify([tag]))
-            }
-        }
-
+        // Pré-carrega supressões se necessário (antes de construir a query)
+        let suppressedPhones: string[] = []
         if (status === 'SUPPRESSED') {
-            // Optimized: Filter active suppressions at database level
             const { data: suppressionRows, error: suppressionError } = await supabase
                 .from('phone_suppressions')
                 .select('phone')
@@ -710,22 +690,56 @@ export const contactDb = {
 
             if (suppressionError) throw suppressionError
 
-            const suppressedPhones = (suppressionRows || [])
+            suppressedPhones = (suppressionRows || [])
                 .map((row: any) => String(row.phone || '').trim())
                 .filter(Boolean)
 
-            if (!suppressedPhones.length) {
-                return []
-            }
-
-            query = query.in('phone', suppressedPhones)
+            if (!suppressedPhones.length) return []
         }
 
-        const { data, error } = await query
+        // Função que reconstrói a query com todos os filtros + range (evita mutação do builder)
+        const buildQuery = (from: number, to: number) => {
+            let q = supabase.from('contacts').select('id').range(from, to)
 
-        if (error) throw error
+            if (search) q = q.or(buildContactSearchOr(search))
 
-        return (data || []).map((row: any) => String(row.id))
+            if (status && status !== 'ALL' && status !== 'SUPPRESSED') {
+                q = q.eq('status', status)
+            }
+
+            if (tag && tag !== 'ALL') {
+                if (tag === 'NONE') {
+                    q = q.filter('tags', 'eq', '[]')
+                } else {
+                    q = q.filter('tags', 'cs', JSON.stringify([tag]))
+                }
+            }
+
+            if (status === 'SUPPRESSED') {
+                q = q.in('phone', suppressedPhones)
+            }
+
+            return q
+        }
+
+        // Pagina em blocos de 1000 para contornar o limite padrão do PostgREST
+        const PAGE_SIZE = 1000
+        const allIds: string[] = []
+        let offset = 0
+
+        while (true) {
+            const { data, error } = await buildQuery(offset, offset + PAGE_SIZE - 1)
+
+            if (error) throw error
+
+            const rows = data || []
+            allIds.push(...rows.map((row: any) => String(row.id)))
+
+            if (rows.length < PAGE_SIZE) break
+            offset += PAGE_SIZE
+        }
+
+        return allIds
     },
 
     getById: async (id: string): Promise<Contact | undefined> => {

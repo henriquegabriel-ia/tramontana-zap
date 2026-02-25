@@ -37,7 +37,7 @@ export const getContactsInitialData = cache(async (): Promise<ContactsInitialDat
   }
 
   // Buscar tudo em paralelo
-  const [contactsResult, tagsResult, customFieldsResult, suppressionsResult] = await Promise.all([
+  const [contactsResult, tagsResult, customFieldsResult, suppressionsResult, statsResult] = await Promise.all([
     // Primeira página de contatos
     supabase
       .from('contacts')
@@ -45,11 +45,8 @@ export const getContactsInitialData = cache(async (): Promise<ContactsInitialDat
       .order('created_at', { ascending: false })
       .range(0, PAGE_SIZE - 1),
 
-    // Tags únicas
-    supabase
-      .from('contacts')
-      .select('tags')
-      .not('tags', 'is', null),
+    // Tags únicas via RPC (sem limite PostgREST — retorna todos os contatos)
+    supabase.rpc('get_contact_tags'),
 
     // Campos customizados
     supabase
@@ -58,12 +55,15 @@ export const getContactsInitialData = cache(async (): Promise<ContactsInitialDat
       .eq('entity_type', 'contact')
       .order('name'),
 
-    // Supressões ativas (para calcular effectiveStatus)
+    // Supressões ativas (para calcular effectiveStatus nos contatos da página)
     supabase
       .from('phone_suppressions')
       .select('phone,reason,source,expires_at')
       .eq('is_active', true)
-      .or('expires_at.is.null,expires_at.gt.' + new Date().toISOString())
+      .or('expires_at.is.null,expires_at.gt.' + new Date().toISOString()),
+
+    // Stats agregados via RPC (total, optIn, optOut — sem limite PostgREST)
+    supabase.rpc('get_contact_stats'),
   ])
 
   // Criar mapa de supressões indexado por telefone normalizado
@@ -109,51 +109,23 @@ export const getContactsInitialData = cache(async (): Promise<ContactsInitialDat
     }
   })
 
-  // Extrair tags únicas
-  const allTags = new Set<string>()
-  ;(tagsResult.data || []).forEach(row => {
-    if (Array.isArray(row.tags)) {
-      row.tags.forEach((tag: string) => allTags.add(tag))
-    }
-  })
+  // Tags via RPC — retorna string[] com todas as tags únicas do banco (sem limite PostgREST)
+  const allTags: string[] = Array.isArray(tagsResult.data) ? tagsResult.data : []
 
-  // Calcular stats com effectiveStatus (supressão tem prioridade)
-  // Precisamos buscar os telefones de TODOS os contatos para calcular corretamente
-  const { data: allContactsPhones, count: totalContactsCount } = await supabase
-    .from('contacts')
-    .select('phone,status', { count: 'exact' })
-
-  const computedStats = {
-    total: totalContactsCount || 0,
-    active: 0,
-    optOut: 0,
-    suppressed: 0
-  }
-
-  for (const row of allContactsPhones || []) {
-    const phone = String(row.phone || '').trim()
-    const normalizedPhone = normalizePhone(phone)
-    const isSuppressed = suppressionMap.has(normalizedPhone)
-
-    if (isSuppressed) {
-      computedStats.suppressed++
-    } else if (row.status === 'OPT_IN' || row.status === 'Opt-in') {
-      computedStats.active++
-    } else if (row.status === 'OPT_OUT' || row.status === 'Opt-out') {
-      computedStats.optOut++
-    }
-  }
+  // Stats via RPC — counts calculados no SQL (total real, sem limite PostgREST)
+  const rpcStats = statsResult.data as { total: number; optIn: number; optOut: number } | null
+  const suppressed = suppressionMap.size
 
   return {
     contacts,
     total: contactsResult.count || 0,
     stats: {
-      total: computedStats.total,
-      active: computedStats.active,
-      optOut: computedStats.optOut,
-      suppressed: computedStats.suppressed
+      total: rpcStats?.total || contactsResult.count || 0,
+      active: rpcStats?.optIn || 0,
+      optOut: rpcStats?.optOut || 0,
+      suppressed,
     },
-    tags: Array.from(allTags).toSorted(),
+    tags: allTags.toSorted(),
     customFields: (customFieldsResult.data || []) as CustomFieldDefinition[]
   }
 })
