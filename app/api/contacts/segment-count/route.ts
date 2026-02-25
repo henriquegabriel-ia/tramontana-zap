@@ -26,7 +26,8 @@ const resolveCountry = (phone: string): string | null => {
 
 /**
  * GET /api/contacts/segment-count
- * Retorna contagem real de contatos com filtros por tags, pais (ISO) e UF (BR)
+ * Retorna contagem real de contatos com filtros por tags, pais (ISO) e UF (BR).
+ * Filtro de tags aplicado no SQL (evita PostgREST 1000-row default limit).
  */
 export async function GET(request: Request) {
   try {
@@ -39,29 +40,50 @@ export async function GET(request: Request) {
     const states = parseList(url.searchParams.get('states'))
     const combine = (url.searchParams.get('combine') || 'or').toLowerCase() === 'and' ? 'and' : 'or'
 
-    const { data, error } = await supabase
+    // Construir query com filtro de tags no SQL
+    // Isso evita o PostgREST default limit de 1000 linhas para contatos com muitas tags
+    let query = supabase
       .from('contacts')
-      .select('phone,tags')
+      .select('phone,tags', { count: 'exact' })
+
+    if (tags.length > 0) {
+      if (combine === 'and') {
+        // AND: contato deve ter TODAS as tags — encadeia .contains() para cada tag
+        for (const tag of tags) {
+          query = query.contains('tags', JSON.stringify([tag]))
+        }
+      } else {
+        // OR: contato deve ter QUALQUER uma das tags
+        const orConditions = tags
+          .map(tag => `tags.cs.${JSON.stringify([tag])}`)
+          .join(',')
+        query = query.or(orConditions)
+      }
+    }
+
+    const { data, count: sqlCount, error } = await query
 
     if (error) throw error
 
     const contacts = data || []
-    const total = contacts.length
 
-    if (!tags.length && !countries.length && !states.length) {
-      return NextResponse.json({ total, matched: total })
+    // Sem filtros de localização: retornar count do SQL diretamente (preciso e sem limite)
+    if (!countries.length && !states.length) {
+      const matched = sqlCount ?? contacts.length
+      return NextResponse.json({ total: matched, matched })
     }
 
+    // Com filtros de localização: filtrar em memória sobre subconjunto já filtrado por tag
+    const total = sqlCount ?? contacts.length
+
     const matched = contacts.reduce((count, contact) => {
-      const contactTags = Array.isArray(contact.tags) ? contact.tags : []
       const phone = String(contact.phone || '')
       const country = countries.length ? resolveCountry(phone) : null
       const uf = states.length ? getBrazilUfFromPhone(phone) : null
 
-      const tagMatches = tags.map((tag) => contactTags.includes(tag))
       const countryMatches = countries.map((code) => Boolean(country && country === code))
       const stateMatches = states.map((code) => Boolean(uf && uf === code))
-      const filters = [...tagMatches, ...countryMatches, ...stateMatches]
+      const filters = [...countryMatches, ...stateMatches]
 
       if (!filters.length) return count + 1
       const isMatch = combine === 'or' ? filters.some(Boolean) : filters.every(Boolean)
