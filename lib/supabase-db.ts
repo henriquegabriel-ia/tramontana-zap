@@ -1058,9 +1058,10 @@ export const contactDb = {
         return ids.length
     },
 
-    // Atualiza as tags de vários contatos em lote.
+    // Atualiza as tags de vários contatos em lote via RPC.
     // Estratégia: (tags_atuais ∪ tagsToAdd) − tagsToRemove para cada contato.
-    // Usa upsert com linha completa para evitar violação de constraints NOT NULL.
+    // Usa RPC (POST body) para evitar 414 Request-URI Too Large com .in('id', uuids[])
+    // e NOT NULL constraint violation no upsert parcial.
     bulkUpdateTags: async (
         ids: string[],
         tagsToAdd: string[],
@@ -1068,50 +1069,14 @@ export const contactDb = {
     ): Promise<number> => {
         if (ids.length === 0) return 0
 
-        // SELECT usa .in('id', ...) → GET com IDs na URL
-        // UUIDs têm 36 chars cada; limite Cloudflare ~8KB → máximo ~218 UUIDs por batch
-        const BATCH_SIZE_SELECT = 150
-        // UPSERT usa POST body → sem restrição de URL
-        const BATCH_SIZE_UPSERT = 500
-        const chunk = <T>(arr: T[], size: number): T[][] =>
-            Array.from({ length: Math.ceil(arr.length / size) }, (_, i) =>
-                arr.slice(i * size, i * size + size)
-            )
+        const { data, error } = await supabase.rpc('bulk_update_contact_tags', {
+            p_ids: ids,
+            p_tags_to_add: tagsToAdd,
+            p_tags_to_remove: tagsToRemove,
+        })
 
-        let totalUpdated = 0
-
-        for (const idBatch of chunk(ids, BATCH_SIZE_SELECT)) {
-            const { data, error } = await supabase
-                .from('contacts')
-                .select('id, tags')
-                .in('id', idBatch)
-
-            if (error) throw error
-
-            // Calcula novas tags: (atual ∪ tagsToAdd) − tagsToRemove
-            const updates = (data || []).map((c) => ({
-                id: c.id,
-                tags: [
-                    ...new Set(
-                        [...(c.tags ?? []), ...tagsToAdd]
-                            .filter((t) => !tagsToRemove.includes(t))
-                    ),
-                ],
-            }))
-
-            if (updates.length === 0) continue
-
-            for (const updateBatch of chunk(updates, BATCH_SIZE_UPSERT)) {
-                const { error: upsertError } = await supabase
-                    .from('contacts')
-                    .upsert(updateBatch, { onConflict: 'id' })
-
-                if (upsertError) throw upsertError
-                totalUpdated += updateBatch.length
-            }
-        }
-
-        return totalUpdated
+        if (error) throw error
+        return (data as number) || 0
     },
 
     import: async (contacts: Omit<Contact, 'id' | 'lastActive'>[]): Promise<{ inserted: number; updated: number }> => {
