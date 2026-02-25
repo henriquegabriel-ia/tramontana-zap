@@ -2,7 +2,8 @@
 -- Substitui a abordagem SELECT + upsert (que gerava 414 por URLs longas com UUIDs).
 -- IDs são passados no body do POST → sem limite de URL.
 -- UPDATE direto em SQL → sem violação de NOT NULL constraints.
--- p_ids é text[] (JS passa strings) com cast explícito para uuid[] no WHERE.
+-- p_ids é text[] — contacts.id é TEXT com prefixo 'ct_', não UUID.
+-- Comparação text = text nativa, sem cast.
 CREATE OR REPLACE FUNCTION public.bulk_update_contact_tags(
     p_ids text[],
     p_tags_to_add text[],
@@ -33,7 +34,7 @@ BEGIN
             ORDER BY elem
         ) unique_tags
     )
-    WHERE c.id = ANY(p_ids::uuid[]);
+    WHERE c.id = ANY(p_ids);
 
     GET DIAGNOSTICS v_count = ROW_COUNT;
     RETURN v_count;

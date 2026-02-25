@@ -1783,7 +1783,7 @@ BEGIN
             ORDER BY elem
         ) unique_tags
     )
-    WHERE c.id = ANY(p_ids::uuid[]);
+    WHERE c.id = ANY(p_ids);
 
     GET DIAGNOSTICS v_count = ROW_COUNT;
     RETURN v_count;
