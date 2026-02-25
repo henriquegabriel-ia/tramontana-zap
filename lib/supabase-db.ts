@@ -1068,8 +1068,11 @@ export const contactDb = {
     ): Promise<number> => {
         if (ids.length === 0) return 0
 
-        // Lotes de 500 para evitar URL muito longa no Supabase REST API (limite ~8KB)
-        const BATCH_SIZE = 500
+        // SELECT usa .in('id', ...) → GET com IDs na URL
+        // UUIDs têm 36 chars cada; limite Cloudflare ~8KB → máximo ~218 UUIDs por batch
+        const BATCH_SIZE_SELECT = 150
+        // UPSERT usa POST body → sem restrição de URL
+        const BATCH_SIZE_UPSERT = 500
         const chunk = <T>(arr: T[], size: number): T[][] =>
             Array.from({ length: Math.ceil(arr.length / size) }, (_, i) =>
                 arr.slice(i * size, i * size + size)
@@ -1077,7 +1080,7 @@ export const contactDb = {
 
         let totalUpdated = 0
 
-        for (const idBatch of chunk(ids, BATCH_SIZE)) {
+        for (const idBatch of chunk(ids, BATCH_SIZE_SELECT)) {
             const { data, error } = await supabase
                 .from('contacts')
                 .select('id, tags')
@@ -1098,7 +1101,7 @@ export const contactDb = {
 
             if (updates.length === 0) continue
 
-            for (const updateBatch of chunk(updates, BATCH_SIZE)) {
+            for (const updateBatch of chunk(updates, BATCH_SIZE_UPSERT)) {
                 const { error: upsertError } = await supabase
                     .from('contacts')
                     .upsert(updateBatch, { onConflict: 'id' })
