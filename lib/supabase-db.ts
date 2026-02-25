@@ -1205,7 +1205,12 @@ export const contactDb = {
             throw error
         }
 
-        return Array.isArray(data) ? data : []
+        if (Array.isArray(data)) return data
+        // Fallback: PostgREST pode retornar JSON string em versões diferentes
+        if (typeof data === 'string') {
+            try { return JSON.parse(data) as string[] } catch { return [] }
+        }
+        return []
     },
 
     getStats: async () => {
