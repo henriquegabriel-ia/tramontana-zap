@@ -1045,17 +1045,17 @@ export const contactDb = {
         if (error) throw error
     },
 
+    // Deleta vários contatos via RPC para evitar 414 Request-URI Too Large.
+    // .delete().in('id', ids) gera URL longa com todos os IDs; RPC usa POST body.
     deleteMany: async (ids: string[]): Promise<number> => {
         if (ids.length === 0) return 0
 
-        const { error } = await supabase
-            .from('contacts')
-            .delete()
-            .in('id', ids)
+        const { data, error } = await supabase.rpc('bulk_delete_contacts', {
+            p_ids: ids,
+        })
 
         if (error) throw error
-
-        return ids.length
+        return (data as number) || 0
     },
 
     // Atualiza as tags de vários contatos em lote via RPC.

@@ -1795,6 +1795,29 @@ REVOKE ALL ON FUNCTION public.bulk_update_contact_tags(text[], text[], text[]) F
 REVOKE ALL ON FUNCTION public.bulk_update_contact_tags(text[], text[], text[]) FROM authenticated;
 GRANT EXECUTE ON FUNCTION public.bulk_update_contact_tags(text[], text[], text[]) TO service_role;
 
+-- Função RPC para deletar múltiplos contatos em lote.
+-- Substitui .delete().in('id', ids) que gerava 414 por URLs longas.
+CREATE OR REPLACE FUNCTION public.bulk_delete_contacts(
+    p_ids text[]
+) RETURNS integer
+    LANGUAGE plpgsql SECURITY DEFINER
+    SET search_path TO 'public'
+    AS $$
+DECLARE
+    v_count integer;
+BEGIN
+    DELETE FROM contacts WHERE id = ANY(p_ids);
+
+    GET DIAGNOSTICS v_count = ROW_COUNT;
+    RETURN v_count;
+END;
+$$;
+
+REVOKE ALL ON FUNCTION public.bulk_delete_contacts(text[]) FROM PUBLIC;
+REVOKE ALL ON FUNCTION public.bulk_delete_contacts(text[]) FROM anon;
+REVOKE ALL ON FUNCTION public.bulk_delete_contacts(text[]) FROM authenticated;
+GRANT EXECUTE ON FUNCTION public.bulk_delete_contacts(text[]) TO service_role;
+
 REVOKE ALL ON FUNCTION public.get_dashboard_stats() FROM PUBLIC;
 REVOKE ALL ON FUNCTION public.get_dashboard_stats() FROM anon;
 REVOKE ALL ON FUNCTION public.get_dashboard_stats() FROM authenticated;
