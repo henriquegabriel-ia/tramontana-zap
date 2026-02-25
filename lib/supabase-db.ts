@@ -586,7 +586,7 @@ export const contactDb = {
                 : (row.created_at ? new Date(row.created_at as string).toLocaleDateString() : '-'),
             createdAt: row.created_at as string,
             updatedAt: row.updated_at as string,
-            custom_fields: row.custom_fields,
+            custom_fields: row.custom_fields as Record<string, any> | undefined,
         }))
     },
 
@@ -857,7 +857,7 @@ export const contactDb = {
                         const PAGE_SIZE = 1000
 
                         while (true) {
-                            let q = supabase.from('contacts').select('id').range(chunkOffset, chunkOffset + PAGE_SIZE - 1)
+                            let q = supabase.from('contacts').select('id').order('id', { ascending: true }).range(chunkOffset, chunkOffset + PAGE_SIZE - 1)
 
                             if (search) q = q.or(buildContactSearchOr(search))
 
