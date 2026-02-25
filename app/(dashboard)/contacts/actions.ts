@@ -20,6 +20,18 @@ export interface ContactsInitialData {
   customFields: CustomFieldDefinition[]
 }
 
+// Helper para sanitizar tags potencialmente aninhadas/corrompidas
+function sanitizeTag(tag: unknown): string {
+    const s = String(tag ?? '').trim()
+    if (s.startsWith('[') && s.endsWith(']')) {
+        try {
+            const parsed = JSON.parse(s)
+            if (Array.isArray(parsed)) return parsed.flat(Infinity).map(String).join(', ')
+        } catch { /* not JSON */ }
+    }
+    return s
+}
+
 // Helper para normalizar telefone (remove + se tiver)
 const normalizePhone = (phone: string) => {
   const p = String(phone || '').trim()
@@ -98,7 +110,7 @@ export const getContactsInitialData = cache(async (): Promise<ContactsInitialDat
       email: c.email,
       status: effectiveStatus, // Status visual calculado
       originalStatus: dbStatus, // Status real do banco (para referência)
-      tags: c.tags || [],
+      tags: Array.isArray(c.tags) ? (c.tags as unknown[]).flat(Infinity).map(t => sanitizeTag(t)).filter(Boolean) : [],
       lastActive: c.last_active || c.updated_at || c.created_at,
       createdAt: c.created_at,
       updatedAt: c.updated_at,
@@ -110,7 +122,11 @@ export const getContactsInitialData = cache(async (): Promise<ContactsInitialDat
   })
 
   // Tags via RPC — retorna string[] com todas as tags únicas do banco (sem limite PostgREST)
-  const allTags: string[] = Array.isArray(tagsResult.data) ? tagsResult.data : []
+  const rawTags: unknown[] = Array.isArray(tagsResult.data) ? tagsResult.data : []
+  const allTags: string[] = rawTags
+    .flat(Infinity)
+    .map(t => sanitizeTag(t))
+    .filter(Boolean)
 
   // Stats via RPC — counts calculados no SQL (total real, sem limite PostgREST)
   const rpcStats = statsResult.data as { total: number; optIn: number; optOut: number } | null

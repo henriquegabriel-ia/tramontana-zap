@@ -55,8 +55,8 @@ DECLARE
 BEGIN
     SELECT json_build_object(
         'total', COUNT(*),
-        'optIn', COUNT(*) FILTER (WHERE status = 'Opt-in'),
-        'optOut', COUNT(*) FILTER (WHERE status = 'Opt-out')
+        'optIn', COUNT(*) FILTER (WHERE status IN ('Opt-in', 'OPT_IN')),
+        'optOut', COUNT(*) FILTER (WHERE status IN ('Opt-out', 'OPT_OUT'))
     ) INTO result
     FROM contacts;
 
@@ -73,7 +73,9 @@ DECLARE
 BEGIN
     SELECT COALESCE(json_agg(DISTINCT tag ORDER BY tag), '[]'::json) INTO result
     FROM contacts, jsonb_array_elements_text(tags) AS tag
-    WHERE tags IS NOT NULL AND jsonb_array_length(tags) > 0;
+    WHERE tags IS NOT NULL AND jsonb_array_length(tags) > 0
+      AND length(trim(tag)) > 0
+      AND tag NOT LIKE '[%]';
 
     RETURN COALESCE(result, '[]'::json);
 END;
@@ -1769,18 +1771,32 @@ DECLARE
 BEGIN
     UPDATE contacts c
     SET tags = (
-        SELECT COALESCE(jsonb_agg(elem), '[]'::jsonb)
+        SELECT COALESCE(jsonb_agg(elem ORDER BY elem), '[]'::jsonb)
         FROM (
             SELECT DISTINCT elem
             FROM (
-                SELECT elem
-                FROM jsonb_array_elements_text(COALESCE(c.tags, '[]'::jsonb)) AS elem
+                -- Extrai tags existentes como texto plano (achata nested arrays)
+                SELECT CASE
+                    WHEN jsonb_typeof(arr_elem) = 'array'
+                    THEN sub_text
+                    ELSE arr_elem #>> '{}'
+                END AS elem
+                FROM jsonb_array_elements(COALESCE(c.tags, '[]'::jsonb)) AS arr_elem
+                LEFT JOIN LATERAL jsonb_array_elements_text(
+                    CASE WHEN jsonb_typeof(arr_elem) = 'array' THEN arr_elem ELSE '[]'::jsonb END
+                ) AS sub_text ON true
+                WHERE CASE
+                    WHEN jsonb_typeof(arr_elem) = 'array' THEN sub_text IS NOT NULL
+                    ELSE true
+                END
                 UNION ALL
+                -- Adiciona novas tags
                 SELECT t AS elem
                 FROM UNNEST(p_tags_to_add) AS t
             ) all_tags
-            WHERE NOT (elem = ANY(p_tags_to_remove))
-            ORDER BY elem
+            WHERE elem IS NOT NULL
+              AND length(trim(elem)) > 0
+              AND NOT (elem = ANY(p_tags_to_remove))
         ) unique_tags
     )
     WHERE c.id = ANY(p_ids);

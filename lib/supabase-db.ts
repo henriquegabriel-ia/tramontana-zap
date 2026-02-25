@@ -42,6 +42,29 @@ import {
 import { isSuppressionActive } from '@/lib/phone-suppressions'
 import { canonicalTemplateCategory } from '@/lib/template-category'
 
+/**
+ * Normaliza tags que podem estar aninhadas como [["tag"]] → ["tag"].
+ * Resolve corrupção de dados onde arrays JSONB foram double-wrapped.
+ */
+function flattenTags(tags: unknown): string[] {
+    if (!Array.isArray(tags)) return []
+    return tags
+        .flat(Infinity)
+        .map(t => {
+            const s = String(t ?? '').trim()
+            // Remove brackets de strings que parecem JSON arrays: '["tag"]' → 'tag'
+            if (s.startsWith('[') && s.endsWith(']')) {
+                try {
+                    const parsed = JSON.parse(s)
+                    if (Array.isArray(parsed)) return parsed.map(String)
+                } catch { /* not JSON, keep as-is */ }
+            }
+            return s
+        })
+        .flat()
+        .filter(Boolean)
+}
+
 // Gera um ID compatível com ambientes que usam UUID (preferencial) e também funciona como TEXT.
 // - Em Supabase, muitos schemas antigos usam `uuid` como PK.
 // - No schema consolidado atual, os PKs são TEXT com defaults, mas aceitar UUID como string é ok.
@@ -541,7 +564,7 @@ export const contactDb = {
             phone: row.phone,
             email: row.email,
             status: (row.status as ContactStatus) || ContactStatus.OPT_IN,
-            tags: row.tags || [],
+            tags: flattenTags(row.tags),
             lastActive: row.updated_at
                 ? new Date(row.updated_at).toLocaleDateString()
                 : (row.created_at ? new Date(row.created_at).toLocaleDateString() : '-'),
@@ -693,7 +716,7 @@ export const contactDb = {
                     email: row.email,
                     status: effectiveStatus, // Status visual calculado
                     originalStatus: dbStatus, // Status real do banco (para referência)
-                    tags: row.tags || [],
+                    tags: flattenTags(row.tags),
                     lastActive: row.updated_at
                         ? new Date(row.updated_at).toLocaleDateString()
                         : (row.created_at ? new Date(row.created_at).toLocaleDateString() : '-'),
@@ -871,7 +894,7 @@ export const contactDb = {
             phone: data.phone,
             email: data.email,
             status: (data.status as ContactStatus) || ContactStatus.OPT_IN,
-            tags: data.tags || [],
+            tags: flattenTags(data.tags),
             lastActive: data.updated_at
                 ? new Date(data.updated_at).toLocaleDateString()
                 : (data.created_at ? new Date(data.created_at).toLocaleDateString() : '-'),
@@ -896,7 +919,7 @@ export const contactDb = {
             phone: data.phone,
             email: data.email,
             status: (data.status as ContactStatus) || ContactStatus.OPT_IN,
-            tags: data.tags || [],
+            tags: flattenTags(data.tags),
             lastActive: data.updated_at
                 ? new Date(data.updated_at).toLocaleDateString()
                 : (data.created_at ? new Date(data.created_at).toLocaleDateString() : '-'),
@@ -928,7 +951,7 @@ export const contactDb = {
             .single()
 
         if (existing) {
-            const mergedTags = uniq([...(existing.tags || []), ...(contact.tags || []), ...tagsToMerge])
+            const mergedTags = uniq([...flattenTags(existing.tags), ...(contact.tags || []), ...tagsToMerge])
             const mergedCustomFields = mergeCustomFields(existing.custom_fields, contact.custom_fields)
             const updateData: any = {
                 updated_at: now,
@@ -1009,7 +1032,7 @@ export const contactDb = {
             if (contact.name) updateData.name = contact.name
             if (contact.email !== undefined) updateData.email = contact.email
             if (contact.status) updateData.status = contact.status
-            if (contact.tags) updateData.tags = contact.tags
+            if (contact.tags) updateData.tags = flattenTags(contact.tags)
             if (contact.custom_fields) updateData.custom_fields = contact.custom_fields
 
             const { error: updateError } = await supabase
@@ -1025,7 +1048,7 @@ export const contactDb = {
                 phone: existing.phone,
                 email: contact.email ?? existing.email,
                 status: (contact.status || existing.status) as ContactStatus,
-                tags: contact.tags || existing.tags || [],
+                tags: flattenTags(contact.tags || existing.tags || []),
                 custom_fields: contact.custom_fields || existing.custom_fields || {},
                 lastActive: 'Agora mesmo',
                 createdAt: existing.created_at,
@@ -1044,7 +1067,7 @@ export const contactDb = {
                 phone: contact.phone,
                 email: contact.email || null,
                 status: contact.status || ContactStatus.OPT_IN,
-                tags: contact.tags || [],
+                tags: flattenTags(contact.tags),
                 custom_fields: contact.custom_fields || {},
                 created_at: now,
             })
@@ -1067,7 +1090,7 @@ export const contactDb = {
         if (data.phone !== undefined) updateData.phone = data.phone
         if (data.email !== undefined) updateData.email = data.email
         if (data.status !== undefined) updateData.status = data.status
-        if (data.tags !== undefined) updateData.tags = data.tags
+        if (data.tags !== undefined) updateData.tags = flattenTags(data.tags)
         if (data.custom_fields !== undefined) updateData.custom_fields = data.custom_fields
 
         updateData.updated_at = new Date().toISOString()
@@ -1264,8 +1287,8 @@ export const contactDb = {
 
             if (existing) {
                 // Merge: combina tags e custom_fields, preserva dados existentes
-                const existingTags = Array.isArray(existing.tags) ? existing.tags : []
-                const newTags = Array.isArray(contact.tags) ? contact.tags : []
+                const existingTags = flattenTags(existing.tags)
+                const newTags = flattenTags(contact.tags)
                 const mergedTags = [...new Set([...existingTags, ...newTags])]
 
                 const existingCustomFields =
@@ -1294,7 +1317,7 @@ export const contactDb = {
                     phone: contact.phone,
                     email: (contact as any).email || null,
                     status: contact.status || ContactStatus.OPT_IN,
-                    tags: [...new Set(contact.tags || [])], // deduplica tags
+                    tags: [...new Set(flattenTags(contact.tags))], // deduplica tags
                     custom_fields: (contact as any).custom_fields || {},
                     created_at: now,
                 })
@@ -1334,7 +1357,7 @@ export const contactDb = {
             throw error
         }
 
-        if (Array.isArray(data)) return data
+        if (Array.isArray(data)) return flattenTags(data)
         // Fallback: PostgREST pode retornar JSON string em versões diferentes
         if (typeof data === 'string') {
             try {
