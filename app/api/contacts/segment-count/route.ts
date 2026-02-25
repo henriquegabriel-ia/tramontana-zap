@@ -40,25 +40,32 @@ export async function GET(request: Request) {
     const states = parseList(url.searchParams.get('states'))
     const combine = (url.searchParams.get('combine') || 'or').toLowerCase() === 'and' ? 'and' : 'or'
 
-    // Construir query com filtro de tags no SQL
-    // Isso evita o PostgREST default limit de 1000 linhas para contatos com muitas tags
+    const hasLocationFilters = countries.length > 0 || states.length > 0
+
+    // Construir query base com filtro de tags no SQL
+    // Usa operadores JSONB nativos do PostgreSQL:
+    //   cs (@>) = contains (AND: contém TODAS as tags)
+    //   ov (&&) = overlap  (OR:  contém QUALQUER tag)
     let query = supabase
       .from('contacts')
       .select('phone,tags', { count: 'exact' })
 
     if (tags.length > 0) {
       if (combine === 'and') {
-        // AND: contato deve ter TODAS as tags — encadeia .contains() para cada tag
-        for (const tag of tags) {
-          query = query.contains('tags', JSON.stringify([tag]))
-        }
+        // @>: tags deve conter TODAS as tags especificadas (uma chamada, não loop)
+        query = query.filter('tags', 'cs', JSON.stringify(tags))
       } else {
-        // OR: contato deve ter QUALQUER uma das tags
-        const orConditions = tags
-          .map(tag => `tags.cs.${JSON.stringify([tag])}`)
-          .join(',')
-        query = query.or(orConditions)
+        // &&: tags deve conter pelo menos UMA das tags especificadas
+        query = query.filter('tags', 'ov', JSON.stringify(tags))
       }
+    }
+
+    // Para filtros de localização, precisamos buscar os dados completos para
+    // filtrar por país/UF (derivado do número de telefone, não disponível no SQL).
+    // Limite alto para minimizar truncamento do PostgREST default (1000 linhas).
+    // Limitação: datasets com >10000 contatos no segmento podem ter contagem imprecisa.
+    if (hasLocationFilters) {
+      query = query.limit(10000)
     }
 
     const { data, count: sqlCount, error } = await query
@@ -67,13 +74,13 @@ export async function GET(request: Request) {
 
     const contacts = data || []
 
-    // Sem filtros de localização: retornar count do SQL diretamente (preciso e sem limite)
-    if (!countries.length && !states.length) {
+    // Sem filtros de localização: count do SQL é preciso e sem limite de linhas
+    if (!hasLocationFilters) {
       const matched = sqlCount ?? contacts.length
       return NextResponse.json({ total: matched, matched })
     }
 
-    // Com filtros de localização: filtrar em memória sobre subconjunto já filtrado por tag
+    // Com filtros de localização: filtrar em memória sobre subconjunto filtrado por tag
     const total = sqlCount ?? contacts.length
 
     const matched = contacts.reduce((count, contact) => {
