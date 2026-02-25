@@ -1425,6 +1425,8 @@ CREATE INDEX idx_campaigns_active ON public.campaigns USING btree (status, sched
 
 CREATE INDEX idx_contacts_custom_fields ON public.contacts USING gin (custom_fields);
 
+CREATE INDEX idx_contacts_tags ON public.contacts USING gin (tags);
+
 -- idx_contacts_phone removido: redundante com contacts_phone_key UNIQUE
 
 CREATE INDEX idx_contacts_status ON public.contacts USING btree (status);
