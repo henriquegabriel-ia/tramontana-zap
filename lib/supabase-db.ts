@@ -1068,30 +1068,47 @@ export const contactDb = {
     ): Promise<number> => {
         if (ids.length === 0) return 0
 
-        const { data, error } = await supabase
-            .from('contacts')
-            .select('id, tags')
-            .in('id', ids)
+        // Lotes de 500 para evitar URL muito longa no Supabase REST API (limite ~8KB)
+        const BATCH_SIZE = 500
+        const chunk = <T>(arr: T[], size: number): T[][] =>
+            Array.from({ length: Math.ceil(arr.length / size) }, (_, i) =>
+                arr.slice(i * size, i * size + size)
+            )
 
-        if (error) throw error
+        let totalUpdated = 0
 
-        // Calcula novas tags: (atual ∪ tagsToAdd) − tagsToRemove
-        const updates = (data || []).map((c) => ({
-            id: c.id,
-            tags: [
-                ...new Set(
-                    [...(c.tags ?? []), ...tagsToAdd]
-                        .filter((t) => !tagsToRemove.includes(t))
-                ),
-            ],
-        }))
+        for (const idBatch of chunk(ids, BATCH_SIZE)) {
+            const { data, error } = await supabase
+                .from('contacts')
+                .select('id, tags')
+                .in('id', idBatch)
 
-        const { error: upsertError } = await supabase
-            .from('contacts')
-            .upsert(updates, { onConflict: 'id' })
+            if (error) throw error
 
-        if (upsertError) throw upsertError
-        return updates.length
+            // Calcula novas tags: (atual ∪ tagsToAdd) − tagsToRemove
+            const updates = (data || []).map((c) => ({
+                id: c.id,
+                tags: [
+                    ...new Set(
+                        [...(c.tags ?? []), ...tagsToAdd]
+                            .filter((t) => !tagsToRemove.includes(t))
+                    ),
+                ],
+            }))
+
+            if (updates.length === 0) continue
+
+            for (const updateBatch of chunk(updates, BATCH_SIZE)) {
+                const { error: upsertError } = await supabase
+                    .from('contacts')
+                    .upsert(updateBatch, { onConflict: 'id' })
+
+                if (upsertError) throw upsertError
+                totalUpdated += updateBatch.length
+            }
+        }
+
+        return totalUpdated
     },
 
     import: async (contacts: Omit<Contact, 'id' | 'lastActive'>[]): Promise<{ inserted: number; updated: number }> => {
