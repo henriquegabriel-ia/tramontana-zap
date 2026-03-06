@@ -12,6 +12,15 @@
 Este plano foi desenhado para ser executado pelo Claude Code Web (extensão com browser real).
 Para cada teste, siga as instruções, tire screenshot da tela, e anote o resultado (OK/FALHA/PARCIAL).
 
+### Arquitetura do app (contexto para testes)
+- **Stack:** Next.js 16 (App Router) + React 19 + Supabase + Upstash QStash
+- **209 API routes**, **62 hooks**, **19 services**
+- **Single-tenant:** Sem cadastro de usuários, login por senha master
+- **Padrão:** Page (RSC) → Hook (controller) → Service (fetch) → API Route → Supabase
+- **Sidebar:** 9 itens: Dashboard, Campanhas, Inbox, Templates, Contatos, IA, Configurações
+  (Workflows = beta/dev-mode only)
+- **Realtime:** Supabase Realtime em campanhas, contatos, templates, inbox
+
 ---
 
 ## 1. LOGIN E AUTENTICAÇÃO
@@ -144,18 +153,36 @@ Para cada teste, siga as instruções, tire screenshot da tela, e anote o result
 - [ ] Para campanhas DRAFT/SCHEDULED: botão "Iniciar" (Play icon)
 - [ ] Opção "Mover para pasta" (MoveToFolderButton)
 
-### TC-010: Criar nova campanha (wizard)
+### TC-010: Criar nova campanha (wizard de 4 etapas)
 **Passos:**
 1. Acesse /campaigns/new
-2. Tire screenshot de cada etapa do wizard
+2. Tire screenshot de CADA etapa do wizard (4 etapas)
 
 **Verificar:**
-- [ ] Wizard de criação com múltiplas etapas
-- [ ] Etapa de seleção de template (TemplateSelection)
-- [ ] Etapa de seleção de audiência (ContactSelectionList)
-- [ ] Etapa de configuração (agendamento, nome)
-- [ ] Botões "Voltar" e "Próximo" funcionando
+- [ ] **Etapa 1 - Identificação:**
+  - Campo "Nome da campanha" (text input)
+  - Campo "Descrição" (textarea)
+  - Seletor de pasta (dropdown)
+  - Seletor de tags (multi-select/combobox)
+- [ ] **Etapa 2 - Template:**
+  - Grid de cards de templates disponíveis com preview
+  - Campos de substituição de variáveis ({{1}}, {{2}}, etc.)
+  - Preview visual da mensagem
+- [ ] **Etapa 3 - Audiência:**
+  - Lista de contatos com busca e filtro por status/tag
+  - Checkbox de seleção por contato
+  - Paginação da lista
+  - Botão "Editar contato rápido" (ContactQuickEditModal)
+  - Botão "Campos personalizados" (CustomFieldsSheet)
+  - Contagem de contatos selecionados
+- [ ] **Etapa 4 - Agendamento/Envio:**
+  - Toggle de agendamento (checkbox)
+  - DateTimePicker + Calendar para data/hora
+  - Preview final (resumo: template + audiência + agenda)
+- [ ] Botões "Anterior" e "Próximo" entre etapas
+- [ ] Progress indicator de 4 passos no topo
 - [ ] Botão final "Criar Campanha" / "Agendar"
+- [ ] Botão "Cancelar" volta para lista
 
 ### TC-011: Detalhes de campanha
 **Passos:**
@@ -327,10 +354,25 @@ Para cada teste, siga as instruções, tire screenshot da tela, e anote o result
 - [ ] Botão "Gerar"
 - [ ] Lista de templates gerados com toggle de seleção
 
-### TC-024: Criar template manualmente
+### TC-024: Criar template com IA (wizard de 6 etapas)
 **Passos:**
-1. Acesse /templates/new ou /templates/drafts/new
-2. Tire screenshot do builder de template
+1. Acesse /templates/new
+2. Tire screenshot de CADA etapa
+
+**Verificar:**
+- [ ] **Etapa 1 - Paste:** Textarea para colar conteúdo bruto (descrição de produto, copy marketing)
+- [ ] **Etapa 2 - Extract:** Campos auto-preenchidos pela IA (nome, tipo, preço, benefícios, CTA)
+- [ ] **Etapa 3 - Strategy:** 3 opções: Marketing, Utility, Camuflado (radio buttons com descrições)
+- [ ] **Etapa 4 - Config:** Prompt customizado (textarea), Quantidade (1-10), Idioma (pt_BR, en_US, etc.)
+- [ ] **Etapa 5 - Generating:** Loading/progress da geração IA
+- [ ] **Etapa 6 - Review:** Grid de templates gerados, cada um com botões Aprovar/Rejeitar/Editar/Copiar
+- [ ] Botão "Salvar Projeto" após revisão
+- [ ] Progress indicator de 6 passos
+
+### TC-024b: Criar template manualmente (drafts)
+**Passos:**
+1. Acesse /templates/drafts/new
+2. Tire screenshot do builder
 
 **Verificar:**
 - [ ] Editor de template com campos de header, body, footer
@@ -514,12 +556,18 @@ Para cada teste, siga as instruções, tire screenshot da tela, e anote o result
 ### TC-035: Configurações de IA
 **Passos:**
 1. Navegue para /settings/ai
-2. Tire screenshot
+2. Tire screenshot (scroll completo)
 
 **Verificar:**
-- [ ] Configurações de provedor de IA
-- [ ] API keys
-- [ ] Modelos disponíveis
+- [ ] **OCR Model selector:** 4 opções de modelo Gemini (radio/botões)
+- [ ] **Helicone integration:** Toggle enable/disable + campo API key (masked)
+- [ ] **Mem0 integration:** Toggle enable/disable + campo API key (masked)
+- [ ] **Seção de Prompts:** Lista de prompts editáveis, cada um com:
+  - Botão "Editar prompt" (abre editor modal/textarea)
+  - Botão "Reset to default"
+  - Botão "Copiar prompt"
+- [ ] **Seção de Strategies:** Marketing, Utility, Bypass (badges coloridos)
+- [ ] Lista de variáveis disponíveis (collapsible)
 
 ### TC-036: Agentes de IA
 **Passos:**
@@ -527,9 +575,20 @@ Para cada teste, siga as instruções, tire screenshot da tela, e anote o result
 2. Tire screenshot
 
 **Verificar:**
-- [ ] Lista de agentes de IA configurados (AIAgentsSettingsView)
-- [ ] Botão criar novo agente
-- [ ] Configurações de cada agente (prompt, modelo, etc.)
+- [ ] **Toggle global** para ativar/desativar todos os agentes
+- [ ] Lista de agentes configurados (AIAgentsSettingsView):
+  - Nome, Status toggle, Badge "Default", Botões de ação
+- [ ] Botão "+ Novo Agente" (abre AIAgentForm modal)
+- [ ] Para cada agente: Editar, Excluir, Definir como padrão, Toggle ativo
+- [ ] **Aba Knowledge Base (KB):**
+  - Upload de documentos (file upload)
+  - Adicionar texto (text input)
+  - Lista de itens KB com busca e delete
+- [ ] **Aba Test Chat:**
+  - Interface de chat para testar respostas do agente
+  - Campo de input + botão enviar
+  - Botão "Limpar chat"
+  - Botão "Copiar Agent ID"
 
 ### TC-037: Atendentes
 **Passos:**
@@ -537,9 +596,14 @@ Para cada teste, siga as instruções, tire screenshot da tela, e anote o result
 2. Tire screenshot
 
 **Verificar:**
-- [ ] Lista de atendentes humanos
-- [ ] Botão adicionar atendente
-- [ ] Status de cada atendente
+- [ ] Lista de atendentes com token de acesso
+- [ ] Botão "+ Novo Atendente" (gera token)
+- [ ] Para cada atendente:
+  - Nome (editável inline)
+  - Token (masked/unmasked toggle + botão copiar)
+  - ID (botão copiar)
+  - Checkboxes de permissões: Ver contatos, Enviar mensagens, Gerenciar campanhas, Ver relatórios, Gerenciar settings
+  - Botão "Excluir" com confirmação
 
 ### TC-038: Meta Diagnósticos
 **Passos:**
@@ -572,20 +636,24 @@ Para cada teste, siga as instruções, tire screenshot da tela, e anote o result
 
 **Verificar:**
 - [ ] Logo/marca SmartZap no topo
-- [ ] Links de navegação presentes:
-  - Dashboard (Home)
-  - Campanhas
-  - Contatos
-  - Templates
-  - Fluxos / MiniApps
-  - Inbox / Caixa de Entrada
-  - Workflows
-  - Formulários
-  - Submissões
-  - Configurações (com sub-itens)
+- [ ] Links de navegação presentes (9 itens no código):
+  - Dashboard (LayoutDashboard icon) → `/`
+  - Campanhas (MessageSquare icon) → `/campaigns`
+  - Inbox (MessageCircle icon, com badge de não lidas) → `/inbox`
+  - Templates (FileText icon) → `/templates`
+  - Contatos (Users icon) → `/contacts`
+  - IA (Sparkles icon) → `/settings/ai`
+  - Configurações (Settings icon) → `/settings`
+  - *Workflows (Workflow icon) → somente em Dev Mode (beta)*
+- [ ] Botão "Nova Campanha" com gradiente verde na sidebar expandida
 - [ ] Ícones corretos para cada item (lucide-react)
 - [ ] Item ativo destacado visualmente
-- [ ] Sidebar responsiva (collapsa em mobile)
+- [ ] Badge de não lidas no Inbox (InboxUnreadBadge)
+- [ ] Sidebar collapsa: CompactSidebar (56px, ícones only) vs ExpandedSidebar (14rem)
+- [ ] Botão expand/collapse da sidebar
+- [ ] Seção de perfil no rodapé com botão de logout
+- [ ] Tooltips nos ícones quando sidebar está compacta
+- [ ] Prefetch de dados ao hover sobre links (Dashboard, Campanhas, Templates, Contatos, Settings)
 
 ### TC-041: Sidebar - Navegação entre páginas
 **Passos:**
@@ -658,6 +726,65 @@ Para cada teste, siga as instruções, tire screenshot da tela, e anote o result
 
 ---
 
+## 16. API HEALTH CHECK E ENDPOINTS PÚBLICOS
+
+### TC-046: Health check endpoint
+**Passos:**
+1. Abra o DevTools (F12) > Network
+2. Acesse /api/health diretamente na barra de endereço
+
+**Verificar:**
+- [ ] Retorna JSON com `overall: 'healthy' | 'degraded' | 'unhealthy'`
+- [ ] Inclui status dos serviços: `database`, `qstash`, `whatsapp`, `webhook`
+- [ ] Não requer autenticação (endpoint público)
+
+### TC-047: Auth status endpoint
+**Passos:**
+1. Acesse /api/auth/status (sem login)
+
+**Verificar:**
+- [ ] Retorna JSON com: `isConfigured`, `isSetup`, `isAuthenticated`, `company`
+- [ ] Não requer autenticação
+- [ ] Não vaza dados sensíveis
+
+### TC-048: Console errors check
+**Passos:**
+1. Após login, abra DevTools > Console
+2. Navegue por: Dashboard → Campanhas → Contatos → Templates → Settings
+3. Tire screenshot do console em cada página
+
+**Verificar:**
+- [ ] Sem erros JavaScript no console (exceto warnings conhecidos)
+- [ ] Sem erros de rede 4xx/5xx inesperados
+- [ ] Sem erros de CORS ou mixed content
+
+---
+
+## 17. SHELL DO DASHBOARD (DashboardShell)
+
+### TC-049: Header e elementos globais
+**Passos:**
+1. Em qualquer página autenticada, tire screenshot do header
+
+**Verificar:**
+- [ ] Breadcrumb de navegação
+- [ ] Botão de notificações (sino)
+- [ ] Toggle de tema (claro/escuro)
+- [ ] Toggle Dev Mode (se disponível)
+- [ ] Onboarding banner/modal (se primeiro acesso)
+- [ ] Guided tour após primeira conexão WhatsApp
+
+### TC-050: Logout
+**Passos:**
+1. Na sidebar expandida, localize a seção de perfil no rodapé
+2. Clique no botão de logout
+
+**Verificar:**
+- [ ] Redireciona para /login
+- [ ] Sessão é limpa (não volta ao dashboard sem re-login)
+
+---
+
 ## Resumo de Elementos Interativos por Página
 
 | Página | Botões Principais | Modals/Dialogs | Filtros |
@@ -683,7 +810,37 @@ Para cada teste, siga as instruções, tire screenshot da tela, e anote o result
 
 ## Prioridade de Execução
 
-1. **CRÍTICO**: TC-001 a TC-003 (Login)
-2. **ALTA**: TC-005, TC-008, TC-012, TC-019, TC-027, TC-034, TC-040 (Páginas principais)
-3. **MÉDIA**: TC-010, TC-014, TC-015, TC-023, TC-025, TC-031 (CRUD operations)
-4. **BAIXA**: TC-042, TC-043, TC-044, TC-045 (Responsividade, tema, edge cases)
+**Total: 50 test cases (TC-001 a TC-050)**
+
+1. **CRÍTICO** (executar primeiro):
+   - TC-001 a TC-003 (Login/autenticação)
+   - TC-046, TC-047 (API health)
+   - TC-050 (Logout)
+
+2. **ALTA** (fluxo principal):
+   - TC-005, TC-006 (Dashboard)
+   - TC-008, TC-009 (Campanhas lista)
+   - TC-012, TC-013 (Contatos lista)
+   - TC-019, TC-020 (Templates lista/sync)
+   - TC-027, TC-028, TC-029 (Inbox)
+   - TC-034 (Configurações gerais)
+   - TC-040, TC-041 (Sidebar/navegação)
+   - TC-049 (Shell/header)
+
+3. **MÉDIA** (CRUD e funcionalidades):
+   - TC-010 (Wizard campanha 4 etapas)
+   - TC-011 (Detalhes campanha)
+   - TC-014, TC-015, TC-016 (Contatos CRUD/import/bulk)
+   - TC-021, TC-023, TC-024 (Templates detalhes/IA)
+   - TC-025, TC-026 (Fluxos/builder)
+   - TC-031, TC-032 (Formulários)
+   - TC-035, TC-036 (Settings IA/Agents)
+
+4. **BAIXA** (edge cases):
+   - TC-004 (Toggle senha)
+   - TC-017, TC-018 (Edit/delete contato)
+   - TC-022, TC-024b (Delete/draft template)
+   - TC-030, TC-033 (Workflows/submissões)
+   - TC-037, TC-038, TC-039 (Atendentes/Meta/Performance)
+   - TC-042, TC-043 (Responsividade/tema)
+   - TC-044, TC-045, TC-048 (Error handling/console)
