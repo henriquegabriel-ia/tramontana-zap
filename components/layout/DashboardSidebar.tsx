@@ -119,11 +119,11 @@ const CompactSidebar = memo(function CompactSidebar({
           <ChevronRight size={14} aria-hidden="true" />
         </button>
         <div
-          className="flex h-9 w-9 items-center justify-center rounded-xl border border-[var(--ds-border-default)] bg-linear-to-br from-primary-600 to-primary-800 shadow-lg shadow-primary-900/20"
+          className="flex h-9 w-9 items-center justify-center"
           role="img"
           aria-label="Logo Tramontana Zap"
         >
-          <Zap className="text-white" size={18} fill="currentColor" aria-hidden="true" />
+          <img src="/tramontana-logo.svg" alt="Tramontana" className="h-8 w-8 object-contain" />
         </div>
         <nav className="flex flex-1 flex-col items-center gap-1.5 pt-1" aria-label="Menu principal">
           {navItems.map((item) => {
@@ -238,11 +238,11 @@ const ExpandedSidebar = memo(function ExpandedSidebar({
       <div className="flex h-full flex-col p-4">
         <div className="h-16 flex items-center px-2 mb-6">
           <div
-            className="w-10 h-10 bg-linear-to-br from-primary-600 to-primary-800 rounded-xl flex items-center justify-center mr-3 shadow-lg shadow-primary-900/20 border border-[var(--ds-border-default)]"
+            className="w-10 h-10 flex items-center justify-center mr-3"
             role="img"
             aria-label="Logo Tramontana Zap"
           >
-            <Zap className="text-white" size={20} fill="currentColor" aria-hidden="true" />
+            <img src="/tramontana-logo.svg" alt="Tramontana" className="h-9 w-9 object-contain" />
           </div>
           <div>
             <span className="text-xl font-bold text-[var(--ds-text-primary)] tracking-tight block">Tramontana Zap</span>
