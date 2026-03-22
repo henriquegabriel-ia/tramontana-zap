@@ -155,7 +155,7 @@ export interface IconActionProps extends Omit<ButtonProps, 'variant' | 'size'> {
 const iconVariantStyles = {
   default: 'text-zinc-400 hover:text-white hover:bg-white/10',
   destructive: 'text-zinc-400 hover:text-red-400 hover:bg-red-500/10',
-  success: 'text-zinc-400 hover:text-purple-400 hover:bg-purple-500/10',
+  success: 'text-zinc-400 hover:text-green-400 hover:bg-green-500/10',
 }
 
 export function IconAction({

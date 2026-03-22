@@ -107,7 +107,7 @@ export const TemplateCard = React.memo(
             <span
               className={`inline-flex items-center rounded border px-1.5 py-0.5 font-medium ${
                 template.category === 'UTILIDADE'
-                  ? 'bg-purple-500/10 text-[var(--ds-status-success-text)] border-purple-500/20'
+                  ? 'bg-green-500/10 text-[var(--ds-status-success-text)] border-green-500/20'
                   : template.category === 'MARKETING'
                     ? 'bg-amber-500/10 text-[var(--ds-status-warning-text)] border-amber-500/20'
                     : 'bg-[var(--ds-bg-hover)] text-[var(--ds-text-secondary)] border-[var(--ds-border-default)]'

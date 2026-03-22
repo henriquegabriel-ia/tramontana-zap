@@ -87,7 +87,7 @@ export function SyncTemplatesStep({
         <div className={`
           w-24 h-24 rounded-2xl flex items-center justify-center transition-all duration-500
           ${syncStatus === 'syncing' ? 'bg-blue-500/20 animate-pulse' : ''}
-          ${syncStatus === 'success' ? 'bg-purple-500/20' : ''}
+          ${syncStatus === 'success' ? 'bg-green-500/20' : ''}
           ${syncStatus === 'error' ? 'bg-red-500/20' : ''}
           ${syncStatus === 'idle' ? 'bg-zinc-700/50' : ''}
         `}>

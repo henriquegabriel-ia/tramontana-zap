@@ -144,7 +144,7 @@ const TemplateTableRowComponent: React.FC<TemplateTableRowProps> = ({
         <span
           className={`inline-flex items-center rounded-md border px-2 py-1 text-xs font-medium ${
             template.category === 'UTILIDADE'
-              ? 'bg-purple-500/10 text-[var(--ds-status-success-text)] border-purple-500/20'
+              ? 'bg-green-500/10 text-[var(--ds-status-success-text)] border-green-500/20'
               : template.category === 'MARKETING'
                 ? 'bg-amber-500/10 text-[var(--ds-status-warning-text)] border-amber-500/20'
                 : 'bg-[var(--ds-bg-hover)] text-[var(--ds-text-secondary)] border-[var(--ds-border-default)]'

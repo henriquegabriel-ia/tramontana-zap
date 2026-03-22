@@ -71,7 +71,7 @@ const StatusBadge = ({ status, approvedCount, totalCount }: { status: string; ap
 
   if (isComplete) {
     return (
-      <span className="inline-flex items-center px-2.5 py-1 rounded-md text-xs font-medium border bg-purple-500/10 text-purple-300 border-purple-500/20">
+      <span className="inline-flex items-center px-2.5 py-1 rounded-md text-xs font-medium border bg-green-500/10 text-green-300 border-green-500/20">
         Concluído
       </span>
     );
@@ -328,7 +328,7 @@ export default function TemplatesPage() {
         >
           <Workflow className="w-4 h-4" />
           MiniApps
-          <span className="rounded-full bg-purple-500/20 px-1 py-px text-[8px] font-semibold uppercase tracking-wider text-[var(--ds-status-success-text)] border border-purple-500/30">
+          <span className="rounded-full bg-green-500/20 px-1 py-px text-[8px] font-semibold uppercase tracking-wider text-[var(--ds-status-success-text)] border border-green-500/30">
             beta
           </span>
         </button>
@@ -342,7 +342,7 @@ export default function TemplatesPage() {
         >
           <FileText className="w-4 h-4" />
           Forms
-          <span className="rounded-full bg-purple-500/20 px-1 py-px text-[8px] font-semibold uppercase tracking-wider text-[var(--ds-status-success-text)] border border-purple-500/30">
+          <span className="rounded-full bg-green-500/20 px-1 py-px text-[8px] font-semibold uppercase tracking-wider text-[var(--ds-status-success-text)] border border-green-500/30">
             beta
           </span>
         </button>
@@ -356,7 +356,7 @@ export default function TemplatesPage() {
         >
           <LayoutGrid className="w-4 h-4" />
           Projetos (Fábrica)
-          <span className="rounded-full bg-purple-500/20 px-1 py-px text-[8px] font-semibold uppercase tracking-wider text-[var(--ds-status-success-text)] border border-purple-500/30">
+          <span className="rounded-full bg-green-500/20 px-1 py-px text-[8px] font-semibold uppercase tracking-wider text-[var(--ds-status-success-text)] border border-green-500/30">
             beta
           </span>
         </button>

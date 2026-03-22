@@ -22,7 +22,7 @@ const statusBadgeVariants = cva(
     variants: {
       status: {
         // Generic status
-        success: "bg-purple-500/10 text-[var(--ds-status-success-text)]",
+        success: "bg-green-500/10 text-[var(--ds-status-success-text)]",
         error: "bg-red-500/10 text-[var(--ds-status-error-text)]",
         warning: "bg-amber-500/10 text-[var(--ds-status-warning-text)]",
         info: "bg-blue-500/10 text-[var(--ds-status-info-text)]",
@@ -33,7 +33,7 @@ const statusBadgeVariants = cva(
         draft: "bg-[var(--ds-bg-surface)] text-[var(--ds-text-secondary)]",
         scheduled: "bg-purple-500/10 text-purple-600 dark:text-purple-400",
         sending: "bg-blue-500/10 text-[var(--ds-status-info-text)] animate-pulse",
-        completed: "bg-purple-500/10 text-[var(--ds-status-success-text)]",
+        completed: "bg-green-500/10 text-[var(--ds-status-success-text)]",
         paused: "bg-amber-500/10 text-[var(--ds-status-warning-text)]",
         failed: "bg-red-500/10 text-[var(--ds-status-error-text)]",
       },
@@ -105,7 +105,7 @@ function StatusBadge({
               : "",
             // Cor do dot baseado no status
             {
-              "bg-purple-400": status === "success" || status === "completed",
+              "bg-green-400": status === "success" || status === "completed",
               "bg-red-400": status === "error" || status === "failed",
               "bg-amber-400": status === "warning" || status === "paused",
               "bg-blue-400": status === "info" || status === "sending" || status === "processing",

@@ -160,7 +160,7 @@ export function SendFirstMessageStep({
         <div className={`
           w-20 h-20 rounded-2xl flex items-center justify-center transition-all duration-300
           ${sendStatus === 'sending' ? 'bg-blue-500/20 animate-pulse' : ''}
-          ${sendStatus === 'success' ? 'bg-purple-500/20' : ''}
+          ${sendStatus === 'success' ? 'bg-green-500/20' : ''}
           ${sendStatus === 'error' ? 'bg-amber-500/20' : ''}
           ${sendStatus === 'idle' ? 'bg-gradient-to-br from-purple-500/20 to-teal-500/20' : ''}
         `}>
