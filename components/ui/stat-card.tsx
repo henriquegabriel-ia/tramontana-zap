@@ -58,11 +58,6 @@ const colorStyles = {
     iconColor: "text-blue-600 dark:text-blue-400",
     iconGlow: "shadow-blue-500/20",
   },
-  purple: {
-    iconBg: "bg-purple-500/20",
-    iconColor: "text-purple-600 dark:text-purple-400",
-    iconGlow: "shadow-purple-500/20",
-  },
   red: {
     iconBg: "bg-red-500/20",
     iconColor: "text-red-600 dark:text-red-400",
