@@ -10,6 +10,7 @@ import { FlowEndpointPanel } from './FlowEndpointPanel';
 import { CredentialsForm } from './CredentialsForm';
 import { UpstashConfigPanel } from './UpstashConfigPanel';
 import { ApiDocsPanel } from './ApiDocsPanel';
+import { RDStationPanel } from './rdstation/RDStationPanel';
 import { useDevMode } from '@/components/providers/DevModeProvider';
 import type { SettingsViewProps } from './types';
 
@@ -205,7 +206,10 @@ export const SettingsView: React.FC<SettingsViewProps> = ({
           />
         )}
 
-        {/* 5. API Documentation Link */}
+        {/* 5. RD Station Integration */}
+        {settings.isConnected && <RDStationPanel />}
+
+        {/* 6. API Documentation Link */}
         {settings.isConnected && <ApiDocsPanel />}
 
         {/* ========== SEÇÕES DEV-ONLY ABAIXO ========== */}
