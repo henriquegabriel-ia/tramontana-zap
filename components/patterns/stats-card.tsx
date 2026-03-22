@@ -46,12 +46,12 @@ export interface StatsCardProps {
 
 const variantStyles: Record<StatsCardVariant, { icon: string; bg: string }> = {
   default: {
-    icon: 'text-emerald-400',
-    bg: 'bg-emerald-500/10',
+    icon: 'text-purple-400',
+    bg: 'bg-purple-500/10',
   },
   success: {
-    icon: 'text-emerald-400',
-    bg: 'bg-emerald-500/10',
+    icon: 'text-purple-400',
+    bg: 'bg-purple-500/10',
   },
   warning: {
     icon: 'text-amber-400',

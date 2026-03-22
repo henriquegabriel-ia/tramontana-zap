@@ -103,7 +103,7 @@ export function TemplatePreview({ spec, headerMediaPreview }: TemplatePreviewPro
                 <div className="px-3 py-2">
                 {header?.format === 'LOCATION' ? (
                   <div className="mb-2">
-                    <div className="relative w-full h-24 rounded-lg overflow-hidden bg-gradient-to-br from-emerald-100 to-emerald-200 border border-zinc-200">
+                    <div className="relative w-full h-24 rounded-lg overflow-hidden bg-gradient-to-br from-purple-100 to-purple-200 border border-zinc-200">
                       {/* Grid pattern to simulate map */}
                       <div className="absolute inset-0 opacity-20" style={{
                         backgroundImage: 'linear-gradient(#059669 1px, transparent 1px), linear-gradient(90deg, #059669 1px, transparent 1px)',

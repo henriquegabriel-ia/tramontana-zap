@@ -76,14 +76,14 @@ export function TemplateImportDialog({
                 selectedKey === tpl.key
                   ? tpl.isDynamic
                     ? 'border-purple-400/40 bg-purple-500/10'
-                    : 'border-emerald-400/40 bg-emerald-500/10'
+                    : 'border-purple-400/40 bg-purple-500/10'
                   : 'border-white/10 bg-zinc-900/60 hover:bg-white/5'
               }`}
             >
               <input
                 type="radio"
                 name="flow_template"
-                className={`mt-1 h-4 w-4 ${tpl.isDynamic ? 'accent-purple-400' : 'accent-emerald-400'}`}
+                className={`mt-1 h-4 w-4 ${tpl.isDynamic ? 'accent-purple-400' : 'accent-purple-400'}`}
                 checked={selectedKey === tpl.key}
                 onChange={() => setSelectedKey(tpl.key)}
               />
@@ -93,7 +93,7 @@ export function TemplateImportDialog({
                   <span
                     className={
                       'px-1.5 py-0.5 text-[10px] rounded ' +
-                      (tpl.isDynamic ? 'bg-emerald-500/20 text-emerald-300' : 'bg-white/10 text-gray-300')
+                      (tpl.isDynamic ? 'bg-purple-500/20 text-purple-300' : 'bg-white/10 text-gray-300')
                     }
                   >
                     {tpl.isDynamic ? 'Dinâmico' : 'Simples'}

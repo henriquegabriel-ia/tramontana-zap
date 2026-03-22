@@ -37,7 +37,7 @@ function StatusBadge({ status }: { status?: string }) {
   const normalized = (status || "draft").toLowerCase();
   if (normalized === "published") {
     return (
-      <span className="inline-flex items-center rounded-md border border-emerald-500/20 bg-emerald-500/10 px-2.5 py-1 text-xs font-medium text-emerald-300">
+      <span className="inline-flex items-center rounded-md border border-purple-500/20 bg-purple-500/10 px-2.5 py-1 text-xs font-medium text-purple-300">
         Publicado
       </span>
     );
@@ -263,9 +263,9 @@ export default function WorkflowsPage() {
           </Button>
           <Button
             onClick={handleCreate}
-            className="bg-emerald-500 text-black hover:bg-emerald-400 transition-colors"
+            className="bg-purple-500 text-black hover:bg-purple-400 transition-colors"
           >
-            <Plus className="h-4 w-4 text-emerald-900" />
+            <Plus className="h-4 w-4 text-purple-900" />
             Novo fluxo
           </Button>
         </PageActions>
@@ -274,7 +274,7 @@ export default function WorkflowsPage() {
       <div className="rounded-2xl border border-white/5 bg-zinc-950/60 p-4">
         <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
           <div className="flex items-center gap-2 text-sm text-gray-400">
-            <WorkflowIcon className="h-4 w-4 text-emerald-400" />
+            <WorkflowIcon className="h-4 w-4 text-purple-400" />
             {workflows.length} fluxos encontrados
           </div>
           <div className="flex w-full max-w-sm items-center gap-2 rounded-xl border border-white/10 bg-black/40 px-3 py-2">
@@ -305,9 +305,9 @@ export default function WorkflowsPage() {
               <button
                 key={workflow.id}
                 className={cn(
-                  "group flex w-full items-center justify-between rounded-xl border border-white/10 bg-black/40 px-4 py-4 text-left transition hover:border-emerald-500/40 hover:bg-black/60",
+                  "group flex w-full items-center justify-between rounded-xl border border-white/10 bg-black/40 px-4 py-4 text-left transition hover:border-purple-500/40 hover:bg-black/60",
                   workflow.id === defaultWorkflowId &&
-                    "border-emerald-500/30 bg-emerald-500/5 shadow-[0_0_0_1px_rgba(16,185,129,0.15)]"
+                    "border-purple-500/30 bg-purple-500/5 shadow-[0_0_0_1px_rgba(16,185,129,0.15)]"
                 )}
                 onClick={() =>
                   router.push(`/builder/${encodeURIComponent(workflow.id)}`)
@@ -317,14 +317,14 @@ export default function WorkflowsPage() {
                 <div className="space-y-1">
                   <div className="flex items-center gap-3">
                 <div className="flex h-9 w-9 items-center justify-center rounded-lg border border-white/10 bg-white/5">
-                  <WorkflowIcon className="h-4 w-4 text-emerald-400" />
+                  <WorkflowIcon className="h-4 w-4 text-purple-400" />
                 </div>
                 <div>
                   <div className="text-sm font-semibold text-white">
                     <span className="inline-flex items-center gap-2">
                       {workflow.name}
                       {workflow.id === defaultWorkflowId && (
-                        <Star className="h-3.5 w-3.5 text-emerald-300" />
+                        <Star className="h-3.5 w-3.5 text-purple-300" />
                       )}
                     </span>
                   </div>
@@ -335,12 +335,12 @@ export default function WorkflowsPage() {
                     Gatilho: {getTriggerLabel(workflow)}
                   </div>
                   {workflow.id === defaultWorkflowId && (
-                    <div className="text-xs text-emerald-300/80">
+                    <div className="text-xs text-purple-300/80">
                       Fluxo padrao
                     </div>
                     )}
                     {workflow.lastPublishedVersion && (
-                      <div className="text-xs text-emerald-300/70">
+                      <div className="text-xs text-purple-300/70">
                         Última publicada: v{workflow.lastPublishedVersion}
                       </div>
                     )}

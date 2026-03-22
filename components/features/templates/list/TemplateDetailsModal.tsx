@@ -82,7 +82,7 @@ export const TemplateDetailsModal: React.FC<TemplateDetailsModalProps> = ({
         <div className="p-6 overflow-y-auto space-y-4">
           {isLoading ? (
             <div className="flex items-center justify-center py-8">
-              <Loader2 size={24} className="animate-spin text-emerald-300" />
+              <Loader2 size={24} className="animate-spin text-purple-300" />
             </div>
           ) : (
             <>
@@ -119,7 +119,7 @@ export const TemplateDetailsModal: React.FC<TemplateDetailsModalProps> = ({
                 <div
                   className={`flex items-center gap-2 p-3 rounded-lg ${
                     details?.qualityScore === 'HIGH'
-                      ? 'bg-emerald-500/10 text-emerald-200'
+                      ? 'bg-purple-500/10 text-purple-200'
                       : details?.qualityScore === 'MEDIUM'
                         ? 'bg-amber-500/10 text-amber-200'
                         : 'bg-zinc-500/10 text-gray-300'

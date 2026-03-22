@@ -18,17 +18,17 @@ export function SuccessBanner({ onSendTest, dismissible = true }: SuccessBannerP
   }
 
   return (
-    <div className="rounded-xl border border-emerald-500/30 bg-emerald-500/10 p-4 mb-6">
+    <div className="rounded-xl border border-purple-500/30 bg-purple-500/10 p-4 mb-6">
       <div className="flex flex-col sm:flex-row sm:items-center gap-4">
         <div className="flex items-start gap-3 flex-1">
-          <div className="w-10 h-10 rounded-lg bg-emerald-500/20 flex items-center justify-center flex-shrink-0">
-            <CheckCircle2 className="w-5 h-5 text-emerald-400" />
+          <div className="w-10 h-10 rounded-lg bg-purple-500/20 flex items-center justify-center flex-shrink-0">
+            <CheckCircle2 className="w-5 h-5 text-purple-400" />
           </div>
           <div>
-            <h3 className="font-semibold text-emerald-200">
+            <h3 className="font-semibold text-purple-200">
               WhatsApp conectado com sucesso!
             </h3>
-            <p className="text-sm text-emerald-200/70 mt-0.5">
+            <p className="text-sm text-purple-200/70 mt-0.5">
               Que tal enviar sua primeira mensagem de teste?
             </p>
           </div>
@@ -39,7 +39,7 @@ export function SuccessBanner({ onSendTest, dismissible = true }: SuccessBannerP
             <Button
               variant="ghost"
               size="sm"
-              className="text-emerald-200/70 hover:text-emerald-200 hover:bg-emerald-500/10"
+              className="text-purple-200/70 hover:text-purple-200 hover:bg-purple-500/10"
               onClick={() => setIsDismissed(true)}
             >
               Depois
@@ -47,7 +47,7 @@ export function SuccessBanner({ onSendTest, dismissible = true }: SuccessBannerP
           )}
           <Button
             size="sm"
-            className="bg-emerald-500 hover:bg-emerald-600 text-black font-medium"
+            className="bg-purple-500 hover:bg-purple-600 text-black font-medium"
             onClick={onSendTest}
           >
             <Send className="w-4 h-4 mr-1.5" />
@@ -59,7 +59,7 @@ export function SuccessBanner({ onSendTest, dismissible = true }: SuccessBannerP
       {dismissible && (
         <button
           onClick={() => setIsDismissed(true)}
-          className="absolute top-3 right-3 p-1 text-emerald-200/50 hover:text-emerald-200 transition-colors hidden sm:block"
+          className="absolute top-3 right-3 p-1 text-purple-200/50 hover:text-purple-200 transition-colors hidden sm:block"
           aria-label="Fechar"
         >
           <X className="w-4 h-4" />

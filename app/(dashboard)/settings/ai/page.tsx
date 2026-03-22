@@ -95,7 +95,7 @@ type StrategyItem = {
   metaCategory: 'MARKETING' | 'UTILITY'
   features: string[]
   warning?: string
-  tone: 'amber' | 'emerald' | 'violet'
+  tone: 'amber' | 'purple' | 'violet'
   Icon: typeof Megaphone
 }
 
@@ -121,7 +121,7 @@ const TEMPLATE_STRATEGIES: StrategyItem[] = [
     metaCategory: 'UTILITY',
     features: ['Avisos Transacionais', 'Sem Bloqueios', 'Tom Formal'],
     warning: 'Proibido termos de venda',
-    tone: 'emerald',
+    tone: 'purple',
     Icon: Wrench,
   },
   {
@@ -189,12 +189,12 @@ function StrategyCard({
       badge: 'border-amber-500/40 bg-amber-500/15 text-amber-300',
       glow: 'shadow-amber-500/5',
     },
-    emerald: {
-      border: 'border-emerald-500/30',
-      bg: 'bg-emerald-500/5',
-      icon: 'text-emerald-400 border-emerald-500/30 bg-emerald-500/10',
-      badge: 'border-emerald-500/40 bg-emerald-500/15 text-emerald-300',
-      glow: 'shadow-emerald-500/5',
+    purple: {
+      border: 'border-purple-500/30',
+      bg: 'bg-purple-500/5',
+      icon: 'text-purple-400 border-purple-500/30 bg-purple-500/10',
+      badge: 'border-purple-500/40 bg-purple-500/15 text-purple-300',
+      glow: 'shadow-purple-500/5',
     },
     violet: {
       border: 'border-violet-500/30',
@@ -216,8 +216,8 @@ function StrategyCard({
         className={`absolute inset-x-0 top-0 h-px bg-gradient-to-r ${
           strategy.tone === 'amber'
             ? 'from-transparent via-amber-400/50 to-transparent'
-            : strategy.tone === 'emerald'
-              ? 'from-transparent via-emerald-400/50 to-transparent'
+            : strategy.tone === 'purple'
+              ? 'from-transparent via-purple-400/50 to-transparent'
               : 'from-transparent via-violet-400/50 to-transparent'
         }`}
       />
@@ -281,7 +281,7 @@ function StrategyCard({
               className="inline-flex items-center gap-1.5 rounded-lg border border-[var(--ds-border-default)] bg-[var(--ds-bg-surface)] px-2.5 py-1 text-xs text-[var(--ds-text-secondary)]"
             >
               <span className={`size-1.5 rounded-full ${
-                strategy.tone === 'amber' ? 'bg-amber-400' : strategy.tone === 'emerald' ? 'bg-emerald-400' : 'bg-violet-400'
+                strategy.tone === 'amber' ? 'bg-amber-400' : strategy.tone === 'purple' ? 'bg-purple-400' : 'bg-violet-400'
               }`} />
               {feature}
             </span>
@@ -303,8 +303,8 @@ function StrategyCard({
               className={`min-h-[200px] w-full rounded-xl border bg-[var(--ds-bg-surface)] px-4 py-3 font-mono text-sm text-[var(--ds-text-primary)] outline-none transition focus:ring-2 ${
                 strategy.tone === 'amber'
                   ? 'border-amber-500/20 focus:border-amber-500/40 focus:ring-amber-500/10'
-                  : strategy.tone === 'emerald'
-                    ? 'border-emerald-500/20 focus:border-emerald-500/40 focus:ring-emerald-500/10'
+                  : strategy.tone === 'purple'
+                    ? 'border-purple-500/20 focus:border-purple-500/40 focus:ring-purple-500/10'
                     : 'border-violet-500/20 focus:border-violet-500/40 focus:ring-violet-500/10'
               }`}
               rows={12}
@@ -340,10 +340,10 @@ function StatusPill({
   tone,
 }: {
   label: string
-  tone: 'emerald' | 'amber' | 'red' | 'zinc'
+  tone: 'purple' | 'amber' | 'red' | 'zinc'
 }) {
   const toneClass =
-    tone === 'emerald'
+    tone === 'purple'
       ? 'text-[var(--ds-status-success-text)] border-[var(--ds-status-success)]/30 bg-[var(--ds-status-success-bg)]'
       : tone === 'amber'
         ? 'text-[var(--ds-status-warning-text)] border-[var(--ds-status-warning)]/30 bg-[var(--ds-status-warning-bg)]'
@@ -380,12 +380,12 @@ function MockSwitch({
       disabled={disabled}
       onClick={() => onToggle?.(!on)}
       className={`relative inline-flex h-6 w-11 items-center rounded-full border transition ${
-        on ? 'border-emerald-500/40 bg-emerald-500/20' : 'border-[var(--ds-border-default)] bg-[var(--ds-bg-hover)]'
+        on ? 'border-purple-500/40 bg-purple-500/20' : 'border-[var(--ds-border-default)] bg-[var(--ds-bg-hover)]'
       } ${disabled ? 'cursor-not-allowed opacity-60' : ''}`}
     >
       <span
         className={`inline-block size-4 rounded-full transition ${
-          on ? 'translate-x-6 bg-emerald-300' : 'translate-x-1 bg-[var(--ds-text-muted)]'
+          on ? 'translate-x-6 bg-purple-300' : 'translate-x-1 bg-[var(--ds-text-muted)]'
         }`}
       />
     </button>
@@ -454,7 +454,7 @@ function PromptCard({
         <>
           <div className="mt-4">
             <textarea
-              className="min-h-[160px] w-full rounded-xl border border-[var(--ds-border-default)] bg-[var(--ds-bg-surface)] px-4 py-3 text-sm text-[var(--ds-text-primary)] outline-none transition focus:border-emerald-500/40 focus:ring-2 focus:ring-emerald-500/10"
+              className="min-h-[160px] w-full rounded-xl border border-[var(--ds-border-default)] bg-[var(--ds-bg-surface)] px-4 py-3 text-sm text-[var(--ds-text-primary)] outline-none transition focus:border-purple-500/40 focus:ring-2 focus:ring-purple-500/10"
               rows={item.rows ?? 6}
               value={value}
               onChange={(event) => onChange(event.target.value)}
@@ -597,10 +597,10 @@ export default function AICenterPage() {
       <div className="mb-6">
         <a
           href="/settings/ai/agents"
-          className="group flex items-center justify-between rounded-2xl border border-[var(--ds-border-default)] bg-[var(--ds-bg-elevated)] p-4 transition hover:border-emerald-500/30 hover:bg-emerald-500/5"
+          className="group flex items-center justify-between rounded-2xl border border-[var(--ds-border-default)] bg-[var(--ds-bg-elevated)] p-4 transition hover:border-purple-500/30 hover:bg-purple-500/5"
         >
           <div className="flex items-center gap-3">
-            <div className="rounded-xl border border-[var(--ds-border-default)] bg-[var(--ds-bg-hover)] p-2 text-emerald-300">
+            <div className="rounded-xl border border-[var(--ds-border-default)] bg-[var(--ds-bg-hover)] p-2 text-purple-300">
               <Bot className="size-5" />
             </div>
             <div>
@@ -608,7 +608,7 @@ export default function AICenterPage() {
               <div className="text-xs text-[var(--ds-text-secondary)]">Configure os agentes IA para o Inbox</div>
             </div>
           </div>
-          <ChevronDown className="size-4 -rotate-90 text-[var(--ds-text-muted)] transition group-hover:text-emerald-300" />
+          <ChevronDown className="size-4 -rotate-90 text-[var(--ds-text-muted)] transition group-hover:text-purple-300" />
         </a>
       </div>
 
@@ -650,7 +650,7 @@ export default function AICenterPage() {
                   : 'Inativa'
               const statusTone =
                 status.isConfigured && isActive
-                  ? 'emerald'
+                  ? 'purple'
                   : status.isConfigured
                     ? 'zinc'
                     : 'red'
@@ -659,7 +659,7 @@ export default function AICenterPage() {
                   key={item.id}
                   className={`rounded-xl border p-4 ${
                     isActive
-                      ? 'border-emerald-500/30 bg-emerald-500/5'
+                      ? 'border-purple-500/30 bg-purple-500/5'
                       : 'border-[var(--ds-border-default)] bg-[var(--ds-bg-elevated)]'
                   }`}
                 >
@@ -740,7 +740,7 @@ export default function AICenterPage() {
                           value={model}
                           onChange={(event) => handleModelChange(event.target.value)}
                           disabled={!status.isConfigured}
-                          className="w-full rounded-lg border border-[var(--ds-border-default)] bg-[var(--ds-bg-surface)] px-3 py-2 text-sm text-[var(--ds-text-primary)] outline-none transition focus:border-emerald-500/40 disabled:cursor-not-allowed disabled:opacity-60"
+                          className="w-full rounded-lg border border-[var(--ds-border-default)] bg-[var(--ds-bg-surface)] px-3 py-2 text-sm text-[var(--ds-text-primary)] outline-none transition focus:border-purple-500/40 disabled:cursor-not-allowed disabled:opacity-60"
                         >
                           {primaryModelOptions.map((modelOption) => (
                             <option key={modelOption.id} value={modelOption.id}>
@@ -759,7 +759,7 @@ export default function AICenterPage() {
                         placeholder="Chave de API"
                         value={apiKeyDrafts[item.id]}
                         onChange={(event) => handleApiKeyDraftChange(item.id, event.target.value)}
-                        className="min-w-[220px] flex-1 rounded-lg border border-[var(--ds-border-default)] bg-[var(--ds-bg-surface)] px-3 py-2 text-sm text-[var(--ds-text-primary)] outline-none transition focus:border-emerald-500/40"
+                        className="min-w-[220px] flex-1 rounded-lg border border-[var(--ds-border-default)] bg-[var(--ds-bg-surface)] px-3 py-2 text-sm text-[var(--ds-text-primary)] outline-none transition focus:border-purple-500/40"
                       />
                       <button
                         type="button"
@@ -779,17 +779,17 @@ export default function AICenterPage() {
           {/* Nota de ajuda unificada */}
           <div className="mt-4 flex items-center gap-3 rounded-lg border border-[var(--ds-border-subtle)] bg-[var(--ds-bg-tertiary)] px-4 py-2.5 text-xs">
             <span className="text-[var(--ds-text-secondary)]">Obter chave:</span>
-            <a href={API_KEY_URLS.google.url} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-1 text-emerald-400 hover:text-emerald-300 hover:underline">
+            <a href={API_KEY_URLS.google.url} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-1 text-purple-400 hover:text-purple-300 hover:underline">
               Google <ExternalLink className="size-3" />
             </a>
             {isDevMode && (
               <>
                 <span className="text-[var(--ds-text-muted)]">•</span>
-                <a href={API_KEY_URLS.openai.url} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-1 text-emerald-400 hover:text-emerald-300 hover:underline">
+                <a href={API_KEY_URLS.openai.url} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-1 text-purple-400 hover:text-purple-300 hover:underline">
                   OpenAI <ExternalLink className="size-3" />
                 </a>
                 <span className="text-[var(--ds-text-muted)]">•</span>
-                <a href={API_KEY_URLS.anthropic.url} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-1 text-emerald-400 hover:text-emerald-300 hover:underline">
+                <a href={API_KEY_URLS.anthropic.url} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-1 text-purple-400 hover:text-purple-300 hover:underline">
                   Anthropic <ExternalLink className="size-3" />
                 </a>
               </>
@@ -802,7 +802,7 @@ export default function AICenterPage() {
           <div className="flex flex-wrap items-center justify-between gap-4">
             <div className="space-y-1">
               <div className="flex items-center gap-2 text-sm font-semibold text-[var(--ds-text-primary)]">
-                <FileImage className="size-4 text-emerald-300" />
+                <FileImage className="size-4 text-purple-300" />
                 OCR (Extração de Documentos)
               </div>
               <p className="text-sm text-[var(--ds-text-secondary)]">
@@ -816,7 +816,7 @@ export default function AICenterPage() {
             <div
               className={`rounded-xl border p-4 transition ${
                 ocrConfig.provider === 'gemini'
-                  ? 'border-emerald-500/30 bg-emerald-500/5'
+                  ? 'border-purple-500/30 bg-purple-500/5'
                   : 'border-[var(--ds-border-default)] bg-[var(--ds-bg-elevated)]'
               }`}
             >
@@ -836,7 +836,7 @@ export default function AICenterPage() {
                 </div>
                 <div className="flex items-center gap-2">
                   {ocrConfig.provider === 'gemini' && providerStatuses.google.isConfigured ? (
-                    <span className="rounded-full bg-emerald-500/20 px-2.5 py-1 text-xs font-medium text-emerald-300">
+                    <span className="rounded-full bg-purple-500/20 px-2.5 py-1 text-xs font-medium text-purple-300">
                       Em uso
                     </span>
                   ) : providerStatuses.google.isConfigured ? (
@@ -865,7 +865,7 @@ export default function AICenterPage() {
                       value={ocrConfig.geminiModel}
                       onChange={(e) => handleOcrGeminiModelChange(e.target.value)}
                       disabled={isSavingOcr}
-                      className="w-full rounded-lg border border-[var(--ds-border-default)] bg-[var(--ds-bg-surface)] px-3 py-2 text-sm text-[var(--ds-text-primary)] outline-none transition focus:border-emerald-500/40 disabled:cursor-not-allowed disabled:opacity-60"
+                      className="w-full rounded-lg border border-[var(--ds-border-default)] bg-[var(--ds-bg-surface)] px-3 py-2 text-sm text-[var(--ds-text-primary)] outline-none transition focus:border-purple-500/40 disabled:cursor-not-allowed disabled:opacity-60"
                     >
                       {OCR_GEMINI_MODELS.map((m) => (
                         <option key={m.id} value={m.id}>
@@ -882,7 +882,7 @@ export default function AICenterPage() {
             <div
               className={`rounded-xl border p-4 transition ${
                 ocrConfig.provider === 'mistral'
-                  ? 'border-emerald-500/30 bg-emerald-500/5'
+                  ? 'border-purple-500/30 bg-purple-500/5'
                   : 'border-[var(--ds-border-default)] bg-[var(--ds-bg-elevated)]'
               }`}
             >
@@ -905,7 +905,7 @@ export default function AICenterPage() {
                 <div className="flex items-center gap-2">
                   {ocrConfig.provider === 'mistral' ? (
                     <>
-                      <span className="rounded-full bg-emerald-500/20 px-2.5 py-1 text-xs font-medium text-emerald-300">
+                      <span className="rounded-full bg-purple-500/20 px-2.5 py-1 text-xs font-medium text-purple-300">
                         Em uso
                       </span>
                       <button
@@ -945,7 +945,7 @@ export default function AICenterPage() {
                     placeholder="Chave de API do Mistral"
                     value={mistralKeyDraft}
                     onChange={(e) => setMistralKeyDraft(e.target.value)}
-                    className="min-w-[220px] flex-1 rounded-lg border border-[var(--ds-border-default)] bg-[var(--ds-bg-surface)] px-3 py-2 text-sm text-[var(--ds-text-primary)] outline-none transition focus:border-emerald-500/40"
+                    className="min-w-[220px] flex-1 rounded-lg border border-[var(--ds-border-default)] bg-[var(--ds-bg-surface)] px-3 py-2 text-sm text-[var(--ds-text-primary)] outline-none transition focus:border-purple-500/40"
                   />
                   <button
                     type="button"
@@ -973,7 +973,7 @@ export default function AICenterPage() {
 
             {/* Info note */}
             <div className="flex items-start gap-2 rounded-lg border border-[var(--ds-border-subtle)] bg-[var(--ds-bg-tertiary)] p-3 text-xs text-[var(--ds-text-secondary)]">
-              <Info className="mt-0.5 size-4 shrink-0 text-emerald-400" />
+              <Info className="mt-0.5 size-4 shrink-0 text-purple-400" />
               <div className="space-y-2">
                 <span>
                   O OCR converte PDFs e imagens em texto antes de indexar na base de conhecimento
@@ -982,7 +982,7 @@ export default function AICenterPage() {
                 </span>
                 <div className="flex items-center gap-2">
                   <span>Obter chave:</span>
-                  <a href={API_KEY_URLS.mistral.url} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-1 text-emerald-400 hover:text-emerald-300 hover:underline">
+                  <a href={API_KEY_URLS.mistral.url} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-1 text-purple-400 hover:text-purple-300 hover:underline">
                     Mistral <ExternalLink className="size-3" />
                   </a>
                 </div>
@@ -1020,7 +1020,7 @@ export default function AICenterPage() {
             >
               <div className="space-y-1">
                 <div className="flex items-center gap-2">
-                  <div className="flex size-8 items-center justify-center rounded-lg bg-gradient-to-br from-amber-500/20 via-emerald-500/20 to-violet-500/20">
+                  <div className="flex size-8 items-center justify-center rounded-lg bg-gradient-to-br from-amber-500/20 via-purple-500/20 to-violet-500/20">
                     <Target className="size-4 text-[var(--ds-text-primary)]" />
                   </div>
                   <h3 className="text-lg font-semibold text-[var(--ds-text-primary)]">
@@ -1036,7 +1036,7 @@ export default function AICenterPage() {
                   <span className="rounded-full border border-amber-500/30 bg-amber-500/10 px-2 py-0.5 text-[10px] font-medium text-amber-300">
                     MARKETING
                   </span>
-                  <span className="rounded-full border border-emerald-500/30 bg-emerald-500/10 px-2 py-0.5 text-[10px] font-medium text-emerald-300">
+                  <span className="rounded-full border border-purple-500/30 bg-purple-500/10 px-2 py-0.5 text-[10px] font-medium text-purple-300">
                     UTILITY
                   </span>
                   <span className="rounded-full border border-violet-500/30 bg-violet-500/10 px-2 py-0.5 text-[10px] font-medium text-violet-300">
@@ -1109,12 +1109,12 @@ export default function AICenterPage() {
           <div className="flex flex-wrap items-center justify-between gap-4">
             <div className="space-y-1">
               <div className="flex items-center gap-2 text-sm font-semibold text-[var(--ds-text-primary)]">
-                <Wand2 className="size-4 text-emerald-300" />
+                <Wand2 className="size-4 text-purple-300" />
                 Prompts do sistema
               </div>
               <p className="text-sm text-[var(--ds-text-secondary)]">Edite os prompts sem sair daqui.</p>
             </div>
-            <div className="rounded-full border border-emerald-500/30 bg-emerald-500/10 px-3 py-1 text-xs text-emerald-300">
+            <div className="rounded-full border border-purple-500/30 bg-purple-500/10 px-3 py-1 text-xs text-purple-300">
               {PROMPTS.length} prompts configuráveis
             </div>
           </div>

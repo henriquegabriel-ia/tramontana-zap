@@ -8,7 +8,7 @@ import { cn } from "@/lib/utils"
  * Progress - Barra de progresso com cores do Design System
  *
  * Variantes de cor:
- * - brand (emerald): Progresso padrão, positivo
+ * - brand (purple): Progresso padrão, positivo
  * - info (blue): Informativo, neutro
  * - warning (amber): Atenção, limite próximo
  * - error (red): Erro, acima do limite
@@ -35,7 +35,7 @@ const progressVariants = cva(
   {
     variants: {
       color: {
-        brand: "bg-emerald-500",
+        brand: "bg-purple-500",
         info: "bg-blue-500",
         warning: "bg-amber-500",
         error: "bg-red-500",
@@ -53,7 +53,7 @@ const trackVariants = cva(
   {
     variants: {
       color: {
-        brand: "bg-emerald-500/20",
+        brand: "bg-purple-500/20",
         info: "bg-blue-500/20",
         warning: "bg-amber-500/20",
         error: "bg-red-500/20",
@@ -145,7 +145,7 @@ function Progress({
           <span
             className={cn(
               "font-medium",
-              resolvedColor === "brand" && "text-emerald-400",
+              resolvedColor === "brand" && "text-purple-400",
               resolvedColor === "info" && "text-blue-400",
               resolvedColor === "warning" && "text-amber-400",
               resolvedColor === "error" && "text-red-400",
@@ -167,7 +167,7 @@ function Progress({
       <span
         className={cn(
           "text-xs font-medium min-w-[3rem] text-right",
-          resolvedColor === "brand" && "text-emerald-400",
+          resolvedColor === "brand" && "text-purple-400",
           resolvedColor === "info" && "text-blue-400",
           resolvedColor === "warning" && "text-amber-400",
           resolvedColor === "error" && "text-red-400",

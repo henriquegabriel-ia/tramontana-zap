@@ -313,7 +313,7 @@ export function MessageInput({
                     )}
                   >
                     <div className="flex items-center gap-2">
-                      <span className="text-[10px] px-1.5 py-0.5 rounded bg-emerald-500/20 text-emerald-400 font-mono">
+                      <span className="text-[10px] px-1.5 py-0.5 rounded bg-purple-500/20 text-purple-400 font-mono">
                         /{qr.shortcut}
                       </span>
                       <span className="text-sm font-medium text-[var(--ds-text-primary)] truncate">
@@ -369,7 +369,7 @@ export function MessageInput({
                 'h-9 w-9 shrink-0 rounded-lg flex items-center justify-center',
                 'transition-all duration-150',
                 canSend
-                  ? 'bg-emerald-600 text-white hover:bg-emerald-500 active:scale-95'
+                  ? 'bg-purple-600 text-white hover:bg-purple-500 active:scale-95'
                   : 'bg-[var(--ds-bg-surface)]/50 text-[var(--ds-text-muted)] cursor-not-allowed'
               )}
             >

@@ -251,7 +251,7 @@ export function QuickReplyManager({
                 size="sm"
                 onClick={handleSave}
                 disabled={isSaving || !formData.title.trim() || !formData.content.trim()}
-                className="bg-emerald-600 hover:bg-emerald-500 text-white"
+                className="bg-purple-600 hover:bg-purple-500 text-white"
               >
                 {isSaving ? (
                   <>
@@ -337,7 +337,7 @@ export function QuickReplyManager({
             <div className="flex justify-end pt-2">
               <Button
                 onClick={handleStartCreate}
-                className="bg-emerald-600 hover:bg-emerald-500 text-white"
+                className="bg-purple-600 hover:bg-purple-500 text-white"
               >
                 <Plus className="h-4 w-4 mr-1.5" />
                 Nova

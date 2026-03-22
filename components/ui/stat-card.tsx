@@ -33,7 +33,7 @@ import { Container } from "./container"
  *   title="Contatos Ativos"
  *   value="1,234"
  *   icon={Users}
- *   color="emerald"
+ *   color="purple"
  * />
  *
  * // Com tendência
@@ -41,17 +41,17 @@ import { Container } from "./container"
  *   title="Taxa de Entrega"
  *   value="98.5%"
  *   icon={CheckCircle}
- *   color="emerald"
+ *   color="purple"
  *   trend={{ value: 2.5, direction: "up" }}
  * />
  * ```
  */
 
 const colorStyles = {
-  emerald: {
-    iconBg: "bg-emerald-500/20",
-    iconColor: "text-emerald-600 dark:text-emerald-400",
-    iconGlow: "shadow-emerald-500/20",
+  purple: {
+    iconBg: "bg-purple-500/20",
+    iconColor: "text-purple-600 dark:text-purple-400",
+    iconGlow: "shadow-purple-500/20",
   },
   blue: {
     iconBg: "bg-blue-500/20",
@@ -108,7 +108,7 @@ function StatCard({
   title,
   value,
   icon: Icon,
-  color = "emerald",
+  color = "purple",
   layout = "vertical",
   trend,
   loading = false,
@@ -242,7 +242,7 @@ function TrendIndicator({ value, direction, size = "md" }: TrendIndicatorProps) 
       className={cn(
         "inline-flex items-center gap-0.5 rounded-full font-medium",
         size === "sm" ? "text-xs px-1.5 py-0.5" : "text-xs px-2 py-1",
-        isPositive && "text-emerald-600 dark:text-emerald-400 bg-emerald-500/10",
+        isPositive && "text-purple-600 dark:text-purple-400 bg-purple-500/10",
         isNegative && "text-red-600 dark:text-red-400 bg-red-500/10",
         !isPositive && !isNegative && "text-[var(--ds-text-muted)] bg-[var(--ds-bg-surface)]"
       )}

@@ -115,8 +115,8 @@ export function ConfigureWebhookStep({
         </div>
 
         {/* Dados do Webhook - Sempre visíveis neste step */}
-        <div className="p-4 rounded-xl bg-emerald-500/10 border border-emerald-500/20 space-y-4">
-          <h4 className="font-medium text-emerald-200 flex items-center gap-2">
+        <div className="p-4 rounded-xl bg-purple-500/10 border border-purple-500/20 space-y-4">
+          <h4 className="font-medium text-purple-200 flex items-center gap-2">
             <span className="text-lg">🔗</span>
             Copie estes dados para o Meta
           </h4>
@@ -135,7 +135,7 @@ export function ConfigureWebhookStep({
                 className="flex-shrink-0"
               >
                 {copiedField === 'url' ? (
-                  <Check className="w-4 h-4 text-emerald-500" />
+                  <Check className="w-4 h-4 text-purple-500" />
                 ) : (
                   <Copy className="w-4 h-4" />
                 )}
@@ -157,7 +157,7 @@ export function ConfigureWebhookStep({
                 className="flex-shrink-0"
               >
                 {copiedField === 'token' ? (
-                  <Check className="w-4 h-4 text-emerald-500" />
+                  <Check className="w-4 h-4 text-purple-500" />
                 ) : (
                   <Copy className="w-4 h-4" />
                 )}
@@ -212,7 +212,7 @@ export function ConfigureWebhookStep({
             id="confirm-webhook"
             checked={confirmed}
             onCheckedChange={(checked) => setConfirmed(checked === true)}
-            className="mt-0.5 border-emerald-500 data-[state=checked]:bg-emerald-500"
+            className="mt-0.5 border-purple-500 data-[state=checked]:bg-purple-500"
           />
           <label
             htmlFor="confirm-webhook"
@@ -246,14 +246,14 @@ export function ConfigureWebhookStep({
       />
 
       {/* Status de sucesso */}
-      <div className="p-4 rounded-xl bg-emerald-500/10 border border-emerald-500/20">
+      <div className="p-4 rounded-xl bg-purple-500/10 border border-purple-500/20">
         <div className="flex items-center gap-3">
-          <div className="w-10 h-10 rounded-full bg-emerald-500/20 flex items-center justify-center">
-            <CheckCircle2 className="w-5 h-5 text-emerald-400" />
+          <div className="w-10 h-10 rounded-full bg-purple-500/20 flex items-center justify-center">
+            <CheckCircle2 className="w-5 h-5 text-purple-400" />
           </div>
           <div>
-            <p className="font-medium text-emerald-200">Webhook configurado!</p>
-            <p className="text-sm text-emerald-200/70">Agora vamos ativar as notificações</p>
+            <p className="font-medium text-purple-200">Webhook configurado!</p>
+            <p className="text-sm text-purple-200/70">Agora vamos ativar as notificações</p>
           </div>
         </div>
       </div>
@@ -312,7 +312,7 @@ export function ConfigureWebhookStep({
           id="confirm-messages"
           checked={messagesConfirmed}
           onCheckedChange={(checked) => setMessagesConfirmed(checked === true)}
-          className="mt-0.5 border-emerald-500 data-[state=checked]:bg-emerald-500"
+          className="mt-0.5 border-purple-500 data-[state=checked]:bg-purple-500"
         />
         <label
           htmlFor="confirm-messages"

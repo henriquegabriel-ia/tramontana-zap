@@ -236,7 +236,7 @@ export const WhatsAppFormattedBody = ({ text }: WhatsAppFormattedBodyProps) => {
 
         if (b.type === 'quote') {
           return (
-            <div key={k} className="rounded-sm border-l-2 border-emerald-400/40 bg-black/10 pl-3 py-0.5">
+            <div key={k} className="rounded-sm border-l-2 border-purple-400/40 bg-black/10 pl-3 py-0.5">
               <WhatsAppInlineText text={b.text} />
             </div>
           )

@@ -585,7 +585,7 @@ export function StepContent({
                       Enviando...
                     </span>
                   ) : headerMediaHandleValue ? (
-                    <span className="inline-flex items-center gap-1.5 rounded-full border border-emerald-600 dark:border-emerald-400/30 bg-emerald-100 dark:bg-emerald-500/10 px-2 py-1 text-[11px] text-emerald-700 dark:text-emerald-200">
+                    <span className="inline-flex items-center gap-1.5 rounded-full border border-purple-600 dark:border-purple-400/30 bg-purple-100 dark:bg-purple-500/10 px-2 py-1 text-[11px] text-purple-700 dark:text-purple-200">
                       <CheckCircle2 className="w-3.5 h-3.5" />
                       Pronto
                     </span>
@@ -646,7 +646,7 @@ export function StepContent({
                     className={cn(
                       headerMediaPreview
                         ? 'border-[var(--ds-border-default)] bg-[var(--ds-bg-elevated)] hover:bg-[var(--ds-bg-hover)]'
-                        : 'bg-emerald-500 hover:bg-emerald-400 text-black',
+                        : 'bg-purple-500 hover:bg-purple-400 text-black',
                     )}
                     onClick={() => headerMediaFileInputRef.current?.click()}
                   >

@@ -127,7 +127,7 @@ export function TabButton({ active, onClick, children, badge }: TabButtonProps) 
         'flex items-center gap-2 px-4 py-2.5 rounded-full text-sm font-medium transition-all',
         'border',
         active
-          ? 'border-emerald-400/40 bg-emerald-500/10 text-emerald-200'
+          ? 'border-purple-400/40 bg-purple-500/10 text-purple-200'
           : 'border-white/10 bg-zinc-950/40 text-zinc-400 hover:text-white hover:bg-zinc-900/60'
       )}
     >
@@ -136,7 +136,7 @@ export function TabButton({ active, onClick, children, badge }: TabButtonProps) 
         <span
           className={cn(
             'rounded-full px-1.5 py-0.5 text-[9px] font-semibold uppercase tracking-wider',
-            'bg-emerald-500/20 text-emerald-200 border border-emerald-500/30'
+            'bg-purple-500/20 text-purple-200 border border-purple-500/30'
           )}
         >
           {badge}

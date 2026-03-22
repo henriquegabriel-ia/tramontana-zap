@@ -42,7 +42,7 @@ const StrategyBadge = ({ strategy }: { strategy?: AIStrategy }) => {
     utility: {
       icon: Wrench,
       label: 'Utilidade',
-      style: 'bg-emerald-500/10 text-emerald-400 border-emerald-500/30',
+      style: 'bg-purple-500/10 text-purple-400 border-purple-500/30',
     },
     bypass: {
       icon: VenetianMask,
@@ -71,7 +71,7 @@ const StatusBadge = ({ status, approvedCount, totalCount }: { status: string; ap
 
   if (isComplete) {
     return (
-      <span className="inline-flex items-center px-2.5 py-1 rounded-md text-xs font-medium border bg-emerald-500/10 text-emerald-300 border-emerald-500/20">
+      <span className="inline-flex items-center px-2.5 py-1 rounded-md text-xs font-medium border bg-purple-500/10 text-purple-300 border-purple-500/20">
         Concluído
       </span>
     );
@@ -311,7 +311,7 @@ export default function TemplatesPage() {
         <button
           onClick={() => setTab('meta')}
           className={`rounded-full border px-4 py-2 text-sm font-medium transition-all flex items-center gap-2 ${activeTab === 'meta'
-            ? 'border-emerald-400/40 bg-emerald-500/10 text-[var(--ds-status-success-text)]'
+            ? 'border-purple-400/40 bg-purple-500/10 text-[var(--ds-status-success-text)]'
             : 'border-[var(--ds-border-default)] bg-[var(--ds-bg-elevated)] text-[var(--ds-text-secondary)] hover:text-[var(--ds-text-primary)]'
             }`}
         >
@@ -322,13 +322,13 @@ export default function TemplatesPage() {
         <button
           onClick={() => setTab('flows')}
           className={`rounded-full border px-4 py-2 text-sm font-medium transition-all flex items-center gap-2 ${activeTab === 'flows'
-            ? 'border-emerald-400/40 bg-emerald-500/10 text-[var(--ds-status-success-text)]'
+            ? 'border-purple-400/40 bg-purple-500/10 text-[var(--ds-status-success-text)]'
             : 'border-[var(--ds-border-default)] bg-[var(--ds-bg-elevated)] text-[var(--ds-text-secondary)] hover:text-[var(--ds-text-primary)]'
             }`}
         >
           <Workflow className="w-4 h-4" />
           MiniApps
-          <span className="rounded-full bg-emerald-500/20 px-1 py-px text-[8px] font-semibold uppercase tracking-wider text-[var(--ds-status-success-text)] border border-emerald-500/30">
+          <span className="rounded-full bg-purple-500/20 px-1 py-px text-[8px] font-semibold uppercase tracking-wider text-[var(--ds-status-success-text)] border border-purple-500/30">
             beta
           </span>
         </button>
@@ -336,13 +336,13 @@ export default function TemplatesPage() {
         <button
           onClick={() => setTab('forms')}
           className={`rounded-full border px-4 py-2 text-sm font-medium transition-all flex items-center gap-2 ${activeTab === 'forms'
-            ? 'border-emerald-400/40 bg-emerald-500/10 text-[var(--ds-status-success-text)]'
+            ? 'border-purple-400/40 bg-purple-500/10 text-[var(--ds-status-success-text)]'
             : 'border-[var(--ds-border-default)] bg-[var(--ds-bg-elevated)] text-[var(--ds-text-secondary)] hover:text-[var(--ds-text-primary)]'
             }`}
         >
           <FileText className="w-4 h-4" />
           Forms
-          <span className="rounded-full bg-emerald-500/20 px-1 py-px text-[8px] font-semibold uppercase tracking-wider text-[var(--ds-status-success-text)] border border-emerald-500/30">
+          <span className="rounded-full bg-purple-500/20 px-1 py-px text-[8px] font-semibold uppercase tracking-wider text-[var(--ds-status-success-text)] border border-purple-500/30">
             beta
           </span>
         </button>
@@ -350,13 +350,13 @@ export default function TemplatesPage() {
         <button
           onClick={() => setTab('projects')}
           className={`rounded-full border px-4 py-2 text-sm font-medium transition-all flex items-center gap-2 ${activeTab === 'projects'
-            ? 'border-emerald-400/40 bg-emerald-500/10 text-[var(--ds-status-success-text)]'
+            ? 'border-purple-400/40 bg-purple-500/10 text-[var(--ds-status-success-text)]'
             : 'border-[var(--ds-border-default)] bg-[var(--ds-bg-elevated)] text-[var(--ds-text-secondary)] hover:text-[var(--ds-text-primary)]'
             }`}
         >
           <LayoutGrid className="w-4 h-4" />
           Projetos (Fábrica)
-          <span className="rounded-full bg-emerald-500/20 px-1 py-px text-[8px] font-semibold uppercase tracking-wider text-[var(--ds-status-success-text)] border border-emerald-500/30">
+          <span className="rounded-full bg-purple-500/20 px-1 py-px text-[8px] font-semibold uppercase tracking-wider text-[var(--ds-status-success-text)] border border-purple-500/30">
             beta
           </span>
         </button>
@@ -465,7 +465,7 @@ export default function TemplatesPage() {
                   {isLoadingProjects ? (
                     <tr>
                       <td colSpan={7} className="px-6 py-12 text-center">
-                        <Loader2 className="w-6 h-6 animate-spin text-emerald-500 mx-auto" />
+                        <Loader2 className="w-6 h-6 animate-spin text-purple-500 mx-auto" />
                       </td>
                     </tr>
                   ) : filteredProjects.length === 0 ? (
@@ -488,7 +488,7 @@ export default function TemplatesPage() {
                         >
                           <td className="px-6 py-4">
                             <div className="flex items-center gap-3">
-                              <div className="p-2 bg-emerald-500/10 rounded-lg text-emerald-400">
+                              <div className="p-2 bg-purple-500/10 rounded-lg text-purple-400">
                                 <Folder size={16} />
                               </div>
                               {editingProjectId === project.id ? (
@@ -502,12 +502,12 @@ export default function TemplatesPage() {
                                       if (e.key === 'Escape') handleCancelEdit(e as unknown as React.MouseEvent);
                                     }}
                                     autoFocus
-                                    className="px-2 py-1 rounded-lg border border-emerald-500 bg-[var(--ds-bg-elevated)] text-[var(--ds-text-primary)] text-sm font-medium focus:outline-none focus:ring-2 focus:ring-emerald-500/30"
+                                    className="px-2 py-1 rounded-lg border border-purple-500 bg-[var(--ds-bg-elevated)] text-[var(--ds-text-primary)] text-sm font-medium focus:outline-none focus:ring-2 focus:ring-purple-500/30"
                                   />
                                   <button
                                     onClick={handleSaveEdit}
                                     disabled={isUpdating}
-                                    className="p-1.5 rounded-lg text-emerald-400 hover:bg-emerald-500/10 disabled:opacity-50"
+                                    className="p-1.5 rounded-lg text-purple-400 hover:bg-purple-500/10 disabled:opacity-50"
                                     title="Salvar"
                                   >
                                     {isUpdating ? <Loader2 size={14} className="animate-spin" /> : <Check size={14} />}
@@ -546,7 +546,7 @@ export default function TemplatesPage() {
                             <div className="flex items-center gap-3">
                               <div className="flex-1 w-24 bg-[var(--ds-bg-surface)] rounded-full h-1">
                                 <div
-                                  className="bg-emerald-500 h-1 rounded-full shadow-[0_0_10px_rgba(16,185,129,0.5)]"
+                                  className="bg-purple-500 h-1 rounded-full shadow-[0_0_10px_rgba(16,185,129,0.5)]"
                                   style={{ width: `${approvedPercent}%` }}
                                 />
                               </div>
@@ -563,7 +563,7 @@ export default function TemplatesPage() {
                               <button
                                 onClick={(e) => handleStartEdit(e, project)}
                                 title="Renomear"
-                                className="p-2 rounded-lg text-[var(--ds-text-secondary)] hover:text-emerald-400 hover:bg-emerald-500/10"
+                                className="p-2 rounded-lg text-[var(--ds-text-secondary)] hover:text-purple-400 hover:bg-purple-500/10"
                               >
                                 <Pencil size={16} />
                               </button>

@@ -200,7 +200,7 @@ export function AutoSuppressionPanel({
                 type="checkbox"
                 checked={!!draft.enabled}
                 onChange={(e) => setDraft((s) => ({ ...s, enabled: e.target.checked }))}
-                className="accent-emerald-500"
+                className="accent-purple-500"
               />
               Ativar auto-supressão
             </label>
@@ -222,7 +222,7 @@ export function AutoSuppressionPanel({
                       undeliverable131026: { ...s.undeliverable131026, enabled: e.target.checked },
                     }))
                   }
-                  className="accent-emerald-500"
+                  className="accent-purple-500"
                 />
                 Ativar regra
               </label>

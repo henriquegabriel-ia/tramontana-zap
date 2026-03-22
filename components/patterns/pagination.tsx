@@ -162,7 +162,7 @@ export function Pagination({
               className={cn(
                 'w-9 h-9 rounded-lg text-sm font-medium transition-all',
                 isActive
-                  ? 'bg-emerald-500 text-white'
+                  ? 'bg-purple-500 text-white'
                   : 'text-zinc-400 hover:text-white hover:bg-zinc-800/80'
               )}
             >

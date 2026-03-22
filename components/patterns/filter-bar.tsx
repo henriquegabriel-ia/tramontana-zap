@@ -128,7 +128,7 @@ export function FilterBar({
                   'w-full pl-10 pr-4 py-2.5 rounded-xl',
                   'bg-zinc-950/60 border border-white/10',
                   'text-sm text-white placeholder:text-zinc-500',
-                  'focus:outline-none focus:ring-2 focus:ring-emerald-500/30 focus:border-emerald-500/50',
+                  'focus:outline-none focus:ring-2 focus:ring-purple-500/30 focus:border-purple-500/50',
                   'transition-all duration-200'
                 )}
               />
@@ -157,7 +157,7 @@ export function FilterBar({
                       'bg-zinc-950/60 border-white/10',
                       'text-sm text-zinc-300',
                       'hover:bg-zinc-900/80 hover:border-white/15',
-                      'focus:ring-2 focus:ring-emerald-500/30 focus:border-emerald-500/50'
+                      'focus:ring-2 focus:ring-purple-500/30 focus:border-purple-500/50'
                     )}
                   >
                     <SelectValue placeholder={filter.label} />
@@ -218,7 +218,7 @@ export interface ResultsInfoProps {
 export function ResultsInfo({ showing, total, itemName = 'itens' }: ResultsInfoProps) {
   return (
     <span>
-      Mostrando <span className="text-emerald-400 font-medium">{showing}</span> de{' '}
+      Mostrando <span className="text-purple-400 font-medium">{showing}</span> de{' '}
       <span className="text-white font-medium">{total}</span> {itemName}
     </span>
   )

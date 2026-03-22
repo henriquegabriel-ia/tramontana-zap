@@ -31,7 +31,7 @@ function DraftStatusBadge({ ready }: DraftStatusBadgeProps) {
       className={cn(
         'inline-flex items-center rounded-full px-2.5 py-0.5 text-[11px] font-semibold uppercase tracking-wide border',
         ready
-          ? 'bg-emerald-500/10 text-emerald-300 border-emerald-500/20'
+          ? 'bg-purple-500/10 text-purple-300 border-purple-500/20'
           : 'bg-white/5 text-gray-400 border-white/10'
       )}
     >

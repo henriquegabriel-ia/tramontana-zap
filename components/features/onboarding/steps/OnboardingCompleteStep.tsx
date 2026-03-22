@@ -26,7 +26,7 @@ export function OnboardingCompleteStep({
       {/* Ícone de sucesso */}
       <div className="flex justify-center">
         <div className="relative">
-          <div className="w-24 h-24 rounded-full bg-gradient-to-br from-emerald-500 to-teal-500 flex items-center justify-center animate-pulse">
+          <div className="w-24 h-24 rounded-full bg-gradient-to-br from-purple-500 to-teal-500 flex items-center justify-center animate-pulse">
             <CheckCircle2 className="w-12 h-12 text-white" />
           </div>
           <div className="absolute -top-1 -right-1 w-8 h-8 rounded-full bg-amber-500 flex items-center justify-center">
@@ -51,8 +51,8 @@ export function OnboardingCompleteStep({
 
         <div className="grid gap-3">
           <div className="flex items-center gap-3 p-3 rounded-lg bg-zinc-800/50 border border-zinc-700">
-            <div className="w-10 h-10 rounded-lg bg-emerald-500/20 flex items-center justify-center flex-shrink-0">
-              <MessageSquare className="w-5 h-5 text-emerald-400" />
+            <div className="w-10 h-10 rounded-lg bg-purple-500/20 flex items-center justify-center flex-shrink-0">
+              <MessageSquare className="w-5 h-5 text-purple-400" />
             </div>
             <div>
               <p className="font-medium text-white text-sm">Criar campanhas</p>
@@ -85,7 +85,7 @@ export function OnboardingCompleteStep({
       {/* Botão de conclusão */}
       <Button
         onClick={handleComplete}
-        className="w-full bg-gradient-to-r from-emerald-500 to-teal-500 hover:from-emerald-600 hover:to-teal-600"
+        className="w-full bg-gradient-to-r from-purple-500 to-teal-500 hover:from-purple-600 hover:to-teal-600"
         size="lg"
       >
         <Rocket className="w-5 h-5 mr-2" />

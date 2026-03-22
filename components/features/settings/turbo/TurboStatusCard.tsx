@@ -47,7 +47,7 @@ export function TurboStatusCard({
         <div className="flex-1 flex flex-col justify-center">
           <div className="text-lg font-semibold text-[var(--ds-text-primary)]">
             {config?.enabled ? (
-              <span className="text-emerald-400">Ativo</span>
+              <span className="text-purple-400">Ativo</span>
             ) : (
               <span className="text-[var(--ds-text-secondary)]">Inativo</span>
             )}

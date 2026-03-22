@@ -206,7 +206,7 @@ export function TurboConfigSection({
             <span className="text-sm text-[var(--ds-text-secondary)]">...</span>
           ) : (
             <div className="flex items-center gap-2">
-              <span className={`text-sm font-medium ${turboConfig?.enabled ? 'text-emerald-400' : 'text-[var(--ds-text-secondary)]'}`}>
+              <span className={`text-sm font-medium ${turboConfig?.enabled ? 'text-purple-400' : 'text-[var(--ds-text-secondary)]'}`}>
                 {turboConfig?.enabled ? 'Ativo' : 'Inativo'}
               </span>
               <span className="text-xs text-[var(--ds-text-muted)]">({whatsappThrottle?.source || '-'})</span>

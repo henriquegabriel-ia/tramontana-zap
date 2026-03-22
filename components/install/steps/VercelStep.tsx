@@ -118,7 +118,7 @@ export function VercelStep({ onComplete }: VercelStepProps) {
             minLength={24}
             autoSubmitLength={24}
             onAutoSubmit={handleValidate}
-            accentColor="emerald"
+            accentColor="purple"
           />
         </div>
 
@@ -130,7 +130,7 @@ export function VercelStep({ onComplete }: VercelStepProps) {
           </summary>
           <div className="mt-3 p-3 rounded-lg bg-zinc-800/50 text-left space-y-2 animate-in fade-in slide-in-from-top-2 duration-200">
             <ol className="text-xs text-zinc-400 space-y-1.5 list-decimal list-inside">
-              <li>Acesse <a href="https://vercel.com/account/tokens" target="_blank" rel="noopener noreferrer" className="text-emerald-400 hover:underline">vercel.com/account/tokens</a></li>
+              <li>Acesse <a href="https://vercel.com/account/tokens" target="_blank" rel="noopener noreferrer" className="text-purple-400 hover:underline">vercel.com/account/tokens</a></li>
               <li>Clique em <strong className="text-zinc-300">Create</strong></li>
               <li>Nome: <strong className="text-zinc-300">tramontana-zap</strong> • Scope: <strong className="text-zinc-300">Full Account</strong></li>
               <li>Copie e cole o token acima</li>

@@ -28,7 +28,7 @@ export const TemplateListHeader: React.FC<TemplateListHeaderProps> = ({
         <div className="flex flex-col items-end justify-center mr-4 px-3 py-1 bg-[var(--ds-bg-elevated)] border border-[var(--ds-border-subtle)] rounded-lg">
           <div className="flex items-center gap-2 text-xs font-medium text-[var(--ds-text-secondary)]">
             <span>Uso da Conta</span>
-            <span className={`${templateCount >= 250 ? 'text-amber-300' : 'text-emerald-300'}`}>
+            <span className={`${templateCount >= 250 ? 'text-amber-300' : 'text-purple-300'}`}>
               {templateCount} / 250
             </span>
           </div>
@@ -39,7 +39,7 @@ export const TemplateListHeader: React.FC<TemplateListHeaderProps> = ({
                   ? 'bg-amber-500'
                   : templateCount >= 200
                     ? 'bg-amber-400'
-                    : 'bg-emerald-500'
+                    : 'bg-purple-500'
               }`}
               style={{ width: `${Math.min((templateCount / 250) * 100, 100)}%` }}
             />

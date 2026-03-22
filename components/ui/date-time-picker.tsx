@@ -56,7 +56,7 @@ export default function DateTimePicker({
           )}
         >
           <span className="text-[var(--ds-text-primary)]">{display}</span>
-          <Clock className="h-4 w-4 text-emerald-400" />
+          <Clock className="h-4 w-4 text-purple-400" />
         </button>
       </PopoverTrigger>
       <PopoverContent className={cn("w-52 border border-[var(--ds-border-default)] bg-[var(--ds-bg-base)] p-4", className)}>

@@ -283,7 +283,7 @@ export function SupabaseStep({ onComplete }: SupabaseStepProps) {
   // Estado de sucesso
   if (phase === 'success') {
     return (
-      <StepCard glowColor="emerald">
+      <StepCard glowColor="purple">
         <SuccessCheckmark
           message="Projeto Supabase criado!"
           onComplete={handleSuccessComplete}
@@ -323,11 +323,11 @@ export function SupabaseStep({ onComplete }: SupabaseStepProps) {
   // Estados de provisionamento (loading)
   if (phase !== 'token') {
     return (
-      <StepCard glowColor="emerald">
+      <StepCard glowColor="purple">
         <div className="flex flex-col items-center text-center py-8">
           {/* Spinner ou checkmarks */}
           <div className="relative w-20 h-20 mb-6">
-            <Loader2 className="w-20 h-20 text-emerald-500 animate-spin" />
+            <Loader2 className="w-20 h-20 text-purple-500 animate-spin" />
           </div>
 
           {/* Status atual - Narrativa de Despertar */}
@@ -357,9 +357,9 @@ export function SupabaseStep({ onComplete }: SupabaseStepProps) {
                   key={step}
                   className={`w-2.5 h-2.5 rounded-full transition-colors ${
                     stepIdx < currentIdx
-                      ? 'bg-emerald-500'
+                      ? 'bg-purple-500'
                       : stepIdx === currentIdx
-                      ? 'bg-emerald-500 animate-pulse'
+                      ? 'bg-purple-500 animate-pulse'
                       : 'bg-zinc-700'
                   }`}
                 />
@@ -380,7 +380,7 @@ export function SupabaseStep({ onComplete }: SupabaseStepProps) {
 
   // Estado inicial: input do token
   return (
-    <StepCard glowColor="emerald">
+    <StepCard glowColor="purple">
       <div className="flex flex-col items-center text-center">
         {/* Icon */}
         <ServiceIcon service="supabase" size="lg" />
@@ -394,8 +394,8 @@ export function SupabaseStep({ onComplete }: SupabaseStepProps) {
         </p>
 
         {/* Info box */}
-        <div className="w-full mt-4 p-3 rounded-lg bg-emerald-500/10 border border-emerald-500/20">
-          <div className="flex items-center gap-2 text-emerald-400">
+        <div className="w-full mt-4 p-3 rounded-lg bg-purple-500/10 border border-purple-500/20">
+          <div className="flex items-center gap-2 text-purple-400">
             <CheckCircle2 className="w-4 h-4 shrink-0" />
             <p className="text-xs text-left">
               Criaremos automaticamente um projeto dedicado para o Tramontana Zap
@@ -416,7 +416,7 @@ export function SupabaseStep({ onComplete }: SupabaseStepProps) {
             minLength={30}
             autoSubmitLength={40}
             onAutoSubmit={handleValidateToken}
-            accentColor="emerald"
+            accentColor="purple"
           />
         </div>
 
@@ -428,7 +428,7 @@ export function SupabaseStep({ onComplete }: SupabaseStepProps) {
           </summary>
           <div className="mt-3 p-3 rounded-lg bg-zinc-800/50 text-left space-y-2 animate-in fade-in slide-in-from-top-2 duration-200">
             <ol className="text-xs text-zinc-400 space-y-1.5 list-decimal list-inside">
-              <li>Acesse <a href="https://supabase.com/dashboard/account/tokens" target="_blank" rel="noopener noreferrer" className="text-emerald-400 hover:underline">supabase.com/dashboard/account/tokens</a></li>
+              <li>Acesse <a href="https://supabase.com/dashboard/account/tokens" target="_blank" rel="noopener noreferrer" className="text-purple-400 hover:underline">supabase.com/dashboard/account/tokens</a></li>
               <li>Clique em <strong className="text-zinc-300">Generate new token</strong></li>
               <li>Nome: <strong className="text-zinc-300">tramontana-zap</strong></li>
               <li>Copie e cole o token acima</li>

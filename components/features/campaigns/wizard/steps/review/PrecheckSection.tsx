@@ -126,7 +126,7 @@ export function PrecheckSection({
       {precheckResult?.totals && (
         <div className="mt-3 text-xs text-[var(--ds-text-secondary)] space-y-2">
           <div className="flex flex-wrap items-center gap-3">
-            <span className="text-emerald-400 font-bold">
+            <span className="text-purple-400 font-bold">
               Válidos: {precheckResult.totals.valid}
             </span>
             <span className="text-amber-400 font-bold">

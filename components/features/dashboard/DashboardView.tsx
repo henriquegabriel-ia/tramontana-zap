@@ -101,7 +101,7 @@ export const DashboardView: React.FC<DashboardViewProps> = ({ stats, recentCampa
           title="Taxa de Entrega"
           value={stats.deliveryRate}
           icon={CheckCircle2}
-          color="emerald"
+          color="purple"
           loading={isLoading}
         />
         <StatCard

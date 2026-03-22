@@ -28,10 +28,10 @@ export function FloatingPreviewButton({
         'lg:hidden',
         // Aparencia
         'flex items-center gap-2 px-4 py-3 rounded-full',
-        'bg-emerald-500 hover:bg-emerald-600',
+        'bg-purple-500 hover:bg-purple-600',
         'text-white font-medium text-sm',
         // Sombra e transicao
-        'shadow-lg shadow-emerald-500/25',
+        'shadow-lg shadow-purple-500/25',
         'transition-all duration-200',
         'hover:scale-105 active:scale-95',
         className

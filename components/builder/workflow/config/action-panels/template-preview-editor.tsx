@@ -290,9 +290,9 @@ export function TemplatePreviewEditor({
         <PopoverTrigger asChild>
           <button
             className={cn(
-            "inline-flex items-center rounded-md border border-emerald-500/30 bg-emerald-500/15 px-1.5 py-0.5 text-xs text-emerald-100 transition-colors hover:bg-emerald-500/25 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-emerald-400/70",
-            !rawValue && "text-emerald-200/70",
-            isActive && "ring-1 ring-emerald-400/70"
+            "inline-flex items-center rounded-md border border-purple-500/30 bg-purple-500/15 px-1.5 py-0.5 text-xs text-purple-100 transition-colors hover:bg-purple-500/25 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-purple-400/70",
+            !rawValue && "text-purple-200/70",
+            isActive && "ring-1 ring-purple-400/70"
           )}
             disabled={disabled}
             type="button"
@@ -333,7 +333,7 @@ export function TemplatePreviewEditor({
               ) : (
                 filteredSystem.map((option) => (
                   <button
-                    className="rounded-full border border-emerald-500/30 bg-emerald-500/10 px-3 py-1 text-xs text-emerald-100 hover:bg-emerald-500/20"
+                    className="rounded-full border border-purple-500/30 bg-purple-500/10 px-3 py-1 text-xs text-purple-100 hover:bg-purple-500/20"
                     key={option.token}
                     onClick={() => {
                       handleActiveChange(option.token);
@@ -463,7 +463,7 @@ export function TemplatePreviewEditor({
       )}
       <div className="h-1.5 w-full rounded-full bg-white/10">
         <div
-          className="h-1.5 rounded-full bg-emerald-500"
+          className="h-1.5 rounded-full bg-purple-500"
           style={{ width: `${progressPct}%` }}
         />
       </div>
@@ -475,7 +475,7 @@ export function TemplatePreviewEditor({
           {headerSegments.length > 0 && (
             <div
               className={cn(
-                "max-w-[260px] whitespace-pre-line rounded-2xl rounded-bl-sm bg-emerald-500/10 px-4 py-2 text-sm font-semibold text-white",
+                "max-w-[260px] whitespace-pre-line rounded-2xl rounded-bl-sm bg-purple-500/10 px-4 py-2 text-sm font-semibold text-white",
                 "shadow-[0_0_24px_rgba(16,185,129,0.1)]"
               )}
             >
@@ -484,7 +484,7 @@ export function TemplatePreviewEditor({
           )}
           <div
             className={cn(
-              "max-w-[260px] whitespace-pre-line rounded-2xl rounded-bl-sm bg-emerald-500/10 px-4 py-3 text-sm text-white",
+              "max-w-[260px] whitespace-pre-line rounded-2xl rounded-bl-sm bg-purple-500/10 px-4 py-3 text-sm text-white",
               "shadow-[0_0_24px_rgba(16,185,129,0.1)]"
             )}
           >

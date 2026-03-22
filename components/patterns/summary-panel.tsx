@@ -52,7 +52,7 @@ export interface SummaryPanelProps {
 
 const badgeVariants = {
   default: 'bg-zinc-800 text-zinc-300',
-  success: 'bg-emerald-500/10 text-emerald-400 border border-emerald-500/20',
+  success: 'bg-purple-500/10 text-purple-400 border border-purple-500/20',
   warning: 'bg-amber-500/10 text-amber-400 border border-amber-500/20',
   error: 'bg-red-500/10 text-red-400 border border-red-500/20',
   info: 'bg-blue-500/10 text-blue-400 border border-blue-500/20',
@@ -277,7 +277,7 @@ const alertVariants = {
   info: 'bg-blue-500/10 border-blue-500/20 text-blue-400',
   warning: 'bg-amber-500/10 border-amber-500/20 text-amber-400',
   error: 'bg-red-500/10 border-red-500/20 text-red-400',
-  success: 'bg-emerald-500/10 border-emerald-500/20 text-emerald-400',
+  success: 'bg-purple-500/10 border-purple-500/20 text-purple-400',
 }
 
 const alertIcons = {

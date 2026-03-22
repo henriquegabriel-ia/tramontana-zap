@@ -36,14 +36,14 @@ export function SubmissionDetailView({
     };
 
     const sections = [
-        { id: 'UTILITY', label: 'Aprovados como Utility', count: groups.UTILITY.length, color: 'emerald', icon: CheckCircle },
+        { id: 'UTILITY', label: 'Aprovados como Utility', count: groups.UTILITY.length, color: 'purple', icon: CheckCircle },
         { id: 'MARKETING', label: 'Convertidos para Marketing', count: groups.MARKETING.length, color: 'yellow', icon: AlertTriangle },
         { id: 'REJECTED', label: 'Rejeitados', count: groups.REJECTED.length, color: 'red', icon: XCircle },
         { id: 'PENDING', label: 'Pendentes', count: groups.PENDING.length, color: 'zinc', icon: Filter },
     ] as const;
 
     const sectionIconTone: Record<(typeof sections)[number]['color'], string> = {
-        emerald: 'text-emerald-300',
+        purple: 'text-purple-300',
         yellow: 'text-amber-300',
         red: 'text-amber-300',
         zinc: 'text-gray-400',
@@ -67,7 +67,7 @@ export function SubmissionDetailView({
                             <h1 className="text-xl font-bold text-white flex items-center gap-2">
                                 {submission.name}
                                 <span className={`px-2 py-0.5 text-xs rounded-full border ${submission.status === 'processing'
-                                    ? 'bg-emerald-500/10 text-emerald-200 border-emerald-500/20'
+                                    ? 'bg-purple-500/10 text-purple-200 border-purple-500/20'
                                     : 'bg-zinc-950/40 text-gray-400 border-white/10'
                                     }`}>
                                     {submission.status === 'processing' ? 'Processando' : 'Concluído'}
@@ -107,7 +107,7 @@ export function SubmissionDetailView({
                         label="Utility (Sucesso)"
                         count={groups.UTILITY.length}
                         total={submission.stats.total}
-                        color="emerald"
+                        color="purple"
                         icon={CheckCircle}
                     />
                     <StatCard
@@ -156,7 +156,7 @@ export function SubmissionDetailView({
                                                 key={template.id}
                                                 onClick={() => setSelectedTemplate(template)}
                                                 className={`p-3 rounded-lg border transition-all cursor-pointer ${selectedTemplate?.id === template.id
-                                                    ? 'bg-emerald-500/10 border-emerald-500/30 ring-1 ring-emerald-500/40'
+                                                    ? 'bg-purple-500/10 border-purple-500/30 ring-1 ring-purple-500/40'
                                                     : 'bg-zinc-950/40 border-white/10 hover:border-white/20 hover:bg-white/5'
                                                     }`}
                                             >
@@ -215,7 +215,7 @@ export function SubmissionDetailView({
                             <div className="space-y-2 text-xs text-zinc-400">
                                 <div className="flex justify-between">
                                     <span>Categoria:</span>
-                                    <span className={selectedTemplate.category === 'UTILITY' ? 'text-emerald-300' : 'text-amber-300'}>
+                                    <span className={selectedTemplate.category === 'UTILITY' ? 'text-purple-300' : 'text-amber-300'}>
                                         {selectedTemplate.category}
                                     </span>
                                 </div>
@@ -249,7 +249,7 @@ interface StatCardProps {
     /** Total value for percentage calculation */
     total: number
     /** Color theme for the card */
-    color: 'emerald' | 'yellow' | 'red' | 'zinc'
+    color: 'purple' | 'yellow' | 'red' | 'zinc'
     /** Icon component to display */
     icon: React.ComponentType<{ className?: string }>
 }
@@ -258,7 +258,7 @@ function StatCard({ label, count, total, color, icon: Icon }: StatCardProps) {
     const percent = Math.round((count / total) * 100) || 0;
 
     const colors: Record<StatCardProps['color'], string> = {
-        emerald: 'text-emerald-300 bg-emerald-500/10 border-emerald-500/20',
+        purple: 'text-purple-300 bg-purple-500/10 border-purple-500/20',
         yellow: 'text-amber-300 bg-amber-500/10 border-amber-500/20',
         red: 'text-amber-200 bg-amber-500/10 border-amber-500/20',
         zinc: 'text-gray-400 bg-zinc-500/10 border-white/10',

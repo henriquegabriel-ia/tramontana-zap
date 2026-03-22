@@ -159,8 +159,8 @@ function InstallBanner({ onInstall, onDismiss }: InstallBannerProps) {
     <div className="fixed bottom-4 left-4 right-4 md:left-auto md:right-4 md:w-80 z-50 animate-in slide-in-from-bottom-4 duration-300">
       <div className="bg-zinc-900 border border-zinc-800 rounded-xl p-4 shadow-2xl">
         <div className="flex items-start gap-3">
-          <div className="w-10 h-10 rounded-lg bg-emerald-500/10 flex items-center justify-center shrink-0">
-            <Download className="w-5 h-5 text-emerald-400" />
+          <div className="w-10 h-10 rounded-lg bg-purple-500/10 flex items-center justify-center shrink-0">
+            <Download className="w-5 h-5 text-purple-400" />
           </div>
           <div className="flex-1 min-w-0">
             <h3 className="text-sm font-semibold text-zinc-100">Instalar Tramontana Zap</h3>
@@ -185,7 +185,7 @@ function InstallBanner({ onInstall, onDismiss }: InstallBannerProps) {
           </button>
           <button
             onClick={onInstall}
-            className="flex-1 px-3 py-2 text-xs font-medium text-white bg-emerald-600 hover:bg-emerald-500 rounded-lg transition-colors"
+            className="flex-1 px-3 py-2 text-xs font-medium text-white bg-purple-600 hover:bg-purple-500 rounded-lg transition-colors"
           >
             Instalar
           </button>
@@ -207,20 +207,20 @@ interface UpdateBannerProps {
 function UpdateBanner({ onUpdate, onDismiss }: UpdateBannerProps) {
   return (
     <div className="fixed top-4 left-4 right-4 md:left-auto md:right-4 md:w-80 z-50 animate-in slide-in-from-top-4 duration-300">
-      <div className="bg-emerald-950/90 border border-emerald-800 rounded-xl p-4 shadow-2xl backdrop-blur-sm">
+      <div className="bg-purple-950/90 border border-purple-800 rounded-xl p-4 shadow-2xl backdrop-blur-sm">
         <div className="flex items-start gap-3">
-          <div className="w-10 h-10 rounded-lg bg-emerald-500/20 flex items-center justify-center shrink-0">
-            <RefreshCw className="w-5 h-5 text-emerald-400" />
+          <div className="w-10 h-10 rounded-lg bg-purple-500/20 flex items-center justify-center shrink-0">
+            <RefreshCw className="w-5 h-5 text-purple-400" />
           </div>
           <div className="flex-1 min-w-0">
-            <h3 className="text-sm font-semibold text-emerald-100">Atualização disponível</h3>
-            <p className="text-xs text-emerald-300/70 mt-0.5">
+            <h3 className="text-sm font-semibold text-purple-100">Atualização disponível</h3>
+            <p className="text-xs text-purple-300/70 mt-0.5">
               Uma nova versão do Tramontana Zap está pronta
             </p>
           </div>
           <button
             onClick={onDismiss}
-            className="text-emerald-400/60 hover:text-emerald-300 transition-colors"
+            className="text-purple-400/60 hover:text-purple-300 transition-colors"
           >
             <X className="w-4 h-4" />
           </button>
@@ -229,13 +229,13 @@ function UpdateBanner({ onUpdate, onDismiss }: UpdateBannerProps) {
         <div className="flex gap-2 mt-3">
           <button
             onClick={onDismiss}
-            className="flex-1 px-3 py-2 text-xs font-medium text-emerald-300/70 hover:text-emerald-200 bg-emerald-900/50 hover:bg-emerald-900/70 rounded-lg transition-colors"
+            className="flex-1 px-3 py-2 text-xs font-medium text-purple-300/70 hover:text-purple-200 bg-purple-900/50 hover:bg-purple-900/70 rounded-lg transition-colors"
           >
             Depois
           </button>
           <button
             onClick={onUpdate}
-            className="flex-1 px-3 py-2 text-xs font-medium text-white bg-emerald-600 hover:bg-emerald-500 rounded-lg transition-colors flex items-center justify-center gap-1.5"
+            className="flex-1 px-3 py-2 text-xs font-medium text-white bg-purple-600 hover:bg-purple-500 rounded-lg transition-colors flex items-center justify-center gap-1.5"
           >
             <RefreshCw className="w-3.5 h-3.5" />
             Atualizar
@@ -299,7 +299,7 @@ export function PushToggleButton() {
       className={cn(
         'flex items-center gap-2 px-3 py-2 text-xs font-medium rounded-lg transition-colors',
         isPushEnabled
-          ? 'text-emerald-400 bg-emerald-500/10 hover:bg-emerald-500/20'
+          ? 'text-purple-400 bg-purple-500/10 hover:bg-purple-500/20'
           : 'text-zinc-400 bg-zinc-800 hover:bg-zinc-700'
       )}
     >

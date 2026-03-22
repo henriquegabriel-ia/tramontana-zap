@@ -109,7 +109,7 @@ export function GuidedTour({ onComplete, onSkip }: GuidedTourProps) {
           {/* Progress bar */}
           <div className="h-1 bg-zinc-800">
             <div
-              className="h-full bg-emerald-500 transition-all duration-500"
+              className="h-full bg-purple-500 transition-all duration-500"
               style={{ width: `${progress}%` }}
             />
           </div>
@@ -117,7 +117,7 @@ export function GuidedTour({ onComplete, onSkip }: GuidedTourProps) {
           {/* Header */}
           <div className="flex items-center justify-between p-4 border-b border-zinc-800">
             <div className="flex items-center gap-2">
-              <Sparkles className="w-5 h-5 text-emerald-400" />
+              <Sparkles className="w-5 h-5 text-purple-400" />
               <span className="text-sm font-medium text-zinc-400">
                 Primeiros passos • {currentStep + 1}/{TOUR_STEPS.length}
               </span>
@@ -134,7 +134,7 @@ export function GuidedTour({ onComplete, onSkip }: GuidedTourProps) {
           {/* Content */}
           <div className="p-6">
             {/* Icon */}
-            <div className="w-14 h-14 rounded-2xl bg-emerald-500/10 border border-emerald-500/20 flex items-center justify-center text-emerald-400 mb-4">
+            <div className="w-14 h-14 rounded-2xl bg-purple-500/10 border border-purple-500/20 flex items-center justify-center text-purple-400 mb-4">
               {step.icon}
             </div>
 
@@ -151,7 +151,7 @@ export function GuidedTour({ onComplete, onSkip }: GuidedTourProps) {
               {step.action && (
                 <Button
                   onClick={handleAction}
-                  className="flex-1 bg-emerald-600 hover:bg-emerald-500 text-white"
+                  className="flex-1 bg-purple-600 hover:bg-purple-500 text-white"
                 >
                   {step.action.label}
                   <ArrowRight className="w-4 h-4 ml-2" />
@@ -171,7 +171,7 @@ export function GuidedTour({ onComplete, onSkip }: GuidedTourProps) {
               {isLastStep && (
                 <Button
                   onClick={handleNext}
-                  className="flex-1 bg-emerald-600 hover:bg-emerald-500 text-white"
+                  className="flex-1 bg-purple-600 hover:bg-purple-500 text-white"
                 >
                   Concluir
                   <Sparkles className="w-4 h-4 ml-2" />

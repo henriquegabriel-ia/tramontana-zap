@@ -190,7 +190,7 @@ export function InspectorPanel(props: {
                 <select
                   value={bookingDateComponent}
                   onChange={(e) => props.onUpdateBookingDateComponent?.(e.target.value === 'dropdown' ? 'dropdown' : 'calendar')}
-                  className="h-11 w-full rounded-xl border border-white/10 bg-white/5 px-3 text-[14px] text-zinc-200 focus:outline-none focus:ring-2 focus:ring-emerald-400/40"
+                  className="h-11 w-full rounded-xl border border-white/10 bg-white/5 px-3 text-[14px] text-zinc-200 focus:outline-none focus:ring-2 focus:ring-purple-400/40"
                 >
                   <option value="calendar">Calendário</option>
                   <option value="dropdown">Lista (dropdown)</option>
@@ -234,7 +234,7 @@ export function InspectorPanel(props: {
           <select
             value={nextScreenId}
             onChange={(e) => props.onUpdateCta(screen.id, { nextScreenId: e.target.value })}
-            className="h-11 w-full rounded-xl border border-white/10 bg-white/5 px-3 text-[14px] text-zinc-200 focus:outline-none focus:ring-2 focus:ring-emerald-400/40"
+            className="h-11 w-full rounded-xl border border-white/10 bg-white/5 px-3 text-[14px] text-zinc-200 focus:outline-none focus:ring-2 focus:ring-purple-400/40"
           >
             <option value="">— Concluir —</option>
             {props.spec.screens

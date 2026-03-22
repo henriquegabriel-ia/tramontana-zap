@@ -1441,7 +1441,7 @@ export function UnifiedFlowEditor(props: {
                   value={ctaType === 'complete' || !!activeScreen?.terminal ? '' : nextScreenId}
                   onChange={(e) => setCta({ nextScreenId: e.target.value })}
                   disabled={ctaType === 'complete' || !!activeScreen?.terminal}
-                  className="h-11 w-full rounded-xl border border-white/10 bg-white/5 px-3 text-[14px] text-zinc-200 focus:outline-none focus:ring-2 focus:ring-emerald-400/40 disabled:opacity-50"
+                  className="h-11 w-full rounded-xl border border-white/10 bg-white/5 px-3 text-[14px] text-zinc-200 focus:outline-none focus:ring-2 focus:ring-purple-400/40 disabled:opacity-50"
                 >
                   <option value="">— Concluir —</option>
                   {spec.screens
@@ -1508,7 +1508,7 @@ export function UnifiedFlowEditor(props: {
                 <select
                   value={defaultNextId || ''}
                   onChange={(e) => setDefaultNextForActive(e.target.value || null)}
-                  className="h-11 w-full rounded-xl border border-white/10 bg-white/5 px-3 text-[14px] text-zinc-200 focus:outline-none focus:ring-2 focus:ring-emerald-400/40"
+                  className="h-11 w-full rounded-xl border border-white/10 bg-white/5 px-3 text-[14px] text-zinc-200 focus:outline-none focus:ring-2 focus:ring-purple-400/40"
                 >
                   <option value="">— Concluir —</option>
                   {spec.screens
@@ -1580,7 +1580,7 @@ export function UnifiedFlowEditor(props: {
                               next[idx] = { ...next[idx], field, ...(nextValue !== undefined ? { value: nextValue as any } : {}) }
                               setBranchesForActive(next)
                             }}
-                            className="h-11 w-full rounded-xl border border-white/10 bg-white/5 px-3 text-[14px] text-zinc-200 focus:outline-none focus:ring-2 focus:ring-emerald-400/40"
+                            className="h-11 w-full rounded-xl border border-white/10 bg-white/5 px-3 text-[14px] text-zinc-200 focus:outline-none focus:ring-2 focus:ring-purple-400/40"
                           >
                             {pathFieldOptions.map((f) => (
                               <option key={f.name} value={f.name}>
@@ -1599,7 +1599,7 @@ export function UnifiedFlowEditor(props: {
                               next[idx] = { ...next[idx], op: e.target.value as any }
                               setBranchesForActive(next)
                             }}
-                            className="h-11 w-full rounded-xl border border-white/10 bg-white/5 px-3 text-[14px] text-zinc-200 focus:outline-none focus:ring-2 focus:ring-emerald-400/40"
+                            className="h-11 w-full rounded-xl border border-white/10 bg-white/5 px-3 text-[14px] text-zinc-200 focus:outline-none focus:ring-2 focus:ring-purple-400/40"
                           >
                             <option value="is_filled">preenchido</option>
                             <option value="is_empty">vazio</option>
@@ -1623,7 +1623,7 @@ export function UnifiedFlowEditor(props: {
                                 setBranchesForActive(next)
                               }}
                               disabled={!needsValue}
-                              className="h-11 w-full rounded-xl border border-white/10 bg-white/5 px-3 text-[14px] text-zinc-200 focus:outline-none focus:ring-2 focus:ring-emerald-400/40 disabled:opacity-50"
+                              className="h-11 w-full rounded-xl border border-white/10 bg-white/5 px-3 text-[14px] text-zinc-200 focus:outline-none focus:ring-2 focus:ring-purple-400/40 disabled:opacity-50"
                             >
                               {choiceOptions.map((o) => (
                                 <option key={o.value} value={o.value}>
@@ -1655,7 +1655,7 @@ export function UnifiedFlowEditor(props: {
                               next[idx] = { ...(next[idx] || {}), next: e.target.value ? e.target.value : null, __auto_next: false }
                               setBranchesForActive(next as any)
                             }}
-                            className="h-11 w-full rounded-xl border border-white/10 bg-white/5 px-3 text-[14px] text-zinc-200 focus:outline-none focus:ring-2 focus:ring-emerald-400/40"
+                            className="h-11 w-full rounded-xl border border-white/10 bg-white/5 px-3 text-[14px] text-zinc-200 focus:outline-none focus:ring-2 focus:ring-purple-400/40"
                           >
                             <option value="">— Concluir —</option>
                             {spec.screens

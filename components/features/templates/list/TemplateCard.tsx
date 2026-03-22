@@ -60,7 +60,7 @@ export const TemplateCard = React.memo(
         isRowSelected
           ? isManualDraft
             ? 'border-amber-500/40 bg-amber-500/5'
-            : 'border-emerald-500/40 bg-emerald-500/5'
+            : 'border-purple-500/40 bg-purple-500/5'
           : 'border-[var(--ds-border-default)] bg-[var(--ds-bg-elevated)] hover:bg-[var(--ds-bg-hover)]'
       }`}
     >
@@ -76,7 +76,7 @@ export const TemplateCard = React.memo(
             isRowSelected
               ? isManualDraft
                 ? 'bg-amber-500 border-amber-500'
-                : 'bg-emerald-500 border-emerald-500'
+                : 'bg-purple-500 border-purple-500'
               : 'border-[var(--ds-border-default)] hover:border-[var(--ds-border-strong)]'
           }`}
           title={isRowSelected ? 'Desmarcar' : 'Selecionar'}
@@ -107,7 +107,7 @@ export const TemplateCard = React.memo(
             <span
               className={`inline-flex items-center rounded border px-1.5 py-0.5 font-medium ${
                 template.category === 'UTILIDADE'
-                  ? 'bg-emerald-500/10 text-[var(--ds-status-success-text)] border-emerald-500/20'
+                  ? 'bg-purple-500/10 text-[var(--ds-status-success-text)] border-purple-500/20'
                   : template.category === 'MARKETING'
                     ? 'bg-amber-500/10 text-[var(--ds-status-warning-text)] border-amber-500/20'
                     : 'bg-[var(--ds-bg-hover)] text-[var(--ds-text-secondary)] border-[var(--ds-border-default)]'

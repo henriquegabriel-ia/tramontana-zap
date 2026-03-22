@@ -520,7 +520,7 @@ export function MetaDiagnosticsView(props: MetaDiagnosticsViewProps) {
           onClick={() => setSimpleMode((v) => !v)}
           className={`ml-2 px-3 py-1.5 rounded-lg border text-xs transition-colors ${
             simpleMode
-              ? 'bg-emerald-500/10 text-emerald-200 border-emerald-500/20'
+              ? 'bg-purple-500/10 text-purple-200 border-purple-500/20'
               : 'bg-zinc-900/40 text-gray-300 border-white/10 hover:bg-white/5'
           }`}
           title={simpleMode ? 'Modo simples (recomendado)' : 'Modo tecnico (para dev/suporte)'}

@@ -60,7 +60,7 @@ export function PermissionStatusView({
             ? 'bg-red-500/10 border-b border-red-500/20'
             : hasWarning
             ? 'bg-amber-500/10 border-b border-amber-500/20'
-            : 'bg-emerald-500/10 border-b border-emerald-500/20'
+            : 'bg-purple-500/10 border-b border-purple-500/20'
         )}
       >
         {hasError ? (
@@ -68,12 +68,12 @@ export function PermissionStatusView({
         ) : hasWarning ? (
           <AlertTriangle className="w-5 h-5 text-amber-400" />
         ) : (
-          <ShieldCheck className="w-5 h-5 text-emerald-400" />
+          <ShieldCheck className="w-5 h-5 text-purple-400" />
         )}
         <span
           className={cn(
             'font-medium',
-            hasError ? 'text-red-200' : hasWarning ? 'text-amber-200' : 'text-emerald-200'
+            hasError ? 'text-red-200' : hasWarning ? 'text-amber-200' : 'text-purple-200'
           )}
         >
           Permissões do Token
@@ -88,7 +88,7 @@ export function PermissionStatusView({
             ? 'bg-red-500/5 border border-t-0 border-red-500/20 rounded-b-xl'
             : hasWarning
             ? 'bg-amber-500/5 border border-t-0 border-amber-500/20 rounded-b-xl'
-            : 'bg-emerald-500/5 border border-t-0 border-emerald-500/20 rounded-b-xl'
+            : 'bg-purple-500/5 border border-t-0 border-purple-500/20 rounded-b-xl'
         )}
       >
         {/* Error message */}
@@ -103,7 +103,7 @@ export function PermissionStatusView({
           {result.scopeDetails.map((scope) => (
             <div key={scope.scope} className="flex items-start gap-3">
               {scope.present ? (
-                <CheckCircle2 className="w-4 h-4 text-emerald-500 mt-0.5 shrink-0" />
+                <CheckCircle2 className="w-4 h-4 text-purple-500 mt-0.5 shrink-0" />
               ) : (
                 <XCircle className="w-4 h-4 text-red-400 mt-0.5 shrink-0" />
               )}
@@ -111,7 +111,7 @@ export function PermissionStatusView({
                 <div
                   className={cn(
                     'text-sm font-medium',
-                    scope.present ? 'text-emerald-200' : 'text-red-200'
+                    scope.present ? 'text-purple-200' : 'text-red-200'
                   )}
                 >
                   {scope.scope}
@@ -131,7 +131,7 @@ export function PermissionStatusView({
           <div className="flex items-center gap-2 text-sm">
             <Smartphone className="w-4 h-4 text-zinc-500" />
             <span className="text-zinc-400">Tipo:</span>
-            <span className={cn('font-mono', isSystemUser ? 'text-emerald-300' : 'text-zinc-200')}>
+            <span className={cn('font-mono', isSystemUser ? 'text-purple-300' : 'text-zinc-200')}>
               {tokenType}
             </span>
           </div>
@@ -141,7 +141,7 @@ export function PermissionStatusView({
             <Clock className="w-4 h-4 text-zinc-500" />
             <span className="text-zinc-400">Expiração:</span>
             {result.tokenInfo.isPermanent ? (
-              <span className="text-emerald-300 flex items-center gap-1">
+              <span className="text-purple-300 flex items-center gap-1">
                 <CheckCircle2 className="w-3 h-3" />
                 Token permanente
               </span>

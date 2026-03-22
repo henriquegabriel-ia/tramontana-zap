@@ -67,7 +67,7 @@ export const AIGeneratorModal = ({
         {/* Header */}
         <div className="flex items-center justify-between px-6 py-4 border-b border-white/10 bg-zinc-950/40">
           <div className="flex items-center gap-2">
-            <Sparkles className="h-5 w-5 text-emerald-300" />
+            <Sparkles className="h-5 w-5 text-purple-300" />
             <h2 className="text-lg font-medium text-white">{title}</h2>
           </div>
           <button
@@ -90,7 +90,7 @@ export const AIGeneratorModal = ({
                 value={prompt}
                 onChange={(e) => setPrompt(e.target.value)}
                 placeholder="Ex: Sou dono de uma pizzaria delivery e preciso de templates para confirmar pedidos, avisar sobre tempo de entrega, e informar quando o motoboy saiu..."
-                className="w-full h-32 px-4 py-3 bg-zinc-950/40 rounded-xl border border-white/10 focus:border-emerald-500/50 focus:outline-none resize-none text-sm text-white placeholder:text-gray-600"
+                className="w-full h-32 px-4 py-3 bg-zinc-950/40 rounded-xl border border-white/10 focus:border-purple-500/50 focus:outline-none resize-none text-sm text-white placeholder:text-gray-600"
               />
               <p className="text-xs text-zinc-500 mt-1">
                 Mínimo 10 caracteres. Quanto mais detalhes, melhor a IA entende seu negócio.
@@ -105,7 +105,7 @@ export const AIGeneratorModal = ({
                 <select
                   value={quantity}
                   onChange={(e) => setQuantity(Number(e.target.value))}
-                  className="w-full h-11 px-4 bg-zinc-950/40 rounded-xl border border-white/10 focus:border-emerald-500/50 focus:outline-none text-white"
+                  className="w-full h-11 px-4 bg-zinc-950/40 rounded-xl border border-white/10 focus:border-purple-500/50 focus:outline-none text-white"
                 >
                   <option value={3}>3 templates</option>
                   <option value={5}>5 templates</option>
@@ -120,7 +120,7 @@ export const AIGeneratorModal = ({
                 <select
                   value={language}
                   onChange={(e) => setLanguage(e.target.value)}
-                  className="w-full h-11 px-4 bg-zinc-950/40 rounded-xl border border-white/10 focus:border-emerald-500/50 focus:outline-none text-white"
+                  className="w-full h-11 px-4 bg-zinc-950/40 rounded-xl border border-white/10 focus:border-purple-500/50 focus:outline-none text-white"
                 >
                   <option value="pt_BR">Português (BR)</option>
                   <option value="en_US">English (US)</option>
@@ -141,7 +141,7 @@ export const AIGeneratorModal = ({
                 </>
               ) : (
                 <>
-                  <Sparkles className="h-5 w-5 text-emerald-600" />
+                  <Sparkles className="h-5 w-5 text-purple-600" />
                   Gerar Templates
                 </>
               )}
@@ -157,7 +157,7 @@ export const AIGeneratorModal = ({
                 </h3>
                 <button
                   onClick={onSelectAll}
-                  className="text-sm text-emerald-200 hover:text-emerald-100"
+                  className="text-sm text-purple-200 hover:text-purple-100"
                 >
                   {selectedTemplates.size === generatedTemplates.length
                     ? 'Desmarcar todos'
@@ -171,7 +171,7 @@ export const AIGeneratorModal = ({
                     key={template.id}
                     className={`p-3 rounded-lg border transition-colors ${
                       selectedTemplates.has(template.id)
-                        ? 'bg-emerald-500/10 border-emerald-500/30'
+                        ? 'bg-purple-500/10 border-purple-500/30'
                         : 'bg-zinc-950/40 border-white/10 hover:border-white/20'
                     }`}
                   >
@@ -180,7 +180,7 @@ export const AIGeneratorModal = ({
                         onClick={() => onToggleTemplate(template.id)}
                         className={`flex-shrink-0 mt-0.5 w-5 h-5 rounded border flex items-center justify-center transition-colors ${
                           selectedTemplates.has(template.id)
-                            ? 'bg-emerald-500 border-emerald-500'
+                            ? 'bg-purple-500 border-purple-500'
                             : 'border-white/20 hover:border-white/40'
                         }`}
                       >
@@ -222,7 +222,7 @@ export const AIGeneratorModal = ({
             <button
               onClick={onExport}
               disabled={selectedCount === 0 || isExporting}
-              className="flex items-center gap-2 px-4 py-2 bg-emerald-500 text-black hover:bg-emerald-400 disabled:opacity-50 rounded-lg transition-colors font-semibold"
+              className="flex items-center gap-2 px-4 py-2 bg-purple-500 text-black hover:bg-purple-400 disabled:opacity-50 rounded-lg transition-colors font-semibold"
             >
               {isExporting ? (
                 <>

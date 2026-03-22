@@ -581,12 +581,12 @@ const ImportStepMapping: React.FC<ImportStepMappingProps> = ({
               </div>
               <p className="text-[9px] text-gray-500 uppercase">Total</p>
             </div>
-            <div className="bg-emerald-500/10 rounded-lg p-2.5 border border-emerald-500/20 text-center">
+            <div className="bg-purple-500/10 rounded-lg p-2.5 border border-purple-500/20 text-center">
               <div className="flex items-center justify-center gap-1 mb-0.5">
-                <UserCheck size={12} className="text-emerald-400" />
-                <span className="text-base font-bold text-emerald-400">{previewStats.validContacts}</span>
+                <UserCheck size={12} className="text-purple-400" />
+                <span className="text-base font-bold text-purple-400">{previewStats.validContacts}</span>
               </div>
-              <p className="text-[9px] text-emerald-500/70 uppercase">Novos</p>
+              <p className="text-[9px] text-purple-500/70 uppercase">Novos</p>
             </div>
             <div className="bg-blue-500/10 rounded-lg p-2.5 border border-blue-500/20 text-center">
               <div className="flex items-center justify-center gap-1 mb-0.5">
@@ -771,7 +771,7 @@ const ImportStepSuccess: React.FC<ImportStepSuccessProps> = ({ result, invalidRo
 
   return (
   <div className="text-center py-8">
-    <div className="w-20 h-20 bg-emerald-500/20 rounded-full flex items-center justify-center mx-auto mb-6 text-emerald-500">
+    <div className="w-20 h-20 bg-purple-500/20 rounded-full flex items-center justify-center mx-auto mb-6 text-purple-500">
       <CheckCircle2 size={40} />
     </div>
     <h3 className="text-2xl font-bold text-white mb-2">Importação Concluída!</h3>
@@ -782,9 +782,9 @@ const ImportStepSuccess: React.FC<ImportStepSuccessProps> = ({ result, invalidRo
         <p className="text-2xl font-bold text-white">{result.total}</p>
         <p className="text-xs text-gray-500">Linhas</p>
       </Container>
-      <div className="bg-emerald-500/10 rounded-xl p-4 border border-emerald-500/20">
-        <p className="text-2xl font-bold text-emerald-400">{result.inserted}</p>
-        <p className="text-xs text-emerald-500/70">Novos</p>
+      <div className="bg-purple-500/10 rounded-xl p-4 border border-purple-500/20">
+        <p className="text-2xl font-bold text-purple-400">{result.inserted}</p>
+        <p className="text-xs text-purple-500/70">Novos</p>
       </div>
       <div className="bg-blue-500/10 rounded-xl p-4 border border-blue-500/20">
         <p className="text-2xl font-bold text-blue-400">{result.updated}</p>
@@ -801,9 +801,9 @@ const ImportStepSuccess: React.FC<ImportStepSuccessProps> = ({ result, invalidRo
 
     {/* Feedback da autocorreção */}
     {fixState === 'done' && fixResult && (
-      <div className="flex items-center justify-center gap-2 max-w-lg mx-auto mb-4 p-3 bg-emerald-500/10 border border-emerald-500/20 rounded-lg">
-        <CheckCircle2 size={14} className="text-emerald-400 shrink-0" />
-        <p className="text-xs text-emerald-400">
+      <div className="flex items-center justify-center gap-2 max-w-lg mx-auto mb-4 p-3 bg-purple-500/10 border border-purple-500/20 rounded-lg">
+        <CheckCircle2 size={14} className="text-purple-400 shrink-0" />
+        <p className="text-xs text-purple-400">
           {fixResult.inserted + fixResult.updated} número{fixResult.inserted + fixResult.updated !== 1 ? 's corrigidos' : ' corrigido'} e importado{fixResult.inserted + fixResult.updated !== 1 ? 's' : ''} com sucesso!
         </p>
       </div>
@@ -883,7 +883,7 @@ const ImportStepSuccess: React.FC<ImportStepSuccessProps> = ({ result, invalidRo
             <div className="mt-2 rounded-lg border border-white/10 bg-zinc-900/60 p-3 space-y-3 text-xs">
               {/* Corrigido automaticamente */}
               <div>
-                <p className="text-emerald-400 font-medium mb-1.5">✅ Aceitos e corrigidos automaticamente</p>
+                <p className="text-purple-400 font-medium mb-1.5">✅ Aceitos e corrigidos automaticamente</p>
                 <table className="w-full">
                   <thead>
                     <tr className="text-gray-500 text-[10px]">
@@ -901,7 +901,7 @@ const ImportStepSuccess: React.FC<ImportStepSuccessProps> = ({ result, invalidRo
                     ].map(([in_, out_], i) => (
                       <tr key={i}>
                         <td className="py-1 pr-2 font-mono text-gray-300">{in_}</td>
-                        <td className="py-1 font-mono text-emerald-400">{out_}</td>
+                        <td className="py-1 font-mono text-purple-400">{out_}</td>
                       </tr>
                     ))}
                   </tbody>

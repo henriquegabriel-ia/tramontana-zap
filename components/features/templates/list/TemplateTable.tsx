@@ -138,7 +138,7 @@ export const TemplateTable: React.FC<TemplateTableProps> = ({
                       : isHeaderChecked
                         ? statusFilter === 'DRAFT'
                           ? 'bg-amber-500 border-amber-500'
-                          : 'bg-emerald-500 border-emerald-500'
+                          : 'bg-purple-500 border-purple-500'
                         : 'border-[var(--ds-border-default)] hover:border-[var(--ds-border-strong)]'
                   }`}
                 >

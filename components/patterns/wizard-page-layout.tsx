@@ -246,7 +246,7 @@ export function WizardActions({
           <Button
             onClick={onNext}
             disabled={nextDisabled || isLoading}
-            className="bg-emerald-500 text-white hover:bg-emerald-400"
+            className="bg-purple-500 text-white hover:bg-purple-400"
           >
             {isLoading ? (
               <>
@@ -289,7 +289,7 @@ export function StepIndicator({
             key={index}
             className={cn(
               'w-2 h-2 rounded-full transition-colors',
-              index + 1 <= currentStep ? 'bg-emerald-500' : 'bg-zinc-700'
+              index + 1 <= currentStep ? 'bg-purple-500' : 'bg-zinc-700'
             )}
           />
         ))}

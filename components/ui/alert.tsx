@@ -122,7 +122,7 @@ function Alert({
             "opacity-70 hover:opacity-100",
             "[transition:var(--ds-transition-fast)]",
             "focus:outline-none focus:ring-2 focus:ring-offset-2",
-            variant === "success" && "focus:ring-emerald-500",
+            variant === "success" && "focus:ring-purple-500",
             variant === "warning" && "focus:ring-amber-500",
             variant === "error" && "focus:ring-red-500",
             variant === "info" && "focus:ring-blue-500",

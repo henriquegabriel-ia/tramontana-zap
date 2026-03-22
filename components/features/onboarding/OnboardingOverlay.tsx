@@ -53,7 +53,7 @@ export const OnboardingOverlay = ({
                 : health?.services.database?.status === 'error'
                     ? 'error'
                     : 'pending',
-            icon: React.createElement(Database, { size: 20, className: 'text-emerald-600 dark:text-emerald-400' }),
+            icon: React.createElement(Database, { size: 20, className: 'text-purple-600 dark:text-purple-400' }),
             actionLabel: 'Abrir Assistente de Configuração',
             actionUrl: '/install',
             errorMessage: health?.services.database?.message,
@@ -118,7 +118,7 @@ export const OnboardingOverlay = ({
             <div className="max-w-2xl w-full">
                 {/* Header */}
                 <div className="text-center mb-10">
-                    <div className="inline-flex items-center justify-center w-20 h-20 rounded-2xl bg-linear-to-br from-primary-500 to-emerald-600 mb-6 shadow-lg shadow-primary-500/20">
+                    <div className="inline-flex items-center justify-center w-20 h-20 rounded-2xl bg-linear-to-br from-primary-500 to-purple-600 mb-6 shadow-lg shadow-primary-500/20">
                         <Sparkles size={40} className="text-white" />
                     </div>
                     <h1 className="text-4xl font-bold text-[var(--ds-text-primary)] tracking-tight mb-3">
@@ -153,7 +153,7 @@ export const OnboardingOverlay = ({
                     </div>
                     <div className="h-2 bg-[var(--ds-bg-surface)] rounded-full overflow-hidden">
                         <div
-                            className="h-full bg-linear-to-r from-primary-500 to-emerald-500 transition-all duration-500"
+                            className="h-full bg-linear-to-r from-primary-500 to-purple-500 transition-all duration-500"
                             style={{ width: `${progressPercent}%` }}
                         />
                     </div>
@@ -198,7 +198,7 @@ export const OnboardingOverlay = ({
                                 <div
                                     key={step.id}
                                     className={`relative rounded-2xl border transition-all duration-300 overflow-hidden ${isConfigured
-                                        ? 'bg-emerald-500/5 border-emerald-500/30'
+                                        ? 'bg-purple-500/5 border-purple-500/30'
                                         : isError
                                             ? 'bg-red-500/5 border-red-500/30'
                                             : isNextStep
@@ -208,7 +208,7 @@ export const OnboardingOverlay = ({
                                 >
                                     {/* Step number badge */}
                                     <div className={`absolute top-4 left-4 w-8 h-8 rounded-full flex items-center justify-center text-sm font-bold ${isConfigured
-                                        ? 'bg-emerald-500 text-white'
+                                        ? 'bg-purple-500 text-white'
                                         : isError
                                             ? 'bg-red-500 text-white'
                                             : isNextStep
@@ -222,7 +222,7 @@ export const OnboardingOverlay = ({
                                         {/* Header */}
                                         <div className="flex items-center justify-between mb-2">
                                             <div className="flex items-center gap-2">
-                                                <h3 className={`font-semibold ${isConfigured ? 'text-emerald-600 dark:text-emerald-400' : isError ? 'text-red-600 dark:text-red-400' : 'text-[var(--ds-text-primary)]'
+                                                <h3 className={`font-semibold ${isConfigured ? 'text-purple-600 dark:text-purple-400' : isError ? 'text-red-600 dark:text-red-400' : 'text-[var(--ds-text-primary)]'
                                                     }`}>
                                                     {step.title}
                                                 </h3>
@@ -233,7 +233,7 @@ export const OnboardingOverlay = ({
                                                 )}
                                             </div>
                                             {isConfigured && (
-                                                <div className="w-8 h-8 rounded-lg bg-emerald-500/20 flex items-center justify-center">
+                                                <div className="w-8 h-8 rounded-lg bg-purple-500/20 flex items-center justify-center">
                                                     {step.icon}
                                                 </div>
                                             )}
@@ -251,7 +251,7 @@ export const OnboardingOverlay = ({
                                         )}
 
                                         {isConfigured && (
-                                            <div className="flex items-center gap-2 text-sm text-emerald-600 dark:text-emerald-400 mt-3">
+                                            <div className="flex items-center gap-2 text-sm text-purple-600 dark:text-purple-400 mt-3">
                                                 <CheckCircle2 size={14} />
                                                 <span>Configurado</span>
                                             </div>
@@ -303,7 +303,7 @@ export const OnboardingOverlay = ({
 
                                     {index < steps.length - 1 && (
                                         <div className="absolute -bottom-4 left-7 z-10">
-                                            <div className={`w-0.5 h-8 ${isConfigured ? 'bg-emerald-500/30' : 'bg-[var(--ds-bg-surface)]'}`} />
+                                            <div className={`w-0.5 h-8 ${isConfigured ? 'bg-purple-500/30' : 'bg-[var(--ds-bg-surface)]'}`} />
                                         </div>
                                     )}
                                 </div>

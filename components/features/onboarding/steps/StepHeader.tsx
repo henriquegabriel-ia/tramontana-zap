@@ -32,7 +32,7 @@ export function StepHeader({ stepNumber, totalSteps, title, onBack }: StepHeader
       {/* Progress bar */}
       <div className="h-1.5 bg-zinc-800 rounded-full overflow-hidden">
         <div
-          className="h-full bg-emerald-500 rounded-full transition-all duration-300"
+          className="h-full bg-purple-500 rounded-full transition-all duration-300"
           style={{ width: `${(stepNumber / totalSteps) * 100}%` }}
         />
       </div>

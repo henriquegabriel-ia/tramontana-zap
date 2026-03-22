@@ -113,8 +113,8 @@ export const BulkGenerationModal: React.FC<BulkGenerationModalProps> = ({
                 {/* Header - Apple-esque: Clean, Centered or subtle */}
                 <div className="px-6 py-4 border-b border-white/10 flex items-center justify-between bg-zinc-950/40 backdrop-blur-xl z-10">
                     <div className="flex items-center gap-3">
-                        <div className="p-2 rounded-xl bg-emerald-500/10 border border-emerald-500/20">
-                            {hasTemplates ? <Target className="w-5 h-5 text-emerald-300" /> : <Sparkles className="w-5 h-5 text-emerald-300" />}
+                        <div className="p-2 rounded-xl bg-purple-500/10 border border-purple-500/20">
+                            {hasTemplates ? <Target className="w-5 h-5 text-purple-300" /> : <Sparkles className="w-5 h-5 text-purple-300" />}
                         </div>
                         <div>
                             <h2 className="text-lg font-semibold text-white tracking-tight">
@@ -151,15 +151,15 @@ export const BulkGenerationModal: React.FC<BulkGenerationModalProps> = ({
                                         value={businessType}
                                         onChange={(e) => setBusinessType(e.target.value)}
                                         placeholder="Ex: Confirmação de agendamento para clínica odontológica, avisar sobre boleto vencido, envio de código de rastreio..."
-                                        className="w-full h-40 bg-zinc-950/40 border border-white/10 rounded-xl p-5 text-white placeholder:text-zinc-500 focus:border-emerald-500/50 focus:ring-1 focus:ring-emerald-500/30 outline-none resize-none transition-all text-base leading-relaxed"
+                                        className="w-full h-40 bg-zinc-950/40 border border-white/10 rounded-xl p-5 text-white placeholder:text-zinc-500 focus:border-purple-500/50 focus:ring-1 focus:ring-purple-500/30 outline-none resize-none transition-all text-base leading-relaxed"
                                     />
                                     <div className="absolute bottom-4 right-4 text-xs text-zinc-500 bg-zinc-900/80 px-2 py-1 rounded-md border border-white/5">
                                         {businessType.length} caracteres
                                     </div>
                                 </div>
-                                <div className="flex items-start gap-3 p-4 bg-emerald-500/10 border border-emerald-500/20 rounded-xl">
-                                    <Info className="w-5 h-5 text-emerald-300 shrink-0 mt-0.5" />
-                                    <p className="text-sm text-emerald-100/80 leading-relaxed">
+                                <div className="flex items-start gap-3 p-4 bg-purple-500/10 border border-purple-500/20 rounded-xl">
+                                    <Info className="w-5 h-5 text-purple-300 shrink-0 mt-0.5" />
+                                    <p className="text-sm text-purple-100/80 leading-relaxed">
                                         Nossa IA gera variações otimizadas especificamente para a categoria <strong>UTILITY</strong>, maximizando suas chances de aprovação imediata na Meta.
                                     </p>
                                 </div>
@@ -173,7 +173,7 @@ export const BulkGenerationModal: React.FC<BulkGenerationModalProps> = ({
                                         <select
                                             value={quantity}
                                             onChange={(e) => setQuantity(Number(e.target.value))}
-                                            className="w-full bg-zinc-950/40 border border-white/10 rounded-xl px-4 py-3 text-white outline-none focus:border-emerald-500/50 appearance-none cursor-pointer hover:bg-white/5 transition-colors"
+                                            className="w-full bg-zinc-950/40 border border-white/10 rounded-xl px-4 py-3 text-white outline-none focus:border-purple-500/50 appearance-none cursor-pointer hover:bg-white/5 transition-colors"
                                         >
                                             {[3, 5, 10, 15, 20].map(n => (
                                                 <option key={n} value={n}>{n} variações</option>
@@ -190,7 +190,7 @@ export const BulkGenerationModal: React.FC<BulkGenerationModalProps> = ({
                                         <select
                                             value={language}
                                             onChange={(e) => setLanguage(e.target.value as any)}
-                                            className="w-full bg-zinc-950/40 border border-white/10 rounded-xl px-4 py-3 text-white outline-none focus:border-emerald-500/50 appearance-none cursor-pointer hover:bg-white/5 transition-colors"
+                                            className="w-full bg-zinc-950/40 border border-white/10 rounded-xl px-4 py-3 text-white outline-none focus:border-purple-500/50 appearance-none cursor-pointer hover:bg-white/5 transition-colors"
                                         >
                                             <option value="pt_BR">🇧🇷 Português (BR)</option>
                                             <option value="en_US">🇺🇸 English (US)</option>
@@ -214,14 +214,14 @@ export const BulkGenerationModal: React.FC<BulkGenerationModalProps> = ({
                                             key={template.id}
                                             onClick={() => onToggleTemplate(template.id)}
                                             className={`relative group cursor-pointer transition-all duration-300 border rounded-2xl p-5 hover:scale-[1.01] ${isSelected
-                                                ? 'bg-emerald-500/10 border-emerald-500/30 shadow-[0_0_20px_-10px_rgba(16,185,129,0.2)]'
+                                                ? 'bg-purple-500/10 border-purple-500/30 shadow-[0_0_20px_-10px_rgba(16,185,129,0.2)]'
                                                 : 'bg-zinc-950/40 border-white/10 hover:border-white/20 hover:bg-white/5'
                                                 }`}
                                         >
                                             {/* Header */}
                                             <div className="flex justify-between items-start mb-3">
                                                 <div className="flex-1 min-w-0 pr-4">
-                                                    <h3 className={`text-sm font-bold truncate ${isSelected ? 'text-emerald-400' : 'text-zinc-300'}`}>
+                                                    <h3 className={`text-sm font-bold truncate ${isSelected ? 'text-purple-400' : 'text-zinc-300'}`}>
                                                         {template.name}
                                                     </h3>
                                                     <div className="flex items-center gap-2 mt-1">
@@ -238,7 +238,7 @@ export const BulkGenerationModal: React.FC<BulkGenerationModalProps> = ({
 
                                                 {/* Checkbox Ring */}
                                                 <div className={`w-5 h-5 rounded-full border flex items-center justify-center transition-all duration-300 ${isSelected
-                                                    ? 'bg-emerald-500 border-emerald-500 shadow-sm'
+                                                    ? 'bg-purple-500 border-purple-500 shadow-sm'
                                                     : 'border-zinc-600 group-hover:border-zinc-400'
                                                     }`}>
                                                     {isSelected && <Check size={12} className="text-white" strokeWidth={3} />}
@@ -367,7 +367,7 @@ export const BulkGenerationModal: React.FC<BulkGenerationModalProps> = ({
                                 {isGenerating ? (
                                     <><Loader2 size={18} className="animate-spin" /> Gerando...</>
                                 ) : (
-                                    <><Sparkles size={18} className="text-emerald-600" /> Gerar Templates</>
+                                    <><Sparkles size={18} className="text-purple-600" /> Gerar Templates</>
                                 )}
                             </button>
                         </>
@@ -382,7 +382,7 @@ export const BulkGenerationModal: React.FC<BulkGenerationModalProps> = ({
                                 </button>
                                 <button
                                     onClick={onSelectAll}
-                                    className="px-4 py-2 text-zinc-400 hover:text-emerald-300 text-sm font-medium transition-colors"
+                                    className="px-4 py-2 text-zinc-400 hover:text-purple-300 text-sm font-medium transition-colors"
                                 >
                                     {selectedTemplates.size === generatedTemplates.length ? 'Desmarcar Todos' : 'Selecionar Todos'}
                                 </button>
@@ -391,7 +391,7 @@ export const BulkGenerationModal: React.FC<BulkGenerationModalProps> = ({
                             <button
                                 onClick={onSubmit}
                                 disabled={isSubmitting || !canSubmit}
-                                className="flex items-center gap-2 px-8 py-3 bg-emerald-500 text-black font-semibold rounded-xl hover:bg-emerald-400 transition-all disabled:opacity-50 disabled:cursor-not-allowed"
+                                className="flex items-center gap-2 px-8 py-3 bg-purple-500 text-black font-semibold rounded-xl hover:bg-purple-400 transition-all disabled:opacity-50 disabled:cursor-not-allowed"
                                 title={!canSubmit && (buttonAnalysis.hasUrlButtons || buttonAnalysis.hasPhoneButtons) ? 'Preencha os campos de configuração acima' : ''}
                             >
                                 {isSubmitting ? (

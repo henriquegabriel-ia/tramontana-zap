@@ -115,7 +115,7 @@ export function AdvancedFlowPanel({
                 onClick={() => setSelectedScreenId(screen.id)}
                 className={`rounded-full border px-3 py-1 text-xs ${
                   screen.id === selectedScreenId
-                    ? 'border-emerald-400/40 bg-emerald-500/10 text-emerald-100'
+                    ? 'border-purple-400/40 bg-purple-500/10 text-purple-100'
                     : 'border-white/10 bg-zinc-950/40 text-gray-300 hover:text-white'
                 }`}
               >
@@ -168,7 +168,7 @@ export function AdvancedFlowPanel({
                   value={nextScreenId}
                   onChange={(e) => handleNextScreenChange(e.target.value)}
                   disabled={!!selectedScreen.terminal}
-                  className="h-11 w-full rounded-xl border border-white/10 bg-white/5 px-3 text-[14px] text-zinc-200 focus:outline-none focus:ring-2 focus:ring-emerald-400/40 disabled:opacity-50"
+                  className="h-11 w-full rounded-xl border border-white/10 bg-white/5 px-3 text-[14px] text-zinc-200 focus:outline-none focus:ring-2 focus:ring-purple-400/40 disabled:opacity-50"
                 >
                   <option value="">— Nenhuma (terminal) —</option>
                   {screens

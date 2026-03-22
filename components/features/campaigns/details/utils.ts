@@ -24,7 +24,7 @@ export const formatMs = (ms: number | null | undefined): string => {
 export const getCampaignStatusClass = (status: CampaignStatus): string => {
   switch (status) {
     case CampaignStatus.COMPLETED:
-      return 'bg-emerald-500/10 border-emerald-500/20 text-emerald-400';
+      return 'bg-purple-500/10 border-purple-500/20 text-purple-400';
     case CampaignStatus.SENDING:
       return 'bg-blue-500/10 border-blue-500/20 text-blue-400';
     case CampaignStatus.CANCELLED:
@@ -61,7 +61,7 @@ export const computeBaselineThroughputMedian = (baseline: any[]): number | null 
 
 export const computePerfSourceLabel = (source: string | undefined): { label: string; tone: string } => {
   const s = String(source || '').trim();
-  if (s === 'run_metrics') return { label: 'Dados: avancados', tone: 'text-emerald-300 bg-emerald-500/10 border-emerald-500/20' };
+  if (s === 'run_metrics') return { label: 'Dados: avancados', tone: 'text-purple-300 bg-purple-500/10 border-purple-500/20' };
   if (s === 'campaigns_fallback') return { label: 'Dados: basicos', tone: 'text-amber-200 bg-amber-500/10 border-amber-500/20' };
   if (!s) return { label: 'Dados: —', tone: 'text-gray-500 bg-zinc-900/60 border-white/10' };
   return { label: `Dados: ${s}`, tone: 'text-gray-500 bg-zinc-900/60 border-white/10' };

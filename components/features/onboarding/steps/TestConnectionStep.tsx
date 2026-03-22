@@ -285,7 +285,7 @@ export function TestConnectionStep({
       case 'loading':
         return <Loader2 className="w-4 h-4 text-zinc-400 animate-spin" />;
       case 'success':
-        return <CheckCircle2 className="w-4 h-4 text-emerald-500" />;
+        return <CheckCircle2 className="w-4 h-4 text-purple-500" />;
       case 'warning':
         return <AlertTriangle className="w-4 h-4 text-amber-500" />;
       case 'error':
@@ -376,7 +376,7 @@ export function TestConnectionStep({
             {validation.permissionDetails.map((perm) => (
               <div key={perm.scope} className="flex items-center justify-between text-sm">
                 <span className="text-zinc-400">{perm.label}</span>
-                <span className={perm.present ? 'text-emerald-400' : 'text-red-400'}>
+                <span className={perm.present ? 'text-purple-400' : 'text-red-400'}>
                   {perm.present ? '✓' : '✗'}
                 </span>
               </div>
@@ -390,7 +390,7 @@ export function TestConnectionStep({
             <p className="text-xs text-zinc-500">
               Tipo: <span className="text-zinc-300">{validation.tokenType}</span>
               {validation.isPermanent ? (
-                <span className="text-emerald-400 ml-2">• Permanente</span>
+                <span className="text-purple-400 ml-2">• Permanente</span>
               ) : validation.tokenExpiry ? (
                 <span className="text-amber-400 ml-2">• Expira em {validation.tokenExpiry}</span>
               ) : null}

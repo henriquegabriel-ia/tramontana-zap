@@ -12,7 +12,7 @@ export function StatusBadge({ status }: StatusBadgeProps) {
 
   if (status === 'pass') {
     return (
-      <span className={`${base} bg-emerald-500/10 border-emerald-500/20 text-emerald-200`}>
+      <span className={`${base} bg-purple-500/10 border-purple-500/20 text-purple-200`}>
         <CheckCircle2 size={14} /> OK
       </span>
     )

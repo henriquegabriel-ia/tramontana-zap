@@ -128,7 +128,7 @@ export function PhoneNumberCard({
               onClick={() => setIsFunnelExpanded(!isFunnelExpanded)}
               className={
                 'px-2.5 py-1 text-xs font-medium rounded-lg flex items-center gap-1.5 transition-all hover:ring-2 hover:ring-[var(--ds-border-strong)] ' +
-                (cardColor === 'emerald'
+                (cardColor === 'purple'
                   ? 'bg-[var(--ds-status-success-bg)] text-[var(--ds-status-success-text)]'
                   : cardColor === 'amber'
                     ? 'bg-[var(--ds-status-warning-bg)] text-[var(--ds-status-warning-text)]'

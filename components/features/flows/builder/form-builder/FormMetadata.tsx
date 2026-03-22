@@ -56,7 +56,7 @@ export function FormMetadata({
           <div className="mt-2 text-sm text-gray-400">
             {dirty ? 'Alterações não salvas' : 'Sincronizado'}
             {issues.length === 0 ? (
-              <span className="text-emerald-300"> • pronto</span>
+              <span className="text-purple-300"> • pronto</span>
             ) : (
               <span className="text-amber-300"> • revisar</span>
             )}

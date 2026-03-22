@@ -71,7 +71,7 @@ const TemplateTableRowComponent: React.FC<TemplateTableRowProps> = ({
   return (
     <tr
       className={`hover:bg-[var(--ds-bg-hover)] transition-colors group cursor-pointer ${
-        isRowSelected ? (isManualDraft ? 'bg-amber-500/5' : 'bg-emerald-500/5') : ''
+        isRowSelected ? (isManualDraft ? 'bg-amber-500/5' : 'bg-purple-500/5') : ''
       }`}
       onMouseEnter={onMouseEnter}
       onMouseLeave={onMouseLeave}
@@ -84,7 +84,7 @@ const TemplateTableRowComponent: React.FC<TemplateTableRowProps> = ({
             isRowSelected
               ? isManualDraft
                 ? 'bg-amber-500 border-amber-500'
-                : 'bg-emerald-500 border-emerald-500'
+                : 'bg-purple-500 border-purple-500'
               : 'border-[var(--ds-border-default)] hover:border-[var(--ds-border-strong)]'
           }`}
           title={isRowSelected ? 'Desmarcar' : 'Selecionar'}
@@ -103,11 +103,11 @@ const TemplateTableRowComponent: React.FC<TemplateTableRowProps> = ({
             className="flex items-center gap-3 hover:opacity-90"
             title="Continuar edicao"
           >
-            <div className="p-2 bg-[var(--ds-bg-elevated)] rounded-lg text-[var(--ds-text-secondary)] group-hover:text-emerald-200 transition-colors">
+            <div className="p-2 bg-[var(--ds-bg-elevated)] rounded-lg text-[var(--ds-text-secondary)] group-hover:text-purple-200 transition-colors">
               <FileText size={16} />
             </div>
             <span
-              className="font-medium text-[var(--ds-text-primary)] group-hover:text-emerald-200 transition-colors truncate max-w-50"
+              className="font-medium text-[var(--ds-text-primary)] group-hover:text-purple-200 transition-colors truncate max-w-50"
               title={template.name}
             >
               {template.name}
@@ -115,11 +115,11 @@ const TemplateTableRowComponent: React.FC<TemplateTableRowProps> = ({
           </Link>
         ) : (
           <div className="flex items-center gap-3">
-            <div className="p-2 bg-[var(--ds-bg-elevated)] rounded-lg text-[var(--ds-text-secondary)] group-hover:text-emerald-200 transition-colors">
+            <div className="p-2 bg-[var(--ds-bg-elevated)] rounded-lg text-[var(--ds-text-secondary)] group-hover:text-purple-200 transition-colors">
               <FileText size={16} />
             </div>
             <span
-              className="font-medium text-[var(--ds-text-primary)] group-hover:text-emerald-200 transition-colors truncate max-w-50"
+              className="font-medium text-[var(--ds-text-primary)] group-hover:text-purple-200 transition-colors truncate max-w-50"
               title={template.name}
             >
               {template.name}
@@ -144,7 +144,7 @@ const TemplateTableRowComponent: React.FC<TemplateTableRowProps> = ({
         <span
           className={`inline-flex items-center rounded-md border px-2 py-1 text-xs font-medium ${
             template.category === 'UTILIDADE'
-              ? 'bg-emerald-500/10 text-[var(--ds-status-success-text)] border-emerald-500/20'
+              ? 'bg-purple-500/10 text-[var(--ds-status-success-text)] border-purple-500/20'
               : template.category === 'MARKETING'
                 ? 'bg-amber-500/10 text-[var(--ds-status-warning-text)] border-amber-500/20'
                 : 'bg-[var(--ds-bg-hover)] text-[var(--ds-text-secondary)] border-[var(--ds-border-default)]'

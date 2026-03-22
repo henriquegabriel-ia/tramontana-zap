@@ -241,7 +241,7 @@ export function ContactMemoriesSheet({
         <SheetContent className="w-[400px] sm:w-[450px] bg-[var(--ds-bg-elevated)] border-l border-[var(--ds-border-subtle)] px-6">
           <SheetHeader className="space-y-1">
             <SheetTitle className="flex items-center gap-2 text-[var(--ds-text-primary)]">
-              <User className="h-5 w-5 text-emerald-400" />
+              <User className="h-5 w-5 text-purple-400" />
               Contexto do Contato
             </SheetTitle>
             <SheetDescription className="text-[var(--ds-text-secondary)]">
@@ -332,11 +332,11 @@ export function ContactMemoriesSheet({
                 {/* SEÇÃO 1: Perfil (Dados do SmartZap) */}
                 {profile && (
                   <div className="space-y-3">
-                    <div className="flex items-center gap-2 text-xs font-medium text-emerald-400">
+                    <div className="flex items-center gap-2 text-xs font-medium text-purple-400">
                       <FileText className="h-3.5 w-3.5" />
                       Perfil Cadastrado
                     </div>
-                    <div className="rounded-lg border border-emerald-500/20 bg-emerald-500/5 p-3 space-y-2.5">
+                    <div className="rounded-lg border border-purple-500/20 bg-purple-500/5 p-3 space-y-2.5">
                       {profile.name && (
                         <div className="flex items-center gap-2 text-sm">
                           <User className="h-3.5 w-3.5 text-[var(--ds-text-muted)]" />
@@ -356,7 +356,7 @@ export function ContactMemoriesSheet({
                             {profile.tags.map((tag) => (
                               <span
                                 key={tag}
-                                className="px-2 py-0.5 rounded-full bg-emerald-500/20 text-emerald-300 text-[10px] font-medium"
+                                className="px-2 py-0.5 rounded-full bg-purple-500/20 text-purple-300 text-[10px] font-medium"
                               >
                                 {tag}
                               </span>
@@ -374,7 +374,7 @@ export function ContactMemoriesSheet({
                       )}
                       {/* Custom fields */}
                       {profile.customFields && Object.keys(profile.customFields).length > 0 && (
-                        <div className="pt-2 border-t border-emerald-500/10 space-y-1.5">
+                        <div className="pt-2 border-t border-purple-500/10 space-y-1.5">
                           {Object.entries(profile.customFields).map(([key, value]) => (
                             <div key={key} className="flex items-center justify-between text-xs">
                               <span className="text-[var(--ds-text-muted)] capitalize">{key.replace(/_/g, ' ')}</span>

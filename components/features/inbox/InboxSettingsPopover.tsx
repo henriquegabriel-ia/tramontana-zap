@@ -209,7 +209,7 @@ export function InboxSettingsPopover() {
               className={cn(
                 'w-full flex items-center justify-center gap-2 h-8 rounded-lg text-xs font-medium transition-colors',
                 hasChanges
-                  ? 'bg-emerald-600 text-white hover:bg-emerald-500'
+                  ? 'bg-purple-600 text-white hover:bg-purple-500'
                   : 'bg-[var(--ds-bg-surface)] text-[var(--ds-text-muted)] cursor-not-allowed'
               )}
             >

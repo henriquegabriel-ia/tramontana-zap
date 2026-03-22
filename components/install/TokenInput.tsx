@@ -31,7 +31,7 @@ interface TokenInputProps
   autoSubmitLength?: number;
   onAutoSubmit?: () => void;
   showCharCount?: boolean;
-  accentColor?: 'cyan' | 'magenta' | 'orange' | 'red' | 'emerald';
+  accentColor?: 'cyan' | 'magenta' | 'orange' | 'red' | 'purple';
   /** Se false, mostra texto claro (para URLs). Default: true */
   masked?: boolean;
 }
@@ -70,7 +70,7 @@ const colorMap: Record<string, keyof typeof accentColorStyles> = {
   magenta: 'magenta',
   orange: 'orange',
   red: 'red',
-  emerald: 'cyan', // emerald → cyan (compatibility)
+  purple: 'cyan', // purple → cyan (compatibility)
 };
 
 // Função para obter cores resolvidas

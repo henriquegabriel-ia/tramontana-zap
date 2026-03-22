@@ -87,7 +87,7 @@ export function SyncTemplatesStep({
         <div className={`
           w-24 h-24 rounded-2xl flex items-center justify-center transition-all duration-500
           ${syncStatus === 'syncing' ? 'bg-blue-500/20 animate-pulse' : ''}
-          ${syncStatus === 'success' ? 'bg-emerald-500/20' : ''}
+          ${syncStatus === 'success' ? 'bg-purple-500/20' : ''}
           ${syncStatus === 'error' ? 'bg-red-500/20' : ''}
           ${syncStatus === 'idle' ? 'bg-zinc-700/50' : ''}
         `}>
@@ -95,7 +95,7 @@ export function SyncTemplatesStep({
             <Loader2 className="w-12 h-12 text-blue-400 animate-spin" />
           )}
           {syncStatus === 'success' && (
-            <CheckCircle2 className="w-12 h-12 text-emerald-400" />
+            <CheckCircle2 className="w-12 h-12 text-purple-400" />
           )}
           {syncStatus === 'error' && (
             <AlertCircle className="w-12 h-12 text-red-400" />
@@ -117,7 +117,7 @@ export function SyncTemplatesStep({
 
         {syncStatus === 'success' && templateCount > 0 && (
           <>
-            <p className="text-lg font-medium text-emerald-400">
+            <p className="text-lg font-medium text-purple-400">
               {templateCount} {templateCount === 1 ? 'template encontrado' : 'templates encontrados'}!
             </p>
             <p className="text-sm text-zinc-400">

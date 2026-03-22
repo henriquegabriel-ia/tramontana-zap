@@ -119,13 +119,13 @@ export function ConversationList({
                 className={cn(
                   'h-8 w-8 flex items-center justify-center rounded-lg transition-colors',
                   activeFilterCount > 0
-                    ? 'bg-emerald-500/10 text-emerald-400'
+                    ? 'bg-purple-500/10 text-purple-400'
                     : 'text-[var(--ds-text-muted)] hover:text-[var(--ds-text-secondary)] hover:bg-[var(--ds-bg-surface)]/60'
                 )}
               >
                 <SlidersHorizontal className="h-3.5 w-3.5" />
                 {activeFilterCount > 0 && (
-                  <span className="absolute -top-0.5 -right-0.5 w-3.5 h-3.5 rounded-full bg-emerald-500 text-[9px] text-white flex items-center justify-center">
+                  <span className="absolute -top-0.5 -right-0.5 w-3.5 h-3.5 rounded-full bg-purple-500 text-[9px] text-white flex items-center justify-center">
                     {activeFilterCount}
                   </span>
                 )}
@@ -228,7 +228,7 @@ export function ConversationList({
         {/* Unread count - subtle, inline */}
         {totalUnread > 0 && (
           <div className="flex items-center gap-1.5 mt-2 px-0.5">
-            <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse" />
+            <span className="w-1.5 h-1.5 rounded-full bg-purple-500 animate-pulse" />
             <span className="text-[10px] text-[var(--ds-text-muted)]">
               {totalUnread} {totalUnread === 1 ? 'não lida' : 'não lidas'}
             </span>
@@ -265,7 +265,7 @@ export function ConversationList({
             {(search || activeFilterCount > 0) && (
               <button
                 onClick={clearFilters}
-                className="mt-2 text-[10px] text-emerald-400/80 hover:text-emerald-400 transition-colors"
+                className="mt-2 text-[10px] text-purple-400/80 hover:text-purple-400 transition-colors"
               >
                 Limpar filtros
               </button>

@@ -380,7 +380,7 @@ export default function TemplateProjectDetailsPage() {
     }, [project?.items]);
 
     const sections = [
-        { id: 'APPROVED', label: 'Aprovados', count: groups.APPROVED.length, color: 'emerald', icon: CheckCircle },
+        { id: 'APPROVED', label: 'Aprovados', count: groups.APPROVED.length, color: 'purple', icon: CheckCircle },
         { id: 'REJECTED', label: 'Rejeitados', count: groups.REJECTED.length, color: 'red', icon: XCircle },
         { id: 'PENDING', label: 'Em Análise', count: groups.PENDING.length, color: 'yellow', icon: Clock },
         { id: 'DRAFT', label: 'Rascunhos (Não Enviados)', count: groups.DRAFT.length, color: 'zinc', icon: Filter },
@@ -389,7 +389,7 @@ export default function TemplateProjectDetailsPage() {
     if (isLoading) {
         return (
             <div className="flex items-center justify-center h-full">
-                <Loader2 className="w-8 h-8 animate-spin text-emerald-300" />
+                <Loader2 className="w-8 h-8 animate-spin text-purple-300" />
             </div>
         );
     }
@@ -438,12 +438,12 @@ export default function TemplateProjectDetailsPage() {
                                                 if (e.key === 'Escape') handleCancelEdit();
                                             }}
                                             autoFocus
-                                            className="text-2xl sm:text-3xl font-bold bg-transparent border-b-2 border-emerald-500 outline-none text-white min-w-[200px]"
+                                            className="text-2xl sm:text-3xl font-bold bg-transparent border-b-2 border-purple-500 outline-none text-white min-w-[200px]"
                                         />
                                         <button
                                             onClick={handleSaveTitle}
                                             disabled={renameProjectMutation.isPending}
-                                            className="p-1.5 text-emerald-400 hover:bg-emerald-500/20 rounded-lg transition-colors"
+                                            className="p-1.5 text-purple-400 hover:bg-purple-500/20 rounded-lg transition-colors"
                                             title="Salvar"
                                         >
                                             {renameProjectMutation.isPending ? <Loader2 className="w-5 h-5 animate-spin" /> : <Check className="w-5 h-5" />}
@@ -522,7 +522,7 @@ export default function TemplateProjectDetailsPage() {
                         label="Aprovados"
                         count={groups.APPROVED.length}
                         total={project.items.length}
-                        color="emerald"
+                        color="purple"
                         icon={CheckCircle}
                     />
                     <StatCard
@@ -565,7 +565,7 @@ export default function TemplateProjectDetailsPage() {
                                 >
                                     <div className="flex items-center gap-3">
                                         <section.icon className={cn("w-5 h-5", {
-                                            'text-emerald-300': section.color === 'emerald',
+                                            'text-purple-300': section.color === 'purple',
                                             'text-red-300': section.color === 'red',
                                             'text-amber-300': section.color === 'yellow',
                                             'text-gray-400': section.color === 'zinc',
@@ -592,7 +592,7 @@ export default function TemplateProjectDetailsPage() {
                                                 <div className={cn(
                                                     "w-5 h-5 rounded border flex items-center justify-center transition-colors shrink-0",
                                                     selectedItems.length === groups.DRAFT.length && groups.DRAFT.length > 0
-                                                        ? "bg-emerald-500 border-emerald-500 text-black"
+                                                        ? "bg-purple-500 border-purple-500 text-black"
                                                         : "border-white/20 text-transparent hover:border-white/40"
                                                 )}>
                                                     <Check className="w-3.5 h-3.5" />
@@ -617,7 +617,7 @@ export default function TemplateProjectDetailsPage() {
                                                     className={cn(
                                                         "p-3 rounded-lg border transition-all cursor-pointer flex gap-3 relative group",
                                                         isActive
-                                                            ? "bg-emerald-500/10 border-emerald-500/30 ring-1 ring-emerald-500/40"
+                                                            ? "bg-purple-500/10 border-purple-500/30 ring-1 ring-purple-500/40"
                                                             : "bg-zinc-950/40 border-white/10 hover:border-white/20 hover:bg-white/5"
                                                     )}
                                                 >
@@ -627,7 +627,7 @@ export default function TemplateProjectDetailsPage() {
                                                             className={cn(
                                                                 "mt-1 w-5 h-5 rounded border flex items-center justify-center transition-colors shrink-0 z-10",
                                                                 isSelected
-                                                                    ? "bg-emerald-500 border-emerald-500 text-black"
+                                                                    ? "bg-purple-500 border-purple-500 text-black"
                                                                     : "border-white/20 text-transparent hover:border-white/40"
                                                             )}
                                                         >
@@ -653,7 +653,7 @@ export default function TemplateProjectDetailsPage() {
                                                                             editItemMutation.mutate(item);
                                                                         }}
                                                                         disabled={editItemMutation.isPending}
-                                                                        className="p-1 text-zinc-400 hover:text-emerald-300 hover:bg-emerald-500/10 rounded transition-colors opacity-0 group-hover:opacity-100 disabled:opacity-50"
+                                                                        className="p-1 text-zinc-400 hover:text-purple-300 hover:bg-purple-500/10 rounded transition-colors opacity-0 group-hover:opacity-100 disabled:opacity-50"
                                                                         title="Editar template"
                                                                     >
                                                                         <Pencil className="w-3.5 h-3.5" />
@@ -714,7 +714,7 @@ export default function TemplateProjectDetailsPage() {
                                     <span>Status Meta:</span>
                                     <span className={cn(
                                         "font-medium",
-                                        previewItem.meta_status === 'APPROVED' && "text-emerald-300",
+                                        previewItem.meta_status === 'APPROVED' && "text-purple-300",
                                         previewItem.meta_status === 'REJECTED' && "text-amber-300",
                                         previewItem.meta_status === 'PENDING' && "text-amber-300",
                                     )}>{previewItem.meta_status || 'Rascunho'}</span>
@@ -742,7 +742,7 @@ function StatCard({ label, count, total, color, icon: Icon }: any) {
     const percent = total > 0 ? Math.round((count / total) * 100) : 0;
 
     const colors: Record<string, string> = {
-        emerald: 'text-emerald-300 bg-emerald-500/10 border-emerald-500/20',
+        purple: 'text-purple-300 bg-purple-500/10 border-purple-500/20',
         yellow: 'text-amber-300 bg-amber-500/10 border-amber-500/20',
         red: 'text-amber-200 bg-amber-500/10 border-amber-500/20',
         zinc: 'text-gray-400 bg-zinc-500/10 border-white/10',

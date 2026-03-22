@@ -144,8 +144,8 @@ export function AIAgentTestChat({ agent, onClose }: AIAgentTestChatProps) {
       <CardHeader className="pb-3">
         <div className="flex items-center justify-between">
           <div className="flex items-center gap-3">
-            <div className="p-2 rounded-lg bg-emerald-500/10">
-              <Bot className="h-5 w-5 text-emerald-400" />
+            <div className="p-2 rounded-lg bg-purple-500/10">
+              <Bot className="h-5 w-5 text-purple-400" />
             </div>
             <div>
               <CardTitle className="text-base">Testar: {agent.name}</CardTitle>

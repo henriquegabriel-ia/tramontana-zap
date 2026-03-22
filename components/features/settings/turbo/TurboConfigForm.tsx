@@ -102,7 +102,7 @@ export function TurboConfigForm({
             type="checkbox"
             checked={!!draft.enabled}
             onChange={(e) => updateField('enabled', e.target.checked)}
-            className="accent-emerald-500"
+            className="accent-purple-500"
           />
           Ativar modo turbo
         </label>

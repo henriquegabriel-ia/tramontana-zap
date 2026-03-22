@@ -23,7 +23,7 @@ export const ContactStats: React.FC<ContactStatsProps> = ({ stats }) => {
         title="Opt-in Ativos"
         value={(stats?.optIn ?? 0).toLocaleString()}
         icon={UserCheck}
-        color="emerald"
+        color="purple"
         layout="horizontal"
       />
       <StatCard

@@ -117,7 +117,7 @@ export function CredentialsModal({
       <DialogContent className="sm:max-w-[480px]">
         <DialogHeader>
           <div className="flex justify-center mb-4">
-            <div className="w-14 h-14 rounded-2xl bg-gradient-to-br from-emerald-500/20 to-emerald-600/20 flex items-center justify-center">
+            <div className="w-14 h-14 rounded-2xl bg-gradient-to-br from-purple-500/20 to-purple-600/20 flex items-center justify-center">
               <span className="text-3xl">🔐</span>
             </div>
           </div>
@@ -147,7 +147,7 @@ export function CredentialsModal({
           <button
             type="button"
             onClick={onHelpClick}
-            className="flex items-center gap-2 text-sm text-zinc-400 hover:text-emerald-400 transition-colors w-full justify-center py-2"
+            className="flex items-center gap-2 text-sm text-zinc-400 hover:text-purple-400 transition-colors w-full justify-center py-2"
           >
             Não sabe onde encontrar? Ver tutorial passo-a-passo
           </button>
@@ -161,9 +161,9 @@ export function CredentialsModal({
 
           {/* Success Message */}
           {testStatus === 'success' && (
-            <div className="flex items-center gap-2 p-3 rounded-lg bg-emerald-500/10 border border-emerald-500/20">
-              <CheckCircle2 className="w-5 h-5 text-emerald-400" />
-              <p className="text-sm text-emerald-200">
+            <div className="flex items-center gap-2 p-3 rounded-lg bg-purple-500/10 border border-purple-500/20">
+              <CheckCircle2 className="w-5 h-5 text-purple-400" />
+              <p className="text-sm text-purple-200">
                 Conectado! Sincronizando templates...
               </p>
             </div>

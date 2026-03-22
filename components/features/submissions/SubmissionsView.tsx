@@ -40,11 +40,11 @@ function SubmissionCard({
       {/* Header */}
       <div className="flex items-start justify-between mb-4">
         <div className="flex items-center gap-3">
-          <div className="p-2 rounded-xl bg-emerald-500/10 border border-emerald-500/20">
+          <div className="p-2 rounded-xl bg-purple-500/10 border border-purple-500/20">
             {contactName ? (
-              <User className="w-4 h-4 text-emerald-400" />
+              <User className="w-4 h-4 text-purple-400" />
             ) : (
-              <Phone className="w-4 h-4 text-emerald-400" />
+              <Phone className="w-4 h-4 text-purple-400" />
             )}
           </div>
           <div>
@@ -189,7 +189,7 @@ export function SubmissionsView({
         </div>
         <div className="flex items-center gap-3">
           <div className="flex items-center gap-2 px-4 py-2 rounded-xl bg-zinc-900/60 border border-white/10">
-            <FileText className="w-4 h-4 text-emerald-400" />
+            <FileText className="w-4 h-4 text-purple-400" />
             <span className="text-sm text-gray-300">
               <span className="font-semibold text-white">{total}</span> submissões
             </span>
@@ -198,7 +198,7 @@ export function SubmissionsView({
             <a
               href={exportUrl}
               download
-              className="flex items-center gap-2 px-4 py-2 rounded-xl bg-emerald-600 hover:bg-emerald-500 text-white text-sm font-medium transition-colors"
+              className="flex items-center gap-2 px-4 py-2 rounded-xl bg-purple-600 hover:bg-purple-500 text-white text-sm font-medium transition-colors"
             >
               <Download className="w-4 h-4" />
               Exportar CSV

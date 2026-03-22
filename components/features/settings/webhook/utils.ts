@@ -71,7 +71,7 @@ export function getWebhookFunnelLevels(
       url: config?.phone_number || null,
       isActive: activeStatus.level === 1,
       isSmartZap: config?.phone_number === activeUrl,
-      color: 'emerald',
+      color: 'purple',
       description: 'Override específico deste número',
     },
     {
@@ -101,8 +101,8 @@ export function getWebhookFunnelLevels(
  */
 export function getCardColor(
   webhookStatus: WebhookStatus
-): 'emerald' | 'amber' | 'blue' | 'zinc' {
-  if (webhookStatus.status === 'smartzap') return 'emerald';
+): 'purple' | 'amber' | 'blue' | 'zinc' {
+  if (webhookStatus.status === 'smartzap') return 'purple';
   if (webhookStatus.status === 'other') return 'amber';
   if (webhookStatus.level === 2) return 'blue';
   return 'zinc';
@@ -111,18 +111,18 @@ export function getCardColor(
 /**
  * Retorna classes CSS para cor do card
  */
-export function getCardColorClasses(color: 'emerald' | 'amber' | 'blue' | 'zinc'): {
+export function getCardColorClasses(color: 'purple' | 'amber' | 'blue' | 'zinc'): {
   border: string;
   bg: string;
   icon: string;
   text: string;
 } {
   const colorMap = {
-    emerald: {
-      border: 'border-emerald-500/20',
-      bg: 'bg-emerald-500/5',
-      icon: 'bg-emerald-500/20 text-emerald-400',
-      text: 'text-emerald-400/80',
+    purple: {
+      border: 'border-purple-500/20',
+      bg: 'bg-purple-500/5',
+      icon: 'bg-purple-500/20 text-purple-400',
+      text: 'text-purple-400/80',
     },
     amber: {
       border: 'border-amber-500/20',
@@ -150,18 +150,18 @@ export function getCardColorClasses(color: 'emerald' | 'amber' | 'blue' | 'zinc'
 /**
  * Retorna classes CSS para níveis do funil
  */
-export function getFunnelLevelColorClasses(color: 'emerald' | 'blue' | 'zinc'): {
+export function getFunnelLevelColorClasses(color: 'purple' | 'blue' | 'zinc'): {
   active: string;
   inactive: string;
   arrow: string;
   ring: string;
 } {
   const colorMap = {
-    emerald: {
-      active: 'bg-emerald-500/20 border-emerald-500/40 text-emerald-400',
-      inactive: 'bg-emerald-500/5 border-emerald-500/10 text-emerald-400/50',
-      arrow: 'text-emerald-500/30',
-      ring: 'ring-emerald-500/30',
+    purple: {
+      active: 'bg-purple-500/20 border-purple-500/40 text-purple-400',
+      inactive: 'bg-purple-500/5 border-purple-500/10 text-purple-400/50',
+      arrow: 'text-purple-500/30',
+      ring: 'ring-purple-500/30',
     },
     blue: {
       active: 'bg-blue-500/20 border-blue-500/40 text-blue-400',

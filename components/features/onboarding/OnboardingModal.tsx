@@ -399,7 +399,7 @@ export function OnboardingModal({ isConnected, onSaveCredentials, onMarkComplete
           <>
             <DialogHeader className="text-center pb-2">
               <div className="flex justify-center mb-4">
-                <div className="w-16 h-16 rounded-2xl bg-gradient-to-br from-emerald-500 to-emerald-600 flex items-center justify-center shadow-lg">
+                <div className="w-16 h-16 rounded-2xl bg-gradient-to-br from-purple-500 to-purple-600 flex items-center justify-center shadow-lg">
                   <span className="text-3xl">🚀</span>
                 </div>
               </div>

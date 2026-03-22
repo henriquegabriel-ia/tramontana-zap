@@ -137,7 +137,7 @@ describe('formatMs', () => {
 describe('getCampaignStatusClass', () => {
   it('retorna classe correta para COMPLETED', () => {
     expect(getCampaignStatusClass(CampaignStatus.COMPLETED)).toBe(
-      'bg-emerald-500/10 border-emerald-500/20 text-emerald-400'
+      'bg-purple-500/10 border-purple-500/20 text-purple-400'
     )
   })
 
@@ -281,7 +281,7 @@ describe('computePerfSourceLabel', () => {
   it('retorna label correto para run_metrics', () => {
     const result = computePerfSourceLabel('run_metrics')
     expect(result.label).toBe('Dados: avancados')
-    expect(result.tone).toBe('text-emerald-300 bg-emerald-500/10 border-emerald-500/20')
+    expect(result.tone).toBe('text-purple-300 bg-purple-500/10 border-purple-500/20')
   })
 
   it('retorna label correto para campaigns_fallback', () => {

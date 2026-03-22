@@ -68,9 +68,9 @@ export const TemplateFilters: React.FC<TemplateFiltersProps> = ({
           <button
             key={cat.value}
             onClick={() => setCategoryFilter(cat.value)}
-            className={`rounded-full border px-3 py-1 text-[10px] uppercase tracking-widest transition-colors whitespace-nowrap focus-visible:outline focus-visible:outline-emerald-400 focus-visible:outline-offset-2 ${
+            className={`rounded-full border px-3 py-1 text-[10px] uppercase tracking-widest transition-colors whitespace-nowrap focus-visible:outline focus-visible:outline-purple-400 focus-visible:outline-offset-2 ${
               categoryFilter === cat.value
-                ? 'border-emerald-400/40 bg-emerald-500/10 text-[var(--ds-status-success-text)]'
+                ? 'border-purple-400/40 bg-purple-500/10 text-[var(--ds-status-success-text)]'
                 : 'border-[var(--ds-border-default)] bg-[var(--ds-bg-elevated)] text-[var(--ds-text-secondary)] hover:text-[var(--ds-text-primary)]'
             }`}
             aria-pressed={categoryFilter === cat.value}
@@ -92,9 +92,9 @@ export const TemplateFilters: React.FC<TemplateFiltersProps> = ({
             <button
               key={s.value}
               onClick={() => setStatusFilter(s.value)}
-              className={`rounded-full border px-3 py-1 text-xs font-medium transition-colors whitespace-nowrap focus-visible:outline focus-visible:outline-emerald-400 focus-visible:outline-offset-2 ${
+              className={`rounded-full border px-3 py-1 text-xs font-medium transition-colors whitespace-nowrap focus-visible:outline focus-visible:outline-purple-400 focus-visible:outline-offset-2 ${
                 statusFilter === s.value
-                  ? 'border-emerald-400/40 bg-emerald-500/10 text-[var(--ds-status-success-text)]'
+                  ? 'border-purple-400/40 bg-purple-500/10 text-[var(--ds-status-success-text)]'
                   : 'border-[var(--ds-border-default)] bg-[var(--ds-bg-elevated)] text-[var(--ds-text-secondary)] hover:text-[var(--ds-text-primary)]'
               }`}
               aria-pressed={statusFilter === s.value}

@@ -201,7 +201,7 @@ export function FlowPublishPanel({
               className={cn(
                 'rounded-full border px-3 py-1 text-xs font-medium transition-colors whitespace-nowrap',
                 statusFilter === item.id
-                  ? 'border-emerald-400/40 bg-emerald-500/10 text-emerald-200'
+                  ? 'border-purple-400/40 bg-purple-500/10 text-purple-200'
                   : 'border-white/10 bg-zinc-950/40 text-gray-400 hover:text-white',
               )}
               aria-pressed={statusFilter === item.id}
@@ -259,7 +259,7 @@ export function FlowPublishPanel({
                       visibleFlows.length === 0
                         ? 'border-white/10 opacity-40 cursor-not-allowed'
                         : allVisibleSelected
-                          ? 'bg-emerald-500 border-emerald-500'
+                          ? 'bg-purple-500 border-purple-500'
                           : 'border-white/20 hover:border-white/40'
                     }`}
                     aria-label="Selecionar todos"
@@ -310,7 +310,7 @@ export function FlowPublishPanel({
                   const canTest = !!flow.meta_flow_id
                   return (
                     <tr key={flow.id} className={`hover:bg-white/5 transition-colors group cursor-pointer ${
-                      selectedIds.has(flow.id) ? 'bg-emerald-500/5' : ''
+                      selectedIds.has(flow.id) ? 'bg-purple-500/5' : ''
                     }`}>
                       <td className="px-4 py-4" onClick={(e) => e.stopPropagation()}>
                         <button
@@ -324,7 +324,7 @@ export function FlowPublishPanel({
                           }}
                           className={`w-5 h-5 rounded border flex items-center justify-center transition-colors ${
                             selectedIds.has(flow.id)
-                              ? 'bg-emerald-500 border-emerald-500'
+                              ? 'bg-purple-500 border-purple-500'
                               : 'border-white/20 hover:border-white/40'
                           }`}
                           title={selectedIds.has(flow.id) ? 'Desmarcar' : 'Selecionar'}
@@ -336,11 +336,11 @@ export function FlowPublishPanel({
                       </td>
                       <td className="px-4 py-4">
                         <div className="flex items-center gap-3">
-                          <div className="p-2 bg-zinc-950/40 rounded-lg text-gray-400 group-hover:text-emerald-200 transition-colors">
+                          <div className="p-2 bg-zinc-950/40 rounded-lg text-gray-400 group-hover:text-purple-200 transition-colors">
                             <FileText size={16} />
                           </div>
                           <span
-                            className="font-medium text-white group-hover:text-emerald-200 transition-colors truncate max-w-50"
+                            className="font-medium text-white group-hover:text-purple-200 transition-colors truncate max-w-50"
                             title={flow.name}
                           >
                             {flow.name}

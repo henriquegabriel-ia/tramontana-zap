@@ -47,9 +47,9 @@ const serviceConfig: Record<ServiceType, ServiceConfig> = {
   },
   supabase: {
     icon: Database,
-    color: 'text-emerald-400',
-    bgColor: 'bg-emerald-500/10',
-    borderColor: 'border-emerald-500/20',
+    color: 'text-purple-400',
+    bgColor: 'bg-purple-500/10',
+    borderColor: 'border-purple-500/20',
   },
   qstash: {
     icon: Zap,
@@ -90,7 +90,7 @@ const sizes = {
  * Serviços:
  * - identity: User icon (zinc)
  * - vercel: Triangle icon (white)
- * - supabase: Database icon (emerald)
+ * - supabase: Database icon (purple)
  * - qstash: Zap icon (orange)
  * - redis: Server icon (red)
  */
@@ -133,10 +133,10 @@ export function ServiceIcon({
  */
 export function getServiceGlowColor(
   service: ServiceType
-): 'emerald' | 'blue' | 'orange' | 'red' | 'zinc' {
+): 'purple' | 'blue' | 'orange' | 'red' | 'zinc' {
   switch (service) {
     case 'supabase':
-      return 'emerald';
+      return 'purple';
     case 'qstash':
       return 'orange';
     case 'redis':

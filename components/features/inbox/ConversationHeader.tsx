@@ -268,7 +268,7 @@ export function ConversationHeader({
                 isUpdating || !isOpen ? 'opacity-50 cursor-not-allowed' : '',
                 isBotMode
                   ? aiGlobalEnabled
-                    ? 'bg-emerald-500/15 text-emerald-400 hover:bg-emerald-500/25'
+                    ? 'bg-purple-500/15 text-purple-400 hover:bg-purple-500/25'
                     : 'bg-zinc-500/15 text-zinc-400 hover:bg-zinc-500/25'
                   : 'bg-amber-500/15 text-amber-400 hover:bg-amber-500/25'
               )}
@@ -425,7 +425,7 @@ export function ConversationHeader({
               <DropdownMenuItem
                 onClick={onResume}
                 disabled={isResuming}
-                className="text-emerald-400"
+                className="text-purple-400"
               >
                 <PlayCircle className="h-4 w-4 mr-2" />
                 {isResuming ? 'Resumindo...' : 'Retomar automação'}

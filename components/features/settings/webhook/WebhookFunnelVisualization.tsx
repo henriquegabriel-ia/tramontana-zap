@@ -86,7 +86,7 @@ export function WebhookFunnelVisualization({
                       {level.isActive ? (
                         <CheckCircle2
                           size={16}
-                          className={level.isSmartZap ? 'text-emerald-400' : ''}
+                          className={level.isSmartZap ? 'text-purple-400' : ''}
                         />
                       ) : level.url ? (
                         <Circle size={16} className="opacity-40" />
@@ -99,7 +99,7 @@ export function WebhookFunnelVisualization({
                           <span className="font-bold text-sm">#{level.level}</span>
                           <span className="font-medium text-sm">{level.name}</span>
                           {level.isActive && level.isSmartZap && (
-                            <span className="px-1.5 py-0.5 bg-emerald-500/30 text-emerald-300 text-[10px] font-bold rounded">
+                            <span className="px-1.5 py-0.5 bg-purple-500/30 text-purple-300 text-[10px] font-bold rounded">
                               TRAMONTANA
                             </span>
                           )}
@@ -147,7 +147,7 @@ export function WebhookFunnelVisualization({
                             <button
                               onClick={handleActivate}
                               disabled={isBusy}
-                              className="h-8 px-2.5 text-[10px] font-medium bg-emerald-600 hover:bg-emerald-500 disabled:opacity-50 text-white rounded-lg transition-colors flex items-center gap-1"
+                              className="h-8 px-2.5 text-[10px] font-medium bg-purple-600 hover:bg-purple-500 disabled:opacity-50 text-white rounded-lg transition-colors flex items-center gap-1"
                               title={`Ativar Tramontana Zap no nível #${level.level}`}
                             >
                               {isBusy ? (
@@ -164,7 +164,7 @@ export function WebhookFunnelVisualization({
                             <button
                               onClick={handleActivate}
                               disabled={isBusy}
-                              className="h-8 px-2.5 text-[10px] font-medium bg-emerald-600 hover:bg-emerald-500 disabled:opacity-50 text-white rounded-lg transition-colors flex items-center gap-1"
+                              className="h-8 px-2.5 text-[10px] font-medium bg-purple-600 hover:bg-purple-500 disabled:opacity-50 text-white rounded-lg transition-colors flex items-center gap-1"
                               title={`Substituir por Tramontana Zap`}
                             >
                               {isBusy ? (

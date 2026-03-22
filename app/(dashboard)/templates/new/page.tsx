@@ -60,9 +60,9 @@ const STRATEGY_CONFIG: Record<AIStrategy, {
         icon: Wrench,
         label: 'Utilidade',
         description: 'Confirmações, lembretes e atualizações transacionais',
-        color: 'text-emerald-400',
-        bgColor: 'bg-emerald-500/10',
-        borderColor: 'border-emerald-500/30 hover:border-emerald-500/60',
+        color: 'text-purple-400',
+        bgColor: 'bg-purple-500/10',
+        borderColor: 'border-purple-500/30 hover:border-purple-500/60',
         when: 'Quando é uma mensagem transacional real (confirmação, status)'
     },
     bypass: {
@@ -309,7 +309,7 @@ export default function NewTemplateProjectPage() {
 
                     {step === 'review' ? (
                         <div className="flex items-center gap-2 group">
-                            <div className="flex items-center gap-2 px-3 py-1.5 rounded-lg border border-[var(--ds-border-default)] bg-[var(--ds-bg-surface)] hover:border-emerald-500/50 focus-within:border-emerald-500 focus-within:ring-1 focus-within:ring-emerald-500/30 transition-all">
+                            <div className="flex items-center gap-2 px-3 py-1.5 rounded-lg border border-[var(--ds-border-default)] bg-[var(--ds-bg-surface)] hover:border-purple-500/50 focus-within:border-purple-500 focus-within:ring-1 focus-within:ring-purple-500/30 transition-all">
                                 <input
                                     type="text"
                                     value={projectTitle}
@@ -352,9 +352,9 @@ export default function NewTemplateProjectPage() {
                                     onClick={() => isClickable && setStep(s.key as Step)}
                                     disabled={!isClickable}
                                     className={`flex items-center gap-2 px-3 py-1.5 rounded-lg transition-all ${isActive
-                                            ? 'bg-emerald-500/20 text-emerald-400 border border-emerald-500/40'
+                                            ? 'bg-purple-500/20 text-purple-400 border border-purple-500/40'
                                             : isCompleted
-                                                ? 'bg-[var(--ds-bg-elevated)] text-emerald-400 border border-[var(--ds-border-default)] cursor-pointer hover:border-emerald-500/40'
+                                                ? 'bg-[var(--ds-bg-elevated)] text-purple-400 border border-[var(--ds-border-default)] cursor-pointer hover:border-purple-500/40'
                                                 : 'bg-[var(--ds-bg-surface)] text-[var(--ds-text-muted)] border border-[var(--ds-border-default)]'
                                         }`}
                                 >
@@ -362,7 +362,7 @@ export default function NewTemplateProjectPage() {
                                     <span className="text-sm font-medium hidden sm:inline">{s.label}</span>
                                 </button>
                                 {i < steps.length - 1 && (
-                                    <div className={`w-8 h-px ${i < currentStepIndex ? 'bg-emerald-500/50' : 'bg-[var(--ds-border-default)]'}`} />
+                                    <div className={`w-8 h-px ${i < currentStepIndex ? 'bg-purple-500/50' : 'bg-[var(--ds-border-default)]'}`} />
                                 )}
                             </React.Fragment>
                         );
@@ -398,7 +398,7 @@ Exemplo:
 - Post de rede social
 
 Quanto mais informação, melhor!`}
-                            className="w-full h-80 p-4 rounded-xl border border-[var(--ds-border-default)] bg-[var(--ds-bg-elevated)] focus:ring-2 focus:ring-emerald-500/30 outline-none resize-none text-base text-[var(--ds-text-primary)] placeholder:text-[var(--ds-text-muted)]"
+                            className="w-full h-80 p-4 rounded-xl border border-[var(--ds-border-default)] bg-[var(--ds-bg-elevated)] focus:ring-2 focus:ring-purple-500/30 outline-none resize-none text-base text-[var(--ds-text-primary)] placeholder:text-[var(--ds-text-muted)]"
                         />
 
                         <div className="flex items-center justify-between mt-4">
@@ -426,8 +426,8 @@ Quanto mais informação, melhor!`}
                         </div>
                     </div>
 
-                    <div className="rounded-xl border border-emerald-500/20 bg-emerald-500/5 p-4">
-                        <p className="text-sm text-emerald-400">
+                    <div className="rounded-xl border border-purple-500/20 bg-purple-500/5 p-4">
+                        <p className="text-sm text-purple-400">
                             💡 <strong>Dica:</strong> Você pode colar uma página de vendas inteira, um e-mail de lançamento, ou qualquer texto com informações sobre o que quer promover. A IA vai identificar automaticamente: nome, data, preço, benefícios, garantia, links, etc.
                         </p>
                     </div>
@@ -452,7 +452,7 @@ Quanto mais informação, melhor!`}
                         {/* Dados extraídos */}
                         <div className="rounded-2xl border border-[var(--ds-border-default)] bg-[var(--ds-bg-surface)] p-6 shadow-lg space-y-4">
                             <h3 className="font-semibold text-[var(--ds-text-primary)] flex items-center gap-2">
-                                <Check className="w-5 h-5 text-emerald-400" />
+                                <Check className="w-5 h-5 text-purple-400" />
                                 Dados Identificados
                             </h3>
 
@@ -476,7 +476,7 @@ Quanto mais informação, melhor!`}
                                     <>
                                         <span className="text-[var(--ds-text-muted)]">💰 Preço:</span>
                                         <span className="text-[var(--ds-text-primary)]">
-                                            {extractedContent.discount && <span className="text-emerald-400 mr-2">{extractedContent.discount}</span>}
+                                            {extractedContent.discount && <span className="text-purple-400 mr-2">{extractedContent.discount}</span>}
                                             {extractedContent.price}
                                         </span>
                                     </>
@@ -501,7 +501,7 @@ Quanto mais informação, melhor!`}
                                     <ul className="mt-2 space-y-1">
                                         {extractedContent.benefits.slice(0, 4).map((b, i) => (
                                             <li key={i} className="text-sm text-[var(--ds-text-secondary)] flex items-start gap-2">
-                                                <span className="text-emerald-400">•</span>
+                                                <span className="text-purple-400">•</span>
                                                 {b}
                                             </li>
                                         ))}
@@ -537,13 +537,13 @@ Quanto mais informação, melhor!`}
                             <textarea
                                 value={prompt}
                                 onChange={(e) => setPrompt(e.target.value)}
-                                className="w-full h-40 p-4 rounded-xl border border-[var(--ds-border-default)] bg-[var(--ds-bg-elevated)] focus:ring-2 focus:ring-emerald-500/30 outline-none resize-none text-sm text-[var(--ds-text-primary)]"
+                                className="w-full h-40 p-4 rounded-xl border border-[var(--ds-border-default)] bg-[var(--ds-bg-elevated)] focus:ring-2 focus:ring-purple-500/30 outline-none resize-none text-sm text-[var(--ds-text-primary)]"
                             />
 
                             <div className="flex items-center gap-2">
                                 <button
                                     onClick={() => setPrompt(suggestedPrompt)}
-                                    className="text-sm text-emerald-400 hover:text-emerald-300 flex items-center gap-1"
+                                    className="text-sm text-purple-400 hover:text-purple-300 flex items-center gap-1"
                                 >
                                     <RotateCcw className="w-3 h-3" />
                                     Restaurar original
@@ -653,7 +653,7 @@ Quanto mais informação, melhor!`}
                             <textarea
                                 value={prompt}
                                 onChange={(e) => setPrompt(e.target.value)}
-                                className="w-full h-32 p-4 rounded-xl border border-[var(--ds-border-default)] bg-[var(--ds-bg-elevated)] focus:ring-2 focus:ring-emerald-500/30 outline-none resize-none text-base text-[var(--ds-text-primary)]"
+                                className="w-full h-32 p-4 rounded-xl border border-[var(--ds-border-default)] bg-[var(--ds-bg-elevated)] focus:ring-2 focus:ring-purple-500/30 outline-none resize-none text-base text-[var(--ds-text-primary)]"
                             />
                         </div>
 
@@ -730,7 +730,7 @@ Quanto mais informação, melhor!`}
             {/* ================================================================ */}
             {step === 'generating' && (
                 <div className="flex flex-col items-center justify-center min-h-[400px]">
-                    <Loader2 className="w-12 h-12 text-emerald-300 animate-spin mb-4" />
+                    <Loader2 className="w-12 h-12 text-purple-300 animate-spin mb-4" />
                     <h2 className="text-xl font-semibold text-[var(--ds-text-primary)] mb-2">
                         Criando seus templates...
                     </h2>
@@ -784,7 +784,7 @@ Quanto mais informação, melhor!`}
                                     onMouseEnter={() => setHoveredId(t.id)}
                                     onMouseLeave={() => setHoveredId(null)}
                                     className={`relative p-4 rounded-2xl border cursor-pointer transition-all hover:shadow-lg ${selectedIds.has(t.id)
-                                            ? 'border-emerald-600 dark:border-emerald-400/40 bg-emerald-100 dark:bg-emerald-500/10'
+                                            ? 'border-purple-600 dark:border-purple-400/40 bg-purple-100 dark:bg-purple-500/10'
                                             : 'border-[var(--ds-border-default)] bg-[var(--ds-bg-surface)]'
                                         }`}
                                 >
@@ -796,7 +796,7 @@ Quanto mais informação, melhor!`}
                                             </span>
                                         )}
                                         {selectedIds.has(t.id) && (
-                                            <div className="p-1 bg-emerald-500 text-black rounded-full">
+                                            <div className="p-1 bg-purple-500 text-black rounded-full">
                                                 <Check className="w-3 h-3" />
                                             </div>
                                         )}
@@ -830,7 +830,7 @@ Quanto mais informação, melhor!`}
                                     {t.buttons && t.buttons.length > 0 && (
                                         <div className="space-y-2">
                                             {t.buttons.map((btn, i) => (
-                                                <div key={i} className="w-full py-2 px-3 bg-[var(--ds-bg-elevated)] text-center text-emerald-700 dark:text-emerald-200 text-sm rounded font-medium border border-[var(--ds-border-default)]">
+                                                <div key={i} className="w-full py-2 px-3 bg-[var(--ds-bg-elevated)] text-center text-purple-700 dark:text-purple-200 text-sm rounded font-medium border border-[var(--ds-border-default)]">
                                                     {btn.type === 'URL' && <span className="mr-1">🔗</span>}
                                                     {btn.text}
                                                 </div>
@@ -861,8 +861,8 @@ Quanto mais informação, melhor!`}
                                         </div>
                                     )}
                                     {t.wasFixed && (
-                                        <div className="mt-4 p-2 bg-emerald-100 dark:bg-emerald-500/10 text-emerald-700 dark:text-emerald-200 text-xs rounded border border-emerald-400 dark:border-emerald-500/20 flex items-start gap-1">
-                                            <Sparkles className="w-3 h-3 shrink-0 mt-0.5 text-emerald-300" />
+                                        <div className="mt-4 p-2 bg-purple-100 dark:bg-purple-500/10 text-purple-700 dark:text-purple-200 text-xs rounded border border-purple-400 dark:border-purple-500/20 flex items-start gap-1">
+                                            <Sparkles className="w-3 h-3 shrink-0 mt-0.5 text-purple-300" />
                                             <span>Corrigido pelo AI Judge</span>
                                         </div>
                                     )}

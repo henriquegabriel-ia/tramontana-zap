@@ -11,7 +11,7 @@ import { cn } from "@/lib/utils"
  * O indicador de cor ajuda a categorizar visualmente diferentes tipos de seções.
  *
  * Cores disponíveis:
- * - brand (emerald): Configurações principais, features ativas
+ * - brand (purple): Configurações principais, features ativas
  * - warning (amber): Configurações opcionais, atenção necessária
  * - info (blue): Informações, documentação
  * - neutral (zinc): Seções padrão
@@ -43,7 +43,7 @@ import { cn } from "@/lib/utils"
  */
 
 const indicatorColors = {
-  brand: "bg-emerald-500",
+  brand: "bg-purple-500",
   warning: "bg-amber-500",
   info: "bg-blue-500",
   error: "bg-red-500",
@@ -102,7 +102,7 @@ function SectionHeader({
         <div
           className={cn(
             "flex-shrink-0 mt-0.5",
-            color === "brand" && "text-emerald-400",
+            color === "brand" && "text-purple-400",
             color === "warning" && "text-amber-400",
             color === "info" && "text-blue-400",
             color === "error" && "text-red-400",

@@ -142,8 +142,8 @@ export function SendFlowDialog(props: {
       <DialogContent className="sm:max-w-md">
         <DialogHeader>
           <DialogTitle className="flex items-center gap-2 text-lg">
-            <div className="p-1.5 rounded-lg bg-emerald-500/10">
-              <Smartphone className="h-4 w-4 text-emerald-400" />
+            <div className="p-1.5 rounded-lg bg-purple-500/10">
+              <Smartphone className="h-4 w-4 text-purple-400" />
             </div>
             Testar MiniApp
           </DialogTitle>
@@ -201,7 +201,7 @@ export function SendFlowDialog(props: {
               className="h-11 bg-zinc-900/50 border-white/10"
             />
             {hasTestContact && to && (
-              <p className="text-xs text-emerald-400/80">
+              <p className="text-xs text-purple-400/80">
                 ✓ Contato de teste configurado
               </p>
             )}
@@ -275,7 +275,7 @@ export function SendFlowDialog(props: {
           <Button
             onClick={handleSend}
             disabled={isSending || !canSend}
-            className="w-full h-11 bg-emerald-600 hover:bg-emerald-500 text-white font-medium"
+            className="w-full h-11 bg-purple-600 hover:bg-purple-500 text-white font-medium"
           >
             {isSending ? (
               <span className="flex items-center gap-2">

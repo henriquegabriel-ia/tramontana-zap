@@ -148,8 +148,8 @@ export function IdentityStep({ onComplete, initialName = '', initialEmail = '' }
                 'w-full pl-10 pr-4 py-3 rounded-xl',
                 'bg-zinc-800/50 border border-zinc-700',
                 'text-zinc-100 placeholder:text-zinc-500',
-                'focus:border-emerald-500 focus:outline-none',
-                'focus:shadow-[0_0_0_3px_theme(colors.emerald.500/0.15)]',
+                'focus:border-purple-500 focus:outline-none',
+                'focus:shadow-[0_0_0_3px_theme(colors.purple.500/0.15)]',
                 'transition-all duration-200'
               )}
             />
@@ -172,8 +172,8 @@ export function IdentityStep({ onComplete, initialName = '', initialEmail = '' }
                 'w-full pl-10 pr-4 py-3 rounded-xl',
                 'bg-zinc-800/50 border border-zinc-700',
                 'text-zinc-100 placeholder:text-zinc-500',
-                'focus:border-emerald-500 focus:outline-none',
-                'focus:shadow-[0_0_0_3px_theme(colors.emerald.500/0.15)]',
+                'focus:border-purple-500 focus:outline-none',
+                'focus:shadow-[0_0_0_3px_theme(colors.purple.500/0.15)]',
                 'transition-all duration-200'
               )}
             />
@@ -189,7 +189,7 @@ export function IdentityStep({ onComplete, initialName = '', initialEmail = '' }
             <button
               type="button"
               onClick={handleSuggestPassword}
-              className="flex items-center gap-1 text-xs text-emerald-400 hover:text-emerald-300 transition-colors"
+              className="flex items-center gap-1 text-xs text-purple-400 hover:text-purple-300 transition-colors"
             >
               <Sparkles className="w-3 h-3" />
               Sugerir senha forte
@@ -206,8 +206,8 @@ export function IdentityStep({ onComplete, initialName = '', initialEmail = '' }
                 'w-full pl-10 pr-10 py-3 rounded-xl',
                 'bg-zinc-800/50 border border-zinc-700',
                 'text-zinc-100 placeholder:text-zinc-500',
-                'focus:border-emerald-500 focus:outline-none',
-                'focus:shadow-[0_0_0_3px_theme(colors.emerald.500/0.15)]',
+                'focus:border-purple-500 focus:outline-none',
+                'focus:shadow-[0_0_0_3px_theme(colors.purple.500/0.15)]',
                 'transition-all duration-200',
                 showPassword && 'font-mono text-sm'
               )}
@@ -234,21 +234,21 @@ export function IdentityStep({ onComplete, initialName = '', initialEmail = '' }
             >
               <span
                 className={cn(
-                  validation.checks.minLen ? 'text-emerald-400' : 'text-zinc-500'
+                  validation.checks.minLen ? 'text-purple-400' : 'text-zinc-500'
                 )}
               >
                 {validation.checks.minLen ? '✓' : '○'} 8+ chars
               </span>
               <span
                 className={cn(
-                  validation.checks.hasLetter ? 'text-emerald-400' : 'text-zinc-500'
+                  validation.checks.hasLetter ? 'text-purple-400' : 'text-zinc-500'
                 )}
               >
                 {validation.checks.hasLetter ? '✓' : '○'} Letra
               </span>
               <span
                 className={cn(
-                  validation.checks.hasNumber ? 'text-emerald-400' : 'text-zinc-500'
+                  validation.checks.hasNumber ? 'text-purple-400' : 'text-zinc-500'
                 )}
               >
                 {validation.checks.hasNumber ? '✓' : '○'} Número
@@ -273,8 +273,8 @@ export function IdentityStep({ onComplete, initialName = '', initialEmail = '' }
                 'w-full pl-10 pr-10 py-3 rounded-xl',
                 'bg-zinc-800/50 border border-zinc-700',
                 'text-zinc-100 placeholder:text-zinc-500',
-                'focus:border-emerald-500 focus:outline-none',
-                'focus:shadow-[0_0_0_3px_theme(colors.emerald.500/0.15)]',
+                'focus:border-purple-500 focus:outline-none',
+                'focus:shadow-[0_0_0_3px_theme(colors.purple.500/0.15)]',
                 'transition-all duration-200',
                 showConfirm && 'font-mono text-sm'
               )}
@@ -299,7 +299,7 @@ export function IdentityStep({ onComplete, initialName = '', initialEmail = '' }
               animate={{ opacity: 1 }}
               className={cn(
                 'mt-2 text-xs',
-                password === confirmPassword ? 'text-emerald-400' : 'text-red-400'
+                password === confirmPassword ? 'text-purple-400' : 'text-red-400'
               )}
             >
               {password === confirmPassword ? '✓ Senhas conferem' : '✗ Senhas não conferem'}

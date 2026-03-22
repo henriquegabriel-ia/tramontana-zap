@@ -188,7 +188,7 @@ function DeliveryStatusIcon({ status }: { status: DeliveryStatus }) {
 // Sentiment - subtle underline indicator
 function SentimentIndicator({ sentiment }: { sentiment: Sentiment }) {
   const colors: Record<Sentiment, string> = {
-    positive: 'bg-emerald-500/60',
+    positive: 'bg-purple-500/60',
     neutral: 'bg-[var(--ds-text-muted)]/60',
     negative: 'bg-amber-500/60',
     frustrated: 'bg-red-500/60',
@@ -232,7 +232,7 @@ function TemplateMessageContent({ parsed, time, deliveryStatus }: {
   return (
     <div className="flex w-full">
       {/* Barra lateral verde - indicador de template */}
-      <div className="w-1 bg-emerald-500 rounded-full mr-3 flex-shrink-0" />
+      <div className="w-1 bg-purple-500 rounded-full mr-3 flex-shrink-0" />
 
       <div className="flex flex-col flex-1 min-w-0">
         {/* Header (título do template em negrito) */}
@@ -434,9 +434,9 @@ export const MessageBubble = memo(function MessageBubble({
             // Template message: fundo verde escuro especial
             isTemplate && 'bg-zinc-900/95 text-white',
             // Outbound humano (não template): verde desaturado, elegante
-            !isInbound && !isAIResponse && !isTemplate && 'bg-emerald-600/80 text-white',
+            !isInbound && !isAIResponse && !isTemplate && 'bg-purple-600/80 text-white',
             // AI Response (não template): verde mais escuro para diferenciar
-            isAIResponse && !isTemplate && 'bg-emerald-700/70 text-emerald-50'
+            isAIResponse && !isTemplate && 'bg-purple-700/70 text-purple-50'
           )}
         >
           {/* Template message - special rendering */}
@@ -457,7 +457,7 @@ export const MessageBubble = memo(function MessageBubble({
               {isAIResponse && ai_sources && ai_sources.length > 0 && isLastInGroup && (
                 <Tooltip>
                   <TooltipTrigger asChild>
-                    <button className="inline-flex items-center gap-1 mt-1.5 text-[10px] text-emerald-200/70 hover:text-emerald-100 transition-colors">
+                    <button className="inline-flex items-center gap-1 mt-1.5 text-[10px] text-purple-200/70 hover:text-purple-100 transition-colors">
                       <Sparkles className="h-2.5 w-2.5" />
                       <span>{ai_sources.length} fontes</span>
                     </button>

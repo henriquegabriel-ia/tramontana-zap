@@ -48,7 +48,7 @@ export interface KnowledgeBasePanelProps {
 const statusConfig: Record<KnowledgeFileIndexingStatus, { label: string; icon: React.ElementType; color: string }> = {
   pending: { label: 'Aguardando', icon: Clock, color: 'text-yellow-400' },
   processing: { label: 'Processando', icon: Loader2, color: 'text-blue-400' },
-  completed: { label: 'Indexado', icon: CheckCircle2, color: 'text-emerald-400' },
+  completed: { label: 'Indexado', icon: CheckCircle2, color: 'text-purple-400' },
   failed: { label: 'Falhou', icon: XCircle, color: 'text-red-400' },
   local_only: { label: 'Local', icon: HardDrive, color: 'text-zinc-400' },
 }

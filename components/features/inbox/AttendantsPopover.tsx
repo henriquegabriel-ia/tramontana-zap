@@ -94,7 +94,7 @@ function AttendantRow({
         <div className="flex items-center gap-2 min-w-0">
           <div className={cn(
             'w-7 h-7 rounded-full flex items-center justify-center text-xs font-semibold shrink-0',
-            attendant.is_active ? 'bg-emerald-500/10 text-emerald-400' : 'bg-[var(--ds-bg-hover)] text-[var(--ds-text-secondary)]'
+            attendant.is_active ? 'bg-purple-500/10 text-purple-400' : 'bg-[var(--ds-bg-hover)] text-[var(--ds-text-secondary)]'
           )}>
             {attendant.name.charAt(0).toUpperCase()}
           </div>
@@ -274,14 +274,14 @@ export function AttendantsPopover() {
           className={cn(
             'h-8 w-8 flex items-center justify-center rounded-lg transition-colors relative',
             activeCount > 0
-              ? 'text-emerald-400 hover:bg-emerald-500/10'
+              ? 'text-purple-400 hover:bg-purple-500/10'
               : 'text-[var(--ds-text-muted)] hover:text-[var(--ds-text-secondary)] hover:bg-[var(--ds-bg-surface)]/60'
           )}
           title="Gerenciar atendentes"
         >
           <Users className="h-3.5 w-3.5" />
           {activeCount > 0 && (
-            <span className="absolute -top-0.5 -right-0.5 w-3.5 h-3.5 rounded-full bg-emerald-500 text-[9px] text-white flex items-center justify-center">
+            <span className="absolute -top-0.5 -right-0.5 w-3.5 h-3.5 rounded-full bg-purple-500 text-[9px] text-white flex items-center justify-center">
               {activeCount}
             </span>
           )}
@@ -292,7 +292,7 @@ export function AttendantsPopover() {
         {/* Header */}
         <div className="flex items-center justify-between px-3 py-2 border-b border-[var(--ds-border-subtle)]">
           <div className="flex items-center gap-2">
-            <Users size={14} className="text-emerald-400" />
+            <Users size={14} className="text-purple-400" />
             <span className="text-xs font-medium">Atendentes</span>
           </div>
           <div className="flex items-center gap-1">
@@ -301,7 +301,7 @@ export function AttendantsPopover() {
               className={cn(
                 'p-1.5 rounded transition-colors',
                 showCreateForm
-                  ? 'bg-emerald-500/10 text-emerald-400'
+                  ? 'bg-purple-500/10 text-purple-400'
                   : 'text-[var(--ds-text-muted)] hover:text-[var(--ds-text-secondary)] hover:bg-[var(--ds-bg-hover)]'
               )}
               title="Novo atendente"

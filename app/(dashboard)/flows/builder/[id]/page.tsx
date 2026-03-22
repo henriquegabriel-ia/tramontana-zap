@@ -164,7 +164,7 @@ export default function FlowBuilderEditorPage({
                     onClick={() => setStep(item.id)}
                     className={`flex items-center gap-3 rounded-2xl border px-4 py-3 text-left text-sm transition ${
                       step === item.id
-                        ? 'border-emerald-400/40 bg-emerald-500/10 text-white'
+                        ? 'border-purple-400/40 bg-purple-500/10 text-white'
                         : 'border-white/10 bg-zinc-900/40 text-gray-400 hover:text-white'
                     }`}
                   >
@@ -190,7 +190,7 @@ export default function FlowBuilderEditorPage({
                       onClick={() => handleStartModeSelect('ai')}
                       className={`relative rounded-2xl border p-4 text-left transition ${
                         startMode === 'ai'
-                          ? 'border-emerald-400/40 bg-emerald-500/10'
+                          ? 'border-purple-400/40 bg-purple-500/10'
                           : 'border-white/10 bg-zinc-900/60 hover:bg-white/5'
                       }`}
                     >
@@ -207,7 +207,7 @@ export default function FlowBuilderEditorPage({
                       onClick={() => handleStartModeSelect('template')}
                       className={`relative rounded-2xl border p-4 text-left transition ${
                         startMode === 'template'
-                          ? 'border-emerald-400/40 bg-emerald-500/10'
+                          ? 'border-purple-400/40 bg-purple-500/10'
                           : 'border-white/10 bg-zinc-900/60 hover:bg-white/5'
                       }`}
                     >
@@ -224,7 +224,7 @@ export default function FlowBuilderEditorPage({
                       onClick={() => handleStartModeSelect('zero')}
                       className={`relative rounded-2xl border p-4 text-left transition ${
                         startMode === 'zero'
-                          ? 'border-emerald-400/40 bg-emerald-500/10'
+                          ? 'border-purple-400/40 bg-purple-500/10'
                           : 'border-white/10 bg-zinc-900/60 hover:bg-white/5'
                       }`}
                     >
@@ -278,7 +278,7 @@ export default function FlowBuilderEditorPage({
                             onClick={() => handleTemplateClick(tpl)}
                             className={`rounded-xl border p-4 text-left transition ${
                               selectedTemplateKey === tpl.key
-                                ? 'border-emerald-400/40 bg-emerald-500/10 text-white'
+                                ? 'border-purple-400/40 bg-purple-500/10 text-white'
                                 : 'border-white/10 bg-zinc-900/60 text-gray-300 hover:bg-white/5'
                             }`}
                           >
@@ -288,7 +288,7 @@ export default function FlowBuilderEditorPage({
                                 className={
                                   'px-1.5 py-0.5 text-[10px] rounded ' +
                                   (tpl.isDynamic
-                                    ? 'bg-emerald-500/20 text-emerald-200'
+                                    ? 'bg-purple-500/20 text-purple-200'
                                     : 'bg-white/10 text-gray-300')
                                 }
                               >

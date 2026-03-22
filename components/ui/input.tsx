@@ -6,7 +6,7 @@ import { cn } from "@/lib/utils"
  * Input com Design System
  *
  * Mudanças do DS:
- * - Focus ring usando --ds-shadow-input-focus (glow emerald)
+ * - Focus ring usando --ds-shadow-input-focus (glow purple)
  * - Border focus usando --ds-border-focus
  * - Transição suave usando --ds-transition-fast
  */

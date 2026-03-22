@@ -63,7 +63,7 @@ const InboxUnreadBadge = memo(function InboxUnreadBadge({
   if (variant === 'compact') {
     return (
       <span
-        className="absolute -right-1 -top-1 rounded-full bg-emerald-500/90 px-0.5 py-[1px] text-[7px] font-semibold uppercase tracking-wider text-black"
+        className="absolute -right-1 -top-1 rounded-full bg-purple-500/90 px-0.5 py-[1px] text-[7px] font-semibold uppercase tracking-wider text-black"
         aria-label={`${count} mensagens não lidas`}
       >
         {displayCount}
@@ -73,7 +73,7 @@ const InboxUnreadBadge = memo(function InboxUnreadBadge({
 
   return (
     <span
-      className="rounded-full bg-emerald-500/20 px-1.5 py-[1px] text-[8px] font-semibold uppercase tracking-wider text-emerald-700 dark:text-emerald-200 border border-emerald-500/30"
+      className="rounded-full bg-purple-500/20 px-1.5 py-[1px] text-[8px] font-semibold uppercase tracking-wider text-purple-700 dark:text-purple-200 border border-purple-500/30"
       aria-label={`${count} mensagens não lidas`}
     >
       {displayCount}
@@ -140,7 +140,7 @@ const CompactSidebar = memo(function CompactSidebar({
               <InboxUnreadBadge variant="compact" />
             ) : item.badge ? (
               <span
-                className="absolute -right-1 -top-1 rounded-full bg-emerald-500/90 px-0.5 py-[1px] text-[7px] font-semibold uppercase tracking-wider text-black"
+                className="absolute -right-1 -top-1 rounded-full bg-purple-500/90 px-0.5 py-[1px] text-[7px] font-semibold uppercase tracking-wider text-black"
                 aria-label={item.badge}
               >
                 {item.badge}
@@ -297,7 +297,7 @@ const ExpandedSidebar = memo(function ExpandedSidebar({
                 <InboxUnreadBadge variant="expanded" />
               ) : item.badge ? (
                 <span
-                  className="rounded-full bg-emerald-500/20 px-1.5 py-[1px] text-[8px] font-semibold uppercase tracking-wider text-emerald-700 dark:text-emerald-200 border border-emerald-500/30"
+                  className="rounded-full bg-purple-500/20 px-1.5 py-[1px] text-[8px] font-semibold uppercase tracking-wider text-purple-700 dark:text-purple-200 border border-purple-500/30"
                   aria-label={item.badge}
                 >
                   {item.badge}

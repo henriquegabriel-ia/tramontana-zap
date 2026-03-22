@@ -148,7 +148,7 @@ function renderBasicText(
       key={`bt_${idx}`}
       className={`text-[14px] leading-snug text-zinc-100 whitespace-pre-wrap ${
         editorKey ? 'cursor-pointer hover:bg-white/5 px-1 rounded transition-colors' : ''
-      } ${selected ? 'ring-2 ring-emerald-400/40 bg-emerald-500/5' : ''}`}
+      } ${selected ? 'ring-2 ring-purple-400/40 bg-purple-500/5' : ''}`}
       onClick={() => {
         if (editorKey && onSelectKey) onSelectKey(editorKey)
         if (editorKey && onEditKey) onEditKey(editorKey)
@@ -201,7 +201,7 @@ function renderTextEntry(
     <div key={`te_${idx}`} className="space-y-2">
       <div
         className={`text-[14px] text-zinc-200 ${editorKey ? 'cursor-pointer' : ''} ${
-          selected ? 'ring-2 ring-emerald-400/40 bg-emerald-500/5 rounded px-1' : ''
+          selected ? 'ring-2 ring-purple-400/40 bg-purple-500/5 rounded px-1' : ''
         }`}
         onClick={() => {
           if (editorKey && onSelectKey) onSelectKey(editorKey)
@@ -215,7 +215,7 @@ function renderTextEntry(
         value={value}
         onChange={(e) => setValues((prev) => ({ ...prev, [name]: e.target.value }))}
         placeholder="Digite aqui"
-        className="h-12 w-full rounded-xl border border-white/10 bg-white/5 px-4 text-[15px] text-zinc-200 placeholder:text-zinc-500 focus:outline-none focus:ring-2 focus:ring-emerald-400/40"
+        className="h-12 w-full rounded-xl border border-white/10 bg-white/5 px-4 text-[15px] text-zinc-200 placeholder:text-zinc-500 focus:outline-none focus:ring-2 focus:ring-purple-400/40"
       />
     </div>
   )
@@ -240,7 +240,7 @@ function renderTextArea(
     <div key={`ta_${idx}`} className="space-y-2">
       <div
         className={`text-[14px] text-zinc-200 ${editorKey ? 'cursor-pointer' : ''} ${
-          selected ? 'ring-2 ring-emerald-400/40 bg-emerald-500/5 rounded px-1' : ''
+          selected ? 'ring-2 ring-purple-400/40 bg-purple-500/5 rounded px-1' : ''
         }`}
         onClick={() => {
           if (editorKey && onSelectKey) onSelectKey(editorKey)
@@ -254,7 +254,7 @@ function renderTextArea(
         onChange={(e) => setValues((prev) => ({ ...prev, [name]: e.target.value }))}
         placeholder="Digite aqui"
         rows={3}
-        className="w-full rounded-xl border border-white/10 bg-white/5 px-4 py-3 text-[15px] text-zinc-200 placeholder:text-zinc-500 focus:outline-none focus:ring-2 focus:ring-emerald-400/40"
+        className="w-full rounded-xl border border-white/10 bg-white/5 px-4 py-3 text-[15px] text-zinc-200 placeholder:text-zinc-500 focus:outline-none focus:ring-2 focus:ring-purple-400/40"
       />
     </div>
   )
@@ -291,18 +291,18 @@ function renderOptIn(
         type="checkbox"
         checked={checked}
         onChange={(e) => setValues((prev) => ({ ...prev, [name]: e.target.checked }))}
-        className="mt-1 h-5 w-5 rounded border border-white/30 bg-white/5 accent-emerald-400"
+        className="mt-1 h-5 w-5 rounded border border-white/30 bg-white/5 accent-purple-400"
       />
       <div
         className={`text-[15px] text-zinc-300 leading-snug ${
-          selected ? 'ring-2 ring-emerald-400/40 bg-emerald-500/5 rounded px-1' : ''
+          selected ? 'ring-2 ring-purple-400/40 bg-purple-500/5 rounded px-1' : ''
         }`}
         onClick={handleEdit}
       >
         {parts.map((p, i) => {
           if (/^Leia mais$/i.test(p)) {
             return (
-              <span key={i} className="text-emerald-400">
+              <span key={i} className="text-purple-400">
                 {p}
               </span>
             )
@@ -348,7 +348,7 @@ function renderRadioGroup(
       {label ? (
         <div
           className={`text-[14px] text-zinc-200 ${editorKey ? 'cursor-pointer' : ''} ${
-            labelSelected ? 'ring-2 ring-emerald-400/40 bg-emerald-500/5 rounded px-1' : ''
+            labelSelected ? 'ring-2 ring-purple-400/40 bg-purple-500/5 rounded px-1' : ''
           }`}
           onClick={() => {
             if (editorKey && onSelectKey) onSelectKey(editorKey)
@@ -368,7 +368,7 @@ function renderRadioGroup(
               value={s(o?.id, s(o?.title, String(j)))}
               checked={selected === s(o?.id, s(o?.title, String(j)))}
               onChange={(e) => setValues((prev) => ({ ...prev, [name]: e.target.value }))}
-              className="h-5 w-5 accent-emerald-400"
+              className="h-5 w-5 accent-purple-400"
             />
           </label>
         ))}
@@ -400,7 +400,7 @@ function renderCheckboxGroup(
       {label ? (
         <div
           className={`text-[14px] text-zinc-200 ${editorKey ? 'cursor-pointer' : ''} ${
-            labelSelected ? 'ring-2 ring-emerald-400/40 bg-emerald-500/5 rounded px-1' : ''
+            labelSelected ? 'ring-2 ring-purple-400/40 bg-purple-500/5 rounded px-1' : ''
           }`}
           onClick={() => {
             if (editorKey && onSelectKey) onSelectKey(editorKey)
@@ -428,7 +428,7 @@ function renderCheckboxGroup(
                   }
                 })
               }}
-              className="h-5 w-5 accent-emerald-400"
+              className="h-5 w-5 accent-purple-400"
             />
           </label>
         ))}
@@ -465,7 +465,7 @@ function renderDropdown(
     <div key={`dd_${idx}`} className="space-y-2">
       <div
         className={`text-[14px] text-zinc-200 ${editorKey ? 'cursor-pointer' : ''} ${
-          selected ? 'ring-2 ring-emerald-400/40 bg-emerald-500/5 rounded px-1' : ''
+          selected ? 'ring-2 ring-purple-400/40 bg-purple-500/5 rounded px-1' : ''
         }`}
         onClick={() => {
           if (editorKey && onSelectKey) onSelectKey(editorKey)
@@ -477,7 +477,7 @@ function renderDropdown(
       <select
         value={value}
         onChange={(e) => setValues((prev) => ({ ...prev, [name]: e.target.value }))}
-        className="h-12 w-full rounded-xl border border-white/10 bg-white/5 px-4 text-[15px] text-zinc-200 focus:outline-none focus:ring-2 focus:ring-emerald-400/40"
+        className="h-12 w-full rounded-xl border border-white/10 bg-white/5 px-4 text-[15px] text-zinc-200 focus:outline-none focus:ring-2 focus:ring-purple-400/40"
       >
         <option value="" disabled>
           Selecionar opção
@@ -511,7 +511,7 @@ function renderDatePicker(
     <div key={`dp_${idx}`} className="space-y-2">
       <div
         className={`text-[14px] text-zinc-200 ${editorKey ? 'cursor-pointer' : ''} ${
-          selected ? 'ring-2 ring-emerald-400/40 bg-emerald-500/5 rounded px-1' : ''
+          selected ? 'ring-2 ring-purple-400/40 bg-purple-500/5 rounded px-1' : ''
         }`}
         onClick={() => {
           if (editorKey && onSelectKey) onSelectKey(editorKey)
@@ -524,7 +524,7 @@ function renderDatePicker(
         type="date"
         value={value}
         onChange={(e) => setValues((prev) => ({ ...prev, [name]: e.target.value }))}
-        className="h-12 w-full rounded-xl border border-white/10 bg-white/5 px-4 text-[15px] text-zinc-200 focus:outline-none focus:ring-2 focus:ring-emerald-400/40"
+        className="h-12 w-full rounded-xl border border-white/10 bg-white/5 px-4 text-[15px] text-zinc-200 focus:outline-none focus:ring-2 focus:ring-purple-400/40"
       />
     </div>
   )
@@ -832,7 +832,7 @@ export function MetaFlowPreview(props: {
           <div
             className={`text-[18px] font-semibold text-zinc-100 truncate ${
               titleEditorKey ? 'cursor-pointer hover:bg-white/5 px-1 rounded transition-colors' : ''
-            } ${titleSelected ? 'ring-2 ring-emerald-400/40 bg-emerald-500/5 rounded px-1' : ''}`}
+            } ${titleSelected ? 'ring-2 ring-purple-400/40 bg-purple-500/5 rounded px-1' : ''}`}
             onClick={() => {
               if (titleEditorKey && props.onSelectEditorKey) props.onSelectEditorKey(titleEditorKey)
               if (titleEditorKey && props.onEditKey) props.onEditKey(titleEditorKey)
@@ -881,15 +881,15 @@ export function MetaFlowPreview(props: {
               e.preventDefault()
               props.onSelectEditorKey(footerEditorKey)
             }}
-            className={`w-full h-12 rounded-2xl bg-emerald-500/80 text-white text-[16px] font-semibold hover:bg-emerald-400/90 disabled:bg-white/10 disabled:text-white/40 disabled:cursor-not-allowed ${
-              footerSelected ? 'ring-2 ring-emerald-300/60' : ''
+            className={`w-full h-12 rounded-2xl bg-purple-500/80 text-white text-[16px] font-semibold hover:bg-purple-400/90 disabled:bg-white/10 disabled:text-white/40 disabled:cursor-not-allowed ${
+              footerSelected ? 'ring-2 ring-purple-300/60' : ''
             }`}
           >
             {completed ? 'Concluído' : footer.label}
           </button>
 
           <div className="mt-4 text-center text-[14px] text-zinc-400">
-            Gerenciada pela empresa. <span className="text-emerald-400">Saiba mais</span>
+            Gerenciada pela empresa. <span className="text-purple-400">Saiba mais</span>
           </div>
           <div className="mt-1 text-center text-[10px] text-zinc-500">preview Meta • v{parsed.version || '—'}</div>
         </div>

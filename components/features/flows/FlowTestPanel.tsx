@@ -215,7 +215,7 @@ export function FlowTestPanel({
             }
           }}
           disabled={isSending || !to.trim() || !flowId.trim() || !flowToken.trim()}
-          className="bg-emerald-500 text-black hover:bg-emerald-400"
+          className="bg-purple-500 text-black hover:bg-purple-400"
         >
           <Send className="h-4 w-4" />
           {isSending ? 'Enviando…' : 'Enviar teste'}

@@ -192,7 +192,7 @@ export function InternationalPhoneInput({
               className={cn(
                 "flex shrink-0 items-center gap-2 rounded-l-xl border-r border-zinc-700 px-3",
                 "bg-zinc-800 hover:bg-zinc-700/60",
-                "focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:ring-offset-0"
+                "focus:outline-none focus:ring-2 focus:ring-purple-500 focus:ring-offset-0"
               )}
               aria-label="Selecionar país"
             >
@@ -245,7 +245,7 @@ export function InternationalPhoneInput({
                           </span>
                           <span className="flex-1 truncate">{c.name}</span>
                           <span className="text-xs text-zinc-400">+{c.dialCode}</span>
-                          {c.iso2 === country.iso2 && <Check className="h-4 w-4 text-emerald-500" />}
+                          {c.iso2 === country.iso2 && <Check className="h-4 w-4 text-purple-500" />}
                         </CommandItem>
                       ))}
                     </CommandGroup>
@@ -274,7 +274,7 @@ export function InternationalPhoneInput({
                       </span>
                       <span className="flex-1 truncate">{c.name}</span>
                       <span className="text-xs text-zinc-400">+{c.dialCode}</span>
-                      {c.iso2 === country.iso2 && <Check className="h-4 w-4 text-emerald-500" />}
+                      {c.iso2 === country.iso2 && <Check className="h-4 w-4 text-purple-500" />}
                     </CommandItem>
                   ))}
                 </CommandGroup>
@@ -296,7 +296,7 @@ export function InternationalPhoneInput({
           placeholder={placeholder}
           className={cn(
             "min-w-0 flex-1 rounded-r-xl bg-zinc-800 px-4 py-3 text-white placeholder:text-zinc-500",
-            "focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:border-transparent",
+            "focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-transparent",
             inputClassName
           )}
         />

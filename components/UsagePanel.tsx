@@ -69,14 +69,14 @@ const formatNumber = (num: number): string => {
 }
 
 const StatusIcon = ({ status }: { status: 'ok' | 'warning' | 'critical' }) => {
-  if (status === 'ok') return <CheckCircle2 size={14} className="text-emerald-400" />
+  if (status === 'ok') return <CheckCircle2 size={14} className="text-purple-400" />
   if (status === 'warning') return <AlertTriangle size={14} className="text-amber-400" />
   return <AlertTriangle size={14} className="text-red-400" />
 }
 
 // Constantes de cores hoistadas para evitar re-criação em cada render
 const PROGRESS_BAR_COLORS = {
-  ok: 'bg-emerald-500',
+  ok: 'bg-purple-500',
   warning: 'bg-amber-500',
   critical: 'bg-red-500',
 } as const
@@ -153,7 +153,7 @@ const UsageItem = ({
             ? 'text-red-400'
             : status === 'warning'
               ? 'text-amber-400'
-              : 'text-emerald-400'
+              : 'text-purple-400'
             }`}>
             {percentage.toFixed(1)}%
           </span>
@@ -372,7 +372,7 @@ export const UsagePanel: React.FC<UsagePanelProps> = ({ usage, isLoading, onRefr
                   {usage.database.plan && usage.database.plan !== 'unknown' && (
                     <span className={`px-1.5 py-0.5 text-[10px] font-semibold uppercase rounded ${usage.database.plan === 'enterprise' ? 'bg-purple-500/20 text-purple-300' :
                       usage.database.plan === 'team' ? 'bg-indigo-500/20 text-indigo-300' :
-                        usage.database.plan === 'pro' ? 'bg-emerald-500/20 text-emerald-300' :
+                        usage.database.plan === 'pro' ? 'bg-purple-500/20 text-purple-300' :
                           'bg-[var(--ds-bg-surface)] text-[var(--ds-text-secondary)]'
                       }`}>
                       {usage.database.plan}
@@ -393,7 +393,7 @@ export const UsagePanel: React.FC<UsagePanelProps> = ({ usage, isLoading, onRefr
               </span>
               <span className={`font-medium ${usage.database.status === 'critical' ? 'text-red-400' :
                 usage.database.status === 'warning' ? 'text-amber-400' :
-                  'text-emerald-400'
+                  'text-purple-400'
                 }`}>
                 {(usage.database?.percentage ?? 0).toFixed(1)}%
               </span>

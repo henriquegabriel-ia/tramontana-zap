@@ -202,13 +202,13 @@ export function AIGatewayPanel() {
               onClick={() => handleSaveConfig({ useBYOK: !config.useBYOK })}
               className={`relative inline-flex h-6 w-11 items-center rounded-full border transition ${
                 config.useBYOK
-                  ? 'border-emerald-500/40 bg-emerald-500/20'
+                  ? 'border-purple-500/40 bg-purple-500/20'
                   : 'border-[var(--ds-border-default)] bg-[var(--ds-bg-hover)]'
               } ${saving ? 'cursor-not-allowed opacity-60' : ''}`}
             >
               <span
                 className={`inline-block size-4 rounded-full transition ${
-                  config.useBYOK ? 'translate-x-6 bg-emerald-300' : 'translate-x-1 bg-[var(--ds-text-muted)]'
+                  config.useBYOK ? 'translate-x-6 bg-purple-300' : 'translate-x-1 bg-[var(--ds-text-muted)]'
                 }`}
               />
             </button>

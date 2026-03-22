@@ -377,7 +377,7 @@ export function CampaignTracePanel({
                       ok === false
                         ? 'text-red-300'
                         : ok === true
-                          ? 'text-emerald-200'
+                          ? 'text-purple-200'
                           : 'text-gray-300'
 
                     return (

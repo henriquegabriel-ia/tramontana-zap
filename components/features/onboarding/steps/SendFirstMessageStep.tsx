@@ -160,21 +160,21 @@ export function SendFirstMessageStep({
         <div className={`
           w-20 h-20 rounded-2xl flex items-center justify-center transition-all duration-300
           ${sendStatus === 'sending' ? 'bg-blue-500/20 animate-pulse' : ''}
-          ${sendStatus === 'success' ? 'bg-emerald-500/20' : ''}
+          ${sendStatus === 'success' ? 'bg-purple-500/20' : ''}
           ${sendStatus === 'error' ? 'bg-amber-500/20' : ''}
-          ${sendStatus === 'idle' ? 'bg-gradient-to-br from-emerald-500/20 to-teal-500/20' : ''}
+          ${sendStatus === 'idle' ? 'bg-gradient-to-br from-purple-500/20 to-teal-500/20' : ''}
         `}>
           {sendStatus === 'sending' && (
             <Loader2 className="w-10 h-10 text-blue-400 animate-spin" />
           )}
           {sendStatus === 'success' && (
-            <CheckCircle2 className="w-10 h-10 text-emerald-400" />
+            <CheckCircle2 className="w-10 h-10 text-purple-400" />
           )}
           {sendStatus === 'error' && (
             <AlertCircle className="w-10 h-10 text-amber-400" />
           )}
           {sendStatus === 'idle' && (
-            <Send className="w-10 h-10 text-emerald-400" />
+            <Send className="w-10 h-10 text-purple-400" />
           )}
         </div>
       </div>
@@ -231,12 +231,12 @@ export function SendFirstMessageStep({
 
       {/* Resultado de sucesso */}
       {sendStatus === 'success' && sendResult && (
-        <div className="p-4 rounded-xl bg-emerald-500/10 border border-emerald-500/20 space-y-3">
+        <div className="p-4 rounded-xl bg-purple-500/10 border border-purple-500/20 space-y-3">
           <div className="flex items-center gap-3">
-            <CheckCircle2 className="w-5 h-5 text-emerald-400 flex-shrink-0" />
+            <CheckCircle2 className="w-5 h-5 text-purple-400 flex-shrink-0" />
             <div>
-              <p className="font-medium text-emerald-200">Mensagem enviada com sucesso!</p>
-              <p className="text-sm text-emerald-200/70">
+              <p className="font-medium text-purple-200">Mensagem enviada com sucesso!</p>
+              <p className="text-sm text-purple-200/70">
                 Template usado: {sendResult.templateUsed}
               </p>
             </div>
