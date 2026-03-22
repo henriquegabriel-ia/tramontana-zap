@@ -42,6 +42,9 @@ import {
   handleDeliveryStatus,
 } from '@/lib/inbox/inbox-webhook'
 
+// RD Station CRM integration (auto-deal on campaign reply)
+import { handleCampaignReply, getRDStationConfig } from '@/lib/rd-station'
+
 // Get WhatsApp Access Token from centralized helper
 async function getWhatsAppAccessToken(): Promise<string | null> {
   const credentials = await getWhatsAppCredentials()
@@ -1580,6 +1583,29 @@ export async function POST(request: NextRequest) {
                 timestamp: message?.timestamp || null,
               },
             })
+          }
+
+          // =================================================================
+          // RD Station: auto-create lead/deal on campaign reply (fire-and-forget)
+          // =================================================================
+          if (text && from) {
+            try {
+              const rdConfig = await getRDStationConfig()
+              if (rdConfig) {
+                const contactName =
+                  change.value?.contacts?.[0]?.profile?.name || ''
+                handleCampaignReply(from, contactName, text)
+                  .then((result) => {
+                    console.log('[Webhook] RD Station integration:', { phone: maskPhone(from), result })
+                  })
+                  .catch((err) => {
+                    console.warn('[Webhook] RD Station integration error (non-blocking):', err)
+                  })
+              }
+            } catch (rdErr) {
+              // Silently skip — never block webhook
+              console.warn('[Webhook] RD Station config check failed (non-blocking):', rdErr)
+            }
           }
         }
       }
