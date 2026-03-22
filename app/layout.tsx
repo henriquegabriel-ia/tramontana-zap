@@ -22,8 +22,8 @@ export const viewport: Viewport = {
 }
 
 export const metadata: Metadata = {
-  title: 'SmartZap - WhatsApp Manager',
-  description: 'Plataforma de automação de marketing via WhatsApp',
+  title: 'Tramontana Zap - WhatsApp para Consórcios',
+  description: 'Central de atendimento WhatsApp com IA para consórcios',
   manifest: '/manifest.json',
   icons: {
     icon: [
@@ -38,7 +38,7 @@ export const metadata: Metadata = {
   appleWebApp: {
     capable: true,
     statusBarStyle: 'black-translucent',
-    title: 'SmartZap',
+    title: 'Tramontana Zap',
   },
   formatDetection: {
     telephone: false,

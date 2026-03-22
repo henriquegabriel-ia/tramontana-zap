@@ -1,13 +1,13 @@
 {
-  "name": "SmartZap Atendimento",
-  "short_name": "SmartZap",
-  "description": "Central de atendimento WhatsApp com IA",
+  "name": "Tramontana Zap Atendimento",
+  "short_name": "Tramontana Zap",
+  "description": "Central de atendimento WhatsApp com IA para consórcios",
   "start_url": "/atendimento",
   "scope": "/atendimento",
   "display": "standalone",
   "orientation": "portrait",
-  "background_color": "#18181b",
-  "theme_color": "#22c55e",
+  "background_color": "#1C1040",
+  "theme_color": "#6833BD",
   "icons": [
     {
       "src": "/icons/icon-192.png",

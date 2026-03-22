@@ -100,7 +100,7 @@ export function WebhookFunnelVisualization({
                           <span className="font-medium text-sm">{level.name}</span>
                           {level.isActive && level.isSmartZap && (
                             <span className="px-1.5 py-0.5 bg-emerald-500/30 text-emerald-300 text-[10px] font-bold rounded">
-                              SMARTZAP
+                              TRAMONTANA
                             </span>
                           )}
                           {level.isActive && !level.isSmartZap && level.url && (
@@ -148,7 +148,7 @@ export function WebhookFunnelVisualization({
                               onClick={handleActivate}
                               disabled={isBusy}
                               className="h-8 px-2.5 text-[10px] font-medium bg-emerald-600 hover:bg-emerald-500 disabled:opacity-50 text-white rounded-lg transition-colors flex items-center gap-1"
-                              title={`Ativar SmartZap no nível #${level.level}`}
+                              title={`Ativar Tramontana Zap no nível #${level.level}`}
                             >
                               {isBusy ? (
                                 <Loader2 size={12} className="animate-spin" />
@@ -165,14 +165,14 @@ export function WebhookFunnelVisualization({
                               onClick={handleActivate}
                               disabled={isBusy}
                               className="h-8 px-2.5 text-[10px] font-medium bg-emerald-600 hover:bg-emerald-500 disabled:opacity-50 text-white rounded-lg transition-colors flex items-center gap-1"
-                              title={`Substituir por SmartZap`}
+                              title={`Substituir por Tramontana Zap`}
                             >
                               {isBusy ? (
                                 <Loader2 size={12} className="animate-spin" />
                               ) : (
                                 <Zap size={12} />
                               )}
-                              SmartZap
+                              Tramontana Zap
                             </button>
                           )}
 

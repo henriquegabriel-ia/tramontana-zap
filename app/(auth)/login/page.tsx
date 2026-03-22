@@ -101,10 +101,10 @@ function LoginForm() {
       {/* Logo */}
       <div className="text-center mb-8">
         <div className="inline-flex items-center justify-center w-16 h-16 rounded-2xl bg-linear-to-br from-emerald-500 to-emerald-600 mb-4">
-          <span className="text-3xl font-bold text-white">S</span>
+          <span className="text-3xl font-bold text-white">T</span>
         </div>
         <h1 className="text-2xl font-bold text-[var(--ds-text-primary)]">
-          {companyName || 'SmartZap'}
+          {companyName || 'Tramontana Zap'}
         </h1>
         <p className="text-[var(--ds-text-secondary)] mt-1">Entre para continuar</p>
       </div>
@@ -165,23 +165,12 @@ function LoginForm() {
 
       {/* Footer */}
       <p className="text-center text-[var(--ds-text-muted)] text-sm mt-6">
-        SmartZap © {new Date().getFullYear()} |{' '}
+        Tramontana Zap © {new Date().getFullYear()} |{' '}
         <a
-          href="https://www.escoladeautomacao.com.br/"
-          target="_blank"
-          rel="noopener noreferrer"
+          href="#"
           className="hover:text-emerald-500 transition-colors"
         >
-          Escola de Automação
-        </a>
-        {' '}| by{' '}
-        <a
-          href="https://instagram.com/thaleslaray"
-          target="_blank"
-          rel="noopener noreferrer"
-          className="hover:text-emerald-500 transition-colors"
-        >
-          @thaleslaray
+          Tramontana Consórcios
         </a>
       </p>
     </div>

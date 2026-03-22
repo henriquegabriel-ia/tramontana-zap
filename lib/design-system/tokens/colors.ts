@@ -1,5 +1,5 @@
 /**
- * SmartZap Design System - Color Tokens
+ * Tramontana Zap Design System - Color Tokens
  *
  * Sistema de cores baseado em camadas:
  * 1. Primitivas (raw colors) - valores hex/hsl puros
@@ -28,19 +28,19 @@ export const primitiveColors = {
     950: '#09090b',
   },
 
-  // Emerald Scale (Primary - WhatsApp inspired)
+  // Purple Scale (Primary - Tramontana Consórcios)
   emerald: {
-    50: '#ecfdf5',
-    100: '#d1fae5',
-    200: '#a7f3d0',
-    300: '#6ee7b7',
-    400: '#34d399',
-    500: '#10b981',
-    600: '#059669',
-    700: '#047857',
-    800: '#065f46',
-    900: '#064e3b',
-    950: '#022c22',
+    50: '#f5f0ff',
+    100: '#ebe0ff',
+    200: '#d4bfff',
+    300: '#b899ff',
+    400: '#9966ee',
+    500: '#6833BD',
+    600: '#5528A0',
+    700: '#441f83',
+    800: '#341868',
+    900: '#25104d',
+    950: '#150a30',
   },
 
   // Red Scale (Destructive/Error)

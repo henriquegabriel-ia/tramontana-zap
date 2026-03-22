@@ -90,7 +90,7 @@ export async function bootstrapInstance({
   // 2) Configura settings iniciais
   // Nota: company_name é necessário para isSetupComplete() retornar true
   // Usa o nome do admin se fornecido, senão extrai do email como fallback
-  const companyName = adminName?.trim() || emailNorm.split('@')[0] || 'SmartZap';
+  const companyName = adminName?.trim() || emailNorm.split('@')[0] || 'Tramontana Zap';
 
   // Gera chaves RSA para o Flow Endpoint (MiniApp Dinâmico)
   // Isso evita erro ao publicar Flows que usam endpoint dinâmico

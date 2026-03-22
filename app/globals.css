@@ -30,10 +30,10 @@
   --ds-text-3xl: 1.875rem;
   --ds-text-4xl: 2.25rem;
 
-  /* DS - Brand colors (Emerald - mantendo identidade SmartZap) */
-  --ds-brand-primary: #10b981;
-  --ds-brand-primary-hover: #059669;
-  --ds-brand-primary-muted: rgba(16, 185, 129, 0.1);
+  /* DS - Brand colors (Purple - Tramontana Zap) */
+  --ds-brand-primary: #6833BD;
+  --ds-brand-primary-hover: #5528A0;
+  --ds-brand-primary-muted: rgba(104, 51, 189, 0.1);
 
   /* ================================
      LIGHT MODE - Geist Inspired
@@ -52,14 +52,14 @@
   --ds-text-primary: #0a0a0a;
   --ds-text-secondary: #525252;
   --ds-text-muted: #737373;
-  --ds-text-brand: #059669;
+  --ds-text-brand: #5528A0;
   --ds-text-disabled: #a3a3a3;
 
   /* DS - Border colors (LIGHT MODE - Geist style - visible but elegant) */
   --ds-border-subtle: rgba(0, 0, 0, 0.06);
   --ds-border-default: rgba(0, 0, 0, 0.09);
   --ds-border-strong: rgba(0, 0, 0, 0.14);
-  --ds-border-focus: #10b981;
+  --ds-border-focus: #6833BD;
 
   /* DS - Status colors (LIGHT MODE - Geist style) */
   --ds-status-success: #22c55e;
@@ -97,9 +97,9 @@
   --ds-shadow-xl: 0 20px 25px -5px rgba(0, 0, 0, 0.08), 0 8px 10px -6px rgba(0, 0, 0, 0.04);
 
   /* DS - Glow effects (LIGHT MODE - Geist: subtle focus rings) */
-  --ds-glow-brand-sm: 0 0 0 2px rgba(16, 185, 129, 0.15);
-  --ds-glow-brand-md: 0 0 0 3px rgba(16, 185, 129, 0.2);
-  --ds-glow-brand-ring: 0 0 0 2px rgba(16, 185, 129, 0.25);
+  --ds-glow-brand-sm: 0 0 0 2px rgba(104, 51, 189, 0.15);
+  --ds-glow-brand-md: 0 0 0 3px rgba(104, 51, 189, 0.2);
+  --ds-glow-brand-ring: 0 0 0 2px rgba(104, 51, 189, 0.25);
   --ds-glow-error-ring: 0 0 0 2px rgba(239, 68, 68, 0.25);
 
   /* DS - Composite shadows (LIGHT MODE - Geist style) */
@@ -109,7 +109,7 @@
   --ds-shadow-button-hover: 0 0 0 1px rgba(0, 0, 0, 0.08);
   --ds-shadow-button-primary: 0 1px 2px 0 rgba(0, 0, 0, 0.08);
   --ds-shadow-button-primary-hover: 0 2px 4px 0 rgba(0, 0, 0, 0.1);
-  --ds-shadow-input-focus: 0 0 0 2px rgba(16, 185, 129, 0.25);
+  --ds-shadow-input-focus: 0 0 0 2px rgba(104, 51, 189, 0.25);
   --ds-shadow-modal: 0 0 0 1px rgba(0, 0, 0, 0.04), 0 16px 32px -8px rgba(0, 0, 0, 0.12);
   --ds-shadow-dropdown: 0 0 0 1px rgba(0, 0, 0, 0.04), 0 8px 16px -4px rgba(0, 0, 0, 0.1);
 
@@ -146,18 +146,18 @@
   --color-gray-900: #18181b;
   --color-gray-950: #09090b;
 
-  /* Electric Emerald (WhatsApp Tech vibe) */
-  --color-primary-50: #ecfdf5;
-  --color-primary-100: #d1fae5;
-  --color-primary-200: #a7f3d0;
-  --color-primary-300: #6ee7b7;
-  --color-primary-400: #34d399;
-  --color-primary-500: #10b981;
-  --color-primary-600: #059669;
-  --color-primary-700: #047857;
-  --color-primary-800: #065f46;
-  --color-primary-900: #064e3b;
-  --color-primary-950: #022c22;
+  /* Tramontana Purple (Tramontana Consórcios) */
+  --color-primary-50: #f5f0ff;
+  --color-primary-100: #ebe0ff;
+  --color-primary-200: #d4bfff;
+  --color-primary-300: #b899ff;
+  --color-primary-400: #9966ee;
+  --color-primary-500: #6833BD;
+  --color-primary-600: #5528A0;
+  --color-primary-700: #441f83;
+  --color-primary-800: #341868;
+  --color-primary-900: #25104d;
+  --color-primary-950: #150a30;
 
   /* ================================
      LANGFLOW COLOR SYSTEM
@@ -338,7 +338,7 @@ select:focus-visible,
 textarea:focus-visible {
   outline: none;
   border-color: var(--color-primary-500);
-  box-shadow: 0 0 0 3px rgba(16, 185, 129, 0.2);
+  box-shadow: 0 0 0 3px rgba(104, 51, 189, 0.2);
 }
 
 /* Remove default focus outline when using :focus-visible */
@@ -717,9 +717,9 @@ textarea:focus-visible {
   --ds-shadow-xl: 0 20px 40px -5px rgba(0, 0, 0, 0.6), 0 8px 16px -6px rgba(0, 0, 0, 0.4);
 
   /* DS - Glow effects (DARK MODE) */
-  --ds-glow-brand-sm: 0 0 10px rgba(16, 185, 129, 0.2);
-  --ds-glow-brand-md: 0 0 20px rgba(16, 185, 129, 0.3);
-  --ds-glow-brand-ring: 0 0 0 3px rgba(16, 185, 129, 0.2);
+  --ds-glow-brand-sm: 0 0 10px rgba(104, 51, 189, 0.2);
+  --ds-glow-brand-md: 0 0 20px rgba(104, 51, 189, 0.3);
+  --ds-glow-brand-ring: 0 0 0 3px rgba(104, 51, 189, 0.2);
   --ds-glow-error-ring: 0 0 0 3px rgba(239, 68, 68, 0.2);
 
   /* DS - Composite shadows (DARK MODE) */
@@ -727,9 +727,9 @@ textarea:focus-visible {
   --ds-shadow-card-hover: 0 4px 8px -1px rgba(0, 0, 0, 0.4), 0 2px 4px -2px rgba(0, 0, 0, 0.3), inset 0 1px 0 0 rgba(255, 255, 255, 0.05);
   --ds-shadow-button: 0 1px 2px 0 rgba(0, 0, 0, 0.3), inset 0 1px 0 0 rgba(255, 255, 255, 0.1);
   --ds-shadow-button-hover: 0 2px 4px 0 rgba(0, 0, 0, 0.4), inset 0 1px 0 0 rgba(255, 255, 255, 0.15);
-  --ds-shadow-button-primary: 0 2px 4px 0 rgba(0, 0, 0, 0.4), 0 0 10px rgba(16, 185, 129, 0.2);
-  --ds-shadow-button-primary-hover: 0 4px 8px -1px rgba(0, 0, 0, 0.4), 0 0 20px rgba(16, 185, 129, 0.3);
-  --ds-shadow-input-focus: 0 0 0 3px rgba(16, 185, 129, 0.2);
+  --ds-shadow-button-primary: 0 2px 4px 0 rgba(0, 0, 0, 0.4), 0 0 10px rgba(104, 51, 189, 0.2);
+  --ds-shadow-button-primary-hover: 0 4px 8px -1px rgba(0, 0, 0, 0.4), 0 0 20px rgba(104, 51, 189, 0.3);
+  --ds-shadow-input-focus: 0 0 0 3px rgba(104, 51, 189, 0.2);
   --ds-shadow-modal: 0 20px 40px -5px rgba(0, 0, 0, 0.6), 0 8px 16px -6px rgba(0, 0, 0, 0.4), 0 0 0 1px rgba(255, 255, 255, 0.05);
   --ds-shadow-dropdown: 0 10px 25px -3px rgba(0, 0, 0, 0.5), 0 4px 10px -4px rgba(0, 0, 0, 0.4), 0 0 0 1px rgba(255, 255, 255, 0.05);
 

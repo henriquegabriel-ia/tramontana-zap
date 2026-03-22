@@ -1,5 +1,5 @@
 /**
- * SmartZap Service Worker
+ * Tramontana Zap Service Worker
  *
  * Estratégias de cache:
  * - Cache-first: assets estáticos (JS, CSS, fontes, imagens)
@@ -7,7 +7,7 @@
  * - Stale-while-revalidate: páginas HTML
  */
 
-const CACHE_VERSION = 'smartzap-v1'
+const CACHE_VERSION = 'tramontana-zap-v1'
 const STATIC_CACHE = `${CACHE_VERSION}-static`
 const DYNAMIC_CACHE = `${CACHE_VERSION}-dynamic`
 
@@ -70,7 +70,7 @@ self.addEventListener('activate', (event) => {
       .then((cacheNames) => {
         return Promise.all(
           cacheNames
-            .filter((name) => name.startsWith('smartzap-') && name !== STATIC_CACHE && name !== DYNAMIC_CACHE)
+            .filter((name) => name.startsWith('tramontana-zap-') && name !== STATIC_CACHE && name !== DYNAMIC_CACHE)
             .map((name) => {
               console.log('[SW] Deleting old cache:', name)
               return caches.delete(name)
@@ -127,11 +127,11 @@ self.addEventListener('push', (event) => {
   console.log('[SW] Push received')
 
   let data = {
-    title: 'SmartZap',
+    title: 'Tramontana Zap',
     body: 'Nova mensagem recebida',
     icon: '/icons/icon-192.png',
     badge: '/icons/icon-192.png',
-    tag: 'smartzap-notification',
+    tag: 'tramontana-zap-notification',
     data: { url: '/atendimento' }
   }
 
