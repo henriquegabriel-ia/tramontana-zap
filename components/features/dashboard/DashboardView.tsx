@@ -5,9 +5,18 @@ import { PrefetchLink } from '@/components/ui/PrefetchLink';
 import { Page, PageActions, PageDescription, PageHeader, PageTitle } from '@/components/ui/page';
 import { formatDateFull } from '@/lib/date-formatter';
 import { Container } from '@/components/ui/container';
-import { StatCard } from '@/components/ui/stat-card';
 import { StatusBadge } from '@/components/ui/status-badge';
-import { Send, TrendingUp, AlertCircle, CheckCircle2, MoreHorizontal, ArrowUpRight } from 'lucide-react';
+import {
+  Send,
+  TrendingUp,
+  AlertCircle,
+  CheckCircle2,
+  MoreHorizontal,
+  ArrowUpRight,
+  Zap,
+  BarChart3,
+  Plus,
+} from 'lucide-react';
 import { AreaChart, Area, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer } from '@/components/ui/lazy-charts';
 import { Campaign, CampaignStatus } from '../../../types';
 import { DashboardStats } from '../../../services/dashboardService';
@@ -18,9 +27,6 @@ interface DashboardViewProps {
   isLoading: boolean;
 }
 
-/**
- * Mapeia CampaignStatus enum para status do StatusBadge
- */
 const getCampaignBadgeStatus = (status: CampaignStatus) => {
   const map: Record<CampaignStatus, 'completed' | 'sending' | 'failed' | 'draft' | 'paused' | 'scheduled' | 'default'> = {
     [CampaignStatus.COMPLETED]: 'completed',
@@ -47,6 +53,26 @@ const getCampaignLabel = (status: CampaignStatus) => {
   return labels[status];
 };
 
+function HeroStatSkeleton() {
+  return (
+    <div className="col-span-1 md:col-span-2 ds-gradient-hero p-8 rounded-2xl">
+      <div className="w-32 h-4 bg-white/10 rounded animate-pulse mb-3" />
+      <div className="w-48 h-10 bg-white/10 rounded animate-pulse mb-4" />
+      <div className="w-36 h-5 bg-white/10 rounded animate-pulse" />
+    </div>
+  );
+}
+
+function SmallStatSkeleton() {
+  return (
+    <div className="ds-stat-card p-6">
+      <div className="w-10 h-10 rounded-lg bg-[var(--ds-bg-surface)] animate-pulse mb-4" />
+      <div className="w-24 h-3 bg-[var(--ds-bg-surface)] rounded animate-pulse mb-2" />
+      <div className="w-16 h-7 bg-[var(--ds-bg-surface)] rounded animate-pulse" />
+    </div>
+  );
+}
+
 export const DashboardView: React.FC<DashboardViewProps> = ({ stats, recentCampaigns, isLoading }) => {
   const [range, setRange] = React.useState<'7D' | '15D' | '30D'>('7D');
   const [isMounted, setIsMounted] = React.useState(false);
@@ -55,15 +81,11 @@ export const DashboardView: React.FC<DashboardViewProps> = ({ stats, recentCampa
   const chartData = stats.chartData || [];
 
   React.useEffect(() => {
-    // Aguarda o browser calcular as dimensões do container antes de renderizar o chart
-    // Isso evita o warning "width(-1) height(-1)" do Recharts
-    // Usa setTimeout para garantir que o layout foi calculado após o primeiro paint
     const timer = setTimeout(() => {
       const container = containerRef.current;
       if (container && container.clientWidth > 0 && container.clientHeight > 0) {
         setIsMounted(true);
       } else {
-        // Fallback: renderiza mesmo assim após 500ms
         setTimeout(() => setIsMounted(true), 500);
       }
     }, 100);
@@ -80,49 +102,85 @@ export const DashboardView: React.FC<DashboardViewProps> = ({ stats, recentCampa
         <PageActions>
           <PrefetchLink
             href="/campaigns/new"
-            className="bg-primary-600 text-white hover:bg-primary-500 dark:bg-white dark:text-black dark:hover:bg-white/90 px-4 py-2 rounded-lg font-semibold text-sm transition-colors shadow-lg shadow-primary-500/20 dark:shadow-white/15 ring-1 ring-primary-500/30 dark:ring-white/30 focus-visible:outline focus-visible:outline-2 focus-visible:outline-primary-500 dark:focus-visible:outline-white focus-visible:outline-offset-2"
-            aria-label="Criar nova campanha rápida"
+            className="flex items-center gap-2 bg-primary-600 hover:bg-primary-500 text-white px-5 py-2.5 rounded-lg font-bold text-sm shadow-lg shadow-primary-500/10 active:scale-95 transition-all focus-visible:outline focus-visible:outline-2 focus-visible:outline-primary-500 focus-visible:outline-offset-2"
+            aria-label="Criar nova campanha"
           >
-            Campanha Rápida
+            <Plus size={16} />
+            Nova Campanha
           </PrefetchLink>
         </PageActions>
       </PageHeader>
 
-      {/* Stats Grid */}
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-        <StatCard
-          title="Total Enviado"
-          value={stats.sent24h}
-          icon={Send}
-          color="blue"
-          loading={isLoading}
-        />
-        <StatCard
-          title="Taxa de Entrega"
-          value={stats.deliveryRate}
-          icon={CheckCircle2}
-          color="purple"
-          loading={isLoading}
-        />
-        <StatCard
-          title="Campanhas Ativas"
-          value={stats.activeCampaigns}
-          icon={TrendingUp}
-          color="purple"
-          loading={isLoading}
-        />
-        <StatCard
-          title="Falhas no Envio"
-          value={stats.failedMessages}
-          icon={AlertCircle}
-          color="red"
-          loading={isLoading}
-        />
-      </div>
+      {/* ====== HERO STATS ROW (Stitch-inspired) ====== */}
+      <section className="grid grid-cols-1 md:grid-cols-4 gap-6">
 
+        {/* Hero Card — Total Enviado (ocupa 2 colunas) */}
+        {isLoading ? <HeroStatSkeleton /> : (
+          <div className="col-span-1 md:col-span-2 ds-gradient-hero p-8 group">
+            <div className="relative z-10">
+              <p className="text-primary-200 text-sm font-bold uppercase tracking-widest mb-2">
+                Total Enviado
+              </p>
+              <h3 className="text-4xl font-extrabold text-white font-[var(--ds-font-display)] mb-4">
+                {stats.sent24h}
+              </h3>
+              <div className="flex items-center gap-2 text-[var(--ds-brand-secondary)] font-bold text-sm">
+                <TrendingUp size={16} />
+                <span>Últimas 24 horas</span>
+              </div>
+            </div>
+            {/* Ghost icon decorativo */}
+            <div className="absolute -right-6 -bottom-6 opacity-[0.06] group-hover:scale-110 transition-transform duration-700 pointer-events-none">
+              <Send size={180} strokeWidth={1} />
+            </div>
+          </div>
+        )}
+
+        {/* Stat Card — Taxa de Entrega */}
+        {isLoading ? <SmallStatSkeleton /> : (
+          <div className="ds-stat-card p-6 flex flex-col justify-between">
+            <div>
+              <div className="w-10 h-10 bg-emerald-500/10 text-emerald-500 rounded-lg flex items-center justify-center mb-4">
+                <CheckCircle2 size={20} />
+              </div>
+              <p className="text-[var(--ds-text-muted)] text-xs font-semibold mb-1">Taxa de Entrega</p>
+              <h4 className="text-2xl font-bold text-[var(--ds-text-primary)] font-[var(--ds-font-display)]">
+                {stats.deliveryRate}
+              </h4>
+            </div>
+            <div className="h-1 bg-[var(--ds-bg-surface)] rounded-full mt-4 overflow-hidden">
+              <div
+                className="h-full bg-emerald-500 rounded-full transition-all duration-500"
+                style={{ width: stats.deliveryRate }}
+              />
+            </div>
+          </div>
+        )}
+
+        {/* Stat Card — Campanhas Ativas */}
+        {isLoading ? <SmallStatSkeleton /> : (
+          <div className="ds-stat-card p-6 flex flex-col justify-between">
+            <div>
+              <div className="w-10 h-10 bg-[var(--ds-brand-secondary-muted)] text-[var(--ds-brand-secondary)] rounded-lg flex items-center justify-center mb-4">
+                <Zap size={20} />
+              </div>
+              <p className="text-[var(--ds-text-muted)] text-xs font-semibold mb-1">Campanhas Ativas</p>
+              <h4 className="text-2xl font-bold text-[var(--ds-text-primary)] font-[var(--ds-font-display)]">
+                {stats.activeCampaigns}
+              </h4>
+            </div>
+            <p className="text-[10px] text-[var(--ds-brand-secondary)] font-bold mt-4 uppercase tracking-tight">
+              Em andamento agora
+            </p>
+          </div>
+        )}
+      </section>
+
+      {/* ====== CHART + RECENT CAMPAIGNS ====== */}
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
+
         {/* Chart Section */}
-        <Container variant="glass" padding="lg" className="lg:col-span-2">
+        <div className="lg:col-span-2 ds-stat-card p-8">
           <div className="flex items-center justify-between mb-8">
             <h3 className="text-heading-4" id="chart-title">Volume de Mensagens</h3>
             <div className="flex gap-2" role="group" aria-label="Período do gráfico">
@@ -131,103 +189,113 @@ export const DashboardView: React.FC<DashboardViewProps> = ({ stats, recentCampa
                 { key: '15D', label: 'Últimos 15 dias' },
                 { key: '30D', label: 'Últimos 30 dias' }
               ].map((t) => (
-                <button 
-                  key={t.key} 
+                <button
+                  key={t.key}
                   aria-label={t.label}
                   aria-pressed={t.key === range}
                   onClick={() => setRange(t.key as '7D' | '15D' | '30D')}
-                  className={`text-xs px-3 py-1.5 rounded-full font-bold transition-colors ${t.key === range ? 'bg-primary-600 text-white shadow-sm' : 'text-[var(--ds-text-muted)] hover:text-[var(--ds-text-secondary)] hover:bg-[var(--ds-bg-hover)]'}`}
+                  className={`text-xs px-4 py-1.5 rounded-full font-bold transition-colors ${
+                    t.key === range
+                      ? 'bg-primary-600 text-white shadow-sm'
+                      : 'bg-[var(--ds-bg-surface)] text-[var(--ds-text-muted)] hover:text-[var(--ds-text-secondary)]'
+                  }`}
                 >
                   {t.key}
                 </button>
               ))}
             </div>
           </div>
-          <figure 
-            role="figure" 
-            aria-labelledby="chart-title"
-            aria-describedby="chart-description"
-          >
+          <figure role="figure" aria-labelledby="chart-title" aria-describedby="chart-description">
             <div ref={containerRef} className="h-72 w-full">
               {isMounted && chartData.length > 0 ? (
                 <ResponsiveContainer width="100%" height="100%" minWidth={0} minHeight={0}>
                   <AreaChart data={chartData.slice(-rangeSize)} aria-hidden="true">
-                  <defs>
-                    <linearGradient id="colorSent" x1="0" y1="0" x2="0" y2="1">
-                      <stop offset="5%" stopColor="#818cf8" stopOpacity={0.22}/>
-                      <stop offset="95%" stopColor="#818cf8" stopOpacity={0}/>
-                    </linearGradient>
-                </defs>
-                <CartesianGrid strokeDasharray="3 3" vertical={false} stroke="rgba(148,163,184,0.08)" />
-                <XAxis
-                  dataKey="name"
-                  axisLine={false}
-                  tickLine={false}
-                  tick={{fill: '#64748b', fontSize: 12}}
-                  dy={15}
-                />
-                <YAxis
-                  axisLine={false}
-                  tickLine={false}
-                  tick={{fill: '#64748b', fontSize: 12}}
-                />
-                <Tooltip
-                  contentStyle={{backgroundColor: '#0f172a', borderRadius: '12px', border: '1px solid rgba(255,255,255,0.08)', color: '#fff'}}
-                  itemStyle={{color: '#818cf8'}}
-                  labelStyle={{color: '#94a3b8'}}
-                  formatter={(value) => [value, 'Enviadas']}
-                />
-                <Area
-                  type="monotone"
-                  dataKey="sent"
-                  stroke="#818cf8"
-                  strokeWidth={2}
-                  fillOpacity={1}
-                  fill="url(#colorSent)"
-                />
-              </AreaChart>
-            </ResponsiveContainer>
+                    <defs>
+                      <linearGradient id="colorSent" x1="0" y1="0" x2="0" y2="1">
+                        <stop offset="5%" stopColor="#818cf8" stopOpacity={0.22}/>
+                        <stop offset="95%" stopColor="#818cf8" stopOpacity={0}/>
+                      </linearGradient>
+                    </defs>
+                    <CartesianGrid strokeDasharray="3 3" vertical={false} stroke="rgba(148,163,184,0.08)" />
+                    <XAxis
+                      dataKey="name"
+                      axisLine={false}
+                      tickLine={false}
+                      tick={{fill: '#64748b', fontSize: 12}}
+                      dy={15}
+                    />
+                    <YAxis
+                      axisLine={false}
+                      tickLine={false}
+                      tick={{fill: '#64748b', fontSize: 12}}
+                    />
+                    <Tooltip
+                      contentStyle={{backgroundColor: '#0f172a', borderRadius: '12px', border: '1px solid rgba(255,255,255,0.08)', color: '#fff'}}
+                      itemStyle={{color: '#818cf8'}}
+                      labelStyle={{color: '#94a3b8'}}
+                      formatter={(value) => [value, 'Enviadas']}
+                    />
+                    <Area
+                      type="monotone"
+                      dataKey="sent"
+                      stroke="#818cf8"
+                      strokeWidth={2}
+                      fillOpacity={1}
+                      fill="url(#colorSent)"
+                    />
+                  </AreaChart>
+                </ResponsiveContainer>
               ) : (
                 <div className="h-full w-full rounded-xl bg-[var(--ds-bg-hover)]" aria-hidden="true" />
               )}
-          </div>
-          <p id="chart-description" className="sr-only">
-            Gráfico de área mostrando o volume de mensagens enviadas ao longo do tempo. 
-            Os dados são atualizados automaticamente.
-          </p>
-        </figure>
-        </Container>
+            </div>
+            <p id="chart-description" className="sr-only">
+              Gráfico de área mostrando o volume de mensagens enviadas ao longo do tempo.
+            </p>
+          </figure>
+        </div>
 
-        {/* Recent Activity */}
-        <Container variant="glass" padding="none" className="flex flex-col overflow-hidden">
+        {/* Recent Campaigns — Premium Table */}
+        <div className="ds-table-wrapper flex flex-col">
           <div className="p-6 border-b border-[var(--ds-border-default)] flex justify-between items-center">
             <h3 className="text-heading-4">Campanhas Recentes</h3>
-            <button 
+            <button
               aria-label="Mais opções"
               className="text-[var(--ds-text-muted)] hover:text-[var(--ds-text-primary)] transition-colors"
             >
               <MoreHorizontal size={20} aria-hidden="true" />
             </button>
           </div>
-          <div className="flex-1 overflow-auto bg-[var(--ds-bg-elevated)]">
+          <div className="flex-1 overflow-auto">
             {recentCampaigns.length === 0 ? (
               <div className="p-8 text-center text-[var(--ds-text-muted)]">
-                Nenhuma campanha ainda.
+                <BarChart3 size={32} className="mx-auto mb-3 opacity-30" />
+                <p className="text-sm">Nenhuma campanha ainda.</p>
+                <p className="text-xs mt-1">Crie sua primeira campanha para ver os dados aqui.</p>
               </div>
             ) : (
               <table className="w-full text-left text-sm">
-                <thead className="sr-only">
-                  <tr>
-                    <th scope="col">Campanha</th>
-                    <th scope="col">Status</th>
+                <thead>
+                  <tr className="bg-[var(--ds-bg-surface)]/30">
+                    <th className="px-6 py-4 text-[11px] font-extrabold text-[var(--ds-text-muted)] uppercase tracking-widest">
+                      Campanha
+                    </th>
+                    <th className="px-6 py-4 text-right text-[11px] font-extrabold text-[var(--ds-text-muted)] uppercase tracking-widest">
+                      Status
+                    </th>
                   </tr>
                 </thead>
                 <tbody className="divide-y divide-[var(--ds-border-subtle)]">
                   {recentCampaigns.map((campaign) => (
-                    <tr key={campaign.id} className="hover:bg-[var(--ds-bg-hover)] transition-all duration-200 group cursor-pointer hover:shadow-[inset_0_0_20px_rgba(104,51,189,0.05)]">
+                    <tr
+                      key={campaign.id}
+                      className="hover:bg-[var(--ds-bg-hover)] transition-all duration-200 group cursor-pointer"
+                    >
                       <td className="px-6 py-5">
-                        <p className="font-medium text-[var(--ds-text-primary)] group-hover:text-primary-600 dark:group-hover:text-primary-400 transition-colors duration-200">{campaign.name}</p>
-                        <p className="text-[var(--ds-text-muted)] text-xs mt-1 font-mono">{formatDateFull(campaign.createdAt)}</p>
+                        <p className="font-semibold text-[var(--ds-text-primary)] text-sm group-hover:text-primary-600 dark:group-hover:text-primary-400 transition-colors">
+                          {campaign.name}
+                        </p>
+                        <p className="text-[var(--ds-text-muted)] text-xs mt-1">{formatDateFull(campaign.createdAt)}</p>
                       </td>
                       <td className="px-6 py-5 text-right">
                         <StatusBadge status={getCampaignBadgeStatus(campaign.status)} size="sm">
@@ -240,12 +308,15 @@ export const DashboardView: React.FC<DashboardViewProps> = ({ stats, recentCampa
               </table>
             )}
           </div>
-          <div className="p-4 border-t border-[var(--ds-border-default)] text-center">
-            <PrefetchLink href="/campaigns" className="text-label-sm hover:text-[var(--ds-text-primary)] transition-colors flex items-center justify-center gap-2">
-              Ver Todas <ArrowUpRight size={14} />
+          <div className="px-6 py-4 border-t border-[var(--ds-border-default)] bg-[var(--ds-bg-surface)]/20">
+            <PrefetchLink
+              href="/campaigns"
+              className="text-xs font-bold text-[var(--ds-text-muted)] hover:text-primary-500 transition-colors flex items-center justify-center gap-2"
+            >
+              Ver Todas as Campanhas <ArrowUpRight size={14} />
             </PrefetchLink>
           </div>
-        </Container>
+        </div>
       </div>
     </Page>
   );
