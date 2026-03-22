@@ -269,7 +269,7 @@ export function ConversationHeader({
                 isBotMode
                   ? aiGlobalEnabled
                     ? 'bg-purple-500/15 text-purple-400 hover:bg-purple-500/25'
-                    : 'bg-zinc-500/15 text-zinc-400 hover:bg-zinc-500/25'
+                    : 'bg-slate-500/15 text-slate-400 hover:bg-slate-500/25'
                   : 'bg-amber-500/15 text-amber-400 hover:bg-amber-500/25'
               )}
             >

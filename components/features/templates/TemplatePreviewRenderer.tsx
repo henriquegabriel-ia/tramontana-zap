@@ -74,23 +74,23 @@ export const TemplatePreviewRenderer: React.FC<TemplatePreviewRendererProps> = (
             case 'IMAGE':
                 return (
                     <div className="bg-[#202c33] rounded-lg rounded-tl-none shadow-sm mb-1 overflow-hidden">
-                        <div className="bg-zinc-700/50 h-32 flex items-center justify-center">
-                            <Image size={32} className="text-zinc-500" />
+                        <div className="bg-slate-700/50 h-32 flex items-center justify-center">
+                            <Image size={32} className="text-slate-500" />
                         </div>
                     </div>
                 );
             case 'VIDEO':
                 return (
                     <div className="bg-[#202c33] rounded-lg rounded-tl-none shadow-sm mb-1 overflow-hidden">
-                        <div className="bg-zinc-700/50 h-32 flex items-center justify-center">
-                            <Video size={32} className="text-zinc-500" />
+                        <div className="bg-slate-700/50 h-32 flex items-center justify-center">
+                            <Video size={32} className="text-slate-500" />
                         </div>
                     </div>
                 );
             case 'DOCUMENT':
                 return (
                     <div className="bg-[#202c33] rounded-lg rounded-tl-none shadow-sm mb-1 p-3">
-                        <div className="flex items-center gap-2 text-zinc-400">
+                        <div className="flex items-center gap-2 text-slate-400">
                             <FileText size={20} />
                             <span className="text-[12px]">Documento anexado</span>
                         </div>
@@ -102,7 +102,7 @@ export const TemplatePreviewRenderer: React.FC<TemplatePreviewRendererProps> = (
                         <div className="relative h-24 bg-gradient-to-br from-purple-900/50 to-purple-800/30">
                             {/* Grid pattern to simulate map */}
                             <div className="absolute inset-0 opacity-10" style={{
-                                backgroundImage: 'linear-gradient(#10b981 1px, transparent 1px), linear-gradient(90deg, #10b981 1px, transparent 1px)',
+                                backgroundImage: 'linear-gradient(#818cf8 1px, transparent 1px), linear-gradient(90deg, #818cf8 1px, transparent 1px)',
                                 backgroundSize: '20px 20px'
                             }} />
                             {/* Pin */}
@@ -111,7 +111,7 @@ export const TemplatePreviewRenderer: React.FC<TemplatePreviewRendererProps> = (
                             </div>
                             {/* Label */}
                             <div className="absolute bottom-2 left-2 right-2">
-                                <div className="bg-zinc-800/80 rounded px-2 py-1 text-[11px] text-zinc-300 text-center truncate">
+                                <div className="bg-slate-800/80 rounded px-2 py-1 text-[11px] text-slate-300 text-center truncate">
                                     {(header as any)?.location?.name || (header as any)?.location?.address || 'Localização'}
                                 </div>
                             </div>

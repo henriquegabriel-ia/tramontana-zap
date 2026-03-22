@@ -11,8 +11,8 @@ const inter = Inter({
 
 export const viewport: Viewport = {
   themeColor: [
-    { media: '(prefers-color-scheme: light)', color: '#22c55e' },
-    { media: '(prefers-color-scheme: dark)', color: '#18181b' },
+    { media: '(prefers-color-scheme: light)', color: '#6833BD' },
+    { media: '(prefers-color-scheme: dark)', color: '#0f172a' },
   ],
   width: 'device-width',
   initialScale: 1,

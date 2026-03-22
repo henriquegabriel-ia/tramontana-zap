@@ -21,14 +21,14 @@ export const ApiDocsPanel: React.FC = () => {
   };
 
   return (
-    <Card className="border-zinc-800 bg-zinc-900/50">
+    <Card className="border-slate-800 bg-slate-900/50">
       <CardHeader>
         <div className="flex items-center gap-3">
           <div className="p-2 rounded-lg bg-blue-500/10">
             <BookOpen className="h-5 w-5 text-blue-400" />
           </div>
           <div>
-            <CardTitle className="text-lg text-zinc-100">Documentação da API</CardTitle>
+            <CardTitle className="text-lg text-slate-100">Documentação da API</CardTitle>
             <CardDescription>
               Integre o Tramontana Zap com seus sistemas via REST API
             </CardDescription>
@@ -36,20 +36,20 @@ export const ApiDocsPanel: React.FC = () => {
         </div>
       </CardHeader>
       <CardContent className="space-y-4">
-        <p className="text-sm text-zinc-400">
+        <p className="text-sm text-slate-400">
           Acesse a documentação interativa (Swagger UI) para explorar todos os endpoints disponíveis,
           testar requisições e ver exemplos de uso.
         </p>
 
         {/* Exemplo de uso */}
-        <div className="bg-zinc-950 rounded-lg p-4 border border-zinc-800">
+        <div className="bg-slate-950 rounded-lg p-4 border border-slate-800">
           <div className="flex items-center justify-between mb-2">
-            <span className="text-xs text-zinc-500 uppercase tracking-wider">Exemplo</span>
+            <span className="text-xs text-slate-500 uppercase tracking-wider">Exemplo</span>
             <Button
               variant="ghost"
               size="sm"
               onClick={copyExample}
-              className="h-6 px-2 text-zinc-500 hover:text-zinc-300"
+              className="h-6 px-2 text-slate-500 hover:text-slate-300"
             >
               {copied ? (
                 <Check className="h-3 w-3 text-green-400" />
@@ -58,7 +58,7 @@ export const ApiDocsPanel: React.FC = () => {
               )}
             </Button>
           </div>
-          <pre className="text-xs text-zinc-300 overflow-x-auto">
+          <pre className="text-xs text-slate-300 overflow-x-auto">
             <code>{`curl -X GET "/api/campaigns" \\
   -H "Authorization: Bearer <API_KEY>"`}</code>
           </pre>

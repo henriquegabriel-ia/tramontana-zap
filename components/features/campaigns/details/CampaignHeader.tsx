@@ -101,7 +101,7 @@ export const CampaignHeader: React.FC<CampaignHeaderProps> = ({
           <button
             onClick={onCancelSchedule}
             disabled={isCancelingSchedule}
-            className="px-4 py-2 bg-zinc-900 border border-white/10 rounded-lg text-gray-300 hover:text-white hover:bg-white/5 transition-colors flex items-center gap-2 text-sm font-medium disabled:opacity-50"
+            className="px-4 py-2 bg-slate-900 border border-white/10 rounded-lg text-gray-300 hover:text-white hover:bg-white/5 transition-colors flex items-center gap-2 text-sm font-medium disabled:opacity-50"
             title="Cancela o agendamento e volta a campanha para Rascunho"
           >
             {isCancelingSchedule ? <Loader2 size={16} className="animate-spin" /> : <Ban size={16} />}
@@ -151,7 +151,7 @@ export const CampaignHeader: React.FC<CampaignHeaderProps> = ({
           <button
             onClick={refetch}
             disabled={isRefreshing}
-            className="px-4 py-2 bg-zinc-900 border border-white/10 rounded-lg text-gray-300 hover:text-white hover:bg-white/5 transition-colors flex items-center gap-2 text-sm font-medium disabled:opacity-50"
+            className="px-4 py-2 bg-slate-900 border border-white/10 rounded-lg text-gray-300 hover:text-white hover:bg-white/5 transition-colors flex items-center gap-2 text-sm font-medium disabled:opacity-50"
           >
             {isRefreshing ? <Loader2 size={16} className="animate-spin" /> : <RefreshCw size={16} />}
             {isRefreshing ? 'Atualizando...' : 'Atualizar'}
@@ -176,7 +176,7 @@ export const CampaignHeader: React.FC<CampaignHeaderProps> = ({
         <a
           href={`/api/campaigns/${encodeURIComponent(campaign.id)}/report.csv`}
           download
-          className="px-4 py-2 bg-zinc-900 border border-white/10 rounded-lg text-gray-300 hover:text-white hover:bg-white/5 transition-colors flex items-center gap-2 text-sm font-medium"
+          className="px-4 py-2 bg-slate-900 border border-white/10 rounded-lg text-gray-300 hover:text-white hover:bg-white/5 transition-colors flex items-center gap-2 text-sm font-medium"
           title="Baixar relatório em CSV"
         >
           <Download size={16} /> Relatório CSV

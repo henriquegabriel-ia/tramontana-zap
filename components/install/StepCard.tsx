@@ -4,7 +4,7 @@ import { motion, HTMLMotionProps } from 'framer-motion';
 import { ReactNode, forwardRef } from 'react';
 import { cn } from '@/lib/utils';
 
-type GlowColor = 'cyan' | 'magenta' | 'orange' | 'red' | 'purple' | 'zinc' | 'blue';
+type GlowColor = 'cyan' | 'magenta' | 'orange' | 'red' | 'purple' | 'slate' | 'blue';
 
 interface StepCardProps extends Omit<HTMLMotionProps<'div'>, 'children'> {
   children: ReactNode;
@@ -18,7 +18,7 @@ const colorMap: Record<GlowColor, 'cyan' | 'magenta' | 'orange' | 'red'> = {
   orange: 'orange',
   red: 'red',
   purple: 'cyan',   // purple → cyan (success color)
-  zinc: 'cyan',      // zinc → cyan (neutral color)
+  slate: 'cyan',      // slate → cyan (neutral color)
   blue: 'cyan',      // blue → cyan
 };
 

@@ -214,7 +214,7 @@ export const allCssVars = {
  * @example
  * ```ts
  * const cssString = generateCssVars(allCssVars)
- * // Retorna: "--ds-brand-primary: #10b981; --ds-bg-base: #09090b; ..."
+ * // Retorna: "--ds-brand-primary: #6833BD; --ds-bg-base: #09090b; ..."
  * ```
  */
 export function generateCssVars(vars: Record<string, string>): string {

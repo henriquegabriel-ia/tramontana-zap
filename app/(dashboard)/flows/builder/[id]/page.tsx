@@ -119,13 +119,13 @@ export default function FlowBuilderEditorPage({
         <PageActions>
           <div className="flex items-center gap-2">
             <Link href="/templates?tab=flows">
-              <Button variant="outline" className="border-white/10 bg-zinc-900 hover:bg-white/5">
+              <Button variant="outline" className="border-white/10 bg-slate-900 hover:bg-white/5">
                 <ArrowLeft className="w-4 h-4" />
                 Voltar
               </Button>
             </Link>
             <Link href="/flows/builder">
-              <Button variant="outline" className="border-white/10 bg-zinc-900 hover:bg-white/5">
+              <Button variant="outline" className="border-white/10 bg-slate-900 hover:bg-white/5">
                 Lista
               </Button>
             </Link>
@@ -145,7 +145,7 @@ export default function FlowBuilderEditorPage({
             {controller.error?.message || 'Erro desconhecido'}
           </div>
           <div>
-            <Button variant="outline" onClick={() => router.refresh()} className="border-white/10 bg-zinc-900 hover:bg-white/5">
+            <Button variant="outline" onClick={() => router.refresh()} className="border-white/10 bg-slate-900 hover:bg-white/5">
               Tentar novamente
             </Button>
           </div>
@@ -165,7 +165,7 @@ export default function FlowBuilderEditorPage({
                     className={`flex items-center gap-3 rounded-2xl border px-4 py-3 text-left text-sm transition ${
                       step === item.id
                         ? 'border-purple-400/40 bg-purple-500/10 text-white'
-                        : 'border-white/10 bg-zinc-900/40 text-gray-400 hover:text-white'
+                        : 'border-white/10 bg-slate-900/40 text-gray-400 hover:text-white'
                     }`}
                   >
                     <span className="grid h-8 w-8 shrink-0 place-items-center rounded-full border border-white/10 text-xs font-semibold leading-none">
@@ -191,7 +191,7 @@ export default function FlowBuilderEditorPage({
                       className={`relative rounded-2xl border p-4 text-left transition ${
                         startMode === 'ai'
                           ? 'border-purple-400/40 bg-purple-500/10'
-                          : 'border-white/10 bg-zinc-900/60 hover:bg-white/5'
+                          : 'border-white/10 bg-slate-900/60 hover:bg-white/5'
                       }`}
                     >
                       <div className="flex items-center gap-2 text-white font-semibold">
@@ -208,7 +208,7 @@ export default function FlowBuilderEditorPage({
                       className={`relative rounded-2xl border p-4 text-left transition ${
                         startMode === 'template'
                           ? 'border-purple-400/40 bg-purple-500/10'
-                          : 'border-white/10 bg-zinc-900/60 hover:bg-white/5'
+                          : 'border-white/10 bg-slate-900/60 hover:bg-white/5'
                       }`}
                     >
                       <div className="flex items-center gap-2 text-white font-semibold">
@@ -225,7 +225,7 @@ export default function FlowBuilderEditorPage({
                       className={`relative rounded-2xl border p-4 text-left transition ${
                         startMode === 'zero'
                           ? 'border-purple-400/40 bg-purple-500/10'
-                          : 'border-white/10 bg-zinc-900/60 hover:bg-white/5'
+                          : 'border-white/10 bg-slate-900/60 hover:bg-white/5'
                       }`}
                     >
                       <div className="flex items-center gap-2 text-white font-semibold">
@@ -237,20 +237,20 @@ export default function FlowBuilderEditorPage({
                   </div>
 
                   {startMode === 'ai' ? (
-                    <div className={`rounded-2xl border border-white/10 bg-zinc-900/60 p-4 space-y-3 ${aiLoading ? 'animate-pulse' : ''}`}>
+                    <div className={`rounded-2xl border border-white/10 bg-slate-900/60 p-4 space-y-3 ${aiLoading ? 'animate-pulse' : ''}`}>
                       <div className="text-sm font-semibold text-white">Criar com IA</div>
                       <div className="text-xs text-gray-500">Descreva o que você quer coletar.</div>
                       <Textarea
                         value={aiPrompt}
                         onChange={(e) => setAiPrompt(e.target.value)}
-                        className="min-h-28 bg-zinc-900 border-white/10 text-white"
+                        className="min-h-28 bg-slate-900 border-white/10 text-white"
                         placeholder='Ex: "Quero um formulário de pré-cadastro para uma turma. Pergunte nome, telefone, e-mail e cidade."'
                       />
                       <div className="flex items-center gap-2">
                         <Button
                           type="button"
                           variant="outline"
-                          className="border-white/10 bg-zinc-950/40 hover:bg-white/5"
+                          className="border-white/10 bg-slate-950/40 hover:bg-white/5"
                           onClick={handleCancelStartMode}
                           disabled={aiLoading}
                         >
@@ -264,7 +264,7 @@ export default function FlowBuilderEditorPage({
                   ) : null}
 
                   {startMode === 'template' ? (
-                    <div className="rounded-2xl border border-white/10 bg-zinc-900/60 p-4 space-y-3">
+                    <div className="rounded-2xl border border-white/10 bg-slate-900/60 p-4 space-y-3">
                       <div className="text-sm font-semibold text-white">Usar modelo pronto</div>
                       <div
                         className="grid grid-cols-1 md:grid-cols-2 gap-3"
@@ -279,7 +279,7 @@ export default function FlowBuilderEditorPage({
                             className={`rounded-xl border p-4 text-left transition ${
                               selectedTemplateKey === tpl.key
                                 ? 'border-purple-400/40 bg-purple-500/10 text-white'
-                                : 'border-white/10 bg-zinc-900/60 text-gray-300 hover:bg-white/5'
+                                : 'border-white/10 bg-slate-900/60 text-gray-300 hover:bg-white/5'
                             }`}
                           >
                             <div className="flex items-center gap-2">
@@ -303,7 +303,7 @@ export default function FlowBuilderEditorPage({
                         <Button
                           type="button"
                           variant="outline"
-                          className="border-white/10 bg-zinc-950/40 hover:bg-white/5"
+                          className="border-white/10 bg-slate-950/40 hover:bg-white/5"
                           onClick={handleCancelStartMode}
                         >
                           Cancelar
@@ -337,7 +337,7 @@ export default function FlowBuilderEditorPage({
                   <Button
                     type="button"
                     variant="outline"
-                    className="border-white/10 bg-zinc-950/40 hover:bg-white/5"
+                    className="border-white/10 bg-slate-950/40 hover:bg-white/5"
                     onClick={() => setStep(3)}
                   >
                     Ir para finalizar
@@ -357,7 +357,7 @@ export default function FlowBuilderEditorPage({
                   </div>
 
                   {previewDynamicSpec && finalScreenId ? (
-                    <div className="rounded-2xl border border-white/10 bg-zinc-950/30 p-4 space-y-4">
+                    <div className="rounded-2xl border border-white/10 bg-slate-950/30 p-4 space-y-4">
                       <div>
                         <div className="text-sm font-semibold text-white">Confirmação</div>
                         <div className="text-xs text-gray-400 mt-1">
@@ -365,7 +365,7 @@ export default function FlowBuilderEditorPage({
                         </div>
                       </div>
 
-                      <div className="flex items-center justify-between rounded-xl border border-white/10 bg-zinc-950/40 px-3 py-2">
+                      <div className="flex items-center justify-between rounded-xl border border-white/10 bg-slate-950/40 px-3 py-2">
                         <div>
                           <div className="text-xs font-medium text-gray-300">Enviar confirmação ao usuário</div>
                           <div className="text-[11px] text-gray-500">Mostra um resumo das respostas após finalizar</div>
@@ -420,14 +420,14 @@ export default function FlowBuilderEditorPage({
                           <Button
                             type="button"
                             variant="outline"
-                            className="border-white/10 bg-zinc-950/40 hover:bg-white/5"
+                            className="border-white/10 bg-slate-950/40 hover:bg-white/5"
                             onClick={() => applyConfirmationPatch({ fields: collectFieldCatalog(previewDynamicSpec).map((f) => f.name) })}
                           >
                             Selecionar tudo
                           </Button>
                         </div>
 
-                        <div className="rounded-xl border border-white/10 bg-zinc-950/40 p-3 max-h-56 overflow-auto space-y-2">
+                        <div className="rounded-xl border border-white/10 bg-slate-950/40 p-3 max-h-56 overflow-auto space-y-2">
                           {collectFieldCatalog(previewDynamicSpec).map((f) => {
                             const selected = confirmationState?.fields ? confirmationState.fields.includes(f.name) : true
                             const customLabel = confirmationState?.labels ? confirmationState.labels[f.name] : ''
@@ -464,7 +464,7 @@ export default function FlowBuilderEditorPage({
                                 <Button
                                   type="button"
                                   variant="outline"
-                                  className="h-9 border-white/10 bg-zinc-950/40 hover:bg-white/5 text-xs"
+                                  className="h-9 border-white/10 bg-slate-950/40 hover:bg-white/5 text-xs"
                                   onClick={() => {
                                     const base = confirmationState?.labels ? { ...confirmationState.labels } : {}
                                     delete base[f.name]
@@ -486,7 +486,7 @@ export default function FlowBuilderEditorPage({
                       variant="outline"
                       onClick={handleSaveDraft}
                       disabled={controller.isSaving}
-                      className="border-white/10 bg-zinc-950/40 hover:bg-white/5"
+                      className="border-white/10 bg-slate-950/40 hover:bg-white/5"
                     >
                       {controller.isSaving ? <Loader2 className="w-4 h-4 animate-spin" /> : <Save className="w-4 h-4" />}
                       Salvar rascunho
@@ -497,7 +497,7 @@ export default function FlowBuilderEditorPage({
                         variant="outline"
                         onClick={handleResetPublication}
                         disabled={controller.isSaving}
-                        className="border-white/10 bg-zinc-950/40 hover:bg-white/5"
+                        className="border-white/10 bg-slate-950/40 hover:bg-white/5"
                       >
                         Resetar publicação
                       </Button>

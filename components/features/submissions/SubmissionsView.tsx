@@ -36,7 +36,7 @@ function SubmissionCard({
   const campaignName = submission.campaign?.name
 
   return (
-    <Container variant="default" padding="lg" hover className="hover:bg-zinc-900/80 transition-colors">
+    <Container variant="default" padding="lg" hover className="hover:bg-slate-900/80 transition-colors">
       {/* Header */}
       <div className="flex items-start justify-between mb-4">
         <div className="flex items-center gap-3">
@@ -113,7 +113,7 @@ function formatFieldValue(value: unknown): string {
 function EmptyState() {
   return (
     <div className="flex flex-col items-center justify-center py-16 text-center">
-      <div className="p-4 rounded-2xl bg-zinc-800/50 mb-4">
+      <div className="p-4 rounded-2xl bg-slate-800/50 mb-4">
         <Inbox className="w-8 h-8 text-gray-500" />
       </div>
       <h3 className="text-lg font-medium text-white mb-2">Nenhuma submissão encontrada</h3>
@@ -130,15 +130,15 @@ function LoadingSkeleton() {
       {[1, 2, 3].map((i) => (
         <Container key={i} variant="default" padding="lg" className="animate-pulse">
           <div className="flex items-center gap-3 mb-4">
-            <div className="w-10 h-10 rounded-xl bg-zinc-700/50" />
+            <div className="w-10 h-10 rounded-xl bg-slate-700/50" />
             <div>
-              <div className="w-32 h-5 bg-zinc-700/50 rounded mb-2" />
-              <div className="w-24 h-3 bg-zinc-700/50 rounded" />
+              <div className="w-32 h-5 bg-slate-700/50 rounded mb-2" />
+              <div className="w-24 h-3 bg-slate-700/50 rounded" />
             </div>
           </div>
           <div className="space-y-2 pl-11">
-            <div className="w-48 h-4 bg-zinc-700/50 rounded" />
-            <div className="w-36 h-4 bg-zinc-700/50 rounded" />
+            <div className="w-48 h-4 bg-slate-700/50 rounded" />
+            <div className="w-36 h-4 bg-slate-700/50 rounded" />
           </div>
         </Container>
       ))}
@@ -188,7 +188,7 @@ export function SubmissionsView({
           <PageDescription>{description}</PageDescription>
         </div>
         <div className="flex items-center gap-3">
-          <div className="flex items-center gap-2 px-4 py-2 rounded-xl bg-zinc-900/60 border border-white/10">
+          <div className="flex items-center gap-2 px-4 py-2 rounded-xl bg-slate-900/60 border border-white/10">
             <FileText className="w-4 h-4 text-purple-400" />
             <span className="text-sm text-gray-300">
               <span className="font-semibold text-white">{total}</span> submissões
@@ -215,7 +215,7 @@ export function SubmissionsView({
             placeholder="Buscar por telefone..."
             value={search}
             onChange={(e) => setSearch(e.target.value)}
-            className="pl-10 bg-zinc-900/60 border-white/10"
+            className="pl-10 bg-slate-900/60 border-white/10"
           />
         </div>
       </div>
@@ -250,7 +250,7 @@ export function SubmissionsView({
                   size="sm"
                   onClick={prevPage}
                   disabled={!hasPrevPage}
-                  className="border-white/10 bg-zinc-900 hover:bg-white/5"
+                  className="border-white/10 bg-slate-900 hover:bg-white/5"
                 >
                   <ChevronLeft className="w-4 h-4" />
                   Anterior
@@ -260,7 +260,7 @@ export function SubmissionsView({
                   size="sm"
                   onClick={nextPage}
                   disabled={!hasNextPage}
-                  className="border-white/10 bg-zinc-900 hover:bg-white/5"
+                  className="border-white/10 bg-slate-900 hover:bg-white/5"
                 >
                   Próxima
                   <ChevronRight className="w-4 h-4" />

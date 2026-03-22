@@ -38,15 +38,15 @@ const PREVIEW_THEME: Record<PreviewVariant, {
     buttonDivider: 'border-[#111b21]',
   },
   smartzap: {
-    headerBg: 'bg-zinc-950/40',
-    bubbleBg: 'bg-zinc-900/60',
+    headerBg: 'bg-slate-950/40',
+    bubbleBg: 'bg-slate-900/60',
     bubbleText: 'text-white',
     bubbleBorder: 'border border-white/10',
     subtleText: 'text-gray-400',
     quoteBorder: 'border-primary-500/60',
     quoteBg: 'bg-white/5',
     inlineCodeBg: 'bg-black/40',
-    codeblockBg: 'bg-zinc-950/60',
+    codeblockBg: 'bg-slate-950/60',
     divider: 'border-white/10',
     buttonText: 'text-primary-300',
     buttonHoverBg: 'hover:bg-white/5',
@@ -437,8 +437,8 @@ const MessageHeader: React.FC<MessageHeaderProps> = ({
               loading="lazy"
             />
           ) : (
-            <div className="bg-zinc-700/50 h-32 flex items-center justify-center">
-              <Image size={32} className="text-zinc-500" />
+            <div className="bg-slate-700/50 h-32 flex items-center justify-center">
+              <Image size={32} className="text-slate-500" />
             </div>
           )}
         </div>
@@ -456,8 +456,8 @@ const MessageHeader: React.FC<MessageHeaderProps> = ({
               playsInline
             />
           ) : (
-            <div className="bg-zinc-700/50 h-32 flex items-center justify-center">
-              <Video size={32} className="text-zinc-500" />
+            <div className="bg-slate-700/50 h-32 flex items-center justify-center">
+              <Video size={32} className="text-slate-500" />
             </div>
           )}
         </div>
@@ -470,13 +470,13 @@ const MessageHeader: React.FC<MessageHeaderProps> = ({
               href={resolvedHeaderMediaPreviewUrl}
               target="_blank"
               rel="noreferrer"
-              className="flex items-center gap-2 text-zinc-200 hover:text-white transition-colors"
+              className="flex items-center gap-2 text-slate-200 hover:text-white transition-colors"
             >
               <FileText size={20} />
               <span className="text-[12px]">Abrir documento</span>
             </a>
           ) : (
-            <div className="flex items-center gap-2 text-zinc-400">
+            <div className="flex items-center gap-2 text-slate-400">
               <FileText size={20} />
               <span className="text-[12px]">Documento anexado</span>
             </div>
@@ -667,9 +667,9 @@ export const WhatsAppPhonePreview: React.FC<WhatsAppPhonePreviewProps> = ({
   const hasContent = components?.length || fallbackContent;
 
   return (
-    <div className={`relative mx-auto border-zinc-800 bg-zinc-950 ${sizeConfig.border} rounded-[2.5rem] ${sizeConfig.height} ${sizeConfig.width} ${sizeConfig.aspect} shadow-2xl flex flex-col overflow-hidden ${className}`}>
+    <div className={`relative mx-auto border-slate-800 bg-slate-950 ${sizeConfig.border} rounded-[2.5rem] ${sizeConfig.height} ${sizeConfig.width} ${sizeConfig.aspect} shadow-2xl flex flex-col overflow-hidden ${className}`}>
       {/* Notch */}
-      <div className={`absolute top-0 left-1/2 transform -translate-x-1/2 ${sizeConfig.notch} bg-zinc-800 rounded-b-xl z-20`}></div>
+      <div className={`absolute top-0 left-1/2 transform -translate-x-1/2 ${sizeConfig.notch} bg-slate-800 rounded-b-xl z-20`}></div>
 
       {/* WhatsApp Header */}
       <div className="bg-[#202c33] h-20 flex items-end px-4 pb-3 border-b border-[#111b21] shrink-0 z-10">
@@ -782,7 +782,7 @@ export const CompactPreview: React.FC<CompactPreviewProps> = ({
 }) => {
   return (
     <div
-      className={`rounded-xl border border-white/10 bg-zinc-950/40 p-4 shadow-[0_12px_30px_rgba(0,0,0,0.35)] ${className}`}
+      className={`rounded-xl border border-white/10 bg-slate-950/40 p-4 shadow-[0_12px_30px_rgba(0,0,0,0.35)] ${className}`}
     >
       <MessageBubble
         components={components}

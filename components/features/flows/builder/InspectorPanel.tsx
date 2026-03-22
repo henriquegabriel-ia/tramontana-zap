@@ -104,11 +104,11 @@ export function InspectorPanel(props: {
 
   if (!props.selectedEditorKey) {
     return (
-      <div className="rounded-2xl border border-white/10 bg-zinc-900/60 p-4">
+      <div className="rounded-2xl border border-white/10 bg-slate-900/60 p-4">
         <div className="text-sm font-semibold text-white">Editar</div>
         <div className="text-xs text-gray-400 mt-1">Clique em um texto, pergunta ou botão no preview para editar.</div>
         {isBooking ? (
-          <details className="mt-4 rounded-xl border border-white/10 bg-zinc-950/40 p-3">
+          <details className="mt-4 rounded-xl border border-white/10 bg-slate-950/40 p-3">
             <summary className="cursor-pointer text-xs font-semibold text-white">Assistente: Agendamento</summary>
             <div className="mt-3 space-y-4">
               <div>
@@ -158,7 +158,7 @@ export function InspectorPanel(props: {
                       <Button
                         type="button"
                         variant="outline"
-                        className="border-white/10 bg-zinc-950/40 hover:bg-white/5"
+                        className="border-white/10 bg-slate-950/40 hover:bg-white/5"
                         onClick={() => {
                           const next = bookingServices.filter((_, i) => i !== idx)
                           props.onUpdateBookingServices?.(next)
@@ -173,7 +173,7 @@ export function InspectorPanel(props: {
                   <Button
                     type="button"
                     variant="secondary"
-                    className="bg-zinc-950/40 border border-white/10 text-gray-200 hover:text-white hover:bg-white/5"
+                    className="bg-slate-950/40 border border-white/10 text-gray-200 hover:text-white hover:bg-white/5"
                     onClick={() => {
                       const n = bookingServices.length + 1
                       props.onUpdateBookingServices?.([...bookingServices, { id: `servico_${n}`, title: `Serviço ${n}` }])
@@ -190,7 +190,7 @@ export function InspectorPanel(props: {
                 <select
                   value={bookingDateComponent}
                   onChange={(e) => props.onUpdateBookingDateComponent?.(e.target.value === 'dropdown' ? 'dropdown' : 'calendar')}
-                  className="h-11 w-full rounded-xl border border-white/10 bg-white/5 px-3 text-[14px] text-zinc-200 focus:outline-none focus:ring-2 focus:ring-purple-400/40"
+                  className="h-11 w-full rounded-xl border border-white/10 bg-white/5 px-3 text-[14px] text-slate-200 focus:outline-none focus:ring-2 focus:ring-purple-400/40"
                 >
                   <option value="calendar">Calendário</option>
                   <option value="dropdown">Lista (dropdown)</option>
@@ -205,7 +205,7 @@ export function InspectorPanel(props: {
 
   if (!screen || parsed.kind === 'unknown') {
     return (
-      <div className="rounded-2xl border border-white/10 bg-zinc-900/60 p-4">
+      <div className="rounded-2xl border border-white/10 bg-slate-900/60 p-4">
         <div className="text-sm font-semibold text-white">Editar</div>
         <div className="text-xs text-gray-400 mt-1">Seleção não reconhecida. Selecione um elemento do preview.</div>
       </div>
@@ -214,7 +214,7 @@ export function InspectorPanel(props: {
 
   if (parsed.kind === 'screen_title') {
     return (
-      <div className="rounded-2xl border border-white/10 bg-zinc-900/60 p-4 space-y-3">
+      <div className="rounded-2xl border border-white/10 bg-slate-900/60 p-4 space-y-3">
         <div className="text-sm font-semibold text-white">Título da tela</div>
         <Input value={screen.title} onChange={(e) => props.onUpdateScreenTitle(screen.id, e.target.value)} />
       </div>
@@ -223,7 +223,7 @@ export function InspectorPanel(props: {
 
   if (parsed.kind === 'cta') {
     return (
-      <div className="rounded-2xl border border-white/10 bg-zinc-900/60 p-4 space-y-3">
+      <div className="rounded-2xl border border-white/10 bg-slate-900/60 p-4 space-y-3">
         <div className="text-sm font-semibold text-white">Botão</div>
         <div>
           <label className="block text-xs uppercase tracking-widest text-gray-500 mb-2">Texto</label>
@@ -234,7 +234,7 @@ export function InspectorPanel(props: {
           <select
             value={nextScreenId}
             onChange={(e) => props.onUpdateCta(screen.id, { nextScreenId: e.target.value })}
-            className="h-11 w-full rounded-xl border border-white/10 bg-white/5 px-3 text-[14px] text-zinc-200 focus:outline-none focus:ring-2 focus:ring-purple-400/40"
+            className="h-11 w-full rounded-xl border border-white/10 bg-white/5 px-3 text-[14px] text-slate-200 focus:outline-none focus:ring-2 focus:ring-purple-400/40"
           >
             <option value="">— Concluir —</option>
             {props.spec.screens
@@ -252,7 +252,7 @@ export function InspectorPanel(props: {
 
   if ((parsed.kind === 'component_text' || parsed.kind === 'component_label') && !component) {
     return (
-      <div className="rounded-2xl border border-white/10 bg-zinc-900/60 p-4">
+      <div className="rounded-2xl border border-white/10 bg-slate-900/60 p-4">
         <div className="text-sm font-semibold text-white">Editar</div>
         <div className="text-xs text-gray-400 mt-1">Não achei esse elemento no fluxo. Selecione novamente no preview.</div>
       </div>
@@ -261,7 +261,7 @@ export function InspectorPanel(props: {
 
   if (parsed.kind === 'component_text') {
     return (
-      <div className="rounded-2xl border border-white/10 bg-zinc-900/60 p-4 space-y-3">
+      <div className="rounded-2xl border border-white/10 bg-slate-900/60 p-4 space-y-3">
         <div className="text-sm font-semibold text-white">Texto</div>
         <Textarea
           value={String(component?.text || '')}
@@ -272,7 +272,7 @@ export function InspectorPanel(props: {
   }
 
   return (
-    <div className="rounded-2xl border border-white/10 bg-zinc-900/60 p-4 space-y-3">
+    <div className="rounded-2xl border border-white/10 bg-slate-900/60 p-4 space-y-3">
       <div className="text-sm font-semibold text-white">Pergunta</div>
       <Input
         value={String(component?.label || '')}

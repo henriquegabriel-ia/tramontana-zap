@@ -90,7 +90,7 @@ export function LeadFormsView(props: LeadFormsViewProps) {
         <div className="flex items-start justify-between gap-4">
           <div>
             <h1 className="text-2xl font-semibold text-white">Formularios</h1>
-            <p className="text-sm text-zinc-400">
+            <p className="text-sm text-slate-400">
               Crie um link publico (tipo Google Forms) para captar contatos automaticamente com uma tag.
             </p>
           </div>

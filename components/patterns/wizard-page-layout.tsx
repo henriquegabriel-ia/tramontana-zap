@@ -114,7 +114,7 @@ export function WizardPageLayout({
               variant="ghost"
               size="sm"
               onClick={handleBack}
-              className="text-zinc-400 hover:text-white -ml-2"
+              className="text-slate-400 hover:text-white -ml-2"
             >
               <ArrowLeft className="w-4 h-4 mr-1" />
               {backLabel}
@@ -126,7 +126,7 @@ export function WizardPageLayout({
           <div>
             <h1 className="text-2xl font-bold text-white">{title}</h1>
             {description && (
-              <p className="text-zinc-400 mt-1">{description}</p>
+              <p className="text-slate-400 mt-1">{description}</p>
             )}
           </div>
         </div>
@@ -231,7 +231,7 @@ export function WizardActions({
             variant="outline"
             onClick={onBack}
             disabled={isLoading}
-            className="border-white/10 bg-zinc-950/40 text-zinc-200 hover:bg-white/5"
+            className="border-white/10 bg-slate-950/40 text-slate-200 hover:bg-white/5"
           >
             <ArrowLeft className="w-4 h-4 mr-2" />
             Voltar
@@ -280,7 +280,7 @@ export function StepIndicator({
 }: StepIndicatorProps) {
   return (
     <div className={cn('flex items-center gap-2', className)}>
-      <span className="text-sm text-zinc-400">
+      <span className="text-sm text-slate-400">
         Passo {currentStep} de {totalSteps}
       </span>
       <div className="flex gap-1">
@@ -289,7 +289,7 @@ export function StepIndicator({
             key={index}
             className={cn(
               'w-2 h-2 rounded-full transition-colors',
-              index + 1 <= currentStep ? 'bg-purple-500' : 'bg-zinc-700'
+              index + 1 <= currentStep ? 'bg-purple-500' : 'bg-slate-700'
             )}
           />
         ))}

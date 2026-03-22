@@ -121,7 +121,7 @@ export function Pagination({
     >
       {/* Page Info */}
       {showInfo && (
-        <div className="text-sm text-zinc-500">
+        <div className="text-sm text-slate-500">
           Página <span className="text-white font-medium">{currentPage}</span> de{' '}
           <span className="text-white font-medium">{totalPages}</span>
         </div>
@@ -135,7 +135,7 @@ export function Pagination({
           size="icon"
           onClick={() => onPageChange(currentPage - 1)}
           disabled={!canGoPrev}
-          className="h-9 w-9 border-white/10 bg-zinc-950/60 hover:bg-zinc-900/80 disabled:opacity-40"
+          className="h-9 w-9 border-white/10 bg-slate-950/60 hover:bg-slate-900/80 disabled:opacity-40"
         >
           <ChevronLeft className="w-4 h-4" />
         </Button>
@@ -146,7 +146,7 @@ export function Pagination({
             return (
               <span
                 key={`ellipsis-${index}`}
-                className="w-9 h-9 flex items-center justify-center text-zinc-500"
+                className="w-9 h-9 flex items-center justify-center text-slate-500"
               >
                 ...
               </span>
@@ -163,7 +163,7 @@ export function Pagination({
                 'w-9 h-9 rounded-lg text-sm font-medium transition-all',
                 isActive
                   ? 'bg-purple-500 text-white'
-                  : 'text-zinc-400 hover:text-white hover:bg-zinc-800/80'
+                  : 'text-slate-400 hover:text-white hover:bg-slate-800/80'
               )}
             >
               {page}
@@ -177,7 +177,7 @@ export function Pagination({
           size="icon"
           onClick={() => onPageChange(currentPage + 1)}
           disabled={!canGoNext}
-          className="h-9 w-9 border-white/10 bg-zinc-950/60 hover:bg-zinc-900/80 disabled:opacity-40"
+          className="h-9 w-9 border-white/10 bg-slate-950/60 hover:bg-slate-900/80 disabled:opacity-40"
         >
           <ChevronRight className="w-4 h-4" />
         </Button>

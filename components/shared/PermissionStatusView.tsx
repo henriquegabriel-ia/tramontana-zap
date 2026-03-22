@@ -32,10 +32,10 @@ export function PermissionStatusView({
 }: PermissionStatusViewProps) {
   if (isLoading) {
     return (
-      <div className={cn('p-4 rounded-xl bg-zinc-900/50 border border-zinc-800', className)}>
+      <div className={cn('p-4 rounded-xl bg-slate-900/50 border border-slate-800', className)}>
         <div className="flex items-center gap-3">
-          <Loader2 className="w-5 h-5 text-zinc-400 animate-spin" />
-          <span className="text-sm text-zinc-400">Validando permissões do token...</span>
+          <Loader2 className="w-5 h-5 text-slate-400 animate-spin" />
+          <span className="text-sm text-slate-400">Validando permissões do token...</span>
         </div>
       </div>
     )
@@ -119,27 +119,27 @@ export function PermissionStatusView({
                     <span className="ml-2 text-xs text-red-400">(obrigatório)</span>
                   )}
                 </div>
-                <div className="text-xs text-zinc-400">{scope.description}</div>
+                <div className="text-xs text-slate-400">{scope.description}</div>
               </div>
             </div>
           ))}
         </div>
 
         {/* Token Info Card */}
-        <div className="p-3 rounded-lg bg-zinc-900/50 border border-zinc-800 space-y-2">
+        <div className="p-3 rounded-lg bg-slate-900/50 border border-slate-800 space-y-2">
           {/* Tipo do token */}
           <div className="flex items-center gap-2 text-sm">
-            <Smartphone className="w-4 h-4 text-zinc-500" />
-            <span className="text-zinc-400">Tipo:</span>
-            <span className={cn('font-mono', isSystemUser ? 'text-purple-300' : 'text-zinc-200')}>
+            <Smartphone className="w-4 h-4 text-slate-500" />
+            <span className="text-slate-400">Tipo:</span>
+            <span className={cn('font-mono', isSystemUser ? 'text-purple-300' : 'text-slate-200')}>
               {tokenType}
             </span>
           </div>
 
           {/* Expiração */}
           <div className="flex items-center gap-2 text-sm">
-            <Clock className="w-4 h-4 text-zinc-500" />
-            <span className="text-zinc-400">Expiração:</span>
+            <Clock className="w-4 h-4 text-slate-500" />
+            <span className="text-slate-400">Expiração:</span>
             {result.tokenInfo.isPermanent ? (
               <span className="text-purple-300 flex items-center gap-1">
                 <CheckCircle2 className="w-3 h-3" />
@@ -157,15 +157,15 @@ export function PermissionStatusView({
                 {result.tokenInfo.expiresAtFormatted && ` (${result.tokenInfo.expiresAtFormatted})`}
               </span>
             ) : (
-              <span className="text-zinc-500">—</span>
+              <span className="text-slate-500">—</span>
             )}
           </div>
 
           {/* App ID */}
           {result.tokenInfo.appId && (
             <div className="flex items-center gap-2 text-sm">
-              <span className="text-zinc-400 ml-6">App ID:</span>
-              <span className="font-mono text-zinc-300">{result.tokenInfo.appId}</span>
+              <span className="text-slate-400 ml-6">App ID:</span>
+              <span className="font-mono text-slate-300">{result.tokenInfo.appId}</span>
             </div>
           )}
         </div>
@@ -181,13 +181,13 @@ export function PermissionStatusView({
         {/* Steps to fix (when missing permissions) */}
         {hasError && result.steps && result.steps.length > 0 && (
           <div className="space-y-2">
-            <p className="text-sm font-medium text-zinc-300 flex items-center gap-2">
+            <p className="text-sm font-medium text-slate-300 flex items-center gap-2">
               <AlertTriangle className="w-4 h-4 text-amber-400" />
               Como resolver:
             </p>
             <ol className="space-y-1 ml-6 list-decimal list-outside">
               {result.steps.map((step, i) => (
-                <li key={i} className="text-sm text-zinc-400 pl-1">
+                <li key={i} className="text-sm text-slate-400 pl-1">
                   {step}
                 </li>
               ))}

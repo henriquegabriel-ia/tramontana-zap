@@ -38,7 +38,7 @@ const alertVariants = cva(
       variant: {
         success: [
           "[background-color:var(--ds-status-success-bg)]",
-          "[border:1px_solid_rgba(16,185,129,0.3)]",
+          "[border:1px_solid_rgba(104,51,189,0.3)]",
           "[color:var(--ds-status-success-text)]",
         ].join(" "),
         warning: [
@@ -57,9 +57,9 @@ const alertVariants = cva(
           "[color:var(--ds-status-info-text)]",
         ].join(" "),
         default: [
-          "bg-zinc-900/50",
+          "bg-slate-900/50",
           "[border:1px_solid_var(--ds-border-default)]",
-          "text-zinc-300",
+          "text-slate-300",
         ].join(" "),
       },
     },

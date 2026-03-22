@@ -136,7 +136,7 @@ export const DashboardView: React.FC<DashboardViewProps> = ({ stats, recentCampa
                   aria-label={t.label}
                   aria-pressed={t.key === range}
                   onClick={() => setRange(t.key as '7D' | '15D' | '30D')}
-                  className={`text-xs px-3 py-1 rounded-lg transition-colors ${t.key === range ? 'bg-[var(--ds-bg-hover)] text-[var(--ds-text-primary)]' : 'text-[var(--ds-text-muted)] hover:text-[var(--ds-text-secondary)]'}`}
+                  className={`text-xs px-3 py-1.5 rounded-full font-bold transition-colors ${t.key === range ? 'bg-primary-600 text-white shadow-sm' : 'text-[var(--ds-text-muted)] hover:text-[var(--ds-text-secondary)] hover:bg-[var(--ds-bg-hover)]'}`}
                 >
                   {t.key}
                 </button>
@@ -154,36 +154,36 @@ export const DashboardView: React.FC<DashboardViewProps> = ({ stats, recentCampa
                   <AreaChart data={chartData.slice(-rangeSize)} aria-hidden="true">
                   <defs>
                     <linearGradient id="colorSent" x1="0" y1="0" x2="0" y2="1">
-                      <stop offset="5%" stopColor="#10b981" stopOpacity={0.22}/>
-                      <stop offset="95%" stopColor="#10b981" stopOpacity={0}/>
+                      <stop offset="5%" stopColor="#818cf8" stopOpacity={0.22}/>
+                      <stop offset="95%" stopColor="#818cf8" stopOpacity={0}/>
                     </linearGradient>
                 </defs>
-                <CartesianGrid strokeDasharray="3 3" vertical={false} stroke="rgba(255,255,255,0.06)" />
-                <XAxis 
-                  dataKey="name" 
-                  axisLine={false} 
-                  tickLine={false} 
-                  tick={{fill: '#71717a', fontSize: 12}} 
+                <CartesianGrid strokeDasharray="3 3" vertical={false} stroke="rgba(148,163,184,0.08)" />
+                <XAxis
+                  dataKey="name"
+                  axisLine={false}
+                  tickLine={false}
+                  tick={{fill: '#64748b', fontSize: 12}}
                   dy={15}
                 />
-                <YAxis 
-                  axisLine={false} 
-                  tickLine={false} 
-                  tick={{fill: '#71717a', fontSize: 12}} 
+                <YAxis
+                  axisLine={false}
+                  tickLine={false}
+                  tick={{fill: '#64748b', fontSize: 12}}
                 />
                 <Tooltip
-                  contentStyle={{backgroundColor: '#101113', borderRadius: '12px', border: '1px solid rgba(255,255,255,0.08)', color: '#fff'}}
-                  itemStyle={{color: '#10b981'}}
-                  labelStyle={{color: '#a1a1aa'}}
+                  contentStyle={{backgroundColor: '#0f172a', borderRadius: '12px', border: '1px solid rgba(255,255,255,0.08)', color: '#fff'}}
+                  itemStyle={{color: '#818cf8'}}
+                  labelStyle={{color: '#94a3b8'}}
                   formatter={(value) => [value, 'Enviadas']}
                 />
-                <Area 
-                  type="monotone" 
-                  dataKey="sent" 
-                  stroke="#10b981" 
+                <Area
+                  type="monotone"
+                  dataKey="sent"
+                  stroke="#818cf8"
                   strokeWidth={2}
-                  fillOpacity={1} 
-                  fill="url(#colorSent)" 
+                  fillOpacity={1}
+                  fill="url(#colorSent)"
                 />
               </AreaChart>
             </ResponsiveContainer>
@@ -224,7 +224,7 @@ export const DashboardView: React.FC<DashboardViewProps> = ({ stats, recentCampa
                 </thead>
                 <tbody className="divide-y divide-[var(--ds-border-subtle)]">
                   {recentCampaigns.map((campaign) => (
-                    <tr key={campaign.id} className="hover:bg-[var(--ds-bg-hover)] transition-all duration-200 group cursor-pointer hover:shadow-[inset_0_0_20px_rgba(16,185,129,0.05)]">
+                    <tr key={campaign.id} className="hover:bg-[var(--ds-bg-hover)] transition-all duration-200 group cursor-pointer hover:shadow-[inset_0_0_20px_rgba(104,51,189,0.05)]">
                       <td className="px-6 py-5">
                         <p className="font-medium text-[var(--ds-text-primary)] group-hover:text-primary-600 dark:group-hover:text-primary-400 transition-colors duration-200">{campaign.name}</p>
                         <p className="text-[var(--ds-text-muted)] text-xs mt-1 font-mono">{formatDateFull(campaign.createdAt)}</p>

@@ -60,7 +60,7 @@ export function FormSection({
   return (
     <div
       className={cn(
-        'rounded-2xl border border-white/10 bg-zinc-900/60',
+        'rounded-2xl border border-white/10 bg-slate-900/60',
         'overflow-hidden',
         className
       )}
@@ -76,7 +76,7 @@ export function FormSection({
         <div className="flex-1 min-w-0">
           <h3 className="text-lg font-semibold text-white">{title}</h3>
           {description && (
-            <p className="text-sm text-zinc-400 mt-1">{description}</p>
+            <p className="text-sm text-slate-400 mt-1">{description}</p>
           )}
         </div>
 
@@ -85,7 +85,7 @@ export function FormSection({
           {collapsible && (
             <button
               className={cn(
-                'p-1 rounded-lg text-zinc-400 hover:text-white transition-transform',
+                'p-1 rounded-lg text-slate-400 hover:text-white transition-transform',
                 isCollapsed && 'rotate-180'
               )}
             >
@@ -150,13 +150,13 @@ export function FormField({
 }: FormFieldProps) {
   return (
     <div className={cn('space-y-2', className)}>
-      <label className="block text-sm font-medium text-zinc-300">
+      <label className="block text-sm font-medium text-slate-300">
         {label}
         {required && <span className="text-red-400 ml-1">*</span>}
       </label>
       {children}
       {hint && !error && (
-        <p className="text-xs text-zinc-500">{hint}</p>
+        <p className="text-xs text-slate-500">{hint}</p>
       )}
       {error && (
         <p className="text-xs text-red-400">{error}</p>
@@ -205,7 +205,7 @@ export function FormDivider({ text, className }: FormDividerProps) {
     return (
       <div className={cn('flex items-center gap-4 my-6', className)}>
         <div className="flex-1 h-px bg-white/10" />
-        <span className="text-xs font-medium text-zinc-500 uppercase tracking-wider">
+        <span className="text-xs font-medium text-slate-500 uppercase tracking-wider">
           {text}
         </span>
         <div className="flex-1 h-px bg-white/10" />

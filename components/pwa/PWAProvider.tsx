@@ -157,20 +157,20 @@ interface InstallBannerProps {
 function InstallBanner({ onInstall, onDismiss }: InstallBannerProps) {
   return (
     <div className="fixed bottom-4 left-4 right-4 md:left-auto md:right-4 md:w-80 z-50 animate-in slide-in-from-bottom-4 duration-300">
-      <div className="bg-zinc-900 border border-zinc-800 rounded-xl p-4 shadow-2xl">
+      <div className="bg-slate-900 border border-slate-800 rounded-xl p-4 shadow-2xl">
         <div className="flex items-start gap-3">
           <div className="w-10 h-10 rounded-lg bg-purple-500/10 flex items-center justify-center shrink-0">
             <Download className="w-5 h-5 text-purple-400" />
           </div>
           <div className="flex-1 min-w-0">
-            <h3 className="text-sm font-semibold text-zinc-100">Instalar Tramontana Zap</h3>
-            <p className="text-xs text-zinc-400 mt-0.5">
+            <h3 className="text-sm font-semibold text-slate-100">Instalar Tramontana Zap</h3>
+            <p className="text-xs text-slate-400 mt-0.5">
               Acesse mais rápido direto da sua tela inicial
             </p>
           </div>
           <button
             onClick={onDismiss}
-            className="text-zinc-500 hover:text-zinc-300 transition-colors"
+            className="text-slate-500 hover:text-slate-300 transition-colors"
           >
             <X className="w-4 h-4" />
           </button>
@@ -179,7 +179,7 @@ function InstallBanner({ onInstall, onDismiss }: InstallBannerProps) {
         <div className="flex gap-2 mt-3">
           <button
             onClick={onDismiss}
-            className="flex-1 px-3 py-2 text-xs font-medium text-zinc-400 hover:text-zinc-200 bg-zinc-800 hover:bg-zinc-700 rounded-lg transition-colors"
+            className="flex-1 px-3 py-2 text-xs font-medium text-slate-400 hover:text-slate-200 bg-slate-800 hover:bg-slate-700 rounded-lg transition-colors"
           >
             Depois
           </button>
@@ -271,7 +271,7 @@ export function PushToggleButton() {
     return (
       <button
         disabled
-        className="flex items-center gap-2 px-3 py-2 text-xs text-zinc-500 bg-zinc-800/50 rounded-lg cursor-not-allowed"
+        className="flex items-center gap-2 px-3 py-2 text-xs text-slate-500 bg-slate-800/50 rounded-lg cursor-not-allowed"
       >
         <BellOff className="w-4 h-4" />
         Não suportado
@@ -300,7 +300,7 @@ export function PushToggleButton() {
         'flex items-center gap-2 px-3 py-2 text-xs font-medium rounded-lg transition-colors',
         isPushEnabled
           ? 'text-purple-400 bg-purple-500/10 hover:bg-purple-500/20'
-          : 'text-zinc-400 bg-zinc-800 hover:bg-zinc-700'
+          : 'text-slate-400 bg-slate-800 hover:bg-slate-700'
       )}
     >
       {isPushEnabled ? (

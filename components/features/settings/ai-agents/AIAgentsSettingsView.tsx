@@ -144,8 +144,8 @@ export function AIAgentsSettingsView({
       <div className="space-y-6">
         {/* Toggle global - sem header duplicado */}
         <div className="flex items-center justify-end">
-          <div className="flex items-center gap-3 px-4 py-2 rounded-xl bg-zinc-800/50 border border-zinc-700">
-            <span className="text-sm text-zinc-400">Atendimento IA</span>
+          <div className="flex items-center gap-3 px-4 py-2 rounded-xl bg-slate-800/50 border border-slate-700">
+            <span className="text-sm text-slate-400">Atendimento IA</span>
             <Switch
               id="ai-agents-global"
               checked={globalEnabled}
@@ -158,7 +158,7 @@ export function AIAgentsSettingsView({
 
         {/* Loading state */}
         {isLoading && (
-          <Card className="border-zinc-800">
+          <Card className="border-slate-800">
             <CardContent className="flex items-center justify-center py-16">
               <Loader2 className="h-8 w-8 animate-spin text-primary-500" />
             </CardContent>
@@ -167,26 +167,26 @@ export function AIAgentsSettingsView({
 
         {/* Error state */}
         {error && !isLoading && (
-          <Card className="border-zinc-800">
+          <Card className="border-slate-800">
             <CardContent className="flex flex-col items-center justify-center py-16 text-center">
               <AlertCircle className="h-8 w-8 text-red-400 mb-3" />
-              <p className="text-sm text-zinc-400">Erro ao carregar agentes</p>
-              <p className="text-xs text-zinc-500 mt-1">{error.message}</p>
+              <p className="text-sm text-slate-400">Erro ao carregar agentes</p>
+              <p className="text-xs text-slate-500 mt-1">{error.message}</p>
             </CardContent>
           </Card>
         )}
 
         {/* Empty state - sem agentes */}
         {!isLoading && !error && agents.length === 0 && (
-          <Card className="border-zinc-800 border-dashed">
+          <Card className="border-slate-800 border-dashed">
             <CardContent className="flex flex-col items-center justify-center py-16 text-center">
-              <div className="p-4 rounded-2xl bg-zinc-800/50 mb-4">
-                <Bot className="h-10 w-10 text-zinc-500" />
+              <div className="p-4 rounded-2xl bg-slate-800/50 mb-4">
+                <Bot className="h-10 w-10 text-slate-500" />
               </div>
               <h3 className="text-lg font-medium text-white mb-1">
                 Nenhum assistente configurado
               </h3>
-              <p className="text-sm text-zinc-500 mb-6 max-w-sm">
+              <p className="text-sm text-slate-500 mb-6 max-w-sm">
                 Crie seu primeiro assistente IA para começar a automatizar o atendimento aos clientes.
               </p>
               <Button onClick={handleOpenCreate} disabled={!globalEnabled}>
@@ -211,13 +211,13 @@ export function AIAgentsSettingsView({
               />
             ) : (
               // Sem agente padrão definido
-              <Card className="border-zinc-800 border-dashed bg-zinc-900/50">
+              <Card className="border-slate-800 border-dashed bg-slate-900/50">
                 <CardContent className="flex flex-col items-center justify-center py-12 text-center">
-                  <p className="text-sm text-zinc-400 mb-4">
+                  <p className="text-sm text-slate-400 mb-4">
                     Nenhum agente definido como principal
                   </p>
                   {otherAgents.length > 0 && (
-                    <p className="text-xs text-zinc-500">
+                    <p className="text-xs text-slate-500">
                       Defina um dos agentes abaixo como principal
                     </p>
                   )}
@@ -229,13 +229,13 @@ export function AIAgentsSettingsView({
             {otherAgents.length > 0 && (
               <Collapsible open={isOthersOpen} onOpenChange={setIsOthersOpen}>
                 <CollapsibleTrigger asChild>
-                  <button className="flex items-center justify-between w-full px-4 py-3 rounded-xl bg-zinc-900/50 border border-zinc-800 hover:bg-zinc-800/50 transition-colors group">
-                    <span className="text-sm text-zinc-400">
+                  <button className="flex items-center justify-between w-full px-4 py-3 rounded-xl bg-slate-900/50 border border-slate-800 hover:bg-slate-800/50 transition-colors group">
+                    <span className="text-sm text-slate-400">
                       Outros agentes ({otherAgents.length})
                     </span>
                     <ChevronDown
                       className={cn(
-                        'h-4 w-4 text-zinc-500 transition-transform',
+                        'h-4 w-4 text-slate-500 transition-transform',
                         isOthersOpen && 'rotate-180'
                       )}
                     />
@@ -266,7 +266,7 @@ export function AIAgentsSettingsView({
               variant="outline"
               onClick={handleOpenCreate}
               disabled={!globalEnabled}
-              className="w-full border-dashed border-zinc-700 bg-transparent hover:bg-zinc-800/50 text-zinc-400"
+              className="w-full border-dashed border-slate-700 bg-transparent hover:bg-slate-800/50 text-slate-400"
             >
               <Plus className="h-4 w-4 mr-2" />
               Novo agente

@@ -306,7 +306,7 @@ export const ContactQuickEditModal: React.FC<ContactQuickEditModalProps> = ({
 
   return (
     <div className="fixed inset-0 bg-black/80 backdrop-blur-sm z-60 flex items-center justify-center p-4">
-      <div className="bg-zinc-950 border border-white/10 rounded-2xl w-full max-w-md p-6 shadow-2xl animate-in zoom-in duration-200">
+      <div className="bg-slate-950 border border-white/10 rounded-2xl w-full max-w-md p-6 shadow-2xl animate-in zoom-in duration-200">
         <div className="flex justify-between items-center mb-6">
           <div>
             <h2 className="text-xl font-bold text-white">{title}</h2>
@@ -345,7 +345,7 @@ export const ContactQuickEditModal: React.FC<ContactQuickEditModalProps> = ({
             <div className="mt-4">
               <button
                 onClick={onClose}
-                className="px-4 py-2 rounded-lg bg-zinc-800 border border-white/10 text-white hover:bg-zinc-700 transition-colors"
+                className="px-4 py-2 rounded-lg bg-slate-800 border border-white/10 text-white hover:bg-slate-700 transition-colors"
               >
                 Fechar
               </button>
@@ -372,7 +372,7 @@ export const ContactQuickEditModal: React.FC<ContactQuickEditModalProps> = ({
               </button>
               <button
                 onClick={onClose}
-                className="px-4 py-2 rounded-lg bg-zinc-800 border border-white/10 text-white hover:bg-zinc-700 transition-colors"
+                className="px-4 py-2 rounded-lg bg-slate-800 border border-white/10 text-white hover:bg-slate-700 transition-colors"
               >
                 Fechar
               </button>
@@ -388,7 +388,7 @@ export const ContactQuickEditModal: React.FC<ContactQuickEditModalProps> = ({
                 )}
                 <input
                   ref={nameRef}
-                  className="w-full bg-zinc-900 border border-white/10 rounded-lg px-4 py-3 text-white focus:border-primary-500 outline-none transition-colors"
+                  className="w-full bg-slate-900 border border-white/10 rounded-lg px-4 py-3 text-white focus:border-primary-500 outline-none transition-colors"
                   value={form.name}
                   onChange={(e) => setForm(prev => ({ ...prev, name: e.target.value }))}
                   placeholder="Ex: João Silva"
@@ -402,7 +402,7 @@ export const ContactQuickEditModal: React.FC<ContactQuickEditModalProps> = ({
                 <input
                   ref={emailRef}
                   type="email"
-                  className="w-full bg-zinc-900 border border-white/10 rounded-lg px-4 py-3 text-white focus:border-primary-500 outline-none transition-colors"
+                  className="w-full bg-slate-900 border border-white/10 rounded-lg px-4 py-3 text-white focus:border-primary-500 outline-none transition-colors"
                   value={form.email}
                   onChange={(e) => setForm(prev => ({ ...prev, email: e.target.value }))}
                   placeholder="email@exemplo.com"
@@ -423,7 +423,7 @@ export const ContactQuickEditModal: React.FC<ContactQuickEditModalProps> = ({
                       <div key={key}>
                         <label className="block text-sm text-gray-400 mb-1">{label}</label>
                         <select
-                          className="w-full bg-zinc-900 border border-white/10 rounded-lg px-4 py-3 text-white focus:border-primary-500 outline-none transition-colors"
+                          className="w-full bg-slate-900 border border-white/10 rounded-lg px-4 py-3 text-white focus:border-primary-500 outline-none transition-colors"
                           value={String(form.custom_fields?.[key] ?? '')}
                           onChange={(e) =>
                             setForm((prev) => ({
@@ -447,7 +447,7 @@ export const ContactQuickEditModal: React.FC<ContactQuickEditModalProps> = ({
                       <input
                         ref={(el) => { customRefs.current[key] = el; }}
                         type={type === 'number' ? 'number' : type === 'date' ? 'date' : 'text'}
-                        className="w-full bg-zinc-900 border border-white/10 rounded-lg px-4 py-3 text-white focus:border-primary-500 outline-none transition-colors"
+                        className="w-full bg-slate-900 border border-white/10 rounded-lg px-4 py-3 text-white focus:border-primary-500 outline-none transition-colors"
                         value={String(form.custom_fields?.[key] ?? '')}
                         onChange={(e) =>
                           setForm((prev) => ({
@@ -475,7 +475,7 @@ export const ContactQuickEditModal: React.FC<ContactQuickEditModalProps> = ({
                         <label className="block text-xs text-gray-500 mb-1">{field.label}</label>
                         {field.type === 'select' && field.options && field.options.length > 0 ? (
                           <select
-                            className="w-full bg-zinc-900 border border-white/10 rounded-lg px-4 py-2.5 text-white focus:border-primary-500 outline-none transition-colors"
+                            className="w-full bg-slate-900 border border-white/10 rounded-lg px-4 py-2.5 text-white focus:border-primary-500 outline-none transition-colors"
                             value={String(form.custom_fields?.[field.key] ?? '')}
                             onChange={(e) =>
                               setForm(prev => ({
@@ -492,7 +492,7 @@ export const ContactQuickEditModal: React.FC<ContactQuickEditModalProps> = ({
                         ) : (
                           <input
                             type={field.type === 'number' ? 'number' : field.type === 'date' ? 'date' : 'text'}
-                            className="w-full bg-zinc-900 border border-white/10 rounded-lg px-4 py-2.5 text-white focus:border-primary-500 outline-none transition-colors"
+                            className="w-full bg-slate-900 border border-white/10 rounded-lg px-4 py-2.5 text-white focus:border-primary-500 outline-none transition-colors"
                             value={String(form.custom_fields?.[field.key] ?? '')}
                             onChange={(e) =>
                               setForm(prev => ({
@@ -513,7 +513,7 @@ export const ContactQuickEditModal: React.FC<ContactQuickEditModalProps> = ({
             <div className="pt-4 flex gap-3">
               <button
                 onClick={onClose}
-                className="flex-1 bg-zinc-800 text-white font-medium py-3 rounded-xl hover:bg-zinc-700 transition-colors"
+                className="flex-1 bg-slate-800 text-white font-medium py-3 rounded-xl hover:bg-slate-700 transition-colors"
                 disabled={updateMutation.isPending}
               >
                 Cancelar

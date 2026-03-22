@@ -13,23 +13,23 @@
 // =============================================================================
 
 export const primitiveColors = {
-  // Zinc Scale (Neutrals)
-  zinc: {
-    50: '#fafafa',
-    100: '#f4f4f5',
-    200: '#e4e4e7',
-    300: '#d4d4d8',
-    400: '#a1a1aa',
-    500: '#71717a',
-    600: '#52525b',
-    700: '#3f3f46',
-    800: '#27272a',
-    900: '#18181b',
-    950: '#09090b',
+  // Slate Scale (Neutrals - Premium)
+  slate: {
+    50: '#f8fafc',
+    100: '#f1f5f9',
+    200: '#e2e8f0',
+    300: '#cbd5e1',
+    400: '#94a3b8',
+    500: '#64748b',
+    600: '#475569',
+    700: '#334155',
+    800: '#1e293b',
+    900: '#0f172a',
+    950: '#020617',
   },
 
-  // Purple Scale (Primary - Tramontana Consórcios)
-  emerald: {
+  // Brand Scale (Primary - Tramontana Consórcios)
+  brand: {
     50: '#f5f0ff',
     100: '#ebe0ff',
     200: '#d4bfff',
@@ -145,18 +145,18 @@ export const primitiveColors = {
 export const semanticColors = {
   // Brand
   brand: {
-    primary: primitiveColors.emerald[500],
-    primaryHover: primitiveColors.emerald[600],
-    primaryActive: primitiveColors.emerald[700],
-    primaryMuted: primitiveColors.emerald[500] + '1a', // 10% opacity
-    primarySubtle: primitiveColors.emerald[950],
+    primary: primitiveColors.brand[500],
+    primaryHover: primitiveColors.brand[600],
+    primaryActive: primitiveColors.brand[700],
+    primaryMuted: primitiveColors.brand[500] + '1a', // 10% opacity
+    primarySubtle: primitiveColors.brand[950],
   },
 
   // Backgrounds
   bg: {
-    base: primitiveColors.zinc[950],
-    elevated: primitiveColors.zinc[900],
-    surface: primitiveColors.zinc[800],
+    base: primitiveColors.slate[950],
+    elevated: primitiveColors.slate[900],
+    surface: primitiveColors.slate[800],
     overlay: 'rgba(9, 9, 11, 0.8)',
     glass: 'rgba(24, 24, 27, 0.7)',
     hover: 'rgba(255, 255, 255, 0.05)',
@@ -165,12 +165,12 @@ export const semanticColors = {
 
   // Text
   text: {
-    primary: primitiveColors.zinc[100],
-    secondary: primitiveColors.zinc[400],
-    muted: primitiveColors.zinc[500],
-    disabled: primitiveColors.zinc[600],
-    inverse: primitiveColors.zinc[950],
-    brand: primitiveColors.emerald[400],
+    primary: primitiveColors.slate[100],
+    secondary: primitiveColors.slate[400],
+    muted: primitiveColors.slate[500],
+    disabled: primitiveColors.slate[600],
+    inverse: primitiveColors.slate[950],
+    brand: primitiveColors.brand[400],
   },
 
   // Borders
@@ -178,17 +178,17 @@ export const semanticColors = {
     subtle: 'rgba(255, 255, 255, 0.05)',
     default: 'rgba(255, 255, 255, 0.10)',
     strong: 'rgba(255, 255, 255, 0.15)',
-    brand: primitiveColors.emerald[500],
-    focus: primitiveColors.emerald[400],
+    brand: primitiveColors.brand[500],
+    focus: primitiveColors.brand[400],
   },
 
   // Status Colors
   status: {
     success: {
-      base: primitiveColors.emerald[500],
-      text: primitiveColors.emerald[400],
-      bg: primitiveColors.emerald[500] + '1a',
-      border: primitiveColors.emerald[500] + '33',
+      base: primitiveColors.brand[500],
+      text: primitiveColors.brand[400],
+      bg: primitiveColors.brand[500] + '1a',
+      border: primitiveColors.brand[500] + '33',
     },
     error: {
       base: primitiveColors.red[500],
@@ -213,20 +213,20 @@ export const semanticColors = {
   // Campaign Status (specific to SmartZap)
   campaign: {
     draft: {
-      text: primitiveColors.zinc[400],
-      bg: primitiveColors.zinc[500] + '1a',
+      text: primitiveColors.slate[400],
+      bg: primitiveColors.slate[500] + '1a',
     },
     scheduled: {
-      text: primitiveColors.purple[400],
-      bg: primitiveColors.purple[500] + '1a',
+      text: primitiveColors.brand[400],
+      bg: primitiveColors.brand[500] + '1a',
     },
     sending: {
       text: primitiveColors.blue[400],
       bg: primitiveColors.blue[500] + '1a',
     },
     completed: {
-      text: primitiveColors.emerald[400],
-      bg: primitiveColors.emerald[500] + '1a',
+      text: primitiveColors.brand[400],
+      bg: primitiveColors.brand[500] + '1a',
     },
     paused: {
       text: primitiveColors.amber[400],
@@ -248,7 +248,7 @@ export const nodeColors = {
   message: {
     border: 'hsl(161.4, 93.5%, 30.4%)',
     bg: 'hsl(164, 86%, 16%)',
-    accent: primitiveColors.emerald[500],
+    accent: primitiveColors.brand[500],
   },
   ai: {
     border: 'hsl(262.1, 83.3%, 57.8%)',
@@ -278,7 +278,7 @@ export const nodeColors = {
   default: {
     border: 'hsl(215, 13.8%, 34.1%)',
     bg: 'hsl(220, 14%, 12%)',
-    accent: primitiveColors.zinc[500],
+    accent: primitiveColors.slate[500],
   },
 } as const
 

@@ -63,7 +63,7 @@ const InboxUnreadBadge = memo(function InboxUnreadBadge({
   if (variant === 'compact') {
     return (
       <span
-        className="absolute -right-1 -top-1 rounded-full bg-purple-500/90 px-0.5 py-[1px] text-[7px] font-semibold uppercase tracking-wider text-black"
+        className="absolute -right-1 -top-1 rounded-full bg-primary-500/90 px-0.5 py-[1px] text-[7px] font-semibold uppercase tracking-wider text-black"
         aria-label={`${count} mensagens não lidas`}
       >
         {displayCount}
@@ -73,7 +73,7 @@ const InboxUnreadBadge = memo(function InboxUnreadBadge({
 
   return (
     <span
-      className="rounded-full bg-purple-500/20 px-1.5 py-[1px] text-[8px] font-semibold uppercase tracking-wider text-purple-700 dark:text-purple-200 border border-purple-500/30"
+      className="rounded-full bg-primary-500/15 px-1.5 py-[1px] text-[8px] font-semibold uppercase tracking-wider text-primary-700 dark:text-primary-200 border border-primary-500/25"
       aria-label={`${count} mensagens não lidas`}
     >
       {displayCount}
@@ -140,7 +140,7 @@ const CompactSidebar = memo(function CompactSidebar({
               <InboxUnreadBadge variant="compact" />
             ) : item.badge ? (
               <span
-                className="absolute -right-1 -top-1 rounded-full bg-purple-500/90 px-0.5 py-[1px] text-[7px] font-semibold uppercase tracking-wider text-black"
+                className="absolute -right-1 -top-1 rounded-full bg-primary-500/90 px-0.5 py-[1px] text-[7px] font-semibold uppercase tracking-wider text-black"
                 aria-label={item.badge}
               >
                 {item.badge}
@@ -245,7 +245,8 @@ const ExpandedSidebar = memo(function ExpandedSidebar({
             <img src="/tramontana-logo.svg" alt="Tramontana" className="h-9 w-9 object-contain" />
           </div>
           <div>
-            <span className="text-xl font-bold text-[var(--ds-text-primary)] tracking-tight block">Tramontana Zap</span>
+            <span className="text-xl font-bold text-[var(--ds-text-primary)] tracking-tight block font-[var(--ds-font-display)]">Tramontana Zap</span>
+            <span className="text-[10px] uppercase tracking-widest font-bold text-[var(--ds-brand-secondary)] block">Consórcios</span>
           </div>
           <button
             type="button"
@@ -288,7 +289,7 @@ const ExpandedSidebar = memo(function ExpandedSidebar({
                 isDisabled
                   ? 'opacity-50 cursor-not-allowed text-[var(--ds-text-muted)]'
                   : isActive
-                    ? 'bg-primary-500/10 text-primary-600 dark:text-primary-400 font-medium border border-primary-500/20 shadow-[0_0_15px_rgba(16,185,129,0.1)]'
+                    ? 'bg-primary-500/10 text-primary-600 dark:text-primary-400 font-medium border border-primary-500/20 shadow-[0_0_15px_rgba(104,51,189,0.1)]'
                     : 'text-[var(--ds-text-secondary)] hover:bg-[var(--ds-bg-hover)] hover:text-[var(--ds-text-primary)] focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-primary-500'
               }`
 
@@ -297,7 +298,7 @@ const ExpandedSidebar = memo(function ExpandedSidebar({
                 <InboxUnreadBadge variant="expanded" />
               ) : item.badge ? (
                 <span
-                  className="rounded-full bg-purple-500/20 px-1.5 py-[1px] text-[8px] font-semibold uppercase tracking-wider text-purple-700 dark:text-purple-200 border border-purple-500/30"
+                  className="rounded-full bg-primary-500/15 px-1.5 py-[1px] text-[8px] font-semibold uppercase tracking-wider text-primary-700 dark:text-primary-200 border border-primary-500/25"
                   aria-label={item.badge}
                 >
                   {item.badge}

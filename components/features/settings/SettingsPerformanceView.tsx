@@ -69,12 +69,12 @@ function Gauge(props: {
 
           {/* Faixas discretas de risco */}
           <path d={arcD} fill="none" stroke="#3f3f46" strokeWidth={14} strokeLinecap="round" opacity={0.35} />
-          <path d={arcD} fill="none" stroke="#10b981" strokeWidth={14} strokeLinecap="round" opacity={0.18} />
+          <path d={arcD} fill="none" stroke="#818cf8" strokeWidth={14} strokeLinecap="round" opacity={0.18} />
           <path d={arcD} fill="none" stroke="#f59e0b" strokeWidth={14} strokeLinecap="round" opacity={0.14} />
           <path d={arcD} fill="none" stroke="#ef4444" strokeWidth={14} strokeLinecap="round" opacity={0.10} />
 
           {/* Preenchimento */}
-          <path d={arcFillD} fill="none" stroke="#10b981" strokeWidth={14} strokeLinecap="round" />
+          <path d={arcFillD} fill="none" stroke="#818cf8" strokeWidth={14} strokeLinecap="round" />
 
           {/* Ponteiro */}
           <line x1={cx} y1={cy} x2={x} y2={y} stroke="#e5e7eb" strokeWidth={3} strokeLinecap="round" />
@@ -251,7 +251,7 @@ export function SettingsPerformanceView(props: {
             onClick={() => props.setRangeDays(d)}
             className={`px-3 py-1.5 rounded-lg border text-xs transition-colors ${props.rangeDays === d
               ? 'bg-white/10 text-white border-white/20'
-              : 'bg-zinc-900/40 text-gray-300 border-white/10 hover:bg-white/5'
+              : 'bg-slate-900/40 text-gray-300 border-white/10 hover:bg-white/5'
               }`}
           >
             {d}d
@@ -263,7 +263,7 @@ export function SettingsPerformanceView(props: {
           <select
             value={props.selectedConfigHash || ''}
             onChange={(e) => props.setSelectedConfigHash(e.target.value || null)}
-            className="px-3 py-2 bg-zinc-900/50 border border-white/10 rounded-lg text-xs text-white font-mono"
+            className="px-3 py-2 bg-slate-900/50 border border-white/10 rounded-lg text-xs text-white font-mono"
           >
             <option value="">(todas)</option>
             {(props.configs || []).map((c) => (
@@ -357,8 +357,8 @@ export function SettingsPerformanceView(props: {
               <AreaChart data={chartData}>
               <defs>
                 <linearGradient id="colorThroughput" x1="0" y1="0" x2="0" y2="1">
-                  <stop offset="5%" stopColor="#10b981" stopOpacity={0.25} />
-                  <stop offset="95%" stopColor="#10b981" stopOpacity={0} />
+                  <stop offset="5%" stopColor="#818cf8" stopOpacity={0.25} />
+                  <stop offset="95%" stopColor="#818cf8" stopOpacity={0} />
                 </linearGradient>
               </defs>
               <CartesianGrid strokeDasharray="3 3" vertical={false} stroke="#27272a" />
@@ -373,7 +373,7 @@ export function SettingsPerformanceView(props: {
                 }}
                 labelFormatter={(label: any) => `Quando: ${label}`}
               />
-              <Area type="monotone" dataKey="throughput" stroke="#10b981" strokeWidth={2} fillOpacity={1} fill="url(#colorThroughput)" />
+              <Area type="monotone" dataKey="throughput" stroke="#818cf8" strokeWidth={2} fillOpacity={1} fill="url(#colorThroughput)" />
               </AreaChart>
             </ResponsiveContainer>
           ) : (

@@ -11,8 +11,8 @@ const MonacoEditor = dynamic(
   {
     ssr: false,
     loading: () => (
-      <div className="h-full w-full animate-pulse bg-zinc-800 rounded-lg flex items-center justify-center">
-        <span className="text-zinc-500 text-sm">Carregando editor...</span>
+      <div className="h-full w-full animate-pulse bg-slate-800 rounded-lg flex items-center justify-center">
+        <span className="text-slate-500 text-sm">Carregando editor...</span>
       </div>
     ),
   }

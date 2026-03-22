@@ -37,7 +37,7 @@ export const UpgradeRoadmapModal: React.FC<UpgradeRoadmapModalProps> = ({
 
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/70 backdrop-blur-sm animate-in fade-in duration-200">
-      <div className="bg-zinc-900 border border-white/10 rounded-2xl w-full max-w-lg mx-4 shadow-2xl animate-in zoom-in-95 duration-200 max-h-[90vh] overflow-hidden flex flex-col">
+      <div className="bg-slate-900 border border-white/10 rounded-2xl w-full max-w-lg mx-4 shadow-2xl animate-in zoom-in-95 duration-200 max-h-[90vh] overflow-hidden flex flex-col">
         {/* Header */}
         <div className="flex items-center gap-4 p-6 border-b border-white/10 bg-linear-to-r from-primary-500/10 to-transparent shrink-0">
           <div className="p-3 bg-primary-500/20 rounded-xl">
@@ -59,7 +59,7 @@ export const UpgradeRoadmapModal: React.FC<UpgradeRoadmapModalProps> = ({
         <div className="p-6 space-y-6 overflow-y-auto flex-1">
           {/* Current vs Next Tier */}
           <div className="grid grid-cols-2 gap-4">
-            <div className="bg-zinc-800/50 rounded-xl p-4 text-center border border-white/5">
+            <div className="bg-slate-800/50 rounded-xl p-4 text-center border border-white/5">
               <p className="text-[10px] text-gray-500 uppercase tracking-wider mb-1">Tier Atual</p>
               <p className="text-lg font-bold text-white">{TIER_DISPLAY_NAMES[currentTier]}</p>
               <p className="text-sm text-gray-400">{currentLimit.toLocaleString('pt-BR')}/dia</p>
@@ -84,13 +84,13 @@ export const UpgradeRoadmapModal: React.FC<UpgradeRoadmapModalProps> = ({
                     key={index}
                     className={`p-4 rounded-xl border transition-all \${isCompleted
                       ? 'bg-primary-500/10 border-primary-500/30'
-                      : 'bg-zinc-800/30 border-white/5'
+                      : 'bg-slate-800/30 border-white/5'
                       }`}
                   >
                     <div className="flex items-start gap-3">
                       <div className={`w-6 h-6 rounded-full flex items-center justify-center shrink-0 mt-0.5 \${isCompleted
                         ? 'bg-primary-500 text-white'
-                        : 'bg-zinc-700 text-gray-400'
+                        : 'bg-slate-700 text-gray-400'
                         }`}>
                         {isCompleted ? <Check size={14} /> : <Circle size={14} />}
                       </div>
@@ -130,7 +130,7 @@ export const UpgradeRoadmapModal: React.FC<UpgradeRoadmapModalProps> = ({
         </div>
 
         {/* Footer */}
-        <div className="flex items-center justify-between p-6 border-t border-white/10 bg-zinc-800/30 shrink-0">
+        <div className="flex items-center justify-between p-6 border-t border-white/10 bg-slate-800/30 shrink-0">
           <a
             href="https://developers.facebook.com/docs/whatsapp/messaging-limits"
             target="_blank"
@@ -163,7 +163,7 @@ const QualityScoreCard: React.FC<{ qualityScore: string }> = ({ qualityScore }) 
       case 'RED':
         return 'bg-red-500/10 border-red-500/30';
       default:
-        return 'bg-zinc-800/30 border-white/5';
+        return 'bg-slate-800/30 border-white/5';
     }
   };
 

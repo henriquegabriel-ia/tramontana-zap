@@ -60,10 +60,10 @@ export function TemplateImportDialog({
 
   return (
     <Dialog open={open} onOpenChange={onOpenChange}>
-      <DialogContent className="bg-zinc-950 border-white/10 text-white sm:max-w-2xl">
+      <DialogContent className="bg-slate-950 border-white/10 text-white sm:max-w-2xl">
         <DialogHeader>
           <DialogTitle>Importar modelo pronto</DialogTitle>
-          <DialogDescription className="text-zinc-400">
+          <DialogDescription className="text-slate-400">
             Isso substitui o formulário atual. Você pode editar depois.
           </DialogDescription>
         </DialogHeader>
@@ -77,7 +77,7 @@ export function TemplateImportDialog({
                   ? tpl.isDynamic
                     ? 'border-purple-400/40 bg-purple-500/10'
                     : 'border-purple-400/40 bg-purple-500/10'
-                  : 'border-white/10 bg-zinc-900/60 hover:bg-white/5'
+                  : 'border-white/10 bg-slate-900/60 hover:bg-white/5'
               }`}
             >
               <input
@@ -109,7 +109,7 @@ export function TemplateImportDialog({
           <Button
             type="button"
             variant="outline"
-            className="border-white/10 bg-zinc-900 hover:bg-white/5"
+            className="border-white/10 bg-slate-900 hover:bg-white/5"
             onClick={() => onOpenChange(false)}
           >
             Cancelar

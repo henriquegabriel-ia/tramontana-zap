@@ -91,10 +91,10 @@ export function StatsCard({
       className={cn(
         // Base styles
         'flex items-center gap-4 p-5 rounded-2xl',
-        'bg-zinc-900/60 border border-white/10',
+        'bg-slate-900/60 border border-white/10',
         'transition-all duration-200',
         // Hover state
-        isClickable && 'cursor-pointer hover:bg-zinc-900/80 hover:border-white/15',
+        isClickable && 'cursor-pointer hover:bg-slate-900/80 hover:border-white/15',
         className
       )}
       onClick={onClick}
@@ -109,7 +109,7 @@ export function StatsCard({
 
       {/* Content */}
       <div className="flex flex-col min-w-0">
-        <span className="text-xs font-medium text-zinc-400 uppercase tracking-wider truncate">
+        <span className="text-xs font-medium text-slate-400 uppercase tracking-wider truncate">
           {label}
         </span>
         <span className="text-2xl font-bold text-white tabular-nums">

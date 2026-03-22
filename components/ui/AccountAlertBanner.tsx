@@ -41,10 +41,10 @@ const alertColors: Record<string, { bg: string; border: string; text: string; ic
     icon: 'text-blue-400',
   },
   system: {
-    bg: 'bg-zinc-800/50',
-    border: 'border-zinc-700',
-    text: 'text-zinc-200',
-    icon: 'text-zinc-400',
+    bg: 'bg-slate-800/50',
+    border: 'border-slate-700',
+    text: 'text-slate-200',
+    icon: 'text-slate-400',
   },
   default: {
     bg: 'bg-red-950/50',

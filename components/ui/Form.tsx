@@ -137,7 +137,7 @@ export const Input = forwardRef<HTMLInputElement, InputProps>(
         ref={ref}
         className={`
           w-full px-4 py-3 
-          bg-zinc-900/50 border rounded-xl 
+          bg-slate-900/50 border rounded-xl 
           text-white placeholder-gray-600
           outline-none transition-all duration-200
           focus:ring-2 focus:ring-primary-500/50 focus:border-primary-500/50
@@ -169,7 +169,7 @@ export const Textarea = forwardRef<HTMLTextAreaElement, TextareaProps>(
         ref={ref}
         className={`
           w-full px-4 py-3 
-          bg-zinc-900/50 border rounded-xl 
+          bg-slate-900/50 border rounded-xl 
           text-white placeholder-gray-600
           outline-none transition-all duration-200 resize-none
           focus:ring-2 focus:ring-primary-500/50 focus:border-primary-500/50
@@ -201,7 +201,7 @@ export const Select = forwardRef<HTMLSelectElement, SelectProps>(
         ref={ref}
         className={`
           w-full px-4 py-3 
-          bg-zinc-900/50 border rounded-xl 
+          bg-slate-900/50 border rounded-xl 
           text-white
           outline-none transition-all duration-200
           focus:ring-2 focus:ring-primary-500/50 focus:border-primary-500/50
@@ -245,7 +245,7 @@ export const Checkbox = forwardRef<HTMLInputElement, CheckboxProps>(
           flex items-center gap-3 p-3 rounded-lg cursor-pointer transition-all
           ${props.checked 
             ? 'bg-primary-500/10 border border-primary-500/30' 
-            : 'bg-zinc-800/50 border border-transparent hover:bg-zinc-800'
+            : 'bg-slate-800/50 border border-transparent hover:bg-slate-800'
           }
           ${props.disabled ? 'opacity-50 cursor-not-allowed' : ''}
           ${className}
@@ -255,7 +255,7 @@ export const Checkbox = forwardRef<HTMLInputElement, CheckboxProps>(
           ref={ref}
           id={id}
           type="checkbox"
-          className="w-4 h-4 text-primary-600 bg-zinc-700 border-zinc-600 rounded focus:ring-primary-500"
+          className="w-4 h-4 text-primary-600 bg-slate-700 border-slate-600 rounded focus:ring-primary-500"
           {...props}
         />
         <span className="text-sm text-white">{label}</span>
@@ -288,7 +288,7 @@ export const SubmitButton: React.FC<SubmitButtonProps> = ({
   ...props
 }) => {
   const variants = {
-    primary: 'bg-primary-600 hover:bg-primary-500 text-white shadow-[0_0_20px_rgba(16,185,129,0.3)]',
+    primary: 'bg-primary-600 hover:bg-primary-500 text-white shadow-[0_0_20px_rgba(104,51,189,0.3)]',
     secondary: 'bg-white hover:bg-gray-200 text-black',
     danger: 'bg-red-600 hover:bg-red-500 text-white',
   };

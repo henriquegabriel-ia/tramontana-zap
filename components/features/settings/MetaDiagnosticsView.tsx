@@ -169,7 +169,7 @@ export function MetaDiagnosticsView(props: MetaDiagnosticsViewProps) {
             { category: 'Token', label: topToken.label, status: topToken.status, detail: topToken.detail },
             { category: 'Webhook', label: topWebhook.label, status: topWebhook.status, detail: topWebhook.detail },
           ] as const).map((row) => (
-            <div key={row.category} className="bg-zinc-900/40 border border-white/10 rounded-xl p-4">
+            <div key={row.category} className="bg-slate-900/40 border border-white/10 rounded-xl p-4">
               <div className="flex items-center justify-between gap-3">
                 <div className="text-xs text-gray-500">{row.category}</div>
                 <StatusBadge status={row.status} />
@@ -367,19 +367,19 @@ export function MetaDiagnosticsView(props: MetaDiagnosticsViewProps) {
           </div>
 
           <div className="mt-4 grid grid-cols-4 gap-2 text-xs">
-            <div className="bg-zinc-900/40 border border-white/10 rounded-lg p-2">
+            <div className="bg-slate-900/40 border border-white/10 rounded-lg p-2">
               <div className="text-gray-500">OK</div>
               <div className="mt-1 text-white font-medium">{props.counts.pass}</div>
             </div>
-            <div className="bg-zinc-900/40 border border-white/10 rounded-lg p-2">
+            <div className="bg-slate-900/40 border border-white/10 rounded-lg p-2">
               <div className="text-gray-500">Info</div>
               <div className="mt-1 text-white font-medium">{props.counts.info}</div>
             </div>
-            <div className="bg-zinc-900/40 border border-amber-500/20 rounded-lg p-2">
+            <div className="bg-slate-900/40 border border-amber-500/20 rounded-lg p-2">
               <div className="text-amber-200">Atencao</div>
               <div className="mt-1 text-white font-medium">{props.counts.warn}</div>
             </div>
-            <div className="bg-zinc-900/40 border border-red-500/20 rounded-lg p-2">
+            <div className="bg-slate-900/40 border border-red-500/20 rounded-lg p-2">
               <div className="text-red-200">Falha</div>
               <div className="mt-1 text-white font-medium">{props.counts.fail}</div>
             </div>
@@ -396,7 +396,7 @@ export function MetaDiagnosticsView(props: MetaDiagnosticsViewProps) {
           </summary>
 
           <div className="mt-4 grid grid-cols-1 lg:grid-cols-2 gap-4">
-            <div className="bg-zinc-900/40 border border-white/10 rounded-xl p-4">
+            <div className="bg-slate-900/40 border border-white/10 rounded-xl p-4">
               <div className="text-xs text-gray-500">Ambiente</div>
               <div className="mt-2 text-sm text-white">
                 {(props.data?.env as { vercelEnv?: string })?.vercelEnv || '—'}
@@ -413,7 +413,7 @@ export function MetaDiagnosticsView(props: MetaDiagnosticsViewProps) {
               </div>
             </div>
 
-            <div className="bg-zinc-900/40 border border-white/10 rounded-xl p-4">
+            <div className="bg-slate-900/40 border border-white/10 rounded-xl p-4">
               <div className="text-xs text-gray-500">Webhook (URL esperada)</div>
               <div className="mt-2 text-sm text-white font-mono break-all">
                 {props.data?.webhook?.expectedUrl || '—'}
@@ -508,7 +508,7 @@ export function MetaDiagnosticsView(props: MetaDiagnosticsViewProps) {
             className={`px-3 py-1.5 rounded-lg border text-xs transition-colors ${
               props.filter === b.k
                 ? 'bg-white/10 text-white border-white/20'
-                : 'bg-zinc-900/40 text-gray-300 border-white/10 hover:bg-white/5'
+                : 'bg-slate-900/40 text-gray-300 border-white/10 hover:bg-white/5'
             }`}
           >
             {b.label}
@@ -521,7 +521,7 @@ export function MetaDiagnosticsView(props: MetaDiagnosticsViewProps) {
           className={`ml-2 px-3 py-1.5 rounded-lg border text-xs transition-colors ${
             simpleMode
               ? 'bg-purple-500/10 text-purple-200 border-purple-500/20'
-              : 'bg-zinc-900/40 text-gray-300 border-white/10 hover:bg-white/5'
+              : 'bg-slate-900/40 text-gray-300 border-white/10 hover:bg-white/5'
           }`}
           title={simpleMode ? 'Modo simples (recomendado)' : 'Modo tecnico (para dev/suporte)'}
         >
@@ -582,7 +582,7 @@ export function MetaDiagnosticsView(props: MetaDiagnosticsViewProps) {
                         <summary className="cursor-pointer text-xs text-gray-400 hover:text-white transition-colors">
                           {simpleMode ? 'Detalhes (para suporte)' : 'Ver detalhes tecnicos'}
                         </summary>
-                        <pre className="mt-3 text-xs bg-zinc-950/50 border border-white/10 rounded-xl p-4 overflow-auto text-gray-200">
+                        <pre className="mt-3 text-xs bg-slate-950/50 border border-white/10 rounded-xl p-4 overflow-auto text-gray-200">
                           {formatJsonMaybe(c.details)}
                         </pre>
                       </details>
@@ -599,7 +599,7 @@ export function MetaDiagnosticsView(props: MetaDiagnosticsViewProps) {
       {reportText && (
         <Container variant="glass" padding="md">
           <div className="text-xs text-gray-500">Relatorio (resumo)</div>
-          <pre className="mt-3 text-xs bg-zinc-950/50 border border-white/10 rounded-xl p-4 overflow-auto text-gray-200 whitespace-pre-wrap">
+          <pre className="mt-3 text-xs bg-slate-950/50 border border-white/10 rounded-xl p-4 overflow-auto text-gray-200 whitespace-pre-wrap">
             {reportText}
           </pre>
         </Container>

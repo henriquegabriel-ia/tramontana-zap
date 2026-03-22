@@ -52,7 +52,7 @@ export function Simulate10033Card() {
       </div>
 
       {result && (
-        <div className="mt-4 bg-zinc-900/40 border border-white/10 rounded-xl p-4">
+        <div className="mt-4 bg-slate-900/40 border border-white/10 rounded-xl p-4">
           {result.ok === false ? (
             <>
               <div className="flex items-center justify-between gap-3">

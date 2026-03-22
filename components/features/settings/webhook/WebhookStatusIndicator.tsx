@@ -83,9 +83,9 @@ export function WebhookStatusIndicator({
 }: WebhookStatusIndicatorProps) {
   if (isLoading) {
     return (
-      <div className="flex items-center gap-2 px-3 py-2 bg-zinc-800/50 rounded-lg">
-        <Loader2 size={16} className="animate-spin text-zinc-400" />
-        <span className="text-sm text-zinc-400">Verificando webhook...</span>
+      <div className="flex items-center gap-2 px-3 py-2 bg-slate-800/50 rounded-lg">
+        <Loader2 size={16} className="animate-spin text-slate-400" />
+        <span className="text-sm text-slate-400">Verificando webhook...</span>
       </div>
     );
   }
@@ -185,13 +185,13 @@ export function WebhookStatusIndicator({
       <div className="space-y-1.5 text-xs">
         {active.url && (
           <div className="break-all">
-            <span className="text-zinc-500">URL atual: </span>
+            <span className="text-slate-500">URL atual: </span>
             <code className="text-red-400">{active.url}</code>
           </div>
         )}
         {expectedUrl && (
           <div className="break-all">
-            <span className="text-zinc-500">URL esperada: </span>
+            <span className="text-slate-500">URL esperada: </span>
             <code className="text-purple-400">{expectedUrl}</code>
           </div>
         )}

@@ -107,7 +107,7 @@ export function TokenValidityCard({ data, checks }: TokenValidityCardProps) {
       </div>
 
       {nextSteps.length > 0 && (
-        <div className="mt-4 bg-zinc-900/40 border border-white/10 rounded-xl p-4">
+        <div className="mt-4 bg-slate-900/40 border border-white/10 rounded-xl p-4">
           <div className="text-sm text-white font-semibold">O que fazer</div>
           <ul className="mt-2 list-disc pl-5 space-y-1 text-sm text-gray-200">
             {nextSteps.map((s, i) => (
@@ -127,7 +127,7 @@ export function TokenValidityCard({ data, checks }: TokenValidityCardProps) {
           <summary className="cursor-pointer text-xs text-gray-400 hover:text-white transition-colors">
             Ver detalhes tecnicos
           </summary>
-          <pre className="mt-3 text-xs bg-zinc-950/50 border border-white/10 rounded-xl p-4 overflow-auto text-gray-200">
+          <pre className="mt-3 text-xs bg-slate-950/50 border border-white/10 rounded-xl p-4 overflow-auto text-gray-200">
             {formatJsonMaybe({
               debug_token: dbgCheck?.details || null,
               me: meCheck?.details || null,

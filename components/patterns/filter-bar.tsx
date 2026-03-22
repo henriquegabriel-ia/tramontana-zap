@@ -109,7 +109,7 @@ export function FilterBar({
       <div
         className={cn(
           'flex flex-col gap-3 p-4 rounded-2xl',
-          'bg-zinc-900/60 border border-white/10',
+          'bg-slate-900/60 border border-white/10',
           'sm:flex-row sm:items-center sm:justify-between'
         )}
       >
@@ -118,7 +118,7 @@ export function FilterBar({
           {/* Search Input */}
           {onSearchChange && (
             <div className="relative flex-1 max-w-md">
-              <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-zinc-500" />
+              <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-500" />
               <input
                 type="text"
                 value={searchValue}
@@ -126,8 +126,8 @@ export function FilterBar({
                 placeholder={searchPlaceholder}
                 className={cn(
                   'w-full pl-10 pr-4 py-2.5 rounded-xl',
-                  'bg-zinc-950/60 border border-white/10',
-                  'text-sm text-white placeholder:text-zinc-500',
+                  'bg-slate-950/60 border border-white/10',
+                  'text-sm text-white placeholder:text-slate-500',
                   'focus:outline-none focus:ring-2 focus:ring-purple-500/30 focus:border-purple-500/50',
                   'transition-all duration-200'
                 )}
@@ -137,8 +137,8 @@ export function FilterBar({
 
           {/* Filter Icon (optional) */}
           {showFilterIcon && filters.length > 0 && (
-            <div className="hidden sm:flex items-center justify-center w-10 h-10 rounded-lg bg-zinc-800/50 border border-white/10">
-              <Filter className="w-4 h-4 text-zinc-400" />
+            <div className="hidden sm:flex items-center justify-center w-10 h-10 rounded-lg bg-slate-800/50 border border-white/10">
+              <Filter className="w-4 h-4 text-slate-400" />
             </div>
           )}
 
@@ -154,9 +154,9 @@ export function FilterBar({
                   <SelectTrigger
                     className={cn(
                       'min-w-[140px] h-10',
-                      'bg-zinc-950/60 border-white/10',
-                      'text-sm text-zinc-300',
-                      'hover:bg-zinc-900/80 hover:border-white/15',
+                      'bg-slate-950/60 border-white/10',
+                      'text-sm text-slate-300',
+                      'hover:bg-slate-900/80 hover:border-white/15',
                       'focus:ring-2 focus:ring-purple-500/30 focus:border-purple-500/50'
                     )}
                   >
@@ -183,7 +183,7 @@ export function FilterBar({
               size="icon"
               onClick={onRefresh}
               disabled={isRefreshing}
-              className="h-10 w-10 border-white/10 bg-zinc-950/60 hover:bg-zinc-900/80"
+              className="h-10 w-10 border-white/10 bg-slate-950/60 hover:bg-slate-900/80"
               title="Atualizar"
             >
               <RefreshCw
@@ -197,7 +197,7 @@ export function FilterBar({
 
       {/* Results Info (optional) */}
       {resultsInfo && (
-        <div className="text-sm text-zinc-500 px-1">
+        <div className="text-sm text-slate-500 px-1">
           {resultsInfo}
         </div>
       )}

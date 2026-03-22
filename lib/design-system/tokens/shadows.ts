@@ -44,18 +44,18 @@ export const elevations = {
 // =============================================================================
 
 export const glows = {
-  // Brand glow (emerald)
+  // Brand glow (purple)
   brand: {
-    sm: `0 0 10px ${primitiveColors.emerald[500]}33`,
-    md: `0 0 20px ${primitiveColors.emerald[500]}4d`,
-    lg: `0 0 30px ${primitiveColors.emerald[500]}66`,
-    ring: `0 0 0 3px ${primitiveColors.emerald[500]}33`,
+    sm: `0 0 10px ${primitiveColors.brand[500]}33`,
+    md: `0 0 20px ${primitiveColors.brand[500]}4d`,
+    lg: `0 0 30px ${primitiveColors.brand[500]}66`,
+    ring: `0 0 0 3px ${primitiveColors.brand[500]}33`,
   },
 
   // Success glow
   success: {
-    sm: `0 0 10px ${primitiveColors.emerald[400]}33`,
-    md: `0 0 20px ${primitiveColors.emerald[400]}4d`,
+    sm: `0 0 10px ${primitiveColors.brand[400]}33`,
+    md: `0 0 20px ${primitiveColors.brand[400]}4d`,
   },
 
   // Error glow
@@ -80,8 +80,8 @@ export const glows = {
 
   // Purple glow (AI/scheduled)
   purple: {
-    sm: `0 0 10px ${primitiveColors.purple[500]}33`,
-    md: `0 0 20px ${primitiveColors.purple[500]}4d`,
+    sm: `0 0 10px ${primitiveColors.brand[500]}33`,
+    md: `0 0 20px ${primitiveColors.brand[500]}4d`,
   },
 
   // White glow (neutral emphasis)
@@ -148,14 +148,14 @@ export const compositeShadows = {
   dropdown: `${elevations.lg}, 0 0 0 1px rgba(255, 255, 255, 0.05)`,
 
   /** Input focus */
-  inputFocus: `0 0 0 3px ${primitiveColors.emerald[500]}33`,
+  inputFocus: `0 0 0 3px ${primitiveColors.brand[500]}33`,
   inputError: `0 0 0 3px ${primitiveColors.red[500]}33`,
 
   /** Glass panel */
   glass: `${elevations.lg}, inset 0 1px 0 0 rgba(255, 255, 255, 0.05)`,
 
   /** Progress bar glow */
-  progressGlow: `0 0 10px ${primitiveColors.emerald[500]}80`,
+  progressGlow: `0 0 10px ${primitiveColors.brand[500]}80`,
 
   /** Node selected (workflow builder) */
   nodeSelected: `0 0 0 2px ${primitiveColors.blue[500]}, ${elevations.md}`,

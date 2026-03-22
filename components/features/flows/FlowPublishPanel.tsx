@@ -202,7 +202,7 @@ export function FlowPublishPanel({
                 'rounded-full border px-3 py-1 text-xs font-medium transition-colors whitespace-nowrap',
                 statusFilter === item.id
                   ? 'border-purple-400/40 bg-purple-500/10 text-purple-200'
-                  : 'border-white/10 bg-zinc-950/40 text-gray-400 hover:text-white',
+                  : 'border-white/10 bg-slate-950/40 text-gray-400 hover:text-white',
               )}
               aria-pressed={statusFilter === item.id}
             >
@@ -213,7 +213,7 @@ export function FlowPublishPanel({
 
         {/* Search + Selection actions */}
         <div className="flex items-center gap-2 w-full md:w-auto">
-          <div className="flex items-center gap-3 bg-zinc-950/40 border border-white/10 rounded-xl px-4 py-3 w-full md:w-72 transition-all focus-within:border-primary-500/50 focus-within:ring-1 focus-within:ring-primary-500/50">
+          <div className="flex items-center gap-3 bg-slate-950/40 border border-white/10 rounded-xl px-4 py-3 w-full md:w-72 transition-all focus-within:border-primary-500/50 focus-within:ring-1 focus-within:ring-primary-500/50">
             <Search size={18} className="text-gray-500" aria-hidden="true" />
             <input
               type="text"
@@ -243,7 +243,7 @@ export function FlowPublishPanel({
       <Container variant="default" padding="none" className="overflow-hidden">
         <div className="overflow-x-auto">
           <table className="w-full text-left text-sm">
-            <thead className="bg-zinc-950/40 border-b border-white/10 text-gray-500 uppercase tracking-widest text-xs">
+            <thead className="bg-slate-950/40 border-b border-white/10 text-gray-500 uppercase tracking-widest text-xs">
               <tr>
                 <th className="px-4 py-4 w-10">
                   <button
@@ -287,7 +287,7 @@ export function FlowPublishPanel({
                 <tr>
                   <td colSpan={6} className="px-6 py-16 text-center">
                     <div className="flex flex-col items-center gap-3">
-                      <div className="w-12 h-12 rounded-full bg-zinc-800 flex items-center justify-center">
+                      <div className="w-12 h-12 rounded-full bg-slate-800 flex items-center justify-center">
                         <Search size={24} className="text-gray-500" />
                       </div>
                       <div>
@@ -336,7 +336,7 @@ export function FlowPublishPanel({
                       </td>
                       <td className="px-4 py-4">
                         <div className="flex items-center gap-3">
-                          <div className="p-2 bg-zinc-950/40 rounded-lg text-gray-400 group-hover:text-purple-200 transition-colors">
+                          <div className="p-2 bg-slate-950/40 rounded-lg text-gray-400 group-hover:text-purple-200 transition-colors">
                             <FileText size={16} />
                           </div>
                           <span
@@ -417,7 +417,7 @@ export function FlowPublishPanel({
       </Container>
 
       <Dialog open={!!confirmFlow} onOpenChange={(open) => !open && setConfirmFlow(null)}>
-        <DialogContent className="sm:max-w-md bg-zinc-900/80 border border-amber-500/20 text-white">
+        <DialogContent className="sm:max-w-md bg-slate-900/80 border border-amber-500/20 text-white">
           <DialogHeader>
             <DialogTitle>Excluir MiniApp</DialogTitle>
           </DialogHeader>
@@ -425,7 +425,7 @@ export function FlowPublishPanel({
             MiniApp: <span className="font-semibold">{confirmFlow?.name}</span>
           </div>
           <DialogFooter>
-            <Button variant="outline" onClick={() => setConfirmFlow(null)} className="border-white/10 bg-zinc-950/40 text-gray-200 hover:text-white hover:bg-white/5">
+            <Button variant="outline" onClick={() => setConfirmFlow(null)} className="border-white/10 bg-slate-950/40 text-gray-200 hover:text-white hover:bg-white/5">
               Cancelar
             </Button>
             <Button
@@ -441,7 +441,7 @@ export function FlowPublishPanel({
       </Dialog>
 
       <Dialog open={confirmBulkDelete} onOpenChange={(open) => !open && setConfirmBulkDelete(false)}>
-        <DialogContent className="sm:max-w-md bg-zinc-900/80 border border-amber-500/20 text-white">
+        <DialogContent className="sm:max-w-md bg-slate-900/80 border border-amber-500/20 text-white">
           <DialogHeader>
             <DialogTitle>Excluir MiniApps selecionados</DialogTitle>
             <DialogDescription className="text-gray-400">
@@ -452,7 +452,7 @@ export function FlowPublishPanel({
             <Button
               variant="outline"
               onClick={() => setConfirmBulkDelete(false)}
-              className="border-white/10 bg-zinc-950/40 text-gray-200 hover:text-white hover:bg-white/5"
+              className="border-white/10 bg-slate-950/40 text-gray-200 hover:text-white hover:bg-white/5"
             >
               Cancelar
             </Button>

@@ -49,29 +49,39 @@ import { Container } from "./container"
 
 const colorStyles = {
   purple: {
-    iconBg: "bg-purple-500/20",
+    iconBg: "bg-purple-500/15",
     iconColor: "text-purple-600 dark:text-purple-400",
     iconGlow: "shadow-purple-500/20",
   },
   blue: {
-    iconBg: "bg-blue-500/20",
+    iconBg: "bg-blue-500/15",
     iconColor: "text-blue-600 dark:text-blue-400",
     iconGlow: "shadow-blue-500/20",
   },
   red: {
-    iconBg: "bg-red-500/20",
+    iconBg: "bg-red-500/15",
     iconColor: "text-red-600 dark:text-red-400",
     iconGlow: "shadow-red-500/20",
   },
   amber: {
-    iconBg: "bg-amber-500/20",
+    iconBg: "bg-amber-500/15",
     iconColor: "text-amber-600 dark:text-amber-400",
     iconGlow: "shadow-amber-500/20",
   },
-  zinc: {
-    iconBg: "bg-zinc-500/20",
-    iconColor: "text-zinc-600 dark:text-zinc-400",
-    iconGlow: "shadow-zinc-500/20",
+  emerald: {
+    iconBg: "bg-emerald-500/15",
+    iconColor: "text-emerald-600 dark:text-emerald-400",
+    iconGlow: "shadow-emerald-500/20",
+  },
+  gold: {
+    iconBg: "bg-[var(--ds-brand-secondary-muted)]",
+    iconColor: "text-[var(--ds-brand-secondary-text)] dark:text-[var(--ds-brand-secondary)]",
+    iconGlow: "shadow-[var(--ds-brand-secondary)]/20",
+  },
+  slate: {
+    iconBg: "bg-slate-500/15",
+    iconColor: "text-slate-600 dark:text-slate-400",
+    iconGlow: "shadow-slate-500/20",
   },
 } as const
 
@@ -237,7 +247,7 @@ function TrendIndicator({ value, direction, size = "md" }: TrendIndicatorProps) 
       className={cn(
         "inline-flex items-center gap-0.5 rounded-full font-medium",
         size === "sm" ? "text-xs px-1.5 py-0.5" : "text-xs px-2 py-1",
-        isPositive && "text-purple-600 dark:text-purple-400 bg-purple-500/10",
+        isPositive && "text-emerald-600 dark:text-emerald-400 bg-emerald-500/10",
         isNegative && "text-red-600 dark:text-red-400 bg-red-500/10",
         !isPositive && !isNegative && "text-[var(--ds-text-muted)] bg-[var(--ds-bg-surface)]"
       )}

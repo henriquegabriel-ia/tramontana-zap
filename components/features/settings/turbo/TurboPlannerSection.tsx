@@ -147,7 +147,7 @@ export function TurboPlannerSection({
   };
 
   return (
-    <div className="mt-4 bg-zinc-900/30 border border-white/10 rounded-2xl">
+    <div className="mt-4 bg-slate-900/30 border border-white/10 rounded-2xl">
       <button
         type="button"
         onClick={() => setIsPlannerOpen((v) => !v)}
@@ -171,7 +171,7 @@ export function TurboPlannerSection({
                 type="number"
                 value={plannerMessages}
                 onChange={(e) => setPlannerMessages(Number(e.target.value))}
-                className="w-full px-3 py-2 bg-zinc-900/50 border border-white/10 rounded-lg text-sm text-white font-mono"
+                className="w-full px-3 py-2 bg-slate-900/50 border border-white/10 rounded-lg text-sm text-white font-mono"
                 min={1}
                 max={100000}
               />
@@ -182,7 +182,7 @@ export function TurboPlannerSection({
                 type="number"
                 value={plannerSeconds}
                 onChange={(e) => setPlannerSeconds(Number(e.target.value))}
-                className="w-full px-3 py-2 bg-zinc-900/50 border border-white/10 rounded-lg text-sm text-white font-mono"
+                className="w-full px-3 py-2 bg-slate-900/50 border border-white/10 rounded-lg text-sm text-white font-mono"
                 min={1}
                 max={3600}
               />
@@ -196,7 +196,7 @@ export function TurboPlannerSection({
                   setPlannerLatencyTouched(true);
                   setPlannerLatencyMs(Number(e.target.value));
                 }}
-                className="w-full px-3 py-2 bg-zinc-900/50 border border-white/10 rounded-lg text-sm text-white font-mono"
+                className="w-full px-3 py-2 bg-slate-900/50 border border-white/10 rounded-lg text-sm text-white font-mono"
                 min={50}
                 max={5000}
               />
@@ -214,7 +214,7 @@ export function TurboPlannerSection({
                 type="number"
                 value={plannerHeadroom}
                 onChange={(e) => setPlannerHeadroom(Number(e.target.value))}
-                className="w-full px-3 py-2 bg-zinc-900/50 border border-white/10 rounded-lg text-sm text-white font-mono"
+                className="w-full px-3 py-2 bg-slate-900/50 border border-white/10 rounded-lg text-sm text-white font-mono"
                 min={1.0}
                 max={2.5}
                 step={0.05}
@@ -224,7 +224,7 @@ export function TurboPlannerSection({
           </div>
 
           <div className="mt-4 grid grid-cols-1 lg:grid-cols-3 gap-4">
-            <div className="bg-zinc-900/40 border border-white/10 rounded-xl p-4">
+            <div className="bg-slate-900/40 border border-white/10 rounded-xl p-4">
               <div className="text-xs text-gray-500">Meta</div>
               <div className="mt-2 text-sm text-white">
                 {turboPlan.msgs} msgs em {turboPlan.secs}s
@@ -237,7 +237,7 @@ export function TurboPlannerSection({
               </div>
             </div>
 
-            <div className="bg-zinc-900/40 border border-white/10 rounded-xl p-4">
+            <div className="bg-slate-900/40 border border-white/10 rounded-xl p-4">
               <div className="text-xs text-gray-500">Sugestao de config</div>
               <div className="mt-2 text-xs text-gray-300 space-y-1">
                 <div className="flex justify-between gap-3"><span className="text-gray-400">sendConcurrency</span><span className="font-mono text-white">{turboPlan.recommended.sendConcurrency}</span></div>
@@ -257,14 +257,14 @@ export function TurboPlannerSection({
                 <button
                   type="button"
                   onClick={handleLoadExample}
-                  className="h-10 px-3 bg-zinc-800 hover:bg-zinc-700 border border-white/10 rounded-lg transition-colors text-sm text-white"
+                  className="h-10 px-3 bg-slate-800 hover:bg-slate-700 border border-white/10 rounded-lg transition-colors text-sm text-white"
                 >
                   Exemplo 174/10s
                 </button>
               </div>
             </div>
 
-            <div className="bg-zinc-900/40 border border-white/10 rounded-xl p-4">
+            <div className="bg-slate-900/40 border border-white/10 rounded-xl p-4">
               <div className="text-xs text-gray-500">Estimativa</div>
               <div className="mt-2 text-xs text-gray-300 space-y-1">
                 <div className="flex justify-between gap-3">

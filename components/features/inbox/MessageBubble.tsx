@@ -244,7 +244,7 @@ function TemplateMessageContent({ parsed, time, deliveryStatus }: {
 
         {/* Header de mídia */}
         {parsed.header && parsed.header.type !== 'text' && (
-          <div className="flex items-center gap-2 text-zinc-300 text-sm mb-3 bg-zinc-800/50 rounded px-2 py-1.5">
+          <div className="flex items-center gap-2 text-slate-300 text-sm mb-3 bg-slate-800/50 rounded px-2 py-1.5">
             {parsed.header.type === 'image' && <span>🖼️</span>}
             {parsed.header.type === 'video' && <span>🎬</span>}
             {parsed.header.type === 'document' && <span>📄</span>}
@@ -255,15 +255,15 @@ function TemplateMessageContent({ parsed, time, deliveryStatus }: {
 
         {/* Body - preserva whitespace e formatação WhatsApp */}
         {parsed.body && (
-          <div className="text-base text-zinc-200 whitespace-pre-wrap break-words leading-relaxed">
+          <div className="text-base text-slate-200 whitespace-pre-wrap break-words leading-relaxed">
             <WhatsAppFormattedText text={parsed.body} />
           </div>
         )}
 
         {/* Footer - separado por linha visível, texto mais sutil */}
         {parsed.footer && (
-          <div className="mt-5 pt-4 border-t border-zinc-600/60">
-            <p className="text-sm text-zinc-500">
+          <div className="mt-5 pt-4 border-t border-slate-600/60">
+            <p className="text-sm text-slate-500">
               {parsed.footer}
             </p>
           </div>
@@ -275,10 +275,10 @@ function TemplateMessageContent({ parsed, time, deliveryStatus }: {
             {parsed.buttons.map((btn, idx) => (
               <div
                 key={idx}
-                className="flex items-center justify-between bg-zinc-800/90 rounded-xl px-4 py-3"
+                className="flex items-center justify-between bg-slate-800/90 rounded-xl px-4 py-3"
               >
                 <div className="flex items-center gap-2">
-                  <span className="text-sm text-zinc-300">{btn.text}</span>
+                  <span className="text-sm text-slate-300">{btn.text}</span>
                 </div>
                 {(btn.type === 'url' || btn.type === 'flow') && (
                   <svg
@@ -297,9 +297,9 @@ function TemplateMessageContent({ parsed, time, deliveryStatus }: {
 
         {/* Template name, Time & Status */}
         <div className="flex items-center justify-end gap-1.5 mt-3">
-          <span className="text-[10px] text-zinc-500">📋 {parsed.templateName}</span>
-          <span className="text-[10px] text-zinc-600">·</span>
-          <span className="text-[10px] text-zinc-500">{time}</span>
+          <span className="text-[10px] text-slate-500">📋 {parsed.templateName}</span>
+          <span className="text-[10px] text-slate-600">·</span>
+          <span className="text-[10px] text-slate-500">{time}</span>
           {deliveryStatus && <DeliveryStatusIcon status={deliveryStatus} />}
         </div>
       </div>
@@ -432,7 +432,7 @@ export const MessageBubble = memo(function MessageBubble({
             // Inbound (cliente): themed surface color
             isInbound && 'bg-[var(--ds-bg-surface)]/80 text-[var(--ds-text-primary)]',
             // Template message: fundo verde escuro especial
-            isTemplate && 'bg-zinc-900/95 text-white',
+            isTemplate && 'bg-slate-900/95 text-white',
             // Outbound humano (não template): verde desaturado, elegante
             !isInbound && !isAIResponse && !isTemplate && 'bg-purple-600/80 text-white',
             // AI Response (não template): verde mais escuro para diferenciar

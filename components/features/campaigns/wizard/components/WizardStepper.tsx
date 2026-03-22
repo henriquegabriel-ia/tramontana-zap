@@ -35,7 +35,7 @@ export const WizardStepper: React.FC<WizardStepperProps> = ({
         >
           <div
             className={`w-8 h-8 rounded-full flex items-center justify-center font-bold text-sm mb-2 transition-all duration-300 border-2 ${currentStep >= s.number
-              ? 'bg-[var(--ds-bg-base)] text-primary-400 border-primary-500 shadow-[0_0_15px_rgba(16,185,129,0.4)] scale-110'
+              ? 'bg-[var(--ds-bg-base)] text-primary-400 border-primary-500 shadow-[0_0_15px_rgba(104,51,189,0.4)] scale-110'
               : 'bg-[var(--ds-bg-base)] text-[var(--ds-text-muted)] border-[var(--ds-border-default)] group-hover:border-[var(--ds-border-strong)]'
               }`}
             aria-hidden="true"

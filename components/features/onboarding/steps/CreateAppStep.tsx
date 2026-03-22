@@ -26,52 +26,52 @@ export function CreateAppStep({ onNext, onBack, stepNumber, totalSteps }: Create
 
       {/* Instruções */}
       <div className="space-y-3">
-        <div className="flex items-start gap-3 p-3 rounded-lg bg-zinc-800/50">
+        <div className="flex items-start gap-3 p-3 rounded-lg bg-slate-800/50">
           <span className="w-6 h-6 rounded-full bg-purple-500/20 text-purple-500 flex items-center justify-center text-sm font-medium flex-shrink-0">1</span>
-          <p className="text-zinc-300">Clique no botão abaixo para abrir o portal Meta</p>
+          <p className="text-slate-300">Clique no botão abaixo para abrir o portal Meta</p>
         </div>
 
-        <div className="flex items-start gap-3 p-3 rounded-lg bg-zinc-800/50">
+        <div className="flex items-start gap-3 p-3 rounded-lg bg-slate-800/50">
           <span className="w-6 h-6 rounded-full bg-purple-500/20 text-purple-500 flex items-center justify-center text-sm font-medium flex-shrink-0">2</span>
-          <p className="text-zinc-300">Faça login com sua conta Facebook</p>
+          <p className="text-slate-300">Faça login com sua conta Facebook</p>
         </div>
 
-        <div className="flex items-start gap-3 p-3 rounded-lg bg-zinc-800/50">
+        <div className="flex items-start gap-3 p-3 rounded-lg bg-slate-800/50">
           <span className="w-6 h-6 rounded-full bg-purple-500/20 text-purple-500 flex items-center justify-center text-sm font-medium flex-shrink-0">3</span>
-          <p className="text-zinc-300">
+          <p className="text-slate-300">
             Clique em <strong className="text-white">"Criar App"</strong>
           </p>
         </div>
 
-        <div className="flex items-start gap-3 p-3 rounded-lg bg-zinc-800/50">
+        <div className="flex items-start gap-3 p-3 rounded-lg bg-slate-800/50">
           <span className="w-6 h-6 rounded-full bg-purple-500/20 text-purple-500 flex items-center justify-center text-sm font-medium flex-shrink-0">4</span>
-          <div className="text-zinc-300">
+          <div className="text-slate-300">
             <p>Em "Casos de uso", selecione <strong className="text-white">"Outro"</strong></p>
-            <p className="text-zinc-500 text-sm mt-1">(aparece como "Outro - Esta opção vai desaparecer em breve")</p>
+            <p className="text-slate-500 text-sm mt-1">(aparece como "Outro - Esta opção vai desaparecer em breve")</p>
           </div>
         </div>
 
-        <div className="flex items-start gap-3 p-3 rounded-lg bg-zinc-800/50">
+        <div className="flex items-start gap-3 p-3 rounded-lg bg-slate-800/50">
           <span className="w-6 h-6 rounded-full bg-purple-500/20 text-purple-500 flex items-center justify-center text-sm font-medium flex-shrink-0">5</span>
-          <div className="text-zinc-300">
+          <div className="text-slate-300">
             <p>Na próxima tela, escolha o tipo <strong className="text-white">"Empresa"</strong></p>
-            <p className="text-zinc-500 text-sm mt-1">Isso habilitará o produto WhatsApp Business</p>
+            <p className="text-slate-500 text-sm mt-1">Isso habilitará o produto WhatsApp Business</p>
           </div>
         </div>
 
-        <div className="flex items-start gap-3 p-3 rounded-lg bg-zinc-800/50">
+        <div className="flex items-start gap-3 p-3 rounded-lg bg-slate-800/50">
           <span className="w-6 h-6 rounded-full bg-purple-500/20 text-purple-500 flex items-center justify-center text-sm font-medium flex-shrink-0">6</span>
-          <div className="text-zinc-300">
+          <div className="text-slate-300">
             <p>Dê um nome (ex: <strong className="text-white">"Minha Empresa WhatsApp"</strong>) e informe seu email</p>
-            <p className="text-zinc-500 text-sm mt-1">
+            <p className="text-slate-500 text-sm mt-1">
               💡 O campo "Portfólio empresarial" é opcional — será criado automaticamente se você não tiver um
             </p>
           </div>
         </div>
 
-        <div className="flex items-start gap-3 p-3 rounded-lg bg-zinc-800/50">
+        <div className="flex items-start gap-3 p-3 rounded-lg bg-slate-800/50">
           <span className="w-6 h-6 rounded-full bg-purple-500/20 text-purple-500 flex items-center justify-center text-sm font-medium flex-shrink-0">7</span>
-          <p className="text-zinc-300">
+          <p className="text-slate-300">
             Clique em <strong className="text-white">"Criar app"</strong> para finalizar
           </p>
         </div>
@@ -89,7 +89,7 @@ export function CreateAppStep({ onNext, onBack, stepNumber, totalSteps }: Create
       </a>
 
       {/* Dica */}
-      <div className="flex items-start gap-2 text-sm text-zinc-400">
+      <div className="flex items-start gap-2 text-sm text-slate-400">
         <Lightbulb className="w-4 h-4 text-amber-500 mt-0.5 flex-shrink-0" />
         <p>Mantenha esta aba aberta para voltar depois</p>
       </div>

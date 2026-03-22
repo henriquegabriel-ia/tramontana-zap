@@ -383,7 +383,7 @@ export default function TemplateProjectDetailsPage() {
         { id: 'APPROVED', label: 'Aprovados', count: groups.APPROVED.length, color: 'purple', icon: CheckCircle },
         { id: 'REJECTED', label: 'Rejeitados', count: groups.REJECTED.length, color: 'red', icon: XCircle },
         { id: 'PENDING', label: 'Em Análise', count: groups.PENDING.length, color: 'yellow', icon: Clock },
-        { id: 'DRAFT', label: 'Rascunhos (Não Enviados)', count: groups.DRAFT.length, color: 'zinc', icon: Filter },
+        { id: 'DRAFT', label: 'Rascunhos (Não Enviados)', count: groups.DRAFT.length, color: 'slate', icon: Filter },
     ] as const;
 
     if (isLoading) {
@@ -419,7 +419,7 @@ export default function TemplateProjectDetailsPage() {
                     <div className="flex items-center gap-3">
                         <button
                             onClick={() => router.push('/templates?tab=projects')}
-                            className="p-2 -ml-2 text-gray-400 hover:text-white hover:bg-white/5 rounded-lg transition-colors border border-white/10 bg-zinc-950/40"
+                            className="p-2 -ml-2 text-gray-400 hover:text-white hover:bg-white/5 rounded-lg transition-colors border border-white/10 bg-slate-950/40"
                             aria-label="Voltar para projetos"
                         >
                             <ArrowLeft className="w-5 h-5" />
@@ -468,7 +468,7 @@ export default function TemplateProjectDetailsPage() {
                                         </button>
                                     </>
                                 )}
-                                <span className="px-2 py-0.5 text-xs rounded-full border bg-zinc-950/40 border-white/10 text-gray-400 shrink-0">
+                                <span className="px-2 py-0.5 text-xs rounded-full border bg-slate-950/40 border-white/10 text-gray-400 shrink-0">
                                     {groups.DRAFT.length === 0 && groups.PENDING.length === 0 ? 'Concluído' : 'Em Progresso'}
                                 </span>
                             </div>
@@ -483,7 +483,7 @@ export default function TemplateProjectDetailsPage() {
                     <button
                         onClick={() => syncProjectMutation.mutate()}
                         disabled={syncProjectMutation.isPending}
-                        className="px-3 py-2 bg-zinc-950/40 border border-white/10 text-gray-200 rounded-lg hover:bg-white/5 transition-colors flex items-center gap-2 text-sm disabled:opacity-50"
+                        className="px-3 py-2 bg-slate-950/40 border border-white/10 text-gray-200 rounded-lg hover:bg-white/5 transition-colors flex items-center gap-2 text-sm disabled:opacity-50"
                     >
                         <RefreshCw className={cn("w-4 h-4", syncProjectMutation.isPending && "animate-spin")} />
                         {syncProjectMutation.isPending ? 'Sincronizando...' : 'Sincronizar Meta'}
@@ -492,7 +492,7 @@ export default function TemplateProjectDetailsPage() {
                     {groups.DRAFT.length > 0 && (
                         <button
                             onClick={toggleSelectAll}
-                            className="px-3 py-2 bg-zinc-950/40 border border-white/10 text-gray-200 rounded-lg hover:bg-white/5 transition-colors flex items-center gap-2 text-sm"
+                            className="px-3 py-2 bg-slate-950/40 border border-white/10 text-gray-200 rounded-lg hover:bg-white/5 transition-colors flex items-center gap-2 text-sm"
                         >
                             {selectedItems.length === groups.DRAFT.length ? <CheckSquare className="w-4 h-4" /> : <Square className="w-4 h-4" />}
                             Selecionar Tudo
@@ -543,13 +543,13 @@ export default function TemplateProjectDetailsPage() {
                         label="Rascunhos"
                         count={groups.DRAFT.length}
                         total={project.items.length}
-                        color="zinc"
+                        color="slate"
                         icon={Filter}
                     />
                 </div>
 
                 {/* Template List */}
-                <div className="flex-1 bg-zinc-900/60 border border-white/10 rounded-2xl overflow-y-auto shadow-[0_12px_30px_rgba(0,0,0,0.35)]">
+                <div className="flex-1 bg-slate-900/60 border border-white/10 rounded-2xl overflow-y-auto shadow-[0_12px_30px_rgba(0,0,0,0.35)]">
                     {sections.map(section => {
                         if (section.count === 0) return null;
 
@@ -561,17 +561,17 @@ export default function TemplateProjectDetailsPage() {
                             <div key={section.id} className="border-b border-white/10 last:border-0">
                                 <button
                                     onClick={() => setExpandedSection(isExpanded && expandedSection !== 'ALL' ? 'ALL' : section.id)}
-                                    className="w-full flex items-center justify-between p-4 hover:bg-white/5 transition-colors sticky top-0 bg-zinc-900/60 z-10"
+                                    className="w-full flex items-center justify-between p-4 hover:bg-white/5 transition-colors sticky top-0 bg-slate-900/60 z-10"
                                 >
                                     <div className="flex items-center gap-3">
                                         <section.icon className={cn("w-5 h-5", {
                                             'text-purple-300': section.color === 'purple',
                                             'text-red-300': section.color === 'red',
                                             'text-amber-300': section.color === 'yellow',
-                                            'text-gray-400': section.color === 'zinc',
+                                            'text-gray-400': section.color === 'slate',
                                         })} />
                                         <span className="font-medium text-white">{section.label}</span>
-                                        <span className="px-2 py-0.5 rounded-full bg-zinc-950/40 border border-white/10 text-xs text-gray-400">
+                                        <span className="px-2 py-0.5 rounded-full bg-slate-950/40 border border-white/10 text-xs text-gray-400">
                                             {section.count}
                                         </span>
                                     </div>
@@ -587,7 +587,7 @@ export default function TemplateProjectDetailsPage() {
                                                     e.stopPropagation();
                                                     toggleSelectAll();
                                                 }}
-                                                className="flex items-center gap-3 px-3 py-2 rounded-lg bg-zinc-950/60 border border-white/5 cursor-pointer hover:bg-white/5 transition-colors"
+                                                className="flex items-center gap-3 px-3 py-2 rounded-lg bg-slate-950/60 border border-white/5 cursor-pointer hover:bg-white/5 transition-colors"
                                             >
                                                 <div className={cn(
                                                     "w-5 h-5 rounded border flex items-center justify-center transition-colors shrink-0",
@@ -618,7 +618,7 @@ export default function TemplateProjectDetailsPage() {
                                                         "p-3 rounded-lg border transition-all cursor-pointer flex gap-3 relative group",
                                                         isActive
                                                             ? "bg-purple-500/10 border-purple-500/30 ring-1 ring-purple-500/40"
-                                                            : "bg-zinc-950/40 border-white/10 hover:border-white/20 hover:bg-white/5"
+                                                            : "bg-slate-950/40 border-white/10 hover:border-white/20 hover:bg-white/5"
                                                     )}
                                                 >
                                                     {isDraft && (
@@ -653,7 +653,7 @@ export default function TemplateProjectDetailsPage() {
                                                                             editItemMutation.mutate(item);
                                                                         }}
                                                                         disabled={editItemMutation.isPending}
-                                                                        className="p-1 text-zinc-400 hover:text-purple-300 hover:bg-purple-500/10 rounded transition-colors opacity-0 group-hover:opacity-100 disabled:opacity-50"
+                                                                        className="p-1 text-slate-400 hover:text-purple-300 hover:bg-purple-500/10 rounded transition-colors opacity-0 group-hover:opacity-100 disabled:opacity-50"
                                                                         title="Editar template"
                                                                     >
                                                                         <Pencil className="w-3.5 h-3.5" />
@@ -665,7 +665,7 @@ export default function TemplateProjectDetailsPage() {
                                                                                 deleteItemMutation.mutate(item.id);
                                                                             }
                                                                         }}
-                                                                        className="p-1 text-zinc-400 hover:text-amber-300 hover:bg-amber-500/10 rounded transition-colors opacity-0 group-hover:opacity-100"
+                                                                        className="p-1 text-slate-400 hover:text-amber-300 hover:bg-amber-500/10 rounded transition-colors opacity-0 group-hover:opacity-100"
                                                                         title="Excluir rascunho"
                                                                     >
                                                                         <Trash2 className="w-3.5 h-3.5" />
@@ -693,7 +693,7 @@ export default function TemplateProjectDetailsPage() {
                 <div className="hidden lg:flex col-span-4 border-l border-white/10 pl-6 flex-col min-h-0">
                 {previewItem ? (
                     <div className="sticky top-6 w-full">
-                        <h3 className="text-sm font-medium text-zinc-400 mb-4 text-center">
+                        <h3 className="text-sm font-medium text-slate-400 mb-4 text-center">
                             Pré-visualização
                         </h3>
                         <WhatsAppPhonePreview
@@ -707,7 +707,7 @@ export default function TemplateProjectDetailsPage() {
                             variables={['Nome do Contato', 'Valor', 'Data']} // Placeholder
                             size="md"
                         />
-                        <div className="mt-6 p-4 bg-zinc-900/60 border border-white/10 rounded-2xl shadow-[0_12px_30px_rgba(0,0,0,0.35)]">
+                        <div className="mt-6 p-4 bg-slate-900/60 border border-white/10 rounded-2xl shadow-[0_12px_30px_rgba(0,0,0,0.35)]">
                             <h4 className="text-sm font-medium text-white mb-2">Detalhes Técnicos</h4>
                             <div className="space-y-2 text-xs text-gray-400">
                                 <div className="flex justify-between">
@@ -727,7 +727,7 @@ export default function TemplateProjectDetailsPage() {
                         </div>
                     </div>
                 ) : (
-                    <div className="h-full flex flex-col items-center justify-center text-gray-400 border border-dashed border-white/10 rounded-2xl bg-zinc-900/60 shadow-[0_12px_30px_rgba(0,0,0,0.35)] w-full">
+                    <div className="h-full flex flex-col items-center justify-center text-gray-400 border border-dashed border-white/10 rounded-2xl bg-slate-900/60 shadow-[0_12px_30px_rgba(0,0,0,0.35)] w-full">
                         <Eye className="w-12 h-12 mb-4 opacity-50" />
                         <p className="text-sm">Selecione um template para visualizar</p>
                     </div>
@@ -745,7 +745,7 @@ function StatCard({ label, count, total, color, icon: Icon }: any) {
         purple: 'text-purple-300 bg-purple-500/10 border-purple-500/20',
         yellow: 'text-amber-300 bg-amber-500/10 border-amber-500/20',
         red: 'text-amber-200 bg-amber-500/10 border-amber-500/20',
-        zinc: 'text-gray-400 bg-zinc-500/10 border-white/10',
+        slate: 'text-gray-400 bg-slate-500/10 border-white/10',
     };
 
     return (

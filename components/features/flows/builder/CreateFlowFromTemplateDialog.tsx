@@ -77,7 +77,7 @@ export function CreateFlowFromTemplateDialog(props: {
                       'text-left rounded-lg border px-3 py-2 transition ' +
                       (templateKey === t.key
                         ? 'border-primary-500 bg-white/5'
-                        : 'border-white/10 bg-zinc-900 hover:bg-white/5')
+                        : 'border-white/10 bg-slate-900 hover:bg-white/5')
                     }
                   >
                     <div className="text-sm text-gray-200 font-medium">{t.name}</div>
@@ -100,7 +100,7 @@ export function CreateFlowFromTemplateDialog(props: {
           <Button
             type="button"
             variant="outline"
-            className="border-white/10 bg-zinc-900 hover:bg-white/5"
+            className="border-white/10 bg-slate-900 hover:bg-white/5"
             onClick={() => setOpen(false)}
           >
             Cancelar

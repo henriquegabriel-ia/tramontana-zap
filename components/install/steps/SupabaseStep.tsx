@@ -301,7 +301,7 @@ export function SupabaseStep({ onComplete }: SupabaseStepProps) {
             <span className="text-3xl">❌</span>
           </div>
 
-          <h2 className="text-xl font-semibold text-zinc-100">
+          <h2 className="text-xl font-semibold text-slate-100">
             Erro no provisionamento
           </h2>
           <p className="mt-2 text-sm text-red-400 max-w-sm">
@@ -311,7 +311,7 @@ export function SupabaseStep({ onComplete }: SupabaseStepProps) {
           <button
             type="button"
             onClick={handleRetry}
-            className="mt-6 px-6 py-2.5 rounded-xl bg-zinc-700 text-zinc-100 hover:bg-zinc-600 transition-colors"
+            className="mt-6 px-6 py-2.5 rounded-xl bg-slate-700 text-slate-100 hover:bg-slate-600 transition-colors"
           >
             Tentar novamente
           </button>
@@ -331,14 +331,14 @@ export function SupabaseStep({ onComplete }: SupabaseStepProps) {
           </div>
 
           {/* Status atual - Narrativa de Despertar */}
-          <h2 className="text-lg font-medium text-zinc-100">
+          <h2 className="text-lg font-medium text-slate-100">
             {phase === 'listing_orgs' && 'Olhando ao redor...'}
             {phase === 'creating' && 'Tomando forma...'}
             {phase === 'waiting' && 'Despertando...'}
             {phase === 'resolving' && 'Quase lá...'}
           </h2>
 
-          <p className="mt-2 text-sm text-zinc-400">
+          <p className="mt-2 text-sm text-slate-400">
             {phase === 'listing_orgs' && 'Reconhecendo o ambiente'}
             {phase === 'creating' && 'Seu assistente está nascendo'}
             {phase === 'waiting' && 'Abrindo os olhos pela primeira vez'}
@@ -360,7 +360,7 @@ export function SupabaseStep({ onComplete }: SupabaseStepProps) {
                       ? 'bg-purple-500'
                       : stepIdx === currentIdx
                       ? 'bg-purple-500 animate-pulse'
-                      : 'bg-zinc-700'
+                      : 'bg-slate-700'
                   }`}
                 />
               );
@@ -369,7 +369,7 @@ export function SupabaseStep({ onComplete }: SupabaseStepProps) {
 
           {/* Indicador de tempo para waiting */}
           {phase === 'waiting' && (
-            <p className="mt-4 text-xs text-zinc-500">
+            <p className="mt-4 text-xs text-slate-500">
               Isso pode levar até 3 minutos...
             </p>
           )}
@@ -386,10 +386,10 @@ export function SupabaseStep({ onComplete }: SupabaseStepProps) {
         <ServiceIcon service="supabase" size="lg" />
 
         {/* Title */}
-        <h2 className="mt-4 text-xl font-semibold text-zinc-100">
+        <h2 className="mt-4 text-xl font-semibold text-slate-100">
           Configure o banco de dados
         </h2>
-        <p className="mt-1 text-sm text-zinc-400">
+        <p className="mt-1 text-sm text-slate-400">
           Cole seu Personal Access Token do Supabase
         </p>
 
@@ -422,18 +422,18 @@ export function SupabaseStep({ onComplete }: SupabaseStepProps) {
 
         {/* Collapsible help */}
         <details className="w-full mt-6 group">
-          <summary className="flex items-center justify-center gap-1.5 text-sm text-zinc-500 hover:text-zinc-300 cursor-pointer list-none transition-colors">
+          <summary className="flex items-center justify-center gap-1.5 text-sm text-slate-500 hover:text-slate-300 cursor-pointer list-none transition-colors">
             <ChevronDown className="w-3.5 h-3.5 transition-transform group-open:rotate-180" />
             Como criar o token?
           </summary>
-          <div className="mt-3 p-3 rounded-lg bg-zinc-800/50 text-left space-y-2 animate-in fade-in slide-in-from-top-2 duration-200">
-            <ol className="text-xs text-zinc-400 space-y-1.5 list-decimal list-inside">
+          <div className="mt-3 p-3 rounded-lg bg-slate-800/50 text-left space-y-2 animate-in fade-in slide-in-from-top-2 duration-200">
+            <ol className="text-xs text-slate-400 space-y-1.5 list-decimal list-inside">
               <li>Acesse <a href="https://supabase.com/dashboard/account/tokens" target="_blank" rel="noopener noreferrer" className="text-purple-400 hover:underline">supabase.com/dashboard/account/tokens</a></li>
-              <li>Clique em <strong className="text-zinc-300">Generate new token</strong></li>
-              <li>Nome: <strong className="text-zinc-300">tramontana-zap</strong></li>
+              <li>Clique em <strong className="text-slate-300">Generate new token</strong></li>
+              <li>Nome: <strong className="text-slate-300">tramontana-zap</strong></li>
               <li>Copie e cole o token acima</li>
             </ol>
-            <p className="text-xs text-zinc-500 pt-1 border-t border-zinc-700/50">
+            <p className="text-xs text-slate-500 pt-1 border-t border-slate-700/50">
               💡 O projeto Supabase será criado automaticamente
             </p>
           </div>

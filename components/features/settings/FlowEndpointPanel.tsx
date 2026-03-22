@@ -114,7 +114,7 @@ export function FlowEndpointPanel({ devBaseUrl }: FlowEndpointPanelProps) {
           </Alert>
 
           {/* Endpoint URL */}
-          <div className="bg-zinc-900/50 rounded-xl p-4">
+          <div className="bg-slate-900/50 rounded-xl p-4">
             <div className="flex items-center justify-between mb-2">
               <span className="text-xs text-gray-400">URL do Endpoint</span>
               <button

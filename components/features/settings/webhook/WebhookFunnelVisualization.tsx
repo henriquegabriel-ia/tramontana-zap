@@ -28,7 +28,7 @@ export function WebhookFunnelVisualization({
 }: WebhookFunnelVisualizationProps) {
   return (
     <div className="px-4 pb-4 animate-in slide-in-from-top-2 duration-200">
-      <div className="bg-zinc-900/50 rounded-xl p-4 border border-white/5">
+      <div className="bg-slate-900/50 rounded-xl p-4 border border-white/5">
         <div className="text-xs text-gray-500 mb-3 flex items-center gap-2">
           <ArrowDown size={12} />
           Fluxo de eventos (primeiro que existir, captura)
@@ -40,7 +40,7 @@ export function WebhookFunnelVisualization({
             const colors = getFunnelLevelColorClasses(level.color);
             const activeClasses = level.isActive ? colors.active : colors.inactive;
             const ringClasses = level.isActive
-              ? 'ring-2 ring-offset-2 ring-offset-zinc-900 ' + colors.ring
+              ? 'ring-2 ring-offset-2 ring-offset-slate-900 ' + colors.ring
               : '';
 
             // Determinar ações e estado para este nível
@@ -110,7 +110,7 @@ export function WebhookFunnelVisualization({
                           )}
                           {level.isLocked && (
                             <span
-                              className="flex items-center gap-1 px-1.5 py-0.5 bg-zinc-700/50 text-gray-400 text-[10px] font-medium rounded"
+                              className="flex items-center gap-1 px-1.5 py-0.5 bg-slate-700/50 text-gray-400 text-[10px] font-medium rounded"
                               title="Configurado no Meta Dashboard"
                             >
                               <Lock size={10} />

@@ -12,7 +12,7 @@ import { cn } from "@/lib/utils"
  * - info (blue): Informativo, neutro
  * - warning (amber): Atenção, limite próximo
  * - error (red): Erro, acima do limite
- * - neutral (zinc): Desabilitado, inativo
+ * - neutral (slate): Desabilitado, inativo
  *
  * @example
  * ```tsx
@@ -39,7 +39,7 @@ const progressVariants = cva(
         info: "bg-blue-500",
         warning: "bg-amber-500",
         error: "bg-red-500",
-        neutral: "bg-zinc-500",
+        neutral: "bg-slate-500",
       },
     },
     defaultVariants: {
@@ -57,7 +57,7 @@ const trackVariants = cva(
         info: "bg-blue-500/20",
         warning: "bg-amber-500/20",
         error: "bg-red-500/20",
-        neutral: "bg-zinc-500/20",
+        neutral: "bg-slate-500/20",
       },
       size: {
         sm: "h-1",
@@ -141,7 +141,7 @@ function Progress({
     return (
       <div className="space-y-1.5">
         <div className="flex justify-between text-xs">
-          <span className="text-zinc-400">Progresso</span>
+          <span className="text-slate-400">Progresso</span>
           <span
             className={cn(
               "font-medium",
@@ -149,7 +149,7 @@ function Progress({
               resolvedColor === "info" && "text-blue-400",
               resolvedColor === "warning" && "text-amber-400",
               resolvedColor === "error" && "text-red-400",
-              resolvedColor === "neutral" && "text-zinc-400"
+              resolvedColor === "neutral" && "text-slate-400"
             )}
           >
             {label}
@@ -171,7 +171,7 @@ function Progress({
           resolvedColor === "info" && "text-blue-400",
           resolvedColor === "warning" && "text-amber-400",
           resolvedColor === "error" && "text-red-400",
-          resolvedColor === "neutral" && "text-zinc-400"
+          resolvedColor === "neutral" && "text-slate-400"
         )}
       >
         {label}
@@ -213,10 +213,10 @@ function ProgressWithLimits({
     <div className={cn("space-y-2", className)}>
       {label && (
         <div className="flex justify-between text-sm">
-          <span className="text-zinc-400">{label}</span>
-          <span className="text-zinc-300">
+          <span className="text-slate-400">{label}</span>
+          <span className="text-slate-300">
             {formatValue(current)}{" "}
-            <span className="text-zinc-500">/ {formatValue(limit)}</span>
+            <span className="text-slate-500">/ {formatValue(limit)}</span>
           </span>
         </div>
       )}

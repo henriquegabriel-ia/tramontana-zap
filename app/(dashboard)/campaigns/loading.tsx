@@ -19,9 +19,9 @@ export default function CampaignsLoading() {
             </div>
 
             {/* Table Skeleton */}
-            <div className="rounded-xl border border-white/5 bg-zinc-900/50 overflow-hidden">
+            <div className="rounded-xl border border-white/5 bg-slate-900/50 overflow-hidden">
                 {/* Table Header */}
-                <div className="grid grid-cols-12 gap-4 p-4 border-b border-white/5 bg-zinc-900/50">
+                <div className="grid grid-cols-12 gap-4 p-4 border-b border-white/5 bg-slate-900/50">
                     <Skeleton className="col-span-4 h-4" />
                     <Skeleton className="col-span-2 h-4" />
                     <Skeleton className="col-span-2 h-4" />

@@ -37,11 +37,11 @@ export function BatchSubmissionList({
     if (submissions.length === 0) {
         return (
             <Container variant="default" padding="none" className="flex flex-col items-center justify-center py-16 px-4 border-dashed">
-                <div className="w-16 h-16 rounded-full bg-zinc-950/40 border border-white/10 flex items-center justify-center mb-4">
+                <div className="w-16 h-16 rounded-full bg-slate-950/40 border border-white/10 flex items-center justify-center mb-4">
                     <Clock className="w-8 h-8 text-gray-500" />
                 </div>
                 <h3 className="text-lg font-medium text-white mb-2">Nenhuma submissão ainda</h3>
-                <p className="text-zinc-400 text-center max-w-md mb-6">
+                <p className="text-slate-400 text-center max-w-md mb-6">
                     Gere sua primeira levas de templates para começar a fábrica.
                 </p>
             </Container>
@@ -54,12 +54,12 @@ export function BatchSubmissionList({
             <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
                 <Container variant="default" padding="md" className="flex items-center justify-between">
                     <div>
-                        <p className="text-zinc-400 text-xs font-medium uppercase tracking-wider mb-1">Cota por Hora</p>
+                        <p className="text-slate-400 text-xs font-medium uppercase tracking-wider mb-1">Cota por Hora</p>
                         <h3 className={`text-2xl font-bold ${hourlyCount >= 100 ? 'text-amber-300' : 'text-white'}`}>
-                            {hourlyCount}<span className="text-zinc-600 text-base">/100</span>
+                            {hourlyCount}<span className="text-slate-600 text-base">/100</span>
                         </h3>
                     </div>
-                    <div className="h-10 w-10 rounded-full bg-zinc-950/40 border border-white/10 flex items-center justify-center">
+                    <div className="h-10 w-10 rounded-full bg-slate-950/40 border border-white/10 flex items-center justify-center">
                         <Clock className={`w-5 h-5 ${hourlyCount >= 80 ? 'text-amber-300' : 'text-purple-300'}`} />
                     </div>
                 </Container>
@@ -69,14 +69,14 @@ export function BatchSubmissionList({
                 <div className="overflow-x-auto">
                     <table className="w-full text-left">
                         <thead>
-                            <tr className="border-b border-white/10 bg-zinc-950/40">
-                                <th className="px-6 py-4 text-xs font-semibold text-zinc-400 uppercase tracking-widest">Nome</th>
-                                <th className="px-6 py-4 text-xs font-semibold text-zinc-400 uppercase tracking-widest">Progresso</th>
-                                <th className="px-6 py-4 text-xs font-semibold text-zinc-400 uppercase tracking-widest text-center">Gerados</th>
-                                <th className="px-6 py-4 text-xs font-semibold text-zinc-400 uppercase tracking-widest text-center">Utility</th>
-                                <th className="px-6 py-4 text-xs font-semibold text-zinc-400 uppercase tracking-widest text-center">Mkt</th>
-                                <th className="px-6 py-4 text-xs font-semibold text-zinc-400 uppercase tracking-widest">Criado Em</th>
-                                <th className="px-6 py-4 text-xs font-semibold text-zinc-400 uppercase tracking-widest text-right">Ações</th>
+                            <tr className="border-b border-white/10 bg-slate-950/40">
+                                <th className="px-6 py-4 text-xs font-semibold text-slate-400 uppercase tracking-widest">Nome</th>
+                                <th className="px-6 py-4 text-xs font-semibold text-slate-400 uppercase tracking-widest">Progresso</th>
+                                <th className="px-6 py-4 text-xs font-semibold text-slate-400 uppercase tracking-widest text-center">Gerados</th>
+                                <th className="px-6 py-4 text-xs font-semibold text-slate-400 uppercase tracking-widest text-center">Utility</th>
+                                <th className="px-6 py-4 text-xs font-semibold text-slate-400 uppercase tracking-widest text-center">Mkt</th>
+                                <th className="px-6 py-4 text-xs font-semibold text-slate-400 uppercase tracking-widest">Criado Em</th>
+                                <th className="px-6 py-4 text-xs font-semibold text-slate-400 uppercase tracking-widest text-right">Ações</th>
                             </tr>
                         </thead>
                         <tbody className="divide-y divide-white/10">
@@ -102,7 +102,7 @@ export function BatchSubmissionList({
                                                     <h3 className="font-medium text-white group-hover:text-purple-200 transition-colors truncate max-w-[280px]" title={submission.name}>
                                                         {submission.name}
                                                     </h3>
-                                                    <span className="text-xs text-zinc-500">
+                                                    <span className="text-xs text-slate-500">
                                                         {isProcessing ? 'Processando...' : 'Concluído'}
                                                     </span>
                                                 </div>
@@ -110,16 +110,16 @@ export function BatchSubmissionList({
                                         </td>
 
                                         <td className="px-6 py-4 w-48">
-                                            <div className="h-2 w-full bg-zinc-950/60 rounded-full overflow-hidden flex">
+                                            <div className="h-2 w-full bg-slate-950/60 rounded-full overflow-hidden flex">
                                                 <div style={{ width: `${utilityPercent}%` }} className="bg-purple-500 transition-all duration-500" />
                                                 <div style={{ width: `${marketingPercent}%` }} className="bg-amber-500 transition-all duration-500" />
                                                 <div style={{ width: `${rejectedPercent}%` }} className="bg-amber-700 transition-all duration-500" />
-                                                <div style={{ width: `${pendingPercent}%` }} className="bg-zinc-700 animate-pulse" />
+                                                <div style={{ width: `${pendingPercent}%` }} className="bg-slate-700 animate-pulse" />
                                             </div>
                                         </td>
 
                                         <td className="px-6 py-4 text-center">
-                                            <span className="text-sm text-zinc-300 font-medium">{submission.stats.total}</span>
+                                            <span className="text-sm text-slate-300 font-medium">{submission.stats.total}</span>
                                         </td>
 
                                         <td className="px-6 py-4 text-center">
@@ -128,7 +128,7 @@ export function BatchSubmissionList({
                                                     {submission.stats.utility}
                                                 </span>
                                             ) : (
-                                                <span className="text-xs text-zinc-500">-</span>
+                                                <span className="text-xs text-slate-500">-</span>
                                             )}
                                         </td>
 
@@ -138,11 +138,11 @@ export function BatchSubmissionList({
                                                     {submission.stats.marketing}
                                                 </span>
                                             ) : (
-                                                <span className="text-xs text-zinc-500">-</span>
+                                                <span className="text-xs text-slate-500">-</span>
                                             )}
                                         </td>
 
-                                        <td className="px-6 py-4 text-sm text-zinc-400 whitespace-nowrap">
+                                        <td className="px-6 py-4 text-sm text-slate-400 whitespace-nowrap">
                                             {new Date(submission.createdAt).toLocaleDateString('pt-BR', { day: '2-digit', month: 'short', hour: '2-digit', minute: '2-digit' })}
                                         </td>
 
@@ -152,7 +152,7 @@ export function BatchSubmissionList({
                                                     e.stopPropagation();
                                                     onDeleteSubmission(submission.id);
                                                 }}
-                                                className="p-2 text-zinc-500 hover:text-amber-300 hover:bg-amber-500/10 rounded-lg transition-colors"
+                                                className="p-2 text-slate-500 hover:text-amber-300 hover:bg-amber-500/10 rounded-lg transition-colors"
                                                 title="Excluir submissão"
                                             >
                                                 <Trash2 className="w-4 h-4" />

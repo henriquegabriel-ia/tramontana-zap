@@ -107,7 +107,7 @@ export function FieldEditor({
                 Tipo
               </label>
               <Select value={field.type} onValueChange={handleTypeChange}>
-                <SelectTrigger className="bg-zinc-950/40 border-white/10 text-white">
+                <SelectTrigger className="bg-slate-950/40 border-white/10 text-white">
                   <SelectValue />
                 </SelectTrigger>
                 <SelectContent>
@@ -136,7 +136,7 @@ export function FieldEditor({
               </div>
             </div>
 
-            <div className="flex items-center justify-between rounded-xl border border-white/10 bg-zinc-950/40 px-3 py-2">
+            <div className="flex items-center justify-between rounded-xl border border-white/10 bg-slate-950/40 px-3 py-2">
               <div>
                 <div className="text-xs font-medium text-gray-300">Obrigatório</div>
                 <div className="text-[11px] text-gray-500">O usuário precisa preencher</div>
@@ -173,7 +173,7 @@ export function FieldEditor({
                 <Button
                   type="button"
                   variant="secondary"
-                  className="bg-zinc-950/40 border border-white/10 text-gray-200 hover:text-white hover:bg-white/5"
+                  className="bg-slate-950/40 border border-white/10 text-gray-200 hover:text-white hover:bg-white/5"
                   onClick={handleAddOption}
                 >
                   <Plus className="h-4 w-4" />
@@ -201,7 +201,7 @@ export function FieldEditor({
                     <Button
                       type="button"
                       variant="outline"
-                      className="border-white/10 bg-zinc-950/40 hover:bg-white/5"
+                      className="border-white/10 bg-slate-950/40 hover:bg-white/5"
                       onClick={() => handleRemoveOption(oidx)}
                     >
                       <Trash2 className="h-4 w-4" />
@@ -218,7 +218,7 @@ export function FieldEditor({
           <Button
             type="button"
             variant="outline"
-            className="border-white/10 bg-zinc-950/40 hover:bg-white/5"
+            className="border-white/10 bg-slate-950/40 hover:bg-white/5"
             disabled={index === 0}
             onClick={() => onMove(index, 'up')}
           >
@@ -227,7 +227,7 @@ export function FieldEditor({
           <Button
             type="button"
             variant="outline"
-            className="border-white/10 bg-zinc-950/40 hover:bg-white/5"
+            className="border-white/10 bg-slate-950/40 hover:bg-white/5"
             disabled={index === totalFields - 1}
             onClick={() => onMove(index, 'down')}
           >
@@ -236,7 +236,7 @@ export function FieldEditor({
           <Button
             type="button"
             variant="outline"
-            className="border-white/10 bg-zinc-950/40 hover:bg-white/5"
+            className="border-white/10 bg-slate-950/40 hover:bg-white/5"
             onClick={() => onDuplicate(index)}
           >
             <Copy className="h-4 w-4" />
@@ -244,7 +244,7 @@ export function FieldEditor({
           <Button
             type="button"
             variant="outline"
-            className="border-red-500/20 bg-zinc-900 hover:bg-red-500/10"
+            className="border-red-500/20 bg-slate-900 hover:bg-red-500/10"
             onClick={() => onRemove(index)}
           >
             <Trash2 className="h-4 w-4" />

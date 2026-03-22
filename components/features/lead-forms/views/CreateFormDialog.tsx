@@ -70,10 +70,10 @@ export function CreateFormDialog({
           <Button>Criar formulario</Button>
         </DialogTrigger>
       )}
-      <DialogContent className="border-zinc-800 bg-zinc-950 text-zinc-100 sm:max-w-275 max-h-[85vh] overflow-y-auto">
+      <DialogContent className="border-slate-800 bg-slate-950 text-slate-100 sm:max-w-275 max-h-[85vh] overflow-y-auto">
         <DialogHeader>
           <DialogTitle>Novo formulario</DialogTitle>
-          <DialogDescription className="text-zinc-400">
+          <DialogDescription className="text-slate-400">
             Defina um nome, um slug (URL) e a tag que sera aplicada a quem preencher.
           </DialogDescription>
         </DialogHeader>
@@ -86,7 +86,7 @@ export function CreateFormDialog({
                 value={draft.name}
                 onChange={(e) => setDraft({ ...draft, name: e.target.value })}
                 placeholder="Ex: Lista de espera - Turma Janeiro"
-                className="bg-zinc-900 border-zinc-800"
+                className="bg-slate-900 border-slate-800"
               />
             </div>
 
@@ -96,11 +96,11 @@ export function CreateFormDialog({
                 value={draft.slug}
                 onChange={(e) => setDraft({ ...draft, slug: slugify(e.target.value) })}
                 placeholder="ex: lista-espera-janeiro"
-                className="bg-zinc-900 border-zinc-800"
+                className="bg-slate-900 border-slate-800"
               />
-              <p className="text-xs text-zinc-500">
+              <p className="text-xs text-slate-500">
                 Link publico:{' '}
-                <span className="text-zinc-300">
+                <span className="text-slate-300">
                   {(publicBaseUrl || '...').replace(/\/$/, '')}/f/{draft.slug || 'seu-slug'}
                 </span>
               </p>
@@ -113,10 +113,10 @@ export function CreateFormDialog({
                   value={draft.tag}
                   onChange={(e) => setDraft({ ...draft, tag: e.target.value })}
                   placeholder="Ex: alunos-turma-jan"
-                  className="bg-zinc-900 border-zinc-800"
+                  className="bg-slate-900 border-slate-800"
                 />
                 <select
-                  className="h-10 rounded-md border border-zinc-800 bg-zinc-900 px-3 text-sm"
+                  className="h-10 rounded-md border border-slate-800 bg-slate-900 px-3 text-sm"
                   value={draft.tag || ''}
                   onChange={(e) => setDraft({ ...draft, tag: e.target.value })}
                 >
@@ -128,15 +128,15 @@ export function CreateFormDialog({
                   ))}
                 </select>
               </div>
-              <p className="text-xs text-zinc-500">
+              <p className="text-xs text-slate-500">
                 Dica: campanhas podem filtrar por tag, entao nomeie do jeito que voce ja usa.
               </p>
             </div>
 
-            <div className="flex items-center justify-between rounded-lg border border-zinc-800 bg-zinc-900/40 p-3">
+            <div className="flex items-center justify-between rounded-lg border border-slate-800 bg-slate-900/40 p-3">
               <div>
                 <p className="text-sm font-medium">Ativo</p>
-                <p className="text-xs text-zinc-500">Quando desligado, o link publico retorna 404.</p>
+                <p className="text-xs text-slate-500">Quando desligado, o link publico retorna 404.</p>
               </div>
               <Switch
                 checked={draft.isActive ?? true}
@@ -144,10 +144,10 @@ export function CreateFormDialog({
               />
             </div>
 
-            <div className="flex items-center justify-between rounded-lg border border-zinc-800 bg-zinc-900/40 p-3">
+            <div className="flex items-center justify-between rounded-lg border border-slate-800 bg-slate-900/40 p-3">
               <div>
                 <p className="text-sm font-medium">Coletar email</p>
-                <p className="text-xs text-zinc-500">Mostra o campo de email no formulario publico.</p>
+                <p className="text-xs text-slate-500">Mostra o campo de email no formulario publico.</p>
               </div>
               <Switch
                 checked={draft.collectEmail ?? true}
@@ -161,7 +161,7 @@ export function CreateFormDialog({
                 value={draft.successMessage ?? ''}
                 onChange={(e) => setDraft({ ...draft, successMessage: e.target.value })}
                 placeholder="Ex: Cadastro confirmado! Em breve voce recebera uma mensagem no WhatsApp."
-                className="min-h-22.5 bg-zinc-900 border-zinc-800"
+                className="min-h-22.5 bg-slate-900 border-slate-800"
               />
             </div>
 

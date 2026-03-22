@@ -89,7 +89,7 @@ export function SyncTemplatesStep({
           ${syncStatus === 'syncing' ? 'bg-blue-500/20 animate-pulse' : ''}
           ${syncStatus === 'success' ? 'bg-green-500/20' : ''}
           ${syncStatus === 'error' ? 'bg-red-500/20' : ''}
-          ${syncStatus === 'idle' ? 'bg-zinc-700/50' : ''}
+          ${syncStatus === 'idle' ? 'bg-slate-700/50' : ''}
         `}>
           {syncStatus === 'syncing' && (
             <Loader2 className="w-12 h-12 text-blue-400 animate-spin" />
@@ -101,7 +101,7 @@ export function SyncTemplatesStep({
             <AlertCircle className="w-12 h-12 text-red-400" />
           )}
           {syncStatus === 'idle' && (
-            <FileText className="w-12 h-12 text-zinc-400" />
+            <FileText className="w-12 h-12 text-slate-400" />
           )}
         </div>
       </div>
@@ -111,7 +111,7 @@ export function SyncTemplatesStep({
         {syncStatus === 'syncing' && (
           <>
             <p className="text-lg font-medium text-white">Sincronizando templates...</p>
-            <p className="text-sm text-zinc-400">Buscando seus templates aprovados da Meta</p>
+            <p className="text-sm text-slate-400">Buscando seus templates aprovados da Meta</p>
           </>
         )}
 
@@ -120,7 +120,7 @@ export function SyncTemplatesStep({
             <p className="text-lg font-medium text-purple-400">
               {templateCount} {templateCount === 1 ? 'template encontrado' : 'templates encontrados'}!
             </p>
-            <p className="text-sm text-zinc-400">
+            <p className="text-sm text-slate-400">
               Seus templates estão prontos para uso
             </p>
           </>
@@ -129,7 +129,7 @@ export function SyncTemplatesStep({
         {syncStatus === 'success' && templateCount === 0 && (
           <>
             <p className="text-lg font-medium text-amber-400">Nenhum template encontrado</p>
-            <p className="text-sm text-zinc-400">
+            <p className="text-sm text-slate-400">
               Você ainda não tem templates aprovados na sua conta
             </p>
           </>
@@ -138,7 +138,7 @@ export function SyncTemplatesStep({
         {syncStatus === 'error' && (
           <>
             <p className="text-lg font-medium text-red-400">Erro ao sincronizar</p>
-            <p className="text-sm text-zinc-400">{errorMessage}</p>
+            <p className="text-sm text-slate-400">{errorMessage}</p>
           </>
         )}
       </div>

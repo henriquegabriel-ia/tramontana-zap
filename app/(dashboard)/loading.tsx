@@ -12,7 +12,7 @@ export default function DashboardLoading() {
             {/* Stats Grid Skeleton */}
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
                 {Array.from({ length: 4 }).map((_, i) => (
-                    <div key={i} className="p-6 rounded-xl border border-white/5 bg-zinc-900/50 space-y-4">
+                    <div key={i} className="p-6 rounded-xl border border-white/5 bg-slate-900/50 space-y-4">
                         <div className="flex items-center justify-between">
                             <Skeleton className="h-4 w-24" />
                             <Skeleton className="h-8 w-8 rounded-lg" />
@@ -28,7 +28,7 @@ export default function DashboardLoading() {
             {/* Recent Activity Skeleton */}
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
                 {/* Chart Skeleton */}
-                <div className="p-6 rounded-xl border border-white/5 bg-zinc-900/50 h-[350px] space-y-4">
+                <div className="p-6 rounded-xl border border-white/5 bg-slate-900/50 h-[350px] space-y-4">
                     <div className="flex items-center justify-between">
                         <Skeleton className="h-6 w-32" />
                         <Skeleton className="h-8 w-24" />
@@ -41,7 +41,7 @@ export default function DashboardLoading() {
                 </div>
 
                 {/* Recent Campaigns Skeleton */}
-                <div className="p-6 rounded-xl border border-white/5 bg-zinc-900/50 h-[350px] space-y-4">
+                <div className="p-6 rounded-xl border border-white/5 bg-slate-900/50 h-[350px] space-y-4">
                     <Skeleton className="h-6 w-40" />
                     <div className="space-y-3">
                         {Array.from({ length: 5 }).map((_, i) => (

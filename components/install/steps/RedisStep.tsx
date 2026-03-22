@@ -120,28 +120,28 @@ export function RedisStep({ onComplete }: RedisStepProps) {
         <ServiceIcon service="redis" size="lg" />
 
         {/* Title */}
-        <h2 className="mt-4 text-xl font-semibold text-zinc-100">
+        <h2 className="mt-4 text-xl font-semibold text-slate-100">
           Configure cache de webhooks
         </h2>
-        <p className="mt-1 text-sm text-zinc-400">
+        <p className="mt-1 text-sm text-slate-400">
           URL e Token REST do Upstash Redis
         </p>
 
         {/* Instruções */}
-        <div className="w-full mt-4 p-3 rounded-lg bg-zinc-800/50 text-left space-y-2">
-          <p className="text-xs text-zinc-400 font-medium">Como obter:</p>
-          <ol className="text-xs text-zinc-500 space-y-1 list-decimal list-inside">
+        <div className="w-full mt-4 p-3 rounded-lg bg-slate-800/50 text-left space-y-2">
+          <p className="text-xs text-slate-400 font-medium">Como obter:</p>
+          <ol className="text-xs text-slate-500 space-y-1 list-decimal list-inside">
             <li>Acesse o <a href="https://console.upstash.com/redis" target="_blank" rel="noopener noreferrer" className="text-red-400 hover:underline">console Upstash Redis</a></li>
-            <li>Clique em <strong className="text-zinc-300">Create Database</strong></li>
-            <li>Nome: <strong className="text-zinc-300">tramontana-zap</strong> • Região: <strong className="text-zinc-300">São Paulo</strong> (ou mais próxima)</li>
-            <li>Após criar, vá na aba <strong className="text-zinc-300">REST API</strong></li>
-            <li>Copie a <strong className="text-zinc-300">UPSTASH_REDIS_REST_URL</strong> e <strong className="text-zinc-300">UPSTASH_REDIS_REST_TOKEN</strong></li>
+            <li>Clique em <strong className="text-slate-300">Create Database</strong></li>
+            <li>Nome: <strong className="text-slate-300">tramontana-zap</strong> • Região: <strong className="text-slate-300">São Paulo</strong> (ou mais próxima)</li>
+            <li>Após criar, vá na aba <strong className="text-slate-300">REST API</strong></li>
+            <li>Copie a <strong className="text-slate-300">UPSTASH_REDIS_REST_URL</strong> e <strong className="text-slate-300">UPSTASH_REDIS_REST_TOKEN</strong></li>
           </ol>
         </div>
 
         {/* REST URL Input */}
         <div className="w-full mt-6">
-          <label className="block text-sm font-medium text-zinc-300 mb-2 text-left">
+          <label className="block text-sm font-medium text-slate-300 mb-2 text-left">
             REST URL
           </label>
           <input
@@ -154,8 +154,8 @@ export function RedisStep({ onComplete }: RedisStepProps) {
             placeholder="https://xxx-xxx.upstash.io"
             className={cn(
               'w-full px-4 py-3 rounded-xl',
-              'bg-zinc-800/50 border border-zinc-700',
-              'text-zinc-100 placeholder:text-zinc-500',
+              'bg-slate-800/50 border border-slate-700',
+              'text-slate-100 placeholder:text-slate-500',
               'font-mono text-sm',
               'focus:border-red-500 focus:outline-none',
               'focus:shadow-[0_0_0_3px_theme(colors.red.500/0.15)]',
@@ -167,7 +167,7 @@ export function RedisStep({ onComplete }: RedisStepProps) {
             <p
               className={cn(
                 'mt-1 text-xs text-left',
-                isValidUrl(restUrl) ? 'text-red-400' : 'text-zinc-500'
+                isValidUrl(restUrl) ? 'text-red-400' : 'text-slate-500'
               )}
             >
               {isValidUrl(restUrl) ? '✓ URL válida' : 'Formato: https://xxx.upstash.io'}
@@ -203,7 +203,7 @@ export function RedisStep({ onComplete }: RedisStepProps) {
           href="https://console.upstash.com/redis"
           target="_blank"
           rel="noopener noreferrer"
-          className="mt-6 inline-flex items-center gap-1.5 text-sm text-zinc-500 hover:text-red-400 transition-colors"
+          className="mt-6 inline-flex items-center gap-1.5 text-sm text-slate-500 hover:text-red-400 transition-colors"
         >
           <ExternalLink className="w-3.5 h-3.5" />
           Como criar um banco Redis?

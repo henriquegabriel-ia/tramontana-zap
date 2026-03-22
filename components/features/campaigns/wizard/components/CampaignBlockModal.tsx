@@ -37,7 +37,7 @@ export const CampaignBlockModal: React.FC<CampaignBlockModalProps> = ({
 
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/70 backdrop-blur-sm animate-in fade-in duration-200">
-      <div className="bg-zinc-900 border border-white/10 rounded-2xl w-full max-w-lg mx-4 shadow-2xl animate-in zoom-in-95 duration-200">
+      <div className="bg-slate-900 border border-white/10 rounded-2xl w-full max-w-lg mx-4 shadow-2xl animate-in zoom-in-95 duration-200">
         {/* Header */}
         <div className="flex items-center gap-4 p-6 border-b border-white/10 bg-red-500/5">
           <div className="p-3 bg-red-500/20 rounded-xl">
@@ -58,10 +58,10 @@ export const CampaignBlockModal: React.FC<CampaignBlockModalProps> = ({
         {/* Content */}
         <div className="p-6 space-y-6">
           {/* Current Status */}
-          <div className="bg-zinc-800/50 rounded-xl p-4 space-y-3">
+          <div className="bg-slate-800/50 rounded-xl p-4 space-y-3">
             <div className="flex items-center justify-between">
               <span className="text-sm text-gray-400">Seu Tier Atual</span>
-              <span className="text-sm font-bold text-white bg-zinc-700 px-3 py-1 rounded-lg">
+              <span className="text-sm font-bold text-white bg-slate-700 px-3 py-1 rounded-lg">
                 {TIER_DISPLAY_NAMES[currentTier]}
               </span>
             </div>
@@ -96,7 +96,7 @@ export const CampaignBlockModal: React.FC<CampaignBlockModalProps> = ({
                 {validation.upgradeRoadmap.map((step, index) => (
                   <div
                     key={index}
-                    className="flex items-start gap-3 bg-zinc-800/30 p-3 rounded-lg border border-white/5"
+                    className="flex items-start gap-3 bg-slate-800/30 p-3 rounded-lg border border-white/5"
                   >
                     <div className="w-5 h-5 rounded-full bg-primary-500/20 text-primary-400 flex items-center justify-center text-xs font-bold shrink-0 mt-0.5">
                       {index + 1}
@@ -137,7 +137,7 @@ export const CampaignBlockModal: React.FC<CampaignBlockModalProps> = ({
         </div>
 
         {/* Footer */}
-        <div className="flex items-center justify-between p-6 border-t border-white/10 bg-zinc-800/30">
+        <div className="flex items-center justify-between p-6 border-t border-white/10 bg-slate-800/30">
           <a
             href="https://developers.facebook.com/docs/whatsapp/messaging-limits"
             target="_blank"

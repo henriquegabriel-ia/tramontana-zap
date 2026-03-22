@@ -41,7 +41,7 @@ export function FieldList({
           </DropdownMenuTrigger>
           <DropdownMenuContent
             align="end"
-            className="bg-zinc-900 border-white/10 text-white min-w-56"
+            className="bg-slate-900 border-white/10 text-white min-w-56"
           >
             {Object.entries(FIELD_TYPE_LABEL).map(([key, label]) => (
               <DropdownMenuItem key={key} onClick={() => onAddField(key as FlowFormFieldType)}>
@@ -53,7 +53,7 @@ export function FieldList({
       </div>
 
       {fields.length === 0 ? (
-        <div className="mt-4 rounded-xl border border-white/10 bg-zinc-950/40 px-6 py-8 text-center text-gray-400">
+        <div className="mt-4 rounded-xl border border-white/10 bg-slate-950/40 px-6 py-8 text-center text-gray-400">
           <div className="text-sm text-gray-300">
             Crie a primeira pergunta para começar sua MiniApp.
           </div>

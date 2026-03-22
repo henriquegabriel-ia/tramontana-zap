@@ -158,26 +158,26 @@ export function OnboardingChecklist({
   const showTokenWarning = tokenExpiresIn && !isPermanentToken;
 
   return (
-    <div className="bg-zinc-900/50 border border-zinc-800 rounded-xl p-4 space-y-4">
+    <div className="bg-slate-900/50 border border-slate-800 rounded-xl p-4 space-y-4">
       {/* Header */}
       <div className="flex items-center justify-between">
         <div className="flex items-center gap-3">
           <h3 className="font-semibold text-white">Complete sua configuração</h3>
-          <span className="text-sm text-zinc-500">
+          <span className="text-sm text-slate-500">
             {checklistProgress.percentage}%
           </span>
         </div>
         <div className="flex items-center gap-1">
           <button
             onClick={() => minimizeChecklist(true)}
-            className="p-1.5 text-zinc-500 hover:text-white hover:bg-zinc-800 rounded-lg transition-colors"
+            className="p-1.5 text-slate-500 hover:text-white hover:bg-slate-800 rounded-lg transition-colors"
             title="Minimizar"
           >
             <Minimize2 className="w-4 h-4" />
           </button>
           <button
             onClick={dismissChecklist}
-            className="p-1.5 text-zinc-500 hover:text-white hover:bg-zinc-800 rounded-lg transition-colors"
+            className="p-1.5 text-slate-500 hover:text-white hover:bg-slate-800 rounded-lg transition-colors"
             title="Fechar"
           >
             <X className="w-4 h-4" />
@@ -186,7 +186,7 @@ export function OnboardingChecklist({
       </div>
 
       {/* Progress bar */}
-      <div className="h-1.5 bg-zinc-800 rounded-full overflow-hidden">
+      <div className="h-1.5 bg-slate-800 rounded-full overflow-hidden">
         <div
           className="h-full bg-purple-500 rounded-full transition-all duration-500"
           style={{ width: `${checklistProgress.percentage}%` }}
@@ -200,26 +200,26 @@ export function OnboardingChecklist({
             key={item.id}
             className={cn(
               'flex items-center justify-between p-3 rounded-lg transition-colors',
-              item.isComplete ? 'bg-zinc-800/30' : 'bg-zinc-800/50 hover:bg-zinc-800/70'
+              item.isComplete ? 'bg-slate-800/30' : 'bg-slate-800/50 hover:bg-slate-800/70'
             )}
           >
             <div className="flex items-center gap-3">
               {item.isComplete ? (
                 <CheckCircle2 className="w-5 h-5 text-purple-500 flex-shrink-0" />
               ) : (
-                <Circle className="w-5 h-5 text-zinc-600 flex-shrink-0" />
+                <Circle className="w-5 h-5 text-slate-600 flex-shrink-0" />
               )}
               <div>
                 <p
                   className={cn(
                     'text-sm font-medium',
-                    item.isComplete ? 'text-zinc-500 line-through' : 'text-white'
+                    item.isComplete ? 'text-slate-500 line-through' : 'text-white'
                   )}
                 >
                   {item.label}
                 </p>
                 {item.description && !item.isComplete && (
-                  <p className="text-xs text-zinc-500">{item.description}</p>
+                  <p className="text-xs text-slate-500">{item.description}</p>
                 )}
               </div>
             </div>
@@ -296,22 +296,22 @@ export function OnboardingChecklist({
           <div className="space-y-4 mt-4">
             {/* Instruções */}
             <div className="space-y-3">
-              <h4 className="text-sm font-medium text-zinc-300">No Meta Business Suite:</h4>
-              <ol className="space-y-2 text-sm text-zinc-400">
+              <h4 className="text-sm font-medium text-slate-300">No Meta Business Suite:</h4>
+              <ol className="space-y-2 text-sm text-slate-400">
                 <li className="flex items-start gap-2">
-                  <span className="w-5 h-5 rounded-full bg-zinc-700 text-zinc-300 flex items-center justify-center text-xs flex-shrink-0 mt-0.5">1</span>
+                  <span className="w-5 h-5 rounded-full bg-slate-700 text-slate-300 flex items-center justify-center text-xs flex-shrink-0 mt-0.5">1</span>
                   <span>Vá em <strong className="text-white">System Users</strong></span>
                 </li>
                 <li className="flex items-start gap-2">
-                  <span className="w-5 h-5 rounded-full bg-zinc-700 text-zinc-300 flex items-center justify-center text-xs flex-shrink-0 mt-0.5">2</span>
+                  <span className="w-5 h-5 rounded-full bg-slate-700 text-slate-300 flex items-center justify-center text-xs flex-shrink-0 mt-0.5">2</span>
                   <span>Clique em <strong className="text-white">Add</strong> para criar um novo System User</span>
                 </li>
                 <li className="flex items-start gap-2">
-                  <span className="w-5 h-5 rounded-full bg-zinc-700 text-zinc-300 flex items-center justify-center text-xs flex-shrink-0 mt-0.5">3</span>
+                  <span className="w-5 h-5 rounded-full bg-slate-700 text-slate-300 flex items-center justify-center text-xs flex-shrink-0 mt-0.5">3</span>
                   <span>Dê permissão de <strong className="text-white">WhatsApp Business</strong></span>
                 </li>
                 <li className="flex items-start gap-2">
-                  <span className="w-5 h-5 rounded-full bg-zinc-700 text-zinc-300 flex items-center justify-center text-xs flex-shrink-0 mt-0.5">4</span>
+                  <span className="w-5 h-5 rounded-full bg-slate-700 text-slate-300 flex items-center justify-center text-xs flex-shrink-0 mt-0.5">4</span>
                   <span>Gere o token e <strong className="text-white">atualize nas configurações</strong> do Tramontana Zap</span>
                 </li>
               </ol>
@@ -329,7 +329,7 @@ export function OnboardingChecklist({
             </a>
 
             {/* Confirmação */}
-            <div className="flex items-start gap-3 p-3 rounded-lg bg-zinc-800/50 border border-zinc-700">
+            <div className="flex items-start gap-3 p-3 rounded-lg bg-slate-800/50 border border-slate-700">
               <Checkbox
                 id="confirm-token"
                 checked={tokenConfirmChecked}
@@ -338,7 +338,7 @@ export function OnboardingChecklist({
               />
               <label
                 htmlFor="confirm-token"
-                className="text-sm text-zinc-300 cursor-pointer select-none leading-relaxed"
+                className="text-sm text-slate-300 cursor-pointer select-none leading-relaxed"
               >
                 Confirmo que criei um <strong className="text-white">System User</strong> e atualizei o token nas configurações
               </label>

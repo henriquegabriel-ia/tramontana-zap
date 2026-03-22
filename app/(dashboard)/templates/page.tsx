@@ -546,7 +546,7 @@ export default function TemplatesPage() {
                             <div className="flex items-center gap-3">
                               <div className="flex-1 w-24 bg-[var(--ds-bg-surface)] rounded-full h-1">
                                 <div
-                                  className="bg-purple-500 h-1 rounded-full shadow-[0_0_10px_rgba(16,185,129,0.5)]"
+                                  className="bg-purple-500 h-1 rounded-full shadow-[0_0_10px_rgba(104,51,189,0.5)]"
                                   style={{ width: `${approvedPercent}%` }}
                                 />
                               </div>

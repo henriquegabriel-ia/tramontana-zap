@@ -82,7 +82,7 @@ export function ConfirmDeleteModal({
       />
 
       {/* Content area */}
-      <div className="bg-zinc-950/40 rounded-lg p-4 mb-6 border border-white/10">
+      <div className="bg-slate-950/40 rounded-lg p-4 mb-6 border border-white/10">
         {children ? (
           children
         ) : itemsToDelete && itemsToDelete.length > 0 ? (
@@ -95,7 +95,7 @@ export function ConfirmDeleteModal({
               {itemsToDelete.map((item) => (
                 <div
                   key={item}
-                  className="text-xs text-gray-400 font-mono bg-zinc-950/40 px-2 py-1 rounded border border-white/10"
+                  className="text-xs text-gray-400 font-mono bg-slate-950/40 px-2 py-1 rounded border border-white/10"
                 >
                   {item}
                 </div>

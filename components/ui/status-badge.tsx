@@ -110,7 +110,7 @@ function StatusBadge({
               "bg-amber-400": status === "warning" || status === "paused",
               "bg-blue-400": status === "info" || status === "sending" || status === "processing",
               "bg-purple-400": status === "scheduled",
-              "bg-zinc-400": status === "default" || status === "draft",
+              "bg-slate-400": status === "default" || status === "draft",
             }
           )}
         />

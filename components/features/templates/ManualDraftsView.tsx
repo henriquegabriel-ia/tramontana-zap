@@ -155,7 +155,7 @@ export function ManualDraftsView({
               variant="outline"
               onClick={onRefresh}
               disabled={isRefreshing}
-              className="border-white/10 bg-zinc-950/40 text-gray-200 hover:text-white hover:bg-white/5"
+              className="border-white/10 bg-slate-950/40 text-gray-200 hover:text-white hover:bg-white/5"
             >
               <RefreshCw className={cn('w-4 h-4', isRefreshing ? 'animate-spin' : '')} />
               Atualizar
@@ -168,7 +168,7 @@ export function ManualDraftsView({
             value={search}
             onChange={(e) => setSearch(e.target.value)}
             placeholder="Buscar rascunhos..."
-            className="bg-zinc-950/40 border-white/10 text-white placeholder:text-gray-600 w-full sm:w-96"
+            className="bg-slate-950/40 border-white/10 text-white placeholder:text-gray-600 w-full sm:w-96"
           />
           <div className="text-xs text-gray-400">
             {drafts.length} rascunho(s) • {readyDrafts.length} pronto(s) para envio

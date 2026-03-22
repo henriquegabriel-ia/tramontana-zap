@@ -66,7 +66,7 @@ export function QuickStartCard(props: QuickStartCardProps) {
           const steps = firstNextSteps(c.details as Record<string, unknown> | undefined)
           const friendly = props.simpleMode ? getFriendlyCopy(c) : { title: c.title, message: c.message }
           return (
-            <div key={c.id} className="bg-zinc-900/40 border border-white/10 rounded-xl p-4">
+            <div key={c.id} className="bg-slate-900/40 border border-white/10 rounded-xl p-4">
               <div className="flex items-start justify-between gap-4">
                 <div className="min-w-0">
                   <div className="flex items-center gap-2">

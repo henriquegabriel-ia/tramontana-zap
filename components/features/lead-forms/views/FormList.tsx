@@ -30,10 +30,10 @@ export function FormList({
   onDelete,
 }: FormListProps) {
   return (
-    <Card className="border-zinc-800 bg-zinc-900/50">
+    <Card className="border-slate-800 bg-slate-900/50">
       <CardHeader>
         <CardTitle className="text-white">Seus formularios</CardTitle>
-        <CardDescription className="text-zinc-400">
+        <CardDescription className="text-slate-400">
           Copie o link e compartilhe com os alunos.
         </CardDescription>
       </CardHeader>
@@ -47,9 +47,9 @@ export function FormList({
         ) : null}
 
         {isLoading ? (
-          <div className="text-sm text-zinc-400">Carregando...</div>
+          <div className="text-sm text-slate-400">Carregando...</div>
         ) : forms.length === 0 ? (
-          <div className="text-sm text-zinc-400">Nenhum formulario ainda.</div>
+          <div className="text-sm text-slate-400">Nenhum formulario ainda.</div>
         ) : (
           <div className="space-y-3">
             {forms.map((form) => (

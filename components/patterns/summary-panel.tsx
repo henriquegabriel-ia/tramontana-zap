@@ -51,7 +51,7 @@ export interface SummaryPanelProps {
 }
 
 const badgeVariants = {
-  default: 'bg-zinc-800 text-zinc-300',
+  default: 'bg-slate-800 text-slate-300',
   success: 'bg-green-500/10 text-green-400 border border-green-500/20',
   warning: 'bg-amber-500/10 text-amber-400 border border-amber-500/20',
   error: 'bg-red-500/10 text-red-400 border border-red-500/20',
@@ -74,7 +74,7 @@ export function SummaryPanel({
   return (
     <div
       className={cn(
-        'rounded-2xl border border-white/10 bg-zinc-900/60',
+        'rounded-2xl border border-white/10 bg-slate-900/60',
         'overflow-hidden',
         sticky && 'sticky top-6',
         className
@@ -83,7 +83,7 @@ export function SummaryPanel({
       {/* Header */}
       <div className="flex items-center justify-between gap-3 p-5 border-b border-white/5">
         <div className="flex items-center gap-2">
-          {Icon && <Icon className="w-5 h-5 text-zinc-400" />}
+          {Icon && <Icon className="w-5 h-5 text-slate-400" />}
           <h3 className="text-lg font-semibold text-white">{title}</h3>
         </div>
         {badge && (
@@ -139,18 +139,18 @@ export function SummaryItem({
   return (
     <div className={cn('flex items-start justify-between gap-4', className)}>
       <div className="flex items-center gap-2 min-w-0">
-        {Icon && <Icon className="w-4 h-4 text-zinc-500 flex-shrink-0" />}
-        <span className="text-sm text-zinc-400">{label}</span>
+        {Icon && <Icon className="w-4 h-4 text-slate-500 flex-shrink-0" />}
+        <span className="text-sm text-slate-400">{label}</span>
         {hint && (
           <span title={hint}>
-            <Info className="w-3.5 h-3.5 text-zinc-600 cursor-help" />
+            <Info className="w-3.5 h-3.5 text-slate-600 cursor-help" />
           </span>
         )}
       </div>
       <span
         className={cn(
           'text-sm font-medium text-right',
-          pending ? 'text-zinc-600 italic' : 'text-white'
+          pending ? 'text-slate-600 italic' : 'text-white'
         )}
       >
         {pending ? 'Não definido' : value}
@@ -190,8 +190,8 @@ export function SummaryGroup({
       <button
         onClick={collapsible ? () => setIsCollapsed(!isCollapsed) : undefined}
         className={cn(
-          'text-xs font-medium text-zinc-500 uppercase tracking-wider',
-          collapsible && 'cursor-pointer hover:text-zinc-400 transition-colors'
+          'text-xs font-medium text-slate-500 uppercase tracking-wider',
+          collapsible && 'cursor-pointer hover:text-slate-400 transition-colors'
         )}
         disabled={!collapsible}
       >
@@ -242,12 +242,12 @@ export function SummaryPreview({
 }: SummaryPreviewProps) {
   return (
     <div className={cn('space-y-3', className)}>
-      <span className="text-xs font-medium text-zinc-500 uppercase tracking-wider">
+      <span className="text-xs font-medium text-slate-500 uppercase tracking-wider">
         {title}
       </span>
       <div
         className={cn(
-          'rounded-xl border border-white/10 bg-zinc-950/50 p-4',
+          'rounded-xl border border-white/10 bg-slate-950/50 p-4',
           'overflow-auto'
         )}
         style={maxHeight ? { maxHeight } : undefined}
@@ -338,13 +338,13 @@ export function SummaryStats({ stats, className }: SummaryStatsProps) {
       {stats.map((stat, index) => (
         <div
           key={index}
-          className="p-3 rounded-lg bg-zinc-800/50 border border-white/5 text-center"
+          className="p-3 rounded-lg bg-slate-800/50 border border-white/5 text-center"
         >
           {stat.icon && (
-            <stat.icon className="w-4 h-4 text-zinc-500 mx-auto mb-1" />
+            <stat.icon className="w-4 h-4 text-slate-500 mx-auto mb-1" />
           )}
           <div className="text-lg font-semibold text-white">{stat.value}</div>
-          <div className="text-xs text-zinc-500">{stat.label}</div>
+          <div className="text-xs text-slate-500">{stat.label}</div>
         </div>
       ))}
     </div>

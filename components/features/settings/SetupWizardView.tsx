@@ -80,7 +80,7 @@ export const SetupWizardView: React.FC<SetupWizardViewProps> = ({
             Verificar novamente
           </button>
         </div>
-        <div className="h-2 bg-zinc-800 rounded-full overflow-hidden">
+        <div className="h-2 bg-slate-800 rounded-full overflow-hidden">
           <div 
             className="h-full bg-linear-to-r from-primary-500 to-purple-500 transition-all duration-500"
             style={{ width: `${progressPercent}%` }}
@@ -112,7 +112,7 @@ export const SetupWizardView: React.FC<SetupWizardViewProps> = ({
                     ? 'bg-red-500/5 border-red-500/30'
                     : isNextStep
                       ? 'bg-primary-500/5 border-primary-500/30 ring-2 ring-primary-500/20'
-                      : 'bg-zinc-900/50 border-white/10 opacity-60'
+                      : 'bg-slate-900/50 border-white/10 opacity-60'
               }`}
             >
               {/* Step number badge */}
@@ -123,7 +123,7 @@ export const SetupWizardView: React.FC<SetupWizardViewProps> = ({
                     ? 'bg-red-500 text-white'
                     : isNextStep
                       ? 'bg-primary-500 text-white'
-                      : 'bg-zinc-700 text-gray-400'
+                      : 'bg-slate-700 text-gray-400'
               }`}>
                 {isConfigured ? <Check size={16} /> : index + 1}
               </div>
@@ -173,7 +173,7 @@ export const SetupWizardView: React.FC<SetupWizardViewProps> = ({
                       className={`flex items-center gap-2 px-4 py-2 rounded-xl font-medium text-sm transition-all ${
                         isNextStep
                           ? 'bg-primary-500 hover:bg-primary-400 text-white'
-                          : 'bg-zinc-700 text-gray-400 cursor-not-allowed'
+                          : 'bg-slate-700 text-gray-400 cursor-not-allowed'
                       }`}
                       onClick={(e) => {
                         if (!isNextStep) {
@@ -198,7 +198,7 @@ export const SetupWizardView: React.FC<SetupWizardViewProps> = ({
               {/* Arrow connector */}
               {index < steps.length - 1 && (
                 <div className="absolute -bottom-4 left-7 z-10">
-                  <div className={`w-0.5 h-8 ${isConfigured ? 'bg-purple-500/30' : 'bg-zinc-700'}`} />
+                  <div className={`w-0.5 h-8 ${isConfigured ? 'bg-purple-500/30' : 'bg-slate-700'}`} />
                 </div>
               )}
             </div>
@@ -250,7 +250,7 @@ export const SetupWizardView: React.FC<SetupWizardViewProps> = ({
           </div>
         </div>
       ) : (
-        <div className="mt-8 p-4 bg-zinc-800/50 border border-white/10 rounded-xl text-center">
+        <div className="mt-8 p-4 bg-slate-800/50 border border-white/10 rounded-xl text-center">
           <p className="text-gray-400 text-sm">
             Complete os passos acima para liberar as configurações do WhatsApp.
           </p>
@@ -268,7 +268,7 @@ export const SetupWizardView: React.FC<SetupWizardViewProps> = ({
             href="https://vercel.com/docs/storage/upstash"
             target="_blank"
             rel="noopener noreferrer"
-            className="flex items-center gap-2 p-3 bg-zinc-800/50 hover:bg-zinc-800 border border-white/10 rounded-xl text-sm text-gray-300 transition-colors"
+            className="flex items-center gap-2 p-3 bg-slate-800/50 hover:bg-slate-800 border border-white/10 rounded-xl text-sm text-gray-300 transition-colors"
           >
             <Database size={16} className="text-red-400" />
             Docs: Upstash no Vercel
@@ -278,7 +278,7 @@ export const SetupWizardView: React.FC<SetupWizardViewProps> = ({
             href="https://developers.facebook.com/docs/whatsapp/cloud-api/get-started"
             target="_blank"
             rel="noopener noreferrer"
-            className="flex items-center gap-2 p-3 bg-zinc-800/50 hover:bg-zinc-800 border border-white/10 rounded-xl text-sm text-gray-300 transition-colors"
+            className="flex items-center gap-2 p-3 bg-slate-800/50 hover:bg-slate-800 border border-white/10 rounded-xl text-sm text-gray-300 transition-colors"
           >
             <MessageSquare size={16} className="text-green-400" />
             Docs: WhatsApp Cloud API

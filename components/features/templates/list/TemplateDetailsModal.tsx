@@ -61,7 +61,7 @@ export const TemplateDetailsModal: React.FC<TemplateDetailsModalProps> = ({
 
   return (
     <div className="fixed inset-0 bg-black/70 backdrop-blur-sm z-50 flex items-center justify-center p-4">
-      <div className="bg-zinc-900/80 border border-white/10 rounded-2xl w-full max-w-md p-0 shadow-[0_30px_80px_rgba(0,0,0,0.55)] animate-in zoom-in duration-200 flex flex-col max-h-[90vh] overflow-hidden">
+      <div className="bg-slate-900/80 border border-white/10 rounded-2xl w-full max-w-md p-0 shadow-[0_30px_80px_rgba(0,0,0,0.55)] animate-in zoom-in duration-200 flex flex-col max-h-[90vh] overflow-hidden">
         {/* Header */}
         <div className="px-6 py-4 border-b border-white/10 flex justify-between items-center">
           <div>
@@ -122,7 +122,7 @@ export const TemplateDetailsModal: React.FC<TemplateDetailsModalProps> = ({
                       ? 'bg-purple-500/10 text-purple-200'
                       : details?.qualityScore === 'MEDIUM'
                         ? 'bg-amber-500/10 text-amber-200'
-                        : 'bg-zinc-500/10 text-gray-300'
+                        : 'bg-slate-500/10 text-gray-300'
                   }`}
                 >
                   <span className="text-lg">
@@ -154,7 +154,7 @@ export const TemplateDetailsModal: React.FC<TemplateDetailsModalProps> = ({
             <button
               onClick={onRefreshPreview}
               disabled={isRefreshingPreview || isLoading}
-              className="px-3 py-2 bg-zinc-950/40 text-gray-200 border border-white/10 rounded-lg font-medium hover:bg-white/5 transition-colors flex items-center gap-2 text-sm disabled:opacity-60 disabled:cursor-not-allowed"
+              className="px-3 py-2 bg-slate-950/40 text-gray-200 border border-white/10 rounded-lg font-medium hover:bg-white/5 transition-colors flex items-center gap-2 text-sm disabled:opacity-60 disabled:cursor-not-allowed"
               title="Regerar preview da midia"
             >
               {isRefreshingPreview ? (
@@ -167,7 +167,7 @@ export const TemplateDetailsModal: React.FC<TemplateDetailsModalProps> = ({
           )}
           <button
             onClick={handleCopyContent}
-            className="flex-1 py-2 bg-zinc-950/40 text-gray-200 border border-white/10 rounded-lg font-medium hover:bg-white/5 transition-colors flex items-center justify-center gap-2 text-sm"
+            className="flex-1 py-2 bg-slate-950/40 text-gray-200 border border-white/10 rounded-lg font-medium hover:bg-white/5 transition-colors flex items-center justify-center gap-2 text-sm"
           >
             <Copy size={16} />
             Copiar codigo

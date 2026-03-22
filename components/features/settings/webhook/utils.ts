@@ -89,7 +89,7 @@ export function getWebhookFunnelLevels(
       url: config?.application || null,
       isActive: activeStatus.level === 3,
       isSmartZap: config?.application === activeUrl,
-      color: 'zinc',
+      color: 'slate',
       description: 'Padrão do Meta Dashboard',
       isLocked: true,
     },
@@ -101,17 +101,17 @@ export function getWebhookFunnelLevels(
  */
 export function getCardColor(
   webhookStatus: WebhookStatus
-): 'purple' | 'amber' | 'blue' | 'zinc' {
+): 'purple' | 'amber' | 'blue' | 'slate' {
   if (webhookStatus.status === 'smartzap') return 'purple';
   if (webhookStatus.status === 'other') return 'amber';
   if (webhookStatus.level === 2) return 'blue';
-  return 'zinc';
+  return 'slate';
 }
 
 /**
  * Retorna classes CSS para cor do card
  */
-export function getCardColorClasses(color: 'purple' | 'amber' | 'blue' | 'zinc'): {
+export function getCardColorClasses(color: 'purple' | 'amber' | 'blue' | 'slate'): {
   border: string;
   bg: string;
   icon: string;
@@ -136,10 +136,10 @@ export function getCardColorClasses(color: 'purple' | 'amber' | 'blue' | 'zinc')
       icon: 'bg-blue-500/20 text-blue-400',
       text: 'text-blue-400/80',
     },
-    zinc: {
+    slate: {
       border: 'border-white/10',
-      bg: 'bg-zinc-800/50',
-      icon: 'bg-zinc-700 text-gray-400',
+      bg: 'bg-slate-800/50',
+      icon: 'bg-slate-700 text-gray-400',
       text: 'text-gray-500',
     },
   };
@@ -150,7 +150,7 @@ export function getCardColorClasses(color: 'purple' | 'amber' | 'blue' | 'zinc')
 /**
  * Retorna classes CSS para níveis do funil
  */
-export function getFunnelLevelColorClasses(color: 'purple' | 'blue' | 'zinc'): {
+export function getFunnelLevelColorClasses(color: 'purple' | 'blue' | 'slate'): {
   active: string;
   inactive: string;
   arrow: string;
@@ -169,11 +169,11 @@ export function getFunnelLevelColorClasses(color: 'purple' | 'blue' | 'zinc'): {
       arrow: 'text-blue-500/30',
       ring: 'ring-blue-500/30',
     },
-    zinc: {
-      active: 'bg-zinc-700 border-zinc-600 text-gray-300',
-      inactive: 'bg-zinc-800/50 border-white/5 text-gray-500',
-      arrow: 'text-zinc-600',
-      ring: 'ring-zinc-500/30',
+    slate: {
+      active: 'bg-slate-700 border-slate-600 text-gray-300',
+      inactive: 'bg-slate-800/50 border-white/5 text-gray-500',
+      arrow: 'text-slate-600',
+      ring: 'ring-slate-500/30',
     },
   };
 

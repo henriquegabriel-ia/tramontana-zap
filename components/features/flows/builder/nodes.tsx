@@ -27,7 +27,7 @@ function NodeShell(props: NodeShellProps) {
         : 'ring-white/10 border-white/10'
 
   return (
-    <div className={`min-w-55 rounded-2xl border ${ring} bg-zinc-950/70 backdrop-blur shadow-lg shadow-black/30 ring-1`}>
+    <div className={`min-w-55 rounded-2xl border ${ring} bg-slate-950/70 backdrop-blur shadow-lg shadow-black/30 ring-1`}>
       <div className="px-4 py-3 border-b border-white/5">
         <div className="text-sm font-semibold text-white">{props.title}</div>
         {props.subtitle ? <div className="text-[11px] text-gray-400 mt-0.5">{props.subtitle}</div> : null}

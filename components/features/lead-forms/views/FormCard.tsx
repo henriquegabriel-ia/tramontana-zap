@@ -37,12 +37,12 @@ export function FormCard({
               {form.isActive ? 'Ativo' : 'Inativo'}
             </Badge>
           </div>
-          <p className="text-xs text-zinc-400">
-            <span className="text-zinc-500">Slug:</span> {form.slug} &nbsp;-&nbsp;{' '}
-            <span className="text-zinc-500">Tag:</span> {form.tag}
+          <p className="text-xs text-slate-400">
+            <span className="text-slate-500">Slug:</span> {form.slug} &nbsp;-&nbsp;{' '}
+            <span className="text-slate-500">Tag:</span> {form.tag}
           </p>
-          <p className="text-xs text-zinc-400 break-all">
-            <span className="text-zinc-500">Link:</span> {url}
+          <p className="text-xs text-slate-400 break-all">
+            <span className="text-slate-500">Link:</span> {url}
           </p>
         </div>
 
@@ -50,14 +50,14 @@ export function FormCard({
           <Button
             variant="secondary"
             onClick={() => onCopyLink(url)}
-            className="border-zinc-700 bg-zinc-900"
+            className="border-slate-700 bg-slate-900"
           >
             {isCopied ? 'Copiado' : 'Copiar link'}
           </Button>
           <Button
             variant="secondary"
             onClick={() => onEdit(form)}
-            className="border-zinc-700 bg-zinc-900"
+            className="border-slate-700 bg-slate-900"
           >
             <Pencil className="mr-2 h-4 w-4" />
             Editar

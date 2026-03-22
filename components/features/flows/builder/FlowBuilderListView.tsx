@@ -114,7 +114,7 @@ export function FlowBuilderListView(props: {
             <Button
               type="button"
               variant="secondary"
-              className="bg-zinc-950/40 border border-white/10 text-gray-200 hover:text-white hover:bg-white/5"
+              className="bg-slate-950/40 border border-white/10 text-gray-200 hover:text-white hover:bg-white/5"
               onClick={props.onRefresh}
               disabled={props.isLoading || props.isFetching}
             >
@@ -132,7 +132,7 @@ export function FlowBuilderListView(props: {
 
       <Container variant="glass" padding="none" className="overflow-hidden">
         <table className="w-full text-left text-sm">
-          <thead className="bg-zinc-950/40">
+          <thead className="bg-slate-950/40">
             <tr className="text-gray-300">
               <th className="px-4 py-3 font-semibold">Nome</th>
               <th className="px-4 py-3 font-semibold">Status</th>
@@ -165,7 +165,7 @@ export function FlowBuilderListView(props: {
                   <td className="px-4 py-3">
                     <div className="flex items-center justify-end gap-2">
                       <Link href={`/flows/builder/${encodeURIComponent(f.id)}`}>
-                        <Button type="button" variant="secondary" className="bg-zinc-950/40 border border-white/10 text-gray-200 hover:text-white hover:bg-white/5">
+                        <Button type="button" variant="secondary" className="bg-slate-950/40 border border-white/10 text-gray-200 hover:text-white hover:bg-white/5">
                           Abrir
                           <ArrowRight size={16} />
                         </Button>

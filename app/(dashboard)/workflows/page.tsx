@@ -44,7 +44,7 @@ function StatusBadge({ status }: { status?: string }) {
   }
   if (normalized === "archived") {
     return (
-      <span className="inline-flex items-center rounded-md border border-zinc-500/20 bg-zinc-500/10 px-2.5 py-1 text-xs font-medium text-zinc-400">
+      <span className="inline-flex items-center rounded-md border border-slate-500/20 bg-slate-500/10 px-2.5 py-1 text-xs font-medium text-slate-400">
         Arquivado
       </span>
     );
@@ -255,7 +255,7 @@ export default function WorkflowsPage() {
           <Button
             variant="outline"
             onClick={() => refetch()}
-            className="border-white/10 bg-zinc-950/40 hover:bg-white/5 text-gray-200"
+            className="border-white/10 bg-slate-950/40 hover:bg-white/5 text-gray-200"
             disabled={isFetching}
           >
             <RefreshCw className={cn("h-4 w-4", isFetching && "animate-spin")} />
@@ -271,7 +271,7 @@ export default function WorkflowsPage() {
         </PageActions>
       </PageHeader>
 
-      <div className="rounded-2xl border border-white/5 bg-zinc-950/60 p-4">
+      <div className="rounded-2xl border border-white/5 bg-slate-950/60 p-4">
         <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
           <div className="flex items-center gap-2 text-sm text-gray-400">
             <WorkflowIcon className="h-4 w-4 text-purple-400" />
@@ -307,7 +307,7 @@ export default function WorkflowsPage() {
                 className={cn(
                   "group flex w-full items-center justify-between rounded-xl border border-white/10 bg-black/40 px-4 py-4 text-left transition hover:border-purple-500/40 hover:bg-black/60",
                   workflow.id === defaultWorkflowId &&
-                    "border-purple-500/30 bg-purple-500/5 shadow-[0_0_0_1px_rgba(16,185,129,0.15)]"
+                    "border-purple-500/30 bg-purple-500/5 shadow-[0_0_0_1px_rgba(104,51,189,0.15)]"
                 )}
                 onClick={() =>
                   router.push(`/builder/${encodeURIComponent(workflow.id)}`)
@@ -366,7 +366,7 @@ export default function WorkflowsPage() {
                   <StatusBadge status={workflow.status} />
                   {workflow.status !== "published" && (
                     <Button
-                      className="border-white/10 bg-zinc-950/40 hover:bg-white/5 text-gray-200"
+                      className="border-white/10 bg-slate-950/40 hover:bg-white/5 text-gray-200"
                       onClick={(event) => {
                         event.stopPropagation();
                         handlePublish(workflow.id);
@@ -381,7 +381,7 @@ export default function WorkflowsPage() {
                   <DropdownMenu>
                     <DropdownMenuTrigger asChild>
                       <Button
-                        className="border-white/10 bg-zinc-950/40 hover:bg-white/5 text-gray-200"
+                        className="border-white/10 bg-slate-950/40 hover:bg-white/5 text-gray-200"
                         size="sm"
                         variant="outline"
                         onClick={(event) => event.stopPropagation()}
@@ -478,7 +478,7 @@ export default function WorkflowsPage() {
                     <Button
                       size="sm"
                       variant="outline"
-                      className="border-white/10 bg-zinc-950/40 hover:bg-white/5 text-gray-200"
+                      className="border-white/10 bg-slate-950/40 hover:bg-white/5 text-gray-200"
                       disabled={
                         isRollingBack ||
                         rollingBackId === version.id ||

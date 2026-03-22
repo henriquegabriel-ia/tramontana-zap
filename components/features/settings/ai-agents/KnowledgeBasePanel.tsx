@@ -50,7 +50,7 @@ const statusConfig: Record<KnowledgeFileIndexingStatus, { label: string; icon: R
   processing: { label: 'Processando', icon: Loader2, color: 'text-blue-400' },
   completed: { label: 'Indexado', icon: CheckCircle2, color: 'text-green-400' },
   failed: { label: 'Falhou', icon: XCircle, color: 'text-red-400' },
-  local_only: { label: 'Local', icon: HardDrive, color: 'text-zinc-400' },
+  local_only: { label: 'Local', icon: HardDrive, color: 'text-slate-400' },
 }
 
 function formatFileSize(bytes: number): string {
@@ -226,8 +226,8 @@ export function KnowledgeBasePanel({
           {error && !isLoading && (
             <div className="flex flex-col items-center justify-center py-8 text-center">
               <AlertCircle className="h-6 w-6 text-red-400 mb-2" />
-              <p className="text-sm text-zinc-400">Erro ao carregar arquivos</p>
-              <p className="text-xs text-zinc-500">{error.message}</p>
+              <p className="text-sm text-slate-400">Erro ao carregar arquivos</p>
+              <p className="text-xs text-slate-500">{error.message}</p>
             </div>
           )}
 
@@ -238,17 +238,17 @@ export function KnowledgeBasePanel({
                 'flex flex-col items-center justify-center py-8 border-2 border-dashed rounded-lg transition-colors',
                 isDragOver
                   ? 'border-primary-500 bg-primary-500/5'
-                  : 'border-zinc-800 hover:border-zinc-700'
+                  : 'border-slate-800 hover:border-slate-700'
               )}
               onDragOver={handleDragOver}
               onDragLeave={handleDragLeave}
               onDrop={handleDrop}
             >
-              <Upload className="h-8 w-8 text-zinc-500 mb-3" />
-              <p className="text-sm text-zinc-400 mb-1">
+              <Upload className="h-8 w-8 text-slate-500 mb-3" />
+              <p className="text-sm text-slate-400 mb-1">
                 Arraste arquivos aqui ou clique em &quot;Adicionar&quot;
               </p>
-              <p className="text-xs text-zinc-500">
+              <p className="text-xs text-slate-500">
                 Suporta TXT, MD, PDF, CSV, JSON
               </p>
             </div>
@@ -272,17 +272,17 @@ export function KnowledgeBasePanel({
                 return (
                   <div
                     key={file.id}
-                    className="flex items-center justify-between p-3 rounded-lg bg-zinc-800/50 border border-zinc-700/50"
+                    className="flex items-center justify-between p-3 rounded-lg bg-slate-800/50 border border-slate-700/50"
                   >
                     <div className="flex items-center gap-3 min-w-0 flex-1">
-                      <div className="p-2 rounded bg-zinc-700/50">
-                        <FileText className="h-4 w-4 text-zinc-400" />
+                      <div className="p-2 rounded bg-slate-700/50">
+                        <FileText className="h-4 w-4 text-slate-400" />
                       </div>
                       <div className="min-w-0 flex-1">
-                        <p className="text-sm font-medium text-zinc-200 truncate">
+                        <p className="text-sm font-medium text-slate-200 truncate">
                           {file.name}
                         </p>
-                        <p className="text-xs text-zinc-500">
+                        <p className="text-xs text-slate-500">
                           {formatFileSize(file.size_bytes)}
                         </p>
                       </div>
@@ -310,7 +310,7 @@ export function KnowledgeBasePanel({
                       <Button
                         variant="ghost"
                         size="icon"
-                        className="h-8 w-8 text-zinc-400 hover:text-red-400"
+                        className="h-8 w-8 text-slate-400 hover:text-red-400"
                         onClick={() => setDeleteFile(file)}
                         disabled={isDeleting}
                       >

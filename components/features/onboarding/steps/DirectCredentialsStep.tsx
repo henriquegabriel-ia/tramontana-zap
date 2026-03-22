@@ -91,7 +91,7 @@ export function DirectCredentialsStep({
       <div className="space-y-2">
         <button
           onClick={onBack}
-          className="flex items-center gap-1 text-sm text-zinc-400 hover:text-white transition-colors"
+          className="flex items-center gap-1 text-sm text-slate-400 hover:text-white transition-colors"
         >
           <ArrowLeft className="w-4 h-4" />
           Voltar

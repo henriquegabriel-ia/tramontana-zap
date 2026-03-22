@@ -81,7 +81,7 @@ export function TokenScopesCard({ data, checks }: TokenScopesCardProps) {
       </div>
 
       {verificationMode !== 'unknown' && missing.length > 0 && (
-        <div className="mt-4 bg-zinc-900/40 border border-white/10 rounded-xl p-4">
+        <div className="mt-4 bg-slate-900/40 border border-white/10 rounded-xl p-4">
           <div className="text-sm text-white font-semibold">Faltando</div>
           <div className="mt-2 flex flex-wrap gap-2">
             {missing.map((s) => (
@@ -94,7 +94,7 @@ export function TokenScopesCard({ data, checks }: TokenScopesCardProps) {
         </div>
       )}
 
-      <details className="mt-4 bg-zinc-900/30 border border-white/10 rounded-xl p-4">
+      <details className="mt-4 bg-slate-900/30 border border-white/10 rounded-xl p-4">
         <summary className="cursor-pointer list-none flex items-center justify-between gap-3">
           <div className="text-sm text-white">Ver detalhes (para suporte)</div>
           <ChevronDown size={16} className="text-gray-400" />

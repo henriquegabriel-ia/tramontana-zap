@@ -68,10 +68,10 @@ export function EditFormDialog({
         if (!open) onClose()
       }}
     >
-      <DialogContent className="border-zinc-800 bg-zinc-950 text-zinc-100 sm:max-w-275 max-h-[85vh] overflow-y-auto">
+      <DialogContent className="border-slate-800 bg-slate-950 text-slate-100 sm:max-w-275 max-h-[85vh] overflow-y-auto">
         <DialogHeader>
           <DialogTitle>Editar formulario</DialogTitle>
-          <DialogDescription className="text-zinc-400">
+          <DialogDescription className="text-slate-400">
             Voce pode alterar nome, slug, tag, campos e mensagem de sucesso. Atencao: mudar o slug altera o link publico.
           </DialogDescription>
         </DialogHeader>
@@ -84,7 +84,7 @@ export function EditFormDialog({
                 value={draft.name}
                 onChange={(e) => setDraft({ ...draft, name: e.target.value })}
                 placeholder="Ex: Lista de espera - Turma Janeiro"
-                className="bg-zinc-900 border-zinc-800"
+                className="bg-slate-900 border-slate-800"
                 disabled={isUpdating}
               />
             </div>
@@ -95,12 +95,12 @@ export function EditFormDialog({
                 value={draft.slug}
                 onChange={(e) => setDraft({ ...draft, slug: slugify(e.target.value) })}
                 placeholder="ex: lista-espera-janeiro"
-                className="bg-zinc-900 border-zinc-800"
+                className="bg-slate-900 border-slate-800"
                 disabled={isUpdating}
               />
-              <p className="text-xs text-zinc-500">
+              <p className="text-xs text-slate-500">
                 Link publico:{' '}
-                <span className="text-zinc-300">
+                <span className="text-slate-300">
                   {(publicBaseUrl || '...').replace(/\/$/, '')}/f/{draft.slug || 'seu-slug'}
                 </span>
               </p>
@@ -113,11 +113,11 @@ export function EditFormDialog({
                   value={draft.tag}
                   onChange={(e) => setDraft({ ...draft, tag: e.target.value })}
                   placeholder="Ex: alunos-turma-jan"
-                  className="bg-zinc-900 border-zinc-800"
+                  className="bg-slate-900 border-slate-800"
                   disabled={isUpdating}
                 />
                 <select
-                  className="h-10 rounded-md border border-zinc-800 bg-zinc-900 px-3 text-sm"
+                  className="h-10 rounded-md border border-slate-800 bg-slate-900 px-3 text-sm"
                   value={draft.tag || ''}
                   onChange={(e) => setDraft({ ...draft, tag: e.target.value })}
                   disabled={isUpdating}
@@ -132,10 +132,10 @@ export function EditFormDialog({
               </div>
             </div>
 
-            <div className="flex items-center justify-between rounded-lg border border-zinc-800 bg-zinc-900/40 p-3">
+            <div className="flex items-center justify-between rounded-lg border border-slate-800 bg-slate-900/40 p-3">
               <div>
                 <p className="text-sm font-medium">Ativo</p>
-                <p className="text-xs text-zinc-500">Quando desligado, o link publico retorna 404.</p>
+                <p className="text-xs text-slate-500">Quando desligado, o link publico retorna 404.</p>
               </div>
               <Switch
                 checked={draft.isActive ?? true}
@@ -144,10 +144,10 @@ export function EditFormDialog({
               />
             </div>
 
-            <div className="flex items-center justify-between rounded-lg border border-zinc-800 bg-zinc-900/40 p-3">
+            <div className="flex items-center justify-between rounded-lg border border-slate-800 bg-slate-900/40 p-3">
               <div>
                 <p className="text-sm font-medium">Coletar email</p>
-                <p className="text-xs text-zinc-500">Mostra o campo de email no formulario publico.</p>
+                <p className="text-xs text-slate-500">Mostra o campo de email no formulario publico.</p>
               </div>
               <Switch
                 checked={draft.collectEmail ?? true}
@@ -162,7 +162,7 @@ export function EditFormDialog({
                 value={draft.successMessage ?? ''}
                 onChange={(e) => setDraft({ ...draft, successMessage: e.target.value })}
                 placeholder="Ex: Cadastro confirmado! Em breve voce recebera uma mensagem no WhatsApp."
-                className="min-h-22.5 bg-zinc-900 border-zinc-800"
+                className="min-h-22.5 bg-slate-900 border-slate-800"
                 disabled={isUpdating}
               />
             </div>
@@ -188,7 +188,7 @@ export function EditFormDialog({
               <Button
                 type="button"
                 variant="secondary"
-                className="border-zinc-700 bg-zinc-900"
+                className="border-slate-700 bg-slate-900"
                 onClick={onClose}
                 disabled={isUpdating}
               >

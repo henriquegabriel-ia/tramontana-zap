@@ -23,10 +23,10 @@ const CustomFieldItem = memo(function CustomFieldItem({ field, onDelete }: Custo
 
   return (
     <div
-      className="flex items-center justify-between p-3.5 rounded-xl border border-white/5 bg-zinc-900/30 hover:bg-zinc-900/80 hover:border-white/10 transition-all group"
+      className="flex items-center justify-between p-3.5 rounded-xl border border-white/5 bg-slate-900/30 hover:bg-slate-900/80 hover:border-white/10 transition-all group"
     >
       <div className="flex items-center gap-3">
-        <div className="w-9 h-9 rounded-lg flex items-center justify-center bg-zinc-800 border border-white/5 text-gray-400 group-hover:text-white transition-colors">
+        <div className="w-9 h-9 rounded-lg flex items-center justify-center bg-slate-800 border border-white/5 text-gray-400 group-hover:text-white transition-colors">
           <Type size={14} />
         </div>
         <div>
@@ -149,7 +149,7 @@ export function CustomFieldsManager({
     return (
         <div className="flex-1 overflow-y-auto p-6 space-y-6">
             {/* Create Form */}
-            <div className="bg-zinc-900/50 p-5 rounded-2xl border border-white/5 space-y-5">
+            <div className="bg-slate-900/50 p-5 rounded-2xl border border-white/5 space-y-5">
                 <h4 className="text-sm font-semibold text-white flex items-center gap-2">
                     <div className="w-6 h-6 rounded-lg bg-primary-500/10 flex items-center justify-center text-primary-500">
                         <Plus size={14} />
@@ -164,13 +164,13 @@ export function CustomFieldsManager({
                             placeholder="Ex: Empresa"
                             value={newLabel}
                             onChange={(e) => setNewLabel(e.target.value)}
-                            className="bg-zinc-950 border-white/10 text-white placeholder-gray-600 focus:border-primary-500/50 focus:ring-primary-500/20"
+                            className="bg-slate-950 border-white/10 text-white placeholder-gray-600 focus:border-primary-500/50 focus:ring-primary-500/20"
                         />
                     </div>
 
                     <div>
                         <Label className="text-xs font-medium text-gray-400 mb-1.5 block">Chave (Variável)</Label>
-                        <div className="text-xs font-mono bg-zinc-950 border border-white/10 p-3 rounded-lg text-gray-400 flex items-center gap-2">
+                        <div className="text-xs font-mono bg-slate-950 border border-white/10 p-3 rounded-lg text-gray-400 flex items-center gap-2">
                             <span className="text-gray-600 select-none">{'{{'}</span>
                             <span className="text-primary-400">{newKey || '...'}</span>
                             <span className="text-gray-600 select-none">{'}}'}</span>
@@ -216,7 +216,7 @@ export function CustomFieldsManager({
                                         </p>
                                     </div>
                                 </div>
-                                <span className="text-[10px] text-gray-500 px-2 py-1 rounded bg-zinc-800/50">automático</span>
+                                <span className="text-[10px] text-gray-500 px-2 py-1 rounded bg-slate-800/50">automático</span>
                             </div>
                         ))}
                     </div>

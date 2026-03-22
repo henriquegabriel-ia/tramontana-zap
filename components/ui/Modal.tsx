@@ -103,7 +103,7 @@ export function Modal({
     >
       <div
         className={`
-          bg-zinc-900/95 border rounded-2xl w-full p-6
+          bg-slate-900/95 border rounded-2xl w-full p-6
           shadow-[0_30px_80px_rgba(0,0,0,0.55)]
           animate-in zoom-in-95 fade-in duration-200
           ${maxWidthClasses[maxWidth]}
@@ -197,7 +197,7 @@ export function ModalCancelButton({
     <button
       onClick={onClick}
       disabled={disabled}
-      className="flex-1 px-4 py-3 bg-zinc-950/40 text-gray-300 border border-white/10 rounded-lg font-medium hover:bg-white/5 transition-colors disabled:opacity-50"
+      className="flex-1 px-4 py-3 bg-slate-950/40 text-gray-300 border border-white/10 rounded-lg font-medium hover:bg-white/5 transition-colors disabled:opacity-50"
     >
       {children}
     </button>

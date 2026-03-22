@@ -1,6 +1,5 @@
 /* Design System Fonts - must be first */
-@import url('https://api.fontshare.com/v2/css?f[]=satoshi@400,500,700,900&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap');
 
 @import "tailwindcss";
 
@@ -16,7 +15,7 @@
      ================================ */
 
   /* DS - Typography (não muda com tema) */
-  --ds-font-display: "Satoshi", "Inter", system-ui, sans-serif;
+  --ds-font-display: "Manrope", "Inter", system-ui, sans-serif;
   --ds-font-body: "Inter", system-ui, -apple-system, sans-serif;
   --ds-font-mono: "JetBrains Mono", "Fira Code", "Consolas", monospace;
 
@@ -35,30 +34,37 @@
   --ds-brand-primary-hover: #5528A0;
   --ds-brand-primary-muted: rgba(104, 51, 189, 0.1);
 
+  /* DS - Brand secondary (Gold - Consórcio Premium) */
+  --ds-brand-secondary: #ecc21e;
+  --ds-brand-secondary-hover: #d4ad0e;
+  --ds-brand-secondary-muted: rgba(236, 194, 30, 0.1);
+  --ds-brand-secondary-text: #92740a;
+
   /* ================================
      LIGHT MODE - Geist Inspired
      Clean, professional, high contrast
      ================================ */
 
-  /* DS - Backgrounds (LIGHT MODE - Geist style) */
+  /* DS - Backgrounds (LIGHT MODE - Slate Premium) */
   --ds-bg-base: #ffffff;
-  --ds-bg-elevated: #fafafa;
-  --ds-bg-surface: #f4f4f5;
+  --ds-bg-elevated: #f8fafc;
+  --ds-bg-surface: #f1f5f9;
   --ds-bg-overlay: rgba(255, 255, 255, 0.95);
-  --ds-bg-glass: rgba(250, 250, 250, 0.85);
+  --ds-bg-glass: rgba(248, 250, 252, 0.85);
   --ds-bg-hover: rgba(0, 0, 0, 0.04);
+  --ds-bg-glass-header: rgba(255, 255, 255, 0.8);
 
-  /* DS - Text colors (LIGHT MODE - Geist style - high contrast) */
-  --ds-text-primary: #0a0a0a;
-  --ds-text-secondary: #525252;
-  --ds-text-muted: #737373;
+  /* DS - Text colors (LIGHT MODE - Slate Premium) */
+  --ds-text-primary: #0f172a;
+  --ds-text-secondary: #475569;
+  --ds-text-muted: #64748b;
   --ds-text-brand: #5528A0;
-  --ds-text-disabled: #a3a3a3;
+  --ds-text-disabled: #94a3b8;
 
-  /* DS - Border colors (LIGHT MODE - Geist style - visible but elegant) */
-  --ds-border-subtle: rgba(0, 0, 0, 0.06);
-  --ds-border-default: rgba(0, 0, 0, 0.09);
-  --ds-border-strong: rgba(0, 0, 0, 0.14);
+  /* DS - Border colors (LIGHT MODE - Slate Premium) */
+  --ds-border-subtle: rgba(15, 23, 42, 0.06);
+  --ds-border-default: rgba(15, 23, 42, 0.10);
+  --ds-border-strong: rgba(15, 23, 42, 0.16);
   --ds-border-focus: #6833BD;
 
   /* DS - Status colors (LIGHT MODE - Geist style) */
@@ -89,29 +95,32 @@
   --ds-campaign-failed-text: #dc2626;
   --ds-campaign-failed-bg: rgba(220, 38, 38, 0.08);
 
-  /* DS - Shadows (LIGHT MODE - Geist style - clean and subtle) */
-  --ds-shadow-xs: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
-  --ds-shadow-sm: 0 1px 3px 0 rgba(0, 0, 0, 0.06), 0 1px 2px -1px rgba(0, 0, 0, 0.03);
-  --ds-shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.07), 0 2px 4px -2px rgba(0, 0, 0, 0.04);
-  --ds-shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.08), 0 4px 6px -4px rgba(0, 0, 0, 0.04);
-  --ds-shadow-xl: 0 20px 25px -5px rgba(0, 0, 0, 0.08), 0 8px 10px -6px rgba(0, 0, 0, 0.04);
+  /* DS - Shadows (LIGHT MODE - Slate Premium) */
+  --ds-shadow-xs: 0 1px 2px 0 rgba(15, 23, 42, 0.05);
+  --ds-shadow-sm: 0 1px 3px 0 rgba(15, 23, 42, 0.08), 0 1px 2px -1px rgba(15, 23, 42, 0.04);
+  --ds-shadow-md: 0 4px 8px -1px rgba(15, 23, 42, 0.08), 0 2px 4px -2px rgba(15, 23, 42, 0.04);
+  --ds-shadow-lg: 0 12px 20px -4px rgba(15, 23, 42, 0.10), 0 4px 8px -4px rgba(15, 23, 42, 0.05);
+  --ds-shadow-xl: 0 24px 32px -6px rgba(15, 23, 42, 0.12), 0 10px 14px -6px rgba(15, 23, 42, 0.06);
+  --ds-shadow-2xl: 0 32px 48px -8px rgba(15, 23, 42, 0.16);
 
-  /* DS - Glow effects (LIGHT MODE - Geist: subtle focus rings) */
+  /* DS - Glow effects (LIGHT MODE - Slate Premium) */
   --ds-glow-brand-sm: 0 0 0 2px rgba(104, 51, 189, 0.15);
   --ds-glow-brand-md: 0 0 0 3px rgba(104, 51, 189, 0.2);
   --ds-glow-brand-ring: 0 0 0 2px rgba(104, 51, 189, 0.25);
   --ds-glow-error-ring: 0 0 0 2px rgba(239, 68, 68, 0.25);
+  --ds-glow-secondary-sm: 0 0 0 2px rgba(236, 194, 30, 0.15);
+  --ds-glow-secondary-ring: 0 0 0 2px rgba(236, 194, 30, 0.25);
 
-  /* DS - Composite shadows (LIGHT MODE - Geist style) */
-  --ds-shadow-card: 0 0 0 1px rgba(0, 0, 0, 0.03), 0 1px 3px 0 rgba(0, 0, 0, 0.06);
-  --ds-shadow-card-hover: 0 0 0 1px rgba(0, 0, 0, 0.06), 0 4px 12px -2px rgba(0, 0, 0, 0.08);
-  --ds-shadow-button: 0 0 0 1px rgba(0, 0, 0, 0.04);
-  --ds-shadow-button-hover: 0 0 0 1px rgba(0, 0, 0, 0.08);
-  --ds-shadow-button-primary: 0 1px 2px 0 rgba(0, 0, 0, 0.08);
-  --ds-shadow-button-primary-hover: 0 2px 4px 0 rgba(0, 0, 0, 0.1);
+  /* DS - Composite shadows (LIGHT MODE - Slate Premium) */
+  --ds-shadow-card: 0 0 0 1px rgba(15, 23, 42, 0.04), 0 2px 4px 0 rgba(15, 23, 42, 0.06);
+  --ds-shadow-card-hover: 0 0 0 1px rgba(15, 23, 42, 0.08), 0 6px 16px -3px rgba(15, 23, 42, 0.10);
+  --ds-shadow-button: 0 0 0 1px rgba(15, 23, 42, 0.04);
+  --ds-shadow-button-hover: 0 0 0 1px rgba(15, 23, 42, 0.08);
+  --ds-shadow-button-primary: 0 1px 3px 0 rgba(104, 51, 189, 0.12);
+  --ds-shadow-button-primary-hover: 0 3px 6px 0 rgba(104, 51, 189, 0.16);
   --ds-shadow-input-focus: 0 0 0 2px rgba(104, 51, 189, 0.25);
-  --ds-shadow-modal: 0 0 0 1px rgba(0, 0, 0, 0.04), 0 16px 32px -8px rgba(0, 0, 0, 0.12);
-  --ds-shadow-dropdown: 0 0 0 1px rgba(0, 0, 0, 0.04), 0 8px 16px -4px rgba(0, 0, 0, 0.1);
+  --ds-shadow-modal: 0 0 0 1px rgba(15, 23, 42, 0.04), 0 20px 40px -10px rgba(15, 23, 42, 0.14);
+  --ds-shadow-dropdown: 0 0 0 1px rgba(15, 23, 42, 0.04), 0 10px 20px -5px rgba(15, 23, 42, 0.12);
 
   /* DS - Motion (não muda com tema) */
   --ds-duration-fastest: 75ms;
@@ -133,18 +142,18 @@
   --ds-radius-2xl: 1rem;
   --ds-radius-full: 9999px;
 
-  /* Zinc colors for dark mode */
-  --color-gray-50: #fafafa;
-  --color-gray-100: #f4f4f5;
-  --color-gray-200: #e4e4e7;
-  --color-gray-300: #d4d4d8;
-  --color-gray-400: #a1a1aa;
-  --color-gray-500: #71717a;
-  --color-gray-600: #52525b;
-  --color-gray-700: #3f3f46;
-  --color-gray-800: #27272a;
-  --color-gray-900: #18181b;
-  --color-gray-950: #09090b;
+  /* Slate colors (premium neutral palette) */
+  --color-gray-50: #f8fafc;
+  --color-gray-100: #f1f5f9;
+  --color-gray-200: #e2e8f0;
+  --color-gray-300: #cbd5e1;
+  --color-gray-400: #94a3b8;
+  --color-gray-500: #64748b;
+  --color-gray-600: #475569;
+  --color-gray-700: #334155;
+  --color-gray-800: #1e293b;
+  --color-gray-900: #0f172a;
+  --color-gray-950: #020617;
 
   /* Tramontana Purple (Tramontana Consórcios) */
   --color-primary-50: #f5f0ff;
@@ -203,62 +212,62 @@
   --node-ring: hsl(240, 6%, 90%);
 
   /* ================================
-     SHADCN/UI OKLCH VARIABLES (LIGHT MODE)
+     SHADCN/UI OKLCH VARIABLES (LIGHT MODE - Slate Premium)
      ================================ */
   --radius: 0.625rem;
   --background: oklch(1 0 0);
-  --foreground: oklch(0.15 0 0);
-  --card: oklch(0.99 0 0);
-  --card-foreground: oklch(0.15 0 0);
+  --foreground: oklch(0.145 0.02 256);
+  --card: oklch(0.99 0.002 256);
+  --card-foreground: oklch(0.145 0.02 256);
   --popover: oklch(1 0 0);
-  --popover-foreground: oklch(0.15 0 0);
-  --primary: oklch(0.15 0 0);
-  --primary-foreground: oklch(0.98 0 0);
-  --secondary: oklch(0.96 0 0);
-  --secondary-foreground: oklch(0.15 0 0);
-  --muted: oklch(0.96 0 0);
-  --muted-foreground: oklch(0.45 0 0);
-  --accent: oklch(0.96 0 0);
-  --accent-foreground: oklch(0.15 0 0);
+  --popover-foreground: oklch(0.145 0.02 256);
+  --primary: oklch(0.145 0.02 256);
+  --primary-foreground: oklch(0.98 0.002 256);
+  --secondary: oklch(0.96 0.004 256);
+  --secondary-foreground: oklch(0.145 0.02 256);
+  --muted: oklch(0.96 0.004 256);
+  --muted-foreground: oklch(0.48 0.015 256);
+  --accent: oklch(0.96 0.004 256);
+  --accent-foreground: oklch(0.145 0.02 256);
   --destructive: oklch(0.55 0.2 27);
-  --border: oklch(0.90 0 0);
-  --input: oklch(0.90 0 0);
-  --ring: oklch(0.15 0 0);
+  --border: oklch(0.90 0.006 256);
+  --input: oklch(0.90 0.006 256);
+  --ring: oklch(0.145 0.02 256);
   --chart-1: oklch(0.646 0.222 41.116);
   --chart-2: oklch(0.6 0.118 184.704);
   --chart-3: oklch(0.398 0.07 227.392);
   --chart-4: oklch(0.828 0.189 84.429);
   --chart-5: oklch(0.769 0.188 70.08);
-  --sidebar: oklch(0.98 0 0);
-  --sidebar-foreground: oklch(0.45 0 0);
-  --sidebar-primary: oklch(0.15 0 0);
-  --sidebar-primary-foreground: oklch(0.98 0 0);
-  --sidebar-accent: oklch(0.96 0 0);
-  --sidebar-accent-foreground: oklch(0.15 0 0);
-  --sidebar-border: oklch(0.90 0 0);
-  --sidebar-ring: oklch(0.15 0 0);
+  --sidebar: oklch(0.98 0.003 256);
+  --sidebar-foreground: oklch(0.48 0.015 256);
+  --sidebar-primary: oklch(0.145 0.02 256);
+  --sidebar-primary-foreground: oklch(0.98 0.002 256);
+  --sidebar-accent: oklch(0.96 0.004 256);
+  --sidebar-accent-foreground: oklch(0.145 0.02 256);
+  --sidebar-border: oklch(0.90 0.006 256);
+  --sidebar-ring: oklch(0.145 0.02 256);
 
   /* ================================
      INTERNATIONAL PHONE INPUT THEME (LIGHT MODE)
      ================================ */
   --react-international-phone-height: 48px;
-  --react-international-phone-background-color: #f4f4f5; /* zinc-100 */
-  --react-international-phone-text-color: #18181b; /* zinc-900 */
+  --react-international-phone-background-color: #f1f5f9; /* slate-100 */
+  --react-international-phone-text-color: #0f172a; /* slate-900 */
   --react-international-phone-font-size: 14px;
   --react-international-phone-border-radius: 0.75rem; /* rounded-xl */
-  --react-international-phone-border-color: #d4d4d8; /* zinc-300 */
+  --react-international-phone-border-color: #cbd5e1; /* slate-300 */
 
-  --react-international-phone-country-selector-background-color: #f4f4f5;
-  --react-international-phone-country-selector-background-color-hover: #e4e4e7; /* zinc-200 */
-  --react-international-phone-country-selector-border-color: #d4d4d8;
-  --react-international-phone-country-selector-arrow-color: #52525b; /* zinc-600 */
+  --react-international-phone-country-selector-background-color: #f1f5f9;
+  --react-international-phone-country-selector-background-color-hover: #e2e8f0; /* slate-200 */
+  --react-international-phone-country-selector-border-color: #cbd5e1;
+  --react-international-phone-country-selector-arrow-color: #475569; /* slate-600 */
 
   --react-international-phone-dropdown-item-background-color: #ffffff;
-  --react-international-phone-dropdown-item-text-color: #18181b;
+  --react-international-phone-dropdown-item-text-color: #0f172a;
   --react-international-phone-dropdown-shadow: 0 10px 30px rgba(0, 0, 0, .15);
-  --react-international-phone-dropdown-item-dial-code-color: #71717a;
-  --react-international-phone-selected-dropdown-item-background-color: #f4f4f5;
-  --react-international-phone-selected-dropdown-item-text-color: #18181b;
+  --react-international-phone-dropdown-item-dial-code-color: #64748b;
+  --react-international-phone-selected-dropdown-item-background-color: #f1f5f9;
+  --react-international-phone-selected-dropdown-item-text-color: #0f172a;
 }
 
 /* Tailwind v4 theme customizations */
@@ -330,7 +339,7 @@ a:focus-visible,
 [role="button"]:focus-visible {
   outline: 2px solid var(--color-primary-400);
   outline-offset: 2px;
-  box-shadow: 0 0 0 4px rgba(52, 211, 153, 0.2);
+  box-shadow: 0 0 0 4px rgba(104, 51, 189, 0.2);
 }
 
 /* Input focus styles removidos - cada componente gerencia seu próprio focus */
@@ -348,8 +357,8 @@ textarea:focus-visible {
 
 /* Improved placeholder contrast for WCAG AA */
 ::placeholder {
-  color: #71717a;
-  /* gray-500 - 4.7:1 contrast ratio */
+  color: #64748b;
+  /* slate-500 - 4.6:1 contrast ratio */
   opacity: 1;
 }
 
@@ -674,116 +683,120 @@ textarea:focus-visible {
      DS TOKENS - DARK MODE OVERRIDES
      ================================ */
 
-  /* DS - Backgrounds (DARK MODE) */
-  --ds-bg-base: #09090b;
-  --ds-bg-elevated: #18181b;
-  --ds-bg-surface: #27272a;
-  --ds-bg-overlay: rgba(9, 9, 11, 0.8);
-  --ds-bg-glass: rgba(24, 24, 27, 0.7);
+  /* DS - Backgrounds (DARK MODE - Slate Premium) */
+  --ds-bg-base: #0f172a;
+  --ds-bg-elevated: #1e293b;
+  --ds-bg-surface: #334155;
+  --ds-bg-overlay: rgba(15, 23, 42, 0.85);
+  --ds-bg-glass: rgba(30, 41, 59, 0.7);
   --ds-bg-hover: rgba(255, 255, 255, 0.05);
+  --ds-bg-glass-header: rgba(15, 23, 42, 0.8);
 
-  /* DS - Text colors (DARK MODE) */
-  --ds-text-primary: #f4f4f5;
-  --ds-text-secondary: #a1a1aa;
-  --ds-text-muted: #71717a;
-  --ds-text-brand: #34d399;
-  --ds-text-disabled: #52525b;
+  /* DS - Text colors (DARK MODE - Slate Premium) */
+  --ds-text-primary: #f1f5f9;
+  --ds-text-secondary: #94a3b8;
+  --ds-text-muted: #64748b;
+  --ds-text-brand: #a78bfa;
+  --ds-text-disabled: #475569;
 
-  /* DS - Border colors (DARK MODE) */
+  /* DS - Border colors (DARK MODE - Slate Premium) */
   --ds-border-subtle: rgba(255, 255, 255, 0.05);
   --ds-border-default: rgba(255, 255, 255, 0.10);
-  --ds-border-strong: rgba(255, 255, 255, 0.15);
-  --ds-border-focus: #34d399;
+  --ds-border-strong: rgba(255, 255, 255, 0.16);
+  --ds-border-focus: #a78bfa;
 
-  /* DS - Status colors (DARK MODE - tons -400 para texto) */
+  /* DS - Status colors (DARK MODE - Slate Premium) */
   --ds-status-success-text: #34d399;
   --ds-status-error-text: #f87171;
   --ds-status-warning-text: #fbbf24;
-  --ds-status-info-text: #60a5fa;
+  --ds-status-info-text: #818cf8;
 
-  /* DS - Campaign status colors (DARK MODE) */
-  --ds-campaign-draft-text: #a1a1aa;
+  /* DS - Campaign status colors (DARK MODE - Slate Premium) */
+  --ds-campaign-draft-text: #94a3b8;
   --ds-campaign-scheduled-text: #c084fc;
-  --ds-campaign-sending-text: #60a5fa;
+  --ds-campaign-sending-text: #818cf8;
   --ds-campaign-completed-text: #34d399;
   --ds-campaign-paused-text: #fbbf24;
   --ds-campaign-failed-text: #f87171;
 
-  /* DS - Shadows (DARK MODE - maior opacidade) */
-  --ds-shadow-xs: 0 1px 2px 0 rgba(0, 0, 0, 0.3);
+  /* DS - Shadows (DARK MODE - Slate Premium) */
+  --ds-shadow-xs: 0 1px 2px 0 rgba(0, 0, 0, 0.4);
   --ds-shadow-sm: 0 2px 4px 0 rgba(0, 0, 0, 0.4);
-  --ds-shadow-md: 0 4px 8px -1px rgba(0, 0, 0, 0.4), 0 2px 4px -2px rgba(0, 0, 0, 0.3);
-  --ds-shadow-lg: 0 10px 25px -3px rgba(0, 0, 0, 0.5), 0 4px 10px -4px rgba(0, 0, 0, 0.4);
-  --ds-shadow-xl: 0 20px 40px -5px rgba(0, 0, 0, 0.6), 0 8px 16px -6px rgba(0, 0, 0, 0.4);
+  --ds-shadow-md: 0 4px 8px -1px rgba(0, 0, 0, 0.5), 0 2px 4px -2px rgba(0, 0, 0, 0.3);
+  --ds-shadow-lg: 0 12px 28px -4px rgba(0, 0, 0, 0.6), 0 4px 10px -4px rgba(0, 0, 0, 0.4);
+  --ds-shadow-xl: 0 24px 48px -8px rgba(0, 0, 0, 0.7), 0 10px 20px -6px rgba(0, 0, 0, 0.5);
+  --ds-shadow-2xl: 0 40px 60px -12px rgba(0, 0, 0, 0.8);
 
-  /* DS - Glow effects (DARK MODE) */
-  --ds-glow-brand-sm: 0 0 10px rgba(104, 51, 189, 0.2);
-  --ds-glow-brand-md: 0 0 20px rgba(104, 51, 189, 0.3);
-  --ds-glow-brand-ring: 0 0 0 3px rgba(104, 51, 189, 0.2);
+  /* DS - Glow effects (DARK MODE - Slate Premium) */
+  --ds-glow-brand-sm: 0 0 12px rgba(129, 140, 248, 0.2);
+  --ds-glow-brand-md: 0 0 24px rgba(129, 140, 248, 0.3);
+  --ds-glow-brand-ring: 0 0 0 3px rgba(129, 140, 248, 0.2);
   --ds-glow-error-ring: 0 0 0 3px rgba(239, 68, 68, 0.2);
+  --ds-glow-secondary-sm: 0 0 12px rgba(236, 194, 30, 0.15);
+  --ds-glow-secondary-ring: 0 0 0 3px rgba(236, 194, 30, 0.2);
 
-  /* DS - Composite shadows (DARK MODE) */
-  --ds-shadow-card: 0 2px 4px 0 rgba(0, 0, 0, 0.4), inset 0 1px 0 0 rgba(255, 255, 255, 0.03);
-  --ds-shadow-card-hover: 0 4px 8px -1px rgba(0, 0, 0, 0.4), 0 2px 4px -2px rgba(0, 0, 0, 0.3), inset 0 1px 0 0 rgba(255, 255, 255, 0.05);
-  --ds-shadow-button: 0 1px 2px 0 rgba(0, 0, 0, 0.3), inset 0 1px 0 0 rgba(255, 255, 255, 0.1);
-  --ds-shadow-button-hover: 0 2px 4px 0 rgba(0, 0, 0, 0.4), inset 0 1px 0 0 rgba(255, 255, 255, 0.15);
-  --ds-shadow-button-primary: 0 2px 4px 0 rgba(0, 0, 0, 0.4), 0 0 10px rgba(104, 51, 189, 0.2);
-  --ds-shadow-button-primary-hover: 0 4px 8px -1px rgba(0, 0, 0, 0.4), 0 0 20px rgba(104, 51, 189, 0.3);
-  --ds-shadow-input-focus: 0 0 0 3px rgba(104, 51, 189, 0.2);
-  --ds-shadow-modal: 0 20px 40px -5px rgba(0, 0, 0, 0.6), 0 8px 16px -6px rgba(0, 0, 0, 0.4), 0 0 0 1px rgba(255, 255, 255, 0.05);
-  --ds-shadow-dropdown: 0 10px 25px -3px rgba(0, 0, 0, 0.5), 0 4px 10px -4px rgba(0, 0, 0, 0.4), 0 0 0 1px rgba(255, 255, 255, 0.05);
+  /* DS - Composite shadows (DARK MODE - Slate Premium) */
+  --ds-shadow-card: 0 2px 6px 0 rgba(0, 0, 0, 0.5), inset 0 1px 0 0 rgba(255, 255, 255, 0.03);
+  --ds-shadow-card-hover: 0 6px 16px -2px rgba(0, 0, 0, 0.5), inset 0 1px 0 0 rgba(255, 255, 255, 0.05);
+  --ds-shadow-button: 0 1px 3px 0 rgba(0, 0, 0, 0.4), inset 0 1px 0 0 rgba(255, 255, 255, 0.08);
+  --ds-shadow-button-hover: 0 3px 6px 0 rgba(0, 0, 0, 0.5), inset 0 1px 0 0 rgba(255, 255, 255, 0.12);
+  --ds-shadow-button-primary: 0 2px 6px 0 rgba(0, 0, 0, 0.4), 0 0 12px rgba(129, 140, 248, 0.2);
+  --ds-shadow-button-primary-hover: 0 4px 12px -2px rgba(0, 0, 0, 0.4), 0 0 24px rgba(129, 140, 248, 0.3);
+  --ds-shadow-input-focus: 0 0 0 3px rgba(129, 140, 248, 0.2);
+  --ds-shadow-modal: 0 24px 48px -8px rgba(0, 0, 0, 0.7), 0 0 0 1px rgba(255, 255, 255, 0.05);
+  --ds-shadow-dropdown: 0 12px 28px -4px rgba(0, 0, 0, 0.6), 0 0 0 1px rgba(255, 255, 255, 0.05);
 
   /* ================================
      INTERNATIONAL PHONE INPUT (DARK MODE)
      ================================ */
-  --react-international-phone-background-color: #27272a;
-  --react-international-phone-text-color: #f4f4f5;
-  --react-international-phone-border-color: #3f3f46;
-  --react-international-phone-country-selector-background-color: #27272a;
-  --react-international-phone-country-selector-background-color-hover: #3f3f46;
-  --react-international-phone-country-selector-border-color: #3f3f46;
-  --react-international-phone-country-selector-arrow-color: #a1a1aa;
-  --react-international-phone-dropdown-item-background-color: #18181b;
-  --react-international-phone-dropdown-item-text-color: #f4f4f5;
+  --react-international-phone-background-color: #1e293b;
+  --react-international-phone-text-color: #f1f5f9;
+  --react-international-phone-border-color: #334155;
+  --react-international-phone-country-selector-background-color: #1e293b;
+  --react-international-phone-country-selector-background-color-hover: #334155;
+  --react-international-phone-country-selector-border-color: #334155;
+  --react-international-phone-country-selector-arrow-color: #94a3b8;
+  --react-international-phone-dropdown-item-background-color: #0f172a;
+  --react-international-phone-dropdown-item-text-color: #f1f5f9;
   --react-international-phone-dropdown-shadow: 0 10px 30px rgba(0, 0, 0, .5);
-  --react-international-phone-dropdown-item-dial-code-color: #a1a1aa;
-  --react-international-phone-selected-dropdown-item-background-color: #27272a;
-  --react-international-phone-selected-dropdown-item-text-color: #f4f4f5;
+  --react-international-phone-dropdown-item-dial-code-color: #94a3b8;
+  --react-international-phone-selected-dropdown-item-background-color: #1e293b;
+  --react-international-phone-selected-dropdown-item-text-color: #f1f5f9;
 
   /* ================================
-     SHADCN/UI OKLCH VARIABLES
+     SHADCN/UI OKLCH VARIABLES (DARK MODE - Slate Premium)
      ================================ */
-  --background: oklch(0 0 0);
-  --foreground: oklch(0.98 0 0);
-  --card: oklch(0.04 0 0);
-  --card-foreground: oklch(0.98 0 0);
-  --popover: oklch(0.04 0 0);
-  --popover-foreground: oklch(0.98 0 0);
-  --primary: oklch(0.98 0 0);
-  --primary-foreground: oklch(0.09 0 0);
-  --secondary: oklch(0.1 0 0);
-  --secondary-foreground: oklch(0.98 0 0);
-  --muted: oklch(0.15 0 0);
-  --muted-foreground: oklch(0.65 0 0);
-  --accent: oklch(0.15 0 0);
-  --accent-foreground: oklch(0.98 0 0);
+  --background: oklch(0.13 0.02 256);
+  --foreground: oklch(0.96 0.004 256);
+  --card: oklch(0.18 0.02 256);
+  --card-foreground: oklch(0.96 0.004 256);
+  --popover: oklch(0.18 0.02 256);
+  --popover-foreground: oklch(0.96 0.004 256);
+  --primary: oklch(0.96 0.004 256);
+  --primary-foreground: oklch(0.13 0.02 256);
+  --secondary: oklch(0.18 0.02 256);
+  --secondary-foreground: oklch(0.96 0.004 256);
+  --muted: oklch(0.24 0.02 256);
+  --muted-foreground: oklch(0.65 0.015 256);
+  --accent: oklch(0.24 0.02 256);
+  --accent-foreground: oklch(0.96 0.004 256);
   --destructive: oklch(0.65 0.25 29);
-  --border: oklch(0.27 0 0);
-  --input: oklch(0.27 0 0);
-  --ring: oklch(0.8 0 0);
+  --border: oklch(0.30 0.02 256);
+  --input: oklch(0.30 0.02 256);
+  --ring: oklch(0.8 0.015 256);
   --chart-1: oklch(0.488 0.243 264.376);
   --chart-2: oklch(0.696 0.17 162.48);
   --chart-3: oklch(0.769 0.188 70.08);
   --chart-4: oklch(0.627 0.265 303.9);
   --chart-5: oklch(0.645 0.246 16.439);
-  --sidebar: oklch(0 0 0);
-  --sidebar-foreground: oklch(0.65 0 0);
-  --sidebar-primary: oklch(0.98 0 0);
-  --sidebar-primary-foreground: oklch(0 0 0);
-  --sidebar-accent: oklch(0.1 0 0);
-  --sidebar-accent-foreground: oklch(0.98 0 0);
-  --sidebar-border: oklch(0.18 0 0);
-  --sidebar-ring: oklch(0.8 0 0);
+  --sidebar: oklch(0.07 0.02 256);
+  --sidebar-foreground: oklch(0.65 0.015 256);
+  --sidebar-primary: oklch(0.96 0.004 256);
+  --sidebar-primary-foreground: oklch(0.07 0.02 256);
+  --sidebar-accent: oklch(0.18 0.02 256);
+  --sidebar-accent-foreground: oklch(0.96 0.004 256);
+  --sidebar-border: oklch(0.22 0.02 256);
+  --sidebar-ring: oklch(0.8 0.015 256);
 }
 
 @layer base {
@@ -807,7 +820,7 @@ textarea:focus-visible {
    DESIGN SYSTEM TYPOGRAPHY CLASSES
    ================================ */
 
-/* Headings - usando fonte display (Satoshi) */
+/* Headings - usando fonte display (Manrope) */
 .text-heading-1 {
   font-family: var(--ds-font-display);
   font-size: var(--ds-text-4xl);
@@ -955,6 +968,123 @@ textarea:focus-visible {
   border: 1px solid var(--ds-border-default);
   border-radius: var(--ds-radius-xl);
   box-shadow: var(--ds-shadow-md);
+}
+
+/* ================================
+   PREMIUM DESIGN UTILITIES
+   ================================ */
+
+/* Glass header — backdrop blur premium */
+.ds-glass-header {
+  background: var(--ds-bg-glass-header);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border-bottom: 1px solid var(--ds-border-subtle);
+}
+
+/* Hero gradient card — purple brand gradient */
+.ds-gradient-hero {
+  background: linear-gradient(135deg,
+    var(--color-primary-800) 0%,
+    var(--color-primary-700) 40%,
+    var(--color-primary-900) 100%
+  );
+  border: 1px solid var(--color-primary-600);
+  border-radius: var(--ds-radius-2xl);
+  box-shadow: var(--ds-shadow-xl);
+  position: relative;
+  overflow: hidden;
+}
+
+/* Hero gradient card — gold secondary variant */
+.ds-gradient-hero-gold {
+  background: linear-gradient(135deg,
+    #92740a 0%,
+    #b8930d 40%,
+    #705a08 100%
+  );
+  border: 1px solid rgba(236, 194, 30, 0.3);
+  border-radius: var(--ds-radius-2xl);
+  box-shadow: var(--ds-shadow-xl);
+  position: relative;
+  overflow: hidden;
+}
+
+/* Stat card premium */
+.ds-stat-card {
+  background-color: var(--ds-bg-elevated);
+  border: 1px solid var(--ds-border-default);
+  border-radius: var(--ds-radius-2xl);
+  box-shadow: var(--ds-shadow-lg);
+  transition: var(--ds-transition-normal);
+}
+
+.ds-stat-card:hover {
+  box-shadow: var(--ds-shadow-xl);
+  border-color: var(--ds-border-strong);
+}
+
+/* Premium table wrapper */
+.ds-table-wrapper {
+  background-color: var(--ds-bg-elevated);
+  border: 1px solid var(--ds-border-default);
+  border-radius: 1.5rem;
+  box-shadow: var(--ds-shadow-xl);
+  overflow: hidden;
+}
+
+/* Filter pill active/inactive */
+.ds-pill {
+  padding: 0.625rem 1.5rem;
+  border-radius: var(--ds-radius-full);
+  font-size: var(--ds-text-xs);
+  font-weight: 700;
+  white-space: nowrap;
+  transition: var(--ds-transition-fast);
+}
+
+.ds-pill-active {
+  background-color: var(--color-primary-600);
+  color: white;
+  box-shadow: 0 4px 12px -2px rgba(104, 51, 189, 0.3);
+}
+
+.ds-pill-inactive {
+  background-color: var(--ds-bg-elevated);
+  border: 1px solid var(--ds-border-default);
+  color: var(--ds-text-secondary);
+}
+
+.ds-pill-inactive:hover {
+  color: var(--ds-text-primary);
+  background-color: var(--ds-bg-surface);
+}
+
+/* Premium badge — uppercase tracking with border */
+.ds-badge-premium {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.25rem 0.75rem;
+  font-size: 10px;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: -0.025em;
+  border-radius: var(--ds-radius-full);
+}
+
+/* Ghost icon decorative background (for hero cards) */
+.ds-ghost-icon {
+  position: absolute;
+  right: -10px;
+  bottom: -10px;
+  opacity: 0.08;
+  font-size: 200px;
+  transition: transform 700ms cubic-bezier(0.4, 0, 0.2, 1);
+  pointer-events: none;
+}
+
+.group:hover .ds-ghost-icon {
+  transform: scale(1.1);
 }
 
 /* ================================

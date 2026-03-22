@@ -30,7 +30,7 @@ export const ContactStats: React.FC<ContactStatsProps> = ({ stats }) => {
         title="Inativos / Opt-out"
         value={(stats?.optOut ?? 0).toLocaleString()}
         icon={UserX}
-        color="zinc"
+        color="slate"
         layout="horizontal"
       />
     </div>

@@ -20,12 +20,12 @@ export default function DebugAuthPage() {
             {loading ? (
                 <p>Loading...</p>
             ) : (
-                <pre className="bg-zinc-900 p-4 rounded overflow-auto border border-zinc-800">
+                <pre className="bg-slate-900 p-4 rounded overflow-auto border border-slate-800">
                     {JSON.stringify(data, null, 2)}
                 </pre>
             )}
             <div className="mt-4">
-                <p className="text-zinc-500">
+                <p className="text-slate-500">
                     If isConfigured is false, MASTER_PASSWORD is missing in the API environment.
                 </p>
             </div>

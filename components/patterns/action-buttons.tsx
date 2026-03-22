@@ -68,7 +68,7 @@ export function SecondaryAction({
     <Button
       variant="outline"
       className={cn(
-        'border-white/10 bg-zinc-950/40 text-zinc-200',
+        'border-white/10 bg-slate-950/40 text-slate-200',
         'hover:bg-white/5 hover:text-white',
         'transition-all duration-200',
         className
@@ -153,9 +153,9 @@ export interface IconActionProps extends Omit<ButtonProps, 'variant' | 'size'> {
 }
 
 const iconVariantStyles = {
-  default: 'text-zinc-400 hover:text-white hover:bg-white/10',
-  destructive: 'text-zinc-400 hover:text-red-400 hover:bg-red-500/10',
-  success: 'text-zinc-400 hover:text-green-400 hover:bg-green-500/10',
+  default: 'text-slate-400 hover:text-white hover:bg-white/10',
+  destructive: 'text-slate-400 hover:text-red-400 hover:bg-red-500/10',
+  success: 'text-slate-400 hover:text-green-400 hover:bg-green-500/10',
 }
 
 export function IconAction({

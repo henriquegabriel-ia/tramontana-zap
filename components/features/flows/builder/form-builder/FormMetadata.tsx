@@ -51,7 +51,7 @@ export function FormMetadata({
       </div>
 
       {showTechFields && (
-        <div className="rounded-xl border border-white/10 bg-zinc-950/40 p-4">
+        <div className="rounded-xl border border-white/10 bg-slate-950/40 p-4">
           <div className="text-sm font-semibold text-white">Status</div>
           <div className="mt-2 text-sm text-gray-400">
             {dirty ? 'Alterações não salvas' : 'Sincronizado'}

@@ -31,7 +31,7 @@ export const MessageLogTable: React.FC<MessageLogTableProps> = ({
       <div className="p-5 border-b border-white/5 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
         <h3 className="font-bold text-white flex items-center gap-2">
           Logs de Envio{' '}
-          <span className="text-xs font-normal text-gray-500 bg-zinc-900 px-2 py-0.5 rounded-full">
+          <span className="text-xs font-normal text-gray-500 bg-slate-900 px-2 py-0.5 rounded-full">
             {total.toLocaleString()}
           </span>
         </h3>
@@ -44,7 +44,7 @@ export const MessageLogTable: React.FC<MessageLogTableProps> = ({
               className={`px-3 py-1.5 rounded-lg border text-xs font-medium transition-colors flex items-center gap-2 ${
                 includeReadInDelivered
                   ? 'bg-blue-500/10 border-blue-500/20 text-blue-300 hover:bg-blue-500/15'
-                  : 'bg-zinc-900/50 border-white/10 text-gray-300 hover:text-white hover:bg-white/5'
+                  : 'bg-slate-900/50 border-white/10 text-gray-300 hover:text-white hover:bg-white/5'
               }`}
               title={includeReadInDelivered
                 ? 'Mostrando entregues + lidas (cumulativo)'
@@ -55,7 +55,7 @@ export const MessageLogTable: React.FC<MessageLogTableProps> = ({
             </button>
           )}
 
-          <div className="flex items-center gap-2 bg-zinc-900/50 border border-white/10 rounded-lg px-3 py-1.5 w-full sm:w-64 focus-within:border-primary-500/50 transition-all">
+          <div className="flex items-center gap-2 bg-slate-900/50 border border-white/10 rounded-lg px-3 py-1.5 w-full sm:w-64 focus-within:border-primary-500/50 transition-all">
             <Search size={14} className="text-gray-500" />
             <input
               type="text"
@@ -154,7 +154,7 @@ export const MessageLogTable: React.FC<MessageLogTableProps> = ({
                 type="button"
                 onClick={onLoadMore}
                 disabled={!!isLoadingMore}
-                className="px-3 py-2 bg-zinc-900 border border-white/10 rounded-lg text-gray-300 hover:text-white hover:bg-white/5 transition-colors flex items-center gap-2 text-xs font-medium disabled:opacity-50"
+                className="px-3 py-2 bg-slate-900 border border-white/10 rounded-lg text-gray-300 hover:text-white hover:bg-white/5 transition-colors flex items-center gap-2 text-xs font-medium disabled:opacity-50"
               >
                 {isLoadingMore ? <Loader2 size={14} className="animate-spin" /> : null}
                 {isLoadingMore ? 'Carregando...' : 'Carregar mais'}

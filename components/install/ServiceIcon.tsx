@@ -35,15 +35,15 @@ interface ServiceConfig {
 const serviceConfig: Record<ServiceType, ServiceConfig> = {
   identity: {
     icon: User,
-    color: 'text-zinc-300',
-    bgColor: 'bg-zinc-800/80',
-    borderColor: 'border-zinc-700/50',
+    color: 'text-slate-300',
+    bgColor: 'bg-slate-800/80',
+    borderColor: 'border-slate-700/50',
   },
   vercel: {
     icon: Triangle,
     color: 'text-white',
-    bgColor: 'bg-zinc-800/80',
-    borderColor: 'border-zinc-700/50',
+    bgColor: 'bg-slate-800/80',
+    borderColor: 'border-slate-700/50',
   },
   supabase: {
     icon: Database,
@@ -88,7 +88,7 @@ const sizes = {
  * Ícone de serviço com cores e animações específicas.
  *
  * Serviços:
- * - identity: User icon (zinc)
+ * - identity: User icon (slate)
  * - vercel: Triangle icon (white)
  * - supabase: Database icon (purple)
  * - qstash: Zap icon (orange)
@@ -133,7 +133,7 @@ export function ServiceIcon({
  */
 export function getServiceGlowColor(
   service: ServiceType
-): 'purple' | 'blue' | 'orange' | 'red' | 'zinc' {
+): 'purple' | 'blue' | 'orange' | 'red' | 'slate' {
   switch (service) {
     case 'supabase':
       return 'purple';
@@ -142,6 +142,6 @@ export function getServiceGlowColor(
     case 'redis':
       return 'red';
     default:
-      return 'zinc';
+      return 'slate';
   }
 }

@@ -93,7 +93,7 @@ export function ListPageLayout({
       {/* Content Section */}
       <div
         className={cn(
-          'rounded-2xl border border-white/10 bg-zinc-900/60 overflow-hidden',
+          'rounded-2xl border border-white/10 bg-slate-900/60 overflow-hidden',
           'shadow-[0_12px_30px_rgba(0,0,0,0.35)]',
           isLoading && 'opacity-70 pointer-events-none'
         )}
@@ -128,7 +128,7 @@ export function TabButton({ active, onClick, children, badge }: TabButtonProps) 
         'border',
         active
           ? 'border-purple-400/40 bg-purple-500/10 text-purple-200'
-          : 'border-white/10 bg-zinc-950/40 text-zinc-400 hover:text-white hover:bg-zinc-900/60'
+          : 'border-white/10 bg-slate-950/40 text-slate-400 hover:text-white hover:bg-slate-900/60'
       )}
     >
       {children}
@@ -176,8 +176,8 @@ export function TableHeader({ children, className }: TableHeaderProps) {
   return (
     <thead
       className={cn(
-        'bg-zinc-950/40 border-b border-white/10',
-        'text-zinc-500 uppercase tracking-widest text-xs',
+        'bg-slate-950/40 border-b border-white/10',
+        'text-slate-500 uppercase tracking-widest text-xs',
         className
       )}
     >
@@ -219,7 +219,7 @@ export function TableRow({ children, onClick, className }: TableRowProps) {
       onClick={onClick}
       className={cn(
         'transition-all duration-200',
-        onClick && 'cursor-pointer hover:bg-white/5 hover:shadow-[0_0_20px_rgba(16,185,129,0.1)]',
+        onClick && 'cursor-pointer hover:bg-white/5 hover:shadow-[0_0_20px_rgba(104,51,189,0.1)]',
         className
       )}
     >
@@ -267,9 +267,9 @@ export interface EmptyStateProps {
 export function EmptyState({ icon, title, description, action }: EmptyStateProps) {
   return (
     <div className="flex flex-col items-center justify-center py-16 px-4 text-center">
-      {icon && <div className="mb-4 text-zinc-500">{icon}</div>}
+      {icon && <div className="mb-4 text-slate-500">{icon}</div>}
       <h3 className="text-lg font-medium text-white mb-1">{title}</h3>
-      {description && <p className="text-sm text-zinc-500 mb-4 max-w-md">{description}</p>}
+      {description && <p className="text-sm text-slate-500 mb-4 max-w-md">{description}</p>}
       {action}
     </div>
   )
@@ -291,7 +291,7 @@ export function LoadingState({ rows = 5, columns = 4 }: LoadingStateProps) {
         <tr>
           {Array.from({ length: columns }).map((_, i) => (
             <TableCell key={i} header>
-              <div className="h-4 bg-zinc-800 rounded animate-pulse w-20" />
+              <div className="h-4 bg-slate-800 rounded animate-pulse w-20" />
             </TableCell>
           ))}
         </tr>
@@ -302,7 +302,7 @@ export function LoadingState({ rows = 5, columns = 4 }: LoadingStateProps) {
             {Array.from({ length: columns }).map((_, colIndex) => (
               <TableCell key={colIndex}>
                 <div
-                  className="h-4 bg-zinc-800/50 rounded animate-pulse"
+                  className="h-4 bg-slate-800/50 rounded animate-pulse"
                   style={{ width: `${60 + Math.random() * 40}%` }}
                 />
               </TableCell>

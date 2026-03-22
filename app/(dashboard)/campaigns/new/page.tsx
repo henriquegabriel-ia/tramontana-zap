@@ -1321,7 +1321,7 @@ export default function CampaignsNewRealPage() {
                         type="checkbox"
                         checked={ctrl.skipIgnored}
                         onChange={(e) => ctrl.setSkipIgnored(e.target.checked)}
-                        className="h-4 w-4 rounded border-zinc-600 bg-zinc-800 text-primary-500 focus:ring-primary-500 focus:ring-offset-0"
+                        className="h-4 w-4 rounded border-slate-600 bg-slate-800 text-primary-500 focus:ring-primary-500 focus:ring-offset-0"
                       />
                       <span className="text-sm text-[var(--ds-text-secondary)]">
                         Prosseguir apenas com os <strong className="text-[var(--ds-text-primary)]">{ctrl.precheckTotals?.valid ?? 0}</strong> contatos válidos

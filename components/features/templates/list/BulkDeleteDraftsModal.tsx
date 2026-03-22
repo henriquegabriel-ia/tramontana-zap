@@ -29,7 +29,7 @@ export const BulkDeleteDraftsModal: React.FC<BulkDeleteDraftsModalProps> = ({
 
   return (
     <div className="fixed inset-0 bg-black/70 backdrop-blur-sm z-50 flex items-center justify-center p-4">
-      <div className="bg-zinc-900/80 border border-amber-500/20 rounded-2xl w-full max-w-md p-6 shadow-[0_30px_80px_rgba(0,0,0,0.55)] animate-in zoom-in duration-200">
+      <div className="bg-slate-900/80 border border-amber-500/20 rounded-2xl w-full max-w-md p-6 shadow-[0_30px_80px_rgba(0,0,0,0.55)] animate-in zoom-in duration-200">
         <div className="flex items-center gap-3 mb-4">
           <div className="p-3 bg-amber-500/10 rounded-xl">
             <Trash2 className="text-amber-300" size={24} />
@@ -42,7 +42,7 @@ export const BulkDeleteDraftsModal: React.FC<BulkDeleteDraftsModalProps> = ({
           </div>
         </div>
 
-        <div className="bg-zinc-950/40 border border-white/10 rounded-lg p-4 mb-6">
+        <div className="bg-slate-950/40 border border-white/10 rounded-lg p-4 mb-6">
           <p className="text-sm text-gray-300 mb-3">
             Voce esta prestes a excluir{' '}
             <strong className="text-amber-300">{drafts.length} rascunho(s)</strong>.
@@ -51,7 +51,7 @@ export const BulkDeleteDraftsModal: React.FC<BulkDeleteDraftsModalProps> = ({
             {drafts.slice(0, 30).map((t) => (
               <div
                 key={t.id}
-                className="text-xs text-gray-400 font-mono bg-zinc-950/40 px-2 py-1 rounded border border-white/10"
+                className="text-xs text-gray-400 font-mono bg-slate-950/40 px-2 py-1 rounded border border-white/10"
               >
                 {t.name}
               </div>
@@ -66,7 +66,7 @@ export const BulkDeleteDraftsModal: React.FC<BulkDeleteDraftsModalProps> = ({
           <button
             onClick={onCancel}
             disabled={isDeleting}
-            className="flex-1 px-4 py-2.5 text-gray-300 bg-zinc-950/40 border border-white/10 hover:bg-white/5 rounded-lg font-medium transition-colors disabled:opacity-50"
+            className="flex-1 px-4 py-2.5 text-gray-300 bg-slate-950/40 border border-white/10 hover:bg-white/5 rounded-lg font-medium transition-colors disabled:opacity-50"
           >
             Cancelar
           </button>

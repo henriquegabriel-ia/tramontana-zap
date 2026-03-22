@@ -182,7 +182,7 @@ export function WhatsAppPreview({ actionType, config, template }: PreviewProps) 
               <div
                 className={cn(
                   "max-w-[260px] rounded-2xl rounded-bl-sm bg-purple-500/10 px-4 py-2 text-sm font-semibold text-white",
-                  "shadow-[0_0_24px_rgba(16,185,129,0.1)]"
+                  "shadow-[0_0_24px_rgba(104,51,189,0.1)]"
                 )}
               >
                 {templateHeader}
@@ -191,7 +191,7 @@ export function WhatsAppPreview({ actionType, config, template }: PreviewProps) 
             <div
               className={cn(
                 "max-w-[260px] whitespace-pre-line rounded-2xl rounded-bl-sm bg-purple-500/10 px-4 py-3 text-sm text-white",
-                "shadow-[0_0_24px_rgba(16,185,129,0.1)]"
+                "shadow-[0_0_24px_rgba(104,51,189,0.1)]"
               )}
             >
               {templateBody || text}
@@ -218,7 +218,7 @@ export function WhatsAppPreview({ actionType, config, template }: PreviewProps) 
           <div
             className={cn(
               "max-w-[260px] rounded-2xl rounded-bl-sm bg-purple-500/10 px-4 py-3 text-sm text-white",
-              "shadow-[0_0_24px_rgba(16,185,129,0.1)]"
+              "shadow-[0_0_24px_rgba(104,51,189,0.1)]"
             )}
           >
             {text}

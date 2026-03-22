@@ -202,7 +202,7 @@ export function CampaignTracePanel({
       <CollapsibleContent className="mt-4">
         <div className="flex flex-col gap-3">
           <div className="flex flex-col sm:flex-row sm:items-center gap-2">
-            <div className="flex-1 flex items-center gap-2 bg-zinc-900/50 border border-white/10 rounded-lg px-3 py-2 focus-within:border-primary-500/50 transition-all">
+            <div className="flex-1 flex items-center gap-2 bg-slate-900/50 border border-white/10 rounded-lg px-3 py-2 focus-within:border-primary-500/50 transition-all">
               <Search size={14} className="text-gray-500" />
               <input
                 type="text"
@@ -217,7 +217,7 @@ export function CampaignTracePanel({
               <button
                 type="button"
                 onClick={() => setShowAllTraces((v) => !v)}
-                className="px-3 py-2 bg-zinc-900 border border-white/10 rounded-lg text-gray-300 hover:text-white hover:bg-white/5 transition-colors flex items-center gap-2 text-xs font-medium"
+                className="px-3 py-2 bg-slate-900 border border-white/10 rounded-lg text-gray-300 hover:text-white hover:bg-white/5 transition-colors flex items-center gap-2 text-xs font-medium"
                 title={showAllTraces ? 'Ocultar lista de execuções' : 'Mostrar lista de execuções'}
               >
                 {showAllTraces ? 'Ocultar execuções' : 'Ver execuções'}
@@ -228,7 +228,7 @@ export function CampaignTracePanel({
               type="button"
               onClick={() => void loadTraces()}
               disabled={isLoadingTraces}
-              className="px-3 py-2 bg-zinc-900 border border-white/10 rounded-lg text-gray-300 hover:text-white hover:bg-white/5 transition-colors flex items-center gap-2 text-xs font-medium disabled:opacity-50"
+              className="px-3 py-2 bg-slate-900 border border-white/10 rounded-lg text-gray-300 hover:text-white hover:bg-white/5 transition-colors flex items-center gap-2 text-xs font-medium disabled:opacity-50"
             >
               {isLoadingTraces ? <Loader2 size={14} className="animate-spin" /> : <RefreshCw size={14} />}
               Atualizar
@@ -318,7 +318,7 @@ export function CampaignTracePanel({
                   <select
                     value={okFilter}
                     onChange={(e) => setOkFilter(e.target.value as any)}
-                    className="bg-zinc-900/60 border border-white/10 rounded-md px-2 py-1 text-xs text-gray-200"
+                    className="bg-slate-900/60 border border-white/10 rounded-md px-2 py-1 text-xs text-gray-200"
                     title="Filtro de sucesso/erro"
                   >
                     <option value="all">Todos</option>
@@ -330,7 +330,7 @@ export function CampaignTracePanel({
                     value={phaseFilter}
                     onChange={(e) => setPhaseFilter(e.target.value)}
                     placeholder="phase (ex: batch_end)"
-                    className="bg-zinc-900/60 border border-white/10 rounded-md px-2 py-1 text-xs text-gray-200 placeholder-gray-600 w-[180px]"
+                    className="bg-slate-900/60 border border-white/10 rounded-md px-2 py-1 text-xs text-gray-200 placeholder-gray-600 w-[180px]"
                   />
 
                   <button
@@ -340,7 +340,7 @@ export function CampaignTracePanel({
                       void navigator.clipboard?.writeText(selectedTraceId)
                     }}
                     disabled={!selectedTraceId}
-                    className="px-2 py-1 bg-zinc-900 border border-white/10 rounded-md text-gray-300 hover:text-white hover:bg-white/5 transition-colors flex items-center gap-2 text-xs disabled:opacity-50"
+                    className="px-2 py-1 bg-slate-900 border border-white/10 rounded-md text-gray-300 hover:text-white hover:bg-white/5 transition-colors flex items-center gap-2 text-xs disabled:opacity-50"
                     title="Copiar trace_id"
                   >
                     <Copy size={14} /> Copiar
@@ -350,7 +350,7 @@ export function CampaignTracePanel({
                     type="button"
                     onClick={() => void loadEvents({ reset: true })}
                     disabled={!selectedTraceId || isLoadingEvents}
-                    className="px-2 py-1 bg-zinc-900 border border-white/10 rounded-md text-gray-300 hover:text-white hover:bg-white/5 transition-colors flex items-center gap-2 text-xs disabled:opacity-50"
+                    className="px-2 py-1 bg-slate-900 border border-white/10 rounded-md text-gray-300 hover:text-white hover:bg-white/5 transition-colors flex items-center gap-2 text-xs disabled:opacity-50"
                     title="Atualizar timeline"
                   >
                     {isLoadingEvents ? <Loader2 size={14} className="animate-spin" /> : <RefreshCw size={14} />}
@@ -418,7 +418,7 @@ export function CampaignTracePanel({
                     type="button"
                     onClick={() => void loadEvents({ reset: false })}
                     disabled={isLoadingEvents}
-                    className="w-full px-3 py-2 bg-zinc-900 border border-white/10 rounded-lg text-gray-300 hover:text-white hover:bg-white/5 transition-colors flex items-center justify-center gap-2 text-xs font-medium disabled:opacity-50"
+                    className="w-full px-3 py-2 bg-slate-900 border border-white/10 rounded-lg text-gray-300 hover:text-white hover:bg-white/5 transition-colors flex items-center justify-center gap-2 text-xs font-medium disabled:opacity-50"
                   >
                     {isLoadingEvents ? <Loader2 size={14} className="animate-spin" /> : null}
                     Carregar mais

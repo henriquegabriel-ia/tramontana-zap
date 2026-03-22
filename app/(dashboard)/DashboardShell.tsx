@@ -469,8 +469,8 @@ export function DashboardShell({
                         "flex-1 flex flex-col min-w-0 h-screen overflow-hidden transition-[padding] duration-200",
                         isSidebarExpanded && "lg:pl-56"
                     )}>
-                        {/* Compact mobile header - only menu button */}
-                        <header className="lg:hidden h-12 flex items-center justify-between px-4 border-b border-[var(--ds-border-subtle)] bg-[var(--ds-bg-elevated)] shrink-0">
+                        {/* Compact mobile header - glass morphism */}
+                        <header className="lg:hidden h-12 flex items-center justify-between px-4 ds-glass-header shrink-0">
                             <div className="flex items-center">
                                 <button
                                     className="p-2 text-[var(--ds-text-secondary)] -ml-2 focus-visible:outline focus-visible:outline-2 focus-visible:outline-primary-500 focus-visible:outline-offset-2 rounded-md"
@@ -525,8 +525,8 @@ export function DashboardShell({
                 "flex-1 flex flex-col min-w-0 h-screen overflow-hidden transition-[padding] duration-200",
                 isSidebarExpanded && "lg:pl-56"
             )}>
-                {/* Header */}
-                <header className="h-20 flex items-center justify-between px-6 lg:px-10 shrink-0">
+                {/* Header — Glass morphism premium */}
+                <header className="h-20 flex items-center justify-between px-6 lg:px-10 shrink-0 ds-glass-header sticky top-0 z-30">
                     <div className="flex items-center">
                         <button
                             className="lg:hidden p-2 text-[var(--ds-text-secondary)] mr-4 focus-visible:outline focus-visible:outline-2 focus-visible:outline-primary-500 focus-visible:outline-offset-2 rounded-md"

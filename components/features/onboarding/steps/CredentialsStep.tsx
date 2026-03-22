@@ -94,7 +94,7 @@ export function CredentialsStep({
         onBack={onBack}
       />
 
-      <p className="text-sm text-zinc-400">
+      <p className="text-sm text-slate-400">
         Na página <strong className="text-white">"API Setup"</strong> do seu app, copie os seguintes dados:
       </p>
 

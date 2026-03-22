@@ -18,19 +18,19 @@ export function LeadFormPreview({ title, collectEmail, fields }: LeadFormPreview
     <Container variant="subtle" padding="md">
       <div className="mb-3">
         <p className="text-sm font-medium text-white">Pre-visualizacao</p>
-        <p className="text-xs text-zinc-500">Assim vai aparecer para a pessoa que abrir o link publico.</p>
+        <p className="text-xs text-slate-500">Assim vai aparecer para a pessoa que abrir o link publico.</p>
       </div>
 
       <Container variant="default" padding="md">
         <div className="mb-4">
           <p className="text-lg font-semibold text-white">{title || 'Formulario'}</p>
-          <p className="text-xs text-zinc-400">Preencha seus dados para ser adicionado automaticamente na lista.</p>
+          <p className="text-xs text-slate-400">Preencha seus dados para ser adicionado automaticamente na lista.</p>
         </div>
 
         <div className="space-y-4">
           <div className="space-y-2">
             <Label>Nome</Label>
-            <Input className="bg-zinc-800 border-zinc-700" placeholder="Seu nome" disabled value="" readOnly />
+            <Input className="bg-slate-800 border-slate-700" placeholder="Seu nome" disabled value="" readOnly />
           </div>
 
           <div className="space-y-2">
@@ -47,7 +47,7 @@ export function LeadFormPreview({ title, collectEmail, fields }: LeadFormPreview
           {collectEmail ? (
             <div className="space-y-2">
               <Label>Email (opcional)</Label>
-              <Input className="bg-zinc-800 border-zinc-700" placeholder="voce@exemplo.com" disabled value="" readOnly />
+              <Input className="bg-slate-800 border-slate-700" placeholder="voce@exemplo.com" disabled value="" readOnly />
             </div>
           ) : null}
 
@@ -64,7 +64,7 @@ export function LeadFormPreview({ title, collectEmail, fields }: LeadFormPreview
                         {f.required ? ' *' : ''}
                       </Label>
                       <select
-                        className="h-10 w-full rounded-md border border-zinc-700 bg-zinc-800 px-3 text-sm"
+                        className="h-10 w-full rounded-md border border-slate-700 bg-slate-800 px-3 text-sm"
                         disabled
                         value=""
                       >
@@ -86,7 +86,7 @@ export function LeadFormPreview({ title, collectEmail, fields }: LeadFormPreview
                       {f.label}
                       {f.required ? ' *' : ''}
                     </Label>
-                    <Input className="bg-zinc-800 border-zinc-700" disabled value="" readOnly type={inputType} />
+                    <Input className="bg-slate-800 border-slate-700" disabled value="" readOnly type={inputType} />
                   </div>
                 )
               })}

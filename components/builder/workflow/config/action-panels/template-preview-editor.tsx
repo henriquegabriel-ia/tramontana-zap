@@ -300,10 +300,10 @@ export function TemplatePreviewEditor({
             {displayValue || placeholder}
           </button>
         </PopoverTrigger>
-        <PopoverContent className="w-80 border border-white/10 bg-zinc-950 p-3 text-white">
+        <PopoverContent className="w-80 border border-white/10 bg-slate-950 p-3 text-white">
           <div className="flex items-center justify-between gap-2">
             <Input
-              className="h-8 bg-zinc-900/60 text-xs text-white"
+              className="h-8 bg-slate-900/60 text-xs text-white"
               onChange={(event) => setSearchTerm(event.target.value)}
               placeholder="Buscar campo..."
               value={searchTerm}
@@ -380,7 +380,7 @@ export function TemplatePreviewEditor({
               Variavel do fluxo
             </div>
             <TemplateBadgeInput
-              className="bg-zinc-900/60 text-white"
+              className="bg-slate-900/60 text-white"
               disabled={disabled}
               onChange={setFlowDraft}
               placeholder="Digite @ para escolher"
@@ -476,7 +476,7 @@ export function TemplatePreviewEditor({
             <div
               className={cn(
                 "max-w-[260px] whitespace-pre-line rounded-2xl rounded-bl-sm bg-purple-500/10 px-4 py-2 text-sm font-semibold text-white",
-                "shadow-[0_0_24px_rgba(16,185,129,0.1)]"
+                "shadow-[0_0_24px_rgba(104,51,189,0.1)]"
               )}
             >
               {renderSegments(headerSegments, "header")}
@@ -485,7 +485,7 @@ export function TemplatePreviewEditor({
           <div
             className={cn(
               "max-w-[260px] whitespace-pre-line rounded-2xl rounded-bl-sm bg-purple-500/10 px-4 py-3 text-sm text-white",
-              "shadow-[0_0_24px_rgba(16,185,129,0.1)]"
+              "shadow-[0_0_24px_rgba(104,51,189,0.1)]"
             )}
           >
             {bodySegments.length > 0

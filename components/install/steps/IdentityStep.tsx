@@ -118,26 +118,26 @@ export function IdentityStep({ onComplete, initialName = '', initialEmail = '' }
   };
 
   return (
-    <StepCard glowColor="zinc">
+    <StepCard glowColor="slate">
       <form onSubmit={handleSubmit} className="space-y-5">
         {/* Header */}
         <div className="flex flex-col items-center text-center">
           <ServiceIcon service="identity" size="lg" />
-          <h2 className="mt-4 text-xl font-semibold text-zinc-100">
+          <h2 className="mt-4 text-xl font-semibold text-slate-100">
             Crie sua conta
           </h2>
-          <p className="mt-1 text-sm text-zinc-400">
+          <p className="mt-1 text-sm text-slate-400">
             Dados para acessar o painel
           </p>
         </div>
 
         {/* Nome */}
         <div>
-          <label className="block text-sm font-medium text-zinc-300 mb-2">
+          <label className="block text-sm font-medium text-slate-300 mb-2">
             Seu nome
           </label>
           <div className="relative">
-            <User className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-zinc-500" />
+            <User className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-500" />
             <input
               type="text"
               value={name}
@@ -146,8 +146,8 @@ export function IdentityStep({ onComplete, initialName = '', initialEmail = '' }
               autoFocus
               className={cn(
                 'w-full pl-10 pr-4 py-3 rounded-xl',
-                'bg-zinc-800/50 border border-zinc-700',
-                'text-zinc-100 placeholder:text-zinc-500',
+                'bg-slate-800/50 border border-slate-700',
+                'text-slate-100 placeholder:text-slate-500',
                 'focus:border-purple-500 focus:outline-none',
                 'focus:shadow-[0_0_0_3px_theme(colors.purple.500/0.15)]',
                 'transition-all duration-200'
@@ -158,11 +158,11 @@ export function IdentityStep({ onComplete, initialName = '', initialEmail = '' }
 
         {/* Email */}
         <div>
-          <label className="block text-sm font-medium text-zinc-300 mb-2">
+          <label className="block text-sm font-medium text-slate-300 mb-2">
             Email
           </label>
           <div className="relative">
-            <Mail className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-zinc-500" />
+            <Mail className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-500" />
             <input
               type="email"
               value={email}
@@ -170,8 +170,8 @@ export function IdentityStep({ onComplete, initialName = '', initialEmail = '' }
               placeholder="seu@email.com"
               className={cn(
                 'w-full pl-10 pr-4 py-3 rounded-xl',
-                'bg-zinc-800/50 border border-zinc-700',
-                'text-zinc-100 placeholder:text-zinc-500',
+                'bg-slate-800/50 border border-slate-700',
+                'text-slate-100 placeholder:text-slate-500',
                 'focus:border-purple-500 focus:outline-none',
                 'focus:shadow-[0_0_0_3px_theme(colors.purple.500/0.15)]',
                 'transition-all duration-200'
@@ -183,7 +183,7 @@ export function IdentityStep({ onComplete, initialName = '', initialEmail = '' }
         {/* Password */}
         <div>
           <div className="flex items-center justify-between mb-2">
-            <label className="block text-sm font-medium text-zinc-300">
+            <label className="block text-sm font-medium text-slate-300">
               Senha
             </label>
             <button
@@ -196,7 +196,7 @@ export function IdentityStep({ onComplete, initialName = '', initialEmail = '' }
             </button>
           </div>
           <div className="relative">
-            <Lock className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-zinc-500" />
+            <Lock className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-500" />
             <input
               type={showPassword ? 'text' : 'password'}
               value={password}
@@ -204,8 +204,8 @@ export function IdentityStep({ onComplete, initialName = '', initialEmail = '' }
               placeholder="Mínimo 8 caracteres"
               className={cn(
                 'w-full pl-10 pr-10 py-3 rounded-xl',
-                'bg-zinc-800/50 border border-zinc-700',
-                'text-zinc-100 placeholder:text-zinc-500',
+                'bg-slate-800/50 border border-slate-700',
+                'text-slate-100 placeholder:text-slate-500',
                 'focus:border-purple-500 focus:outline-none',
                 'focus:shadow-[0_0_0_3px_theme(colors.purple.500/0.15)]',
                 'transition-all duration-200',
@@ -215,7 +215,7 @@ export function IdentityStep({ onComplete, initialName = '', initialEmail = '' }
             <button
               type="button"
               onClick={() => setShowPassword(!showPassword)}
-              className="absolute right-3 top-1/2 -translate-y-1/2 text-zinc-500 hover:text-zinc-300"
+              className="absolute right-3 top-1/2 -translate-y-1/2 text-slate-500 hover:text-slate-300"
             >
               {showPassword ? (
                 <EyeOff className="w-4 h-4" />
@@ -234,21 +234,21 @@ export function IdentityStep({ onComplete, initialName = '', initialEmail = '' }
             >
               <span
                 className={cn(
-                  validation.checks.minLen ? 'text-purple-400' : 'text-zinc-500'
+                  validation.checks.minLen ? 'text-purple-400' : 'text-slate-500'
                 )}
               >
                 {validation.checks.minLen ? '✓' : '○'} 8+ chars
               </span>
               <span
                 className={cn(
-                  validation.checks.hasLetter ? 'text-purple-400' : 'text-zinc-500'
+                  validation.checks.hasLetter ? 'text-purple-400' : 'text-slate-500'
                 )}
               >
                 {validation.checks.hasLetter ? '✓' : '○'} Letra
               </span>
               <span
                 className={cn(
-                  validation.checks.hasNumber ? 'text-purple-400' : 'text-zinc-500'
+                  validation.checks.hasNumber ? 'text-purple-400' : 'text-slate-500'
                 )}
               >
                 {validation.checks.hasNumber ? '✓' : '○'} Número
@@ -259,11 +259,11 @@ export function IdentityStep({ onComplete, initialName = '', initialEmail = '' }
 
         {/* Confirm Password */}
         <div>
-          <label className="block text-sm font-medium text-zinc-300 mb-2">
+          <label className="block text-sm font-medium text-slate-300 mb-2">
             Confirmar senha
           </label>
           <div className="relative">
-            <Lock className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-zinc-500" />
+            <Lock className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-500" />
             <input
               type={showConfirm ? 'text' : 'password'}
               value={confirmPassword}
@@ -271,8 +271,8 @@ export function IdentityStep({ onComplete, initialName = '', initialEmail = '' }
               placeholder="Repita a senha"
               className={cn(
                 'w-full pl-10 pr-10 py-3 rounded-xl',
-                'bg-zinc-800/50 border border-zinc-700',
-                'text-zinc-100 placeholder:text-zinc-500',
+                'bg-slate-800/50 border border-slate-700',
+                'text-slate-100 placeholder:text-slate-500',
                 'focus:border-purple-500 focus:outline-none',
                 'focus:shadow-[0_0_0_3px_theme(colors.purple.500/0.15)]',
                 'transition-all duration-200',
@@ -282,7 +282,7 @@ export function IdentityStep({ onComplete, initialName = '', initialEmail = '' }
             <button
               type="button"
               onClick={() => setShowConfirm(!showConfirm)}
-              className="absolute right-3 top-1/2 -translate-y-1/2 text-zinc-500 hover:text-zinc-300"
+              className="absolute right-3 top-1/2 -translate-y-1/2 text-slate-500 hover:text-slate-300"
             >
               {showConfirm ? (
                 <EyeOff className="w-4 h-4" />

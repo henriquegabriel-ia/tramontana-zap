@@ -140,7 +140,7 @@ const ContactTableRow = React.memo(
     const displayName = contact.name || contact.phone;
 
     return (
-      <tr className="hover:bg-[var(--ds-bg-hover)] transition-all duration-200 group hover:shadow-[inset_0_0_20px_rgba(16,185,129,0.05)]">
+      <tr className="hover:bg-[var(--ds-bg-hover)] transition-all duration-200 group hover:shadow-[inset_0_0_20px_rgba(104,51,189,0.05)]">
         <td className="px-6 py-5">
           <input
             type="checkbox"

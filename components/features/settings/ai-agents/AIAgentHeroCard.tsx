@@ -32,7 +32,7 @@ export function AIAgentHeroCard({
     <div
       className={cn(
         'relative rounded-xl overflow-hidden transition-all duration-300',
-        'bg-zinc-900/80 border border-zinc-800',
+        'bg-slate-900/80 border border-slate-800',
         !isActive && 'opacity-60'
       )}
     >
@@ -52,7 +52,7 @@ export function AIAgentHeroCard({
                 'flex items-center justify-center w-11 h-11 rounded-xl text-base font-semibold',
                 isActive
                   ? 'bg-primary-500/15 text-primary-400 border border-primary-500/20'
-                  : 'bg-zinc-800 text-zinc-500'
+                  : 'bg-slate-800 text-slate-500'
               )}
             >
               {agent.name.charAt(0).toUpperCase()}
@@ -61,7 +61,7 @@ export function AIAgentHeroCard({
             {/* Texto */}
             <div>
               <h2 className="text-base font-medium text-white">{agent.name}</h2>
-              <p className="text-sm text-zinc-500">
+              <p className="text-sm text-slate-500">
                 {isActive
                   ? 'Respondendo automaticamente'
                   : 'Desativado'
@@ -77,12 +77,12 @@ export function AIAgentHeroCard({
               <span
                 className={cn(
                   'w-1.5 h-1.5 rounded-full',
-                  isActive ? 'bg-primary-400' : 'bg-zinc-600'
+                  isActive ? 'bg-primary-400' : 'bg-slate-600'
                 )}
               />
               <span className={cn(
                 'text-xs',
-                isActive ? 'text-primary-400' : 'text-zinc-500'
+                isActive ? 'text-primary-400' : 'text-slate-500'
               )}>
                 {isActive ? 'Ativo' : 'Inativo'}
               </span>
@@ -95,7 +95,7 @@ export function AIAgentHeroCard({
                 size="sm"
                 onClick={() => onEdit(agent)}
                 disabled={isUpdating || disabled}
-                className="h-8 px-3 text-zinc-400 hover:text-white hover:bg-zinc-800"
+                className="h-8 px-3 text-slate-400 hover:text-white hover:bg-slate-800"
               >
                 <Settings className="h-4 w-4 mr-1.5" />
                 Configurar
@@ -107,7 +107,7 @@ export function AIAgentHeroCard({
                 onClick={() => onToggleActive(agent, !isActive)}
                 disabled={isUpdating || disabled}
                 className={cn(
-                  'h-8 px-3 text-zinc-400',
+                  'h-8 px-3 text-slate-400',
                   isActive
                     ? 'hover:text-red-400 hover:bg-red-500/10'
                     : 'hover:text-primary-400 hover:bg-primary-500/10'

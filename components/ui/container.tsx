@@ -7,8 +7,8 @@ import { cn } from "@/lib/utils"
  * Container com Design System
  *
  * Substitui as ~173 ocorrencias de:
- * - rounded-2xl border border-white/10 bg-zinc-900/60
- * - bg-zinc-950/40 border border-white/5
+ * - rounded-2xl border border-white/10 bg-slate-900/60
+ * - bg-slate-950/40 border border-white/5
  *
  * Variantes:
  * - default: fundo elevado com borda sutil

@@ -165,7 +165,7 @@ export function SendFlowDialog(props: {
                 }
               }}
             >
-              <SelectTrigger className="w-full h-11 bg-zinc-900/50 border-white/10">
+              <SelectTrigger className="w-full h-11 bg-slate-900/50 border-white/10">
                 <SelectValue
                   placeholder={
                     props.isLoadingFlows ? 'Carregando…' : 'Selecione um MiniApp'
@@ -198,7 +198,7 @@ export function SendFlowDialog(props: {
               value={to}
               onChange={(e) => setTo(e.target.value)}
               placeholder="+55 11 99999-9999"
-              className="h-11 bg-zinc-900/50 border-white/10"
+              className="h-11 bg-slate-900/50 border-white/10"
             />
             {hasTestContact && to && (
               <p className="text-xs text-purple-400/80">
@@ -225,7 +225,7 @@ export function SendFlowDialog(props: {
             </CollapsibleTrigger>
 
             <CollapsibleContent className="pt-3 space-y-4">
-              <div className="p-4 rounded-xl bg-zinc-900/30 border border-white/5 space-y-4">
+              <div className="p-4 rounded-xl bg-slate-900/30 border border-white/5 space-y-4">
                 {/* Texto da mensagem */}
                 <div className="space-y-2">
                   <Label className="text-xs font-medium text-gray-400">
@@ -235,7 +235,7 @@ export function SendFlowDialog(props: {
                     value={body}
                     onChange={(e) => setBody(e.target.value)}
                     placeholder="Vamos começar?"
-                    className="min-h-[60px] bg-zinc-900/50 border-white/10 resize-none"
+                    className="min-h-[60px] bg-slate-900/50 border-white/10 resize-none"
                   />
                 </div>
 
@@ -248,7 +248,7 @@ export function SendFlowDialog(props: {
                     value={ctaText}
                     onChange={(e) => setCtaText(e.target.value)}
                     placeholder="Abrir"
-                    className="h-9 bg-zinc-900/50 border-white/10"
+                    className="h-9 bg-slate-900/50 border-white/10"
                   />
                 </div>
 
@@ -262,7 +262,7 @@ export function SendFlowDialog(props: {
                     value={footer}
                     onChange={(e) => setFooter(e.target.value)}
                     placeholder="Texto pequeno no rodapé"
-                    className="h-9 bg-zinc-900/50 border-white/10"
+                    className="h-9 bg-slate-900/50 border-white/10"
                   />
                 </div>
               </div>

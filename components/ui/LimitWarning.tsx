@@ -114,14 +114,14 @@ export function LimitWarning({
           O que você pode fazer:
         </p>
         <div className="flex items-center gap-2 text-sm text-gray-300">
-          <span className="w-5 h-5 rounded-full bg-zinc-800 flex items-center justify-center text-xs">
+          <span className="w-5 h-5 rounded-full bg-slate-800 flex items-center justify-center text-xs">
             1
           </span>
           Reduza a seleção para no máximo{' '}
           <span className="font-bold text-primary-400">{currentLimit}</span> contatos
         </div>
         <div className="flex items-center gap-2 text-sm text-gray-300">
-          <span className="w-5 h-5 rounded-full bg-zinc-800 flex items-center justify-center text-xs">
+          <span className="w-5 h-5 rounded-full bg-slate-800 flex items-center justify-center text-xs">
             2
           </span>
           Divida em {campaignsNeeded} campanhas menores

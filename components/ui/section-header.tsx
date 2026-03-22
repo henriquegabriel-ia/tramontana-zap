@@ -14,7 +14,7 @@ import { cn } from "@/lib/utils"
  * - brand (purple): Configurações principais, features ativas
  * - warning (amber): Configurações opcionais, atenção necessária
  * - info (blue): Informações, documentação
- * - neutral (zinc): Seções padrão
+ * - neutral (slate): Seções padrão
  *
  * @example
  * ```tsx
@@ -47,7 +47,7 @@ const indicatorColors = {
   warning: "bg-amber-500",
   info: "bg-blue-500",
   error: "bg-red-500",
-  neutral: "bg-zinc-500",
+  neutral: "bg-slate-500",
 } as const
 
 type IndicatorColor = keyof typeof indicatorColors
@@ -106,7 +106,7 @@ function SectionHeader({
             color === "warning" && "text-amber-400",
             color === "info" && "text-blue-400",
             color === "error" && "text-red-400",
-            color === "neutral" && "text-zinc-400"
+            color === "neutral" && "text-slate-400"
           )}
         >
           <Icon size={20} />
@@ -120,7 +120,7 @@ function SectionHeader({
           {badge}
         </div>
         {description && (
-          <p className="text-body-small text-zinc-400 mt-1">{description}</p>
+          <p className="text-body-small text-slate-400 mt-1">{description}</p>
         )}
       </div>
 

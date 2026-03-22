@@ -18,19 +18,19 @@ export function StepHeader({ stepNumber, totalSteps, title, onBack }: StepHeader
         {onBack && (
           <button
             onClick={onBack}
-            className="flex items-center gap-1 text-sm text-zinc-400 hover:text-white transition-colors"
+            className="flex items-center gap-1 text-sm text-slate-400 hover:text-white transition-colors"
           >
             <ArrowLeft className="w-4 h-4" />
             Voltar
           </button>
         )}
-        <span className="text-sm text-zinc-500 ml-auto">
+        <span className="text-sm text-slate-500 ml-auto">
           Passo {stepNumber} de {totalSteps}
         </span>
       </div>
 
       {/* Progress bar */}
-      <div className="h-1.5 bg-zinc-800 rounded-full overflow-hidden">
+      <div className="h-1.5 bg-slate-800 rounded-full overflow-hidden">
         <div
           className="h-full bg-purple-500 rounded-full transition-all duration-300"
           style={{ width: `${(stepNumber / totalSteps) * 100}%` }}

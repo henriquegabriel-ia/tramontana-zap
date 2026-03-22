@@ -99,11 +99,11 @@ export function TemplatePreview({ spec, headerMediaPreview }: TemplatePreviewPro
 
             {/* conversa */}
             <div className="p-3">
-              <div className="max-w-90 rounded-xl bg-white text-zinc-900 shadow-sm overflow-hidden">
+              <div className="max-w-90 rounded-xl bg-white text-slate-900 shadow-sm overflow-hidden">
                 <div className="px-3 py-2">
                 {header?.format === 'LOCATION' ? (
                   <div className="mb-2">
-                    <div className="relative w-full h-24 rounded-lg overflow-hidden bg-gradient-to-br from-purple-100 to-purple-200 border border-zinc-200">
+                    <div className="relative w-full h-24 rounded-lg overflow-hidden bg-gradient-to-br from-purple-100 to-purple-200 border border-slate-200">
                       {/* Grid pattern to simulate map */}
                       <div className="absolute inset-0 opacity-20" style={{
                         backgroundImage: 'linear-gradient(#059669 1px, transparent 1px), linear-gradient(90deg, #059669 1px, transparent 1px)',
@@ -118,7 +118,7 @@ export function TemplatePreview({ spec, headerMediaPreview }: TemplatePreviewPro
                       </div>
                       {/* Label */}
                       <div className="absolute bottom-1 left-1 right-1">
-                        <div className="bg-white/90 rounded px-2 py-1 text-[10px] text-zinc-600 text-center truncate">
+                        <div className="bg-white/90 rounded px-2 py-1 text-[10px] text-slate-600 text-center truncate">
                           {header.location?.name || header.location?.address || 'Configure a localização'}
                         </div>
                       </div>
@@ -133,7 +133,7 @@ export function TemplatePreview({ spec, headerMediaPreview }: TemplatePreviewPro
                         width={360}
                         height={180}
                         unoptimized
-                        className="w-full h-auto rounded-lg border border-zinc-200"
+                        className="w-full h-auto rounded-lg border border-slate-200"
                       />
                     ) : resolvedHeaderMediaPreview.format === 'VIDEO' || resolvedHeaderMediaPreview.format === 'GIF' ? (
                       <video
@@ -141,16 +141,16 @@ export function TemplatePreview({ spec, headerMediaPreview }: TemplatePreviewPro
                         controls
                         muted
                         playsInline
-                        className="w-full rounded-lg border border-zinc-200"
+                        className="w-full rounded-lg border border-slate-200"
                       />
                     ) : (
-                      <div className="flex items-center gap-2 rounded-lg border border-zinc-200 bg-zinc-50 px-3 py-2">
-                        <FileText className="w-4 h-4 text-zinc-600" />
+                      <div className="flex items-center gap-2 rounded-lg border border-slate-200 bg-slate-50 px-3 py-2">
+                        <FileText className="w-4 h-4 text-slate-600" />
                         <div className="min-w-0">
                           <div className="text-[12px] font-medium truncate">
                             {resolvedHeaderMediaPreview.name || 'documento.pdf'}
                           </div>
-                          <div className="text-[10px] text-zinc-500">Documento</div>
+                          <div className="text-[10px] text-slate-500">Documento</div>
                         </div>
                       </div>
                     )}
@@ -165,29 +165,29 @@ export function TemplatePreview({ spec, headerMediaPreview }: TemplatePreviewPro
                   {bodyText ? (
                     <WhatsAppInlineText text={bodyText} />
                   ) : (
-                    <span className="text-zinc-400">Digite o corpo para ver a previa.</span>
+                    <span className="text-slate-400">Digite o corpo para ver a previa.</span>
                   )}
                 </div>
 
                 {footerText ? (
-                  <div className="mt-1 text-[11px] text-zinc-500 whitespace-pre-wrap">
+                  <div className="mt-1 text-[11px] text-slate-500 whitespace-pre-wrap">
                     <WhatsAppInlineText text={footerText} />
                   </div>
                 ) : null}
 
-                <div className="mt-1 flex items-center justify-end text-[10px] text-zinc-400">
+                <div className="mt-1 flex items-center justify-end text-[10px] text-slate-400">
                   16:34
                 </div>
                 </div>
 
                 {buttons.length > 0 ? (
-                  <div className="border-t border-zinc-200">
+                  <div className="border-t border-slate-200">
                     {buttons.map((b, idx) => (
                       <div
                         key={idx}
                         className={cn(
                           'px-3 py-3 text-center text-[13px] font-medium text-blue-600 flex items-center justify-center gap-2',
-                          idx > 0 ? 'border-t border-zinc-200' : ''
+                          idx > 0 ? 'border-t border-slate-200' : ''
                         )}
                       >
                         {String(b?.type || '') === 'URL' ? (

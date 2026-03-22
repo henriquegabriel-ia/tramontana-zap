@@ -100,20 +100,20 @@ export function QStashStep({ onComplete }: QStashStepProps) {
         <ServiceIcon service="qstash" size="lg" />
 
         {/* Title */}
-        <h2 className="mt-4 text-xl font-semibold text-zinc-100">
+        <h2 className="mt-4 text-xl font-semibold text-slate-100">
           Configure filas de mensagens
         </h2>
-        <p className="mt-1 text-sm text-zinc-400">
+        <p className="mt-1 text-sm text-slate-400">
           Token do Upstash QStash
         </p>
 
         {/* Instruções */}
-        <div className="w-full mt-4 p-3 rounded-lg bg-zinc-800/50 text-left space-y-2">
-          <p className="text-xs text-zinc-400 font-medium">Como obter:</p>
-          <ol className="text-xs text-zinc-500 space-y-1 list-decimal list-inside">
+        <div className="w-full mt-4 p-3 rounded-lg bg-slate-800/50 text-left space-y-2">
+          <p className="text-xs text-slate-400 font-medium">Como obter:</p>
+          <ol className="text-xs text-slate-500 space-y-1 list-decimal list-inside">
             <li>Crie uma conta gratuita no <a href="https://console.upstash.com" target="_blank" rel="noopener noreferrer" className="text-orange-400 hover:underline">Upstash</a></li>
-            <li>Clique em <strong className="text-zinc-300">QStash</strong> no menu lateral</li>
-            <li>Copie o <strong className="text-zinc-300">QSTASH_TOKEN</strong> na aba Details</li>
+            <li>Clique em <strong className="text-slate-300">QStash</strong> no menu lateral</li>
+            <li>Copie o <strong className="text-slate-300">QSTASH_TOKEN</strong> na aba Details</li>
           </ol>
         </div>
 
@@ -148,7 +148,7 @@ export function QStashStep({ onComplete }: QStashStepProps) {
           href="https://console.upstash.com/qstash"
           target="_blank"
           rel="noopener noreferrer"
-          className="mt-6 inline-flex items-center gap-1.5 text-sm text-zinc-500 hover:text-orange-400 transition-colors"
+          className="mt-6 inline-flex items-center gap-1.5 text-sm text-slate-500 hover:text-orange-400 transition-colors"
         >
           <ExternalLink className="w-3.5 h-3.5" />
           Onde encontrar no console Upstash?

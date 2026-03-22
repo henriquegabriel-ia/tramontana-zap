@@ -146,7 +146,7 @@ function renderBasicText(
   return (
     <div
       key={`bt_${idx}`}
-      className={`text-[14px] leading-snug text-zinc-100 whitespace-pre-wrap ${
+      className={`text-[14px] leading-snug text-slate-100 whitespace-pre-wrap ${
         editorKey ? 'cursor-pointer hover:bg-white/5 px-1 rounded transition-colors' : ''
       } ${selected ? 'ring-2 ring-purple-400/40 bg-purple-500/5' : ''}`}
       onClick={() => {
@@ -200,7 +200,7 @@ function renderTextEntry(
   return (
     <div key={`te_${idx}`} className="space-y-2">
       <div
-        className={`text-[14px] text-zinc-200 ${editorKey ? 'cursor-pointer' : ''} ${
+        className={`text-[14px] text-slate-200 ${editorKey ? 'cursor-pointer' : ''} ${
           selected ? 'ring-2 ring-purple-400/40 bg-purple-500/5 rounded px-1' : ''
         }`}
         onClick={() => {
@@ -215,7 +215,7 @@ function renderTextEntry(
         value={value}
         onChange={(e) => setValues((prev) => ({ ...prev, [name]: e.target.value }))}
         placeholder="Digite aqui"
-        className="h-12 w-full rounded-xl border border-white/10 bg-white/5 px-4 text-[15px] text-zinc-200 placeholder:text-zinc-500 focus:outline-none focus:ring-2 focus:ring-purple-400/40"
+        className="h-12 w-full rounded-xl border border-white/10 bg-white/5 px-4 text-[15px] text-slate-200 placeholder:text-slate-500 focus:outline-none focus:ring-2 focus:ring-purple-400/40"
       />
     </div>
   )
@@ -239,7 +239,7 @@ function renderTextArea(
   return (
     <div key={`ta_${idx}`} className="space-y-2">
       <div
-        className={`text-[14px] text-zinc-200 ${editorKey ? 'cursor-pointer' : ''} ${
+        className={`text-[14px] text-slate-200 ${editorKey ? 'cursor-pointer' : ''} ${
           selected ? 'ring-2 ring-purple-400/40 bg-purple-500/5 rounded px-1' : ''
         }`}
         onClick={() => {
@@ -254,7 +254,7 @@ function renderTextArea(
         onChange={(e) => setValues((prev) => ({ ...prev, [name]: e.target.value }))}
         placeholder="Digite aqui"
         rows={3}
-        className="w-full rounded-xl border border-white/10 bg-white/5 px-4 py-3 text-[15px] text-zinc-200 placeholder:text-zinc-500 focus:outline-none focus:ring-2 focus:ring-purple-400/40"
+        className="w-full rounded-xl border border-white/10 bg-white/5 px-4 py-3 text-[15px] text-slate-200 placeholder:text-slate-500 focus:outline-none focus:ring-2 focus:ring-purple-400/40"
       />
     </div>
   )
@@ -294,7 +294,7 @@ function renderOptIn(
         className="mt-1 h-5 w-5 rounded border border-white/30 bg-white/5 accent-purple-400"
       />
       <div
-        className={`text-[15px] text-zinc-300 leading-snug ${
+        className={`text-[15px] text-slate-300 leading-snug ${
           selected ? 'ring-2 ring-purple-400/40 bg-purple-500/5 rounded px-1' : ''
         }`}
         onClick={handleEdit}
@@ -347,7 +347,7 @@ function renderRadioGroup(
     <div key={`rg_${idx}`} className="space-y-3">
       {label ? (
         <div
-          className={`text-[14px] text-zinc-200 ${editorKey ? 'cursor-pointer' : ''} ${
+          className={`text-[14px] text-slate-200 ${editorKey ? 'cursor-pointer' : ''} ${
             labelSelected ? 'ring-2 ring-purple-400/40 bg-purple-500/5 rounded px-1' : ''
           }`}
           onClick={() => {
@@ -361,7 +361,7 @@ function renderRadioGroup(
       <div className="space-y-3">
         {(options.length ? options : [{ id: 'opcao_1', title: 'Opção 1' }]).map((o: any, j: number) => (
           <label key={`rg_${idx}_${j}`} className="flex items-center justify-between gap-4 rounded-xl border border-white/10 bg-white/5 px-4 py-3 cursor-pointer">
-            <div className="text-[15px] text-zinc-300">{s(o?.title, 'Opção')}</div>
+            <div className="text-[15px] text-slate-300">{s(o?.title, 'Opção')}</div>
             <input
               type="radio"
               name={name}
@@ -399,7 +399,7 @@ function renderCheckboxGroup(
     <div key={`cg_${idx}`} className="space-y-3">
       {label ? (
         <div
-          className={`text-[14px] text-zinc-200 ${editorKey ? 'cursor-pointer' : ''} ${
+          className={`text-[14px] text-slate-200 ${editorKey ? 'cursor-pointer' : ''} ${
             labelSelected ? 'ring-2 ring-purple-400/40 bg-purple-500/5 rounded px-1' : ''
           }`}
           onClick={() => {
@@ -413,7 +413,7 @@ function renderCheckboxGroup(
       <div className="space-y-3">
         {(options.length ? options : [{ id: 'opcao_1', title: 'Opção 1' }]).map((o: any, j: number) => (
           <label key={`cg_${idx}_${j}`} className="flex items-center justify-between gap-4 rounded-xl border border-white/10 bg-white/5 px-4 py-3 cursor-pointer">
-            <div className="text-[15px] text-zinc-300">{s(o?.title, 'Opção')}</div>
+            <div className="text-[15px] text-slate-300">{s(o?.title, 'Opção')}</div>
             <input
               type="checkbox"
               value={s(o?.id, s(o?.title, String(j)))}
@@ -464,7 +464,7 @@ function renderDropdown(
   return (
     <div key={`dd_${idx}`} className="space-y-2">
       <div
-        className={`text-[14px] text-zinc-200 ${editorKey ? 'cursor-pointer' : ''} ${
+        className={`text-[14px] text-slate-200 ${editorKey ? 'cursor-pointer' : ''} ${
           selected ? 'ring-2 ring-purple-400/40 bg-purple-500/5 rounded px-1' : ''
         }`}
         onClick={() => {
@@ -477,7 +477,7 @@ function renderDropdown(
       <select
         value={value}
         onChange={(e) => setValues((prev) => ({ ...prev, [name]: e.target.value }))}
-        className="h-12 w-full rounded-xl border border-white/10 bg-white/5 px-4 text-[15px] text-zinc-200 focus:outline-none focus:ring-2 focus:ring-purple-400/40"
+        className="h-12 w-full rounded-xl border border-white/10 bg-white/5 px-4 text-[15px] text-slate-200 focus:outline-none focus:ring-2 focus:ring-purple-400/40"
       >
         <option value="" disabled>
           Selecionar opção
@@ -510,7 +510,7 @@ function renderDatePicker(
   return (
     <div key={`dp_${idx}`} className="space-y-2">
       <div
-        className={`text-[14px] text-zinc-200 ${editorKey ? 'cursor-pointer' : ''} ${
+        className={`text-[14px] text-slate-200 ${editorKey ? 'cursor-pointer' : ''} ${
           selected ? 'ring-2 ring-purple-400/40 bg-purple-500/5 rounded px-1' : ''
         }`}
         onClick={() => {
@@ -524,7 +524,7 @@ function renderDatePicker(
         type="date"
         value={value}
         onChange={(e) => setValues((prev) => ({ ...prev, [name]: e.target.value }))}
-        className="h-12 w-full rounded-xl border border-white/10 bg-white/5 px-4 text-[15px] text-zinc-200 focus:outline-none focus:ring-2 focus:ring-purple-400/40"
+        className="h-12 w-full rounded-xl border border-white/10 bg-white/5 px-4 text-[15px] text-slate-200 focus:outline-none focus:ring-2 focus:ring-purple-400/40"
       />
     </div>
   )
@@ -812,9 +812,9 @@ export function MetaFlowPreview(props: {
   }
 
   return (
-    <div className={`relative mx-auto w-[320px] h-160 rounded-[2.2rem] bg-zinc-950 border-8 border-zinc-900 shadow-2xl overflow-hidden ${props.className || ''}`}>
+    <div className={`relative mx-auto w-[320px] h-160 rounded-[2.2rem] bg-slate-950 border-8 border-slate-900 shadow-2xl overflow-hidden ${props.className || ''}`}>
       {/* topo do "telefone" */}
-      <div className="h-10 bg-zinc-950" />
+      <div className="h-10 bg-slate-950" />
 
       {/* modal do flow (como no WhatsApp) */}
       <div className="absolute inset-x-0 top-6 bottom-0 rounded-t-2xl bg-[#1f2223] border-t border-white/10 overflow-hidden">
@@ -824,13 +824,13 @@ export function MetaFlowPreview(props: {
             type="button"
             aria-label={canGoBack ? 'Voltar' : 'Fechar preview da MiniApp'}
             title={canGoBack ? 'Voltar' : 'Fechar'}
-            className="h-9 w-9 rounded-full hover:bg-white/5 flex items-center justify-center text-zinc-200"
+            className="h-9 w-9 rounded-full hover:bg-white/5 flex items-center justify-center text-slate-200"
             onClick={handleGoBack}
           >
             {canGoBack ? <ArrowLeft className="h-5 w-5" /> : <X className="h-5 w-5" />}
           </button>
           <div
-            className={`text-[18px] font-semibold text-zinc-100 truncate ${
+            className={`text-[18px] font-semibold text-slate-100 truncate ${
               titleEditorKey ? 'cursor-pointer hover:bg-white/5 px-1 rounded transition-colors' : ''
             } ${titleSelected ? 'ring-2 ring-purple-400/40 bg-purple-500/5 rounded px-1' : ''}`}
             onClick={() => {
@@ -844,7 +844,7 @@ export function MetaFlowPreview(props: {
             type="button"
             aria-label="Mais opcoes do preview"
             title="Mais opcoes"
-            className="h-9 w-9 rounded-full hover:bg-white/5 flex items-center justify-center text-zinc-200"
+            className="h-9 w-9 rounded-full hover:bg-white/5 flex items-center justify-center text-slate-200"
           >
             <MoreVertical className="h-5 w-5" />
           </button>
@@ -888,10 +888,10 @@ export function MetaFlowPreview(props: {
             {completed ? 'Concluído' : footer.label}
           </button>
 
-          <div className="mt-4 text-center text-[14px] text-zinc-400">
+          <div className="mt-4 text-center text-[14px] text-slate-400">
             Gerenciada pela empresa. <span className="text-purple-400">Saiba mais</span>
           </div>
-          <div className="mt-1 text-center text-[10px] text-zinc-500">preview Meta • v{parsed.version || '—'}</div>
+          <div className="mt-1 text-center text-[10px] text-slate-500">preview Meta • v{parsed.version || '—'}</div>
         </div>
       </div>
     </div>

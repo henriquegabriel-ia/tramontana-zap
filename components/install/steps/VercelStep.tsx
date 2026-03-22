@@ -100,10 +100,10 @@ export function VercelStep({ onComplete }: VercelStepProps) {
         <ServiceIcon service="vercel" size="lg" />
 
         {/* Title */}
-        <h2 className="mt-4 text-xl font-semibold text-zinc-100">
+        <h2 className="mt-4 text-xl font-semibold text-slate-100">
           Conecte sua conta Vercel
         </h2>
-        <p className="mt-1 text-sm text-zinc-400">
+        <p className="mt-1 text-sm text-slate-400">
           Cole seu token de acesso
         </p>
 
@@ -124,15 +124,15 @@ export function VercelStep({ onComplete }: VercelStepProps) {
 
         {/* Collapsible help */}
         <details className="w-full mt-6 group">
-          <summary className="flex items-center justify-center gap-1.5 text-sm text-zinc-500 hover:text-zinc-300 cursor-pointer list-none transition-colors">
+          <summary className="flex items-center justify-center gap-1.5 text-sm text-slate-500 hover:text-slate-300 cursor-pointer list-none transition-colors">
             <ChevronDown className="w-3.5 h-3.5 transition-transform group-open:rotate-180" />
             Como criar o token?
           </summary>
-          <div className="mt-3 p-3 rounded-lg bg-zinc-800/50 text-left space-y-2 animate-in fade-in slide-in-from-top-2 duration-200">
-            <ol className="text-xs text-zinc-400 space-y-1.5 list-decimal list-inside">
+          <div className="mt-3 p-3 rounded-lg bg-slate-800/50 text-left space-y-2 animate-in fade-in slide-in-from-top-2 duration-200">
+            <ol className="text-xs text-slate-400 space-y-1.5 list-decimal list-inside">
               <li>Acesse <a href="https://vercel.com/account/tokens" target="_blank" rel="noopener noreferrer" className="text-purple-400 hover:underline">vercel.com/account/tokens</a></li>
-              <li>Clique em <strong className="text-zinc-300">Create</strong></li>
-              <li>Nome: <strong className="text-zinc-300">tramontana-zap</strong> • Scope: <strong className="text-zinc-300">Full Account</strong></li>
+              <li>Clique em <strong className="text-slate-300">Create</strong></li>
+              <li>Nome: <strong className="text-slate-300">tramontana-zap</strong> • Scope: <strong className="text-slate-300">Full Account</strong></li>
               <li>Copie e cole o token acima</li>
             </ol>
           </div>

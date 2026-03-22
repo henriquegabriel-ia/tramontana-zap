@@ -41,7 +41,7 @@ export const ContactDeleteModal: React.FC<ContactDeleteModalProps> = ({
           <div className="flex gap-3">
             <button
               onClick={onCancel}
-              className="flex-1 bg-zinc-800 text-white font-medium py-3 rounded-xl hover:bg-zinc-700 transition-colors"
+              className="flex-1 bg-slate-800 text-white font-medium py-3 rounded-xl hover:bg-slate-700 transition-colors"
               disabled={isDeleting}
             >
               Cancelar

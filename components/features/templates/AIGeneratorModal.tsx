@@ -63,9 +63,9 @@ export const AIGeneratorModal = ({
 
   return (
     <div className="fixed inset-0 bg-black/70 flex items-center justify-center z-50 p-4">
-      <div className="bg-zinc-900/80 border border-white/10 rounded-2xl w-full max-w-4xl max-h-[90vh] overflow-hidden flex flex-col shadow-[0_30px_80px_rgba(0,0,0,0.55)]">
+      <div className="bg-slate-900/80 border border-white/10 rounded-2xl w-full max-w-4xl max-h-[90vh] overflow-hidden flex flex-col shadow-[0_30px_80px_rgba(0,0,0,0.55)]">
         {/* Header */}
-        <div className="flex items-center justify-between px-6 py-4 border-b border-white/10 bg-zinc-950/40">
+        <div className="flex items-center justify-between px-6 py-4 border-b border-white/10 bg-slate-950/40">
           <div className="flex items-center gap-2">
             <Sparkles className="h-5 w-5 text-purple-300" />
             <h2 className="text-lg font-medium text-white">{title}</h2>
@@ -83,29 +83,29 @@ export const AIGeneratorModal = ({
           {/* Input Form - Always visible */}
           <div className="space-y-4">
             <div>
-              <label className="block text-sm text-zinc-400 mb-2">
+              <label className="block text-sm text-slate-400 mb-2">
                 O que você precisa? Seja específico para melhores resultados
               </label>
               <textarea
                 value={prompt}
                 onChange={(e) => setPrompt(e.target.value)}
                 placeholder="Ex: Sou dono de uma pizzaria delivery e preciso de templates para confirmar pedidos, avisar sobre tempo de entrega, e informar quando o motoboy saiu..."
-                className="w-full h-32 px-4 py-3 bg-zinc-950/40 rounded-xl border border-white/10 focus:border-purple-500/50 focus:outline-none resize-none text-sm text-white placeholder:text-gray-600"
+                className="w-full h-32 px-4 py-3 bg-slate-950/40 rounded-xl border border-white/10 focus:border-purple-500/50 focus:outline-none resize-none text-sm text-white placeholder:text-gray-600"
               />
-              <p className="text-xs text-zinc-500 mt-1">
+              <p className="text-xs text-slate-500 mt-1">
                 Mínimo 10 caracteres. Quanto mais detalhes, melhor a IA entende seu negócio.
               </p>
             </div>
 
             <div className="flex gap-4">
               <div className="flex-1">
-                <label className="block text-sm text-zinc-400 mb-2">
+                <label className="block text-sm text-slate-400 mb-2">
                   Quantidade
                 </label>
                 <select
                   value={quantity}
                   onChange={(e) => setQuantity(Number(e.target.value))}
-                  className="w-full h-11 px-4 bg-zinc-950/40 rounded-xl border border-white/10 focus:border-purple-500/50 focus:outline-none text-white"
+                  className="w-full h-11 px-4 bg-slate-950/40 rounded-xl border border-white/10 focus:border-purple-500/50 focus:outline-none text-white"
                 >
                   <option value={3}>3 templates</option>
                   <option value={5}>5 templates</option>
@@ -114,13 +114,13 @@ export const AIGeneratorModal = ({
                 </select>
               </div>
               <div className="flex-1">
-                <label className="block text-sm text-zinc-400 mb-2">
+                <label className="block text-sm text-slate-400 mb-2">
                   Idioma
                 </label>
                 <select
                   value={language}
                   onChange={(e) => setLanguage(e.target.value)}
-                  className="w-full h-11 px-4 bg-zinc-950/40 rounded-xl border border-white/10 focus:border-purple-500/50 focus:outline-none text-white"
+                  className="w-full h-11 px-4 bg-slate-950/40 rounded-xl border border-white/10 focus:border-purple-500/50 focus:outline-none text-white"
                 >
                   <option value="pt_BR">Português (BR)</option>
                   <option value="en_US">English (US)</option>
@@ -152,7 +152,7 @@ export const AIGeneratorModal = ({
           {hasTemplates && (
             <div className="border-t border-white/10 pt-4 space-y-3">
               <div className="flex items-center justify-between">
-                <h3 className="text-sm font-medium text-zinc-300">
+                <h3 className="text-sm font-medium text-slate-300">
                   Templates Gerados ({generatedTemplates.length})
                 </h3>
                 <button
@@ -172,7 +172,7 @@ export const AIGeneratorModal = ({
                     className={`p-3 rounded-lg border transition-colors ${
                       selectedTemplates.has(template.id)
                         ? 'bg-purple-500/10 border-purple-500/30'
-                        : 'bg-zinc-950/40 border-white/10 hover:border-white/20'
+                        : 'bg-slate-950/40 border-white/10 hover:border-white/20'
                     }`}
                   >
                     <div className="flex items-start gap-3">
@@ -198,10 +198,10 @@ export const AIGeneratorModal = ({
                             className="p-1 hover:bg-white/5 rounded transition-colors"
                             title="Copiar"
                           >
-                            <Copy className="h-4 w-4 text-zinc-400" />
+                            <Copy className="h-4 w-4 text-slate-400" />
                           </button>
                         </div>
-                        <p className="text-sm text-zinc-400 whitespace-pre-wrap">
+                        <p className="text-sm text-slate-400 whitespace-pre-wrap">
                           {template.content}
                         </p>
                       </div>
@@ -215,8 +215,8 @@ export const AIGeneratorModal = ({
 
         {/* Footer - Only when templates exist */}
         {hasTemplates && (
-          <div className="flex items-center justify-between px-6 py-4 border-t border-white/10 bg-zinc-950/40">
-            <span className="text-sm text-zinc-400">
+          <div className="flex items-center justify-between px-6 py-4 border-t border-white/10 bg-slate-950/40">
+            <span className="text-sm text-slate-400">
               {selectedCount} de {generatedTemplates.length} selecionados
             </span>
             <button

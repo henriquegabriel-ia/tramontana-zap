@@ -95,12 +95,12 @@ export function Stepper({
                   'text-purple-400',
                 ],
                 isCompleted && [
-                  'bg-zinc-800/50 border-white/10',
-                  'text-zinc-300',
+                  'bg-slate-800/50 border-white/10',
+                  'text-slate-300',
                 ],
                 !isActive && !isCompleted && [
-                  'bg-zinc-900/50 border-white/5',
-                  'text-zinc-500',
+                  'bg-slate-900/50 border-white/5',
+                  'text-slate-500',
                 ],
                 // Interação
                 isClickable && 'cursor-pointer hover:border-white/20',
@@ -116,7 +116,7 @@ export function Stepper({
                   isCompact ? 'w-6 h-6 text-xs' : 'w-8 h-8',
                   isActive && 'bg-purple-500 text-white',
                   isCompleted && 'bg-purple-500/20 text-purple-400',
-                  !isActive && !isCompleted && 'bg-zinc-800 text-zinc-500'
+                  !isActive && !isCompleted && 'bg-slate-800 text-slate-500'
                 )}
               >
                 {isCompleted ? (
@@ -193,7 +193,7 @@ export function VerticalStepper({
                   'font-semibold text-sm transition-all',
                   isActive && 'bg-purple-500 text-white',
                   isCompleted && 'bg-purple-500/20 text-purple-400',
-                  !isActive && !isCompleted && 'bg-zinc-800 text-zinc-500',
+                  !isActive && !isCompleted && 'bg-slate-800 text-slate-500',
                   isClickable && 'cursor-pointer hover:ring-2 hover:ring-purple-500/30',
                   !isClickable && 'cursor-default'
                 )}
@@ -227,14 +227,14 @@ export function VerticalStepper({
                   className={cn(
                     'font-medium',
                     isActive && 'text-purple-400',
-                    isCompleted && 'text-zinc-300',
-                    !isActive && !isCompleted && 'text-zinc-500'
+                    isCompleted && 'text-slate-300',
+                    !isActive && !isCompleted && 'text-slate-500'
                   )}
                 >
                   {step.label}
                 </p>
                 {showDescription && step.description && (
-                  <p className="text-xs text-zinc-500 mt-0.5">
+                  <p className="text-xs text-slate-500 mt-0.5">
                     {step.description}
                   </p>
                 )}

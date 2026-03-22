@@ -51,7 +51,7 @@ export const ContactFieldMappingSheet: React.FC<ContactFieldMappingSheetProps> =
 
   return (
     <Sheet open={isOpen} onOpenChange={handleOpenChange}>
-      <SheetContent className="w-100 sm:w-135 border-l border-white/10 bg-zinc-950 p-0 flex flex-col z-60">
+      <SheetContent className="w-100 sm:w-135 border-l border-white/10 bg-slate-950 p-0 flex flex-col z-60">
         <SheetHeader className="p-6 border-b border-white/10">
           <div className="flex items-center justify-between">
             <SheetTitle className="text-white flex items-center gap-2">
@@ -70,7 +70,7 @@ export const ContactFieldMappingSheet: React.FC<ContactFieldMappingSheetProps> =
             ) : (
               <button
                 onClick={() => setView('map')}
-                className="text-xs flex items-center gap-1.5 text-white font-semibold bg-zinc-800 hover:bg-zinc-700 border border-white/10 px-4 py-2 rounded-lg transition-all hover:scale-105 shadow-lg shadow-black/20"
+                className="text-xs flex items-center gap-1.5 text-white font-semibold bg-slate-800 hover:bg-slate-700 border border-white/10 px-4 py-2 rounded-lg transition-all hover:scale-105 shadow-lg shadow-black/20"
               >
                 <ChevronLeft size={14} />
                 Voltar
@@ -102,7 +102,7 @@ export const ContactFieldMappingSheet: React.FC<ContactFieldMappingSheetProps> =
                         key={field.id}
                         className={`p-4 rounded-xl border transition-all ${isMapped
                           ? 'bg-primary-500/5 border-primary-500/20'
-                          : 'bg-zinc-900/50 border-white/5'
+                          : 'bg-slate-900/50 border-white/5'
                           }`}
                       >
                         <div className="flex items-center justify-between mb-3">
@@ -112,13 +112,13 @@ export const ContactFieldMappingSheet: React.FC<ContactFieldMappingSheetProps> =
                             </label>
                             {isMapped && <Check size={14} className="text-primary-500" />}
                           </div>
-                          <span className="text-[10px] font-mono text-gray-500 bg-zinc-900 px-2 py-1 rounded">
+                          <span className="text-[10px] font-mono text-gray-500 bg-slate-900 px-2 py-1 rounded">
                             {`{{${field.key}}}`}
                           </span>
                         </div>
 
                         <select
-                          className={`w-full bg-zinc-950 border rounded-lg px-3 py-2 text-white text-sm outline-none transition-colors ${isMapped
+                          className={`w-full bg-slate-950 border rounded-lg px-3 py-2 text-white text-sm outline-none transition-colors ${isMapped
                             ? 'border-primary-500/30 focus:border-primary-500'
                             : 'border-white/10 focus:border-primary-500'
                             }`}
@@ -152,7 +152,7 @@ export const ContactFieldMappingSheet: React.FC<ContactFieldMappingSheetProps> =
               )}
             </div>
 
-            <div className="p-6 border-t border-white/10 bg-zinc-900/50">
+            <div className="p-6 border-t border-white/10 bg-slate-900/50">
               <button
                 onClick={() => onOpenChange(false)}
                 className="w-full py-3 bg-primary-500 hover:bg-primary-600 text-black font-bold rounded-xl transition-colors flex items-center justify-center gap-2"

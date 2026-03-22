@@ -163,7 +163,7 @@ const CampaignTableRow = React.memo(
     return (
       <tr
         onClick={() => onRowClick(campaign.id)}
-        className="hover:bg-[var(--ds-bg-hover)] transition-all duration-200 group cursor-pointer hover:shadow-[0_0_20px_rgba(16,185,129,0.1)]"
+        className="hover:bg-[var(--ds-bg-hover)] transition-all duration-200 group cursor-pointer hover:shadow-[0_0_20px_rgba(104,51,189,0.06)]"
       >
         <td className="px-6 py-4">
           <p className="font-medium text-[var(--ds-text-primary)] group-hover:text-primary-400 transition-colors">{campaign.name}</p>

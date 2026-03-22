@@ -51,7 +51,7 @@ export interface WebhookFunnelLevel {
   url: string | null;
   isActive: boolean;
   isSmartZap: boolean;
-  color: 'purple' | 'blue' | 'zinc';
+  color: 'purple' | 'blue' | 'slate';
   description: string;
   isLocked?: boolean;
 }
@@ -75,4 +75,4 @@ export interface WebhookConfigSectionProps {
   availableDomains?: DomainOption[];
 }
 
-export type CardColor = 'purple' | 'amber' | 'blue' | 'zinc';
+export type CardColor = 'purple' | 'amber' | 'blue' | 'slate';

@@ -37,7 +37,7 @@ export const PreparingCampaignView: React.FC<PreparingCampaignViewProps> = ({
               <Loader2 size={18} className="animate-spin text-primary-400" />
               Preparando campanha...
             </PageTitle>
-            <span className="text-xs px-2 py-1 rounded border bg-zinc-800 border-zinc-700 text-gray-400">
+            <span className="text-xs px-2 py-1 rounded border bg-slate-800 border-slate-700 text-gray-400">
               {campaign.status}
             </span>
           </div>

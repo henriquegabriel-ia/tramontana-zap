@@ -67,7 +67,7 @@ export function FlowTestPanel({
   }, [flowId, flowToken])
 
   return (
-    <div id="flow-test-panel" className="rounded-2xl border border-white/10 bg-zinc-900/60 p-6 shadow-[0_12px_30px_rgba(0,0,0,0.35)] space-y-4">
+    <div id="flow-test-panel" className="rounded-2xl border border-white/10 bg-slate-900/60 p-6 shadow-[0_12px_30px_rgba(0,0,0,0.35)] space-y-4">
       <div className="flex items-center justify-between gap-3">
         <div>
           <div className="text-base font-semibold text-white">3. Testar</div>
@@ -97,7 +97,7 @@ export function FlowTestPanel({
             if (found?.meta_flow_id) setFlowId(String(found.meta_flow_id))
           }}
         >
-          <SelectTrigger className="w-full bg-zinc-950/40 border-white/10 text-white">
+          <SelectTrigger className="w-full bg-slate-950/40 border-white/10 text-white">
             <SelectValue placeholder={isLoadingFlows ? 'Carregando…' : 'Escolha um MiniApp do Builder'} />
           </SelectTrigger>
           <SelectContent>
@@ -124,7 +124,7 @@ export function FlowTestPanel({
             value={to}
             onChange={(e) => setTo(e.target.value)}
             placeholder="Ex: +5511999999999"
-            className="bg-zinc-950/40 border-white/10 text-white"
+            className="bg-slate-950/40 border-white/10 text-white"
           />
           <div className="text-[11px] text-gray-500">Aceita números com ou sem + (E.164).</div>
         </div>
@@ -135,7 +135,7 @@ export function FlowTestPanel({
             value={flowId}
             onChange={(e) => setFlowId(e.target.value)}
             placeholder="Ex: 1234567890"
-            className="bg-zinc-950/40 border-white/10 text-white"
+            className="bg-slate-950/40 border-white/10 text-white"
           />
         </div>
 
@@ -145,7 +145,7 @@ export function FlowTestPanel({
             value={flowToken}
             onChange={(e) => setFlowToken(e.target.value)}
             placeholder="Cole o token da MiniApp"
-            className="bg-zinc-950/40 border-white/10 text-white"
+            className="bg-slate-950/40 border-white/10 text-white"
           />
           <div className="text-[11px] text-gray-500">Esse token vem da configuração da MiniApp na Meta.</div>
         </div>
@@ -168,7 +168,7 @@ export function FlowTestPanel({
             <Textarea
               value={body}
               onChange={(e) => setBody(e.target.value)}
-              className="bg-zinc-950/40 border-white/10 text-white"
+              className="bg-slate-950/40 border-white/10 text-white"
             />
           </div>
           <div className="space-y-2">
@@ -177,7 +177,7 @@ export function FlowTestPanel({
               value={ctaText}
               onChange={(e) => setCtaText(e.target.value)}
               placeholder="Abrir"
-              className="bg-zinc-950/40 border-white/10 text-white"
+              className="bg-slate-950/40 border-white/10 text-white"
             />
           </div>
           <div className="space-y-2">
@@ -186,7 +186,7 @@ export function FlowTestPanel({
               value={footer}
               onChange={(e) => setFooter(e.target.value)}
               placeholder="Opcional"
-              className="bg-zinc-950/40 border-white/10 text-white"
+              className="bg-slate-950/40 border-white/10 text-white"
             />
           </div>
         </div>

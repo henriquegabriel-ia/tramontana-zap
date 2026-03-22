@@ -35,10 +35,10 @@ export function CreateFlowWithAIDialog(props: {
         </Button>
       </DialogTrigger>
 
-      <DialogContent className="max-w-xl bg-zinc-950 border-white/10 text-white">
+      <DialogContent className="max-w-xl bg-slate-950 border-white/10 text-white">
         <DialogHeader>
           <DialogTitle>Criar MiniApp com IA</DialogTitle>
-          <DialogDescription className="text-zinc-400">
+          <DialogDescription className="text-slate-400">
             Descreva o que você quer coletar. A IA sugere as perguntas e a gente já cria o MiniApp no modo “Formulário”.
           </DialogDescription>
         </DialogHeader>
@@ -61,7 +61,7 @@ export function CreateFlowWithAIDialog(props: {
               id="flow_ai_prompt"
               value={prompt}
               onChange={(e) => setPrompt(e.target.value)}
-              className="min-h-28 bg-zinc-900 border-white/10 text-white"
+              className="min-h-28 bg-slate-900 border-white/10 text-white"
               placeholder="Ex: Quero captar nome, telefone, e-mail, cidade, interesse (imóvel/financiamento), melhor horário para contato e um opt-in para receber novidades."
             />
             <div className="text-[11px] text-gray-500">Mínimo: 10 caracteres. Quanto mais contexto, melhor.</div>
@@ -72,7 +72,7 @@ export function CreateFlowWithAIDialog(props: {
           <Button
             type="button"
             variant="outline"
-            className="border-white/10 bg-zinc-900 hover:bg-white/5"
+            className="border-white/10 bg-slate-900 hover:bg-white/5"
             onClick={() => setOpen(false)}
             disabled={props.isCreating}
           >

@@ -283,7 +283,7 @@ export function TestConnectionStep({
   const StatusIcon = ({ status }: { status: ValidationStatus }) => {
     switch (status) {
       case 'loading':
-        return <Loader2 className="w-4 h-4 text-zinc-400 animate-spin" />;
+        return <Loader2 className="w-4 h-4 text-slate-400 animate-spin" />;
       case 'success':
         return <CheckCircle2 className="w-4 h-4 text-purple-500" />;
       case 'warning':
@@ -291,7 +291,7 @@ export function TestConnectionStep({
       case 'error':
         return <XCircle className="w-4 h-4 text-red-500" />;
       default:
-        return <div className="w-4 h-4 rounded-full bg-zinc-600" />;
+        return <div className="w-4 h-4 rounded-full bg-slate-600" />;
     }
   };
 
@@ -305,24 +305,24 @@ export function TestConnectionStep({
       />
 
       {/* Status de validação */}
-      <div className="p-4 rounded-xl bg-zinc-800/50 space-y-3">
-        <p className="text-sm text-zinc-400 mb-3">Status da conexão:</p>
+      <div className="p-4 rounded-xl bg-slate-800/50 space-y-3">
+        <p className="text-sm text-slate-400 mb-3">Status da conexão:</p>
 
         <div className="flex items-center justify-between">
-          <span className="text-zinc-300">Identificação do número de telefone</span>
+          <span className="text-slate-300">Identificação do número de telefone</span>
           <div className="flex items-center gap-2">
             <StatusIcon status={validation.phoneNumberId} />
-            <span className="text-sm text-zinc-400">
+            <span className="text-sm text-slate-400">
               {validation.phoneNumberId === 'success' ? 'válido' : validation.phoneNumberId === 'error' ? 'inválido' : '...'}
             </span>
           </div>
         </div>
 
         <div className="flex items-center justify-between">
-          <span className="text-zinc-300">WABA ID</span>
+          <span className="text-slate-300">WABA ID</span>
           <div className="flex items-center gap-2">
             <StatusIcon status={validation.businessAccountId} />
-            <span className={`text-sm ${validation.businessAccountId === 'warning' ? 'text-amber-400' : 'text-zinc-400'}`}>
+            <span className={`text-sm ${validation.businessAccountId === 'warning' ? 'text-amber-400' : 'text-slate-400'}`}>
               {validation.businessAccountId === 'success'
                 ? 'válido'
                 : validation.businessAccountId === 'warning'
@@ -335,10 +335,10 @@ export function TestConnectionStep({
         </div>
 
         <div className="flex items-center justify-between">
-          <span className="text-zinc-300">Token de acesso</span>
+          <span className="text-slate-300">Token de acesso</span>
           <div className="flex items-center gap-2">
             <StatusIcon status={validation.accessToken} />
-            <span className="text-sm text-zinc-400">
+            <span className="text-sm text-slate-400">
               {validation.accessToken === 'success'
                 ? 'válido'
                 : validation.accessToken === 'error'
@@ -351,10 +351,10 @@ export function TestConnectionStep({
         {/* Permissões do token (se App Secret foi fornecido) */}
         {canValidatePermissions && (
           <div className="flex items-center justify-between">
-            <span className="text-zinc-300">Permissões do token</span>
+            <span className="text-slate-300">Permissões do token</span>
             <div className="flex items-center gap-2">
               <StatusIcon status={validation.permissions} />
-              <span className={`text-sm ${validation.permissions === 'warning' ? 'text-amber-400' : 'text-zinc-400'}`}>
+              <span className={`text-sm ${validation.permissions === 'warning' ? 'text-amber-400' : 'text-slate-400'}`}>
                 {validation.permissions === 'success'
                   ? 'completas'
                   : validation.permissions === 'warning'
@@ -371,11 +371,11 @@ export function TestConnectionStep({
 
         {/* Detalhes das permissões */}
         {validation.permissionDetails && validation.permissionDetails.length > 0 && (
-          <div className="pt-2 mt-2 border-t border-zinc-700 space-y-2">
-            <p className="text-xs text-zinc-500 mb-1">Escopos do token:</p>
+          <div className="pt-2 mt-2 border-t border-slate-700 space-y-2">
+            <p className="text-xs text-slate-500 mb-1">Escopos do token:</p>
             {validation.permissionDetails.map((perm) => (
               <div key={perm.scope} className="flex items-center justify-between text-sm">
-                <span className="text-zinc-400">{perm.label}</span>
+                <span className="text-slate-400">{perm.label}</span>
                 <span className={perm.present ? 'text-purple-400' : 'text-red-400'}>
                   {perm.present ? '✓' : '✗'}
                 </span>
@@ -386,9 +386,9 @@ export function TestConnectionStep({
 
         {/* Info do token (tipo e expiração) */}
         {validation.tokenType && (
-          <div className="pt-2 mt-2 border-t border-zinc-700">
-            <p className="text-xs text-zinc-500">
-              Tipo: <span className="text-zinc-300">{validation.tokenType}</span>
+          <div className="pt-2 mt-2 border-t border-slate-700">
+            <p className="text-xs text-slate-500">
+              Tipo: <span className="text-slate-300">{validation.tokenType}</span>
               {validation.isPermanent ? (
                 <span className="text-purple-400 ml-2">• Permanente</span>
               ) : validation.tokenExpiry ? (
@@ -399,12 +399,12 @@ export function TestConnectionStep({
         )}
 
         {validation.displayPhoneNumber && (
-          <div className="pt-2 mt-2 border-t border-zinc-700">
-            <p className="text-sm text-zinc-400">
+          <div className="pt-2 mt-2 border-t border-slate-700">
+            <p className="text-sm text-slate-400">
               Número: <span className="text-white">{validation.displayPhoneNumber}</span>
             </p>
             {validation.verifiedName && (
-              <p className="text-sm text-zinc-400">
+              <p className="text-sm text-slate-400">
                 Nome: <span className="text-white">{validation.verifiedName}</span>
               </p>
             )}
@@ -412,7 +412,7 @@ export function TestConnectionStep({
         )}
 
         {validation.businessAccountId === 'warning' && (
-          <div className="pt-2 mt-2 border-t border-zinc-700">
+          <div className="pt-2 mt-2 border-t border-slate-700">
             <p className="text-xs text-amber-400 flex items-center gap-1">
               <AlertTriangle className="w-3 h-3" />
               Não foi possível confirmar o vínculo WABA↔Phone. Verifique os IDs.
@@ -450,7 +450,7 @@ export function TestConnectionStep({
               variant="ghost"
               size="sm"
               onClick={onBack}
-              className="text-zinc-400 hover:text-white"
+              className="text-slate-400 hover:text-white"
             >
               Voltar e corrigir
             </Button>
