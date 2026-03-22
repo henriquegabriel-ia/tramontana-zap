@@ -59,9 +59,9 @@ export const ContactTable: React.FC<ContactTableProps> = ({
   return (
     <div className="flex-1 min-h-0 overflow-auto">
       <table className="w-full text-left text-sm" aria-label="Lista de contatos">
-        <thead className="bg-[var(--ds-bg-hover)] text-[var(--ds-text-secondary)] uppercase text-xs tracking-wider">
+        <thead className="bg-[var(--ds-bg-surface)]/30">
           <tr>
-            <th scope="col" className="w-8 px-6 py-4">
+            <th scope="col" className="w-8 px-6 py-5">
               <label className="sr-only" htmlFor="select-all">Selecionar todos os contatos</label>
               <input
                 id="select-all"
@@ -72,15 +72,15 @@ export const ContactTable: React.FC<ContactTableProps> = ({
                 aria-label="Selecionar todos os contatos"
               />
             </th>
-            <th scope="col" className="px-6 py-4 font-medium">Contato</th>
-            <th scope="col" className="px-6 py-4 font-medium">Tags</th>
-            <th scope="col" className="px-6 py-4 font-medium">Status</th>
+            <th scope="col" className="px-6 py-5 text-[11px] font-extrabold text-[var(--ds-text-muted)] uppercase tracking-widest">Contato</th>
+            <th scope="col" className="px-6 py-5 text-[11px] font-extrabold text-[var(--ds-text-muted)] uppercase tracking-widest">Tags</th>
+            <th scope="col" className="px-6 py-5 text-[11px] font-extrabold text-[var(--ds-text-muted)] uppercase tracking-widest">Status</th>
             {showSuppressionDetails && (
-              <th scope="col" className="px-6 py-4 font-medium">Motivo</th>
+              <th scope="col" className="px-6 py-5 text-[11px] font-extrabold text-[var(--ds-text-muted)] uppercase tracking-widest">Motivo</th>
             )}
-            <th scope="col" className="px-6 py-4 font-medium">Data Criação</th>
-            <th scope="col" className="px-6 py-4 font-medium">Última Atividade</th>
-            <th scope="col" className="px-6 py-4 font-medium text-right">Ações</th>
+            <th scope="col" className="px-6 py-5 text-[11px] font-extrabold text-[var(--ds-text-muted)] uppercase tracking-widest">Data Criação</th>
+            <th scope="col" className="px-6 py-5 text-[11px] font-extrabold text-[var(--ds-text-muted)] uppercase tracking-widest">Última Atividade</th>
+            <th scope="col" className="px-6 py-5 text-[11px] font-extrabold text-[var(--ds-text-muted)] uppercase tracking-widest text-right">Ações</th>
           </tr>
         </thead>
         <tbody className="divide-y divide-[var(--ds-border-subtle)]">

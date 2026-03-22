@@ -356,7 +356,7 @@ export const ContactListView: React.FC<ContactListViewProps> = ({
       <ContactStatsComponent stats={stats} />
 
       {/* Main Content Panel */}
-      <Container variant="glass" padding="none" className="rounded-2xl flex-1 min-h-0 flex flex-col">
+      <div className="ds-table-wrapper flex-1 min-h-0 flex flex-col">
         {/* Filters */}
         <ContactFilters
           searchTerm={searchTerm}
@@ -409,7 +409,7 @@ export const ContactListView: React.FC<ContactListViewProps> = ({
           totalPages={totalPages}
           onPageChange={onPageChange}
         />
-      </Container>
+      </div>
 
       {/* Modals */}
       <ContactAddModal

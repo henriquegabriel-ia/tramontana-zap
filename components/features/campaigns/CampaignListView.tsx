@@ -366,12 +366,12 @@ export const CampaignListView: React.FC<CampaignListViewProps> = ({
       {/* Filters Bar */}
       <Container variant="glass" padding="md" className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 relative z-20">
         {/* Search */}
-        <div className="flex items-center gap-3 w-full sm:w-96 bg-[var(--ds-bg-elevated)] border border-[var(--ds-border-subtle)] rounded-lg px-4 py-2.5 focus-within:border-primary-500/50 focus-within:ring-1 focus-within:ring-primary-500/50 transition-all">
-          <Search size={18} className="text-[var(--ds-text-muted)]" />
+        <div className="relative w-full sm:w-96 group">
+          <Search size={18} className="absolute left-4 top-1/2 -translate-y-1/2 text-[var(--ds-text-muted)] group-focus-within:text-primary-500 transition-colors" />
           <input
             type="text"
             placeholder="Buscar campanhas..."
-            className="bg-transparent border-none outline-none text-sm w-full text-[var(--ds-text-primary)] placeholder-[var(--ds-text-muted)]"
+            className="w-full bg-[var(--ds-bg-elevated)] border border-[var(--ds-border-subtle)] rounded-full py-2.5 pl-11 pr-4 focus:ring-2 focus:ring-primary-500/20 focus:border-primary-500/50 text-sm font-medium transition-all text-[var(--ds-text-primary)] placeholder-[var(--ds-text-muted)] outline-none"
             value={searchTerm}
             onChange={(e) => onSearchChange(e.target.value)}
           />
@@ -439,18 +439,18 @@ export const CampaignListView: React.FC<CampaignListViewProps> = ({
           duplicatingId={duplicatingId}
         />
       ) : (
-        <Container variant="glass" padding="none" className="overflow-hidden">
+        <div className="ds-table-wrapper">
           <div className="overflow-x-auto">
-            <table className="w-full text-left text-sm">
-              <thead className="bg-[var(--ds-bg-hover)] border-b border-[var(--ds-border-subtle)] text-[var(--ds-text-secondary)] uppercase tracking-wider text-xs">
-                <tr>
-                  <th className="px-6 py-4 font-medium">Nome</th>
-                  <th className="px-6 py-4 font-medium">Status</th>
-                  <th className="px-6 py-4 font-medium">Destinatarios</th>
-                  <th className="px-6 py-4 font-medium">Entrega</th>
-                  <th className="px-6 py-4 font-medium">Envio</th>
-                  <th className="px-6 py-4 font-medium">Criado em</th>
-                  <th className="px-6 py-4 font-medium text-right">Acoes</th>
+            <table className="w-full text-left text-sm border-collapse">
+              <thead>
+                <tr className="bg-[var(--ds-bg-surface)]/30">
+                  <th className="px-6 py-5 text-[11px] font-extrabold text-[var(--ds-text-muted)] uppercase tracking-widest">Nome</th>
+                  <th className="px-6 py-5 text-[11px] font-extrabold text-[var(--ds-text-muted)] uppercase tracking-widest">Status</th>
+                  <th className="px-6 py-5 text-[11px] font-extrabold text-[var(--ds-text-muted)] uppercase tracking-widest">Destinatários</th>
+                  <th className="px-6 py-5 text-[11px] font-extrabold text-[var(--ds-text-muted)] uppercase tracking-widest">Entrega</th>
+                  <th className="px-6 py-5 text-[11px] font-extrabold text-[var(--ds-text-muted)] uppercase tracking-widest">Envio</th>
+                  <th className="px-6 py-5 text-[11px] font-extrabold text-[var(--ds-text-muted)] uppercase tracking-widest">Criado em</th>
+                  <th className="px-6 py-5 text-[11px] font-extrabold text-[var(--ds-text-muted)] uppercase tracking-widest text-right">Ações</th>
                 </tr>
               </thead>
               <tbody className="divide-y divide-[var(--ds-border-subtle)]">
@@ -502,7 +502,7 @@ export const CampaignListView: React.FC<CampaignListViewProps> = ({
               </tbody>
             </table>
           </div>
-        </Container>
+        </div>
       )}
 
       {/* Pagination */}
