@@ -12,10 +12,13 @@ import { UpstashConfigPanel } from './UpstashConfigPanel';
 import { ApiDocsPanel } from './ApiDocsPanel';
 import { RDStationPanel } from './rdstation/RDStationPanel';
 import { useDevMode } from '@/components/providers/DevModeProvider';
+import { MessageSquare, BarChart3, FileText } from 'lucide-react';
 import type { SettingsViewProps } from './types';
 
 // Re-export types for consumers
 export type { SettingsViewProps } from './types';
+
+type SettingsTab = 'whatsapp' | 'rdstation' | 'api';
 
 export const SettingsView: React.FC<SettingsViewProps> = ({
   settings,
@@ -23,10 +26,8 @@ export const SettingsView: React.FC<SettingsViewProps> = ({
   isLoading,
   isSaving,
   onSave,
-  // onSaveSettings - reserved for future use
   onDisconnect,
   accountLimits,
-  // tierName - reserved for future use
   limitsError,
   limitsErrorMessage,
   limitsLoading,
@@ -94,42 +95,40 @@ export const SettingsView: React.FC<SettingsViewProps> = ({
   isSavingUpstashConfig,
 
 }) => {
-  // Dev mode hook
   const { isDevMode } = useDevMode();
-
-  // Always start collapsed
+  const [activeTab, setActiveTab] = useState<SettingsTab>('whatsapp');
   const [isEditing, setIsEditing] = useState(false);
 
-  // Refs para UX: o formulário de credenciais fica bem abaixo do card.
-  // Sem scroll automático, parece que o botão "Editar" não funcionou.
   const statusCardRef = useRef<HTMLDivElement | null>(null);
   const credentialsFormRef = useRef<HTMLDivElement | null>(null);
 
   useEffect(() => {
-    // Quando o usuário ativa o modo edição, rolar até o formulário.
     if (!isEditing) return;
-
-    // Aguarda o render do bloco condicional.
     const t = window.setTimeout(() => {
       credentialsFormRef.current?.scrollIntoView({ behavior: 'smooth', block: 'start' });
     }, 50);
-
     return () => window.clearTimeout(t);
   }, [isEditing]);
 
   if (isLoading) return <div className="text-[var(--ds-text-primary)]">Carregando configurações...</div>;
+
+  const tabs: { id: SettingsTab; label: string; icon: React.ReactNode }[] = [
+    { id: 'whatsapp', label: 'WhatsApp', icon: <MessageSquare className="w-4 h-4" /> },
+    { id: 'rdstation', label: 'RD Station', icon: <BarChart3 className="w-4 h-4" /> },
+    { id: 'api', label: 'Documentação API', icon: <FileText className="w-4 h-4" /> },
+  ];
 
   return (
     <div>
       {!hideHeader && (
         <>
           <h1 className="text-3xl font-bold text-[var(--ds-text-primary)] tracking-tight mb-2">Configurações</h1>
-          <p className="text-[var(--ds-text-secondary)] mb-10">Gerencie sua conexão com a WhatsApp Business API</p>
+          <p className="text-[var(--ds-text-secondary)] mb-6">Gerencie suas integrações e configurações do sistema</p>
         </>
       )}
 
-      <div className="space-y-8">
-        {/* Status Card */}
+      {/* Status Card — sempre visível */}
+      <div className="mb-8">
         <StatusCard
           ref={statusCardRef}
           settings={settings}
@@ -142,122 +141,149 @@ export const SettingsView: React.FC<SettingsViewProps> = ({
           isEditing={isEditing}
           onToggleEdit={() => setIsEditing((v) => !v)}
         />
+      </div>
 
-        {/* Credentials Form - Only visible if disconnected OR editing */}
-        {(!settings.isConnected || isEditing) && (
-          <CredentialsForm
-            ref={credentialsFormRef}
-            settings={settings}
-            setSettings={setSettings}
-            onSave={onSave}
-            onClose={() => setIsEditing(false)}
-            isSaving={isSaving}
-            onTestConnection={onTestConnection}
-            isTestingConnection={isTestingConnection}
-            metaApp={metaApp}
-            refreshMetaApp={refreshMetaApp}
-          />
+      {/* Tabs */}
+      <div className="flex items-center gap-1 mb-8 border-b border-[var(--ds-border-default)]">
+        {tabs.map((tab) => (
+          <button
+            key={tab.id}
+            onClick={() => setActiveTab(tab.id)}
+            className={`
+              flex items-center gap-2 px-5 py-3 text-sm font-medium transition-all duration-200 border-b-2 -mb-[1px]
+              ${activeTab === tab.id
+                ? 'text-purple-400 border-purple-500'
+                : 'text-[var(--ds-text-muted)] border-transparent hover:text-[var(--ds-text-secondary)] hover:border-[var(--ds-border-default)]'
+              }
+            `}
+          >
+            {tab.icon}
+            {tab.label}
+          </button>
+        ))}
+      </div>
+
+      {/* Tab Content */}
+      <div className="space-y-8">
+
+        {/* ═══════ ABA: WhatsApp ═══════ */}
+        {activeTab === 'whatsapp' && (
+          <>
+
+            {/* Credentials Form */}
+            {(!settings.isConnected || isEditing) && (
+              <CredentialsForm
+                ref={credentialsFormRef}
+                settings={settings}
+                setSettings={setSettings}
+                onSave={onSave}
+                onClose={() => setIsEditing(false)}
+                isSaving={isSaving}
+                onTestConnection={onTestConnection}
+                isTestingConnection={isTestingConnection}
+                metaApp={metaApp}
+                refreshMetaApp={refreshMetaApp}
+              />
+            )}
+
+            {/* Webhook Configuration */}
+            {settings.isConnected && webhookUrl && (
+              <section id="webhooks">
+                <WebhookConfigSection
+                  webhookUrl={webhookUrl}
+                  webhookToken={webhookToken}
+                  webhookStats={webhookStats}
+                  webhookPath={webhookPath}
+                  webhookSubscription={webhookSubscription}
+                  webhookSubscriptionLoading={webhookSubscriptionLoading}
+                  webhookSubscriptionMutating={webhookSubscriptionMutating}
+                  onRefreshWebhookSubscription={onRefreshWebhookSubscription}
+                  onSubscribeWebhookMessages={onSubscribeWebhookMessages}
+                  onUnsubscribeWebhookMessages={onUnsubscribeWebhookMessages}
+                  phoneNumbers={phoneNumbers}
+                  phoneNumbersLoading={phoneNumbersLoading}
+                  onRefreshPhoneNumbers={onRefreshPhoneNumbers}
+                  onSetWebhookOverride={onSetWebhookOverride}
+                  onRemoveWebhookOverride={onRemoveWebhookOverride}
+                  availableDomains={availableDomains}
+                />
+              </section>
+            )}
+
+            {/* Test Contact */}
+            {settings.isConnected && (
+              <TestContactPanel
+                testContact={testContact}
+                saveTestContact={saveTestContact}
+                removeTestContact={removeTestContact}
+                isSaving={isSavingTestContact}
+              />
+            )}
+
+            {/* Calendar Booking */}
+            {settings.isConnected && (
+              <CalendarBookingPanel
+                isConnected={settings.isConnected}
+                calendarBooking={calendarBooking}
+                calendarBookingLoading={calendarBookingLoading}
+                saveCalendarBooking={saveCalendarBooking}
+                isSavingCalendarBooking={isSavingCalendarBooking}
+              />
+            )}
+
+            {/* Dev-only sections */}
+            {isDevMode && settings.isConnected && <FlowEndpointPanel devBaseUrl={null} />}
+
+            {isDevMode && settings.isConnected && saveWhatsAppThrottle && (
+              <TurboConfigSection
+                whatsappThrottle={whatsappThrottle}
+                whatsappThrottleLoading={whatsappThrottleLoading}
+                saveWhatsAppThrottle={saveWhatsAppThrottle}
+                isSaving={isSavingWhatsAppThrottle}
+                settings={settings}
+              />
+            )}
+
+            {isDevMode && settings.isConnected && saveAutoSuppression && (
+              <AutoSuppressionPanel
+                autoSuppression={autoSuppression}
+                autoSuppressionLoading={autoSuppressionLoading}
+                saveAutoSuppression={saveAutoSuppression}
+                isSaving={isSavingAutoSuppression}
+              />
+            )}
+
+            {isDevMode && settings.isConnected && saveWorkflowExecution && (
+              <WorkflowExecutionPanel
+                workflowExecution={workflowExecution}
+                workflowExecutionLoading={workflowExecutionLoading}
+                saveWorkflowExecution={saveWorkflowExecution}
+                isSaving={isSavingWorkflowExecution}
+              />
+            )}
+
+            {isDevMode && settings.isConnected && saveUpstashConfig && (
+              <UpstashConfigPanel
+                upstashConfig={upstashConfig}
+                upstashConfigLoading={upstashConfigLoading}
+                saveUpstashConfig={saveUpstashConfig}
+                removeUpstashConfig={removeUpstashConfig}
+                isSaving={isSavingUpstashConfig}
+              />
+            )}
+          </>
         )}
 
-        {/* ========== ORDEM: 1. Sistema Online (acima), 2. Webhooks, 3. Contato de Teste, 4. Agendamento ========== */}
-
-        {/* 2. Webhook Configuration Section */}
-        {settings.isConnected && webhookUrl && (
-          <section id="webhooks">
-          <WebhookConfigSection
-            webhookUrl={webhookUrl}
-            webhookToken={webhookToken}
-            webhookStats={webhookStats}
-            webhookPath={webhookPath}
-            webhookSubscription={webhookSubscription}
-            webhookSubscriptionLoading={webhookSubscriptionLoading}
-            webhookSubscriptionMutating={webhookSubscriptionMutating}
-            onRefreshWebhookSubscription={onRefreshWebhookSubscription}
-            onSubscribeWebhookMessages={onSubscribeWebhookMessages}
-            onUnsubscribeWebhookMessages={onUnsubscribeWebhookMessages}
-            phoneNumbers={phoneNumbers}
-            phoneNumbersLoading={phoneNumbersLoading}
-            onRefreshPhoneNumbers={onRefreshPhoneNumbers}
-            onSetWebhookOverride={onSetWebhookOverride}
-            onRemoveWebhookOverride={onRemoveWebhookOverride}
-            availableDomains={availableDomains}
-          />
-          </section>
+        {/* ═══════ ABA: RD Station ═══════ */}
+        {activeTab === 'rdstation' && (
+          <RDStationPanel />
         )}
 
-        {/* 3. Test Contact Section */}
-        {settings.isConnected && (
-          <TestContactPanel
-            testContact={testContact}
-            saveTestContact={saveTestContact}
-            removeTestContact={removeTestContact}
-            isSaving={isSavingTestContact}
-          />
+        {/* ═══════ ABA: Documentação API ═══════ */}
+        {activeTab === 'api' && (
+          <ApiDocsPanel />
         )}
 
-        {/* 4. Calendar Booking Section (Agendamento) */}
-        {settings.isConnected && (
-          <CalendarBookingPanel
-            isConnected={settings.isConnected}
-            calendarBooking={calendarBooking}
-            calendarBookingLoading={calendarBookingLoading}
-            saveCalendarBooking={saveCalendarBooking}
-            isSavingCalendarBooking={isSavingCalendarBooking}
-          />
-        )}
-
-        {/* 5. RD Station Integration */}
-        {settings.isConnected && <RDStationPanel />}
-
-        {/* 6. API Documentation Link */}
-        {settings.isConnected && <ApiDocsPanel />}
-
-        {/* ========== SEÇÕES DEV-ONLY ABAIXO ========== */}
-
-        {/* Flow Endpoint (MiniApp Dinamico) - Dev only */}
-        {isDevMode && settings.isConnected && <FlowEndpointPanel devBaseUrl={null} />}
-
-        {/* WhatsApp Turbo (Adaptive Throttle) - Dev only */}
-        {isDevMode && settings.isConnected && saveWhatsAppThrottle && (
-          <TurboConfigSection
-            whatsappThrottle={whatsappThrottle}
-            whatsappThrottleLoading={whatsappThrottleLoading}
-            saveWhatsAppThrottle={saveWhatsAppThrottle}
-            isSaving={isSavingWhatsAppThrottle}
-            settings={settings}
-          />
-        )}
-
-        {/* Proteção de Qualidade (Auto-supressão) - Dev only */}
-        {isDevMode && settings.isConnected && saveAutoSuppression && (
-          <AutoSuppressionPanel
-            autoSuppression={autoSuppression}
-            autoSuppressionLoading={autoSuppressionLoading}
-            saveAutoSuppression={saveAutoSuppression}
-            isSaving={isSavingAutoSuppression}
-          />
-        )}
-
-        {/* Execução do workflow (global) - Dev only */}
-        {isDevMode && settings.isConnected && saveWorkflowExecution && (
-          <WorkflowExecutionPanel
-            workflowExecution={workflowExecution}
-            workflowExecutionLoading={workflowExecutionLoading}
-            saveWorkflowExecution={saveWorkflowExecution}
-            isSaving={isSavingWorkflowExecution}
-          />
-        )}
-
-        {/* Métricas do QStash (Upstash Config) - Dev only */}
-        {isDevMode && settings.isConnected && saveUpstashConfig && (
-          <UpstashConfigPanel
-            upstashConfig={upstashConfig}
-            upstashConfigLoading={upstashConfigLoading}
-            saveUpstashConfig={saveUpstashConfig}
-            removeUpstashConfig={removeUpstashConfig}
-            isSaving={isSavingUpstashConfig}
-          />
-        )}
       </div>
     </div>
   );
