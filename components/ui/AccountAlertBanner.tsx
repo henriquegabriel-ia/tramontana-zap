@@ -143,7 +143,7 @@ export function AccountAlertBanner({ className = '' }: AccountAlertBannerProps) 
         <button
           onClick={() => dismiss(criticalAlert.id)}
           disabled={isDismissing}
-          className={`p-1 rounded hover:bg-white/10 transition-colors ${colors.text} opacity-60 hover:opacity-100`}
+          className={`p-1 rounded hover:bg-[var(--ds-bg-hover)] transition-colors ${colors.text} opacity-60 hover:opacity-100`}
           aria-label="Dispensar alerta"
         >
           <X className="w-4 h-4" />

@@ -147,7 +147,7 @@ function renderBasicText(
     <div
       key={`bt_${idx}`}
       className={`text-[14px] leading-snug text-slate-100 whitespace-pre-wrap ${
-        editorKey ? 'cursor-pointer hover:bg-white/5 px-1 rounded transition-colors' : ''
+        editorKey ? 'cursor-pointer hover:bg-[var(--ds-bg-hover)] px-1 rounded transition-colors' : ''
       } ${selected ? 'ring-2 ring-purple-400/40 bg-purple-500/5' : ''}`}
       onClick={() => {
         if (editorKey && onSelectKey) onSelectKey(editorKey)
@@ -215,7 +215,7 @@ function renderTextEntry(
         value={value}
         onChange={(e) => setValues((prev) => ({ ...prev, [name]: e.target.value }))}
         placeholder="Digite aqui"
-        className="h-12 w-full rounded-xl border border-white/10 bg-white/5 px-4 text-[15px] text-slate-200 placeholder:text-slate-500 focus:outline-none focus:ring-2 focus:ring-purple-400/40"
+        className="h-12 w-full rounded-xl border border-[var(--ds-border-subtle)] bg-[var(--ds-bg-hover)] px-4 text-[15px] text-slate-200 placeholder:text-slate-500 focus:outline-none focus:ring-2 focus:ring-purple-400/40"
       />
     </div>
   )
@@ -254,7 +254,7 @@ function renderTextArea(
         onChange={(e) => setValues((prev) => ({ ...prev, [name]: e.target.value }))}
         placeholder="Digite aqui"
         rows={3}
-        className="w-full rounded-xl border border-white/10 bg-white/5 px-4 py-3 text-[15px] text-slate-200 placeholder:text-slate-500 focus:outline-none focus:ring-2 focus:ring-purple-400/40"
+        className="w-full rounded-xl border border-[var(--ds-border-subtle)] bg-[var(--ds-bg-hover)] px-4 py-3 text-[15px] text-slate-200 placeholder:text-slate-500 focus:outline-none focus:ring-2 focus:ring-purple-400/40"
       />
     </div>
   )
@@ -291,7 +291,7 @@ function renderOptIn(
         type="checkbox"
         checked={checked}
         onChange={(e) => setValues((prev) => ({ ...prev, [name]: e.target.checked }))}
-        className="mt-1 h-5 w-5 rounded border border-white/30 bg-white/5 accent-purple-400"
+        className="mt-1 h-5 w-5 rounded border border-white/30 bg-[var(--ds-bg-hover)] accent-purple-400"
       />
       <div
         className={`text-[15px] text-slate-300 leading-snug ${
@@ -360,7 +360,7 @@ function renderRadioGroup(
       ) : null}
       <div className="space-y-3">
         {(options.length ? options : [{ id: 'opcao_1', title: 'Opção 1' }]).map((o: any, j: number) => (
-          <label key={`rg_${idx}_${j}`} className="flex items-center justify-between gap-4 rounded-xl border border-white/10 bg-white/5 px-4 py-3 cursor-pointer">
+          <label key={`rg_${idx}_${j}`} className="flex items-center justify-between gap-4 rounded-xl border border-[var(--ds-border-subtle)] bg-[var(--ds-bg-hover)] px-4 py-3 cursor-pointer">
             <div className="text-[15px] text-slate-300">{s(o?.title, 'Opção')}</div>
             <input
               type="radio"
@@ -412,7 +412,7 @@ function renderCheckboxGroup(
       ) : null}
       <div className="space-y-3">
         {(options.length ? options : [{ id: 'opcao_1', title: 'Opção 1' }]).map((o: any, j: number) => (
-          <label key={`cg_${idx}_${j}`} className="flex items-center justify-between gap-4 rounded-xl border border-white/10 bg-white/5 px-4 py-3 cursor-pointer">
+          <label key={`cg_${idx}_${j}`} className="flex items-center justify-between gap-4 rounded-xl border border-[var(--ds-border-subtle)] bg-[var(--ds-bg-hover)] px-4 py-3 cursor-pointer">
             <div className="text-[15px] text-slate-300">{s(o?.title, 'Opção')}</div>
             <input
               type="checkbox"
@@ -477,7 +477,7 @@ function renderDropdown(
       <select
         value={value}
         onChange={(e) => setValues((prev) => ({ ...prev, [name]: e.target.value }))}
-        className="h-12 w-full rounded-xl border border-white/10 bg-white/5 px-4 text-[15px] text-slate-200 focus:outline-none focus:ring-2 focus:ring-purple-400/40"
+        className="h-12 w-full rounded-xl border border-[var(--ds-border-subtle)] bg-[var(--ds-bg-hover)] px-4 text-[15px] text-slate-200 focus:outline-none focus:ring-2 focus:ring-purple-400/40"
       >
         <option value="" disabled>
           Selecionar opção
@@ -524,7 +524,7 @@ function renderDatePicker(
         type="date"
         value={value}
         onChange={(e) => setValues((prev) => ({ ...prev, [name]: e.target.value }))}
-        className="h-12 w-full rounded-xl border border-white/10 bg-white/5 px-4 text-[15px] text-slate-200 focus:outline-none focus:ring-2 focus:ring-purple-400/40"
+        className="h-12 w-full rounded-xl border border-[var(--ds-border-subtle)] bg-[var(--ds-bg-hover)] px-4 text-[15px] text-slate-200 focus:outline-none focus:ring-2 focus:ring-purple-400/40"
       />
     </div>
   )
@@ -817,21 +817,21 @@ export function MetaFlowPreview(props: {
       <div className="h-10 bg-slate-950" />
 
       {/* modal do flow (como no WhatsApp) */}
-      <div className="absolute inset-x-0 top-6 bottom-0 rounded-t-2xl bg-[#1f2223] border-t border-white/10 overflow-hidden">
+      <div className="absolute inset-x-0 top-6 bottom-0 rounded-t-2xl bg-[#1f2223] border-t border-[var(--ds-border-subtle)] overflow-hidden">
         {/* topbar */}
-        <div className="h-14 px-4 flex items-center justify-between border-b border-white/10">
+        <div className="h-14 px-4 flex items-center justify-between border-b border-[var(--ds-border-subtle)]">
           <button
             type="button"
             aria-label={canGoBack ? 'Voltar' : 'Fechar preview da MiniApp'}
             title={canGoBack ? 'Voltar' : 'Fechar'}
-            className="h-9 w-9 rounded-full hover:bg-white/5 flex items-center justify-center text-slate-200"
+            className="h-9 w-9 rounded-full hover:bg-[var(--ds-bg-hover)] flex items-center justify-center text-slate-200"
             onClick={handleGoBack}
           >
             {canGoBack ? <ArrowLeft className="h-5 w-5" /> : <X className="h-5 w-5" />}
           </button>
           <div
             className={`text-[18px] font-semibold text-slate-100 truncate ${
-              titleEditorKey ? 'cursor-pointer hover:bg-white/5 px-1 rounded transition-colors' : ''
+              titleEditorKey ? 'cursor-pointer hover:bg-[var(--ds-bg-hover)] px-1 rounded transition-colors' : ''
             } ${titleSelected ? 'ring-2 ring-purple-400/40 bg-purple-500/5 rounded px-1' : ''}`}
             onClick={() => {
               if (titleEditorKey && props.onSelectEditorKey) props.onSelectEditorKey(titleEditorKey)
@@ -844,7 +844,7 @@ export function MetaFlowPreview(props: {
             type="button"
             aria-label="Mais opcoes do preview"
             title="Mais opcoes"
-            className="h-9 w-9 rounded-full hover:bg-white/5 flex items-center justify-center text-slate-200"
+            className="h-9 w-9 rounded-full hover:bg-[var(--ds-bg-hover)] flex items-center justify-center text-slate-200"
           >
             <MoreVertical className="h-5 w-5" />
           </button>
@@ -881,7 +881,7 @@ export function MetaFlowPreview(props: {
               e.preventDefault()
               props.onSelectEditorKey(footerEditorKey)
             }}
-            className={`w-full h-12 rounded-2xl bg-purple-500/80 text-white text-[16px] font-semibold hover:bg-purple-400/90 disabled:bg-white/10 disabled:text-white/40 disabled:cursor-not-allowed ${
+            className={`w-full h-12 rounded-2xl bg-purple-500/80 text-white text-[16px] font-semibold hover:bg-purple-400/90 disabled:bg-[var(--ds-bg-hover)] disabled:text-white/40 disabled:cursor-not-allowed ${
               footerSelected ? 'ring-2 ring-purple-300/60' : ''
             }`}
           >

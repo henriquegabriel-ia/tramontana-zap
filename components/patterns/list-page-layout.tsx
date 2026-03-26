@@ -93,7 +93,7 @@ export function ListPageLayout({
       {/* Content Section */}
       <div
         className={cn(
-          'rounded-2xl border border-white/10 bg-slate-900/60 overflow-hidden',
+          'rounded-2xl border border-[var(--ds-border-subtle)] bg-[var(--ds-bg-elevated)] overflow-hidden',
           'shadow-[0_12px_30px_rgba(0,0,0,0.35)]',
           isLoading && 'opacity-70 pointer-events-none'
         )}
@@ -128,7 +128,7 @@ export function TabButton({ active, onClick, children, badge }: TabButtonProps) 
         'border',
         active
           ? 'border-purple-400/40 bg-purple-500/10 text-purple-200'
-          : 'border-white/10 bg-slate-950/40 text-slate-400 hover:text-white hover:bg-slate-900/60'
+          : 'border-[var(--ds-border-subtle)] bg-[var(--ds-bg-surface)]/30 text-slate-400 hover:text-white hover:bg-[var(--ds-bg-elevated)]'
       )}
     >
       {children}
@@ -176,7 +176,7 @@ export function TableHeader({ children, className }: TableHeaderProps) {
   return (
     <thead
       className={cn(
-        'bg-slate-950/40 border-b border-white/10',
+        'bg-[var(--ds-bg-surface)]/30 border-b border-[var(--ds-border-subtle)]',
         'text-slate-500 uppercase tracking-widest text-xs',
         className
       )}
@@ -219,7 +219,7 @@ export function TableRow({ children, onClick, className }: TableRowProps) {
       onClick={onClick}
       className={cn(
         'transition-all duration-200',
-        onClick && 'cursor-pointer hover:bg-white/5 hover:shadow-[0_0_20px_rgba(104,51,189,0.1)]',
+        onClick && 'cursor-pointer hover:bg-[var(--ds-bg-hover)] hover:shadow-[0_0_20px_rgba(104,51,189,0.1)]',
         className
       )}
     >

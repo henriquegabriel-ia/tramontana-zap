@@ -403,7 +403,7 @@ export default function TemplateProjectDetailsPage() {
                 </div>
                 <button
                     onClick={() => router.push('/templates?tab=projects')}
-                    className="flex items-center gap-2 text-gray-400 hover:text-white"
+                    className="flex items-center gap-2 text-slate-400 hover:text-white"
                 >
                     <ArrowLeft className="w-4 h-4" />
                     Voltar para lista
@@ -419,7 +419,7 @@ export default function TemplateProjectDetailsPage() {
                     <div className="flex items-center gap-3">
                         <button
                             onClick={() => router.push('/templates?tab=projects')}
-                            className="p-2 -ml-2 text-gray-400 hover:text-white hover:bg-white/5 rounded-lg transition-colors border border-white/10 bg-slate-950/40"
+                            className="p-2 -ml-2 text-slate-400 hover:text-white hover:bg-[var(--ds-bg-hover)] rounded-lg transition-colors border border-[var(--ds-border-subtle)] bg-[var(--ds-bg-surface)]/30"
                             aria-label="Voltar para projetos"
                         >
                             <ArrowLeft className="w-5 h-5" />
@@ -450,7 +450,7 @@ export default function TemplateProjectDetailsPage() {
                                         </button>
                                         <button
                                             onClick={handleCancelEdit}
-                                            className="p-1.5 text-gray-400 hover:bg-white/10 rounded-lg transition-colors"
+                                            className="p-1.5 text-slate-400 hover:bg-[var(--ds-bg-hover)] rounded-lg transition-colors"
                                             title="Cancelar"
                                         >
                                             <X className="w-5 h-5" />
@@ -461,14 +461,14 @@ export default function TemplateProjectDetailsPage() {
                                         <PageTitle className="text-2xl sm:text-3xl truncate">{project.title}</PageTitle>
                                         <button
                                             onClick={handleStartEdit}
-                                            className="p-1.5 text-gray-400 hover:text-white hover:bg-white/10 rounded-lg transition-colors"
+                                            className="p-1.5 text-slate-400 hover:text-white hover:bg-[var(--ds-bg-hover)] rounded-lg transition-colors"
                                             title="Renomear projeto"
                                         >
                                             <Pencil className="w-4 h-4" />
                                         </button>
                                     </>
                                 )}
-                                <span className="px-2 py-0.5 text-xs rounded-full border bg-slate-950/40 border-white/10 text-gray-400 shrink-0">
+                                <span className="px-2 py-0.5 text-xs rounded-full border bg-[var(--ds-bg-surface)]/30 border-[var(--ds-border-subtle)] text-slate-400 shrink-0">
                                     {groups.DRAFT.length === 0 && groups.PENDING.length === 0 ? 'Concluído' : 'Em Progresso'}
                                 </span>
                             </div>
@@ -483,7 +483,7 @@ export default function TemplateProjectDetailsPage() {
                     <button
                         onClick={() => syncProjectMutation.mutate()}
                         disabled={syncProjectMutation.isPending}
-                        className="px-3 py-2 bg-slate-950/40 border border-white/10 text-gray-200 rounded-lg hover:bg-white/5 transition-colors flex items-center gap-2 text-sm disabled:opacity-50"
+                        className="px-3 py-2 bg-[var(--ds-bg-surface)]/30 border border-[var(--ds-border-subtle)] text-slate-200 rounded-lg hover:bg-[var(--ds-bg-hover)] transition-colors flex items-center gap-2 text-sm disabled:opacity-50"
                     >
                         <RefreshCw className={cn("w-4 h-4", syncProjectMutation.isPending && "animate-spin")} />
                         {syncProjectMutation.isPending ? 'Sincronizando...' : 'Sincronizar Meta'}
@@ -492,7 +492,7 @@ export default function TemplateProjectDetailsPage() {
                     {groups.DRAFT.length > 0 && (
                         <button
                             onClick={toggleSelectAll}
-                            className="px-3 py-2 bg-slate-950/40 border border-white/10 text-gray-200 rounded-lg hover:bg-white/5 transition-colors flex items-center gap-2 text-sm"
+                            className="px-3 py-2 bg-[var(--ds-bg-surface)]/30 border border-[var(--ds-border-subtle)] text-slate-200 rounded-lg hover:bg-[var(--ds-bg-hover)] transition-colors flex items-center gap-2 text-sm"
                         >
                             {selectedItems.length === groups.DRAFT.length ? <CheckSquare className="w-4 h-4" /> : <Square className="w-4 h-4" />}
                             Selecionar Tudo
@@ -503,7 +503,7 @@ export default function TemplateProjectDetailsPage() {
                         <button
                             onClick={() => bulkSubmitMutation.mutate(selectedItems)}
                             disabled={bulkSubmitMutation.isPending}
-                            className="px-4 py-2 bg-white text-black rounded-lg transition-colors flex items-center gap-2 text-sm font-semibold hover:bg-gray-200 disabled:opacity-50"
+                            className="px-4 py-2 bg-white text-black rounded-lg transition-colors flex items-center gap-2 text-sm font-semibold hover:bg-slate-200 disabled:opacity-50"
                         >
                             {bulkSubmitMutation.isPending ? <Loader2 className="w-4 h-4 animate-spin" /> : <Send className="w-4 h-4" />}
                             Enviar ({selectedItems.length}) para Meta
@@ -549,7 +549,7 @@ export default function TemplateProjectDetailsPage() {
                 </div>
 
                 {/* Template List */}
-                <div className="flex-1 bg-slate-900/60 border border-white/10 rounded-2xl overflow-y-auto shadow-[0_12px_30px_rgba(0,0,0,0.35)]">
+                <div className="flex-1 bg-[var(--ds-bg-elevated)] border border-[var(--ds-border-subtle)] rounded-2xl overflow-y-auto shadow-[0_12px_30px_rgba(0,0,0,0.35)]">
                     {sections.map(section => {
                         if (section.count === 0) return null;
 
@@ -558,24 +558,24 @@ export default function TemplateProjectDetailsPage() {
                         const sectionItems = groups[section.id];
 
                         return (
-                            <div key={section.id} className="border-b border-white/10 last:border-0">
+                            <div key={section.id} className="border-b border-[var(--ds-border-subtle)] last:border-0">
                                 <button
                                     onClick={() => setExpandedSection(isExpanded && expandedSection !== 'ALL' ? 'ALL' : section.id)}
-                                    className="w-full flex items-center justify-between p-4 hover:bg-white/5 transition-colors sticky top-0 bg-slate-900/60 z-10"
+                                    className="w-full flex items-center justify-between p-4 hover:bg-[var(--ds-bg-hover)] transition-colors sticky top-0 bg-[var(--ds-bg-elevated)] z-10"
                                 >
                                     <div className="flex items-center gap-3">
                                         <section.icon className={cn("w-5 h-5", {
                                             'text-purple-300': section.color === 'purple',
                                             'text-red-300': section.color === 'red',
                                             'text-amber-300': section.color === 'yellow',
-                                            'text-gray-400': section.color === 'slate',
+                                            'text-slate-400': section.color === 'slate',
                                         })} />
                                         <span className="font-medium text-white">{section.label}</span>
-                                        <span className="px-2 py-0.5 rounded-full bg-slate-950/40 border border-white/10 text-xs text-gray-400">
+                                        <span className="px-2 py-0.5 rounded-full bg-[var(--ds-bg-surface)]/30 border border-[var(--ds-border-subtle)] text-xs text-slate-400">
                                             {section.count}
                                         </span>
                                     </div>
-                                    <ChevronDown className={cn("w-4 h-4 text-gray-400 transition-transform", { "rotate-180": isExpanded })} />
+                                    <ChevronDown className={cn("w-4 h-4 text-slate-400 transition-transform", { "rotate-180": isExpanded })} />
                                 </button>
 
                                 {isExpanded && (
@@ -587,17 +587,17 @@ export default function TemplateProjectDetailsPage() {
                                                     e.stopPropagation();
                                                     toggleSelectAll();
                                                 }}
-                                                className="flex items-center gap-3 px-3 py-2 rounded-lg bg-slate-950/60 border border-white/5 cursor-pointer hover:bg-white/5 transition-colors"
+                                                className="flex items-center gap-3 px-3 py-2 rounded-lg bg-[var(--ds-bg-surface)]/40 border border-[var(--ds-border-subtle)] cursor-pointer hover:bg-[var(--ds-bg-hover)] transition-colors"
                                             >
                                                 <div className={cn(
                                                     "w-5 h-5 rounded border flex items-center justify-center transition-colors shrink-0",
                                                     selectedItems.length === groups.DRAFT.length && groups.DRAFT.length > 0
                                                         ? "bg-purple-500 border-purple-500 text-black"
-                                                        : "border-white/20 text-transparent hover:border-white/40"
+                                                        : "border-[var(--ds-border-default)] text-transparent hover:border-white/40"
                                                 )}>
                                                     <Check className="w-3.5 h-3.5" />
                                                 </div>
-                                                <span className="text-sm text-gray-400">
+                                                <span className="text-sm text-slate-400">
                                                     {selectedItems.length === groups.DRAFT.length && groups.DRAFT.length > 0
                                                         ? 'Desmarcar tudo'
                                                         : `Selecionar tudo (${groups.DRAFT.length})`}
@@ -618,7 +618,7 @@ export default function TemplateProjectDetailsPage() {
                                                         "p-3 rounded-lg border transition-all cursor-pointer flex gap-3 relative group",
                                                         isActive
                                                             ? "bg-purple-500/10 border-purple-500/30 ring-1 ring-purple-500/40"
-                                                            : "bg-slate-950/40 border-white/10 hover:border-white/20 hover:bg-white/5"
+                                                            : "bg-[var(--ds-bg-surface)]/30 border-[var(--ds-border-subtle)] hover:border-[var(--ds-border-default)] hover:bg-[var(--ds-bg-hover)]"
                                                     )}
                                                 >
                                                     {isDraft && (
@@ -628,7 +628,7 @@ export default function TemplateProjectDetailsPage() {
                                                                 "mt-1 w-5 h-5 rounded border flex items-center justify-center transition-colors shrink-0 z-10",
                                                                 isSelected
                                                                     ? "bg-purple-500 border-purple-500 text-black"
-                                                                    : "border-white/20 text-transparent hover:border-white/40"
+                                                                    : "border-[var(--ds-border-default)] text-transparent hover:border-white/40"
                                                             )}
                                                         >
                                                             <Check className="w-3.5 h-3.5" />
@@ -641,7 +641,7 @@ export default function TemplateProjectDetailsPage() {
                                                                 {item.name}
                                                             </span>
                                                             <div className="flex items-center gap-2">
-                                                            <span className="text-xs text-gray-400 flex items-center gap-1 shrink-0">
+                                                            <span className="text-xs text-slate-400 flex items-center gap-1 shrink-0">
                                                                 <Copy className="w-3 h-3" />
                                                                 {item.language}
                                                             </span>
@@ -674,7 +674,7 @@ export default function TemplateProjectDetailsPage() {
                                                                 )}
                                                             </div>
                                                         </div>
-                                                        <p className="text-xs text-gray-400 line-clamp-2">
+                                                        <p className="text-xs text-slate-400 line-clamp-2">
                                                             {item.content}
                                                         </p>
                                                     </div>
@@ -690,7 +690,7 @@ export default function TemplateProjectDetailsPage() {
             </div>
 
                 {/* --- RIGHT SIDE: PREVIEW --- */}
-                <div className="hidden lg:flex col-span-4 border-l border-white/10 pl-6 flex-col min-h-0">
+                <div className="hidden lg:flex col-span-4 border-l border-[var(--ds-border-subtle)] pl-6 flex-col min-h-0">
                 {previewItem ? (
                     <div className="sticky top-6 w-full">
                         <h3 className="text-sm font-medium text-slate-400 mb-4 text-center">
@@ -707,9 +707,9 @@ export default function TemplateProjectDetailsPage() {
                             variables={['Nome do Contato', 'Valor', 'Data']} // Placeholder
                             size="md"
                         />
-                        <div className="mt-6 p-4 bg-slate-900/60 border border-white/10 rounded-2xl shadow-[0_12px_30px_rgba(0,0,0,0.35)]">
+                        <div className="mt-6 p-4 bg-[var(--ds-bg-elevated)] border border-[var(--ds-border-subtle)] rounded-2xl shadow-[0_12px_30px_rgba(0,0,0,0.35)]">
                             <h4 className="text-sm font-medium text-white mb-2">Detalhes Técnicos</h4>
-                            <div className="space-y-2 text-xs text-gray-400">
+                            <div className="space-y-2 text-xs text-slate-400">
                                 <div className="flex justify-between">
                                     <span>Status Meta:</span>
                                     <span className={cn(
@@ -727,7 +727,7 @@ export default function TemplateProjectDetailsPage() {
                         </div>
                     </div>
                 ) : (
-                    <div className="h-full flex flex-col items-center justify-center text-gray-400 border border-dashed border-white/10 rounded-2xl bg-slate-900/60 shadow-[0_12px_30px_rgba(0,0,0,0.35)] w-full">
+                    <div className="h-full flex flex-col items-center justify-center text-slate-400 border border-dashed border-[var(--ds-border-subtle)] rounded-2xl bg-[var(--ds-bg-elevated)] shadow-[0_12px_30px_rgba(0,0,0,0.35)] w-full">
                         <Eye className="w-12 h-12 mb-4 opacity-50" />
                         <p className="text-sm">Selecione um template para visualizar</p>
                     </div>
@@ -745,7 +745,7 @@ function StatCard({ label, count, total, color, icon: Icon }: any) {
         purple: 'text-purple-300 bg-purple-500/10 border-purple-500/20',
         yellow: 'text-amber-300 bg-amber-500/10 border-amber-500/20',
         red: 'text-amber-200 bg-amber-500/10 border-amber-500/20',
-        slate: 'text-gray-400 bg-slate-500/10 border-white/10',
+        slate: 'text-slate-400 bg-slate-500/10 border-[var(--ds-border-subtle)]',
     };
 
     return (

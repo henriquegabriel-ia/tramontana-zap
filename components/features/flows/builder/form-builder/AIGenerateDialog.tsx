@@ -58,7 +58,7 @@ export function AIGenerateDialog({
 
   return (
     <Dialog open={open} onOpenChange={onOpenChange}>
-      <DialogContent className="bg-slate-950 border-white/10 text-white sm:max-w-xl">
+      <DialogContent className="bg-slate-950 border-[var(--ds-border-subtle)] text-white sm:max-w-xl">
         <DialogHeader>
           <DialogTitle>Gerar MiniApp com IA</DialogTitle>
           <DialogDescription className="text-slate-400">
@@ -68,11 +68,11 @@ export function AIGenerateDialog({
         </DialogHeader>
 
         <div className="space-y-2">
-          <label className="block text-xs text-gray-400">O que você quer no formulário?</label>
+          <label className="block text-xs text-slate-400">O que você quer no formulário?</label>
           <Textarea
             value={prompt}
             onChange={(e) => setPrompt(e.target.value)}
-            className="min-h-28 bg-slate-900 border-white/10 text-white"
+            className="min-h-28 bg-slate-900 border-[var(--ds-border-subtle)] text-white"
             placeholder='Ex: "Quero um formulário de pré-cadastro para uma turma. Pergunte nome, telefone, e-mail, cidade, faixa de horário preferida e um opt-in para receber mensagens."'
           />
           <div className="text-[11px] text-slate-500">
@@ -85,7 +85,7 @@ export function AIGenerateDialog({
           <Button
             type="button"
             variant="outline"
-            className="border-white/10 bg-slate-900 hover:bg-white/5"
+            className="border-[var(--ds-border-subtle)] bg-slate-900 hover:bg-[var(--ds-bg-hover)]"
             onClick={() => onOpenChange(false)}
             disabled={loading}
           >

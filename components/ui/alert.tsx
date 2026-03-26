@@ -57,7 +57,7 @@ const alertVariants = cva(
           "[color:var(--ds-status-info-text)]",
         ].join(" "),
         default: [
-          "bg-slate-900/50",
+          "bg-[var(--ds-bg-elevated)]",
           "[border:1px_solid_var(--ds-border-default)]",
           "text-slate-300",
         ].join(" "),

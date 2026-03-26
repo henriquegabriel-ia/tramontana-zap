@@ -37,8 +37,8 @@ export function BatchSubmissionList({
     if (submissions.length === 0) {
         return (
             <Container variant="default" padding="none" className="flex flex-col items-center justify-center py-16 px-4 border-dashed">
-                <div className="w-16 h-16 rounded-full bg-slate-950/40 border border-white/10 flex items-center justify-center mb-4">
-                    <Clock className="w-8 h-8 text-gray-500" />
+                <div className="w-16 h-16 rounded-full bg-[var(--ds-bg-surface)]/30 border border-[var(--ds-border-subtle)] flex items-center justify-center mb-4">
+                    <Clock className="w-8 h-8 text-slate-500" />
                 </div>
                 <h3 className="text-lg font-medium text-white mb-2">Nenhuma submissão ainda</h3>
                 <p className="text-slate-400 text-center max-w-md mb-6">
@@ -59,7 +59,7 @@ export function BatchSubmissionList({
                             {hourlyCount}<span className="text-slate-600 text-base">/100</span>
                         </h3>
                     </div>
-                    <div className="h-10 w-10 rounded-full bg-slate-950/40 border border-white/10 flex items-center justify-center">
+                    <div className="h-10 w-10 rounded-full bg-[var(--ds-bg-surface)]/30 border border-[var(--ds-border-subtle)] flex items-center justify-center">
                         <Clock className={`w-5 h-5 ${hourlyCount >= 80 ? 'text-amber-300' : 'text-purple-300'}`} />
                     </div>
                 </Container>
@@ -69,7 +69,7 @@ export function BatchSubmissionList({
                 <div className="overflow-x-auto">
                     <table className="w-full text-left">
                         <thead>
-                            <tr className="border-b border-white/10 bg-slate-950/40">
+                            <tr className="border-b border-[var(--ds-border-subtle)] bg-[var(--ds-bg-surface)]/30">
                                 <th className="px-6 py-4 text-xs font-semibold text-slate-400 uppercase tracking-widest">Nome</th>
                                 <th className="px-6 py-4 text-xs font-semibold text-slate-400 uppercase tracking-widest">Progresso</th>
                                 <th className="px-6 py-4 text-xs font-semibold text-slate-400 uppercase tracking-widest text-center">Gerados</th>
@@ -93,7 +93,7 @@ export function BatchSubmissionList({
                                 return (
                                     <tr
                                         key={submission.id}
-                                        className="group hover:bg-white/5 transition-colors cursor-pointer"
+                                        className="group hover:bg-[var(--ds-bg-hover)] transition-colors cursor-pointer"
                                         onClick={() => onSelectSubmission(submission.id)}
                                     >
                                         <td className="px-6 py-4 max-w-[300px]">
@@ -110,7 +110,7 @@ export function BatchSubmissionList({
                                         </td>
 
                                         <td className="px-6 py-4 w-48">
-                                            <div className="h-2 w-full bg-slate-950/60 rounded-full overflow-hidden flex">
+                                            <div className="h-2 w-full bg-[var(--ds-bg-surface)]/40 rounded-full overflow-hidden flex">
                                                 <div style={{ width: `${utilityPercent}%` }} className="bg-purple-500 transition-all duration-500" />
                                                 <div style={{ width: `${marketingPercent}%` }} className="bg-amber-500 transition-all duration-500" />
                                                 <div style={{ width: `${rejectedPercent}%` }} className="bg-amber-700 transition-all duration-500" />

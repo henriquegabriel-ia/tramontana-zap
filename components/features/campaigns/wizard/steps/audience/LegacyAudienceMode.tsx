@@ -55,7 +55,7 @@ export function LegacyAudienceMode({
             isOverLimit
               ? 'bg-red-500/20 text-red-400'
               : recipientSource === 'all'
-                ? 'bg-white/20 text-white dark:bg-gray-200 dark:text-black'
+                ? 'bg-white/20 text-white dark:bg-slate-200 dark:text-black'
                 : 'bg-[var(--ds-bg-surface)] text-[var(--ds-text-secondary)]'
           }`}
         >
@@ -68,7 +68,7 @@ export function LegacyAudienceMode({
               isOverLimit
                 ? 'text-red-400'
                 : recipientSource === 'all'
-                  ? 'text-white/70 dark:text-gray-600'
+                  ? 'text-white/70 dark:text-slate-600'
                   : 'text-[var(--ds-text-muted)]'
             }`}
           >
@@ -117,7 +117,7 @@ export function LegacyAudienceMode({
         <div
           className={`p-4 rounded-full ${
             recipientSource === 'specific'
-              ? 'bg-white/20 text-white dark:bg-gray-200 dark:text-black'
+              ? 'bg-white/20 text-white dark:bg-slate-200 dark:text-black'
               : isOverLimit
                 ? 'bg-primary-500/20 text-primary-400'
                 : 'bg-[var(--ds-bg-surface)] text-[var(--ds-text-secondary)]'
@@ -132,7 +132,7 @@ export function LegacyAudienceMode({
               isOverLimit && recipientSource !== 'specific'
                 ? 'text-primary-400 font-medium'
                 : recipientSource === 'specific'
-                  ? 'text-white/70 dark:text-gray-600'
+                  ? 'text-white/70 dark:text-slate-600'
                   : 'text-[var(--ds-text-muted)]'
             }`}
           >

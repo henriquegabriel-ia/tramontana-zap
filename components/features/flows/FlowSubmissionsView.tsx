@@ -72,12 +72,12 @@ export function FlowSubmissionsView(props: {
 
   return (
     <div className="space-y-4">
-      <div className="rounded-2xl border border-white/10 bg-slate-900/60 p-6 shadow-[0_12px_30px_rgba(0,0,0,0.35)]">
+      <div className="rounded-2xl border border-[var(--ds-border-subtle)] bg-[var(--ds-bg-elevated)] p-6 shadow-[0_12px_30px_rgba(0,0,0,0.35)]">
         <div className="flex flex-col gap-3 md:flex-row md:items-center md:justify-between">
           <div>
             <div className="text-sm font-semibold text-white">{props.title || 'Submissões'}</div>
             {props.subtitle ? (
-              <div className="text-xs text-gray-500 mt-1">{props.subtitle}</div>
+              <div className="text-xs text-slate-500 mt-1">{props.subtitle}</div>
             ) : null}
           </div>
           <div className="flex items-center gap-2">
@@ -102,25 +102,25 @@ export function FlowSubmissionsView(props: {
           <div className="mt-4 flex flex-col gap-3 md:flex-row md:items-end md:justify-between">
             <div className="flex-1 grid grid-cols-1 md:grid-cols-3 gap-3">
               <div>
-                <label className="block text-xs text-gray-400 mb-1">Filtrar por telefone (from_phone)</label>
+                <label className="block text-xs text-slate-400 mb-1">Filtrar por telefone (from_phone)</label>
                 <div className="relative">
-                  <Search className="absolute left-3 top-2.5 text-gray-500" size={16} />
+                  <Search className="absolute left-3 top-2.5 text-slate-500" size={16} />
                   <Input
                     value={props.phoneFilter}
                     onChange={(e) => props.onPhoneFilterChange(e.target.value)}
                     placeholder="Ex: +5511999999999"
-                    className="pl-9 bg-slate-950/40 border-white/10 text-white"
+                    className="pl-9 bg-[var(--ds-bg-surface)]/30 border-[var(--ds-border-subtle)] text-white"
                   />
                 </div>
               </div>
 
               <div>
-                <label className="block text-xs text-gray-400 mb-1">MiniApp (Builder)</label>
+                <label className="block text-xs text-slate-400 mb-1">MiniApp (Builder)</label>
                 <Select
                   value={props.flowIdFilter?.trim() ? props.flowIdFilter : '__all__'}
                   onValueChange={(v) => props.onFlowIdFilterChange(v === '__all__' ? '' : v)}
                 >
-                  <SelectTrigger className="w-full bg-slate-950/40 border-white/10 text-white">
+                  <SelectTrigger className="w-full bg-[var(--ds-bg-surface)]/30 border-[var(--ds-border-subtle)] text-white">
                     <SelectValue />
                   </SelectTrigger>
                   <SelectContent>
@@ -135,19 +135,19 @@ export function FlowSubmissionsView(props: {
               </div>
 
               <div>
-                <label className="block text-xs text-gray-400 mb-1">Filtrar por ID da MiniApp (Meta)</label>
+                <label className="block text-xs text-slate-400 mb-1">Filtrar por ID da MiniApp (Meta)</label>
                 <Input
                   value={props.flowIdFilter}
                   onChange={(e) => props.onFlowIdFilterChange(e.target.value)}
                   placeholder="Ex: 1234567890"
-                  className="bg-slate-950/40 border-white/10 text-white"
+                  className="bg-[var(--ds-bg-surface)]/30 border-[var(--ds-border-subtle)] text-white"
                 />
               </div>
             </div>
           </div>
         )}
 
-        <div className="mt-3 text-xs text-gray-500">
+        <div className="mt-3 text-xs text-slate-500">
           {props.isLoading
             ? 'Carregando…'
             : props.limit
@@ -157,10 +157,10 @@ export function FlowSubmissionsView(props: {
         </div>
       </div>
 
-      <div className="rounded-2xl border border-white/10 bg-slate-900/60 shadow-[0_12px_30px_rgba(0,0,0,0.35)] overflow-hidden">
+      <div className="rounded-2xl border border-[var(--ds-border-subtle)] bg-[var(--ds-bg-elevated)] shadow-[0_12px_30px_rgba(0,0,0,0.35)] overflow-hidden">
         <table className="w-full text-left text-sm">
-          <thead className="bg-slate-950/40">
-            <tr className="text-gray-400">
+          <thead className="bg-[var(--ds-bg-surface)]/30">
+            <tr className="text-slate-400">
               <th className="px-4 py-3 font-semibold">Data</th>
               <th className="px-4 py-3 font-semibold">Telefone</th>
               <th className="px-4 py-3 font-semibold">MiniApp</th>
@@ -171,7 +171,7 @@ export function FlowSubmissionsView(props: {
           <tbody>
             {visibleRows.length === 0 ? (
               <tr>
-                <td colSpan={5} className="px-4 py-10 text-center text-gray-500">
+                <td colSpan={5} className="px-4 py-10 text-center text-slate-500">
                   Nenhuma submissão encontrada.
                 </td>
               </tr>
@@ -181,35 +181,35 @@ export function FlowSubmissionsView(props: {
                 const builder = r.flow_id ? builderByMetaFlowId.get(String(r.flow_id)) : undefined
                 return (
                   <Fragment key={r.id}>
-                    <tr className="border-t border-white/10 hover:bg-white/5">
-                      <td className="px-4 py-3 text-gray-200">{formatDateTime(r.created_at)}</td>
-                      <td className="px-4 py-3 font-mono text-xs text-gray-300">{formatPhoneNumberDisplay(r.from_phone, 'e164')}</td>
+                    <tr className="border-t border-[var(--ds-border-subtle)] hover:bg-[var(--ds-bg-hover)]">
+                      <td className="px-4 py-3 text-slate-200">{formatDateTime(r.created_at)}</td>
+                      <td className="px-4 py-3 font-mono text-xs text-slate-300">{formatPhoneNumberDisplay(r.from_phone, 'e164')}</td>
                       <td className="px-4 py-3">
-                        <div className="text-gray-200 font-medium">{r.flow_name || r.flow_id || '—'}</div>
+                        <div className="text-slate-200 font-medium">{r.flow_name || r.flow_id || '—'}</div>
                         {r.flow_id && r.flow_name && (
-                          <div className="text-[11px] text-gray-500 font-mono">{r.flow_id}</div>
+                          <div className="text-[11px] text-slate-500 font-mono">{r.flow_id}</div>
                         )}
                         {builder && (
                           <div className="mt-1 flex items-center gap-2">
-                            <Badge variant="secondary" className="bg-slate-950/40 text-gray-200 border-white/10">
+                            <Badge variant="secondary" className="bg-[var(--ds-bg-surface)]/30 text-slate-200 border-[var(--ds-border-subtle)]">
                               Builder
                             </Badge>
                             <Link
                               href={`/flows/builder/${encodeURIComponent(builder.id)}`}
-                              className="text-[11px] text-gray-300 hover:text-white underline underline-offset-2"
+                              className="text-[11px] text-slate-300 hover:text-white underline underline-offset-2"
                             >
                               {builder.name}
                             </Link>
                           </div>
                         )}
                       </td>
-                      <td className="px-4 py-3 font-mono text-xs text-gray-300">{r.flow_token || '—'}</td>
+                      <td className="px-4 py-3 font-mono text-xs text-slate-300">{r.flow_token || '—'}</td>
                       <td className="px-4 py-3 text-right">
                         <Button
                           type="button"
                           variant="ghost"
                           onClick={() => setOpenId(isOpen ? null : r.id)}
-                          className="text-gray-200"
+                          className="text-slate-200"
                         >
                           {isOpen ? (
                             <>
@@ -226,35 +226,35 @@ export function FlowSubmissionsView(props: {
                       </td>
                     </tr>
                     {isOpen && (
-                      <tr key={`${r.id}_details`} className="border-t border-white/10 bg-black/20">
+                      <tr key={`${r.id}_details`} className="border-t border-[var(--ds-border-subtle)] bg-black/20">
                         <td colSpan={5} className="px-4 py-4">
                           <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
-                            <div className="rounded-xl bg-slate-950/40 border border-white/10 p-3">
-                              <div className="text-xs text-gray-400 mb-2">response_json (parseado)</div>
-                              <pre className="text-[11px] leading-relaxed text-gray-200 overflow-auto max-h-80">
+                            <div className="rounded-xl bg-[var(--ds-bg-surface)]/30 border border-[var(--ds-border-subtle)] p-3">
+                              <div className="text-xs text-slate-400 mb-2">response_json (parseado)</div>
+                              <pre className="text-[11px] leading-relaxed text-slate-200 overflow-auto max-h-80">
 {safePrettyJson(r.response_json)}
                               </pre>
                             </div>
-                            <div className="rounded-xl bg-slate-950/40 border border-white/10 p-3">
-                              <div className="text-xs text-gray-400 mb-2">response_json_raw</div>
-                              <pre className="text-[11px] leading-relaxed text-gray-200 overflow-auto max-h-80">
+                            <div className="rounded-xl bg-[var(--ds-bg-surface)]/30 border border-[var(--ds-border-subtle)] p-3">
+                              <div className="text-xs text-slate-400 mb-2">response_json_raw</div>
+                              <pre className="text-[11px] leading-relaxed text-slate-200 overflow-auto max-h-80">
 {safePrettyJson(r.response_json_raw)}
                               </pre>
                             </div>
                           </div>
 
                           <div className="mt-4 grid grid-cols-1 md:grid-cols-3 gap-3 text-xs">
-                            <div className="rounded-lg bg-slate-950/40 border border-white/10 p-2">
-                              <div className="text-gray-400">message_id</div>
-                              <div className="font-mono text-[11px] text-gray-200 break-all">{r.message_id}</div>
+                            <div className="rounded-lg bg-[var(--ds-bg-surface)]/30 border border-[var(--ds-border-subtle)] p-2">
+                              <div className="text-slate-400">message_id</div>
+                              <div className="font-mono text-[11px] text-slate-200 break-all">{r.message_id}</div>
                             </div>
-                            <div className="rounded-lg bg-slate-950/40 border border-white/10 p-2">
-                              <div className="text-gray-400">phone_number_id</div>
-                              <div className="font-mono text-[11px] text-gray-200 break-all">{r.phone_number_id || '—'}</div>
+                            <div className="rounded-lg bg-[var(--ds-bg-surface)]/30 border border-[var(--ds-border-subtle)] p-2">
+                              <div className="text-slate-400">phone_number_id</div>
+                              <div className="font-mono text-[11px] text-slate-200 break-all">{r.phone_number_id || '—'}</div>
                             </div>
-                            <div className="rounded-lg bg-slate-950/40 border border-white/10 p-2">
-                              <div className="text-gray-400">message_timestamp</div>
-                              <div className="text-gray-200">{formatDateTime(r.message_timestamp)}</div>
+                            <div className="rounded-lg bg-[var(--ds-bg-surface)]/30 border border-[var(--ds-border-subtle)] p-2">
+                              <div className="text-slate-400">message_timestamp</div>
+                              <div className="text-slate-200">{formatDateTime(r.message_timestamp)}</div>
                             </div>
                           </div>
                         </td>

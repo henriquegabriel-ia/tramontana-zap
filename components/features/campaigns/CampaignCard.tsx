@@ -94,14 +94,14 @@ export const CampaignCard = React.memo(
     return (
       <div
         onClick={() => onRowClick(campaign.id)}
-        className="p-4 border border-white/10 rounded-xl bg-slate-900/60 hover:bg-white/5 transition-all cursor-pointer hover:shadow-[0_0_20px_rgba(104,51,189,0.1)]"
+        className="p-4 border border-[var(--ds-border-subtle)] rounded-xl bg-[var(--ds-bg-elevated)] hover:bg-[var(--ds-bg-hover)] transition-all cursor-pointer hover:shadow-[0_0_20px_rgba(104,51,189,0.1)]"
       >
         {/* Header: Name, Template, Status, Tags */}
         <div className="flex items-start justify-between gap-3">
           <div className="flex-1 min-w-0">
             <p className="font-medium text-white truncate">{campaign.name}</p>
             <div className="flex items-center gap-2 mt-0.5">
-              <p className="text-xs text-gray-500 font-mono truncate">{campaign.templateName}</p>
+              <p className="text-xs text-slate-500 font-mono truncate">{campaign.templateName}</p>
               {campaign.folder && (
                 <span className="flex items-center gap-1 text-xs text-slate-500">
                   <FolderIcon size={10} style={{ color: campaign.folder.color }} />
@@ -135,7 +135,7 @@ export const CampaignCard = React.memo(
             labelPosition="right"
             formatLabel={() => `${deliveryPctRounded}%`}
           />
-          <div className="mt-2 flex items-center gap-3 text-xs text-gray-500">
+          <div className="mt-2 flex items-center gap-3 text-xs text-slate-500">
             <span className="flex items-center gap-1">
               <Users size={12} />
               {recipients.toLocaleString('pt-BR')} destinatarios
@@ -146,8 +146,8 @@ export const CampaignCard = React.memo(
         </div>
 
         {/* Footer: Date + Actions */}
-        <div className="mt-3 pt-3 border-t border-white/5 flex items-center justify-between">
-          <span className="text-xs text-gray-500 font-mono">
+        <div className="mt-3 pt-3 border-t border-[var(--ds-border-subtle)] flex items-center justify-between">
+          <span className="text-xs text-slate-500 font-mono">
             {formatDateFull(campaign.createdAt)}
           </span>
 
@@ -321,7 +321,7 @@ export const CampaignCardList = React.memo(function CampaignCardList({
 }: CampaignCardListProps) {
   if (isLoading) {
     return (
-      <div className="py-12 text-center text-gray-500">
+      <div className="py-12 text-center text-slate-500">
         Carregando campanhas...
       </div>
     )
@@ -331,10 +331,10 @@ export const CampaignCardList = React.memo(function CampaignCardList({
     return (
       <div className="py-16 text-center">
         <div className="w-12 h-12 rounded-full bg-slate-800 flex items-center justify-center mx-auto mb-3">
-          <Users size={24} className="text-gray-500" />
+          <Users size={24} className="text-slate-500" />
         </div>
-        <p className="text-gray-400 font-medium">Nenhuma campanha encontrada</p>
-        <p className="text-gray-600 text-sm mt-1">
+        <p className="text-slate-400 font-medium">Nenhuma campanha encontrada</p>
+        <p className="text-slate-600 text-sm mt-1">
           {searchTerm || filter !== 'All'
             ? 'Tente ajustar os filtros ou buscar por outro termo'
             : 'Crie sua primeira campanha para comecar'}

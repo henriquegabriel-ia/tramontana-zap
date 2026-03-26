@@ -57,12 +57,12 @@ export function TemplateModelPreviewCard(props: TemplateModelPreviewCardProps) {
   }
 
   return (
-    <div className="rounded-2xl border border-white/10 bg-slate-900/60 shadow-[0_12px_30px_rgba(0,0,0,0.35)] overflow-hidden">
-      <div className="px-6 py-4 flex items-center justify-between border-b border-white/10">
+    <div className="rounded-2xl border border-[var(--ds-border-subtle)] bg-[var(--ds-bg-elevated)] shadow-[0_12px_30px_rgba(0,0,0,0.35)] overflow-hidden">
+      <div className="px-6 py-4 flex items-center justify-between border-b border-[var(--ds-border-subtle)]">
         <div className="text-sm font-semibold text-white">{title}</div>
         <button
           type="button"
-          className="h-8 w-8 inline-flex items-center justify-center rounded-md border border-white/10 bg-slate-950/40 hover:bg-white/5 text-gray-200"
+          className="h-8 w-8 inline-flex items-center justify-center rounded-md border border-[var(--ds-border-subtle)] bg-[var(--ds-bg-surface)]/30 hover:bg-[var(--ds-bg-hover)] text-slate-200"
           title="Visualizar"
         >
           <Play className="w-4 h-4" />
@@ -71,8 +71,8 @@ export function TemplateModelPreviewCard(props: TemplateModelPreviewCardProps) {
 
       <div className="p-6">
         {/* “telefone” */}
-        <div className="rounded-2xl border border-white/10 bg-slate-950/40 p-3">
-          <div className="rounded-2xl overflow-hidden border border-white/10 bg-[#efeae2]">
+        <div className="rounded-2xl border border-[var(--ds-border-subtle)] bg-[var(--ds-bg-surface)]/30 p-3">
+          <div className="rounded-2xl overflow-hidden border border-[var(--ds-border-subtle)] bg-[#efeae2]">
             {/* header da conversa */}
             <div className="h-11 px-3 flex items-center gap-2 bg-[#075e54] text-white">
               <div className="h-7 w-7 rounded-full bg-white/20" />

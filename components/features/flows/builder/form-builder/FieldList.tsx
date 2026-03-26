@@ -25,7 +25,7 @@ export function FieldList({
   onAddField,
 }: FieldListProps) {
   return (
-    <div className="border-t border-white/10 pt-6">
+    <div className="border-t border-[var(--ds-border-subtle)] pt-6">
       <div className="flex items-center justify-between">
         <div className="text-sm font-semibold text-white flex items-center gap-2">
           <ListPlus className="h-4 w-4" />
@@ -33,7 +33,7 @@ export function FieldList({
         </div>
         <DropdownMenu>
           <DropdownMenuTrigger asChild>
-            <Button type="button" className="bg-white text-black hover:bg-gray-200">
+            <Button type="button" className="bg-white text-black hover:bg-slate-200">
               <Plus className="h-4 w-4" />
               Adicionar pergunta
               <ChevronDown className="h-4 w-4" />
@@ -41,7 +41,7 @@ export function FieldList({
           </DropdownMenuTrigger>
           <DropdownMenuContent
             align="end"
-            className="bg-slate-900 border-white/10 text-white min-w-56"
+            className="bg-slate-900 border-[var(--ds-border-subtle)] text-white min-w-56"
           >
             {Object.entries(FIELD_TYPE_LABEL).map(([key, label]) => (
               <DropdownMenuItem key={key} onClick={() => onAddField(key as FlowFormFieldType)}>
@@ -53,8 +53,8 @@ export function FieldList({
       </div>
 
       {fields.length === 0 ? (
-        <div className="mt-4 rounded-xl border border-white/10 bg-slate-950/40 px-6 py-8 text-center text-gray-400">
-          <div className="text-sm text-gray-300">
+        <div className="mt-4 rounded-xl border border-[var(--ds-border-subtle)] bg-[var(--ds-bg-surface)]/30 px-6 py-8 text-center text-slate-400">
+          <div className="text-sm text-slate-300">
             Crie a primeira pergunta para começar sua MiniApp.
           </div>
         </div>

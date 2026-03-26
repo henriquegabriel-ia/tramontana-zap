@@ -32,7 +32,7 @@ export function PermissionStatusView({
 }: PermissionStatusViewProps) {
   if (isLoading) {
     return (
-      <div className={cn('p-4 rounded-xl bg-slate-900/50 border border-slate-800', className)}>
+      <div className={cn('p-4 rounded-xl bg-[var(--ds-bg-elevated)] border border-slate-800', className)}>
         <div className="flex items-center gap-3">
           <Loader2 className="w-5 h-5 text-slate-400 animate-spin" />
           <span className="text-sm text-slate-400">Validando permissões do token...</span>
@@ -126,7 +126,7 @@ export function PermissionStatusView({
         </div>
 
         {/* Token Info Card */}
-        <div className="p-3 rounded-lg bg-slate-900/50 border border-slate-800 space-y-2">
+        <div className="p-3 rounded-lg bg-[var(--ds-bg-elevated)] border border-slate-800 space-y-2">
           {/* Tipo do token */}
           <div className="flex items-center gap-2 text-sm">
             <Smartphone className="w-4 h-4 text-slate-500" />

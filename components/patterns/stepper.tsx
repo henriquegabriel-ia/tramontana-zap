@@ -95,15 +95,15 @@ export function Stepper({
                   'text-purple-400',
                 ],
                 isCompleted && [
-                  'bg-slate-800/50 border-white/10',
+                  'bg-slate-800/50 border-[var(--ds-border-subtle)]',
                   'text-slate-300',
                 ],
                 !isActive && !isCompleted && [
-                  'bg-slate-900/50 border-white/5',
+                  'bg-[var(--ds-bg-elevated)] border-[var(--ds-border-subtle)]',
                   'text-slate-500',
                 ],
                 // Interação
-                isClickable && 'cursor-pointer hover:border-white/20',
+                isClickable && 'cursor-pointer hover:border-[var(--ds-border-default)]',
                 !isClickable && 'cursor-default',
                 // Compact mode
                 isCompact && 'px-3 py-2'
@@ -142,7 +142,7 @@ export function Stepper({
               <div
                 className={cn(
                   'flex-1 h-px max-w-8',
-                  isCompleted ? 'bg-purple-500/30' : 'bg-white/10'
+                  isCompleted ? 'bg-purple-500/30' : 'bg-[var(--ds-bg-hover)]'
                 )}
               />
             )}
@@ -206,7 +206,7 @@ export function VerticalStepper({
                 <div
                   className={cn(
                     'w-px flex-1 min-h-8 my-1',
-                    isCompleted ? 'bg-purple-500/30' : 'bg-white/10'
+                    isCompleted ? 'bg-purple-500/30' : 'bg-[var(--ds-bg-hover)]'
                   )}
                 />
               )}

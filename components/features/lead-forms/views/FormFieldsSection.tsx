@@ -26,7 +26,7 @@ export function FormFieldsSection({
   onMoveFieldDown,
 }: FormFieldsSectionProps) {
   return (
-    <div className="rounded-xl border border-slate-800 bg-slate-900/40 p-3">
+    <div className="rounded-xl border border-slate-800 bg-[var(--ds-bg-elevated)] p-3">
       <div className="flex items-center justify-between gap-3">
         <div>
           <p className="text-sm font-medium">Campos do formulario</p>

@@ -74,14 +74,14 @@ export function SummaryPanel({
   return (
     <div
       className={cn(
-        'rounded-2xl border border-white/10 bg-slate-900/60',
+        'rounded-2xl border border-[var(--ds-border-subtle)] bg-[var(--ds-bg-elevated)]',
         'overflow-hidden',
         sticky && 'sticky top-6',
         className
       )}
     >
       {/* Header */}
-      <div className="flex items-center justify-between gap-3 p-5 border-b border-white/5">
+      <div className="flex items-center justify-between gap-3 p-5 border-b border-[var(--ds-border-subtle)]">
         <div className="flex items-center gap-2">
           {Icon && <Icon className="w-5 h-5 text-slate-400" />}
           <h3 className="text-lg font-semibold text-white">{title}</h3>
@@ -103,7 +103,7 @@ export function SummaryPanel({
 
       {/* Footer */}
       {footer && (
-        <div className="px-5 pb-5 pt-2 border-t border-white/5">{footer}</div>
+        <div className="px-5 pb-5 pt-2 border-t border-[var(--ds-border-subtle)]">{footer}</div>
       )}
     </div>
   )
@@ -216,7 +216,7 @@ export interface SummaryDividerProps {
 }
 
 export function SummaryDivider({ className }: SummaryDividerProps) {
-  return <div className={cn('h-px bg-white/5 my-4', className)} />
+  return <div className={cn('h-px bg-[var(--ds-bg-hover)] my-4', className)} />
 }
 
 // =============================================================================
@@ -247,7 +247,7 @@ export function SummaryPreview({
       </span>
       <div
         className={cn(
-          'rounded-xl border border-white/10 bg-slate-950/50 p-4',
+          'rounded-xl border border-[var(--ds-border-subtle)] bg-[var(--ds-bg-surface)]/30 p-4',
           'overflow-auto'
         )}
         style={maxHeight ? { maxHeight } : undefined}
@@ -338,7 +338,7 @@ export function SummaryStats({ stats, className }: SummaryStatsProps) {
       {stats.map((stat, index) => (
         <div
           key={index}
-          className="p-3 rounded-lg bg-slate-800/50 border border-white/5 text-center"
+          className="p-3 rounded-lg bg-slate-800/50 border border-[var(--ds-border-subtle)] text-center"
         >
           {stat.icon && (
             <stat.icon className="w-4 h-4 text-slate-500 mx-auto mb-1" />

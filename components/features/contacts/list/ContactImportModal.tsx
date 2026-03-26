@@ -299,17 +299,17 @@ export const ContactImportModal: React.FC<ContactImportModalProps> = ({
     <div className="fixed inset-0 bg-black/80 backdrop-blur-sm z-50 flex items-center justify-center p-4">
       <Container variant="surface" padding="xl" className="w-full max-w-2xl shadow-2xl animate-in zoom-in duration-200 flex flex-col max-h-[90vh]">
         {/* Header */}
-        <div className="flex justify-between items-center mb-8 border-b border-white/5 pb-6">
+        <div className="flex justify-between items-center mb-8 border-b border-[var(--ds-border-subtle)] pb-6">
           <div>
             <h2 className="text-2xl font-bold text-white mb-1">Importar Contatos</h2>
-            <p className="text-sm text-gray-400">Adicione múltiplos contatos de uma vez via CSV</p>
+            <p className="text-sm text-slate-400">Adicione múltiplos contatos de uma vez via CSV</p>
           </div>
           <button
             type="button"
             aria-label="Fechar importação de contatos"
             onClick={resetAndClose}
           >
-            <X className="text-gray-500 hover:text-white" />
+            <X className="text-slate-500 hover:text-white" />
           </button>
         </div>
 
@@ -352,16 +352,16 @@ export const ContactImportModal: React.FC<ContactImportModalProps> = ({
         </div>
 
         {/* Footer Actions */}
-        <div className="pt-6 mt-6 border-t border-white/5 flex justify-end gap-3">
+        <div className="pt-6 mt-6 border-t border-[var(--ds-border-subtle)] flex justify-end gap-3">
           {step === 1 && (
-            <button onClick={resetAndClose} className="text-gray-400 hover:text-white px-4 py-2 text-sm font-medium">
+            <button onClick={resetAndClose} className="text-slate-400 hover:text-white px-4 py-2 text-sm font-medium">
               Cancelar
             </button>
           )}
 
           {step === 2 && (
             <>
-              <button onClick={resetAndClose} className="text-gray-400 hover:text-white px-4 py-2 text-sm font-medium" disabled={isImporting}>
+              <button onClick={resetAndClose} className="text-slate-400 hover:text-white px-4 py-2 text-sm font-medium" disabled={isImporting}>
                 Cancelar
               </button>
               <button
@@ -381,7 +381,7 @@ export const ContactImportModal: React.FC<ContactImportModalProps> = ({
           {step === 3 && (
             <button
               onClick={resetAndClose}
-              className="bg-white text-black px-8 py-2.5 rounded-lg font-bold hover:bg-gray-200 transition-colors"
+              className="bg-white text-black px-8 py-2.5 rounded-lg font-bold hover:bg-slate-200 transition-colors"
             >
               Fechar
             </button>
@@ -413,14 +413,14 @@ interface ImportStepUploadProps {
 const ImportStepUpload: React.FC<ImportStepUploadProps> = ({ fileInputRef, onFileSelect }) => (
   <div className="space-y-6">
     <div
-      className="border-2 border-dashed border-slate-800 hover:border-primary-500/50 hover:bg-white/5 rounded-2xl p-12 transition-all cursor-pointer text-center group"
+      className="border-2 border-dashed border-slate-800 hover:border-primary-500/50 hover:bg-[var(--ds-bg-hover)] rounded-2xl p-12 transition-all cursor-pointer text-center group"
       onClick={() => fileInputRef.current?.click()}
     >
       <div className="w-16 h-16 bg-slate-900 rounded-full flex items-center justify-center mx-auto mb-4 group-hover:scale-110 transition-transform">
-        <UploadCloud size={32} className="text-gray-400 group-hover:text-primary-400" />
+        <UploadCloud size={32} className="text-slate-400 group-hover:text-primary-400" />
       </div>
       <h3 className="text-lg font-semibold text-white mb-2">Clique para selecionar ou arraste aqui</h3>
-      <p className="text-gray-500 text-sm">Suporta arquivos .csv (Máx 5MB)</p>
+      <p className="text-slate-500 text-sm">Suporta arquivos .csv (Máx 5MB)</p>
       <input
         type="file"
         ref={fileInputRef}
@@ -430,9 +430,9 @@ const ImportStepUpload: React.FC<ImportStepUploadProps> = ({ fileInputRef, onFil
       />
     </div>
 
-    <div className="bg-slate-900/50 rounded-xl p-4 flex gap-3 border border-white/5">
+    <div className="bg-[var(--ds-bg-elevated)] rounded-xl p-4 flex gap-3 border border-[var(--ds-border-subtle)]">
       <AlertCircle className="text-primary-500 shrink-0" size={20} />
-      <div className="text-sm text-gray-400">
+      <div className="text-sm text-slate-400">
         <p className="text-white font-medium mb-1">Dica de Formatação</p>
         <p>Seu arquivo deve ter cabeçalhos na primeira linha (Ex: Nome, Telefone). O sistema tentará identificar as colunas automaticamente.</p>
       </div>
@@ -463,7 +463,7 @@ const ImportStepMapping: React.FC<ImportStepMappingProps> = ({
   onReset
 }) => (
   <div className="space-y-6">
-    <div className="flex items-center gap-3 bg-slate-900 border border-white/10 p-3 rounded-lg mb-6">
+    <div className="flex items-center gap-3 bg-slate-900 border border-[var(--ds-border-subtle)] p-3 rounded-lg mb-6">
       <FileText size={20} className="text-primary-400" />
       <span className="text-white text-sm font-medium flex-1 truncate">{csvFile?.name}</span>
       <button onClick={onReset} className="text-xs text-red-400 hover:underline">Trocar</button>
@@ -510,7 +510,7 @@ const ImportStepMapping: React.FC<ImportStepMappingProps> = ({
         {/* Default Tag Input */}
         {!columnMapping.tags && (
           <div className="grid grid-cols-2 gap-4 items-center bg-primary-500/5 p-3 rounded-lg border border-primary-500/20">
-            <label className="text-gray-400 text-sm">
+            <label className="text-slate-400 text-sm">
               <span className="text-primary-400">*</span> Tag padrão para todos
             </label>
             <input
@@ -524,18 +524,18 @@ const ImportStepMapping: React.FC<ImportStepMappingProps> = ({
         )}
 
         {/* Custom Fields Section */}
-        <div className="border-t border-white/10 pt-4 mt-2">
+        <div className="border-t border-[var(--ds-border-subtle)] pt-4 mt-2">
           <div className="flex items-center justify-between mb-4">
             <h3 className="text-white font-medium text-sm uppercase tracking-wider">Campos Personalizados</h3>
             {customFields && customFields.length > 0 && (
-              <div className="text-xs text-gray-400">
+              <div className="text-xs text-slate-400">
                 {Object.keys(columnMapping.custom_fields || {}).length} de {customFields.length} mapeados
               </div>
             )}
           </div>
 
           {customFields && customFields.length > 0 ? (
-            <div className="bg-slate-900/50 rounded-xl border border-white/10 p-4">
+            <div className="bg-[var(--ds-bg-elevated)] rounded-xl border border-[var(--ds-border-subtle)] p-4">
               <div className="flex items-center justify-between">
                 <div className="flex items-center gap-3">
                   <div className="p-2 bg-primary-500/10 rounded-lg text-primary-400">
@@ -543,7 +543,7 @@ const ImportStepMapping: React.FC<ImportStepMappingProps> = ({
                   </div>
                   <div>
                     <p className="text-white text-sm font-medium">Configurar Mapeamento</p>
-                    <p className="text-xs text-gray-400">
+                    <p className="text-xs text-slate-400">
                       {Object.keys(columnMapping.custom_fields || {}).length === 0
                         ? "Nenhum campo vinculado"
                         : "Clique para ajustar vínculos"}
@@ -552,7 +552,7 @@ const ImportStepMapping: React.FC<ImportStepMappingProps> = ({
                 </div>
                 <button
                   onClick={onOpenMappingSheet}
-                  className="px-4 py-2 bg-slate-800 hover:bg-slate-700 text-white text-xs font-medium rounded-lg border border-white/10 transition-colors flex items-center gap-2"
+                  className="px-4 py-2 bg-slate-800 hover:bg-slate-700 text-white text-xs font-medium rounded-lg border border-[var(--ds-border-subtle)] transition-colors flex items-center gap-2"
                 >
                   Configurar
                   <ChevronRight size={14} />
@@ -560,7 +560,7 @@ const ImportStepMapping: React.FC<ImportStepMappingProps> = ({
               </div>
             </div>
           ) : (
-            <div className="text-sm text-gray-500 italic bg-slate-900/50 p-3 rounded-lg border border-white/5">
+            <div className="text-sm text-slate-500 italic bg-[var(--ds-bg-elevated)] p-3 rounded-lg border border-[var(--ds-border-subtle)]">
               Nenhum campo personalizado encontrado. Crie campos personalizados nas configurações para mapeá-los aqui.
             </div>
           )}
@@ -570,16 +570,16 @@ const ImportStepMapping: React.FC<ImportStepMappingProps> = ({
       {/* Estatísticas de Pré-Importação */}
       {columnMapping.phone && (
         <div className="mt-4">
-          <h3 className="text-gray-500 text-xs font-medium uppercase tracking-wider mb-3">
+          <h3 className="text-slate-500 text-xs font-medium uppercase tracking-wider mb-3">
             Resumo da importação
           </h3>
           <div className="grid grid-cols-5 gap-2">
-            <div className="bg-slate-900/50 rounded-lg p-2.5 border border-white/10 text-center">
+            <div className="bg-[var(--ds-bg-elevated)] rounded-lg p-2.5 border border-[var(--ds-border-subtle)] text-center">
               <div className="flex items-center justify-center gap-1 mb-0.5">
-                <Users size={12} className="text-gray-400" />
+                <Users size={12} className="text-slate-400" />
                 <span className="text-base font-bold text-white">{previewStats.totalRows}</span>
               </div>
-              <p className="text-[9px] text-gray-500 uppercase">Total</p>
+              <p className="text-[9px] text-slate-500 uppercase">Total</p>
             </div>
             <div className="bg-purple-500/10 rounded-lg p-2.5 border border-purple-500/20 text-center">
               <div className="flex items-center justify-center gap-1 mb-0.5">
@@ -614,7 +614,7 @@ const ImportStepMapping: React.FC<ImportStepMappingProps> = ({
             </div>
           </div>
           {(previewStats.duplicatesInDatabase > 0 || previewStats.duplicatesInCsv > 0 || previewStats.invalidPhones > 0) && (
-            <p className="text-xs text-gray-500 mt-2">
+            <p className="text-xs text-slate-500 mt-2">
               * Apenas {previewStats.validContacts} novos contatos serão adicionados
             </p>
           )}
@@ -623,12 +623,12 @@ const ImportStepMapping: React.FC<ImportStepMappingProps> = ({
 
       {/* Preview Table */}
       <div className="mt-4">
-        <h3 className="text-gray-500 text-xs font-medium uppercase tracking-wider mb-3">
+        <h3 className="text-slate-500 text-xs font-medium uppercase tracking-wider mb-3">
           Pré-visualização dos dados (3 linhas)
         </h3>
-        <div className="overflow-x-auto rounded-lg border border-white/10">
+        <div className="overflow-x-auto rounded-lg border border-[var(--ds-border-subtle)]">
           <table className="w-full text-xs text-left">
-            <thead className="bg-white/5 text-gray-300">
+            <thead className="bg-[var(--ds-bg-surface)]/30 text-[var(--ds-text-muted)]">
               <tr>
                 {csvPreview.headers.map(h => (
                   <th
@@ -644,7 +644,7 @@ const ImportStepMapping: React.FC<ImportStepMappingProps> = ({
               {csvPreview.rows.map((row, i) => (
                 <tr key={i}>
                   {row.map((cell, j) => (
-                    <td key={j} className="px-3 py-2 text-gray-400 border-r border-white/5 last:border-0">
+                    <td key={j} className="px-3 py-2 text-slate-400 border-r border-[var(--ds-border-subtle)] last:border-0">
                       {cell}
                     </td>
                   ))}
@@ -677,11 +677,11 @@ const ColumnMappingSelect: React.FC<ColumnMappingSelectProps> = ({
   placeholder = "Ignorar coluna"
 }) => (
   <div className="grid grid-cols-2 gap-4 items-center">
-    <label className="text-gray-400 text-sm">
+    <label className="text-slate-400 text-sm">
       {label} {required && <span className="text-primary-500">*</span>}
     </label>
     <select
-      className={`bg-slate-900 border rounded-lg px-3 py-2 text-white text-sm outline-none focus:border-primary-500 ${required ? 'border-primary-500/30' : 'border-white/10'}`}
+      className={`bg-slate-900 border rounded-lg px-3 py-2 text-white text-sm outline-none focus:border-primary-500 ${required ? 'border-primary-500/30' : 'border-[var(--ds-border-subtle)]'}`}
       value={value}
       onChange={(e) => onChange(e.target.value)}
     >
@@ -775,12 +775,12 @@ const ImportStepSuccess: React.FC<ImportStepSuccessProps> = ({ result, invalidRo
       <CheckCircle2 size={40} />
     </div>
     <h3 className="text-2xl font-bold text-white mb-2">Importação Concluída!</h3>
-    <p className="text-gray-400 mb-8">Seus contatos foram processados com sucesso.</p>
+    <p className="text-slate-400 mb-8">Seus contatos foram processados com sucesso.</p>
 
     <div className="grid grid-cols-4 gap-3 max-w-lg mx-auto mb-8">
       <Container variant="surface" padding="md">
         <p className="text-2xl font-bold text-white">{result.total}</p>
-        <p className="text-xs text-gray-500">Linhas</p>
+        <p className="text-xs text-slate-500">Linhas</p>
       </Container>
       <div className="bg-purple-500/10 rounded-xl p-4 border border-purple-500/20">
         <p className="text-2xl font-bold text-purple-400">{result.inserted}</p>
@@ -794,8 +794,8 @@ const ImportStepSuccess: React.FC<ImportStepSuccessProps> = ({ result, invalidRo
         className="bg-slate-800/50 rounded-xl p-4 border border-slate-700/50 text-center"
         title={result.errors > 0 ? 'Linhas ignoradas por telefone inválido' : undefined}
       >
-        <p className="text-2xl font-bold text-gray-400">{result.errors}</p>
-        <p className="text-xs text-gray-500">Ignorados</p>
+        <p className="text-2xl font-bold text-slate-400">{result.errors}</p>
+        <p className="text-xs text-slate-500">Ignorados</p>
       </div>
     </div>
 
@@ -853,16 +853,16 @@ const ImportStepSuccess: React.FC<ImportStepSuccessProps> = ({ result, invalidRo
                 <th className="px-3 py-2 text-left text-amber-400/70 font-medium">Motivo</th>
               </tr>
             </thead>
-            <tbody className="divide-y divide-white/5 bg-slate-900/40">
+            <tbody className="divide-y divide-white/5 bg-[var(--ds-bg-elevated)]">
               {stillInvalid.map((row, i) => (
                 <tr key={i}>
-                  <td className="px-3 py-2 text-gray-300 max-w-[120px] truncate">
-                    {row.name || <span className="text-gray-600 italic">sem nome</span>}
+                  <td className="px-3 py-2 text-slate-300 max-w-[120px] truncate">
+                    {row.name || <span className="text-slate-600 italic">sem nome</span>}
                   </td>
                   <td className="px-3 py-2 font-mono text-red-400">
-                    {row.rawPhone || <span className="text-gray-600 italic">vazio</span>}
+                    {row.rawPhone || <span className="text-slate-600 italic">vazio</span>}
                   </td>
-                  <td className="px-3 py-2 text-gray-400">{getInvalidReason(row.rawPhone)}</td>
+                  <td className="px-3 py-2 text-slate-400">{getInvalidReason(row.rawPhone)}</td>
                 </tr>
               ))}
             </tbody>
@@ -872,7 +872,7 @@ const ImportStepSuccess: React.FC<ImportStepSuccessProps> = ({ result, invalidRo
         <div className="mt-3">
           <button
             onClick={() => setShowFormats(v => !v)}
-            className="flex items-center gap-1.5 text-xs text-gray-500 hover:text-gray-300 transition-colors"
+            className="flex items-center gap-1.5 text-xs text-slate-500 hover:text-slate-300 transition-colors"
           >
             <HelpCircle className="w-3.5 h-3.5" />
             Quais formatos de telefone são aceitos?
@@ -880,13 +880,13 @@ const ImportStepSuccess: React.FC<ImportStepSuccessProps> = ({ result, invalidRo
           </button>
 
           {showFormats && (
-            <div className="mt-2 rounded-lg border border-white/10 bg-slate-900/60 p-3 space-y-3 text-xs">
+            <div className="mt-2 rounded-lg border border-[var(--ds-border-subtle)] bg-[var(--ds-bg-elevated)] p-3 space-y-3 text-xs">
               {/* Corrigido automaticamente */}
               <div>
                 <p className="text-purple-400 font-medium mb-1.5">✅ Aceitos e corrigidos automaticamente</p>
                 <table className="w-full">
                   <thead>
-                    <tr className="text-gray-500 text-[10px]">
+                    <tr className="text-slate-500 text-[10px]">
                       <th className="text-left pb-1 font-medium w-1/2">Você coloca no CSV</th>
                       <th className="text-left pb-1 font-medium">Como fica salvo</th>
                     </tr>
@@ -900,7 +900,7 @@ const ImportStepSuccess: React.FC<ImportStepSuccessProps> = ({ result, invalidRo
                       ['+1 415 555 0001',       '+14155550001'],
                     ].map(([in_, out_], i) => (
                       <tr key={i}>
-                        <td className="py-1 pr-2 font-mono text-gray-300">{in_}</td>
+                        <td className="py-1 pr-2 font-mono text-slate-300">{in_}</td>
                         <td className="py-1 font-mono text-purple-400">{out_}</td>
                       </tr>
                     ))}
@@ -913,7 +913,7 @@ const ImportStepSuccess: React.FC<ImportStepSuccessProps> = ({ result, invalidRo
                 <p className="text-red-400 font-medium mb-1.5">❌ Rejeitados — o que fazer</p>
                 <table className="w-full">
                   <thead>
-                    <tr className="text-gray-500 text-[10px]">
+                    <tr className="text-slate-500 text-[10px]">
                       <th className="text-left pb-1 font-medium w-1/3">Exemplo</th>
                       <th className="text-left pb-1 font-medium">Problema</th>
                       <th className="text-left pb-1 font-medium">Solução</th>
@@ -927,16 +927,16 @@ const ImportStepSuccess: React.FC<ImportStepSuccessProps> = ({ result, invalidRo
                       ['11abc99', 'Letras no número',          'Use apenas dígitos'],
                     ].map(([ex, prob, sol], i) => (
                       <tr key={i}>
-                        <td className="py-1 pr-2 font-mono text-red-400">{ex || <span className="italic text-gray-600">vazio</span>}</td>
-                        <td className="py-1 pr-2 text-gray-400">{prob}</td>
-                        <td className="py-1 text-gray-300">{sol}</td>
+                        <td className="py-1 pr-2 font-mono text-red-400">{ex || <span className="italic text-slate-600">vazio</span>}</td>
+                        <td className="py-1 pr-2 text-slate-400">{prob}</td>
+                        <td className="py-1 text-slate-300">{sol}</td>
                       </tr>
                     ))}
                   </tbody>
                 </table>
               </div>
 
-              <p className="text-gray-600 text-[10px] pt-1 border-t border-white/5">
+              <p className="text-slate-600 text-[10px] pt-1 border-t border-[var(--ds-border-subtle)]">
                 Números brasileiros sem código de país (+55) são corrigidos automaticamente.
                 Internacionais precisam do código do país (ex: +1, +33, +351).
               </p>

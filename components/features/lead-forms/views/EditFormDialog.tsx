@@ -132,7 +132,7 @@ export function EditFormDialog({
               </div>
             </div>
 
-            <div className="flex items-center justify-between rounded-lg border border-slate-800 bg-slate-900/40 p-3">
+            <div className="flex items-center justify-between rounded-lg border border-slate-800 bg-[var(--ds-bg-elevated)] p-3">
               <div>
                 <p className="text-sm font-medium">Ativo</p>
                 <p className="text-xs text-slate-500">Quando desligado, o link publico retorna 404.</p>
@@ -144,7 +144,7 @@ export function EditFormDialog({
               />
             </div>
 
-            <div className="flex items-center justify-between rounded-lg border border-slate-800 bg-slate-900/40 p-3">
+            <div className="flex items-center justify-between rounded-lg border border-slate-800 bg-[var(--ds-bg-elevated)] p-3">
               <div>
                 <p className="text-sm font-medium">Coletar email</p>
                 <p className="text-xs text-slate-500">Mostra o campo de email no formulario publico.</p>

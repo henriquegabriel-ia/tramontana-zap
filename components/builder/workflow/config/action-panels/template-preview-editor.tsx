@@ -300,10 +300,10 @@ export function TemplatePreviewEditor({
             {displayValue || placeholder}
           </button>
         </PopoverTrigger>
-        <PopoverContent className="w-80 border border-white/10 bg-slate-950 p-3 text-white">
+        <PopoverContent className="w-80 border border-[var(--ds-border-subtle)] bg-slate-950 p-3 text-white">
           <div className="flex items-center justify-between gap-2">
             <Input
-              className="h-8 bg-slate-900/60 text-xs text-white"
+              className="h-8 bg-[var(--ds-bg-elevated)] text-xs text-white"
               onChange={(event) => setSearchTerm(event.target.value)}
               placeholder="Buscar campo..."
               value={searchTerm}
@@ -360,7 +360,7 @@ export function TemplatePreviewEditor({
               ) : (
                 filteredCustom.map((option) => (
                   <button
-                    className="rounded-full border border-white/10 px-3 py-1 text-xs text-white/80 hover:bg-white/5"
+                    className="rounded-full border border-[var(--ds-border-subtle)] px-3 py-1 text-xs text-white/80 hover:bg-[var(--ds-bg-hover)]"
                     key={option.key}
                     onClick={() => {
                       handleActiveChange(`{{${option.key}}}`);
@@ -380,7 +380,7 @@ export function TemplatePreviewEditor({
               Variavel do fluxo
             </div>
             <TemplateBadgeInput
-              className="bg-slate-900/60 text-white"
+              className="bg-[var(--ds-bg-elevated)] text-white"
               disabled={disabled}
               onChange={setFlowDraft}
               placeholder="Digite @ para escolher"
@@ -461,13 +461,13 @@ export function TemplatePreviewEditor({
       {autoFillLabel && (
         <div className="text-xs text-muted-foreground">{autoFillLabel}</div>
       )}
-      <div className="h-1.5 w-full rounded-full bg-white/10">
+      <div className="h-1.5 w-full rounded-full bg-[var(--ds-bg-hover)]">
         <div
           className="h-1.5 rounded-full bg-purple-500"
           style={{ width: `${progressPct}%` }}
         />
       </div>
-      <div className="rounded-xl border border-white/10 bg-black/50 p-4">
+      <div className="rounded-xl border border-[var(--ds-border-subtle)] bg-black/50 p-4">
         <div className="text-xs uppercase tracking-widest text-muted-foreground">
           Preview do WhatsApp
         </div>
@@ -499,7 +499,7 @@ export function TemplatePreviewEditor({
           </div>
         </div>
         {buttonParamIndex !== null && (
-          <div className="mt-3 rounded-lg border border-white/10 bg-black/40 px-3 py-2 text-xs text-muted-foreground">
+          <div className="mt-3 rounded-lg border border-[var(--ds-border-subtle)] bg-black/40 px-3 py-2 text-xs text-muted-foreground">
             <div className="flex items-center gap-2">
               <span>{buttonLabel || "Botao"}</span>
               {renderSlotPicker({ scope: "button", id: "button" }, buttonDisplayValue)}

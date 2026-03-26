@@ -89,7 +89,7 @@ export function AIAgentCard({
       )}
     >
       {/* Status bar no topo */}
-      <div className="flex items-center justify-between px-4 py-2 bg-slate-900/50 border-b border-slate-800">
+      <div className="flex items-center justify-between px-4 py-2 bg-[var(--ds-bg-elevated)] border-b border-slate-800">
         <div className="flex items-center gap-2">
           {/* Indicador de status clicável */}
           <Tooltip>

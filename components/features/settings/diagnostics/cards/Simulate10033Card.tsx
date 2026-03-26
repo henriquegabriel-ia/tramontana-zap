@@ -34,9 +34,9 @@ export function Simulate10033Card() {
     <Container variant="glass" padding="md">
       <div className="flex items-start justify-between gap-4">
         <div className="min-w-0">
-          <div className="text-xs text-gray-500">Simulador</div>
+          <div className="text-xs text-slate-500">Simulador</div>
           <div className="mt-2 text-sm text-white font-medium">Reproduzir erro 100/33 (sem enviar mensagem)</div>
-          <div className="mt-2 text-sm text-gray-300">
+          <div className="mt-2 text-sm text-slate-300">
             Util pra aula/suporte: dispara o erro classico de "ID/permissao" sem risco de mandar mensagem.
           </div>
         </div>
@@ -44,7 +44,7 @@ export function Simulate10033Card() {
           type="button"
           onClick={run}
           disabled={isRunning}
-          className="px-3 py-2 rounded-lg bg-white/5 text-white hover:bg-white/10 border border-white/10 hover:border-white/20 transition-all text-sm font-medium inline-flex items-center gap-2 disabled:opacity-50"
+          className="px-3 py-2 rounded-lg bg-[var(--ds-bg-hover)] text-white hover:bg-[var(--ds-bg-hover)] border border-[var(--ds-border-subtle)] hover:border-[var(--ds-border-default)] transition-all text-sm font-medium inline-flex items-center gap-2 disabled:opacity-50"
           title="Executa um POST invalido em /{WABA_ID}/messages para gerar 100/33"
         >
           <Wand2 size={14} /> {isRunning ? 'Simulando...' : 'Simular agora'}
@@ -52,16 +52,16 @@ export function Simulate10033Card() {
       </div>
 
       {result && (
-        <div className="mt-4 bg-slate-900/40 border border-white/10 rounded-xl p-4">
+        <div className="mt-4 bg-[var(--ds-bg-elevated)] border border-[var(--ds-border-subtle)] rounded-xl p-4">
           {result.ok === false ? (
             <>
               <div className="flex items-center justify-between gap-3">
                 <div className="text-sm text-white font-semibold">Falhou</div>
                 <StatusBadge status="fail" />
               </div>
-              <div className="mt-2 text-sm text-gray-200">{result.error}</div>
+              <div className="mt-2 text-sm text-slate-200">{result.error}</div>
               {result.details && (
-                <pre className="mt-3 text-xs text-gray-300 overflow-auto whitespace-pre-wrap">{formatJsonMaybe(result.details)}</pre>
+                <pre className="mt-3 text-xs text-slate-300 overflow-auto whitespace-pre-wrap">{formatJsonMaybe(result.details)}</pre>
               )}
             </>
           ) : (
@@ -70,12 +70,12 @@ export function Simulate10033Card() {
                 <div className="text-sm text-white font-semibold">Resultado</div>
                 <StatusBadge status="pass" />
               </div>
-              <div className="mt-2 text-sm text-gray-200">
+              <div className="mt-2 text-sm text-slate-200">
                 Endpoint testado: <span className="font-mono">/{'{'}WABA_ID{'}'}/messages</span> · status HTTP: <span className="font-mono">{String((result as { attempt?: { status?: number } })?.attempt?.status ?? '—')}</span>
               </div>
               {normalized?.message && (
-                <div className="mt-3 text-sm text-gray-200">
-                  <div><span className="text-gray-400">Mensagem:</span> {String(normalized.message)}</div>
+                <div className="mt-3 text-sm text-slate-200">
+                  <div><span className="text-slate-400">Mensagem:</span> {String(normalized.message)}</div>
                   <div className="mt-1 flex flex-wrap gap-2">
                     <Pill tone="neutral">code: {String(normalized.code ?? '—')}</Pill>
                     <Pill tone="neutral">subcode: {String(normalized.subcode ?? '—')}</Pill>
@@ -84,8 +84,8 @@ export function Simulate10033Card() {
                 </div>
               )}
               <details className="mt-4">
-                <summary className="cursor-pointer text-sm text-gray-200 underline">Ver resposta bruta da Meta</summary>
-                <pre className="mt-3 text-xs text-gray-300 overflow-auto whitespace-pre-wrap">{formatJsonMaybe((result as { result?: unknown })?.result || null)}</pre>
+                <summary className="cursor-pointer text-sm text-slate-200 underline">Ver resposta bruta da Meta</summary>
+                <pre className="mt-3 text-xs text-slate-300 overflow-auto whitespace-pre-wrap">{formatJsonMaybe((result as { result?: unknown })?.result || null)}</pre>
               </details>
             </>
           )}

@@ -26,13 +26,13 @@ export function HealthStatusSeal({ checks }: HealthStatusSealProps) {
 
   return (
     <Container variant="glass" padding="md">
-      <div className="text-xs text-gray-500">Semaforo</div>
+      <div className="text-xs text-slate-500">Semaforo</div>
       <div className="mt-2 flex items-center gap-2">
         <StatusBadge status={status} />
         <div className="text-sm text-white font-medium">Health Status: {overall || '—'}</div>
       </div>
-      <div className="mt-2 text-sm text-gray-300">{subtitle}</div>
-      <div className="mt-2 text-xs text-gray-500">
+      <div className="mt-2 text-sm text-slate-300">{subtitle}</div>
+      <div className="mt-2 text-xs text-slate-500">
         Fonte: Graph API · field <span className="font-mono">health_status</span>
       </div>
     </Container>

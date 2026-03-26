@@ -60,7 +60,7 @@ export function FormSection({
   return (
     <div
       className={cn(
-        'rounded-2xl border border-white/10 bg-slate-900/60',
+        'rounded-2xl border border-[var(--ds-border-subtle)] bg-[var(--ds-bg-elevated)]',
         'overflow-hidden',
         className
       )}
@@ -69,7 +69,7 @@ export function FormSection({
       <div
         className={cn(
           'flex items-start justify-between gap-4 p-5',
-          collapsible && 'cursor-pointer hover:bg-white/5 transition-colors'
+          collapsible && 'cursor-pointer hover:bg-[var(--ds-bg-hover)] transition-colors'
         )}
         onClick={collapsible ? () => setIsCollapsed(!isCollapsed) : undefined}
       >
@@ -204,14 +204,14 @@ export function FormDivider({ text, className }: FormDividerProps) {
   if (text) {
     return (
       <div className={cn('flex items-center gap-4 my-6', className)}>
-        <div className="flex-1 h-px bg-white/10" />
+        <div className="flex-1 h-px bg-[var(--ds-bg-hover)]" />
         <span className="text-xs font-medium text-slate-500 uppercase tracking-wider">
           {text}
         </span>
-        <div className="flex-1 h-px bg-white/10" />
+        <div className="flex-1 h-px bg-[var(--ds-bg-hover)]" />
       </div>
     )
   }
 
-  return <div className={cn('h-px bg-white/10 my-6', className)} />
+  return <div className={cn('h-px bg-[var(--ds-bg-hover)] my-6', className)} />
 }

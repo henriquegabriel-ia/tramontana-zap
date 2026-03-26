@@ -38,19 +38,19 @@ const PREVIEW_THEME: Record<PreviewVariant, {
     buttonDivider: 'border-[#111b21]',
   },
   smartzap: {
-    headerBg: 'bg-slate-950/40',
-    bubbleBg: 'bg-slate-900/60',
+    headerBg: 'bg-[var(--ds-bg-surface)]/30',
+    bubbleBg: 'bg-[var(--ds-bg-elevated)]',
     bubbleText: 'text-white',
-    bubbleBorder: 'border border-white/10',
-    subtleText: 'text-gray-400',
+    bubbleBorder: 'border border-[var(--ds-border-subtle)]',
+    subtleText: 'text-slate-400',
     quoteBorder: 'border-primary-500/60',
-    quoteBg: 'bg-white/5',
+    quoteBg: 'bg-[var(--ds-bg-hover)]',
     inlineCodeBg: 'bg-black/40',
-    codeblockBg: 'bg-slate-950/60',
-    divider: 'border-white/10',
+    codeblockBg: 'bg-[var(--ds-bg-surface)]/40',
+    divider: 'border-[var(--ds-border-subtle)]',
     buttonText: 'text-primary-300',
-    buttonHoverBg: 'hover:bg-white/5',
-    buttonDivider: 'border-white/10',
+    buttonHoverBg: 'hover:bg-[var(--ds-bg-hover)]',
+    buttonDivider: 'border-[var(--ds-border-subtle)]',
   },
 };
 
@@ -678,8 +678,8 @@ export const WhatsAppPhonePreview: React.FC<WhatsAppPhonePreviewProps> = ({
             {businessName.charAt(0).toUpperCase()}
           </div>
           <div className="flex-1">
-            <p className="text-gray-100 text-sm font-medium leading-none">{businessName}</p>
-            <p className="text-[10px] text-gray-400 mt-1">Conta Comercial</p>
+            <p className="text-slate-100 text-sm font-medium leading-none">{businessName}</p>
+            <p className="text-[10px] text-slate-400 mt-1">Conta Comercial</p>
           </div>
         </div>
       </div>
@@ -716,8 +716,8 @@ export const WhatsAppPhonePreview: React.FC<WhatsAppPhonePreviewProps> = ({
             variant={variant}
           />
         ) : showEmptyState ? (
-          <div className="flex flex-col items-center justify-center h-full text-gray-600 text-xs gap-2 opacity-50">
-            <div className="w-12 h-12 border-2 border-dashed border-gray-700 rounded-lg flex items-center justify-center">
+          <div className="flex flex-col items-center justify-center h-full text-slate-600 text-xs gap-2 opacity-50">
+            <div className="w-12 h-12 border-2 border-dashed border-slate-700 rounded-lg flex items-center justify-center">
               <MessageSquare size={20} />
             </div>
             <span>{emptyStateMessage}</span>
@@ -727,7 +727,7 @@ export const WhatsAppPhonePreview: React.FC<WhatsAppPhonePreviewProps> = ({
 
       {/* Footer */}
       <div className="bg-[#202c33] h-14 flex items-center px-2 gap-2 shrink-0">
-        <div className="w-8 h-8 rounded-full hover:bg-white/5 flex items-center justify-center text-[#8696a0]">
+        <div className="w-8 h-8 rounded-full hover:bg-[var(--ds-bg-hover)] flex items-center justify-center text-[#8696a0]">
           <span className="text-xl">+</span>
         </div>
         <div className="flex-1 h-9 bg-[#2a3942] rounded-lg px-3 flex items-center text-[#8696a0] text-xs">
@@ -782,7 +782,7 @@ export const CompactPreview: React.FC<CompactPreviewProps> = ({
 }) => {
   return (
     <div
-      className={`rounded-xl border border-white/10 bg-slate-950/40 p-4 shadow-[0_12px_30px_rgba(0,0,0,0.35)] ${className}`}
+      className={`rounded-xl border border-[var(--ds-border-subtle)] bg-[var(--ds-bg-surface)]/30 p-4 shadow-[0_12px_30px_rgba(0,0,0,0.35)] ${className}`}
     >
       <MessageBubble
         components={components}

@@ -91,7 +91,7 @@ export function StatsCard({
       className={cn(
         // Base styles
         'flex items-center gap-4 p-5 rounded-2xl',
-        'bg-slate-900/60 border border-white/10',
+        'bg-[var(--ds-bg-elevated)] border border-[var(--ds-border-subtle)]',
         'transition-all duration-200',
         // Hover state
         isClickable && 'cursor-pointer hover:bg-slate-900/80 hover:border-white/15',

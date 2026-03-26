@@ -255,7 +255,7 @@ export default function WorkflowsPage() {
           <Button
             variant="outline"
             onClick={() => refetch()}
-            className="border-white/10 bg-slate-950/40 hover:bg-white/5 text-gray-200"
+            className="border-[var(--ds-border-subtle)] bg-[var(--ds-bg-surface)]/30 hover:bg-[var(--ds-bg-hover)] text-slate-200"
             disabled={isFetching}
           >
             <RefreshCw className={cn("h-4 w-4", isFetching && "animate-spin")} />
@@ -271,31 +271,31 @@ export default function WorkflowsPage() {
         </PageActions>
       </PageHeader>
 
-      <div className="rounded-2xl border border-white/5 bg-slate-950/60 p-4">
+      <div className="rounded-2xl border border-[var(--ds-border-subtle)] bg-[var(--ds-bg-surface)]/40 p-4">
         <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
-          <div className="flex items-center gap-2 text-sm text-gray-400">
+          <div className="flex items-center gap-2 text-sm text-slate-400">
             <WorkflowIcon className="h-4 w-4 text-purple-400" />
             {workflows.length} fluxos encontrados
           </div>
-          <div className="flex w-full max-w-sm items-center gap-2 rounded-xl border border-white/10 bg-black/40 px-3 py-2">
+          <div className="flex w-full max-w-sm items-center gap-2 rounded-xl border border-[var(--ds-border-subtle)] bg-black/40 px-3 py-2">
             <Input
               value={search}
               onChange={(e) => setSearch(e.target.value)}
               placeholder="Buscar fluxo..."
-              className="h-7 border-0 bg-transparent text-sm text-white placeholder:text-gray-500 focus-visible:ring-0"
+              className="h-7 border-0 bg-transparent text-sm text-white placeholder:text-slate-500 focus-visible:ring-0"
             />
           </div>
         </div>
 
         <div className="mt-6 space-y-3">
           {isLoading && (
-            <div className="rounded-xl border border-white/10 bg-black/40 p-6 text-sm text-gray-400">
+            <div className="rounded-xl border border-[var(--ds-border-subtle)] bg-black/40 p-6 text-sm text-slate-400">
               Carregando fluxos...
             </div>
           )}
 
           {!isLoading && workflows.length === 0 && (
-            <div className="rounded-xl border border-dashed border-white/10 bg-black/40 p-8 text-center text-gray-400">
+            <div className="rounded-xl border border-dashed border-[var(--ds-border-subtle)] bg-black/40 p-8 text-center text-slate-400">
               Nenhum fluxo criado ainda.
             </div>
           )}
@@ -305,7 +305,7 @@ export default function WorkflowsPage() {
               <button
                 key={workflow.id}
                 className={cn(
-                  "group flex w-full items-center justify-between rounded-xl border border-white/10 bg-black/40 px-4 py-4 text-left transition hover:border-purple-500/40 hover:bg-black/60",
+                  "group flex w-full items-center justify-between rounded-xl border border-[var(--ds-border-subtle)] bg-black/40 px-4 py-4 text-left transition hover:border-purple-500/40 hover:bg-black/60",
                   workflow.id === defaultWorkflowId &&
                     "border-purple-500/30 bg-purple-500/5 shadow-[0_0_0_1px_rgba(104,51,189,0.15)]"
                 )}
@@ -316,7 +316,7 @@ export default function WorkflowsPage() {
               >
                 <div className="space-y-1">
                   <div className="flex items-center gap-3">
-                <div className="flex h-9 w-9 items-center justify-center rounded-lg border border-white/10 bg-white/5">
+                <div className="flex h-9 w-9 items-center justify-center rounded-lg border border-[var(--ds-border-subtle)] bg-[var(--ds-bg-hover)]">
                   <WorkflowIcon className="h-4 w-4 text-purple-400" />
                 </div>
                 <div>
@@ -328,10 +328,10 @@ export default function WorkflowsPage() {
                       )}
                     </span>
                   </div>
-                  <div className="text-xs text-gray-500">
+                  <div className="text-xs text-slate-500">
                     Atualizado em {formatDate(workflow.updatedAt)}
                   </div>
-                  <div className="text-xs text-gray-500">
+                  <div className="text-xs text-slate-500">
                     Gatilho: {getTriggerLabel(workflow)}
                   </div>
                   {workflow.id === defaultWorkflowId && (
@@ -347,13 +347,13 @@ export default function WorkflowsPage() {
                   </div>
                 </div>
                   {workflow.description && (
-                    <div className="text-xs text-gray-500">
+                    <div className="text-xs text-slate-500">
                       {workflow.description}
                     </div>
                   )}
                 </div>
                 <div className="flex items-center gap-3">
-                  <div className="hidden sm:flex items-center gap-2 text-xs text-gray-500">
+                  <div className="hidden sm:flex items-center gap-2 text-xs text-slate-500">
                     <span>
                       Execucoes:{" "}
                       {metricsQuery.data?.byWorkflow?.[workflow.id]?.runs ?? 0}
@@ -366,7 +366,7 @@ export default function WorkflowsPage() {
                   <StatusBadge status={workflow.status} />
                   {workflow.status !== "published" && (
                     <Button
-                      className="border-white/10 bg-slate-950/40 hover:bg-white/5 text-gray-200"
+                      className="border-[var(--ds-border-subtle)] bg-[var(--ds-bg-surface)]/30 hover:bg-[var(--ds-bg-hover)] text-slate-200"
                       onClick={(event) => {
                         event.stopPropagation();
                         handlePublish(workflow.id);
@@ -381,7 +381,7 @@ export default function WorkflowsPage() {
                   <DropdownMenu>
                     <DropdownMenuTrigger asChild>
                       <Button
-                        className="border-white/10 bg-slate-950/40 hover:bg-white/5 text-gray-200"
+                        className="border-[var(--ds-border-subtle)] bg-[var(--ds-bg-surface)]/30 hover:bg-[var(--ds-bg-hover)] text-slate-200"
                         size="sm"
                         variant="outline"
                         onClick={(event) => event.stopPropagation()}
@@ -431,14 +431,14 @@ export default function WorkflowsPage() {
                       </DropdownMenuItem>
                     </DropdownMenuContent>
                   </DropdownMenu>
-                  <ChevronRight className="h-4 w-4 text-gray-500 transition group-hover:text-white" />
+                  <ChevronRight className="h-4 w-4 text-slate-500 transition group-hover:text-white" />
                 </div>
               </button>
             ))}
         </div>
 
         {selectedWorkflowId && (
-          <div className="mt-6 rounded-xl border border-white/10 bg-black/40 p-4">
+          <div className="mt-6 rounded-xl border border-[var(--ds-border-subtle)] bg-black/40 p-4">
             <div className="flex items-center justify-between">
               <div className="text-sm font-semibold text-white">
                 Versoes do fluxo
@@ -446,7 +446,7 @@ export default function WorkflowsPage() {
               <Button
                 variant="ghost"
                 onClick={() => router.push("/workflows")}
-                className="text-xs text-gray-400 hover:text-white"
+                className="text-xs text-slate-400 hover:text-white"
               >
                 Fechar
               </Button>
@@ -454,7 +454,7 @@ export default function WorkflowsPage() {
             {!versionsQuery.isLoading &&
               versionsQuery.data &&
               versionsQuery.data.length > 0 && (
-                <div className="mt-2 text-xs text-gray-500">
+                <div className="mt-2 text-xs text-slate-500">
                   Última publicada:{" "}
                   {versionsQuery.data.find((version) => version.status === "published")
                     ? `v${versionsQuery.data.find((version) => version.status === "published")?.version}`
@@ -463,22 +463,22 @@ export default function WorkflowsPage() {
               )}
             <div className="mt-3 space-y-2">
               {versionsQuery.isLoading && (
-                <div className="text-xs text-gray-400">Carregando versões...</div>
+                <div className="text-xs text-slate-400">Carregando versões...</div>
               )}
               {!versionsQuery.isLoading &&
                 (versionsQuery.data || []).map((version) => (
                   <div
-                    className="flex items-center justify-between rounded-lg border border-white/10 bg-black/50 px-3 py-2 text-xs text-gray-300"
+                    className="flex items-center justify-between rounded-lg border border-[var(--ds-border-subtle)] bg-black/50 px-3 py-2 text-xs text-slate-300"
                     key={version.id}
                   >
                     <div className="flex items-center gap-3">
                       <span>v{version.version}</span>
-                      <span className="text-gray-500">{version.status}</span>
+                      <span className="text-slate-500">{version.status}</span>
                     </div>
                     <Button
                       size="sm"
                       variant="outline"
-                      className="border-white/10 bg-slate-950/40 hover:bg-white/5 text-gray-200"
+                      className="border-[var(--ds-border-subtle)] bg-[var(--ds-bg-surface)]/30 hover:bg-[var(--ds-bg-hover)] text-slate-200"
                       disabled={
                         isRollingBack ||
                         rollingBackId === version.id ||
@@ -494,7 +494,7 @@ export default function WorkflowsPage() {
                 ))}
               {!versionsQuery.isLoading &&
                 (versionsQuery.data || []).length === 0 && (
-                  <div className="text-xs text-gray-400">
+                  <div className="text-xs text-slate-400">
                     Nenhuma versão encontrada.
                   </div>
                 )}

@@ -81,27 +81,27 @@ export function AdvancedFlowPanel({
   }
 
   return (
-    <div data-advanced-panel-root="true" className="fixed inset-y-0 right-0 w-[600px] bg-slate-900 border-l border-white/10 shadow-2xl z-50 overflow-auto">
-      <div className="sticky top-0 bg-slate-900 border-b border-white/10 p-4 flex items-center justify-between">
+    <div data-advanced-panel-root="true" className="fixed inset-y-0 right-0 w-[600px] bg-slate-900 border-l border-[var(--ds-border-subtle)] shadow-2xl z-50 overflow-auto">
+      <div className="sticky top-0 bg-slate-900 border-b border-[var(--ds-border-subtle)] p-4 flex items-center justify-between">
         <div>
           <div className="text-lg font-semibold text-white">Modo Avançado</div>
-          <div className="text-xs text-gray-400">Manutenção de telas (o normal é editar em “Caminhos”).</div>
+          <div className="text-xs text-slate-400">Manutenção de telas (o normal é editar em “Caminhos”).</div>
         </div>
         <Button
           type="button"
           variant="outline"
           onClick={onClose}
-          className="border-white/10 bg-slate-950/40 hover:bg-white/5"
+          className="border-[var(--ds-border-subtle)] bg-[var(--ds-bg-surface)]/30 hover:bg-[var(--ds-bg-hover)]"
         >
           ← Voltar
         </Button>
       </div>
 
       <div className="p-6 space-y-6">
-        <div className="rounded-2xl border border-white/10 bg-slate-900/60 p-4 space-y-4">
+        <div className="rounded-2xl border border-[var(--ds-border-subtle)] bg-[var(--ds-bg-elevated)] p-4 space-y-4">
           <div className="flex items-center justify-between">
             <div className="text-sm font-semibold text-white">Telas</div>
-            <Button type="button" onClick={handleAddScreen} className="bg-white text-black hover:bg-gray-200">
+            <Button type="button" onClick={handleAddScreen} className="bg-white text-black hover:bg-slate-200">
               <Plus className="w-4 h-4" />
               Adicionar tela
             </Button>
@@ -116,7 +116,7 @@ export function AdvancedFlowPanel({
                 className={`rounded-full border px-3 py-1 text-xs ${
                   screen.id === selectedScreenId
                     ? 'border-purple-400/40 bg-purple-500/10 text-purple-100'
-                    : 'border-white/10 bg-slate-950/40 text-gray-300 hover:text-white'
+                    : 'border-[var(--ds-border-subtle)] bg-[var(--ds-bg-surface)]/30 text-slate-300 hover:text-white'
                 }`}
               >
                 {screen.id}
@@ -128,14 +128,14 @@ export function AdvancedFlowPanel({
             <div className="space-y-4">
               <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
                 <div>
-                  <label className="block text-xs uppercase tracking-widest text-gray-500 mb-2">Screen ID</label>
+                  <label className="block text-xs uppercase tracking-widest text-slate-500 mb-2">Screen ID</label>
                   <Input
                     value={selectedScreen.id}
                     onChange={(e) => handleScreenPatch({ id: e.target.value })}
                   />
                 </div>
                 <div>
-                  <label className="block text-xs uppercase tracking-widest text-gray-500 mb-2">Título</label>
+                  <label className="block text-xs uppercase tracking-widest text-slate-500 mb-2">Título</label>
                   <Input
                     value={selectedScreen.title}
                     onChange={(e) => handleScreenPatch({ title: e.target.value })}
@@ -143,10 +143,10 @@ export function AdvancedFlowPanel({
                 </div>
               </div>
 
-              <div className="flex items-center justify-between rounded-xl border border-white/10 bg-slate-950/40 px-3 py-2">
+              <div className="flex items-center justify-between rounded-xl border border-[var(--ds-border-subtle)] bg-[var(--ds-bg-surface)]/30 px-3 py-2">
                 <div>
-                  <div className="text-xs font-medium text-gray-300">Terminal</div>
-                  <div className="text-[11px] text-gray-500">Marca a última tela do flow</div>
+                  <div className="text-xs font-medium text-slate-300">Terminal</div>
+                  <div className="text-[11px] text-slate-500">Marca a última tela do flow</div>
                 </div>
                 <Switch
                   checked={!!selectedScreen.terminal}
@@ -159,16 +159,16 @@ export function AdvancedFlowPanel({
                 />
               </div>
 
-              <div className="rounded-xl border border-white/10 bg-slate-950/40 px-3 py-3 space-y-2">
-                <div className="text-xs font-medium text-gray-300">Ir para (próxima tela)</div>
-                <div className="text-[11px] text-gray-500">
+              <div className="rounded-xl border border-[var(--ds-border-subtle)] bg-[var(--ds-bg-surface)]/30 px-3 py-3 space-y-2">
+                <div className="text-xs font-medium text-slate-300">Ir para (próxima tela)</div>
+                <div className="text-[11px] text-slate-500">
                   Escolha para onde o botão principal leva. Se a tela for terminal, deixe vazio.
                 </div>
                 <select
                   value={nextScreenId}
                   onChange={(e) => handleNextScreenChange(e.target.value)}
                   disabled={!!selectedScreen.terminal}
-                  className="h-11 w-full rounded-xl border border-white/10 bg-white/5 px-3 text-[14px] text-slate-200 focus:outline-none focus:ring-2 focus:ring-purple-400/40 disabled:opacity-50"
+                  className="h-11 w-full rounded-xl border border-[var(--ds-border-subtle)] bg-[var(--ds-bg-hover)] px-3 text-[14px] text-slate-200 focus:outline-none focus:ring-2 focus:ring-purple-400/40 disabled:opacity-50"
                 >
                   <option value="">— Nenhuma (terminal) —</option>
                   {screens
@@ -185,7 +185,7 @@ export function AdvancedFlowPanel({
                 <Button
                   type="button"
                   variant="outline"
-                  className="border-white/10 bg-slate-950/40 hover:bg-white/5"
+                  className="border-[var(--ds-border-subtle)] bg-[var(--ds-bg-surface)]/30 hover:bg-[var(--ds-bg-hover)]"
                   onClick={handleRemoveScreen}
                 >
                   <Trash2 className="w-4 h-4" />

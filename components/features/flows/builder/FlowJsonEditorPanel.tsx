@@ -50,7 +50,7 @@ export function FlowJsonEditorPanel(props: {
             <Braces className="h-4 w-4" />
             JSON da MiniApp (Meta)
           </div>
-          <div className="text-sm text-gray-400">
+          <div className="text-sm text-slate-400">
             Edite o Flow JSON canônico da MiniApp. Este é o conteúdo que será publicado na Meta.
           </div>
         </div>
@@ -91,7 +91,7 @@ export function FlowJsonEditorPanel(props: {
         spellCheck={false}
       />
 
-      <div className="text-[11px] text-gray-500">
+      <div className="text-[11px] text-slate-500">
         MiniApp: <span className="font-mono">{props.flowName}</span> • {dirty ? 'alterações não salvas' : 'sincronizado'}
       </div>
     </div>

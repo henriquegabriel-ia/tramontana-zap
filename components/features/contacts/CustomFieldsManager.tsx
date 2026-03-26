@@ -23,15 +23,15 @@ const CustomFieldItem = memo(function CustomFieldItem({ field, onDelete }: Custo
 
   return (
     <div
-      className="flex items-center justify-between p-3.5 rounded-xl border border-white/5 bg-slate-900/30 hover:bg-slate-900/80 hover:border-white/10 transition-all group"
+      className="flex items-center justify-between p-3.5 rounded-xl border border-[var(--ds-border-subtle)] bg-slate-900/30 hover:bg-slate-900/80 hover:border-[var(--ds-border-subtle)] transition-all group"
     >
       <div className="flex items-center gap-3">
-        <div className="w-9 h-9 rounded-lg flex items-center justify-center bg-slate-800 border border-white/5 text-gray-400 group-hover:text-white transition-colors">
+        <div className="w-9 h-9 rounded-lg flex items-center justify-center bg-slate-800 border border-[var(--ds-border-subtle)] text-slate-400 group-hover:text-white transition-colors">
           <Type size={14} />
         </div>
         <div>
           <p className="text-sm font-medium text-white">{field.label}</p>
-          <p className="text-[10px] font-mono text-gray-500 flex items-center gap-1">
+          <p className="text-[10px] font-mono text-slate-500 flex items-center gap-1">
             <span>{'{{'}</span>
             {field.key}
             <span>{'}}'}</span>
@@ -41,7 +41,7 @@ const CustomFieldItem = memo(function CustomFieldItem({ field, onDelete }: Custo
       <Button
         variant="ghost"
         size="icon"
-        className="text-gray-500 hover:text-red-400 hover:bg-red-500/10 opacity-0 group-hover:opacity-100 transition-all rounded-lg h-9 w-9"
+        className="text-slate-500 hover:text-red-400 hover:bg-red-500/10 opacity-0 group-hover:opacity-100 transition-all rounded-lg h-9 w-9"
         onClick={handleDelete}
       >
         <Trash2 size={15} />
@@ -149,7 +149,7 @@ export function CustomFieldsManager({
     return (
         <div className="flex-1 overflow-y-auto p-6 space-y-6">
             {/* Create Form */}
-            <div className="bg-slate-900/50 p-5 rounded-2xl border border-white/5 space-y-5">
+            <div className="bg-[var(--ds-bg-elevated)] p-5 rounded-2xl border border-[var(--ds-border-subtle)] space-y-5">
                 <h4 className="text-sm font-semibold text-white flex items-center gap-2">
                     <div className="w-6 h-6 rounded-lg bg-primary-500/10 flex items-center justify-center text-primary-500">
                         <Plus size={14} />
@@ -159,26 +159,26 @@ export function CustomFieldsManager({
 
                 <div className="space-y-4">
                     <div>
-                        <Label className="text-xs font-medium text-gray-400 mb-1.5 block">Nome do Campo</Label>
+                        <Label className="text-xs font-medium text-slate-400 mb-1.5 block">Nome do Campo</Label>
                         <Input
                             placeholder="Ex: Empresa"
                             value={newLabel}
                             onChange={(e) => setNewLabel(e.target.value)}
-                            className="bg-slate-950 border-white/10 text-white placeholder-gray-600 focus:border-primary-500/50 focus:ring-primary-500/20"
+                            className="bg-slate-950 border-[var(--ds-border-subtle)] text-white placeholder-[var(--ds-text-muted)] focus:border-primary-500/50 focus:ring-primary-500/20"
                         />
                     </div>
 
                     <div>
-                        <Label className="text-xs font-medium text-gray-400 mb-1.5 block">Chave (Variável)</Label>
-                        <div className="text-xs font-mono bg-slate-950 border border-white/10 p-3 rounded-lg text-gray-400 flex items-center gap-2">
-                            <span className="text-gray-600 select-none">{'{{'}</span>
+                        <Label className="text-xs font-medium text-slate-400 mb-1.5 block">Chave (Variável)</Label>
+                        <div className="text-xs font-mono bg-slate-950 border border-[var(--ds-border-subtle)] p-3 rounded-lg text-slate-400 flex items-center gap-2">
+                            <span className="text-slate-600 select-none">{'{{'}</span>
                             <span className="text-primary-400">{newKey || '...'}</span>
-                            <span className="text-gray-600 select-none">{'}}'}</span>
+                            <span className="text-slate-600 select-none">{'}}'}</span>
                         </div>
                     </div>
 
                     <Button
-                        className="w-full bg-white text-black hover:bg-gray-200 font-bold rounded-xl transition-all shadow-lg shadow-white/5"
+                        className="w-full bg-white text-black hover:bg-slate-200 font-bold rounded-xl transition-all shadow-lg shadow-white/5"
                         size="default"
                         onClick={handleCreate}
                         disabled={!newLabel || !newKey || creating}
@@ -192,7 +192,7 @@ export function CustomFieldsManager({
             <div className="space-y-4">
                 {/* System Fields Section */}
                 <div className="space-y-2">
-                    <h4 className="text-xs font-semibold text-gray-500 uppercase tracking-wider px-1">Campos do Sistema</h4>
+                    <h4 className="text-xs font-semibold text-slate-500 uppercase tracking-wider px-1">Campos do Sistema</h4>
                     <div className="space-y-2">
                         {[
                             { label: 'Nome', key: 'nome' },
@@ -216,22 +216,22 @@ export function CustomFieldsManager({
                                         </p>
                                     </div>
                                 </div>
-                                <span className="text-[10px] text-gray-500 px-2 py-1 rounded bg-slate-800/50">automático</span>
+                                <span className="text-[10px] text-slate-500 px-2 py-1 rounded bg-slate-800/50">automático</span>
                             </div>
                         ))}
                     </div>
                 </div>
 
                 {/* Custom Fields Section */}
-                <h4 className="text-xs font-semibold text-gray-500 uppercase tracking-wider px-1 pt-4">Campos Personalizados</h4>
+                <h4 className="text-xs font-semibold text-slate-500 uppercase tracking-wider px-1 pt-4">Campos Personalizados</h4>
 
                 {loading ? (
-                    <div className="flex justify-center py-8 text-gray-500">
+                    <div className="flex justify-center py-8 text-slate-500">
                         <Loader2 className="animate-spin" />
                     </div>
                 ) : fields.length === 0 ? (
-                    <div className="text-center py-6 px-4 rounded-2xl border border-dashed border-white/10 bg-white/[0.02]">
-                        <p className="text-xs text-gray-600">Nenhum campo personalizado ainda.</p>
+                    <div className="text-center py-6 px-4 rounded-2xl border border-dashed border-[var(--ds-border-subtle)] bg-white/[0.02]">
+                        <p className="text-xs text-slate-600">Nenhum campo personalizado ainda.</p>
                     </div>
                 ) : (
                     <div className="space-y-2.5">

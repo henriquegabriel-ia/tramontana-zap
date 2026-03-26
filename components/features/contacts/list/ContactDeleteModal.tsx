@@ -37,7 +37,7 @@ export const ContactDeleteModal: React.FC<ContactDeleteModalProps> = ({
             <AlertTriangle size={32} className="text-red-400" />
           </div>
           <h2 className="text-xl font-bold text-white mb-2">Confirmar Exclusão</h2>
-          <p className="text-gray-400 mb-6">{message}</p>
+          <p className="text-slate-400 mb-6">{message}</p>
           <div className="flex gap-3">
             <button
               onClick={onCancel}

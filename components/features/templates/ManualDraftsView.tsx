@@ -32,7 +32,7 @@ function DraftStatusBadge({ ready }: DraftStatusBadgeProps) {
         'inline-flex items-center rounded-full px-2.5 py-0.5 text-[11px] font-semibold uppercase tracking-wide border',
         ready
           ? 'bg-purple-500/10 text-purple-300 border-purple-500/20'
-          : 'bg-white/5 text-gray-400 border-white/10'
+          : 'bg-[var(--ds-bg-hover)] text-slate-400 border-[var(--ds-border-subtle)]'
       )}
     >
       {ready ? 'Pronto para enviar' : 'Em edição'}
@@ -124,12 +124,12 @@ export function ManualDraftsView({
     <div className="space-y-6">
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
         <div className="flex items-center gap-3">
-          <div className="p-2 rounded-lg bg-white/5 border border-white/10 text-gray-200">
+          <div className="p-2 rounded-lg bg-[var(--ds-bg-hover)] border border-[var(--ds-border-subtle)] text-slate-200">
             <FileText className="w-4 h-4" />
           </div>
           <div>
             <h2 className="text-lg font-semibold text-white">Templates em rascunho</h2>
-            <p className="text-sm text-gray-400">Crie, edite e envie para a Meta.</p>
+            <p className="text-sm text-slate-400">Crie, edite e envie para a Meta.</p>
           </div>
         </div>
       </div>
@@ -137,8 +137,8 @@ export function ManualDraftsView({
       <div className="space-y-6 max-w-[min(900px,100%)]">
         <Container variant="default" padding="lg" className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
           <div className="flex items-center gap-3">
-            <div className="text-xs uppercase tracking-widest text-gray-500">Etapas</div>
-            <div className="flex flex-wrap items-center gap-2 text-xs text-gray-400">
+            <div className="text-xs uppercase tracking-widest text-slate-500">Etapas</div>
+            <div className="flex flex-wrap items-center gap-2 text-xs text-slate-400">
               <span className={draftStage === 'create' ? 'text-white font-semibold' : ''}>1. Criar</span>
               <span className="opacity-40">→</span>
               <span className={draftStage === 'edit' ? 'text-white font-semibold' : ''}>2. Editar</span>
@@ -155,7 +155,7 @@ export function ManualDraftsView({
               variant="outline"
               onClick={onRefresh}
               disabled={isRefreshing}
-              className="border-white/10 bg-slate-950/40 text-gray-200 hover:text-white hover:bg-white/5"
+              className="border-[var(--ds-border-subtle)] bg-[var(--ds-bg-surface)]/30 text-slate-200 hover:text-white hover:bg-[var(--ds-bg-hover)]"
             >
               <RefreshCw className={cn('w-4 h-4', isRefreshing ? 'animate-spin' : '')} />
               Atualizar
@@ -168,42 +168,42 @@ export function ManualDraftsView({
             value={search}
             onChange={(e) => setSearch(e.target.value)}
             placeholder="Buscar rascunhos..."
-            className="bg-slate-950/40 border-white/10 text-white placeholder:text-gray-600 w-full sm:w-96"
+            className="bg-[var(--ds-bg-surface)]/30 border-[var(--ds-border-subtle)] text-white placeholder:text-slate-600 w-full sm:w-96"
           />
-          <div className="text-xs text-gray-400">
+          <div className="text-xs text-slate-400">
             {drafts.length} rascunho(s) • {readyDrafts.length} pronto(s) para envio
           </div>
         </Container>
 
         <Container variant="default" padding="none" className="overflow-hidden">
         {isLoading ? (
-          <div className="px-6 py-10 text-center text-gray-400">Carregando...</div>
+          <div className="px-6 py-10 text-center text-slate-400">Carregando...</div>
         ) : drafts.length === 0 ? (
-          <div className="px-6 py-10 text-center text-gray-500">
-            <div className="text-sm font-semibold text-gray-300">Nenhum rascunho ainda.</div>
-            <div className="text-xs text-gray-500 mt-1">Clique em “Criar rascunho” para começar.</div>
+          <div className="px-6 py-10 text-center text-slate-500">
+            <div className="text-sm font-semibold text-slate-300">Nenhum rascunho ainda.</div>
+            <div className="text-xs text-slate-500 mt-1">Clique em “Criar rascunho” para começar.</div>
           </div>
         ) : (
           <div className="divide-y divide-white/10">
-            <div className="px-6 py-3 text-xs font-semibold text-gray-400 uppercase tracking-wider">
+            <div className="px-6 py-3 text-xs font-semibold text-slate-400 uppercase tracking-wider">
               Em edição ({editingDrafts.length})
             </div>
             {editingDrafts.length === 0 ? (
-              <div className="px-6 py-5 text-sm text-gray-500">Tudo pronto para enviar.</div>
+              <div className="px-6 py-5 text-sm text-slate-500">Tudo pronto para enviar.</div>
             ) : (
               editingDrafts.slice(0, 3).map((draft) => {
                 const snippet = extractDraftBody(draft).trim()
                 return (
-                  <div key={draft.id} className="px-6 py-4 flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between hover:bg-white/5">
+                  <div key={draft.id} className="px-6 py-4 flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between hover:bg-[var(--ds-bg-hover)]">
                     <div className="min-w-0">
                       <div className="flex items-center gap-2">
                         <div className="text-white font-medium truncate">{draft.name}</div>
                         <DraftStatusBadge ready={false} />
                       </div>
-                      <p className="text-xs text-gray-500 line-clamp-2 whitespace-pre-wrap">
+                      <p className="text-xs text-slate-500 line-clamp-2 whitespace-pre-wrap">
                         {snippet || 'Sem corpo ainda. Escreva o conteúdo para aparecer aqui.'}
                       </p>
-                      <div className="text-xs text-gray-500 mt-1">
+                      <div className="text-xs text-slate-500 mt-1">
                         Atualizado {new Date(draft.updatedAt).toLocaleString('pt-BR')}
                       </div>
                     </div>
@@ -233,11 +233,11 @@ export function ManualDraftsView({
             )}
 
             {editingDrafts.length > 3 && (
-              <div className="px-6 py-3 flex items-center justify-between text-xs text-gray-500">
+              <div className="px-6 py-3 flex items-center justify-between text-xs text-slate-500">
                 <span>Mostrando 3 de {editingDrafts.length}.</span>
                 <button
                   type="button"
-                  className="text-gray-300 hover:text-white underline underline-offset-2"
+                  className="text-slate-300 hover:text-white underline underline-offset-2"
                   onClick={() => setSearch('')}
                 >
                   Ver todos
@@ -245,25 +245,25 @@ export function ManualDraftsView({
               </div>
             )}
 
-            <div className="px-6 py-3 text-xs font-semibold text-gray-400 uppercase tracking-wider">
+            <div className="px-6 py-3 text-xs font-semibold text-slate-400 uppercase tracking-wider">
               Prontos para enviar ({readyDrafts.length})
             </div>
             {readyDrafts.length === 0 ? (
-              <div className="px-6 py-5 text-sm text-gray-500">Nenhum rascunho pronto ainda.</div>
+              <div className="px-6 py-5 text-sm text-slate-500">Nenhum rascunho pronto ainda.</div>
             ) : (
               readyDrafts.slice(0, 3).map((draft) => {
                 const snippet = extractDraftBody(draft).trim()
                 return (
-                  <div key={draft.id} className="px-6 py-4 flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between hover:bg-white/5">
+                  <div key={draft.id} className="px-6 py-4 flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between hover:bg-[var(--ds-bg-hover)]">
                     <div className="min-w-0">
                       <div className="flex items-center gap-2">
                         <div className="text-white font-medium truncate">{draft.name}</div>
                         <DraftStatusBadge ready />
                       </div>
-                      <p className="text-xs text-gray-500 line-clamp-2 whitespace-pre-wrap">
+                      <p className="text-xs text-slate-500 line-clamp-2 whitespace-pre-wrap">
                         {snippet || 'Pronto para enviar.'}
                       </p>
-                      <div className="text-xs text-gray-500 mt-1">
+                      <div className="text-xs text-slate-500 mt-1">
                         Atualizado {new Date(draft.updatedAt).toLocaleString('pt-BR')}
                       </div>
                     </div>
@@ -303,11 +303,11 @@ export function ManualDraftsView({
             )}
 
             {readyDrafts.length > 3 && (
-              <div className="px-6 py-3 flex items-center justify-between text-xs text-gray-500">
+              <div className="px-6 py-3 flex items-center justify-between text-xs text-slate-500">
                 <span>Mostrando 3 de {readyDrafts.length}.</span>
                 <button
                   type="button"
-                  className="text-gray-300 hover:text-white underline underline-offset-2"
+                  className="text-slate-300 hover:text-white underline underline-offset-2"
                   onClick={() => setSearch('')}
                 >
                   Ver todos
@@ -319,7 +319,7 @@ export function ManualDraftsView({
         </Container>
       </div>
 
-      <div className="text-xs text-gray-500">
+      <div className="text-xs text-slate-500">
         Para enviar, o BODY do template precisa estar preenchido.
       </div>
     </div>

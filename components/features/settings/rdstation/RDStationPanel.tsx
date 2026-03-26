@@ -277,8 +277,8 @@ export function RDStationPanel() {
     return (
       <div className="glass-panel rounded-2xl p-8">
         <div className="animate-pulse space-y-4">
-          <div className="h-6 w-48 bg-white/5 rounded-lg" />
-          <div className="h-20 bg-white/5 rounded-xl" />
+          <div className="h-6 w-48 bg-[var(--ds-bg-hover)] rounded-lg" />
+          <div className="h-20 bg-[var(--ds-bg-hover)] rounded-xl" />
         </div>
       </div>
     );
@@ -473,7 +473,7 @@ export function RDStationPanel() {
                     onChange={(e) => setAutoCreateDeal(e.target.checked)}
                     className="sr-only peer"
                   />
-                  <div className="w-11 h-6 bg-[var(--ds-bg-surface)] peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-purple-600" />
+                  <div className="w-11 h-6 bg-[var(--ds-bg-surface)] peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-slate-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-purple-600" />
                 </label>
               </div>
             </Container>

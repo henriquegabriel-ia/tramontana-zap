@@ -363,7 +363,7 @@ export const useFlowBuilderController = (id: string) => {
     ? 'border-emerald-400/40 bg-emerald-500/10 text-emerald-100'
     : metaStatus === 'PENDING' || metaStatus === 'IN_REVIEW' || metaStatus === 'REJECTED' || metaStatus === 'ERROR' || hasMetaErrors
       ? 'border-amber-400/30 bg-amber-500/10 text-amber-200'
-      : 'border-white/10 bg-slate-950/40 text-gray-300'
+      : 'border-[var(--ds-border-subtle)] bg-[var(--ds-bg-surface)]/30 text-slate-300'
   const steps = [
     { id: 1, label: 'Começar' },
     { id: 2, label: 'Conteúdo' },
@@ -649,7 +649,7 @@ export const useFlowBuilderController = (id: string) => {
     setPreviewSelectedEditorKey(key)
   }, [])
 
-  const panelClass = 'rounded-2xl border border-white/10 bg-slate-900/60 shadow-[0_12px_30px_rgba(0,0,0,0.35)]'
+  const panelClass = 'rounded-2xl border border-[var(--ds-border-subtle)] bg-[var(--ds-bg-elevated)] shadow-[0_12px_30px_rgba(0,0,0,0.35)]'
 
   return {
     // controller passthrough

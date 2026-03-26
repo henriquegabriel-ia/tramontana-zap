@@ -108,10 +108,10 @@ export const BulkGenerationModal: React.FC<BulkGenerationModalProps> = ({
             />
 
             {/* Modal Content */}
-            <div className="relative bg-slate-900/80 border border-white/10 rounded-2xl w-full max-w-4xl shadow-[0_30px_80px_rgba(0,0,0,0.55)] flex flex-col max-h-[90vh] overflow-hidden animate-in zoom-in-95 duration-200">
+            <div className="relative bg-slate-900/80 border border-[var(--ds-border-subtle)] rounded-2xl w-full max-w-4xl shadow-[0_30px_80px_rgba(0,0,0,0.55)] flex flex-col max-h-[90vh] overflow-hidden animate-in zoom-in-95 duration-200">
 
                 {/* Header - Apple-esque: Clean, Centered or subtle */}
-                <div className="px-6 py-4 border-b border-white/10 flex items-center justify-between bg-slate-950/40 backdrop-blur-xl z-10">
+                <div className="px-6 py-4 border-b border-[var(--ds-border-subtle)] flex items-center justify-between bg-[var(--ds-bg-surface)]/30 backdrop-blur-xl z-10">
                     <div className="flex items-center gap-3">
                         <div className="p-2 rounded-xl bg-purple-500/10 border border-purple-500/20">
                             {hasTemplates ? <Target className="w-5 h-5 text-purple-300" /> : <Sparkles className="w-5 h-5 text-purple-300" />}
@@ -130,7 +130,7 @@ export const BulkGenerationModal: React.FC<BulkGenerationModalProps> = ({
                     </div>
                     <button
                         onClick={onClose}
-                        className="p-2 text-slate-400 hover:text-white hover:bg-white/5 rounded-full transition-all"
+                        className="p-2 text-slate-400 hover:text-white hover:bg-[var(--ds-bg-hover)] rounded-full transition-all"
                     >
                         <X size={20} />
                     </button>
@@ -151,9 +151,9 @@ export const BulkGenerationModal: React.FC<BulkGenerationModalProps> = ({
                                         value={businessType}
                                         onChange={(e) => setBusinessType(e.target.value)}
                                         placeholder="Ex: Confirmação de agendamento para clínica odontológica, avisar sobre boleto vencido, envio de código de rastreio..."
-                                        className="w-full h-40 bg-slate-950/40 border border-white/10 rounded-xl p-5 text-white placeholder:text-slate-500 focus:border-purple-500/50 focus:ring-1 focus:ring-purple-500/30 outline-none resize-none transition-all text-base leading-relaxed"
+                                        className="w-full h-40 bg-[var(--ds-bg-surface)]/30 border border-[var(--ds-border-subtle)] rounded-xl p-5 text-white placeholder:text-slate-500 focus:border-purple-500/50 focus:ring-1 focus:ring-purple-500/30 outline-none resize-none transition-all text-base leading-relaxed"
                                     />
-                                    <div className="absolute bottom-4 right-4 text-xs text-slate-500 bg-slate-900/80 px-2 py-1 rounded-md border border-white/5">
+                                    <div className="absolute bottom-4 right-4 text-xs text-slate-500 bg-slate-900/80 px-2 py-1 rounded-md border border-[var(--ds-border-subtle)]">
                                         {businessType.length} caracteres
                                     </div>
                                 </div>
@@ -173,7 +173,7 @@ export const BulkGenerationModal: React.FC<BulkGenerationModalProps> = ({
                                         <select
                                             value={quantity}
                                             onChange={(e) => setQuantity(Number(e.target.value))}
-                                            className="w-full bg-slate-950/40 border border-white/10 rounded-xl px-4 py-3 text-white outline-none focus:border-purple-500/50 appearance-none cursor-pointer hover:bg-white/5 transition-colors"
+                                            className="w-full bg-[var(--ds-bg-surface)]/30 border border-[var(--ds-border-subtle)] rounded-xl px-4 py-3 text-white outline-none focus:border-purple-500/50 appearance-none cursor-pointer hover:bg-[var(--ds-bg-hover)] transition-colors"
                                         >
                                             {[3, 5, 10, 15, 20].map(n => (
                                                 <option key={n} value={n}>{n} variações</option>
@@ -190,7 +190,7 @@ export const BulkGenerationModal: React.FC<BulkGenerationModalProps> = ({
                                         <select
                                             value={language}
                                             onChange={(e) => setLanguage(e.target.value as any)}
-                                            className="w-full bg-slate-950/40 border border-white/10 rounded-xl px-4 py-3 text-white outline-none focus:border-purple-500/50 appearance-none cursor-pointer hover:bg-white/5 transition-colors"
+                                            className="w-full bg-[var(--ds-bg-surface)]/30 border border-[var(--ds-border-subtle)] rounded-xl px-4 py-3 text-white outline-none focus:border-purple-500/50 appearance-none cursor-pointer hover:bg-[var(--ds-bg-hover)] transition-colors"
                                         >
                                             <option value="pt_BR">🇧🇷 Português (BR)</option>
                                             <option value="en_US">🇺🇸 English (US)</option>
@@ -215,7 +215,7 @@ export const BulkGenerationModal: React.FC<BulkGenerationModalProps> = ({
                                             onClick={() => onToggleTemplate(template.id)}
                                             className={`relative group cursor-pointer transition-all duration-300 border rounded-2xl p-5 hover:scale-[1.01] ${isSelected
                                                 ? 'bg-purple-500/10 border-purple-500/30 shadow-[0_0_20px_-10px_rgba(104,51,189,0.2)]'
-                                                : 'bg-slate-950/40 border-white/10 hover:border-white/20 hover:bg-white/5'
+                                                : 'bg-[var(--ds-bg-surface)]/30 border-[var(--ds-border-subtle)] hover:border-[var(--ds-border-default)] hover:bg-[var(--ds-bg-hover)]'
                                                 }`}
                                         >
                                             {/* Header */}
@@ -225,7 +225,7 @@ export const BulkGenerationModal: React.FC<BulkGenerationModalProps> = ({
                                                         {template.name}
                                                     </h3>
                                                     <div className="flex items-center gap-2 mt-1">
-                                                        <span className="text-[10px] uppercase font-bold tracking-wider text-slate-500 bg-slate-900/50 px-1.5 py-0.5 rounded border border-white/5">
+                                                        <span className="text-[10px] uppercase font-bold tracking-wider text-slate-500 bg-[var(--ds-bg-elevated)] px-1.5 py-0.5 rounded border border-[var(--ds-border-subtle)]">
                                                             {template.category}
                                                         </span>
                                                         {template.buttons && template.buttons.length > 0 && (
@@ -271,7 +271,7 @@ export const BulkGenerationModal: React.FC<BulkGenerationModalProps> = ({
                                             <div className="mt-3 flex justify-end opacity-0 group-hover:opacity-100 transition-opacity duration-200">
                                                 <button
                                                     onClick={() => onCopyTemplate(template)}
-                                                    className="shrink-0 p-2 text-gray-500 hover:text-white hover:bg-white/10 rounded-lg transition-colors"
+                                                    className="shrink-0 p-2 text-slate-500 hover:text-white hover:bg-[var(--ds-bg-hover)] rounded-lg transition-colors"
                                                     title="Copiar template"
                                                 >
                                                     <Copy size={16} />
@@ -310,7 +310,7 @@ export const BulkGenerationModal: React.FC<BulkGenerationModalProps> = ({
                                                     value={universalUrl}
                                                     onChange={(e) => setUniversalUrl(e.target.value)}
                                                     placeholder="https://exemplo.com/pagina"
-                                                    className={`w-full px-4 py-3 bg-slate-950/40 border rounded-xl text-white placeholder:text-slate-500 focus:ring-2 focus:ring-amber-500/30 outline-none transition-all ${universalUrl && !isUrlValid ? 'border-amber-500/50' : 'border-white/10 focus:border-amber-500/40'
+                                                    className={`w-full px-4 py-3 bg-[var(--ds-bg-surface)]/30 border rounded-xl text-white placeholder:text-slate-500 focus:ring-2 focus:ring-amber-500/30 outline-none transition-all ${universalUrl && !isUrlValid ? 'border-amber-500/50' : 'border-[var(--ds-border-subtle)] focus:border-amber-500/40'
                                                         }`}
                                                 />
                                                 {universalUrl && !isUrlValid && (
@@ -334,7 +334,7 @@ export const BulkGenerationModal: React.FC<BulkGenerationModalProps> = ({
                                                     value={universalPhone}
                                                     onChange={(e) => setUniversalPhone(e.target.value)}
                                                     placeholder="+5511999999999"
-                                                    className={`w-full px-4 py-3 bg-slate-950/40 border rounded-xl text-white placeholder:text-slate-500 focus:ring-2 focus:ring-amber-500/30 outline-none transition-all ${universalPhone && !isPhoneValid ? 'border-amber-500/50' : 'border-white/10 focus:border-amber-500/40'
+                                                    className={`w-full px-4 py-3 bg-[var(--ds-bg-surface)]/30 border rounded-xl text-white placeholder:text-slate-500 focus:ring-2 focus:ring-amber-500/30 outline-none transition-all ${universalPhone && !isPhoneValid ? 'border-amber-500/50' : 'border-[var(--ds-border-subtle)] focus:border-amber-500/40'
                                                         }`}
                                                 />
                                                 {universalPhone && !isPhoneValid && (
@@ -353,7 +353,7 @@ export const BulkGenerationModal: React.FC<BulkGenerationModalProps> = ({
                 </div>
 
                 {/* Footer */}
-                <div className="p-6 border-t border-white/10 bg-slate-950/40 backdrop-blur-xl z-10 flex justify-between items-center gap-4">
+                <div className="p-6 border-t border-[var(--ds-border-subtle)] bg-[var(--ds-bg-surface)]/30 backdrop-blur-xl z-10 flex justify-between items-center gap-4">
                     {!hasTemplates ? (
                         <>
                             <div className="text-xs text-slate-500 italic hidden sm:block">

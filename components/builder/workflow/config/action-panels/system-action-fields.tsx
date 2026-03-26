@@ -270,7 +270,7 @@ export function ExecutionFields({
   disabled: boolean;
 }) {
   return (
-    <div className="space-y-3 rounded-xl border border-white/10 bg-black/40 p-4">
+    <div className="space-y-3 rounded-xl border border-[var(--ds-border-subtle)] bg-black/40 p-4">
       <div className="text-xs font-semibold uppercase tracking-widest text-muted-foreground">
         Execução
       </div>

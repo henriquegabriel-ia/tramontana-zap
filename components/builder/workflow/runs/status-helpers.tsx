@@ -39,7 +39,7 @@ export function getStatusDotClass(status: string): string {
     case "running":
       return "bg-blue-600";
     case "skipped":
-      return "bg-gray-500";
+      return "bg-slate-500";
     default:
       return "bg-muted-foreground";
   }

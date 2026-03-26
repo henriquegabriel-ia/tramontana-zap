@@ -141,7 +141,7 @@ export function getStatusColor(status: AttendantConversationStatus): string {
     ai_active: 'text-blue-500',
     human_active: 'text-green-500',
     handoff_requested: 'text-red-500',
-    resolved: 'text-gray-500',
+    resolved: 'text-slate-500',
   }
   return colors[status]
 }

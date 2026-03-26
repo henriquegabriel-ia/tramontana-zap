@@ -43,7 +43,7 @@ export function AudienceCardAll({
           isOverLimit
             ? 'bg-red-500/20 text-red-400'
             : isSelected
-              ? 'bg-white/20 text-white dark:bg-gray-200 dark:text-black'
+              ? 'bg-white/20 text-white dark:bg-slate-200 dark:text-black'
               : 'bg-[var(--ds-bg-surface)] text-[var(--ds-text-secondary)]'
         }`}
       >
@@ -53,7 +53,7 @@ export function AudienceCardAll({
         <h3 className="font-bold text-sm">Todos</h3>
         <p
           className={`text-xs mt-1 ${
-            isOverLimit ? 'text-red-400' : isSelected ? 'text-white/70 dark:text-gray-600' : 'text-[var(--ds-text-muted)]'
+            isOverLimit ? 'text-red-400' : isSelected ? 'text-white/70 dark:text-slate-600' : 'text-[var(--ds-text-muted)]'
           }`}
         >
           {eligibleContactsCount} contatos • exclui opt-out e supressões

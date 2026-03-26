@@ -135,7 +135,7 @@ export function Pagination({
           size="icon"
           onClick={() => onPageChange(currentPage - 1)}
           disabled={!canGoPrev}
-          className="h-9 w-9 border-white/10 bg-slate-950/60 hover:bg-slate-900/80 disabled:opacity-40"
+          className="h-9 w-9 border-[var(--ds-border-subtle)] bg-[var(--ds-bg-surface)]/40 hover:bg-slate-900/80 disabled:opacity-40"
         >
           <ChevronLeft className="w-4 h-4" />
         </Button>
@@ -177,7 +177,7 @@ export function Pagination({
           size="icon"
           onClick={() => onPageChange(currentPage + 1)}
           disabled={!canGoNext}
-          className="h-9 w-9 border-white/10 bg-slate-950/60 hover:bg-slate-900/80 disabled:opacity-40"
+          className="h-9 w-9 border-[var(--ds-border-subtle)] bg-[var(--ds-bg-surface)]/40 hover:bg-slate-900/80 disabled:opacity-40"
         >
           <ChevronRight className="w-4 h-4" />
         </Button>

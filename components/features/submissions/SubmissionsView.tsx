@@ -54,16 +54,16 @@ function SubmissionCard({
             </div>
             {/* Se tem nome, mostra telefone abaixo */}
             {contactName && (
-              <div className="flex items-center gap-1 text-xs text-gray-400 mt-0.5">
+              <div className="flex items-center gap-1 text-xs text-slate-400 mt-0.5">
                 <Phone className="w-3 h-3" />
                 {formatPhone(submission.from_phone)}
                 {contactEmail && (
-                  <span className="ml-2 text-gray-500">• {contactEmail}</span>
+                  <span className="ml-2 text-slate-500">• {contactEmail}</span>
                 )}
               </div>
             )}
             {/* Data */}
-            <div className="flex items-center gap-2 text-xs text-gray-500 mt-0.5">
+            <div className="flex items-center gap-2 text-xs text-slate-500 mt-0.5">
               <Calendar className="w-3 h-3" />
               {createdAt.toLocaleDateString('pt-BR')} às {createdAt.toLocaleTimeString('pt-BR', { hour: '2-digit', minute: '2-digit' })}
             </div>
@@ -84,13 +84,13 @@ function SubmissionCard({
         <div className="space-y-2 pl-11">
           {fieldEntries.map(([key, value]) => (
             <div key={key} className="flex items-start gap-2">
-              <span className="text-xs text-gray-500 min-w-[80px] pt-0.5">{formatFieldLabel(key)}:</span>
-              <span className="text-sm text-gray-200">{formatFieldValue(value)}</span>
+              <span className="text-xs text-slate-500 min-w-[80px] pt-0.5">{formatFieldLabel(key)}:</span>
+              <span className="text-sm text-slate-200">{formatFieldValue(value)}</span>
             </div>
           ))}
         </div>
       ) : (
-        <div className="text-sm text-gray-500 pl-11 italic">Sem dados do formulário</div>
+        <div className="text-sm text-slate-500 pl-11 italic">Sem dados do formulário</div>
       )}
     </Container>
   )
@@ -114,10 +114,10 @@ function EmptyState() {
   return (
     <div className="flex flex-col items-center justify-center py-16 text-center">
       <div className="p-4 rounded-2xl bg-slate-800/50 mb-4">
-        <Inbox className="w-8 h-8 text-gray-500" />
+        <Inbox className="w-8 h-8 text-slate-500" />
       </div>
       <h3 className="text-lg font-medium text-white mb-2">Nenhuma submissão encontrada</h3>
-      <p className="text-sm text-gray-500 max-w-sm">
+      <p className="text-sm text-slate-500 max-w-sm">
         As submissões aparecerão aqui quando os leads preencherem seus formulários MiniApp.
       </p>
     </div>
@@ -188,9 +188,9 @@ export function SubmissionsView({
           <PageDescription>{description}</PageDescription>
         </div>
         <div className="flex items-center gap-3">
-          <div className="flex items-center gap-2 px-4 py-2 rounded-xl bg-slate-900/60 border border-white/10">
+          <div className="flex items-center gap-2 px-4 py-2 rounded-xl bg-[var(--ds-bg-elevated)] border border-[var(--ds-border-subtle)]">
             <FileText className="w-4 h-4 text-purple-400" />
-            <span className="text-sm text-gray-300">
+            <span className="text-sm text-slate-300">
               <span className="font-semibold text-white">{total}</span> submissões
             </span>
           </div>
@@ -210,12 +210,12 @@ export function SubmissionsView({
       {/* Search Bar */}
       <div className="mb-6">
         <div className="relative max-w-md">
-          <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-500" />
+          <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-500" />
           <Input
             placeholder="Buscar por telefone..."
             value={search}
             onChange={(e) => setSearch(e.target.value)}
-            className="pl-10 bg-slate-900/60 border-white/10"
+            className="pl-10 bg-[var(--ds-bg-elevated)] border-[var(--ds-border-subtle)]"
           />
         </div>
       </div>
@@ -240,8 +240,8 @@ export function SubmissionsView({
 
           {/* Pagination */}
           {totalPages > 1 && (
-            <div className="flex items-center justify-between mt-8 pt-6 border-t border-white/10">
-              <div className="text-sm text-gray-500">
+            <div className="flex items-center justify-between mt-8 pt-6 border-t border-[var(--ds-border-subtle)]">
+              <div className="text-sm text-slate-500">
                 Página {page + 1} de {totalPages}
               </div>
               <div className="flex gap-2">
@@ -250,7 +250,7 @@ export function SubmissionsView({
                   size="sm"
                   onClick={prevPage}
                   disabled={!hasPrevPage}
-                  className="border-white/10 bg-slate-900 hover:bg-white/5"
+                  className="border-[var(--ds-border-subtle)] bg-slate-900 hover:bg-[var(--ds-bg-hover)]"
                 >
                   <ChevronLeft className="w-4 h-4" />
                   Anterior
@@ -260,7 +260,7 @@ export function SubmissionsView({
                   size="sm"
                   onClick={nextPage}
                   disabled={!hasNextPage}
-                  className="border-white/10 bg-slate-900 hover:bg-white/5"
+                  className="border-[var(--ds-border-subtle)] bg-slate-900 hover:bg-[var(--ds-bg-hover)]"
                 >
                   Próxima
                   <ChevronRight className="w-4 h-4" />

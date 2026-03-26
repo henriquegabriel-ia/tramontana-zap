@@ -30,7 +30,7 @@ export function FormList({
   onDelete,
 }: FormListProps) {
   return (
-    <Card className="border-slate-800 bg-slate-900/50">
+    <Card className="border-slate-800 bg-[var(--ds-bg-elevated)]">
       <CardHeader>
         <CardTitle className="text-white">Seus formularios</CardTitle>
         <CardDescription className="text-slate-400">

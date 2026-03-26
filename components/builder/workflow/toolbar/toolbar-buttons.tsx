@@ -32,7 +32,7 @@ export type SaveButtonProps = {
 export function SaveButton({ state, handleSave }: SaveButtonProps) {
   return (
     <Button
-      className="relative border hover:bg-black/5 disabled:opacity-100 dark:hover:bg-white/5 disabled:[&>svg]:text-muted-foreground"
+      className="relative border hover:bg-black/5 disabled:opacity-100 dark:hover:bg-[var(--ds-bg-hover)] disabled:[&>svg]:text-muted-foreground"
       disabled={
         !state.currentWorkflowId || state.isGenerating || state.isSaving
       }
@@ -72,7 +72,7 @@ export function DownloadButton({ state, actions }: DownloadButtonProps) {
 
   return (
     <Button
-      className="border hover:bg-black/5 disabled:opacity-100 dark:hover:bg-white/5 disabled:[&>svg]:text-muted-foreground"
+      className="border hover:bg-black/5 disabled:opacity-100 dark:hover:bg-[var(--ds-bg-hover)] disabled:[&>svg]:text-muted-foreground"
       disabled={
         state.isDownloading ||
         state.nodes.length === 0 ||
@@ -112,7 +112,7 @@ export function PublishButton({
 }: PublishButtonProps) {
   return (
     <Button
-      className="border hover:bg-black/5 disabled:opacity-100 dark:hover:bg-white/5 disabled:[&>svg]:text-muted-foreground"
+      className="border hover:bg-black/5 disabled:opacity-100 dark:hover:bg-[var(--ds-bg-hover)] disabled:[&>svg]:text-muted-foreground"
       disabled={disabled || isPublishing}
       onClick={onPublish}
       size="icon"
@@ -147,7 +147,7 @@ export function VersionsButton({
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
         <Button
-          className="border hover:bg-black/5 disabled:opacity-100 dark:hover:bg-white/5 disabled:[&>svg]:text-muted-foreground"
+          className="border hover:bg-black/5 disabled:opacity-100 dark:hover:bg-[var(--ds-bg-hover)] disabled:[&>svg]:text-muted-foreground"
           disabled={disabled}
           size="icon"
           title="Versões"
@@ -188,7 +188,7 @@ export function VisibilityButton({ state, actions }: VisibilityButtonProps) {
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
         <Button
-          className="border hover:bg-black/5 dark:hover:bg-white/5"
+          className="border hover:bg-black/5 dark:hover:bg-[var(--ds-bg-hover)]"
           disabled={!state.currentWorkflowId || state.isGenerating}
           size="icon"
           title={isPublic ? "Fluxo publico" : "Fluxo privado"}
@@ -233,7 +233,7 @@ export type RunButtonGroupProps = {
 export function RunButtonGroup({ state, actions }: RunButtonGroupProps) {
   return (
     <Button
-      className="border hover:bg-black/5 disabled:opacity-100 dark:hover:bg-white/5 disabled:[&>svg]:text-muted-foreground"
+      className="border hover:bg-black/5 disabled:opacity-100 dark:hover:bg-[var(--ds-bg-hover)] disabled:[&>svg]:text-muted-foreground"
       disabled={
         state.isExecuting || state.nodes.length === 0 || state.isGenerating
       }
@@ -264,7 +264,7 @@ export function DuplicateButton({
 }: DuplicateButtonProps) {
   return (
     <Button
-      className="h-9 border hover:bg-black/5 dark:hover:bg-white/5"
+      className="h-9 border hover:bg-black/5 dark:hover:bg-[var(--ds-bg-hover)]"
       disabled={isDuplicating}
       onClick={onDuplicate}
       size="sm"

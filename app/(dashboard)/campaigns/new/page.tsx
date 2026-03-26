@@ -1171,7 +1171,7 @@ export default function CampaignsNewRealPage() {
                         <button
                           type="button"
                           onClick={() => ctrl.runPrecheck()}
-                          className="inline-flex items-center gap-2 rounded-lg border border-transparent bg-primary-600 px-3 py-2 text-sm font-semibold text-white transition-colors hover:bg-primary-700 dark:bg-white dark:text-black dark:hover:bg-gray-200"
+                          className="inline-flex items-center gap-2 rounded-lg border border-transparent bg-primary-600 px-3 py-2 text-sm font-semibold text-white transition-colors hover:bg-primary-700 dark:bg-white dark:text-black dark:hover:bg-slate-200"
                         >
                           <RefreshCw size={16} />
                           <span className="whitespace-nowrap">Validar novamente</span>

@@ -1146,7 +1146,7 @@ export function UnifiedFlowEditor(props: {
               <div className="space-y-2">
                 {/* #region agent log */}
                 {/* #endregion */}
-                <label className="block text-xs uppercase tracking-widest text-gray-500">
+                <label className="block text-xs uppercase tracking-widest text-slate-500">
                   {block?.__editor_label || 'Texto'}
                 </label>
                 <Textarea
@@ -1161,7 +1161,7 @@ export function UnifiedFlowEditor(props: {
 
             {showLabel && (
               <div className="mt-3">
-                <label className="block text-xs uppercase tracking-widest text-gray-500 mb-2">Pergunta</label>
+                <label className="block text-xs uppercase tracking-widest text-slate-500 mb-2">Pergunta</label>
                 <Input
                   value={String(block?.label || '')}
                   onChange={(e) => updateBlock(idx, { label: e.target.value })}
@@ -1172,10 +1172,10 @@ export function UnifiedFlowEditor(props: {
             )}
 
             {(isTextInput || isTextArea || isDate || isChoice) && (
-              <div className="mt-3 flex items-center justify-between rounded-xl border border-white/10 bg-slate-950/40 px-3 py-2">
+              <div className="mt-3 flex items-center justify-between rounded-xl border border-[var(--ds-border-subtle)] bg-[var(--ds-bg-surface)]/30 px-3 py-2">
                 <div>
-                  <div className="text-xs font-medium text-gray-300">Obrigatório</div>
-                  <div className="text-[11px] text-gray-500">O usuário precisa preencher</div>
+                  <div className="text-xs font-medium text-slate-300">Obrigatório</div>
+                  <div className="text-[11px] text-slate-500">O usuário precisa preencher</div>
                 </div>
                 <Switch checked={!!block?.required} onCheckedChange={(checked) => updateBlock(idx, { required: checked })} />
               </div>
@@ -1183,7 +1183,7 @@ export function UnifiedFlowEditor(props: {
 
             {isOptIn && (
               <div className="mt-3 space-y-2">
-                <label className="block text-xs uppercase tracking-widest text-gray-500">Texto do opt-in</label>
+                <label className="block text-xs uppercase tracking-widest text-slate-500">Texto do opt-in</label>
                 <Textarea value={resolveDataBindingText(block?.text || '', activeScreen)} onChange={(e) => updateBlockText(idx, e.target.value)} />
               </div>
             )}
@@ -1191,11 +1191,11 @@ export function UnifiedFlowEditor(props: {
             {isChoice && (
               <div className="mt-3 space-y-2">
                 <div className="flex items-center justify-between gap-2">
-                  <label className="block text-xs uppercase tracking-widest text-gray-500">Opções</label>
+                  <label className="block text-xs uppercase tracking-widest text-slate-500">Opções</label>
                   <Button
                     type="button"
                     variant="secondary"
-                    className="bg-slate-950/40 border border-white/10 text-gray-200 hover:text-white hover:bg-white/5"
+                    className="bg-[var(--ds-bg-surface)]/30 border border-[var(--ds-border-subtle)] text-slate-200 hover:text-white hover:bg-[var(--ds-bg-hover)]"
                     onClick={() => {
                       // #region agent log
                       // #endregion agent log
@@ -1250,7 +1250,7 @@ export function UnifiedFlowEditor(props: {
                       <Button
                         type="button"
                         variant="outline"
-                        className="border-white/10 bg-slate-950/40 hover:bg-white/5"
+                        className="border-[var(--ds-border-subtle)] bg-[var(--ds-bg-surface)]/30 hover:bg-[var(--ds-bg-hover)]"
                         onClick={() => {
                           const next = baseOptions.filter((_: any, i: number) => i !== oidx)
                           if (isBoundList) {
@@ -1266,7 +1266,7 @@ export function UnifiedFlowEditor(props: {
                   ))}
                 </div>
                 {resolvedList ? (
-                  <div className="text-[11px] text-gray-500">Opções dinâmicas (tempo real).</div>
+                  <div className="text-[11px] text-slate-500">Opções dinâmicas (tempo real).</div>
                 ) : null}
               </div>
             )}
@@ -1276,7 +1276,7 @@ export function UnifiedFlowEditor(props: {
             <Button
               type="button"
               variant="outline"
-              className="border-white/10 bg-slate-950/40 hover:bg-white/5"
+              className="border-[var(--ds-border-subtle)] bg-[var(--ds-bg-surface)]/30 hover:bg-[var(--ds-bg-hover)]"
               disabled={idx === 0}
               onClick={() => moveBlock(idx, 'up')}
             >
@@ -1285,7 +1285,7 @@ export function UnifiedFlowEditor(props: {
             <Button
               type="button"
               variant="outline"
-              className="border-white/10 bg-slate-950/40 hover:bg-white/5"
+              className="border-[var(--ds-border-subtle)] bg-[var(--ds-bg-surface)]/30 hover:bg-[var(--ds-bg-hover)]"
               disabled={idx === blocks.length - 1}
               onClick={() => moveBlock(idx, 'down')}
             >
@@ -1294,7 +1294,7 @@ export function UnifiedFlowEditor(props: {
             <Button
               type="button"
               variant="outline"
-              className="border-red-500/20 bg-slate-950/40 hover:bg-red-500/10"
+              className="border-red-500/20 bg-[var(--ds-bg-surface)]/30 hover:bg-red-500/10"
               onClick={() => removeBlock(idx)}
             >
               <Trash2 className="h-4 w-4 text-red-300" />
@@ -1320,33 +1320,33 @@ export function UnifiedFlowEditor(props: {
       <div className="flex items-start justify-between gap-3">
         <div className="min-w-0">
           <div className="text-sm font-semibold text-white">Telas</div>
-          <div className="text-xs text-gray-400">Monte o conteúdo de cada tela e escolha para onde o botão vai.</div>
+          <div className="text-xs text-slate-400">Monte o conteúdo de cada tela e escolha para onde o botão vai.</div>
         </div>
         <div className="flex items-center gap-3">
-          <div className="text-[11px] text-gray-500">{saveStatusText}</div>
+          <div className="text-[11px] text-slate-500">{saveStatusText}</div>
           <DropdownMenu>
             <DropdownMenuTrigger asChild>
               <Button
                 type="button"
                 variant="outline"
-                className="border-white/10 bg-slate-950/40 hover:bg-white/5 px-2"
+                className="border-[var(--ds-border-subtle)] bg-[var(--ds-bg-surface)]/30 hover:bg-[var(--ds-bg-hover)] px-2"
                 aria-label="Ações"
               >
                 <MoreVertical className="h-4 w-4" />
               </Button>
             </DropdownMenuTrigger>
-            <DropdownMenuContent align="end" className="bg-slate-900 border-white/10 text-white min-w-56">
+            <DropdownMenuContent align="end" className="bg-slate-900 border-[var(--ds-border-subtle)] text-white min-w-56">
               <DropdownMenuItem onClick={handleAddScreen}>Adicionar tela</DropdownMenuItem>
               <DropdownMenuItem variant="destructive" disabled={spec.screens.length <= 1} onClick={handleRemoveScreen}>
                 Remover tela
               </DropdownMenuItem>
               {props.onOpenAdvanced ? (
                 <>
-                  <DropdownMenuSeparator className="bg-white/10" />
+                  <DropdownMenuSeparator className="bg-[var(--ds-bg-hover)]" />
                   <DropdownMenuItem onClick={props.onOpenAdvanced}>Ajustes avançados</DropdownMenuItem>
                 </>
               ) : null}
-              <DropdownMenuSeparator className="bg-white/10" />
+              <DropdownMenuSeparator className="bg-[var(--ds-bg-hover)]" />
               <DropdownMenuItem disabled={!canSave} onClick={save}>
                 Salvar agora
               </DropdownMenuItem>
@@ -1356,7 +1356,7 @@ export function UnifiedFlowEditor(props: {
       </div>
 
       <Tabs value={activeScreenId} onValueChange={setActiveScreenId}>
-        <TabsList className="bg-slate-950/40 border border-white/10">
+        <TabsList className="bg-[var(--ds-bg-surface)]/30 border border-[var(--ds-border-subtle)]">
           {spec.screens.map((s) => (
             <TabsTrigger key={s.id} value={s.id} className="text-xs">
               {resolveDataBindingText(s.title || s.id, s).slice(0, 18)}
@@ -1365,19 +1365,19 @@ export function UnifiedFlowEditor(props: {
         </TabsList>
 
         <TabsContent value={activeScreenId} className="space-y-6 pt-2">
-          <div className="rounded-2xl border border-white/10 bg-slate-900/60 p-4 space-y-4">
+          <div className="rounded-2xl border border-[var(--ds-border-subtle)] bg-[var(--ds-bg-elevated)] p-4 space-y-4">
             <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
               <div>
-                <label className="block text-xs uppercase tracking-widest text-gray-500 mb-2">Título da tela</label>
+                <label className="block text-xs uppercase tracking-widest text-slate-500 mb-2">Título da tela</label>
                 <Input
                   value={resolveDataBindingText(activeScreen?.title || '', activeScreen)}
                   onChange={(e) => patchScreenById(activeScreenId, { title: e.target.value })}
                 />
               </div>
-              <div className="flex items-center justify-between rounded-xl border border-white/10 bg-slate-950/40 px-3 py-2">
+              <div className="flex items-center justify-between rounded-xl border border-[var(--ds-border-subtle)] bg-[var(--ds-bg-surface)]/30 px-3 py-2">
                 <div>
-                  <div className="text-xs font-medium text-gray-300">Tela final</div>
-                  <div className="text-[11px] text-gray-500">O botão vira “Concluir”</div>
+                  <div className="text-xs font-medium text-slate-300">Tela final</div>
+                  <div className="text-[11px] text-slate-500">O botão vira “Concluir”</div>
                 </div>
                 <Switch
                   checked={!!activeScreen?.terminal}
@@ -1390,18 +1390,18 @@ export function UnifiedFlowEditor(props: {
             </div>
           </div>
 
-          <div className="border-t border-white/10 pt-6">
+          <div className="border-t border-[var(--ds-border-subtle)] pt-6">
             <div className="flex items-center justify-between">
               <div className="text-sm font-semibold text-white">Conteúdo</div>
               <DropdownMenu>
                 <DropdownMenuTrigger asChild>
-                  <Button type="button" className="bg-white text-black hover:bg-gray-200">
+                  <Button type="button" className="bg-white text-black hover:bg-slate-200">
                     <Plus className="h-4 w-4" />
                     Adicionar
                     <ChevronDown className="h-4 w-4" />
                   </Button>
                 </DropdownMenuTrigger>
-                <DropdownMenuContent align="end" className="bg-slate-900 border-white/10 text-white min-w-64">
+                <DropdownMenuContent align="end" className="bg-slate-900 border-[var(--ds-border-subtle)] text-white min-w-64">
                   {Object.entries(BLOCK_TYPE_LABEL).map(([k, label]) => (
                     <DropdownMenuItem key={k} onClick={() => addBlock(k as BlockType)}>
                       {label}
@@ -1412,19 +1412,19 @@ export function UnifiedFlowEditor(props: {
             </div>
 
             {blocks.length === 0 ? (
-              <div className="mt-4 rounded-xl border border-white/10 bg-slate-950/40 px-6 py-8 text-center text-gray-400">
-                <div className="text-sm text-gray-300">Adicione o primeiro bloco para montar sua tela.</div>
+              <div className="mt-4 rounded-xl border border-[var(--ds-border-subtle)] bg-[var(--ds-bg-surface)]/30 px-6 py-8 text-center text-slate-400">
+                <div className="text-sm text-slate-300">Adicione o primeiro bloco para montar sua tela.</div>
               </div>
             ) : (
               <div className="divide-y divide-white/10 mt-4">{blocks.map(renderBlockEditor)}</div>
             )}
           </div>
 
-          <div className="rounded-2xl border border-white/10 bg-slate-900/60 p-4 space-y-4">
+          <div className="rounded-2xl border border-[var(--ds-border-subtle)] bg-[var(--ds-bg-elevated)] p-4 space-y-4">
             <div className="text-sm font-semibold text-white">Botão</div>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
               <div>
-                <label className="block text-xs uppercase tracking-widest text-gray-500 mb-2">Texto do botão</label>
+                <label className="block text-xs uppercase tracking-widest text-slate-500 mb-2">Texto do botão</label>
                 <Input
                   value={ctaLabel}
                   onChange={(e) => {
@@ -1436,12 +1436,12 @@ export function UnifiedFlowEditor(props: {
                 />
               </div>
               <div>
-                <label className="block text-xs uppercase tracking-widest text-gray-500 mb-2">Próxima tela</label>
+                <label className="block text-xs uppercase tracking-widest text-slate-500 mb-2">Próxima tela</label>
                 <select
                   value={ctaType === 'complete' || !!activeScreen?.terminal ? '' : nextScreenId}
                   onChange={(e) => setCta({ nextScreenId: e.target.value })}
                   disabled={ctaType === 'complete' || !!activeScreen?.terminal}
-                  className="h-11 w-full rounded-xl border border-white/10 bg-white/5 px-3 text-[14px] text-slate-200 focus:outline-none focus:ring-2 focus:ring-purple-400/40 disabled:opacity-50"
+                  className="h-11 w-full rounded-xl border border-[var(--ds-border-subtle)] bg-[var(--ds-bg-hover)] px-3 text-[14px] text-slate-200 focus:outline-none focus:ring-2 focus:ring-purple-400/40 disabled:opacity-50"
                 >
                   <option value="">— Concluir —</option>
                   {spec.screens
@@ -1464,16 +1464,16 @@ export function UnifiedFlowEditor(props: {
 
           {/* Confirmação agora fica no passo 3 (Finalizar) */}
 
-          <div className="rounded-2xl border border-white/10 bg-slate-900/60 p-4 space-y-4">
+          <div className="rounded-2xl border border-[var(--ds-border-subtle)] bg-[var(--ds-bg-elevated)] p-4 space-y-4">
             <div className="flex items-start justify-between gap-3">
               <div className="min-w-0">
                 <div className="text-sm font-semibold text-white">Caminhos</div>
-                <div className="text-xs text-gray-400">Decida para onde ir depois do botão, com ou sem ramificações.</div>
+                <div className="text-xs text-slate-400">Decida para onde ir depois do botão, com ou sem ramificações.</div>
               </div>
               <Button
                 type="button"
                 variant="secondary"
-                className="bg-slate-950/40 border border-white/10 text-gray-200 hover:text-white hover:bg-white/5"
+                className="bg-[var(--ds-bg-surface)]/30 border border-[var(--ds-border-subtle)] text-slate-200 hover:text-white hover:bg-[var(--ds-bg-hover)]"
                 onClick={() => {
                   const firstField = pathFieldOptions[0]?.name || ''
                   const opts = firstField ? choiceOptionsByField[firstField] : undefined
@@ -1497,18 +1497,18 @@ export function UnifiedFlowEditor(props: {
             </div>
 
             {pathFieldOptions.length === 0 ? (
-              <div className="rounded-xl border border-white/10 bg-slate-950/40 px-4 py-3 text-sm text-gray-300">
+              <div className="rounded-xl border border-[var(--ds-border-subtle)] bg-[var(--ds-bg-surface)]/30 px-4 py-3 text-sm text-slate-300">
                 Adicione um campo (ex: texto, lista, escolha) para criar ramificações.
               </div>
             ) : null}
 
             <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
               <div>
-                <label className="block text-xs uppercase tracking-widest text-gray-500 mb-2">Destino padrão</label>
+                <label className="block text-xs uppercase tracking-widest text-slate-500 mb-2">Destino padrão</label>
                 <select
                   value={defaultNextId || ''}
                   onChange={(e) => setDefaultNextForActive(e.target.value || null)}
-                  className="h-11 w-full rounded-xl border border-white/10 bg-white/5 px-3 text-[14px] text-slate-200 focus:outline-none focus:ring-2 focus:ring-purple-400/40"
+                  className="h-11 w-full rounded-xl border border-[var(--ds-border-subtle)] bg-[var(--ds-bg-hover)] px-3 text-[14px] text-slate-200 focus:outline-none focus:ring-2 focus:ring-purple-400/40"
                 >
                   <option value="">— Concluir —</option>
                   {spec.screens
@@ -1526,12 +1526,12 @@ export function UnifiedFlowEditor(props: {
                     ))}
                 </select>
                 {activeBranches.length > 0 ? (
-                  <div className="mt-2 text-[11px] text-gray-500">Obrigatório quando há regras (pode ser “Concluir”).</div>
+                  <div className="mt-2 text-[11px] text-slate-500">Obrigatório quando há regras (pode ser “Concluir”).</div>
                 ) : null}
               </div>
-              <div className="rounded-xl border border-white/10 bg-slate-950/40 px-3 py-3">
-                <div className="text-xs font-medium text-gray-300">Quando uma regra casar</div>
-                <div className="text-[11px] text-gray-500 mt-1">O primeiro caminho que casar ganha.</div>
+              <div className="rounded-xl border border-[var(--ds-border-subtle)] bg-[var(--ds-bg-surface)]/30 px-3 py-3">
+                <div className="text-xs font-medium text-slate-300">Quando uma regra casar</div>
+                <div className="text-[11px] text-slate-500 mt-1">O primeiro caminho que casar ganha.</div>
               </div>
             </div>
 
@@ -1560,11 +1560,11 @@ export function UnifiedFlowEditor(props: {
                   const destNext = destId ? (spec.routingModel?.[destId] || [])[0] || '' : ''
                   const destIsFinal = !!dest?.terminal || String((dest as any)?.action?.type || '').toLowerCase() === 'complete' || !destNext
                   return (
-                    <div key={`${activeScreenId}_branch_${idx}`} className="rounded-xl border border-white/10 bg-slate-950/40 p-3">
+                    <div key={`${activeScreenId}_branch_${idx}`} className="rounded-xl border border-[var(--ds-border-subtle)] bg-[var(--ds-bg-surface)]/30 p-3">
                       <div className="space-y-2">
                         <div className="grid grid-cols-1 lg:grid-cols-[1fr_160px_1fr_200px_auto] gap-2 items-end">
                         <div className="min-w-0">
-                          <label className="block text-xs uppercase tracking-widest text-gray-500 mb-2">Campo</label>
+                          <label className="block text-xs uppercase tracking-widest text-slate-500 mb-2">Campo</label>
                           <select
                             value={String(rule.field || '')}
                             onChange={(e) => {
@@ -1580,7 +1580,7 @@ export function UnifiedFlowEditor(props: {
                               next[idx] = { ...next[idx], field, ...(nextValue !== undefined ? { value: nextValue as any } : {}) }
                               setBranchesForActive(next)
                             }}
-                            className="h-11 w-full rounded-xl border border-white/10 bg-white/5 px-3 text-[14px] text-slate-200 focus:outline-none focus:ring-2 focus:ring-purple-400/40"
+                            className="h-11 w-full rounded-xl border border-[var(--ds-border-subtle)] bg-[var(--ds-bg-hover)] px-3 text-[14px] text-slate-200 focus:outline-none focus:ring-2 focus:ring-purple-400/40"
                           >
                             {pathFieldOptions.map((f) => (
                               <option key={f.name} value={f.name}>
@@ -1591,7 +1591,7 @@ export function UnifiedFlowEditor(props: {
                         </div>
 
                         <div className="min-w-0">
-                          <label className="block text-xs uppercase tracking-widest text-gray-500 mb-2">Operador</label>
+                          <label className="block text-xs uppercase tracking-widest text-slate-500 mb-2">Operador</label>
                           <select
                             value={op}
                             onChange={(e) => {
@@ -1599,7 +1599,7 @@ export function UnifiedFlowEditor(props: {
                               next[idx] = { ...next[idx], op: e.target.value as any }
                               setBranchesForActive(next)
                             }}
-                            className="h-11 w-full rounded-xl border border-white/10 bg-white/5 px-3 text-[14px] text-slate-200 focus:outline-none focus:ring-2 focus:ring-purple-400/40"
+                            className="h-11 w-full rounded-xl border border-[var(--ds-border-subtle)] bg-[var(--ds-bg-hover)] px-3 text-[14px] text-slate-200 focus:outline-none focus:ring-2 focus:ring-purple-400/40"
                           >
                             <option value="is_filled">preenchido</option>
                             <option value="is_empty">vazio</option>
@@ -1613,7 +1613,7 @@ export function UnifiedFlowEditor(props: {
                         </div>
 
                         <div className="min-w-0">
-                          <label className="block text-xs uppercase tracking-widest text-gray-500 mb-2">Valor</label>
+                          <label className="block text-xs uppercase tracking-widest text-slate-500 mb-2">Valor</label>
                           {canUseChoiceSelect ? (
                             <select
                               value={needsValue ? String(rule.value ?? '') : ''}
@@ -1623,7 +1623,7 @@ export function UnifiedFlowEditor(props: {
                                 setBranchesForActive(next)
                               }}
                               disabled={!needsValue}
-                              className="h-11 w-full rounded-xl border border-white/10 bg-white/5 px-3 text-[14px] text-slate-200 focus:outline-none focus:ring-2 focus:ring-purple-400/40 disabled:opacity-50"
+                              className="h-11 w-full rounded-xl border border-[var(--ds-border-subtle)] bg-[var(--ds-bg-hover)] px-3 text-[14px] text-slate-200 focus:outline-none focus:ring-2 focus:ring-purple-400/40 disabled:opacity-50"
                             >
                               {choiceOptions.map((o) => (
                                 <option key={o.value} value={o.value}>
@@ -1646,7 +1646,7 @@ export function UnifiedFlowEditor(props: {
                         </div>
 
                         <div className="min-w-0">
-                          <label className="block text-xs uppercase tracking-widest text-gray-500 mb-2">Destino</label>
+                          <label className="block text-xs uppercase tracking-widest text-slate-500 mb-2">Destino</label>
                           <select
                             value={rule.next || ''}
                             onChange={(e) => {
@@ -1655,7 +1655,7 @@ export function UnifiedFlowEditor(props: {
                               next[idx] = { ...(next[idx] || {}), next: e.target.value ? e.target.value : null, __auto_next: false }
                               setBranchesForActive(next as any)
                             }}
-                            className="h-11 w-full rounded-xl border border-white/10 bg-white/5 px-3 text-[14px] text-slate-200 focus:outline-none focus:ring-2 focus:ring-purple-400/40"
+                            className="h-11 w-full rounded-xl border border-[var(--ds-border-subtle)] bg-[var(--ds-bg-hover)] px-3 text-[14px] text-slate-200 focus:outline-none focus:ring-2 focus:ring-purple-400/40"
                           >
                             <option value="">— Concluir —</option>
                             {spec.screens
@@ -1671,7 +1671,7 @@ export function UnifiedFlowEditor(props: {
                         <Button
                           type="button"
                           variant="outline"
-                          className="border-white/10 bg-slate-950/40 hover:bg-white/5 self-end"
+                          className="border-[var(--ds-border-subtle)] bg-[var(--ds-bg-surface)]/30 hover:bg-[var(--ds-bg-hover)] self-end"
                           onClick={() => {
                             const next = activeBranches.filter((_, i) => i !== idx)
                             setBranchesForActive(next)
@@ -1682,17 +1682,17 @@ export function UnifiedFlowEditor(props: {
                         </Button>
                       </div>
                       {inferredDestId && isAutoNext ? (
-                        <div className="text-[11px] text-gray-500">Automático (pela opção escolhida).</div>
+                        <div className="text-[11px] text-slate-500">Automático (pela opção escolhida).</div>
                       ) : null}
                       {destId && dest && !destIsFinal ? (
-                        <div className="flex items-center justify-between gap-2 rounded-lg border border-white/10 bg-white/5 px-3 py-2">
-                          <div className="text-[11px] text-gray-400">
-                            Essa tela ainda continua para <span className="text-gray-200">{destNext || '—'}</span>. Se quiser encerrar nela, marque como final.
+                        <div className="flex items-center justify-between gap-2 rounded-lg border border-[var(--ds-border-subtle)] bg-[var(--ds-bg-hover)] px-3 py-2">
+                          <div className="text-[11px] text-slate-400">
+                            Essa tela ainda continua para <span className="text-slate-200">{destNext || '—'}</span>. Se quiser encerrar nela, marque como final.
                           </div>
                           <Button
                             type="button"
                             variant="outline"
-                            className="h-8 border-white/10 bg-slate-950/40 hover:bg-white/5 text-[12px]"
+                            className="h-8 border-[var(--ds-border-subtle)] bg-[var(--ds-bg-surface)]/30 hover:bg-[var(--ds-bg-hover)] text-[12px]"
                             onClick={() => makeScreenFinal(destId)}
                           >
                             Marcar como final
@@ -1705,7 +1705,7 @@ export function UnifiedFlowEditor(props: {
                 })}
               </div>
             ) : (
-              <div className="text-sm text-gray-400">Sem ramificações. (Opcional) Adicione regras para desviar para telas diferentes.</div>
+              <div className="text-sm text-slate-400">Sem ramificações. (Opcional) Adicione regras para desviar para telas diferentes.</div>
             )}
           </div>
 

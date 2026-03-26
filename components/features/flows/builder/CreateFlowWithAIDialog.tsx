@@ -35,7 +35,7 @@ export function CreateFlowWithAIDialog(props: {
         </Button>
       </DialogTrigger>
 
-      <DialogContent className="max-w-xl bg-slate-950 border-white/10 text-white">
+      <DialogContent className="max-w-xl bg-slate-950 border-[var(--ds-border-subtle)] text-white">
         <DialogHeader>
           <DialogTitle>Criar MiniApp com IA</DialogTitle>
           <DialogDescription className="text-slate-400">
@@ -52,7 +52,7 @@ export function CreateFlowWithAIDialog(props: {
               onChange={(e) => setName(e.target.value)}
               placeholder="Ex: onboarding_lead"
             />
-            <div className="text-[11px] text-gray-500">Dica: use snake_case e evite espaços.</div>
+            <div className="text-[11px] text-slate-500">Dica: use snake_case e evite espaços.</div>
           </div>
 
           <div className="space-y-2">
@@ -61,10 +61,10 @@ export function CreateFlowWithAIDialog(props: {
               id="flow_ai_prompt"
               value={prompt}
               onChange={(e) => setPrompt(e.target.value)}
-              className="min-h-28 bg-slate-900 border-white/10 text-white"
+              className="min-h-28 bg-slate-900 border-[var(--ds-border-subtle)] text-white"
               placeholder="Ex: Quero captar nome, telefone, e-mail, cidade, interesse (imóvel/financiamento), melhor horário para contato e um opt-in para receber novidades."
             />
-            <div className="text-[11px] text-gray-500">Mínimo: 10 caracteres. Quanto mais contexto, melhor.</div>
+            <div className="text-[11px] text-slate-500">Mínimo: 10 caracteres. Quanto mais contexto, melhor.</div>
           </div>
         </div>
 
@@ -72,7 +72,7 @@ export function CreateFlowWithAIDialog(props: {
           <Button
             type="button"
             variant="outline"
-            className="border-white/10 bg-slate-900 hover:bg-white/5"
+            className="border-[var(--ds-border-subtle)] bg-slate-900 hover:bg-[var(--ds-bg-hover)]"
             onClick={() => setOpen(false)}
             disabled={props.isCreating}
           >

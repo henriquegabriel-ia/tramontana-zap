@@ -32,7 +32,7 @@ export function AudienceCardSegments({
 
       <div
         className={`p-4 rounded-full ${
-          isSelected ? 'bg-white/20 text-white dark:bg-gray-200 dark:text-black' : 'bg-[var(--ds-bg-surface)] text-[var(--ds-text-secondary)]'
+          isSelected ? 'bg-white/20 text-white dark:bg-slate-200 dark:text-black' : 'bg-[var(--ds-bg-surface)] text-[var(--ds-text-secondary)]'
         }`}
       >
         <LinkIcon size={24} />
@@ -42,7 +42,7 @@ export function AudienceCardSegments({
         <h3 className="font-bold text-sm">Segmentos</h3>
         <p
           className={`text-xs mt-1 ${
-            isSelected ? 'text-white/70 dark:text-gray-600' : 'text-[var(--ds-text-muted)]'
+            isSelected ? 'text-white/70 dark:text-slate-600' : 'text-[var(--ds-text-muted)]'
           }`}
         >
           {subtitle}

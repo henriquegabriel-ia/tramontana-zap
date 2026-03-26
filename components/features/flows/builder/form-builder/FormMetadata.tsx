@@ -24,7 +24,7 @@ export function FormMetadata({
       <div className="space-y-4">
         {showIntro && (
           <div>
-            <label className="block text-xs uppercase tracking-widest text-gray-500 mb-2">
+            <label className="block text-xs uppercase tracking-widest text-slate-500 mb-2">
               Boas-vindas
             </label>
             <Textarea
@@ -38,22 +38,22 @@ export function FormMetadata({
 
         {showTechFields && (
           <div>
-            <label className="block text-xs uppercase tracking-widest text-gray-500 mb-2">
+            <label className="block text-xs uppercase tracking-widest text-slate-500 mb-2">
               Screen ID (Meta)
             </label>
             <Input
               value={form.screenId}
               onChange={(e) => onUpdate({ screenId: e.target.value.toUpperCase() })}
             />
-            <div className="text-[11px] text-gray-500 mt-1">Ex: CADASTRO, NPS, AGENDAMENTO</div>
+            <div className="text-[11px] text-slate-500 mt-1">Ex: CADASTRO, NPS, AGENDAMENTO</div>
           </div>
         )}
       </div>
 
       {showTechFields && (
-        <div className="rounded-xl border border-white/10 bg-slate-950/40 p-4">
+        <div className="rounded-xl border border-[var(--ds-border-subtle)] bg-[var(--ds-bg-surface)]/30 p-4">
           <div className="text-sm font-semibold text-white">Status</div>
-          <div className="mt-2 text-sm text-gray-400">
+          <div className="mt-2 text-sm text-slate-400">
             {dirty ? 'Alterações não salvas' : 'Sincronizado'}
             {issues.length === 0 ? (
               <span className="text-purple-300"> • pronto</span>
@@ -62,13 +62,13 @@ export function FormMetadata({
             )}
           </div>
 
-          <div className="mt-3 text-[11px] text-gray-500">
+          <div className="mt-3 text-[11px] text-slate-500">
             Este modo cria o JSON no padrão usado pelos templates internos (sem endpoint).
           </div>
 
           <Button
             type="button"
-            className="mt-3 w-full bg-white text-black hover:bg-gray-200"
+            className="mt-3 w-full bg-white text-black hover:bg-slate-200"
             disabled={!canSave}
             onClick={onSave}
           >

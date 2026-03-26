@@ -247,7 +247,7 @@ export const WhatsAppFormattedBody = ({ text }: WhatsAppFormattedBodyProps) => {
             <div key={k} className="space-y-1">
               {b.items.map((item, itemIdx) => (
                 <div key={`${k}-ul-${itemIdx}`} className="flex gap-2">
-                  <span className="text-gray-400">•</span>
+                  <span className="text-slate-400">•</span>
                   <span className="flex-1">
                     <WhatsAppInlineText text={item} />
                   </span>
@@ -262,7 +262,7 @@ export const WhatsAppFormattedBody = ({ text }: WhatsAppFormattedBodyProps) => {
             <div key={k} className="space-y-1">
               {b.items.map((item, itemIdx) => (
                 <div key={`${k}-ol-${itemIdx}`} className="flex gap-2">
-                  <span className="min-w-4.5 text-right text-gray-400">{itemIdx + 1}.</span>
+                  <span className="min-w-4.5 text-right text-slate-400">{itemIdx + 1}.</span>
                   <span className="flex-1">
                     <WhatsAppInlineText text={item} />
                   </span>

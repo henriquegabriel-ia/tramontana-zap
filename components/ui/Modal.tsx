@@ -35,7 +35,7 @@ const maxWidthClasses = {
 } as const
 
 const variantClasses = {
-  default: 'border-white/10',
+  default: 'border-[var(--ds-border-subtle)]',
   warning: 'border-amber-500/20',
   danger: 'border-red-500/20',
   success: 'border-green-500/20',
@@ -121,7 +121,7 @@ export function Modal({
             {showCloseButton && onClose && (
               <button
                 onClick={onClose}
-                className="p-1.5 rounded-lg text-gray-400 hover:text-white hover:bg-white/10 transition-colors"
+                className="p-1.5 rounded-lg text-slate-400 hover:text-white hover:bg-[var(--ds-bg-hover)] transition-colors"
                 aria-label="Fechar"
               >
                 <X size={20} />
@@ -151,13 +151,13 @@ export function ModalHeader({
 }) {
   return (
     <div className="flex items-center gap-4 mb-6">
-      <div className={`p-3 rounded-xl ${iconClassName || 'bg-white/10'}`}>
+      <div className={`p-3 rounded-xl ${iconClassName || 'bg-[var(--ds-bg-hover)]'}`}>
         {icon}
       </div>
       <div>
         <h3 className="text-lg font-bold text-white">{title}</h3>
         {description && (
-          <p className="text-sm text-gray-400">{description}</p>
+          <p className="text-sm text-slate-400">{description}</p>
         )}
       </div>
     </div>
@@ -197,7 +197,7 @@ export function ModalCancelButton({
     <button
       onClick={onClick}
       disabled={disabled}
-      className="flex-1 px-4 py-3 bg-slate-950/40 text-gray-300 border border-white/10 rounded-lg font-medium hover:bg-white/5 transition-colors disabled:opacity-50"
+      className="flex-1 px-4 py-3 bg-[var(--ds-bg-surface)]/30 text-slate-300 border border-[var(--ds-border-subtle)] rounded-lg font-medium hover:bg-[var(--ds-bg-hover)] transition-colors disabled:opacity-50"
     >
       {children}
     </button>

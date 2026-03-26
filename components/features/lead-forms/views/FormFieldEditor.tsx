@@ -98,7 +98,7 @@ export function FormFieldEditor({
           </select>
         </div>
 
-        <div className="flex items-center justify-between rounded-md border border-slate-800 bg-slate-900/40 px-3">
+        <div className="flex items-center justify-between rounded-md border border-slate-800 bg-[var(--ds-bg-elevated)] px-3">
           <div>
             <p className="text-sm">Obrigatorio</p>
             <p className="text-xs text-slate-500">Exige preenchimento</p>

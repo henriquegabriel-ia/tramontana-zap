@@ -450,7 +450,7 @@ export default function TemplatesPage() {
           <div className="rounded-2xl border border-[var(--ds-border-default)] bg-[var(--ds-bg-elevated)] shadow-[0_12px_30px_rgba(0,0,0,0.35)] overflow-hidden">
             <div className="overflow-x-auto">
               <table className="w-full text-left text-sm">
-                <thead className="bg-[var(--ds-bg-elevated)] border-b border-[var(--ds-border-default)] text-[var(--ds-text-muted)] uppercase tracking-widest text-xs">
+                <thead className="bg-[var(--ds-bg-surface)]/30 text-[var(--ds-text-muted)] uppercase tracking-widest text-[11px]">
                   <tr>
                     <th className="px-6 py-4 font-medium">Nome</th>
                     <th className="px-6 py-4 font-medium">Tipo</th>

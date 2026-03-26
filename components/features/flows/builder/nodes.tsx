@@ -24,15 +24,15 @@ function NodeShell(props: NodeShellProps) {
       ? 'ring-purple-500/25 border-purple-500/30'
       : tone === 'danger'
         ? 'ring-red-500/25 border-red-500/30'
-        : 'ring-white/10 border-white/10'
+        : 'ring-white/10 border-[var(--ds-border-subtle)]'
 
   return (
     <div className={`min-w-55 rounded-2xl border ${ring} bg-slate-950/70 backdrop-blur shadow-lg shadow-black/30 ring-1`}>
-      <div className="px-4 py-3 border-b border-white/5">
+      <div className="px-4 py-3 border-b border-[var(--ds-border-subtle)]">
         <div className="text-sm font-semibold text-white">{props.title}</div>
-        {props.subtitle ? <div className="text-[11px] text-gray-400 mt-0.5">{props.subtitle}</div> : null}
+        {props.subtitle ? <div className="text-[11px] text-slate-400 mt-0.5">{props.subtitle}</div> : null}
       </div>
-      <div className="px-4 py-3 text-xs text-gray-300">{props.children}</div>
+      <div className="px-4 py-3 text-xs text-slate-300">{props.children}</div>
     </div>
   )
 }

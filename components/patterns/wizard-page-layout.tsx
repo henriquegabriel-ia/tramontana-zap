@@ -164,7 +164,7 @@ export function WizardPageLayout({
 
       {/* Footer Actions */}
       {actions && (
-        <div className="mt-8 pt-6 border-t border-white/10">{actions}</div>
+        <div className="mt-8 pt-6 border-t border-[var(--ds-border-subtle)]">{actions}</div>
       )}
     </div>
   )
@@ -231,7 +231,7 @@ export function WizardActions({
             variant="outline"
             onClick={onBack}
             disabled={isLoading}
-            className="border-white/10 bg-slate-950/40 text-slate-200 hover:bg-white/5"
+            className="border-[var(--ds-border-subtle)] bg-[var(--ds-bg-surface)]/30 text-slate-200 hover:bg-[var(--ds-bg-hover)]"
           >
             <ArrowLeft className="w-4 h-4 mr-2" />
             Voltar

@@ -213,14 +213,14 @@ export function FlowPhonePreview(props: {
 
       {/* Top bar (Meta preview feel) */}
       <div className="bg-[#111b21] h-14 flex items-center px-3 gap-2 shrink-0 border-b border-black/30">
-        <div className="h-8 w-8 rounded-full bg-white/10 flex items-center justify-center text-white/80">
+        <div className="h-8 w-8 rounded-full bg-[var(--ds-bg-hover)] flex items-center justify-center text-white/80">
           <ChevronLeft className="h-4 w-4" />
         </div>
         <div className="min-w-0 flex-1">
           <div className="text-[12px] font-semibold text-white leading-none truncate">{businessName}</div>
           <div className="text-[10px] text-white/60 leading-none mt-0.5 truncate">MiniApp</div>
         </div>
-        <div className="h-8 w-8 rounded-full bg-white/10 flex items-center justify-center text-white/80">
+        <div className="h-8 w-8 rounded-full bg-[var(--ds-bg-hover)] flex items-center justify-center text-white/80">
           <X className="h-4 w-4" />
         </div>
       </div>

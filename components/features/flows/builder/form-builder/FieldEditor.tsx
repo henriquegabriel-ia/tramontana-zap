@@ -92,7 +92,7 @@ export function FieldEditor({
           {/* Label and Type */}
           <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
             <div>
-              <label className="block text-xs uppercase tracking-widest text-gray-500 mb-2">
+              <label className="block text-xs uppercase tracking-widest text-slate-500 mb-2">
                 Pergunta
               </label>
               <Input
@@ -103,11 +103,11 @@ export function FieldEditor({
               />
             </div>
             <div>
-              <label className="block text-xs uppercase tracking-widest text-gray-500 mb-2">
+              <label className="block text-xs uppercase tracking-widest text-slate-500 mb-2">
                 Tipo
               </label>
               <Select value={field.type} onValueChange={handleTypeChange}>
-                <SelectTrigger className="bg-slate-950/40 border-white/10 text-white">
+                <SelectTrigger className="bg-[var(--ds-bg-surface)]/30 border-[var(--ds-border-subtle)] text-white">
                   <SelectValue />
                 </SelectTrigger>
                 <SelectContent>
@@ -124,22 +124,22 @@ export function FieldEditor({
           {/* Name and Required */}
           <div className="mt-3 grid grid-cols-1 md:grid-cols-2 gap-3">
             <div>
-              <label className="block text-xs uppercase tracking-widest text-gray-500 mb-2">
+              <label className="block text-xs uppercase tracking-widest text-slate-500 mb-2">
                 Identificador (name)
               </label>
               <Input
                 value={field.name}
                 onChange={(e) => onUpdate(index, { name: normalizeFlowFieldName(e.target.value) })}
               />
-              <div className="text-[11px] text-gray-500 mt-1">
+              <div className="text-[11px] text-slate-500 mt-1">
                 Isso vira a chave no response_json.
               </div>
             </div>
 
-            <div className="flex items-center justify-between rounded-xl border border-white/10 bg-slate-950/40 px-3 py-2">
+            <div className="flex items-center justify-between rounded-xl border border-[var(--ds-border-subtle)] bg-[var(--ds-bg-surface)]/30 px-3 py-2">
               <div>
-                <div className="text-xs font-medium text-gray-300">Obrigatório</div>
-                <div className="text-[11px] text-gray-500">O usuário precisa preencher</div>
+                <div className="text-xs font-medium text-slate-300">Obrigatório</div>
+                <div className="text-[11px] text-slate-500">O usuário precisa preencher</div>
               </div>
               <Switch
                 checked={!!field.required}
@@ -152,7 +152,7 @@ export function FieldEditor({
           {/* Opt-in text */}
           {field.type === 'optin' && (
             <div className="mt-3">
-              <label className="block text-xs uppercase tracking-widest text-gray-500 mb-2">
+              <label className="block text-xs uppercase tracking-widest text-slate-500 mb-2">
                 Texto do opt-in
               </label>
               <Textarea
@@ -167,13 +167,13 @@ export function FieldEditor({
           {showOptions && (
             <div className="mt-3">
               <div className="flex items-center justify-between gap-2">
-                <label className="block text-xs uppercase tracking-widest text-gray-500">
+                <label className="block text-xs uppercase tracking-widest text-slate-500">
                   Opções
                 </label>
                 <Button
                   type="button"
                   variant="secondary"
-                  className="bg-slate-950/40 border border-white/10 text-gray-200 hover:text-white hover:bg-white/5"
+                  className="bg-[var(--ds-bg-surface)]/30 border border-[var(--ds-border-subtle)] text-slate-200 hover:text-white hover:bg-[var(--ds-bg-hover)]"
                   onClick={handleAddOption}
                 >
                   <Plus className="h-4 w-4" />
@@ -201,7 +201,7 @@ export function FieldEditor({
                     <Button
                       type="button"
                       variant="outline"
-                      className="border-white/10 bg-slate-950/40 hover:bg-white/5"
+                      className="border-[var(--ds-border-subtle)] bg-[var(--ds-bg-surface)]/30 hover:bg-[var(--ds-bg-hover)]"
                       onClick={() => handleRemoveOption(oidx)}
                     >
                       <Trash2 className="h-4 w-4" />
@@ -218,7 +218,7 @@ export function FieldEditor({
           <Button
             type="button"
             variant="outline"
-            className="border-white/10 bg-slate-950/40 hover:bg-white/5"
+            className="border-[var(--ds-border-subtle)] bg-[var(--ds-bg-surface)]/30 hover:bg-[var(--ds-bg-hover)]"
             disabled={index === 0}
             onClick={() => onMove(index, 'up')}
           >
@@ -227,7 +227,7 @@ export function FieldEditor({
           <Button
             type="button"
             variant="outline"
-            className="border-white/10 bg-slate-950/40 hover:bg-white/5"
+            className="border-[var(--ds-border-subtle)] bg-[var(--ds-bg-surface)]/30 hover:bg-[var(--ds-bg-hover)]"
             disabled={index === totalFields - 1}
             onClick={() => onMove(index, 'down')}
           >
@@ -236,7 +236,7 @@ export function FieldEditor({
           <Button
             type="button"
             variant="outline"
-            className="border-white/10 bg-slate-950/40 hover:bg-white/5"
+            className="border-[var(--ds-border-subtle)] bg-[var(--ds-bg-surface)]/30 hover:bg-[var(--ds-bg-hover)]"
             onClick={() => onDuplicate(index)}
           >
             <Copy className="h-4 w-4" />

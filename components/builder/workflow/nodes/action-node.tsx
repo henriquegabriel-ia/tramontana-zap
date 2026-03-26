@@ -287,7 +287,7 @@ export const ActionNode = memo(({ data, selected, id }: ActionNodeProps) => {
         status={status}
       >
         {isDisabled && (
-          <div className="absolute top-2 left-2 rounded-full bg-gray-500/50 p-1">
+          <div className="absolute top-2 left-2 rounded-full bg-slate-500/50 p-1">
             <EyeOff className="size-3.5 text-white" />
           </div>
         )}
@@ -358,7 +358,7 @@ export const ActionNode = memo(({ data, selected, id }: ActionNodeProps) => {
     >
       {/* Disabled badge in top left */}
       {isDisabled && (
-        <div className="absolute top-2 left-2 rounded-full bg-gray-500/50 p-1">
+        <div className="absolute top-2 left-2 rounded-full bg-slate-500/50 p-1">
           <EyeOff className="size-3.5 text-white" />
         </div>
       )}

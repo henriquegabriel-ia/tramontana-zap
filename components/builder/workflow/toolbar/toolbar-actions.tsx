@@ -159,7 +159,7 @@ export function ToolbarActions({
       {/* Add Step - Mobile Vertical */}
       <ButtonGroup className="flex lg:hidden" orientation="vertical">
         <Button
-          className="border hover:bg-black/5 disabled:opacity-100 dark:hover:bg-white/5 disabled:[&>svg]:text-muted-foreground"
+          className="border hover:bg-black/5 disabled:opacity-100 dark:hover:bg-[var(--ds-bg-hover)] disabled:[&>svg]:text-muted-foreground"
           disabled={state.isGenerating}
           onClick={handleAddStep}
           size="icon"
@@ -173,7 +173,7 @@ export function ToolbarActions({
       {/* Properties - Mobile Vertical (always visible) */}
       <ButtonGroup className="flex lg:hidden" orientation="vertical">
         <Button
-          className="border hover:bg-black/5 dark:hover:bg-white/5"
+          className="border hover:bg-black/5 dark:hover:bg-[var(--ds-bg-hover)]"
           onClick={() => openOverlay(ConfigurationOverlay, {})}
           size="icon"
           title="Configuração"
@@ -184,7 +184,7 @@ export function ToolbarActions({
         {/* Delete - Show when node or edge is selected */}
         {hasSelection && (
           <Button
-            className="border hover:bg-black/5 dark:hover:bg-white/5"
+            className="border hover:bg-black/5 dark:hover:bg-[var(--ds-bg-hover)]"
             onClick={handleDeleteConfirm}
             size="icon"
             title="Excluir"
@@ -198,7 +198,7 @@ export function ToolbarActions({
       {/* Add Step - Desktop Horizontal */}
       <ButtonGroup className="hidden lg:flex" orientation="horizontal">
         <Button
-          className="border hover:bg-black/5 disabled:opacity-100 dark:hover:bg-white/5 disabled:[&>svg]:text-muted-foreground"
+          className="border hover:bg-black/5 disabled:opacity-100 dark:hover:bg-[var(--ds-bg-hover)] disabled:[&>svg]:text-muted-foreground"
           disabled={state.isGenerating}
           onClick={handleAddStep}
           size="icon"
@@ -212,7 +212,7 @@ export function ToolbarActions({
       {/* Undo/Redo - Mobile Vertical */}
       <ButtonGroup className="flex lg:hidden" orientation="vertical">
         <Button
-          className="border hover:bg-black/5 disabled:opacity-100 dark:hover:bg-white/5 disabled:[&>svg]:text-muted-foreground"
+          className="border hover:bg-black/5 disabled:opacity-100 dark:hover:bg-[var(--ds-bg-hover)] disabled:[&>svg]:text-muted-foreground"
           disabled={!state.canUndo || state.isGenerating}
           onClick={() => state.undo()}
           size="icon"
@@ -222,7 +222,7 @@ export function ToolbarActions({
           <Undo2 className="size-4" />
         </Button>
         <Button
-          className="border hover:bg-black/5 disabled:opacity-100 dark:hover:bg-white/5 disabled:[&>svg]:text-muted-foreground"
+          className="border hover:bg-black/5 disabled:opacity-100 dark:hover:bg-[var(--ds-bg-hover)] disabled:[&>svg]:text-muted-foreground"
           disabled={!state.canRedo || state.isGenerating}
           onClick={() => state.redo()}
           size="icon"
@@ -236,7 +236,7 @@ export function ToolbarActions({
       {/* Undo/Redo - Desktop Horizontal */}
       <ButtonGroup className="hidden lg:flex" orientation="horizontal">
         <Button
-          className="border hover:bg-black/5 disabled:opacity-100 dark:hover:bg-white/5 disabled:[&>svg]:text-muted-foreground"
+          className="border hover:bg-black/5 disabled:opacity-100 dark:hover:bg-[var(--ds-bg-hover)] disabled:[&>svg]:text-muted-foreground"
           disabled={!state.canUndo || state.isGenerating}
           onClick={() => state.undo()}
           size="icon"
@@ -246,7 +246,7 @@ export function ToolbarActions({
           <Undo2 className="size-4" />
         </Button>
         <Button
-          className="border hover:bg-black/5 disabled:opacity-100 dark:hover:bg-white/5 disabled:[&>svg]:text-muted-foreground"
+          className="border hover:bg-black/5 disabled:opacity-100 dark:hover:bg-[var(--ds-bg-hover)] disabled:[&>svg]:text-muted-foreground"
           disabled={!state.canRedo || state.isGenerating}
           onClick={() => state.redo()}
           size="icon"

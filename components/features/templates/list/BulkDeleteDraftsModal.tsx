@@ -36,14 +36,14 @@ export const BulkDeleteDraftsModal: React.FC<BulkDeleteDraftsModalProps> = ({
           </div>
           <div>
             <h3 className="text-lg font-bold text-white">Excluir rascunhos</h3>
-            <p className="text-sm text-gray-400">
+            <p className="text-sm text-slate-400">
               Remove apenas rascunhos locais (nao apaga templates da Meta)
             </p>
           </div>
         </div>
 
-        <div className="bg-slate-950/40 border border-white/10 rounded-lg p-4 mb-6">
-          <p className="text-sm text-gray-300 mb-3">
+        <div className="bg-[var(--ds-bg-surface)]/30 border border-[var(--ds-border-subtle)] rounded-lg p-4 mb-6">
+          <p className="text-sm text-slate-300 mb-3">
             Voce esta prestes a excluir{' '}
             <strong className="text-amber-300">{drafts.length} rascunho(s)</strong>.
           </p>
@@ -51,13 +51,13 @@ export const BulkDeleteDraftsModal: React.FC<BulkDeleteDraftsModalProps> = ({
             {drafts.slice(0, 30).map((t) => (
               <div
                 key={t.id}
-                className="text-xs text-gray-400 font-mono bg-slate-950/40 px-2 py-1 rounded border border-white/10"
+                className="text-xs text-slate-400 font-mono bg-[var(--ds-bg-surface)]/30 px-2 py-1 rounded border border-[var(--ds-border-subtle)]"
               >
                 {t.name}
               </div>
             ))}
             {drafts.length > 30 ? (
-              <div className="text-xs text-gray-500">+{drafts.length - 30} item(ns)</div>
+              <div className="text-xs text-slate-500">+{drafts.length - 30} item(ns)</div>
             ) : null}
           </div>
         </div>
@@ -66,7 +66,7 @@ export const BulkDeleteDraftsModal: React.FC<BulkDeleteDraftsModalProps> = ({
           <button
             onClick={onCancel}
             disabled={isDeleting}
-            className="flex-1 px-4 py-2.5 text-gray-300 bg-slate-950/40 border border-white/10 hover:bg-white/5 rounded-lg font-medium transition-colors disabled:opacity-50"
+            className="flex-1 px-4 py-2.5 text-slate-300 bg-[var(--ds-bg-surface)]/30 border border-[var(--ds-border-subtle)] hover:bg-[var(--ds-bg-hover)] rounded-lg font-medium transition-colors disabled:opacity-50"
           >
             Cancelar
           </button>

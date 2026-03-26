@@ -57,7 +57,7 @@ export function SchedulingOptions({
             className={
               'p-2 rounded-lg ' +
               (scheduleMode === 'now'
-                ? 'bg-white/20 text-white dark:bg-gray-200 dark:text-black'
+                ? 'bg-white/20 text-white dark:bg-slate-200 dark:text-black'
                 : 'bg-[var(--ds-bg-surface)] text-[var(--ds-text-secondary)]')
             }
           >
@@ -68,7 +68,7 @@ export function SchedulingOptions({
             <p
               className={
                 'text-xs mt-1 ' +
-                (scheduleMode === 'now' ? 'text-white/70 dark:text-gray-600' : 'text-[var(--ds-text-muted)]')
+                (scheduleMode === 'now' ? 'text-white/70 dark:text-slate-600' : 'text-[var(--ds-text-muted)]')
               }
             >
               Disparo imediato
@@ -96,7 +96,7 @@ export function SchedulingOptions({
             className={
               'p-2 rounded-lg ' +
               (scheduleMode === 'scheduled'
-                ? 'bg-white/20 text-white dark:bg-gray-200 dark:text-black'
+                ? 'bg-white/20 text-white dark:bg-slate-200 dark:text-black'
                 : 'bg-[var(--ds-bg-surface)] text-[var(--ds-text-secondary)]')
             }
           >
@@ -107,7 +107,7 @@ export function SchedulingOptions({
             <p
               className={
                 'text-xs mt-1 ' +
-                (scheduleMode === 'scheduled' ? 'text-white/70 dark:text-gray-600' : 'text-[var(--ds-text-muted)]')
+                (scheduleMode === 'scheduled' ? 'text-white/70 dark:text-slate-600' : 'text-[var(--ds-text-muted)]')
               }
             >
               Escolher data e hora

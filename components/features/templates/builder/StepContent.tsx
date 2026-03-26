@@ -814,7 +814,7 @@ export function StepContent({
             <div className="flex items-center gap-2">
               <Button
                 variant="outline"
-                className="border-white/10 bg-slate-950/40 hover:bg-white/5 h-8 px-3"
+                className="border-[var(--ds-border-subtle)] bg-[var(--ds-bg-surface)]/30 hover:bg-[var(--ds-bg-hover)] h-8 px-3"
                 disabled={isLimitedTimeOffer && !spec.footer}
                 onClick={() => updateFooter(spec.footer ? null : { text: '' })}
               >

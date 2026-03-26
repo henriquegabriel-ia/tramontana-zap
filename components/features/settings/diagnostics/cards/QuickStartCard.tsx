@@ -31,13 +31,13 @@ export function QuickStartCard(props: QuickStartCardProps) {
       <Container variant="glass" padding="md">
         <div className="flex items-start justify-between gap-4">
           <div>
-            <div className="text-xs text-gray-500">O que fazer agora</div>
+            <div className="text-xs text-slate-500">O que fazer agora</div>
             <div className="mt-2 text-sm text-white font-medium">Tudo certo por aqui</div>
-            <div className="mt-2 text-sm text-gray-300">
+            <div className="mt-2 text-sm text-slate-300">
               Nao encontramos falhas/alertas no diagnostico. Se ainda assim "nao envia", use o Support Packet e envie pro suporte.
             </div>
           </div>
-          <div className="text-gray-300">
+          <div className="text-slate-300">
             <ListChecks size={18} />
           </div>
         </div>
@@ -49,13 +49,13 @@ export function QuickStartCard(props: QuickStartCardProps) {
     <Container variant="glass" padding="md">
       <div className="flex items-start justify-between gap-4">
         <div>
-          <div className="text-xs text-gray-500">O que fazer agora</div>
+          <div className="text-xs text-slate-500">O que fazer agora</div>
           <div className="mt-2 text-sm text-white font-medium">Siga estes passos (ordem recomendada)</div>
-          <div className="mt-2 text-sm text-gray-300">
+          <div className="mt-2 text-sm text-slate-300">
             Pegamos os itens que mais destravam alunos (falhas/atencoes) e colocamos em ordem.
           </div>
         </div>
-        <div className="text-gray-300">
+        <div className="text-slate-300">
           <ListChecks size={18} />
         </div>
       </div>
@@ -66,18 +66,18 @@ export function QuickStartCard(props: QuickStartCardProps) {
           const steps = firstNextSteps(c.details as Record<string, unknown> | undefined)
           const friendly = props.simpleMode ? getFriendlyCopy(c) : { title: c.title, message: c.message }
           return (
-            <div key={c.id} className="bg-slate-900/40 border border-white/10 rounded-xl p-4">
+            <div key={c.id} className="bg-[var(--ds-bg-elevated)] border border-[var(--ds-border-subtle)] rounded-xl p-4">
               <div className="flex items-start justify-between gap-4">
                 <div className="min-w-0">
                   <div className="flex items-center gap-2">
-                    <div className="text-xs text-gray-500">Passo {idx + 1}</div>
+                    <div className="text-xs text-slate-500">Passo {idx + 1}</div>
                     <StatusBadge status={c.status} />
                   </div>
                   <div className="mt-2 text-sm text-white font-semibold truncate">{friendly.title}</div>
-                  <div className="mt-1 text-sm text-gray-300">{friendly.message}</div>
+                  <div className="mt-1 text-sm text-slate-300">{friendly.message}</div>
 
                   {steps.length > 0 && (
-                    <ul className="mt-2 list-disc pl-5 space-y-1 text-sm text-gray-200">
+                    <ul className="mt-2 list-disc pl-5 space-y-1 text-sm text-slate-200">
                       {steps.map((s, i) => (
                         <li key={i}>{s}</li>
                       ))}
@@ -100,7 +100,7 @@ export function QuickStartCard(props: QuickStartCardProps) {
                   <button
                     type="button"
                     onClick={() => scrollToCheck(c.id)}
-                    className="px-3 py-2 rounded-lg bg-white/5 text-white hover:bg-white/10 border border-white/10 hover:border-white/20 transition-all text-sm font-medium"
+                    className="px-3 py-2 rounded-lg bg-[var(--ds-bg-hover)] text-white hover:bg-[var(--ds-bg-hover)] border border-[var(--ds-border-subtle)] hover:border-[var(--ds-border-default)] transition-all text-sm font-medium"
                   >
                     Ver detalhes
                   </button>
@@ -112,7 +112,7 @@ export function QuickStartCard(props: QuickStartCardProps) {
       </div>
 
       {problems.length > 3 && (
-        <div className="mt-4 text-xs text-gray-500">
+        <div className="mt-4 text-xs text-slate-500">
           Mais itens: {problems.length - 3}. Use o filtro "Problemas" ou "Com acoes" abaixo.
         </div>
       )}

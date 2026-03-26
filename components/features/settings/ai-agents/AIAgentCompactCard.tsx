@@ -50,7 +50,7 @@ export function AIAgentCompactCard({
     <div
       className={cn(
         'group flex items-center gap-3 p-3 rounded-xl transition-all',
-        'bg-slate-900/50 hover:bg-slate-800/50',
+        'bg-[var(--ds-bg-elevated)] hover:bg-slate-800/50',
         'border border-slate-800/50 hover:border-slate-700/50',
         !agent.is_active && 'opacity-60'
       )}

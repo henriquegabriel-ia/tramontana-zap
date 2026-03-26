@@ -126,7 +126,7 @@ export const TemplateTable: React.FC<TemplateTableProps> = ({
     <Container variant="default" padding="none" className="overflow-hidden">
       <div className="overflow-x-auto">
         <table className="w-full text-left text-sm">
-          <thead className="bg-[var(--ds-bg-elevated)] border-b border-[var(--ds-border-default)] text-[var(--ds-text-muted)] uppercase tracking-widest text-xs">
+          <thead className="bg-[var(--ds-bg-surface)]/30 text-[var(--ds-text-muted)] uppercase tracking-widest text-[11px]">
             <tr>
               <th className="px-4 py-4 w-10">
                 <button

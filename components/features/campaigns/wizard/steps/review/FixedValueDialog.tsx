@@ -91,7 +91,7 @@ export function FixedValueDialog({
           <Button
             type="button"
             onClick={handleApply}
-            className="bg-primary-600 text-white dark:bg-white dark:text-black hover:bg-primary-500 dark:hover:bg-gray-200 font-bold"
+            className="bg-primary-600 text-white dark:bg-white dark:text-black hover:bg-primary-500 dark:hover:bg-slate-200 font-bold"
             disabled={!value.trim() || !slot}
           >
             Aplicar

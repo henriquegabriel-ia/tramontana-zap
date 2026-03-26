@@ -171,7 +171,7 @@ export function WhatsAppPreview({ actionType, config, template }: PreviewProps) 
   const sections = parseSections(config.sections);
 
   return (
-    <div className="rounded-xl border border-white/10 bg-black/60 p-4">
+    <div className="rounded-xl border border-[var(--ds-border-subtle)] bg-black/60 p-4">
       <div className="text-xs uppercase tracking-widest text-muted-foreground">
         Preview do WhatsApp
       </div>
@@ -205,7 +205,7 @@ export function WhatsAppPreview({ actionType, config, template }: PreviewProps) 
               <div className="space-y-2">
                 {templateButtons.slice(0, 3).map((button, index) => (
                   <div
-                    className="max-w-[260px] rounded-xl border border-white/10 bg-black/50 px-4 py-2 text-xs text-white/80"
+                    className="max-w-[260px] rounded-xl border border-[var(--ds-border-subtle)] bg-black/50 px-4 py-2 text-xs text-white/80"
                     key={`${button.text}-${index}`}
                   >
                     {button.text || "Botao"}
@@ -229,7 +229,7 @@ export function WhatsAppPreview({ actionType, config, template }: PreviewProps) 
           <div className="space-y-2">
             {buttons.slice(0, 3).map((button, index) => (
               <div
-                className="max-w-[260px] rounded-xl border border-white/10 bg-black/50 px-4 py-2 text-xs text-white/80"
+                className="max-w-[260px] rounded-xl border border-[var(--ds-border-subtle)] bg-black/50 px-4 py-2 text-xs text-white/80"
                 key={`${button.id || button.title}-${index}`}
               >
                 {button.title || "Botao"}
@@ -239,7 +239,7 @@ export function WhatsAppPreview({ actionType, config, template }: PreviewProps) 
         )}
 
         {sections.length > 0 && (
-          <div className="max-w-[260px] rounded-xl border border-white/10 bg-black/50 px-4 py-3 text-xs text-white/70">
+          <div className="max-w-[260px] rounded-xl border border-[var(--ds-border-subtle)] bg-black/50 px-4 py-3 text-xs text-white/70">
             {sections
               .flatMap((section) => section.rows || [])
               .slice(0, 3)

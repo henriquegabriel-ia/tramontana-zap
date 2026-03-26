@@ -158,7 +158,7 @@ export function OnboardingChecklist({
   const showTokenWarning = tokenExpiresIn && !isPermanentToken;
 
   return (
-    <div className="bg-slate-900/50 border border-slate-800 rounded-xl p-4 space-y-4">
+    <div className="bg-[var(--ds-bg-elevated)] border border-slate-800 rounded-xl p-4 space-y-4">
       {/* Header */}
       <div className="flex items-center justify-between">
         <div className="flex items-center gap-3">

@@ -56,9 +56,9 @@ const getCampaignLabel = (status: CampaignStatus) => {
 function HeroStatSkeleton() {
   return (
     <div className="col-span-1 md:col-span-2 ds-gradient-hero p-8 rounded-2xl">
-      <div className="w-32 h-4 bg-white/10 rounded animate-pulse mb-3" />
-      <div className="w-48 h-10 bg-white/10 rounded animate-pulse mb-4" />
-      <div className="w-36 h-5 bg-white/10 rounded animate-pulse" />
+      <div className="w-32 h-4 bg-[var(--ds-bg-hover)] rounded animate-pulse mb-3" />
+      <div className="w-48 h-10 bg-[var(--ds-bg-hover)] rounded animate-pulse mb-4" />
+      <div className="w-36 h-5 bg-[var(--ds-bg-hover)] rounded animate-pulse" />
     </div>
   );
 }

@@ -67,11 +67,11 @@ export function FlowTestPanel({
   }, [flowId, flowToken])
 
   return (
-    <div id="flow-test-panel" className="rounded-2xl border border-white/10 bg-slate-900/60 p-6 shadow-[0_12px_30px_rgba(0,0,0,0.35)] space-y-4">
+    <div id="flow-test-panel" className="rounded-2xl border border-[var(--ds-border-subtle)] bg-[var(--ds-bg-elevated)] p-6 shadow-[0_12px_30px_rgba(0,0,0,0.35)] space-y-4">
       <div className="flex items-center justify-between gap-3">
         <div>
           <div className="text-base font-semibold text-white">3. Testar</div>
-          <div className="text-xs text-gray-400 mt-1">Envie um MiniApp real para validar a experiência.</div>
+          <div className="text-xs text-slate-400 mt-1">Envie um MiniApp real para validar a experiência.</div>
         </div>
         {onRefreshFlows && (
           <Button
@@ -79,7 +79,7 @@ export function FlowTestPanel({
             variant="ghost"
             onClick={onRefreshFlows}
             disabled={!!isLoadingFlows}
-            className="text-gray-300"
+            className="text-slate-300"
           >
             <RefreshCw className={cn('h-4 w-4', isLoadingFlows ? 'animate-spin' : '')} />
             Atualizar
@@ -88,7 +88,7 @@ export function FlowTestPanel({
       </div>
 
       <div className="space-y-2">
-        <label className="text-xs font-medium text-gray-300">MiniApp do Builder (opcional)</label>
+        <label className="text-xs font-medium text-slate-300">MiniApp do Builder (opcional)</label>
         <Select
           value={selectedDraftId}
           onValueChange={(v) => {
@@ -97,7 +97,7 @@ export function FlowTestPanel({
             if (found?.meta_flow_id) setFlowId(String(found.meta_flow_id))
           }}
         >
-          <SelectTrigger className="w-full bg-slate-950/40 border-white/10 text-white">
+          <SelectTrigger className="w-full bg-[var(--ds-bg-surface)]/30 border-[var(--ds-border-subtle)] text-white">
             <SelectValue placeholder={isLoadingFlows ? 'Carregando…' : 'Escolha um MiniApp do Builder'} />
           </SelectTrigger>
           <SelectContent>
@@ -114,47 +114,47 @@ export function FlowTestPanel({
             )}
           </SelectContent>
         </Select>
-        <div className="text-[11px] text-gray-500">Selecionar um MiniApp preenche automaticamente o ID da MiniApp.</div>
+        <div className="text-[11px] text-slate-500">Selecionar um MiniApp preenche automaticamente o ID da MiniApp.</div>
       </div>
 
       <div className="grid grid-cols-1 gap-3">
         <div className="space-y-2">
-          <label className="text-xs font-medium text-gray-300">Telefone (to)</label>
+          <label className="text-xs font-medium text-slate-300">Telefone (to)</label>
           <Input
             value={to}
             onChange={(e) => setTo(e.target.value)}
             placeholder="Ex: +5511999999999"
-            className="bg-slate-950/40 border-white/10 text-white"
+            className="bg-[var(--ds-bg-surface)]/30 border-[var(--ds-border-subtle)] text-white"
           />
-          <div className="text-[11px] text-gray-500">Aceita números com ou sem + (E.164).</div>
+          <div className="text-[11px] text-slate-500">Aceita números com ou sem + (E.164).</div>
         </div>
 
         <div className="space-y-2">
-          <label className="text-xs font-medium text-gray-300">ID da MiniApp (Meta)</label>
+          <label className="text-xs font-medium text-slate-300">ID da MiniApp (Meta)</label>
           <Input
             value={flowId}
             onChange={(e) => setFlowId(e.target.value)}
             placeholder="Ex: 1234567890"
-            className="bg-slate-950/40 border-white/10 text-white"
+            className="bg-[var(--ds-bg-surface)]/30 border-[var(--ds-border-subtle)] text-white"
           />
         </div>
 
         <div className="space-y-2">
-          <label className="text-xs font-medium text-gray-300">Token da MiniApp</label>
+          <label className="text-xs font-medium text-slate-300">Token da MiniApp</label>
           <Input
             value={flowToken}
             onChange={(e) => setFlowToken(e.target.value)}
             placeholder="Cole o token da MiniApp"
-            className="bg-slate-950/40 border-white/10 text-white"
+            className="bg-[var(--ds-bg-surface)]/30 border-[var(--ds-border-subtle)] text-white"
           />
-          <div className="text-[11px] text-gray-500">Esse token vem da configuração da MiniApp na Meta.</div>
+          <div className="text-[11px] text-slate-500">Esse token vem da configuração da MiniApp na Meta.</div>
         </div>
       </div>
 
       <button
         type="button"
         onClick={() => setShowAdvanced((prev) => !prev)}
-        className="text-xs text-gray-400 hover:text-gray-200 inline-flex items-center gap-1"
+        className="text-xs text-slate-400 hover:text-slate-200 inline-flex items-center gap-1"
         aria-expanded={showAdvanced}
       >
         Opções avançadas
@@ -164,29 +164,29 @@ export function FlowTestPanel({
       {showAdvanced && (
         <div className="grid grid-cols-1 gap-3">
           <div className="space-y-2">
-            <label className="text-xs font-medium text-gray-300">Texto da mensagem</label>
+            <label className="text-xs font-medium text-slate-300">Texto da mensagem</label>
             <Textarea
               value={body}
               onChange={(e) => setBody(e.target.value)}
-              className="bg-slate-950/40 border-white/10 text-white"
+              className="bg-[var(--ds-bg-surface)]/30 border-[var(--ds-border-subtle)] text-white"
             />
           </div>
           <div className="space-y-2">
-            <label className="text-xs font-medium text-gray-300">Texto do botão</label>
+            <label className="text-xs font-medium text-slate-300">Texto do botão</label>
             <Input
               value={ctaText}
               onChange={(e) => setCtaText(e.target.value)}
               placeholder="Abrir"
-              className="bg-slate-950/40 border-white/10 text-white"
+              className="bg-[var(--ds-bg-surface)]/30 border-[var(--ds-border-subtle)] text-white"
             />
           </div>
           <div className="space-y-2">
-            <label className="text-xs font-medium text-gray-300">Rodapé</label>
+            <label className="text-xs font-medium text-slate-300">Rodapé</label>
             <Textarea
               value={footer}
               onChange={(e) => setFooter(e.target.value)}
               placeholder="Opcional"
-              className="bg-slate-950/40 border-white/10 text-white"
+              className="bg-[var(--ds-bg-surface)]/30 border-[var(--ds-border-subtle)] text-white"
             />
           </div>
         </div>
@@ -220,7 +220,7 @@ export function FlowTestPanel({
           <Send className="h-4 w-4" />
           {isSending ? 'Enviando…' : 'Enviar teste'}
         </Button>
-        <div className="text-[11px] text-gray-500">Os testes aparecem em "Submissões recentes".</div>
+        <div className="text-[11px] text-slate-500">Os testes aparecem em "Submissões recentes".</div>
       </div>
     </div>
   )

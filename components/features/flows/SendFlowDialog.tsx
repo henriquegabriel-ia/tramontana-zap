@@ -152,7 +152,7 @@ export function SendFlowDialog(props: {
         <div className="space-y-5 py-2">
           {/* Campo principal: MiniApp */}
           <div className="space-y-2">
-            <Label className="text-sm font-medium text-gray-200">MiniApp</Label>
+            <Label className="text-sm font-medium text-slate-200">MiniApp</Label>
             <Select
               value={selectedDraftId}
               onValueChange={(v) => {
@@ -165,7 +165,7 @@ export function SendFlowDialog(props: {
                 }
               }}
             >
-              <SelectTrigger className="w-full h-11 bg-slate-900/50 border-white/10">
+              <SelectTrigger className="w-full h-11 bg-[var(--ds-bg-elevated)] border-[var(--ds-border-subtle)]">
                 <SelectValue
                   placeholder={
                     props.isLoadingFlows ? 'Carregando…' : 'Selecione um MiniApp'
@@ -181,7 +181,7 @@ export function SendFlowDialog(props: {
                   flowsWithMetaId.map((f) => (
                     <SelectItem key={f.id} value={f.id}>
                       <span className="flex items-center gap-2">
-                        <Smartphone className="h-3.5 w-3.5 text-gray-400" />
+                        <Smartphone className="h-3.5 w-3.5 text-slate-400" />
                         {f.name}
                       </span>
                     </SelectItem>
@@ -193,12 +193,12 @@ export function SendFlowDialog(props: {
 
           {/* Campo principal: Telefone */}
           <div className="space-y-2">
-            <Label className="text-sm font-medium text-gray-200">Enviar para</Label>
+            <Label className="text-sm font-medium text-slate-200">Enviar para</Label>
             <Input
               value={to}
               onChange={(e) => setTo(e.target.value)}
               placeholder="+55 11 99999-9999"
-              className="h-11 bg-slate-900/50 border-white/10"
+              className="h-11 bg-[var(--ds-bg-elevated)] border-[var(--ds-border-subtle)]"
             />
             {hasTestContact && to && (
               <p className="text-xs text-purple-400/80">
@@ -209,7 +209,7 @@ export function SendFlowDialog(props: {
 
           {/* Accordion: Opções avançadas */}
           <Collapsible open={showAdvanced} onOpenChange={setShowAdvanced}>
-            <CollapsibleTrigger className="flex items-center gap-2 w-full py-2 text-sm text-gray-400 hover:text-gray-200 transition-colors group">
+            <CollapsibleTrigger className="flex items-center gap-2 w-full py-2 text-sm text-slate-400 hover:text-slate-200 transition-colors group">
               <ChevronRight
                 className={cn(
                   'h-4 w-4 transition-transform duration-200',
@@ -218,51 +218,51 @@ export function SendFlowDialog(props: {
               />
               <span>Personalizar mensagem</span>
               {!showAdvanced && (
-                <span className="text-xs text-gray-600 ml-auto">
+                <span className="text-xs text-slate-600 ml-auto">
                   body, botão, rodapé
                 </span>
               )}
             </CollapsibleTrigger>
 
             <CollapsibleContent className="pt-3 space-y-4">
-              <div className="p-4 rounded-xl bg-slate-900/30 border border-white/5 space-y-4">
+              <div className="p-4 rounded-xl bg-slate-900/30 border border-[var(--ds-border-subtle)] space-y-4">
                 {/* Texto da mensagem */}
                 <div className="space-y-2">
-                  <Label className="text-xs font-medium text-gray-400">
+                  <Label className="text-xs font-medium text-slate-400">
                     Texto da mensagem
                   </Label>
                   <Textarea
                     value={body}
                     onChange={(e) => setBody(e.target.value)}
                     placeholder="Vamos começar?"
-                    className="min-h-[60px] bg-slate-900/50 border-white/10 resize-none"
+                    className="min-h-[60px] bg-[var(--ds-bg-elevated)] border-[var(--ds-border-subtle)] resize-none"
                   />
                 </div>
 
                 {/* Texto do botão */}
                 <div className="space-y-2">
-                  <Label className="text-xs font-medium text-gray-400">
+                  <Label className="text-xs font-medium text-slate-400">
                     Texto do botão
                   </Label>
                   <Input
                     value={ctaText}
                     onChange={(e) => setCtaText(e.target.value)}
                     placeholder="Abrir"
-                    className="h-9 bg-slate-900/50 border-white/10"
+                    className="h-9 bg-[var(--ds-bg-elevated)] border-[var(--ds-border-subtle)]"
                   />
                 </div>
 
                 {/* Rodapé */}
                 <div className="space-y-2">
-                  <Label className="text-xs font-medium text-gray-400">
+                  <Label className="text-xs font-medium text-slate-400">
                     Rodapé{' '}
-                    <span className="text-gray-600 font-normal">(opcional)</span>
+                    <span className="text-slate-600 font-normal">(opcional)</span>
                   </Label>
                   <Input
                     value={footer}
                     onChange={(e) => setFooter(e.target.value)}
                     placeholder="Texto pequeno no rodapé"
-                    className="h-9 bg-slate-900/50 border-white/10"
+                    className="h-9 bg-[var(--ds-bg-elevated)] border-[var(--ds-border-subtle)]"
                   />
                 </div>
               </div>

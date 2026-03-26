@@ -238,7 +238,7 @@ export function TurboConfigForm({
         <button
           onClick={onSave}
           disabled={!!isSaving}
-          className="h-10 px-5 bg-white text-black font-bold rounded-lg hover:bg-gray-200 transition-colors flex items-center gap-2 disabled:opacity-50"
+          className="h-10 px-5 bg-white text-black font-bold rounded-lg hover:bg-slate-200 transition-colors flex items-center gap-2 disabled:opacity-50"
         >
           {isSaving ? <Loader2 size={16} className="animate-spin" /> : <Save size={16} />}
           Salvar

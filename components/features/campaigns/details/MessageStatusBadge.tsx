@@ -13,14 +13,14 @@ export const MessageStatusBadge: React.FC<MessageStatusBadgeProps> = ({ status }
     [MessageStatus.PENDING]: 'text-amber-400 bg-amber-500/10 border-amber-500/20',
     [MessageStatus.READ]: 'text-blue-400 bg-blue-500/10 border-blue-500/20',
     [MessageStatus.DELIVERED]: 'text-purple-400 bg-purple-500/10 border-purple-500/20',
-    [MessageStatus.SENT]: 'text-gray-400 bg-gray-500/10 border-gray-500/20',
+    [MessageStatus.SENT]: 'text-slate-400 bg-slate-500/10 border-slate-500/20',
     [MessageStatus.SKIPPED]: 'text-amber-300 bg-amber-500/10 border-amber-500/20',
     [MessageStatus.FAILED]: 'text-red-400 bg-red-500/10 border-red-500/20',
     // Fallback para valores antigos em ingles
     'Pending': 'text-amber-400 bg-amber-500/10 border-amber-500/20',
     'Read': 'text-blue-400 bg-blue-500/10 border-blue-500/20',
     'Delivered': 'text-purple-400 bg-purple-500/10 border-purple-500/20',
-    'Sent': 'text-gray-400 bg-gray-500/10 border-gray-500/20',
+    'Sent': 'text-slate-400 bg-slate-500/10 border-slate-500/20',
     'Failed': 'text-red-400 bg-red-500/10 border-red-500/20',
   };
 
@@ -55,7 +55,7 @@ export const MessageStatusBadge: React.FC<MessageStatusBadgeProps> = ({ status }
     'Failed': 'Falhou',
   };
 
-  const style = styles[status] || 'text-gray-400 bg-gray-500/10 border-gray-500/20';
+  const style = styles[status] || 'text-slate-400 bg-slate-500/10 border-slate-500/20';
   const icon = icons[status] || <Clock size={12} className="mr-1" />;
   const label = labels[status] || status;
 

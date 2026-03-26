@@ -63,16 +63,16 @@ export const AIGeneratorModal = ({
 
   return (
     <div className="fixed inset-0 bg-black/70 flex items-center justify-center z-50 p-4">
-      <div className="bg-slate-900/80 border border-white/10 rounded-2xl w-full max-w-4xl max-h-[90vh] overflow-hidden flex flex-col shadow-[0_30px_80px_rgba(0,0,0,0.55)]">
+      <div className="bg-slate-900/80 border border-[var(--ds-border-subtle)] rounded-2xl w-full max-w-4xl max-h-[90vh] overflow-hidden flex flex-col shadow-[0_30px_80px_rgba(0,0,0,0.55)]">
         {/* Header */}
-        <div className="flex items-center justify-between px-6 py-4 border-b border-white/10 bg-slate-950/40">
+        <div className="flex items-center justify-between px-6 py-4 border-b border-[var(--ds-border-subtle)] bg-[var(--ds-bg-surface)]/30">
           <div className="flex items-center gap-2">
             <Sparkles className="h-5 w-5 text-purple-300" />
             <h2 className="text-lg font-medium text-white">{title}</h2>
           </div>
           <button
             onClick={onClose}
-            className="p-2 hover:bg-white/5 rounded-lg transition-colors text-gray-400 hover:text-white"
+            className="p-2 hover:bg-[var(--ds-bg-hover)] rounded-lg transition-colors text-slate-400 hover:text-white"
           >
             <X className="h-5 w-5" />
           </button>
@@ -90,7 +90,7 @@ export const AIGeneratorModal = ({
                 value={prompt}
                 onChange={(e) => setPrompt(e.target.value)}
                 placeholder="Ex: Sou dono de uma pizzaria delivery e preciso de templates para confirmar pedidos, avisar sobre tempo de entrega, e informar quando o motoboy saiu..."
-                className="w-full h-32 px-4 py-3 bg-slate-950/40 rounded-xl border border-white/10 focus:border-purple-500/50 focus:outline-none resize-none text-sm text-white placeholder:text-gray-600"
+                className="w-full h-32 px-4 py-3 bg-[var(--ds-bg-surface)]/30 rounded-xl border border-[var(--ds-border-subtle)] focus:border-purple-500/50 focus:outline-none resize-none text-sm text-white placeholder:text-slate-600"
               />
               <p className="text-xs text-slate-500 mt-1">
                 Mínimo 10 caracteres. Quanto mais detalhes, melhor a IA entende seu negócio.
@@ -105,7 +105,7 @@ export const AIGeneratorModal = ({
                 <select
                   value={quantity}
                   onChange={(e) => setQuantity(Number(e.target.value))}
-                  className="w-full h-11 px-4 bg-slate-950/40 rounded-xl border border-white/10 focus:border-purple-500/50 focus:outline-none text-white"
+                  className="w-full h-11 px-4 bg-[var(--ds-bg-surface)]/30 rounded-xl border border-[var(--ds-border-subtle)] focus:border-purple-500/50 focus:outline-none text-white"
                 >
                   <option value={3}>3 templates</option>
                   <option value={5}>5 templates</option>
@@ -120,7 +120,7 @@ export const AIGeneratorModal = ({
                 <select
                   value={language}
                   onChange={(e) => setLanguage(e.target.value)}
-                  className="w-full h-11 px-4 bg-slate-950/40 rounded-xl border border-white/10 focus:border-purple-500/50 focus:outline-none text-white"
+                  className="w-full h-11 px-4 bg-[var(--ds-bg-surface)]/30 rounded-xl border border-[var(--ds-border-subtle)] focus:border-purple-500/50 focus:outline-none text-white"
                 >
                   <option value="pt_BR">Português (BR)</option>
                   <option value="en_US">English (US)</option>
@@ -132,7 +132,7 @@ export const AIGeneratorModal = ({
             <button
               onClick={onGenerate}
               disabled={isGenerating || prompt.length < 10}
-              className="w-full flex items-center justify-center gap-2 px-4 py-3 bg-white text-black rounded-lg transition-colors font-semibold hover:bg-gray-200 disabled:opacity-50"
+              className="w-full flex items-center justify-center gap-2 px-4 py-3 bg-white text-black rounded-lg transition-colors font-semibold hover:bg-slate-200 disabled:opacity-50"
             >
               {isGenerating ? (
                 <>
@@ -150,7 +150,7 @@ export const AIGeneratorModal = ({
 
           {/* Generated Templates List */}
           {hasTemplates && (
-            <div className="border-t border-white/10 pt-4 space-y-3">
+            <div className="border-t border-[var(--ds-border-subtle)] pt-4 space-y-3">
               <div className="flex items-center justify-between">
                 <h3 className="text-sm font-medium text-slate-300">
                   Templates Gerados ({generatedTemplates.length})
@@ -172,7 +172,7 @@ export const AIGeneratorModal = ({
                     className={`p-3 rounded-lg border transition-colors ${
                       selectedTemplates.has(template.id)
                         ? 'bg-purple-500/10 border-purple-500/30'
-                        : 'bg-slate-950/40 border-white/10 hover:border-white/20'
+                        : 'bg-[var(--ds-bg-surface)]/30 border-[var(--ds-border-subtle)] hover:border-[var(--ds-border-default)]'
                     }`}
                   >
                     <div className="flex items-start gap-3">
@@ -181,7 +181,7 @@ export const AIGeneratorModal = ({
                         className={`flex-shrink-0 mt-0.5 w-5 h-5 rounded border flex items-center justify-center transition-colors ${
                           selectedTemplates.has(template.id)
                             ? 'bg-purple-500 border-purple-500'
-                            : 'border-white/20 hover:border-white/40'
+                            : 'border-[var(--ds-border-default)] hover:border-white/40'
                         }`}
                       >
                         {selectedTemplates.has(template.id) && (
@@ -195,7 +195,7 @@ export const AIGeneratorModal = ({
                           </span>
                           <button
                             onClick={() => onCopyTemplate(template)}
-                            className="p-1 hover:bg-white/5 rounded transition-colors"
+                            className="p-1 hover:bg-[var(--ds-bg-hover)] rounded transition-colors"
                             title="Copiar"
                           >
                             <Copy className="h-4 w-4 text-slate-400" />
@@ -215,7 +215,7 @@ export const AIGeneratorModal = ({
 
         {/* Footer - Only when templates exist */}
         {hasTemplates && (
-          <div className="flex items-center justify-between px-6 py-4 border-t border-white/10 bg-slate-950/40">
+          <div className="flex items-center justify-between px-6 py-4 border-t border-[var(--ds-border-subtle)] bg-[var(--ds-bg-surface)]/30">
             <span className="text-sm text-slate-400">
               {selectedCount} de {generatedTemplates.length} selecionados
             </span>

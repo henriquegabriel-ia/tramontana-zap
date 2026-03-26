@@ -263,7 +263,7 @@ export function CreatePermanentTokenStep({
       <div className="p-4 rounded-xl bg-slate-800/50 border border-slate-700 space-y-2">
         <p className="text-xs text-slate-400 uppercase tracking-wide mb-3">Permissões necessárias:</p>
         {permissions.map((perm) => (
-          <div key={perm.name} className="flex items-center justify-between p-2 rounded-lg bg-slate-900/50">
+          <div key={perm.name} className="flex items-center justify-between p-2 rounded-lg bg-[var(--ds-bg-elevated)]">
             <div>
               <code className="text-sm text-purple-400 font-mono">{perm.name}</code>
               <p className="text-xs text-slate-500">{perm.description}</p>

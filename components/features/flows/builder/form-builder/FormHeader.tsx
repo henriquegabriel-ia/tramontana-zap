@@ -16,7 +16,7 @@ export function FormHeader({ showHeaderActions, onOpenAI, onOpenTemplate }: Form
       <Button
         type="button"
         variant="outline"
-        className="border-white/10 bg-slate-950/40 hover:bg-white/5"
+        className="border-[var(--ds-border-subtle)] bg-[var(--ds-bg-surface)]/30 hover:bg-[var(--ds-bg-hover)]"
         onClick={onOpenAI}
       >
         <Wand2 className="h-4 w-4" />
@@ -25,7 +25,7 @@ export function FormHeader({ showHeaderActions, onOpenAI, onOpenTemplate }: Form
       <Button
         type="button"
         variant="outline"
-        className="border-white/10 bg-slate-950/40 hover:bg-white/5"
+        className="border-[var(--ds-border-subtle)] bg-[var(--ds-bg-surface)]/30 hover:bg-[var(--ds-bg-hover)]"
         onClick={onOpenTemplate}
       >
         Importar modelo

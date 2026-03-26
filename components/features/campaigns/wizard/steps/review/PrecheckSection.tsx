@@ -100,7 +100,7 @@ export function PrecheckSection({
               'px-4 py-2 rounded-lg text-sm font-bold border transition-colors flex items-center gap-2 ' +
               (isPrechecking
                 ? 'bg-[var(--ds-bg-surface)] border-[var(--ds-border-default)] text-[var(--ds-text-secondary)]'
-                : 'bg-primary-600 text-white dark:bg-white dark:text-black border-primary-500 dark:border-white hover:bg-primary-500 dark:hover:bg-gray-200')
+                : 'bg-primary-600 text-white dark:bg-white dark:text-black border-primary-500 dark:border-white hover:bg-primary-500 dark:hover:bg-slate-200')
             }
             title="Valida telefones + variáveis do template sem criar campanha"
           >

@@ -59,7 +59,7 @@ export const SetupWizardView: React.FC<SetupWizardViewProps> = ({
         <h1 className="text-3xl font-bold text-white tracking-tight mb-2">
           Configuração Inicial
         </h1>
-        <p className="text-gray-400 max-w-md mx-auto">
+        <p className="text-slate-400 max-w-md mx-auto">
           Para usar o Tramontana Zap, você precisa configurar alguns serviços. 
           Siga os passos abaixo na ordem indicada.
         </p>
@@ -68,13 +68,13 @@ export const SetupWizardView: React.FC<SetupWizardViewProps> = ({
       {/* Progress Bar */}
       <div className="mb-8">
         <div className="flex items-center justify-between text-sm mb-2">
-          <span className="text-gray-400">
+          <span className="text-slate-400">
             Progresso: {completedSteps}/{steps.length} configurados
           </span>
           <button
             onClick={onRefresh}
             disabled={isLoading}
-            className="flex items-center gap-1 text-gray-400 hover:text-white transition-colors"
+            className="flex items-center gap-1 text-slate-400 hover:text-white transition-colors"
           >
             <RefreshCw size={14} className={isLoading ? 'animate-spin' : ''} />
             Verificar novamente
@@ -112,7 +112,7 @@ export const SetupWizardView: React.FC<SetupWizardViewProps> = ({
                     ? 'bg-red-500/5 border-red-500/30'
                     : isNextStep
                       ? 'bg-primary-500/5 border-primary-500/30 ring-2 ring-primary-500/20'
-                      : 'bg-slate-900/50 border-white/10 opacity-60'
+                      : 'bg-[var(--ds-bg-elevated)] border-[var(--ds-border-subtle)] opacity-60'
               }`}
             >
               {/* Step number badge */}
@@ -123,7 +123,7 @@ export const SetupWizardView: React.FC<SetupWizardViewProps> = ({
                     ? 'bg-red-500 text-white'
                     : isNextStep
                       ? 'bg-primary-500 text-white'
-                      : 'bg-slate-700 text-gray-400'
+                      : 'bg-slate-700 text-slate-400'
               }`}>
                 {isConfigured ? <Check size={16} /> : index + 1}
               </div>
@@ -138,12 +138,12 @@ export const SetupWizardView: React.FC<SetupWizardViewProps> = ({
                         {step.title}
                       </h3>
                       {step.isRequired && (
-                        <span className="px-1.5 py-0.5 bg-white/10 text-gray-400 text-[10px] font-medium rounded">
+                        <span className="px-1.5 py-0.5 bg-[var(--ds-bg-hover)] text-slate-400 text-[10px] font-medium rounded">
                           OBRIGATÓRIO
                         </span>
                       )}
                     </div>
-                    <p className="text-sm text-gray-400 mb-3">
+                    <p className="text-sm text-slate-400 mb-3">
                       {step.description}
                     </p>
 
@@ -173,7 +173,7 @@ export const SetupWizardView: React.FC<SetupWizardViewProps> = ({
                       className={`flex items-center gap-2 px-4 py-2 rounded-xl font-medium text-sm transition-all ${
                         isNextStep
                           ? 'bg-primary-500 hover:bg-primary-400 text-white'
-                          : 'bg-slate-700 text-gray-400 cursor-not-allowed'
+                          : 'bg-slate-700 text-slate-400 cursor-not-allowed'
                       }`}
                       onClick={(e) => {
                         if (!isNextStep) {
@@ -216,7 +216,7 @@ export const SetupWizardView: React.FC<SetupWizardViewProps> = ({
           {onContinueToSettings && (
             <button
               onClick={onContinueToSettings}
-              className="w-full py-4 bg-white hover:bg-gray-100 text-black font-bold rounded-xl transition-colors flex items-center justify-center gap-2"
+              className="w-full py-4 bg-white hover:bg-slate-100 text-black font-bold rounded-xl transition-colors flex items-center justify-center gap-2"
             >
               Ir para Configurações
               <ChevronRight size={20} />
@@ -250,39 +250,39 @@ export const SetupWizardView: React.FC<SetupWizardViewProps> = ({
           </div>
         </div>
       ) : (
-        <div className="mt-8 p-4 bg-slate-800/50 border border-white/10 rounded-xl text-center">
-          <p className="text-gray-400 text-sm">
+        <div className="mt-8 p-4 bg-slate-800/50 border border-[var(--ds-border-subtle)] rounded-xl text-center">
+          <p className="text-slate-400 text-sm">
             Complete os passos acima para liberar as configurações do WhatsApp.
           </p>
-          <p className="text-gray-500 text-xs mt-2">
+          <p className="text-slate-500 text-xs mt-2">
             Após configurar o QStash no Vercel, clique em "Verificar novamente" para atualizar.
           </p>
         </div>
       )}
 
       {/* Help section */}
-      <div className="mt-8 pt-6 border-t border-white/5">
-        <h4 className="text-sm font-medium text-gray-400 mb-3">Precisa de ajuda?</h4>
+      <div className="mt-8 pt-6 border-t border-[var(--ds-border-subtle)]">
+        <h4 className="text-sm font-medium text-slate-400 mb-3">Precisa de ajuda?</h4>
         <div className="grid grid-cols-2 gap-3">
           <a
             href="https://vercel.com/docs/storage/upstash"
             target="_blank"
             rel="noopener noreferrer"
-            className="flex items-center gap-2 p-3 bg-slate-800/50 hover:bg-slate-800 border border-white/10 rounded-xl text-sm text-gray-300 transition-colors"
+            className="flex items-center gap-2 p-3 bg-slate-800/50 hover:bg-slate-800 border border-[var(--ds-border-subtle)] rounded-xl text-sm text-slate-300 transition-colors"
           >
             <Database size={16} className="text-red-400" />
             Docs: Upstash no Vercel
-            <ExternalLink size={12} className="text-gray-500 ml-auto" />
+            <ExternalLink size={12} className="text-slate-500 ml-auto" />
           </a>
           <a
             href="https://developers.facebook.com/docs/whatsapp/cloud-api/get-started"
             target="_blank"
             rel="noopener noreferrer"
-            className="flex items-center gap-2 p-3 bg-slate-800/50 hover:bg-slate-800 border border-white/10 rounded-xl text-sm text-gray-300 transition-colors"
+            className="flex items-center gap-2 p-3 bg-slate-800/50 hover:bg-slate-800 border border-[var(--ds-border-subtle)] rounded-xl text-sm text-slate-300 transition-colors"
           >
             <MessageSquare size={16} className="text-green-400" />
             Docs: WhatsApp Cloud API
-            <ExternalLink size={12} className="text-gray-500 ml-auto" />
+            <ExternalLink size={12} className="text-slate-500 ml-auto" />
           </a>
         </div>
       </div>

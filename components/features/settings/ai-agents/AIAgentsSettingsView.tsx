@@ -211,7 +211,7 @@ export function AIAgentsSettingsView({
               />
             ) : (
               // Sem agente padrão definido
-              <Card className="border-slate-800 border-dashed bg-slate-900/50">
+              <Card className="border-slate-800 border-dashed bg-[var(--ds-bg-elevated)]">
                 <CardContent className="flex flex-col items-center justify-center py-12 text-center">
                   <p className="text-sm text-slate-400 mb-4">
                     Nenhum agente definido como principal
@@ -229,7 +229,7 @@ export function AIAgentsSettingsView({
             {otherAgents.length > 0 && (
               <Collapsible open={isOthersOpen} onOpenChange={setIsOthersOpen}>
                 <CollapsibleTrigger asChild>
-                  <button className="flex items-center justify-between w-full px-4 py-3 rounded-xl bg-slate-900/50 border border-slate-800 hover:bg-slate-800/50 transition-colors group">
+                  <button className="flex items-center justify-between w-full px-4 py-3 rounded-xl bg-[var(--ds-bg-elevated)] border border-slate-800 hover:bg-slate-800/50 transition-colors group">
                     <span className="text-sm text-slate-400">
                       Outros agentes ({otherAgents.length})
                     </span>

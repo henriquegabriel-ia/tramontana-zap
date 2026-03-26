@@ -68,8 +68,8 @@ export function SecondaryAction({
     <Button
       variant="outline"
       className={cn(
-        'border-white/10 bg-slate-950/40 text-slate-200',
-        'hover:bg-white/5 hover:text-white',
+        'border-[var(--ds-border-subtle)] bg-[var(--ds-bg-surface)]/30 text-slate-200',
+        'hover:bg-[var(--ds-bg-hover)] hover:text-white',
         'transition-all duration-200',
         className
       )}
@@ -153,7 +153,7 @@ export interface IconActionProps extends Omit<ButtonProps, 'variant' | 'size'> {
 }
 
 const iconVariantStyles = {
-  default: 'text-slate-400 hover:text-white hover:bg-white/10',
+  default: 'text-slate-400 hover:text-white hover:bg-[var(--ds-bg-hover)]',
   destructive: 'text-slate-400 hover:text-red-400 hover:bg-red-500/10',
   success: 'text-slate-400 hover:text-green-400 hover:bg-green-500/10',
 }

@@ -320,7 +320,7 @@ export function FlowFormBuilder(props: FlowFormBuilderProps) {
       />
 
       {/* Steps (multi-screen form) */}
-      <div className="rounded-2xl border border-white/10 bg-slate-900/60 p-4 space-y-3">
+      <div className="rounded-2xl border border-[var(--ds-border-subtle)] bg-[var(--ds-bg-elevated)] p-4 space-y-3">
         <div className="flex items-center justify-between">
           <div className="text-sm font-semibold text-white">Etapas</div>
           <DropdownMenu>
@@ -328,13 +328,13 @@ export function FlowFormBuilder(props: FlowFormBuilderProps) {
               <Button
                 type="button"
                 variant="outline"
-                className="border-white/10 bg-slate-950/40 hover:bg-white/5 px-2"
+                className="border-[var(--ds-border-subtle)] bg-[var(--ds-bg-surface)]/30 hover:bg-[var(--ds-bg-hover)] px-2"
                 aria-label="Ações das etapas"
               >
                 <MoreVertical className="h-4 w-4" />
               </Button>
             </DropdownMenuTrigger>
-            <DropdownMenuContent align="end" className="bg-slate-900 border-white/10 text-white min-w-56">
+            <DropdownMenuContent align="end" className="bg-slate-900 border-[var(--ds-border-subtle)] text-white min-w-56">
               <DropdownMenuItem onClick={addStep}>
                 <Plus className="h-4 w-4" />
                 Adicionar etapa
@@ -343,7 +343,7 @@ export function FlowFormBuilder(props: FlowFormBuilderProps) {
                 <Trash2 className="h-4 w-4" />
                 Remover etapa
               </DropdownMenuItem>
-              <DropdownMenuSeparator className="bg-white/10" />
+              <DropdownMenuSeparator className="bg-[var(--ds-bg-hover)]" />
               <DropdownMenuItem disabled={!canSave} onClick={save}>
                 Salvar agora
               </DropdownMenuItem>
@@ -352,7 +352,7 @@ export function FlowFormBuilder(props: FlowFormBuilderProps) {
         </div>
 
         <Tabs value={activeStepId} onValueChange={setActiveStepId}>
-          <TabsList className="bg-slate-950/40 border border-white/10">
+          <TabsList className="bg-[var(--ds-bg-surface)]/30 border border-[var(--ds-border-subtle)]">
             {steps.map((s, idx) => (
               <TabsTrigger key={s.id} value={s.id} className="text-xs">
                 {(s.title || `Etapa ${idx + 1}`).slice(0, 18)}
@@ -363,7 +363,7 @@ export function FlowFormBuilder(props: FlowFormBuilderProps) {
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
           <div>
-            <label className="block text-xs uppercase tracking-widest text-gray-500 mb-2">Título da etapa</label>
+            <label className="block text-xs uppercase tracking-widest text-slate-500 mb-2">Título da etapa</label>
             <Input
               value={activeStep?.title || ''}
               onChange={(e) => {
@@ -371,23 +371,23 @@ export function FlowFormBuilder(props: FlowFormBuilderProps) {
               }}
               placeholder={form.title || `Etapa ${activeStepIndex + 1}`}
             />
-            <div className="text-[11px] text-gray-500 mt-1">Se vazio, usa o título do formulário.</div>
+            <div className="text-[11px] text-slate-500 mt-1">Se vazio, usa o título do formulário.</div>
           </div>
           {!isLastStep ? (
             <div>
-              <label className="block text-xs uppercase tracking-widest text-gray-500 mb-2">Botão desta etapa</label>
+              <label className="block text-xs uppercase tracking-widest text-slate-500 mb-2">Botão desta etapa</label>
               <Input
                 value={activeStep?.nextLabel || 'Continuar'}
                 onChange={(e) => updateActiveStep({ nextLabel: e.target.value })}
                 placeholder="Continuar"
               />
-              <div className="text-[11px] text-gray-500 mt-1">Leva para a próxima etapa automaticamente.</div>
+              <div className="text-[11px] text-slate-500 mt-1">Leva para a próxima etapa automaticamente.</div>
             </div>
           ) : (
             <div>
-              <label className="block text-xs uppercase tracking-widest text-gray-500 mb-2">Botão (final)</label>
+              <label className="block text-xs uppercase tracking-widest text-slate-500 mb-2">Botão (final)</label>
               <Input value={form.submitLabel} onChange={(e) => update({ submitLabel: e.target.value })} />
-              <div className="text-[11px] text-gray-500 mt-1">Finaliza e envia o payload para o webhook.</div>
+              <div className="text-[11px] text-slate-500 mt-1">Finaliza e envia o payload para o webhook.</div>
             </div>
           )}
         </div>
@@ -409,16 +409,16 @@ export function FlowFormBuilder(props: FlowFormBuilderProps) {
 
       {isLastStep ? (
         <>
-          <div className="flex items-center justify-between rounded-xl border border-white/10 bg-slate-950/40 px-3 py-2">
+          <div className="flex items-center justify-between rounded-xl border border-[var(--ds-border-subtle)] bg-[var(--ds-bg-surface)]/30 px-3 py-2">
             <div>
-              <div className="text-xs font-medium text-gray-300">Enviar confirmação ao usuário</div>
-              <div className="text-[11px] text-gray-500">Mostra o resumo das respostas após finalizar</div>
+              <div className="text-xs font-medium text-slate-300">Enviar confirmação ao usuário</div>
+              <div className="text-[11px] text-slate-500">Mostra o resumo das respostas após finalizar</div>
             </div>
             <Switch checked={form.sendConfirmation !== false} onCheckedChange={(checked) => update({ sendConfirmation: checked })} />
           </div>
 
           <div className="space-y-2">
-            <label className="block text-xs uppercase tracking-widest text-gray-500">Texto da confirmação (opcional)</label>
+            <label className="block text-xs uppercase tracking-widest text-slate-500">Texto da confirmação (opcional)</label>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
               <Input
                 value={form.confirmationTitle || ''}

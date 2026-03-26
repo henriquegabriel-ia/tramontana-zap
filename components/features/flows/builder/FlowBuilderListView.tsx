@@ -52,7 +52,7 @@ export function FlowBuilderListView(props: {
         <div className="flex flex-col gap-3 md:flex-row md:items-end md:justify-between">
           <div className="flex-1 grid grid-cols-1 md:grid-cols-2 gap-3">
             <div>
-              <label className="block text-xs uppercase tracking-widest text-gray-500 mb-2">Buscar</label>
+              <label className="block text-xs uppercase tracking-widest text-slate-500 mb-2">Buscar</label>
               <Input
                 value={props.search}
                 onChange={(e) => props.onSearchChange(e.target.value)}
@@ -60,7 +60,7 @@ export function FlowBuilderListView(props: {
               />
             </div>
             <div>
-              <label className="block text-xs uppercase tracking-widest text-gray-500 mb-2">Criar nova MiniApp</label>
+              <label className="block text-xs uppercase tracking-widest text-slate-500 mb-2">Criar nova MiniApp</label>
               <div className="flex gap-2">
                 <Input
                   value={newName}
@@ -88,7 +88,7 @@ export function FlowBuilderListView(props: {
                   Criar
                 </Button>
               </div>
-              <div className="text-[11px] text-gray-500 mt-1">Sugestão: use nomes curtos e consistentes (ex.: snake_case).</div>
+              <div className="text-[11px] text-slate-500 mt-1">Sugestão: use nomes curtos e consistentes (ex.: snake_case).</div>
             </div>
           </div>
 
@@ -114,7 +114,7 @@ export function FlowBuilderListView(props: {
             <Button
               type="button"
               variant="secondary"
-              className="bg-slate-950/40 border border-white/10 text-gray-200 hover:text-white hover:bg-white/5"
+              className="bg-[var(--ds-bg-surface)]/30 border border-[var(--ds-border-subtle)] text-slate-200 hover:text-white hover:bg-[var(--ds-bg-hover)]"
               onClick={props.onRefresh}
               disabled={props.isLoading || props.isFetching}
             >
@@ -124,7 +124,7 @@ export function FlowBuilderListView(props: {
           </div>
         </div>
 
-        <div className="mt-3 text-xs text-gray-500">
+        <div className="mt-3 text-xs text-slate-500">
           {props.isLoading ? 'Carregando…' : `Mostrando ${props.flows.length} MiniApp(s)`}
           {props.isFetching && !props.isLoading ? ' (atualizando…)': ''}
         </div>
@@ -132,8 +132,8 @@ export function FlowBuilderListView(props: {
 
       <Container variant="glass" padding="none" className="overflow-hidden">
         <table className="w-full text-left text-sm">
-          <thead className="bg-slate-950/40">
-            <tr className="text-gray-300">
+          <thead className="bg-[var(--ds-bg-surface)]/30">
+            <tr className="text-slate-300">
               <th className="px-4 py-3 font-semibold">Nome</th>
               <th className="px-4 py-3 font-semibold">Status</th>
               <th className="px-4 py-3 font-semibold">ID da MiniApp (Meta)</th>
@@ -144,14 +144,14 @@ export function FlowBuilderListView(props: {
           <tbody>
             {props.flows.length === 0 ? (
               <tr>
-                <td colSpan={5} className="px-4 py-10 text-center text-gray-500">
+                <td colSpan={5} className="px-4 py-10 text-center text-slate-500">
                   Nenhum MiniApp ainda. Crie um para abrir o editor visual.
                 </td>
               </tr>
             ) : (
               props.flows.map((f) => (
-                <tr key={f.id} className="border-t border-white/10 hover:bg-white/5">
-                  <td className="px-4 py-3 text-gray-200 font-medium">{f.name}</td>
+                <tr key={f.id} className="border-t border-[var(--ds-border-subtle)] hover:bg-[var(--ds-bg-hover)]">
+                  <td className="px-4 py-3 text-slate-200 font-medium">{f.name}</td>
                   <td className="px-4 py-3">
                     <StatusBadge
                       status={f.status === 'published' ? 'success' : f.status === 'draft' ? 'draft' : 'default'}
@@ -160,12 +160,12 @@ export function FlowBuilderListView(props: {
                       {f.status === 'published' ? 'Publicado' : f.status === 'draft' ? 'Rascunho' : f.status}
                     </StatusBadge>
                   </td>
-                  <td className="px-4 py-3 font-mono text-xs text-gray-300">{f.meta_flow_id || '—'}</td>
-                  <td className="px-4 py-3 text-gray-400">{formatDateTime(f.created_at)}</td>
+                  <td className="px-4 py-3 font-mono text-xs text-slate-300">{f.meta_flow_id || '—'}</td>
+                  <td className="px-4 py-3 text-slate-400">{formatDateTime(f.created_at)}</td>
                   <td className="px-4 py-3">
                     <div className="flex items-center justify-end gap-2">
                       <Link href={`/flows/builder/${encodeURIComponent(f.id)}`}>
-                        <Button type="button" variant="secondary" className="bg-slate-950/40 border border-white/10 text-gray-200 hover:text-white hover:bg-white/5">
+                        <Button type="button" variant="secondary" className="bg-[var(--ds-bg-surface)]/30 border border-[var(--ds-border-subtle)] text-slate-200 hover:text-white hover:bg-[var(--ds-bg-hover)]">
                           Abrir
                           <ArrowRight size={16} />
                         </Button>

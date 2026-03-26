@@ -96,38 +96,38 @@ export function LimitWarning({
       <div className="grid grid-cols-3 gap-3 bg-black/20 rounded-lg p-3">
         <div className="text-center">
           <p className="text-lg font-bold text-white">{recipientCount}</p>
-          <p className="text-[10px] text-gray-500 uppercase">Selecionados</p>
+          <p className="text-[10px] text-slate-500 uppercase">Selecionados</p>
         </div>
-        <div className="text-center border-x border-white/10">
+        <div className="text-center border-x border-[var(--ds-border-subtle)]">
           <p className="text-lg font-bold text-primary-400">{currentLimit}</p>
-          <p className="text-[10px] text-gray-500 uppercase">Seu Limite</p>
+          <p className="text-[10px] text-slate-500 uppercase">Seu Limite</p>
         </div>
         <div className="text-center">
           <p className="text-lg font-bold text-red-400">+{exceeded}</p>
-          <p className="text-[10px] text-gray-500 uppercase">Excedente</p>
+          <p className="text-[10px] text-slate-500 uppercase">Excedente</p>
         </div>
       </div>
 
       {/* Solutions */}
       <div className="space-y-2">
-        <p className="text-xs font-bold text-gray-400 uppercase tracking-wider">
+        <p className="text-xs font-bold text-slate-400 uppercase tracking-wider">
           O que você pode fazer:
         </p>
-        <div className="flex items-center gap-2 text-sm text-gray-300">
+        <div className="flex items-center gap-2 text-sm text-slate-300">
           <span className="w-5 h-5 rounded-full bg-slate-800 flex items-center justify-center text-xs">
             1
           </span>
           Reduza a seleção para no máximo{' '}
           <span className="font-bold text-primary-400">{currentLimit}</span> contatos
         </div>
-        <div className="flex items-center gap-2 text-sm text-gray-300">
+        <div className="flex items-center gap-2 text-sm text-slate-300">
           <span className="w-5 h-5 rounded-full bg-slate-800 flex items-center justify-center text-xs">
             2
           </span>
           Divida em {campaignsNeeded} campanhas menores
         </div>
         {onShowUpgradeModal && (
-          <div className="flex items-center gap-2 text-sm text-gray-300">
+          <div className="flex items-center gap-2 text-sm text-slate-300">
             <span className="w-5 h-5 rounded-full bg-primary-500/30 flex items-center justify-center text-xs text-primary-400">
               *
             </span>

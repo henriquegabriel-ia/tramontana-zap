@@ -104,15 +104,15 @@ export function InspectorPanel(props: {
 
   if (!props.selectedEditorKey) {
     return (
-      <div className="rounded-2xl border border-white/10 bg-slate-900/60 p-4">
+      <div className="rounded-2xl border border-[var(--ds-border-subtle)] bg-[var(--ds-bg-elevated)] p-4">
         <div className="text-sm font-semibold text-white">Editar</div>
-        <div className="text-xs text-gray-400 mt-1">Clique em um texto, pergunta ou botão no preview para editar.</div>
+        <div className="text-xs text-slate-400 mt-1">Clique em um texto, pergunta ou botão no preview para editar.</div>
         {isBooking ? (
-          <details className="mt-4 rounded-xl border border-white/10 bg-slate-950/40 p-3">
+          <details className="mt-4 rounded-xl border border-[var(--ds-border-subtle)] bg-[var(--ds-bg-surface)]/30 p-3">
             <summary className="cursor-pointer text-xs font-semibold text-white">Assistente: Agendamento</summary>
             <div className="mt-3 space-y-4">
               <div>
-                <div className="text-xs uppercase tracking-widest text-gray-500 mb-2">Serviços</div>
+                <div className="text-xs uppercase tracking-widest text-slate-500 mb-2">Serviços</div>
                 <div className="space-y-2">
                   {bookingServices.map((s, idx) => (
                     <div key={`service_${idx}`} className="grid grid-cols-1 md:grid-cols-[1fr_1fr_auto] gap-2 items-center">
@@ -158,7 +158,7 @@ export function InspectorPanel(props: {
                       <Button
                         type="button"
                         variant="outline"
-                        className="border-white/10 bg-slate-950/40 hover:bg-white/5"
+                        className="border-[var(--ds-border-subtle)] bg-[var(--ds-bg-surface)]/30 hover:bg-[var(--ds-bg-hover)]"
                         onClick={() => {
                           const next = bookingServices.filter((_, i) => i !== idx)
                           props.onUpdateBookingServices?.(next)
@@ -173,7 +173,7 @@ export function InspectorPanel(props: {
                   <Button
                     type="button"
                     variant="secondary"
-                    className="bg-slate-950/40 border border-white/10 text-gray-200 hover:text-white hover:bg-white/5"
+                    className="bg-[var(--ds-bg-surface)]/30 border border-[var(--ds-border-subtle)] text-slate-200 hover:text-white hover:bg-[var(--ds-bg-hover)]"
                     onClick={() => {
                       const n = bookingServices.length + 1
                       props.onUpdateBookingServices?.([...bookingServices, { id: `servico_${n}`, title: `Serviço ${n}` }])
@@ -186,11 +186,11 @@ export function InspectorPanel(props: {
               </div>
 
               <div>
-                <div className="text-xs uppercase tracking-widest text-gray-500 mb-2">Escolha de data</div>
+                <div className="text-xs uppercase tracking-widest text-slate-500 mb-2">Escolha de data</div>
                 <select
                   value={bookingDateComponent}
                   onChange={(e) => props.onUpdateBookingDateComponent?.(e.target.value === 'dropdown' ? 'dropdown' : 'calendar')}
-                  className="h-11 w-full rounded-xl border border-white/10 bg-white/5 px-3 text-[14px] text-slate-200 focus:outline-none focus:ring-2 focus:ring-purple-400/40"
+                  className="h-11 w-full rounded-xl border border-[var(--ds-border-subtle)] bg-[var(--ds-bg-hover)] px-3 text-[14px] text-slate-200 focus:outline-none focus:ring-2 focus:ring-purple-400/40"
                 >
                   <option value="calendar">Calendário</option>
                   <option value="dropdown">Lista (dropdown)</option>
@@ -205,16 +205,16 @@ export function InspectorPanel(props: {
 
   if (!screen || parsed.kind === 'unknown') {
     return (
-      <div className="rounded-2xl border border-white/10 bg-slate-900/60 p-4">
+      <div className="rounded-2xl border border-[var(--ds-border-subtle)] bg-[var(--ds-bg-elevated)] p-4">
         <div className="text-sm font-semibold text-white">Editar</div>
-        <div className="text-xs text-gray-400 mt-1">Seleção não reconhecida. Selecione um elemento do preview.</div>
+        <div className="text-xs text-slate-400 mt-1">Seleção não reconhecida. Selecione um elemento do preview.</div>
       </div>
     )
   }
 
   if (parsed.kind === 'screen_title') {
     return (
-      <div className="rounded-2xl border border-white/10 bg-slate-900/60 p-4 space-y-3">
+      <div className="rounded-2xl border border-[var(--ds-border-subtle)] bg-[var(--ds-bg-elevated)] p-4 space-y-3">
         <div className="text-sm font-semibold text-white">Título da tela</div>
         <Input value={screen.title} onChange={(e) => props.onUpdateScreenTitle(screen.id, e.target.value)} />
       </div>
@@ -223,18 +223,18 @@ export function InspectorPanel(props: {
 
   if (parsed.kind === 'cta') {
     return (
-      <div className="rounded-2xl border border-white/10 bg-slate-900/60 p-4 space-y-3">
+      <div className="rounded-2xl border border-[var(--ds-border-subtle)] bg-[var(--ds-bg-elevated)] p-4 space-y-3">
         <div className="text-sm font-semibold text-white">Botão</div>
         <div>
-          <label className="block text-xs uppercase tracking-widest text-gray-500 mb-2">Texto</label>
+          <label className="block text-xs uppercase tracking-widest text-slate-500 mb-2">Texto</label>
           <Input value={String((screen as any)?.action?.label || '')} onChange={(e) => props.onUpdateCta(screen.id, { label: e.target.value })} />
         </div>
         <div>
-          <label className="block text-xs uppercase tracking-widest text-gray-500 mb-2">Ir para</label>
+          <label className="block text-xs uppercase tracking-widest text-slate-500 mb-2">Ir para</label>
           <select
             value={nextScreenId}
             onChange={(e) => props.onUpdateCta(screen.id, { nextScreenId: e.target.value })}
-            className="h-11 w-full rounded-xl border border-white/10 bg-white/5 px-3 text-[14px] text-slate-200 focus:outline-none focus:ring-2 focus:ring-purple-400/40"
+            className="h-11 w-full rounded-xl border border-[var(--ds-border-subtle)] bg-[var(--ds-bg-hover)] px-3 text-[14px] text-slate-200 focus:outline-none focus:ring-2 focus:ring-purple-400/40"
           >
             <option value="">— Concluir —</option>
             {props.spec.screens
@@ -252,16 +252,16 @@ export function InspectorPanel(props: {
 
   if ((parsed.kind === 'component_text' || parsed.kind === 'component_label') && !component) {
     return (
-      <div className="rounded-2xl border border-white/10 bg-slate-900/60 p-4">
+      <div className="rounded-2xl border border-[var(--ds-border-subtle)] bg-[var(--ds-bg-elevated)] p-4">
         <div className="text-sm font-semibold text-white">Editar</div>
-        <div className="text-xs text-gray-400 mt-1">Não achei esse elemento no fluxo. Selecione novamente no preview.</div>
+        <div className="text-xs text-slate-400 mt-1">Não achei esse elemento no fluxo. Selecione novamente no preview.</div>
       </div>
     )
   }
 
   if (parsed.kind === 'component_text') {
     return (
-      <div className="rounded-2xl border border-white/10 bg-slate-900/60 p-4 space-y-3">
+      <div className="rounded-2xl border border-[var(--ds-border-subtle)] bg-[var(--ds-bg-elevated)] p-4 space-y-3">
         <div className="text-sm font-semibold text-white">Texto</div>
         <Textarea
           value={String(component?.text || '')}
@@ -272,7 +272,7 @@ export function InspectorPanel(props: {
   }
 
   return (
-    <div className="rounded-2xl border border-white/10 bg-slate-900/60 p-4 space-y-3">
+    <div className="rounded-2xl border border-[var(--ds-border-subtle)] bg-[var(--ds-bg-elevated)] p-4 space-y-3">
       <div className="text-sm font-semibold text-white">Pergunta</div>
       <Input
         value={String(component?.label || '')}

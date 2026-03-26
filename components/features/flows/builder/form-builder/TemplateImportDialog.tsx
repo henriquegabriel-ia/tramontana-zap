@@ -60,7 +60,7 @@ export function TemplateImportDialog({
 
   return (
     <Dialog open={open} onOpenChange={onOpenChange}>
-      <DialogContent className="bg-slate-950 border-white/10 text-white sm:max-w-2xl">
+      <DialogContent className="bg-slate-950 border-[var(--ds-border-subtle)] text-white sm:max-w-2xl">
         <DialogHeader>
           <DialogTitle>Importar modelo pronto</DialogTitle>
           <DialogDescription className="text-slate-400">
@@ -77,7 +77,7 @@ export function TemplateImportDialog({
                   ? tpl.isDynamic
                     ? 'border-purple-400/40 bg-purple-500/10'
                     : 'border-purple-400/40 bg-purple-500/10'
-                  : 'border-white/10 bg-slate-900/60 hover:bg-white/5'
+                  : 'border-[var(--ds-border-subtle)] bg-[var(--ds-bg-elevated)] hover:bg-[var(--ds-bg-hover)]'
               }`}
             >
               <input
@@ -93,13 +93,13 @@ export function TemplateImportDialog({
                   <span
                     className={
                       'px-1.5 py-0.5 text-[10px] rounded ' +
-                      (tpl.isDynamic ? 'bg-purple-500/20 text-purple-300' : 'bg-white/10 text-gray-300')
+                      (tpl.isDynamic ? 'bg-purple-500/20 text-purple-300' : 'bg-[var(--ds-bg-hover)] text-slate-300')
                     }
                   >
                     {tpl.isDynamic ? 'Dinâmico' : 'Simples'}
                   </span>
                 </div>
-                <div className="text-xs text-gray-400">{tpl.description}</div>
+                <div className="text-xs text-slate-400">{tpl.description}</div>
               </div>
             </label>
           ))}
@@ -109,7 +109,7 @@ export function TemplateImportDialog({
           <Button
             type="button"
             variant="outline"
-            className="border-white/10 bg-slate-900 hover:bg-white/5"
+            className="border-[var(--ds-border-subtle)] bg-slate-900 hover:bg-[var(--ds-bg-hover)]"
             onClick={() => onOpenChange(false)}
           >
             Cancelar

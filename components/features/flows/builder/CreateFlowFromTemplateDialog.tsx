@@ -53,19 +53,19 @@ export function CreateFlowFromTemplateDialog(props: {
           <div className="space-y-2">
             <Label htmlFor="flow_name">Nome</Label>
             <Input id="flow_name" value={name} onChange={(e) => setName(e.target.value)} placeholder="Ex: lead_cadastro_jan2026" />
-            <div className="text-[11px] text-gray-500">Dica: nomes curtos e consistentes (ex.: snake_case).</div>
+            <div className="text-[11px] text-slate-500">Dica: nomes curtos e consistentes (ex.: snake_case).</div>
           </div>
 
           <div className="space-y-2">
             <Label>Template</Label>
 
             {templatesQuery.isLoading ? (
-              <div className="flex items-center gap-2 text-sm text-gray-300">
+              <div className="flex items-center gap-2 text-sm text-slate-300">
                 <Loader2 className="h-4 w-4 animate-spin" />
                 Carregando templates…
               </div>
             ) : templates.length === 0 ? (
-              <div className="text-sm text-gray-400">Nenhum template disponível.</div>
+              <div className="text-sm text-slate-400">Nenhum template disponível.</div>
             ) : (
               <div className="grid grid-cols-1 gap-2">
                 {templates.map((t) => (
@@ -76,20 +76,20 @@ export function CreateFlowFromTemplateDialog(props: {
                     className={
                       'text-left rounded-lg border px-3 py-2 transition ' +
                       (templateKey === t.key
-                        ? 'border-primary-500 bg-white/5'
-                        : 'border-white/10 bg-slate-900 hover:bg-white/5')
+                        ? 'border-primary-500 bg-[var(--ds-bg-hover)]'
+                        : 'border-[var(--ds-border-subtle)] bg-slate-900 hover:bg-[var(--ds-bg-hover)]')
                     }
                   >
-                    <div className="text-sm text-gray-200 font-medium">{t.name}</div>
-                    <div className="text-xs text-gray-500">{t.description}</div>
-                    <div className="text-[11px] text-gray-600 mt-1 font-mono">{t.key}</div>
+                    <div className="text-sm text-slate-200 font-medium">{t.name}</div>
+                    <div className="text-xs text-slate-500">{t.description}</div>
+                    <div className="text-[11px] text-slate-600 mt-1 font-mono">{t.key}</div>
                   </button>
                 ))}
               </div>
             )}
 
             {selected ? (
-              <div className="text-xs text-gray-500">
+              <div className="text-xs text-slate-500">
                 {selected.isDynamic ? 'Modelo dinâmico: atualiza dados em tempo real.' : 'Modelo simples: pronto para usar.'}
               </div>
             ) : null}
@@ -100,7 +100,7 @@ export function CreateFlowFromTemplateDialog(props: {
           <Button
             type="button"
             variant="outline"
-            className="border-white/10 bg-slate-900 hover:bg-white/5"
+            className="border-[var(--ds-border-subtle)] bg-slate-900 hover:bg-[var(--ds-bg-hover)]"
             onClick={() => setOpen(false)}
           >
             Cancelar

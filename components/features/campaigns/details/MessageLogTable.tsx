@@ -28,10 +28,10 @@ export const MessageLogTable: React.FC<MessageLogTableProps> = ({
 
   return (
     <Container variant="glass" padding="none" className="overflow-hidden">
-      <div className="p-5 border-b border-white/5 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+      <div className="p-5 border-b border-[var(--ds-border-subtle)] flex flex-col sm:flex-row sm:items-center justify-between gap-4">
         <h3 className="font-bold text-white flex items-center gap-2">
           Logs de Envio{' '}
-          <span className="text-xs font-normal text-gray-500 bg-slate-900 px-2 py-0.5 rounded-full">
+          <span className="text-xs font-normal text-slate-500 bg-slate-900 px-2 py-0.5 rounded-full">
             {total.toLocaleString()}
           </span>
         </h3>
@@ -44,7 +44,7 @@ export const MessageLogTable: React.FC<MessageLogTableProps> = ({
               className={`px-3 py-1.5 rounded-lg border text-xs font-medium transition-colors flex items-center gap-2 ${
                 includeReadInDelivered
                   ? 'bg-blue-500/10 border-blue-500/20 text-blue-300 hover:bg-blue-500/15'
-                  : 'bg-slate-900/50 border-white/10 text-gray-300 hover:text-white hover:bg-white/5'
+                  : 'bg-[var(--ds-bg-elevated)] border-[var(--ds-border-subtle)] text-slate-300 hover:text-white hover:bg-[var(--ds-bg-hover)]'
               }`}
               title={includeReadInDelivered
                 ? 'Mostrando entregues + lidas (cumulativo)'
@@ -55,20 +55,20 @@ export const MessageLogTable: React.FC<MessageLogTableProps> = ({
             </button>
           )}
 
-          <div className="flex items-center gap-2 bg-slate-900/50 border border-white/10 rounded-lg px-3 py-1.5 w-full sm:w-64 focus-within:border-primary-500/50 transition-all">
-            <Search size={14} className="text-gray-500" />
+          <div className="relative w-full sm:w-64 group">
+            <Search size={14} className="absolute left-3 top-1/2 -translate-y-1/2 text-[var(--ds-text-muted)] group-focus-within:text-primary-500 transition-colors" />
             <input
               type="text"
-              placeholder="Buscar destinatario..."
-              className="bg-transparent border-none outline-none text-sm w-full text-white placeholder-gray-600"
+              placeholder="Buscar destinatário..."
+              className="w-full bg-[var(--ds-bg-elevated)] border border-[var(--ds-border-subtle)] rounded-full py-1.5 pl-9 pr-3 focus:ring-2 focus:ring-primary-500/20 focus:border-primary-500/50 text-sm transition-all text-[var(--ds-text-primary)] placeholder-[var(--ds-text-muted)] outline-none"
               value={searchTerm}
               onChange={(e) => setSearchTerm(e.target.value)}
             />
           </div>
-          <button className="p-1.5 text-gray-400 hover:text-white hover:bg-white/5 rounded-lg border border-white/10 transition-colors">
+          <button className="p-1.5 text-slate-400 hover:text-white hover:bg-[var(--ds-bg-hover)] rounded-lg border border-[var(--ds-border-subtle)] transition-colors">
             <Filter size={16} />
           </button>
-          <button className="p-1.5 text-gray-400 hover:text-white hover:bg-white/5 rounded-lg border border-white/10 transition-colors">
+          <button className="p-1.5 text-slate-400 hover:text-white hover:bg-[var(--ds-bg-hover)] rounded-lg border border-[var(--ds-border-subtle)] transition-colors">
             <RefreshCw size={16} />
           </button>
         </div>
@@ -76,7 +76,7 @@ export const MessageLogTable: React.FC<MessageLogTableProps> = ({
 
       <div className="overflow-x-auto">
         <table className="w-full text-left text-sm">
-          <thead className="bg-white/5 text-gray-400 uppercase text-xs tracking-wider">
+          <thead className="bg-[var(--ds-bg-surface)]/30 text-[var(--ds-text-muted)] uppercase text-xs tracking-widest">
             <tr>
               <th className="px-6 py-3 font-medium">Destinatario</th>
               <th className="px-6 py-3 font-medium">Telefone</th>
@@ -88,13 +88,13 @@ export const MessageLogTable: React.FC<MessageLogTableProps> = ({
           </thead>
           <tbody className="divide-y divide-white/5">
             {messages.map((msg) => (
-              <tr key={msg.id} className="hover:bg-white/5 transition-colors">
-                <td className="px-6 py-3 font-medium text-gray-200">{msg.contactName}</td>
-                <td className="px-6 py-3 font-mono text-xs text-gray-500">{msg.contactPhone}</td>
+              <tr key={msg.id} className="hover:bg-[var(--ds-bg-hover)] transition-colors">
+                <td className="px-6 py-3 font-medium text-slate-200">{msg.contactName}</td>
+                <td className="px-6 py-3 font-mono text-xs text-slate-500">{msg.contactPhone}</td>
                 <td className="px-6 py-3">
                   <MessageStatusBadge status={msg.status} />
                 </td>
-                <td className="px-6 py-3 text-gray-500 text-xs">{msg.sentAt}</td>
+                <td className="px-6 py-3 text-slate-500 text-xs">{msg.sentAt}</td>
                 <td className="px-6 py-3">
                   {msg.error ? (
                     <span
@@ -113,7 +113,7 @@ export const MessageLogTable: React.FC<MessageLogTableProps> = ({
                       })()}
                     </span>
                   ) : (
-                    <span className="text-gray-600 text-xs">-</span>
+                    <span className="text-slate-600 text-xs">-</span>
                   )}
                 </td>
                 <td className="px-6 py-3">
@@ -129,24 +129,24 @@ export const MessageLogTable: React.FC<MessageLogTableProps> = ({
                       <Pencil size={12} /> Corrigir contato
                     </button>
                   ) : (
-                    <span className="text-gray-600 text-xs">-</span>
+                    <span className="text-slate-600 text-xs">-</span>
                   )}
                 </td>
               </tr>
             ))}
             {messages.length === 0 && (
               <tr>
-                <td colSpan={6} className="px-6 py-8 text-center text-gray-500">Nenhum registro encontrado.</td>
+                <td colSpan={6} className="px-6 py-8 text-center text-slate-500">Nenhum registro encontrado.</td>
               </tr>
             )}
           </tbody>
         </table>
 
         {showPagination && (
-          <div className="p-4 border-t border-white/5 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3">
-            <div className="text-xs text-gray-500">
-              Mostrando <span className="font-mono text-gray-300">{shown}</span> de{' '}
-              <span className="font-mono text-gray-300">{total}</span>
+          <div className="p-4 border-t border-[var(--ds-border-subtle)] flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3">
+            <div className="text-xs text-slate-500">
+              Mostrando <span className="font-mono text-slate-300">{shown}</span> de{' '}
+              <span className="font-mono text-slate-300">{total}</span>
             </div>
 
             {showLoadMore ? (
@@ -154,13 +154,13 @@ export const MessageLogTable: React.FC<MessageLogTableProps> = ({
                 type="button"
                 onClick={onLoadMore}
                 disabled={!!isLoadingMore}
-                className="px-3 py-2 bg-slate-900 border border-white/10 rounded-lg text-gray-300 hover:text-white hover:bg-white/5 transition-colors flex items-center gap-2 text-xs font-medium disabled:opacity-50"
+                className="px-3 py-2 bg-slate-900 border border-[var(--ds-border-subtle)] rounded-lg text-slate-300 hover:text-white hover:bg-[var(--ds-bg-hover)] transition-colors flex items-center gap-2 text-xs font-medium disabled:opacity-50"
               >
                 {isLoadingMore ? <Loader2 size={14} className="animate-spin" /> : null}
                 {isLoadingMore ? 'Carregando...' : 'Carregar mais'}
               </button>
             ) : (
-              <div className="text-xs text-gray-600">(Esta tela carrega ate 100 por vez)</div>
+              <div className="text-xs text-slate-600">(Esta tela carrega ate 100 por vez)</div>
             )}
           </div>
         )}

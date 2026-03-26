@@ -21,7 +21,7 @@ export const ApiDocsPanel: React.FC = () => {
   };
 
   return (
-    <Card className="border-slate-800 bg-slate-900/50">
+    <Card className="border-slate-800 bg-[var(--ds-bg-elevated)]">
       <CardHeader>
         <div className="flex items-center gap-3">
           <div className="p-2 rounded-lg bg-blue-500/10">

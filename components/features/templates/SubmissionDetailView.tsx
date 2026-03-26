@@ -46,7 +46,7 @@ export function SubmissionDetailView({
         purple: 'text-purple-300',
         yellow: 'text-amber-300',
         red: 'text-amber-300',
-        slate: 'text-gray-400',
+        slate: 'text-slate-400',
     };
 
     return (
@@ -59,7 +59,7 @@ export function SubmissionDetailView({
                     <div className="flex items-center gap-4">
                         <button
                             onClick={onBack}
-                            className="p-2 -ml-2 text-gray-400 hover:text-white hover:bg-white/5 rounded-lg transition-colors border border-white/10 bg-slate-950/40"
+                            className="p-2 -ml-2 text-slate-400 hover:text-white hover:bg-[var(--ds-bg-hover)] rounded-lg transition-colors border border-[var(--ds-border-subtle)] bg-[var(--ds-bg-surface)]/30"
                         >
                             <ArrowLeft className="w-5 h-5" />
                         </button>
@@ -68,7 +68,7 @@ export function SubmissionDetailView({
                                 {submission.name}
                                 <span className={`px-2 py-0.5 text-xs rounded-full border ${submission.status === 'processing'
                                     ? 'bg-purple-500/10 text-purple-200 border-purple-500/20'
-                                    : 'bg-slate-950/40 text-gray-400 border-white/10'
+                                    : 'bg-[var(--ds-bg-surface)]/30 text-slate-400 border-[var(--ds-border-subtle)]'
                                     }`}>
                                     {submission.status === 'processing' ? 'Processando' : 'Concluído'}
                                 </span>
@@ -83,7 +83,7 @@ export function SubmissionDetailView({
                         <button
                             onClick={onRefresh}
                             disabled={isLoading}
-                            className="px-3 py-2 bg-slate-950/40 border border-white/10 text-gray-200 rounded-lg hover:bg-white/5 hover:text-white transition-colors flex items-center gap-2 disabled:opacity-50"
+                            className="px-3 py-2 bg-[var(--ds-bg-surface)]/30 border border-[var(--ds-border-subtle)] text-slate-200 rounded-lg hover:bg-[var(--ds-bg-hover)] hover:text-white transition-colors flex items-center gap-2 disabled:opacity-50"
                         >
                             <RefreshCw className={`w-4 h-4 ${isLoading ? 'animate-spin' : ''}`} />
                             Atualizar Status
@@ -134,15 +134,15 @@ export function SubmissionDetailView({
                         const isExpanded = expandedSection === 'ALL' || expandedSection === section.id;
 
                         return (
-                            <div key={section.id} className="border-b border-white/10 last:border-0">
+                            <div key={section.id} className="border-b border-[var(--ds-border-subtle)] last:border-0">
                                 <button
                                     onClick={() => setExpandedSection(isExpanded && expandedSection !== 'ALL' ? 'ALL' : section.id)}
-                                    className="w-full flex items-center justify-between p-4 hover:bg-white/5 transition-colors"
+                                    className="w-full flex items-center justify-between p-4 hover:bg-[var(--ds-bg-hover)] transition-colors"
                                 >
                                     <div className="flex items-center gap-3">
                                         <section.icon className={`w-5 h-5 ${sectionIconTone[section.color]}`} />
                                         <span className="font-medium text-white">{section.label}</span>
-                                        <span className="px-2 py-0.5 rounded-full bg-slate-950/40 text-xs text-gray-400 border border-white/10">
+                                        <span className="px-2 py-0.5 rounded-full bg-[var(--ds-bg-surface)]/30 text-xs text-slate-400 border border-[var(--ds-border-subtle)]">
                                             {section.count}
                                         </span>
                                     </div>
@@ -157,7 +157,7 @@ export function SubmissionDetailView({
                                                 onClick={() => setSelectedTemplate(template)}
                                                 className={`p-3 rounded-lg border transition-all cursor-pointer ${selectedTemplate?.id === template.id
                                                     ? 'bg-purple-500/10 border-purple-500/30 ring-1 ring-purple-500/40'
-                                                    : 'bg-slate-950/40 border-white/10 hover:border-white/20 hover:bg-white/5'
+                                                    : 'bg-[var(--ds-bg-surface)]/30 border-[var(--ds-border-subtle)] hover:border-[var(--ds-border-default)] hover:bg-[var(--ds-bg-hover)]'
                                                     }`}
                                             >
                                                 <div className="flex justify-between items-start mb-2">
@@ -193,7 +193,7 @@ export function SubmissionDetailView({
             </div>
 
             {/* --- RIGHT SIDE: PREVIEW --- */}
-            <div className="w-[380px] shrink-0 border-l border-white/10 pl-6 flex flex-col justify-center">
+            <div className="w-[380px] shrink-0 border-l border-[var(--ds-border-subtle)] pl-6 flex flex-col justify-center">
                 {selectedTemplate ? (
                     <div className="sticky top-6">
                         <h3 className="text-sm font-medium text-slate-400 mb-4 text-center">
@@ -261,7 +261,7 @@ function StatCard({ label, count, total, color, icon: Icon }: StatCardProps) {
         purple: 'text-purple-300 bg-purple-500/10 border-purple-500/20',
         yellow: 'text-amber-300 bg-amber-500/10 border-amber-500/20',
         red: 'text-amber-200 bg-amber-500/10 border-amber-500/20',
-        slate: 'text-gray-400 bg-slate-500/10 border-white/10',
+        slate: 'text-slate-400 bg-slate-500/10 border-[var(--ds-border-subtle)]',
     };
 
     return (
