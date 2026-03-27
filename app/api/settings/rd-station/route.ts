@@ -28,18 +28,16 @@ export async function POST(request: NextRequest) {
     }
 
     const body = await request.json().catch(() => ({}))
-    const clientId = String(body?.clientId || '').trim()
-    const clientSecret = String(body?.clientSecret || '').trim()
 
-    if (!clientId || !clientSecret) {
-      return NextResponse.json({ error: 'Client ID e Client Secret sao obrigatorios' }, { status: 400 })
+    // Salva credenciais OAuth (se fornecidas)
+    if (body?.clientId !== undefined) {
+      await settingsDb.set(KEY_CLIENT_ID, String(body.clientId || '').trim())
+    }
+    if (body?.clientSecret !== undefined) {
+      await settingsDb.set(KEY_CLIENT_SECRET, String(body.clientSecret || '').trim())
     }
 
-    // Salva credenciais OAuth obrigatorias
-    await settingsDb.set(KEY_CLIENT_ID, clientId)
-    await settingsDb.set(KEY_CLIENT_SECRET, clientSecret)
-
-    // Salva configuracoes opcionais do CRM
+    // Salva token CRM (se fornecido)
     if (body?.crmToken !== undefined) {
       await settingsDb.set(KEY_CRM_TOKEN, String(body.crmToken || '').trim())
     }
