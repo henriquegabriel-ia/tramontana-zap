@@ -1,40 +1,57 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { exchangeCodeForTokens, saveTokens } from '@/lib/rd-station'
+import { settingsDb } from '@/lib/supabase-db'
 
-const STATE_COOKIE = 'rd_oauth_state'
-const RETURN_COOKIE = 'rd_oauth_return'
+const SETTINGS_KEY = 'rd_station_oauth_state'
+const STATE_MAX_AGE_MS = 10 * 60 * 1000 // 10 minutos
 
 export async function GET(request: NextRequest) {
   try {
     const url = request.nextUrl
     const code = url.searchParams.get('code')
     const state = url.searchParams.get('state')
-    const cookieState = request.cookies.get(STATE_COOKIE)?.value
-    const returnTo = request.cookies.get(RETURN_COOKIE)?.value || '/settings'
 
     if (!code) {
-      return NextResponse.json({ error: 'Codigo OAuth ausente' }, { status: 400 })
-    }
-    if (!state || !cookieState || state !== cookieState) {
-      return NextResponse.json({ error: 'Estado OAuth invalido' }, { status: 400 })
+      return NextResponse.json({ error: 'Código OAuth ausente' }, { status: 400 })
     }
 
-    // Troca o codigo de autorizacao por tokens de acesso
+    // Valida state via Supabase (mais confiável que cookies cross-site)
+    const storedRaw = await settingsDb.get(SETTINGS_KEY)
+    let storedState: string | null = null
+
+    if (storedRaw) {
+      try {
+        const parsed = JSON.parse(storedRaw)
+        const age = Date.now() - (parsed.createdAt || 0)
+        if (age < STATE_MAX_AGE_MS) {
+          storedState = parsed.state
+        }
+      } catch {
+        // Se não for JSON, trata como state direto (fallback)
+        storedState = storedRaw
+      }
+    }
+
+    if (!state || !storedState || state !== storedState) {
+      console.error('[RD Station] callback: state mismatch', {
+        received: state?.substring(0, 10),
+        stored: storedState?.substring(0, 10),
+      })
+      return NextResponse.json({ error: 'Estado OAuth inválido' }, { status: 400 })
+    }
+
+    // Limpa state usado
+    await settingsDb.set(SETTINGS_KEY, '')
+
+    // Troca o código de autorização por tokens de acesso
     const tokens = await exchangeCodeForTokens(code)
     await saveTokens(tokens)
 
-    // Forcar path local — nunca permitir URLs absolutas (previne open redirect)
-    const safePath = returnTo.startsWith('/') ? returnTo : '/settings'
-    const separator = safePath.includes('?') ? '&' : '?'
-    const absoluteReturnUrl = `${url.origin}${safePath}${separator}rd_connected=true`
-
-    const response = NextResponse.redirect(absoluteReturnUrl)
-    response.cookies.delete(STATE_COOKIE)
-    response.cookies.delete(RETURN_COOKIE)
-    return response
+    const absoluteReturnUrl = `${url.origin}/settings?rd_connected=true`
+    return NextResponse.redirect(absoluteReturnUrl)
   } catch (error) {
     const errorMessage = error instanceof Error ? error.message : 'Erro desconhecido'
-    console.error('[rd-station] callback error:', errorMessage, error)
+    console.error('[RD Station] callback error:', errorMessage, error)
     return NextResponse.json({
       error: 'Falha ao concluir OAuth do RD Station',
       details: errorMessage,

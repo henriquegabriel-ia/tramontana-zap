@@ -1,38 +1,23 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { createOAuthState, buildRDStationAuthUrl } from '@/lib/rd-station'
+import { settingsDb } from '@/lib/supabase-db'
 
-const STATE_COOKIE = 'rd_oauth_state'
-const RETURN_COOKIE = 'rd_oauth_return'
-
-function normalizeReturnTo(value: string | null): string {
-  if (!value) return '/settings'
-  const trimmed = value.trim()
-  if (!trimmed.startsWith('/')) return '/settings'
-  return trimmed
-}
+const SETTINGS_KEY = 'rd_station_oauth_state'
 
 export async function GET(request: NextRequest) {
   try {
     const state = createOAuthState()
     const authUrl = await buildRDStationAuthUrl(state)
-    const returnTo = normalizeReturnTo(request.nextUrl.searchParams.get('returnTo'))
 
-    const response = NextResponse.redirect(authUrl)
-    response.cookies.set(STATE_COOKIE, state, {
-      httpOnly: true,
-      sameSite: 'lax',
-      maxAge: 10 * 60,
-      path: '/',
-    })
-    response.cookies.set(RETURN_COOKIE, returnTo, {
-      httpOnly: true,
-      sameSite: 'lax',
-      maxAge: 10 * 60,
-      path: '/',
-    })
-    return response
+    // Salva state no Supabase (mais confiável que cookies em cross-site redirects)
+    await settingsDb.set(SETTINGS_KEY, JSON.stringify({
+      state,
+      createdAt: Date.now(),
+    }))
+
+    return NextResponse.redirect(authUrl)
   } catch (error) {
-    console.error('[rd-station] connect error:', error)
+    console.error('[RD Station] connect error:', error)
     return NextResponse.json({ error: 'Falha ao iniciar OAuth do RD Station' }, { status: 500 })
   }
 }
