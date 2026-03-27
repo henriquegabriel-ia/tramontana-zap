@@ -1,30 +1,41 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { isSupabaseConfigured } from '@/lib/supabase'
 import { settingsDb } from '@/lib/supabase-db'
-import { getRDStationCredentialsPublic } from '@/lib/rd-station'
+import {
+  getRDStationCredentialsPublic,
+  getRDStationConfig,
+  saveRDStationConfig,
+  type RDStationConfig,
+} from '@/lib/rd-station'
 
-// Chaves no banco de settings
+// Chaves OAuth (separadas do config CRM)
 const KEY_CLIENT_ID = 'rdStationClientId'
 const KEY_CLIENT_SECRET = 'rdStationClientSecret'
-const KEY_CRM_TOKEN = 'rdStationCrmToken'
-const KEY_PIPELINE_ID = 'rdStationPipelineId'
-const KEY_STAGE_ID = 'rdStationStageId'
-const KEY_AUTO_CREATE_DEAL = 'rdStationAutoCreateDeal'
 
 export async function GET() {
   try {
-    const config = await getRDStationCredentialsPublic()
-    return NextResponse.json(config)
+    const [credentialsPublic, config] = await Promise.all([
+      getRDStationCredentialsPublic(),
+      getRDStationConfig(),
+    ])
+    return NextResponse.json({
+      ...credentialsPublic,
+      crmConnected: !!config?.crmToken,
+      hasPipeline: !!config?.pipelineId,
+      pipelineId: config?.pipelineId || null,
+      stageId: config?.stageId || null,
+      autoCreateDeal: config?.autoCreateDeal || false,
+    })
   } catch (error) {
-    console.error('[rd-station] settings get error:', error)
-    return NextResponse.json({ error: 'Falha ao carregar configuracoes do RD Station' }, { status: 500 })
+    console.error('[RD Station] settings get error:', error)
+    return NextResponse.json({ error: 'Falha ao carregar configurações do RD Station' }, { status: 500 })
   }
 }
 
 export async function POST(request: NextRequest) {
   try {
     if (!isSupabaseConfigured()) {
-      return NextResponse.json({ error: 'Supabase nao configurado' }, { status: 400 })
+      return NextResponse.json({ error: 'Supabase não configurado' }, { status: 400 })
     }
 
     const body = await request.json().catch(() => ({}))
@@ -37,46 +48,62 @@ export async function POST(request: NextRequest) {
       await settingsDb.set(KEY_CLIENT_SECRET, String(body.clientSecret || '').trim())
     }
 
-    // Salva token CRM (se fornecido)
-    if (body?.crmToken !== undefined) {
-      await settingsDb.set(KEY_CRM_TOKEN, String(body.crmToken || '').trim())
-    }
-    if (body?.pipelineId !== undefined) {
-      await settingsDb.set(KEY_PIPELINE_ID, String(body.pipelineId || '').trim())
-    }
-    if (body?.stageId !== undefined) {
-      await settingsDb.set(KEY_STAGE_ID, String(body.stageId || '').trim())
-    }
-    if (body?.autoCreateDeal !== undefined) {
-      await settingsDb.set(KEY_AUTO_CREATE_DEAL, body.autoCreateDeal ? 'true' : 'false')
+    // Salva config CRM como JSON unificado (é assim que getRDStationConfig() lê)
+    const hasCrmFields = body?.crmToken !== undefined
+      || body?.pipelineId !== undefined
+      || body?.stageId !== undefined
+      || body?.autoCreateDeal !== undefined
+      || body?.stageActions !== undefined
+      || body?.webhookSecret !== undefined
+
+    if (hasCrmFields) {
+      // Carrega config existente pra fazer merge
+      const existing = await getRDStationConfig()
+      const merged: RDStationConfig = {
+        crmToken: existing?.crmToken || '',
+        pipelineId: existing?.pipelineId,
+        stageId: existing?.stageId,
+        autoCreateDeal: existing?.autoCreateDeal || false,
+        stageActions: existing?.stageActions,
+        webhookSecret: existing?.webhookSecret,
+      }
+
+      // Aplica campos fornecidos
+      if (body?.crmToken !== undefined) merged.crmToken = String(body.crmToken || '').trim()
+      if (body?.pipelineId !== undefined) merged.pipelineId = String(body.pipelineId || '').trim()
+      if (body?.stageId !== undefined) merged.stageId = String(body.stageId || '').trim()
+      if (body?.autoCreateDeal !== undefined) merged.autoCreateDeal = !!body.autoCreateDeal
+      if (body?.stageActions !== undefined) merged.stageActions = body.stageActions
+      if (body?.webhookSecret !== undefined) merged.webhookSecret = String(body.webhookSecret || '').trim()
+
+      await saveRDStationConfig(merged)
     }
 
     return NextResponse.json({ ok: true })
   } catch (error) {
-    console.error('[rd-station] settings save error:', error)
-    return NextResponse.json({ error: 'Falha ao salvar configuracoes do RD Station' }, { status: 500 })
+    console.error('[RD Station] settings save error:', error)
+    return NextResponse.json({ error: 'Falha ao salvar configurações do RD Station' }, { status: 500 })
   }
 }
 
 export async function DELETE() {
   try {
     if (!isSupabaseConfigured()) {
-      return NextResponse.json({ error: 'Supabase nao configurado' }, { status: 400 })
+      return NextResponse.json({ error: 'Supabase não configurado' }, { status: 400 })
     }
 
-    // Limpa todas as configuracoes do RD Station
+    // Limpa todas as configurações do RD Station
     await Promise.all([
       settingsDb.set(KEY_CLIENT_ID, ''),
       settingsDb.set(KEY_CLIENT_SECRET, ''),
-      settingsDb.set(KEY_CRM_TOKEN, ''),
-      settingsDb.set(KEY_PIPELINE_ID, ''),
-      settingsDb.set(KEY_STAGE_ID, ''),
-      settingsDb.set(KEY_AUTO_CREATE_DEAL, ''),
+      settingsDb.set('rd_station_config', ''),
+      settingsDb.set('rd_station_tokens', ''),
+      settingsDb.set('rd_station_oauth_state', ''),
     ])
 
     return NextResponse.json({ ok: true })
   } catch (error) {
-    console.error('[rd-station] settings delete error:', error)
-    return NextResponse.json({ error: 'Falha ao remover configuracoes do RD Station' }, { status: 500 })
+    console.error('[RD Station] settings delete error:', error)
+    return NextResponse.json({ error: 'Falha ao remover configurações do RD Station' }, { status: 500 })
   }
 }
