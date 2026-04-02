@@ -123,7 +123,7 @@ const CompactSidebar = memo(function CompactSidebar({
           role="img"
           aria-label="Logo Tramontana Zap"
         >
-          <img src="/tramontana-logo.svg" alt="Tramontana" className="h-8 w-8 object-contain" />
+          <img src="/tramontana-logo-full.png" alt="Tramontana" className="h-8 object-contain" />
         </div>
         <nav className="flex flex-1 flex-col items-center gap-1.5 pt-1" aria-label="Menu principal">
           {navItems.map((item) => {
@@ -242,11 +242,7 @@ const ExpandedSidebar = memo(function ExpandedSidebar({
             role="img"
             aria-label="Logo Tramontana Zap"
           >
-            <img src="/tramontana-logo.svg" alt="Tramontana" className="h-9 w-9 object-contain" />
-          </div>
-          <div>
-            <span className="text-xl font-bold text-[var(--ds-text-primary)] tracking-tight block font-[var(--ds-font-display)]">Tramontana Zap</span>
-            <span className="text-[10px] uppercase tracking-widest font-bold text-[var(--ds-brand-secondary)] block">Consórcios</span>
+            <img src="/tramontana-logo-full.png" alt="Tramontana Consórcios" className="h-10 object-contain" />
           </div>
           <button
             type="button"
