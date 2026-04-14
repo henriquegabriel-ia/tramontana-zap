@@ -238,11 +238,11 @@ const ExpandedSidebar = memo(function ExpandedSidebar({
       <div className="flex h-full flex-col p-4">
         <div className="h-16 flex items-center px-2 mb-6">
           <div
-            className="w-10 h-10 flex items-center justify-center mr-3"
+            className="flex-1 flex items-center"
             role="img"
             aria-label="Logo Tramontana Zap"
           >
-            <img src="/tramontana-logo-full.png" alt="Tramontana Consórcios" className="h-10 object-contain" />
+            <img src="/tramontana-logo-full.png" alt="Tramontana Consórcios" className="h-8 max-w-[160px] object-contain" />
           </div>
           <button
             type="button"
