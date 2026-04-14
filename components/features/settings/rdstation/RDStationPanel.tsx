@@ -197,9 +197,9 @@ export function RDStationPanel() {
         }),
       });
       if (!res.ok) throw new Error();
-      toast.success('Configuracao salva com sucesso');
+      toast.success('Configuração salva com sucesso');
     } catch {
-      toast.error('Erro ao salvar configuracao');
+      toast.error('Erro ao salvar configuração');
     } finally {
       setSavingConfig(false);
     }
@@ -245,7 +245,7 @@ export function RDStationPanel() {
     }
 
     resetActionForm();
-    toast.success('Automacao salva');
+    toast.success('Automação salva');
   };
 
   const handleEditAction = (action: StageAction) => {
@@ -259,7 +259,7 @@ export function RDStationPanel() {
 
   const handleDeleteAction = (id: string) => {
     setStageActions((prev) => prev.filter((a) => a.id !== id));
-    toast.success('Automacao removida');
+    toast.success('Automação removida');
   };
 
   const handleCopyWebhook = async () => {
@@ -287,11 +287,11 @@ export function RDStationPanel() {
   return (
     <div className="glass-panel rounded-2xl p-8 space-y-8">
       {/* ============================================================ */}
-      {/* Section 1: Conexao RD Station                                */}
+      {/* Section 1: Conexão RD Station                                */}
       {/* ============================================================ */}
       <section>
         <SectionHeader
-          title="Conexao RD Station"
+          title="Conexão RD Station"
           description="Conecte sua conta do RD Station Marketing e CRM."
           color="brand"
           icon={Link}
@@ -379,12 +379,12 @@ export function RDStationPanel() {
       </section>
 
       {/* ============================================================ */}
-      {/* Section 2: Pipeline & Stage Padrao                           */}
+      {/* Section 2: Pipeline & Stage Padrão                           */}
       {/* ============================================================ */}
       <section>
         <SectionHeader
-          title="Pipeline & Stage Padrao"
-          description="Defina o pipeline e stage padrao para novos deals."
+          title="Pipeline & Stage Padrão"
+          description="Defina o pipeline e stage padrão para novos deals."
           color="brand"
           icon={Settings}
           className="mb-6"
@@ -434,7 +434,7 @@ export function RDStationPanel() {
 
             {/* Stage dropdown */}
             <Container variant="subtle" padding="sm">
-              <label className="text-xs text-[var(--ds-text-secondary)] mb-2 block">Stage Padrao</label>
+              <label className="text-xs text-[var(--ds-text-secondary)] mb-2 block">Stage Padrão</label>
               <div className="relative">
                 <select
                   value={selectedStageId}
@@ -491,7 +491,7 @@ export function RDStationPanel() {
                 ) : (
                   <Check size={14} />
                 )}
-                {savingConfig ? 'Salvando...' : 'Salvar Configuracao'}
+                {savingConfig ? 'Salvando...' : 'Salvar Configuração'}
               </button>
             </div>
           </div>
@@ -503,8 +503,8 @@ export function RDStationPanel() {
       {/* ============================================================ */}
       <section>
         <SectionHeader
-          title="Automacoes por Stage"
-          description="Configure mensagens automaticas quando deals mudarem de stage."
+          title="Automações por Stage"
+          description="Configure mensagens automáticas quando deals mudarem de stage."
           color="brand"
           icon={ArrowRight}
           className="mb-6"
@@ -557,7 +557,7 @@ export function RDStationPanel() {
         {stageActions.length === 0 && !showActionForm && (
           <Container variant="subtle" padding="sm" className="mb-4">
             <div className="text-sm text-[var(--ds-text-muted)] text-center py-4">
-              Nenhuma automacao configurada. Adicione uma abaixo.
+              Nenhuma automação configurada. Adicione uma abaixo.
             </div>
           </Container>
         )}
@@ -567,7 +567,7 @@ export function RDStationPanel() {
           <Container variant="default" padding="lg" className="mb-4">
             <div className="space-y-4">
               <div className="text-sm font-semibold text-[var(--ds-text-primary)]">
-                {editingActionId ? 'Editar Automacao' : 'Nova Automacao'}
+                {editingActionId ? 'Editar Automação' : 'Nova Automação'}
               </div>
 
               {/* Stage select */}
@@ -649,7 +649,7 @@ export function RDStationPanel() {
                     className="w-full bg-[var(--ds-bg-surface)] border border-[var(--ds-border-default)] rounded-xl px-4 py-3 text-sm text-[var(--ds-text-primary)] placeholder:text-[var(--ds-text-muted)] resize-none"
                   />
                   <p className="mt-1 text-[11px] text-[var(--ds-text-muted)]">
-                    Variaveis disponiveis: {'{{nome}}'}, {'{{deal}}'}, {'{{stage}}'}
+                    Variáveis disponíveis: {'{{nome}}'}, {'{{deal}}'}, {'{{stage}}'}
                   </p>
                 </div>
               )}
@@ -685,7 +685,7 @@ export function RDStationPanel() {
             className="h-9 px-4 rounded-lg border border-dashed border-[var(--ds-border-default)] text-xs text-[var(--ds-text-secondary)] hover:text-[var(--ds-text-primary)] hover:border-purple-500/50 transition-colors inline-flex items-center gap-2 w-full justify-center"
           >
             <Plus size={14} />
-            Adicionar Automacao
+            Adicionar Automação
           </button>
         )}
       </section>
@@ -696,7 +696,7 @@ export function RDStationPanel() {
       <section>
         <SectionHeader
           title="Webhook"
-          description="URL para receber notificacoes do RD Station via webhook."
+          description="URL para receber notificações do RD Station via webhook."
           color="info"
           icon={Zap}
           className="mb-6"

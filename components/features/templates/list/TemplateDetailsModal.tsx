@@ -170,7 +170,7 @@ export const TemplateDetailsModal: React.FC<TemplateDetailsModalProps> = ({
             className="flex-1 py-2 bg-[var(--ds-bg-surface)]/30 text-slate-200 border border-[var(--ds-border-subtle)] rounded-lg font-medium hover:bg-[var(--ds-bg-hover)] transition-colors flex items-center justify-center gap-2 text-sm"
           >
             <Copy size={16} />
-            Copiar codigo
+            Copiar código
           </button>
           <button
             onClick={onClose}

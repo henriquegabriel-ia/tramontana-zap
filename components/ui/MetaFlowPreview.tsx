@@ -842,8 +842,8 @@ export function MetaFlowPreview(props: {
           </div>
           <button
             type="button"
-            aria-label="Mais opcoes do preview"
-            title="Mais opcoes"
+            aria-label="Mais opções do preview"
+            title="Mais opções"
             className="h-9 w-9 rounded-full hover:bg-[var(--ds-bg-hover)] flex items-center justify-center text-slate-200"
           >
             <MoreVertical className="h-5 w-5" />

@@ -24,7 +24,7 @@ export const CampaignStatsGrid: React.FC<CampaignStatsGridProps> = ({
       <DetailCard
         title="Enviadas"
         value={Number(sentCount || 0).toLocaleString()}
-        subvalue={`${recipients ?? 0} destinatarios`}
+        subvalue={`${recipients ?? 0} destinatários`}
         icon={Clock}
         color="#a1a1aa"
         isActive={filterStatus === MessageStatus.SENT}
@@ -68,7 +68,7 @@ export const CampaignStatsGrid: React.FC<CampaignStatsGridProps> = ({
       <DetailCard
         title="Ignoradas"
         value={skippedCount.toLocaleString()}
-        subvalue="Variaveis/telefones invalidos (pre-check)"
+        subvalue="Variáveis/telefones inválidos (pre-check)"
         icon={Ban}
         color="#f59e0b"
         isActive={filterStatus === MessageStatus.SKIPPED}
@@ -77,7 +77,7 @@ export const CampaignStatsGrid: React.FC<CampaignStatsGridProps> = ({
       <DetailCard
         title="Falhas"
         value={Number(failedCount || 0).toLocaleString()}
-        subvalue="Numeros invalidos ou bloqueio"
+        subvalue="Números inválidos ou bloqueio"
         icon={AlertCircle}
         color="#ef4444"
         isActive={filterStatus === MessageStatus.FAILED}

@@ -41,7 +41,7 @@ export function WizardSidebar({
         </div>
         <div>
           <div className="text-sm font-medium text-[var(--ds-text-primary)]">Google Calendar</div>
-          <div className="text-xs text-[var(--ds-text-muted)]">Configuracao</div>
+          <div className="text-xs text-[var(--ds-text-muted)]">Configuração</div>
         </div>
       </div>
 

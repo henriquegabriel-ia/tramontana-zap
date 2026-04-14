@@ -206,7 +206,7 @@ export function ConfigurationOverlay({ overlayId }: ConfigurationOverlayProps) {
   const handleCopyCode = useCallback(() => {
     if (!selectedNode) return;
     navigator.clipboard.writeText(generateNodeCode(selectedNode));
-    toast.success("Codigo cópiado");
+    toast.success("Código copiado");
   }, [selectedNode]);
 
   const handleRefreshRuns = async () => {
@@ -219,9 +219,9 @@ export function ConfigurationOverlay({ overlayId }: ConfigurationOverlayProps) {
 
   const handleDeleteAllRuns = () => {
     push(ConfirmOverlay, {
-      title: "Excluir todas as execucoes",
+      title: "Excluir todas as execuções",
       message:
-        "Tem certeza que deseja excluir todas as execucoes do fluxo? Essa ação nao pode ser desfeita.",
+        "Tem certeza que deseja excluir todas as execuções do fluxo? Essa ação não pode ser desfeita.",
       confirmLabel: "Excluir",
       confirmVariant: "destructive" as const,
       onConfirm: async () => {
@@ -232,10 +232,10 @@ export function ConfigurationOverlay({ overlayId }: ConfigurationOverlayProps) {
           if (refreshRunsRef.current) {
             await refreshRunsRef.current();
           }
-          toast.success("Execucoes excluidas");
+          toast.success("Execuções excluídas");
         } catch (error) {
           console.error("Failed to delete runs:", error);
-          toast.error("Falha ao excluir execucoes");
+          toast.error("Falha ao excluir execuções");
         }
       },
     });
@@ -262,9 +262,9 @@ export function ConfigurationOverlay({ overlayId }: ConfigurationOverlayProps) {
         case "properties":
           return "Fluxo";
         case "code":
-          return "Codigo";
+          return "Código";
         case "runs":
-          return "Execucoes";
+          return "Execuções";
         default:
           return "Fluxo";
       }
@@ -273,9 +273,9 @@ export function ConfigurationOverlay({ overlayId }: ConfigurationOverlayProps) {
       case "properties":
         return "Propriedades";
       case "code":
-        return "Codigo";
+        return "Código";
       case "runs":
-        return "Execucoes";
+        return "Execuções";
       default:
         return "Propriedades";
     }
@@ -351,7 +351,7 @@ export function ConfigurationOverlay({ overlayId }: ConfigurationOverlayProps) {
   // Handle copy workflow code
   const handleCopyWorkflowCode = () => {
     navigator.clipboard.writeText(workflowCode);
-    toast.success("Codigo cópiado");
+    toast.success("Código copiado");
   };
 
   // Handle delete edge
@@ -553,7 +553,7 @@ export function ConfigurationOverlay({ overlayId }: ConfigurationOverlayProps) {
             type="button"
           >
             <Code className="size-5" />
-            Codigo
+            Código
           </button>
           {isOwner && (
             <button
@@ -566,7 +566,7 @@ export function ConfigurationOverlay({ overlayId }: ConfigurationOverlayProps) {
               type="button"
             >
               <Play className="size-5" />
-              Execucoes
+              Execuções
             </button>
           )}
         </div>
@@ -787,7 +787,7 @@ export function ConfigurationOverlay({ overlayId }: ConfigurationOverlayProps) {
             type="button"
           >
             <Code className="size-5" />
-            Codigo
+            Código
           </button>
         )}
         {isOwner && (
@@ -799,7 +799,7 @@ export function ConfigurationOverlay({ overlayId }: ConfigurationOverlayProps) {
             type="button"
           >
             <Play className="size-5" />
-            Execucoes
+            Execuções
           </button>
         )}
       </div>

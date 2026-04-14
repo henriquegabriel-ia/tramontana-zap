@@ -100,7 +100,7 @@ export const WizardPreviewPanel: React.FC<WizardPreviewPanelProps> = ({
       <div className="flex flex-col h-full">
         <div className="flex items-center justify-between mb-3">
           <div className="flex items-center gap-2 text-[var(--ds-text-secondary)] text-xs uppercase tracking-widest font-bold">
-            <Eye size={14} /> Pre-visualizacao
+            <Eye size={14} /> Pré-visualização
           </div>
           {step === 2 && isOverLimit && (
             <span className="text-[var(--ds-status-error-text)] text-[10px]">(ajuste os contatos)</span>

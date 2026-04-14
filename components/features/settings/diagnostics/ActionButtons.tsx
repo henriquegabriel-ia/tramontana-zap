@@ -41,7 +41,7 @@ export function ActionButtons(props: ActionButtonsProps) {
               className="px-3 py-2 rounded-lg bg-primary-500 hover:bg-primary-400 text-black font-medium transition-colors text-sm inline-flex items-center gap-2 disabled:opacity-50"
               title={
                 props.disabled
-                  ? props.disabledReason || 'Acao temporariamente indisponivel'
+                  ? props.disabledReason || 'Ação temporariamente indisponível'
                   : a.endpoint
                     ? `${a.method || 'POST'} ${a.endpoint}`
                     : undefined

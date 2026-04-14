@@ -78,12 +78,12 @@ export const MessageLogTable: React.FC<MessageLogTableProps> = ({
         <table className="w-full text-left text-sm">
           <thead className="bg-[var(--ds-bg-surface)]/30 text-[var(--ds-text-muted)] uppercase text-xs tracking-widest">
             <tr>
-              <th className="px-6 py-3 font-medium">Destinatario</th>
+              <th className="px-6 py-3 font-medium">Destinatário</th>
               <th className="px-6 py-3 font-medium">Telefone</th>
               <th className="px-6 py-3 font-medium">Status</th>
-              <th className="px-6 py-3 font-medium">Horario</th>
+              <th className="px-6 py-3 font-medium">Horário</th>
               <th className="px-6 py-3 font-medium">Info</th>
-              <th className="px-6 py-3 font-medium">Acoes</th>
+              <th className="px-6 py-3 font-medium">Ações</th>
             </tr>
           </thead>
           <tbody className="divide-y divide-white/5">

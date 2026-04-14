@@ -82,39 +82,39 @@ export function StepNavigation({
           Voltar
         </button>
         <div className="text-center text-xs text-[var(--ds-text-muted)]">
-          {step === 1 && !isConfigComplete && 'Complete a configuracao para continuar'}
+          {step === 1 && !isConfigComplete && 'Complete a configuração para continuar'}
           {step === 2 && !isContentComplete && (
             !isHeaderFormatValid
-              ? 'Tipo de cabecalho invalido'
+              ? 'Tipo de cabeçalho inválido'
               : !isHeaderVariableValid
-                ? 'Cabecalho permite apenas 1 variavel'
+                ? 'Cabeçalho permite apenas 1 variável'
                 : hasInvalidNamed
-                  ? 'Corrija as variaveis: use minusculas e underscore'
+                  ? 'Corrija as variáveis: use minúsculas e underscore'
                 : hasDuplicateNamed
-                  ? 'Nomes de variavel devem ser unicos'
+                  ? 'Nomes de variável devem ser únicos'
                 : hasMissingPositional
-                  ? 'Sequencia posicional deve comecar em {{1}} e nao ter buracos'
+                  ? 'Sequência posicional deve começar em {{1}} e não ter buracos'
                 : hasInvalidPositional
-                  ? 'No modo numerico, use apenas {{1}}, {{2}}...'
+                  ? 'No modo numérico, use apenas {{1}}, {{2}}...'
                 : footerHasVariables
-                  ? 'Rodape nao permite variaveis'
+                  ? 'Rodapé não permite variáveis'
                 : headerEdgeParameter.starts || headerEdgeParameter.ends
-                  ? 'O cabecalho nao pode comecar nem terminar com variavel'
+                  ? 'O cabeçalho não pode começar nem terminar com variável'
                 : bodyEdgeParameter.starts || bodyEdgeParameter.ends
-                  ? 'O corpo nao pode comecar nem terminar com variavel'
+                  ? 'O corpo não pode começar nem terminar com variável'
                 : hasLengthErrors
                   ? 'Revise os limites de caracteres'
                 : ltoHeaderInvalid
-                  ? 'LTO aceita apenas cabecalho imagem/video'
+                  ? 'LTO aceita apenas cabeçalho imagem/vídeo'
                 : ltoFooterInvalid
-                  ? 'LTO nao permite rodape'
+                  ? 'LTO não permite rodapé'
                 : 'Preencha o corpo do template para continuar'
           )}
           {step === 3 && (
             isButtonsValid
-              ? 'Reveja os botoes e envie para aprovacao'
+              ? 'Reveja os botões e envie para aprovação'
               : buttonErrors.length
-                ? 'Revise as regras dos botoes'
+                ? 'Revise as regras dos botões'
                 : carouselErrors.length
                   ? 'Revise o carousel'
                   : limitedTimeOfferCategoryInvalid
@@ -125,7 +125,7 @@ export function StepNavigation({
           )}
         </div>
         <div className="flex items-center gap-2">
-          {/* Botao Salvar Rascunho */}
+          {/* Botão Salvar Rascunho */}
           {onSaveDraft && (
             <button
               type="button"
@@ -144,7 +144,7 @@ export function StepNavigation({
             </button>
           )}
 
-          {/* Botao Continuar/Enviar */}
+          {/* Botão Continuar/Enviar */}
           <button
             type="button"
             onClick={() => {

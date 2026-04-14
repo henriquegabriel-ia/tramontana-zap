@@ -34,7 +34,7 @@ export function ExportWorkflowOverlay({
         },
       ]}
       overlayId={overlayId}
-      title="Exportar fluxo como codigo"
+      title="Exportar fluxo como código"
     >
       <div className="flex items-center gap-2 text-muted-foreground">
         <Download className="size-5" />
@@ -44,7 +44,7 @@ export function ExportWorkflowOverlay({
       </div>
 
       <p className="mt-4 text-muted-foreground text-sm">
-        Isso gera um projeto Next.js completo com o codigo do fluxo. Depois de
+        Isso gera um projeto Next.js completo com o código do fluxo. Depois de
         exportar, voce pode executa-lo fora do Builder, publicar na Vercel ou
         integrar em outras aplicações.
       </p>

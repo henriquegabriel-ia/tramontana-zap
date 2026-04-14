@@ -33,12 +33,12 @@ export function CalendarStatusSection({
           </div>
           {calendarAuthStatus?.calendar?.calendarSummary && (
             <div className="mt-2 text-xs text-[var(--ds-text-secondary)]">
-              Calendario: {calendarAuthStatus.calendar.calendarSummary}
+              Calendário: {calendarAuthStatus.calendar.calendarSummary}
             </div>
           )}
           {calendarAuthStatus?.connected && (
             <div className="mt-2 text-xs text-[var(--ds-text-secondary)]">
-              Conta: {calendarAuthStatus?.calendar?.accountEmail || 'nao disponivel'}
+              Conta: {calendarAuthStatus?.calendar?.accountEmail || 'não disponível'}
             </div>
           )}
           {calendarTestResult?.ok && calendarTestResult?.link && (
@@ -69,7 +69,7 @@ export function CalendarStatusSection({
             onClick={handlePrimaryCalendarAction}
             className="h-9 px-4 rounded-lg bg-primary-600 text-white hover:bg-primary-500 dark:bg-white dark:text-black dark:hover:bg-neutral-100 text-xs font-medium transition-colors"
           >
-            {calendarAuthStatus?.connected ? 'Gerenciar conexao' : 'Conectar Google Calendar'}
+            {calendarAuthStatus?.connected ? 'Gerenciar conexão' : 'Conectar Google Calendar'}
           </button>
           {calendarAuthStatus?.connected && (
             <>
@@ -82,7 +82,7 @@ export function CalendarStatusSection({
                 }}
                 className="h-9 px-3 rounded-lg border border-[var(--ds-border-default)] bg-[var(--ds-bg-hover)] text-xs text-[var(--ds-text-primary)] hover:bg-[var(--ds-bg-surface)] transition-colors"
               >
-                Trocar calendario
+                Trocar calendário
               </button>
               <button
                 type="button"

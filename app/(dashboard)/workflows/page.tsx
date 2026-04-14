@@ -100,7 +100,7 @@ export default function WorkflowsPage() {
     queryKey: ["builder-default-workflow"],
     queryFn: async () => {
       const response = await fetch("/api/settings/workflow-builder");
-      if (!response.ok) throw new Error("Falha ao buscar fluxo padrao");
+      if (!response.ok) throw new Error("Falha ao buscar fluxo padrão");
       return response.json() as Promise<{ defaultWorkflowId: string }>;
     },
     staleTime: 5000,
@@ -229,14 +229,14 @@ export default function WorkflowsPage() {
       });
       if (!response.ok) {
         const error = await response.json().catch(() => ({}));
-        throw new Error(error?.error || "Falha ao definir fluxo padrao");
+        throw new Error(error?.error || "Falha ao definir fluxo padrão");
       }
       setDefaultWorkflowId(workflowId);
-      toast.success("Fluxo padrao atualizado");
+      toast.success("Fluxo padrão atualizado");
       await defaultWorkflowQuery.refetch();
     } catch (error) {
       console.error("Failed to set default workflow:", error);
-      toast.error("Falha ao definir fluxo padrao");
+      toast.error("Falha ao definir fluxo padrão");
     } finally {
       setIsSettingDefault(false);
     }
@@ -336,7 +336,7 @@ export default function WorkflowsPage() {
                   </div>
                   {workflow.id === defaultWorkflowId && (
                     <div className="text-xs text-purple-300/80">
-                      Fluxo padrao
+                      Fluxo padrão
                     </div>
                     )}
                     {workflow.lastPublishedVersion && (
@@ -398,7 +398,7 @@ export default function WorkflowsPage() {
                           }}
                           disabled={isSettingDefault}
                         >
-                          Marcar como padrao
+                          Marcar como padrão
                         </DropdownMenuItem>
                       )}
                       <DropdownMenuItem

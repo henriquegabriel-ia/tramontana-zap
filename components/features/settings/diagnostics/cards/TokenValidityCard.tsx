@@ -52,7 +52,7 @@ export function TokenValidityCard({ data, checks }: TokenValidityCardProps) {
         : 'Autentica via /me, mas nao da pra provar escopos/expiracao sem /debug_token'
     }
     if (meCheck?.status === 'fail') return 'Falha ao autenticar (/me) — token pode estar invalido/expirado'
-    return 'Sem informacao suficiente (ainda carregando ou chamada falhou)'
+    return 'Sem informação suficiente (ainda carregando ou chamada falhou)'
   })()
 
   const nextSteps = (() => {

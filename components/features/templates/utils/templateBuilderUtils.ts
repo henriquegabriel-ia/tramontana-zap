@@ -58,8 +58,8 @@ export function countButtonsByType(buttons: any[], type: ButtonType): number {
 export function newButtonForType(type: ButtonType): any {
   if (type === 'URL') return { type, text: '', url: 'https://' }
   if (type === 'PHONE_NUMBER') return { type, text: '', phone_number: '' }
-  if (type === 'COPY_CODE') return { type, text: 'Copiar codigo', example: 'CODE123' }
-  if (type === 'OTP') return { type, otp_type: 'COPY_CODE', text: 'Copiar codigo' }
+  if (type === 'COPY_CODE') return { type, text: 'Copiar código', example: 'CODE123' }
+  if (type === 'OTP') return { type, otp_type: 'COPY_CODE', text: 'Copiar código' }
   if (type === 'FLOW') return { type, text: '', flow_id: '', flow_action: 'navigate' }
   return { type, text: '' }
 }
@@ -231,14 +231,14 @@ export function validateCarouselSpec(carousel: any): string[] {
       (c: any) => String(c?.type || '').toUpperCase() === 'HEADER'
     )
     const body = components.find((c: any) => String(c?.type || '').toUpperCase() === 'BODY')
-    if (!header) errors.push(`Card ${index + 1}: header e obrigatorio.`)
+    if (!header) errors.push(`Card ${index + 1}: header é obrigatório.`)
     if (header) {
       const format = String(header?.format || '').toUpperCase()
       if (format !== 'IMAGE' && format !== 'VIDEO') {
         errors.push(`Card ${index + 1}: header deve ser IMAGE ou VIDEO.`)
       }
     }
-    if (!body) errors.push(`Card ${index + 1}: body e obrigatorio.`)
+    if (!body) errors.push(`Card ${index + 1}: body é obrigatório.`)
     const buttonComponent = components.find(
       (c: any) => String(c?.type || '').toUpperCase() === 'BUTTONS'
     )
@@ -246,7 +246,7 @@ export function validateCarouselSpec(carousel: any): string[] {
       ? buttonComponent.buttons.length
       : 0
     if (buttonCount > 2) {
-      errors.push(`Card ${index + 1}: maximo de 2 botoes.`)
+      errors.push(`Card ${index + 1}: máximo de 2 botões.`)
     }
   })
   return errors

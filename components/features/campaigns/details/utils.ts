@@ -61,8 +61,8 @@ export const computeBaselineThroughputMedian = (baseline: any[]): number | null 
 
 export const computePerfSourceLabel = (source: string | undefined): { label: string; tone: string } => {
   const s = String(source || '').trim();
-  if (s === 'run_metrics') return { label: 'Dados: avancados', tone: 'text-purple-300 bg-purple-500/10 border-purple-500/20' };
-  if (s === 'campaigns_fallback') return { label: 'Dados: basicos', tone: 'text-amber-200 bg-amber-500/10 border-amber-500/20' };
+  if (s === 'run_metrics') return { label: 'Dados: avançados', tone: 'text-purple-300 bg-purple-500/10 border-purple-500/20' };
+  if (s === 'campaigns_fallback') return { label: 'Dados: básicos', tone: 'text-amber-200 bg-amber-500/10 border-amber-500/20' };
   if (!s) return { label: 'Dados: —', tone: 'text-slate-500 bg-[var(--ds-bg-elevated)] border-[var(--ds-border-subtle)]' };
   return { label: `Dados: ${s}`, tone: 'text-slate-500 bg-[var(--ds-bg-elevated)] border-[var(--ds-border-subtle)]' };
 };
@@ -88,7 +88,7 @@ export const computeLimiterInfo = (
       value: 'OK',
       subvalue: hasMetaAvg
         ? `Sem 130429. Latencia media da Meta: ${formatMs(metaAvg)}.`
-        : 'Sem 130429 detectado nesta execucao.',
+        : 'Sem 130429 detectado nesta execução.',
       color: '#3b82f6',
     };
   }
@@ -97,15 +97,15 @@ export const computeLimiterInfo = (
   if (metricsSource === 'campaigns_fallback') {
     return {
       value: '—',
-      subvalue: 'Sinais da Meta (130429/latencia) exigem metricas avancadas (run_metrics).',
+      subvalue: 'Sinais da Meta (130429/latência) exigem métricas avançadas (run_metrics).',
       color: '#3b82f6',
     };
   }
 
-  // Fonte avancada, mas sem telemetria util (ex.: execucao curta demais ou batch_metrics nao foi registrado)
+  // Fonte avançada, mas sem telemetria útil (ex.: execução curta demais ou batch_metrics não foi registrado)
   return {
     value: 'Sem telemetria',
-    subvalue: 'Esta execucao nao registrou sinal de 130429 nem latencia media da Meta. Rode uma campanha maior ou verifique se os batches estao gravando metricas.',
+    subvalue: 'Esta execução não registrou sinal de 130429 nem latência média da Meta. Rode uma campanha maior ou verifique se os batches estão gravando métricas.',
     color: '#3b82f6',
   };
 };

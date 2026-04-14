@@ -71,7 +71,7 @@ export const PreparingCampaignView: React.FC<PreparingCampaignViewProps> = ({
                 </div>
                 <div className="flex items-center gap-2 text-slate-300">
                   <Ban size={14} className="text-slate-400" />
-                  Verificando opt-out e supressoes
+                  Verificando opt-out e supressões
                 </div>
                 <div className="flex items-center gap-2 text-slate-300">
                   <FileText size={14} className="text-slate-400" />
@@ -88,7 +88,7 @@ export const PreparingCampaignView: React.FC<PreparingCampaignViewProps> = ({
 
         {Array.isArray(campaign.pendingContacts) && campaign.pendingContacts.length > 0 && (
           <Container variant="glass" padding="lg">
-            <h4 className="text-white font-semibold">Previa dos destinatarios</h4>
+            <h4 className="text-white font-semibold">Prévia dos destinatários</h4>
             <p className="text-sm text-slate-400 mt-1">
               Lista carregada localmente (a ordem final pode mudar apos o pre-check).
             </p>
@@ -115,7 +115,7 @@ export const PreparingCampaignView: React.FC<PreparingCampaignViewProps> = ({
 
         <Alert variant="info" hideIcon={false}>
           <AlertDescription>
-            Se ficar preso aqui por mais de 1-2 minutos, verifique sua configuracao da Meta/Supabase e tente novamente.
+            Se ficar preso aqui por mais de 1-2 minutos, verifique sua configuração da Meta/Supabase e tente novamente.
           </AlertDescription>
         </Alert>
       </div>

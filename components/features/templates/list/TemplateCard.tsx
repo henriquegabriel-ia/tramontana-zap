@@ -132,7 +132,7 @@ export const TemplateCard = React.memo(
         </p>
       </div>
 
-      {/* Footer: Data e Acoes */}
+      {/* Footer: Data e Ações */}
       <div className="mt-3 flex items-center justify-between pt-3 border-t border-[var(--ds-border-subtle)]">
         <span className="text-xs text-[var(--ds-text-muted)] font-mono">
           {new Date(template.lastUpdated).toLocaleDateString('pt-BR')}

@@ -33,7 +33,7 @@ export function CopyCodeButtonFields({
   return (
     <div className="grid grid-cols-1 md:grid-cols-2 gap-6 items-end">
       <div className="space-y-1">
-        <div className="text-xs font-medium text-[var(--ds-text-secondary)]">Codigo da oferta (max {maxCodeLength})</div>
+        <div className="text-xs font-medium text-[var(--ds-text-secondary)]">Código da oferta (max {maxCodeLength})</div>
         <Input
           value={code}
           onChange={handleCodeChange}
@@ -42,7 +42,7 @@ export function CopyCodeButtonFields({
         />
       </div>
       <div className="text-xs text-[var(--ds-text-muted)]">
-        O codigo e exibido ao usuario e pode ser copiado.
+        O código é exibido ao usuário e pode ser copiado.
       </div>
     </div>
   )

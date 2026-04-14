@@ -280,13 +280,13 @@ describe('computeBaselineThroughputMedian', () => {
 describe('computePerfSourceLabel', () => {
   it('retorna label correto para run_metrics', () => {
     const result = computePerfSourceLabel('run_metrics')
-    expect(result.label).toBe('Dados: avancados')
+    expect(result.label).toBe('Dados: avançados')
     expect(result.tone).toBe('text-purple-300 bg-purple-500/10 border-purple-500/20')
   })
 
   it('retorna label correto para campaigns_fallback', () => {
     const result = computePerfSourceLabel('campaigns_fallback')
-    expect(result.label).toBe('Dados: basicos')
+    expect(result.label).toBe('Dados: básicos')
     expect(result.tone).toBe('text-amber-200 bg-amber-500/10 border-amber-500/20')
   })
 
@@ -316,7 +316,7 @@ describe('computePerfSourceLabel', () => {
 
   it('faz trim em sources com espacos', () => {
     const result = computePerfSourceLabel('  run_metrics  ')
-    expect(result.label).toBe('Dados: avancados')
+    expect(result.label).toBe('Dados: avançados')
   })
 })
 
@@ -352,7 +352,7 @@ describe('computeLimiterInfo', () => {
         'run_metrics'
       )
       expect(result.value).toBe('OK')
-      expect(result.subvalue).toBe('Sem 130429 detectado nesta execucao.')
+      expect(result.subvalue).toBe('Sem 130429 detectado nesta execução.')
     })
 
     it('retorna OK sem latencia quando meta_avg_ms e zero', () => {
@@ -361,7 +361,7 @@ describe('computeLimiterInfo', () => {
         'run_metrics'
       )
       expect(result.value).toBe('OK')
-      expect(result.subvalue).toBe('Sem 130429 detectado nesta execucao.')
+      expect(result.subvalue).toBe('Sem 130429 detectado nesta execução.')
     })
 
     it('retorna OK sem latencia quando meta_avg_ms e negativo', () => {
@@ -370,7 +370,7 @@ describe('computeLimiterInfo', () => {
         'run_metrics'
       )
       expect(result.value).toBe('OK')
-      expect(result.subvalue).toBe('Sem 130429 detectado nesta execucao.')
+      expect(result.subvalue).toBe('Sem 130429 detectado nesta execução.')
     })
 
     it('formata latencia em segundos para valores >= 1000ms', () => {
@@ -386,7 +386,7 @@ describe('computeLimiterInfo', () => {
     it('retorna traço para campaigns_fallback', () => {
       const result = computeLimiterInfo({}, 'campaigns_fallback')
       expect(result.value).toBe('—')
-      expect(result.subvalue).toContain('metricas avancadas')
+      expect(result.subvalue).toContain('métricas avançadas')
       expect(result.color).toBe('#3b82f6')
     })
 

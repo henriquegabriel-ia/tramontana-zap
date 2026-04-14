@@ -12,10 +12,10 @@ export function EmptyState() {
         <Play className="h-6 w-6 text-muted-foreground" />
       </div>
       <div className="font-medium text-foreground text-sm">
-        Nenhuma execucao ainda
+        Nenhuma execução ainda
       </div>
       <div className="mt-1 text-muted-foreground text-xs">
-        Execute o fluxo para ver execucoes aqui
+        Execute o fluxo para ver execuções aqui
       </div>
     </div>
   );

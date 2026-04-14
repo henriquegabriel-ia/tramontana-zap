@@ -91,7 +91,7 @@ export function StepButtons({
 
         {/* Button Lists */}
         {!hasButtons ? (
-          <div className="text-sm text-[var(--ds-text-muted)]">Nenhum botao</div>
+          <div className="text-sm text-[var(--ds-text-muted)]">Nenhum botão</div>
         ) : (
           <div className="space-y-5">
             {hasQuickReplies && (

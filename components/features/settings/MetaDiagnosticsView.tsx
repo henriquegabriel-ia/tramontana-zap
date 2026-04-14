@@ -123,7 +123,7 @@ export function MetaDiagnosticsView(props: MetaDiagnosticsViewProps) {
     <Page>
       <PageHeader>
         <div>
-          <PageTitle>Diagnostico Meta</PageTitle>
+          <PageTitle>Diagnóstico Meta</PageTitle>
           <PageDescription>
             Responde em linguagem simples: <b>posso enviar?</b> <b>meu token esta ok?</b> <b>vou receber delivered/read?</b>
           </PageDescription>
@@ -142,10 +142,10 @@ export function MetaDiagnosticsView(props: MetaDiagnosticsViewProps) {
             onClick={() => copyToClipboard(reportText)}
             disabled={!reportText}
             className="px-4 py-2 rounded-xl bg-[var(--ds-bg-hover)] text-white hover:bg-[var(--ds-bg-hover)] border border-[var(--ds-border-subtle)] hover:border-[var(--ds-border-default)] transition-all text-sm font-medium flex items-center gap-2 disabled:opacity-50"
-            title={reportText ? 'Copiar relatorio resumido (redigido)' : 'Relatorio indisponivel'}
+            title={reportText ? 'Copiar relatório resumido (redigido)' : 'Relatório indisponível'}
           >
             <Copy size={16} />
-            {isCopied ? 'Copiado!' : 'Copiar relatorio'}
+            {isCopied ? 'Copiado!' : 'Copiar relatório'}
           </button>
 
           <button
@@ -186,7 +186,7 @@ export function MetaDiagnosticsView(props: MetaDiagnosticsViewProps) {
         <summary className="cursor-pointer list-none flex items-center justify-between gap-3">
           <div>
             <div className="text-xs text-slate-500">Mais detalhes</div>
-            <div className="mt-1 text-sm text-white">Selos, suporte e validacoes</div>
+            <div className="mt-1 text-sm text-white">Selos, suporte e validações</div>
           </div>
           <ChevronDown size={16} className="text-slate-400" />
         </summary>
@@ -206,7 +206,7 @@ export function MetaDiagnosticsView(props: MetaDiagnosticsViewProps) {
                 onClick={() => copyToClipboard(supportPacketText)}
                 disabled={!supportPacketText}
                 className="px-3 py-2 rounded-lg bg-[var(--ds-bg-hover)] text-white hover:bg-[var(--ds-bg-hover)] border border-[var(--ds-border-subtle)] hover:border-[var(--ds-border-default)] transition-all text-sm font-medium inline-flex items-center gap-2 disabled:opacity-50"
-                title={supportPacketText ? 'Copiar packet completo' : 'Indisponivel'}
+                title={supportPacketText ? 'Copiar packet completo' : 'Indisponível'}
               >
                 <LifeBuoy size={14} /> {isCopied ? 'Copiado!' : 'Copiar packet'}
               </button>
@@ -214,7 +214,7 @@ export function MetaDiagnosticsView(props: MetaDiagnosticsViewProps) {
                 onClick={() => copyToClipboard(reportText)}
                 disabled={!reportText}
                 className="px-3 py-2 rounded-lg bg-[var(--ds-bg-hover)] text-white hover:bg-[var(--ds-bg-hover)] border border-[var(--ds-border-subtle)] hover:border-[var(--ds-border-default)] transition-all text-sm font-medium inline-flex items-center gap-2 disabled:opacity-50"
-                title={reportText ? 'Copiar resumo' : 'Indisponivel'}
+                title={reportText ? 'Copiar resumo' : 'Indisponível'}
               >
                 <Copy size={14} /> Resumo
               </button>
@@ -233,7 +233,7 @@ export function MetaDiagnosticsView(props: MetaDiagnosticsViewProps) {
           simpleMode={simpleMode}
           lockedReason={
             lockedNow
-              ? `Bloqueado pela Meta (codigo ${META_BUSINESS_LOCKED_CODE}). Resolva no Business Manager e tente novamente.`
+              ? `Bloqueado pela Meta (código ${META_BUSINESS_LOCKED_CODE}). Resolva no Business Manager e tente novamente.`
               : undefined
           }
         />
@@ -249,7 +249,7 @@ export function MetaDiagnosticsView(props: MetaDiagnosticsViewProps) {
       <details className={containerVariants({ variant: 'glass', padding: 'md' }) + ' mb-6'}>
         <summary className="cursor-pointer list-none flex items-center justify-between gap-3">
           <div>
-            <div className="text-xs text-slate-500">Ferramentas avancadas</div>
+            <div className="text-xs text-slate-500">Ferramentas avançadas</div>
             <div className="mt-1 text-sm text-white">Simuladores e debug para suporte/aula</div>
           </div>
           <ChevronDown size={16} className="text-slate-400" />
@@ -277,7 +277,7 @@ export function MetaDiagnosticsView(props: MetaDiagnosticsViewProps) {
                 <li>Volte aqui e clique em <b>Atualizar</b>.</li>
               </ul>
               <div className="mt-3 text-xs text-slate-400">
-                Dica: configurando <b>Meta App ID/Secret</b> em Configuracoes, o diagnostico consegue validar escopos e origem do token via <span className="font-mono">/debug_token</span>.
+                Dica: configurando <b>Meta App ID/Secret</b> em Configurações, o diagnóstico consegue validar escopos e origem do token via <span className="font-mono">/debug_token</span>.
               </div>
             </div>
           </div>
@@ -297,7 +297,7 @@ export function MetaDiagnosticsView(props: MetaDiagnosticsViewProps) {
                 <li>Gere um novo token (recomendado: <b>System User</b> no Business Manager).</li>
                 <li>Atribua os ativos (WABA + Phone Number) ao System User antes de gerar o token.</li>
                 <li>Garanta os escopos <span className="font-mono">whatsapp_business_messaging</span> e <span className="font-mono">whatsapp_business_management</span>.</li>
-                <li>Atualize o token em <b>Ajustes</b> e rode o diagnostico novamente.</li>
+                <li>Atualize o token em <b>Ajustes</b> e rode o diagnóstico novamente.</li>
               </ul>
               <div className="mt-3 text-xs text-slate-400">
                 Dica: com <span className="font-mono">debug_token</span> habilitado, voce ve expiracao/escopos com prova.
@@ -314,12 +314,12 @@ export function MetaDiagnosticsView(props: MetaDiagnosticsViewProps) {
             <div className="min-w-0">
               <div className="text-white font-semibold">Como interpretar: erro 131042 (pagamento/conta)</div>
               <div className="text-sm text-slate-200/90 mt-1">
-                Esse codigo costuma aparecer quando ha problema de pagamento ou restricao de conta no Business Manager. E Meta-side.
+                Esse código costuma aparecer quando há problema de pagamento ou restrição de conta no Business Manager. É Meta-side.
               </div>
               <ul className="mt-3 list-disc pl-5 space-y-1 text-sm text-slate-200">
                 <li>Abra o <b>Business Manager</b> e verifique alertas de cobranca/pagamento.</li>
                 <li>Confirme se o WABA esta verificado e sem pendencias de revisao.</li>
-                <li>Apos corrigir, rode o diagnostico e faca um envio de teste.</li>
+                <li>Apos corrigir, rode o diagnóstico e faça um envio de teste.</li>
               </ul>
             </div>
           </div>
@@ -444,21 +444,21 @@ export function MetaDiagnosticsView(props: MetaDiagnosticsViewProps) {
                 <StatusBadge status={lock.kind === 'current' ? 'fail' : 'warn'} />
                 <h3 className="text-sm font-semibold text-white truncate">
                   {lock.kind === 'current'
-                    ? `Bloqueio atual detectado (codigo ${META_BUSINESS_LOCKED_CODE})`
-                    : `Sinal historico de bloqueio (codigo ${META_BUSINESS_LOCKED_CODE})`}
+                    ? `Bloqueio atual detectado (código ${META_BUSINESS_LOCKED_CODE})`
+                    : `Sinal histórico de bloqueio (código ${META_BUSINESS_LOCKED_CODE})`}
                 </h3>
               </div>
               <div className="mt-2 text-sm text-slate-200">
                 {lock.kind === 'current'
-                  ? 'O Health Status da Meta indica BLOQUEIO na cadeia de envio (APP/BUSINESS/WABA/PHONE/TEMPLATE). Enquanto isso estiver ativo, acoes e envios podem falhar — nao ha "auto-fix" via API aqui dentro.'
-                  : 'Detectamos o codigo 131031 em falhas recentes (ultimos 7 dias), mas o Health Status atual nao esta bloqueado. Isso pode ter sido temporario ou relacionado a uma tentativa antiga.'}
+                  ? 'O Health Status da Meta indica BLOQUEIO na cadeia de envio (APP/BUSINESS/WABA/PHONE/TEMPLATE). Enquanto isso estiver ativo, ações e envios podem falhar — não há "auto-fix" via API aqui dentro.'
+                  : 'Detectamos o código 131031 em falhas recentes (últimos 7 dias), mas o Health Status atual não está bloqueado. Isso pode ter sido temporário ou relacionado a uma tentativa antiga.'}
               </div>
               <div className="mt-3 text-sm text-slate-300 space-y-1">
                 <div>
                   <span className="text-slate-400">O que fazer:</span>
                 </div>
                 <ul className="list-disc pl-5 space-y-1">
-                  <li>Abra o Business Manager e verifique alertas de pagamento, verificacao e qualidade da conta.</li>
+                  <li>Abra o Business Manager e verifique alertas de pagamento, verificação e qualidade da conta.</li>
                   {lock.kind === 'current' ? (
                     <>
                       <li>Se nao houver caminho de auto-resolucao, abra um chamado no suporte da Meta para desbloqueio do WABA.</li>
@@ -466,14 +466,14 @@ export function MetaDiagnosticsView(props: MetaDiagnosticsViewProps) {
                     </>
                   ) : (
                     <>
-                      <li>Se o problema voltar a acontecer, use o "Copiar relatorio" e envie junto do <span className="font-mono">fbtrace_id</span> (quando houver) ao suporte da Meta.</li>
-                      <li>Se o objetivo agora e receber delivered/read, foque em ativar <span className="font-mono">messages</span> em <span className="font-mono">subscribed_apps</span> (botao "Ativar messages").</li>
+                      <li>Se o problema voltar a acontecer, use o "Copiar relatório" e envie junto do <span className="font-mono">fbtrace_id</span> (quando houver) ao suporte da Meta.</li>
+                      <li>Se o objetivo agora e receber delivered/read, foque em ativar <span className="font-mono">messages</span> em <span className="font-mono">subscribed_apps</span> (botão "Ativar messages").</li>
                     </>
                   )}
                 </ul>
               </div>
               <div className="mt-3 text-xs text-slate-400">
-                Evidencia: {lock.evidence?.source || 'diagnostico'}
+                Evidência: {lock.evidence?.source || 'diagnóstico'}
                 {typeof lock.evidence?.count === 'number' ? ` (ocorrencias: ${lock.evidence.count})` : ''}
               </div>
             </div>
@@ -483,10 +483,10 @@ export function MetaDiagnosticsView(props: MetaDiagnosticsViewProps) {
                 onClick={() => copyToClipboard(reportText)}
                 disabled={!reportText}
                 className="px-3 py-2 rounded-lg bg-[var(--ds-bg-hover)] text-white hover:bg-[var(--ds-bg-hover)] border border-[var(--ds-border-subtle)] hover:border-[var(--ds-border-default)] transition-all text-sm font-medium inline-flex items-center gap-2 disabled:opacity-50"
-                title={reportText ? 'Copiar relatorio para suporte' : 'Relatorio indisponivel'}
+                title={reportText ? 'Copiar relatório para suporte' : 'Relatório indisponível'}
               >
                 <Copy size={14} />
-                Copiar relatorio
+                Copiar relatório
               </button>
             </div>
           </div>
@@ -498,7 +498,7 @@ export function MetaDiagnosticsView(props: MetaDiagnosticsViewProps) {
         <div className="text-xs text-slate-400">Filtro:</div>
         {([
           { k: 'problems', label: 'Problemas' },
-          { k: 'actionable', label: 'Com acoes' },
+          { k: 'actionable', label: 'Com ações' },
           { k: 'all', label: 'Tudo' },
         ] as const).map((b) => (
           <button
@@ -537,7 +537,7 @@ export function MetaDiagnosticsView(props: MetaDiagnosticsViewProps) {
       <div className="space-y-3">
         {props.isLoading && (
           <Container variant="glass" padding="md" className="text-sm text-slate-400">
-            Carregando diagnostico...
+            Carregando diagnóstico...
           </Container>
         )}
 
@@ -572,8 +572,8 @@ export function MetaDiagnosticsView(props: MetaDiagnosticsViewProps) {
                       disabled={apiActionsDisabled}
                       disabledReason={
                         lock.kind === 'current'
-                          ? `Bloqueado pela Meta (codigo ${META_BUSINESS_LOCKED_CODE}). Resolva no Business Manager e tente novamente.`
-                          : 'Executando acao...'
+                          ? `Bloqueado pela Meta (código ${META_BUSINESS_LOCKED_CODE}). Resolva no Business Manager e tente novamente.`
+                          : 'Executando ação...'
                       }
                     />
 
@@ -598,7 +598,7 @@ export function MetaDiagnosticsView(props: MetaDiagnosticsViewProps) {
       {/* Raw Report */}
       {reportText && (
         <Container variant="glass" padding="md">
-          <div className="text-xs text-slate-500">Relatorio (resumo)</div>
+          <div className="text-xs text-slate-500">Relatório (resumo)</div>
           <pre className="mt-3 text-xs bg-[var(--ds-bg-surface)]/30 border border-[var(--ds-border-subtle)] rounded-xl p-4 overflow-auto text-slate-200 whitespace-pre-wrap">
             {reportText}
           </pre>

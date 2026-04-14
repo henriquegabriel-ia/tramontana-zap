@@ -121,7 +121,7 @@ export function StepConfig({
             <SelectContent>
               <SelectItem value="MARKETING">Marketing</SelectItem>
               <SelectItem value="UTILITY">Utilidade</SelectItem>
-              <SelectItem value="AUTHENTICATION">Autenticacao</SelectItem>
+              <SelectItem value="AUTHENTICATION">Autenticação</SelectItem>
             </SelectContent>
           </Select>
         </div>
@@ -141,7 +141,7 @@ export function StepConfig({
         </div>
 
         <div className="space-y-2">
-          <label className="text-xs font-medium text-[var(--ds-text-secondary)]">Tipo de variavel</label>
+          <label className="text-xs font-medium text-[var(--ds-text-secondary)]">Tipo de variável</label>
           <Select
             value={variableMode}
             onValueChange={(v) => {
@@ -174,8 +174,8 @@ export function StepConfig({
               <SelectValue placeholder="Selecione" />
             </SelectTrigger>
             <SelectContent>
-              <SelectItem value="positional">Numero</SelectItem>
-              <SelectItem value="named">Nome (avancado)</SelectItem>
+              <SelectItem value="positional">Número</SelectItem>
+              <SelectItem value="named">Nome (avançado)</SelectItem>
             </SelectContent>
           </Select>
         </div>

@@ -36,7 +36,7 @@ export function QuickReplyButtonList({
       <div className="space-y-3">
         <div className="grid grid-cols-[18px_minmax(0,1fr)_40px] gap-3 items-center">
           <div />
-          <div className="text-xs font-medium text-[var(--ds-text-secondary)]">Texto do botao</div>
+          <div className="text-xs font-medium text-[var(--ds-text-secondary)]">Texto do botão</div>
           <div />
         </div>
 
@@ -65,7 +65,7 @@ export function QuickReplyButtonList({
                     {countChars(text)}/{maxButtonText}
                   </div>
                   {hasTextError && (
-                    <div className="mt-1 text-xs text-amber-700 dark:text-amber-300">Informe o texto do botao.</div>
+                    <div className="mt-1 text-xs text-amber-700 dark:text-amber-300">Informe o texto do botão.</div>
                   )}
                 </div>
 

@@ -86,7 +86,7 @@ function getPreviewText(actionType: string, config: Record<string, unknown>) {
     }
     case "Buttons":
     case "whatsapp/send-buttons":
-      return String(config.body || "").trim() || "Escolha uma opcao";
+      return String(config.body || "").trim() || "Escolha uma opção";
     case "List":
     case "whatsapp/send-list":
       return String(config.body || "").trim() || "Selecione um item";

@@ -92,7 +92,7 @@ export function FormFieldEditor({
             disabled={disabled}
           >
             <option value="text">Texto</option>
-            <option value="number">Numero</option>
+            <option value="number">Número</option>
             <option value="date">Data</option>
             <option value="select">Lista (select)</option>
           </select>
@@ -113,7 +113,7 @@ export function FormFieldEditor({
 
       {field.type === 'select' ? (
         <div className="mt-3 space-y-1">
-          <Label>Opcoes (uma por linha)</Label>
+          <Label>Opções (uma por linha)</Label>
           <Textarea
             value={(field.options || []).join('\n')}
             onChange={(e) =>

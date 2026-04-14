@@ -38,7 +38,7 @@ export const EdgePropertiesPanel = ({
         <div className="flex-1 space-y-4 overflow-y-auto p-4">
           <div className="space-y-2">
             <Label className="ml-1" htmlFor="edge-id">
-              ID da conexao
+              ID da conexão
             </Label>
             <Input disabled id="edge-id" value={selectedEdge.id} />
           </div>
@@ -77,9 +77,9 @@ export const EdgePropertiesPanel = ({
       >
         <AlertDialogContent>
           <AlertDialogHeader>
-            <AlertDialogTitle>Excluir conexao</AlertDialogTitle>
+            <AlertDialogTitle>Excluir conexão</AlertDialogTitle>
             <AlertDialogDescription>
-              Tem certeza que deseja excluir esta conexao? Essa acao nao pode
+              Tem certeza que deseja excluir esta conexão? Essa ação não pode
               ser desfeita.
             </AlertDialogDescription>
           </AlertDialogHeader>

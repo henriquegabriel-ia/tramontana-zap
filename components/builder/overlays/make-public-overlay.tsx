@@ -47,7 +47,7 @@ export function MakePublicOverlay({
       </p>
       <ul className="mt-2 list-inside list-disc space-y-1 text-muted-foreground text-sm">
         <li>Suas credenciais de integração (chaves de API, tokens)</li>
-        <li>Logs de execucao e historico de execucoes</li>
+        <li>Logs de execução e histórico de execuções</li>
       </ul>
     </Overlay>
   );

@@ -46,13 +46,13 @@ export function FormFieldsSection({
       </div>
 
       <div className="mt-3 rounded-lg border border-slate-800 bg-slate-950/30 p-3">
-        <p className="text-xs font-medium text-slate-300">Campos padrao (fixos)</p>
+        <p className="text-xs font-medium text-slate-300">Campos padrão (fixos)</p>
         <ul className="mt-2 space-y-1 text-xs text-slate-400">
           <li>
-            <span className="text-slate-200">Nome</span> <span className="text-slate-500">- obrigatorio</span>
+            <span className="text-slate-200">Nome</span> <span className="text-slate-500">- obrigatório</span>
           </li>
           <li>
-            <span className="text-slate-200">Telefone (WhatsApp)</span> <span className="text-slate-500">- obrigatorio</span>
+            <span className="text-slate-200">Telefone (WhatsApp)</span> <span className="text-slate-500">- obrigatório</span>
           </li>
           <li>
             <span className="text-slate-200">Email</span>{' '}

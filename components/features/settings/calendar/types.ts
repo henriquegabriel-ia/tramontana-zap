@@ -48,7 +48,7 @@ export interface WizardStepCredentialsProps extends WizardStepProps {
 }
 
 /**
- * Props para o step de Conexao (Step 2)
+ * Props para o step de Conexão (Step 2)
  */
 export interface WizardStepConnectProps extends WizardStepProps {
   calendarConnectLoading: boolean;
@@ -58,7 +58,7 @@ export interface WizardStepConnectProps extends WizardStepProps {
 }
 
 /**
- * Props para o step de Selecao de Calendario (Step 3)
+ * Props para o step de Seleção de Calendário (Step 3)
  */
 export interface WizardStepCalendarSelectionProps extends WizardStepProps {
   calendarList: UseCalendarBookingReturn['calendarList'];
@@ -153,7 +153,7 @@ export interface CalendarWizardModalProps {
 }
 
 /**
- * Props para a secao de Status do Calendario
+ * Props para a seção de Status do Calendário
  */
 export interface CalendarStatusSectionProps {
   calendarAuthLoading: boolean;
@@ -168,7 +168,7 @@ export interface CalendarStatusSectionProps {
 }
 
 /**
- * Props para a secao de Configuracao de Booking
+ * Props para a seção de Configuração de Booking
  */
 export interface BookingConfigSectionProps {
   calendarBookingLoading?: boolean;

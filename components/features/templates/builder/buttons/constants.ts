@@ -14,10 +14,10 @@ export const REQUIRES_BUTTON_TEXT = new Set<ButtonType>([
 
 // Labels apenas para tipos VÁLIDOS que a Meta aceita em templates
 export const BUTTON_TYPE_LABELS: Partial<Record<ButtonType, string>> = {
-  QUICK_REPLY: 'Resposta rapida',
+  QUICK_REPLY: 'Resposta rápida',
   URL: 'Acessar o site',
   PHONE_NUMBER: 'Ligar',
-  COPY_CODE: 'Copiar codigo da oferta',
+  COPY_CODE: 'Copiar código da oferta',
   OTP: 'OTP',
   FLOW: 'Concluir MiniApp',
 }

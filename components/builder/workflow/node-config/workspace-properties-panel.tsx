@@ -61,14 +61,14 @@ export const WorkspacePropertiesPanel = ({
             className="bg-transparent text-muted-foreground data-[state=active]:text-foreground data-[state=active]:shadow-none"
             value="code"
           >
-            Codigo
+            Código
           </TabsTrigger>
           {isOwner && (
             <TabsTrigger
               className="bg-transparent text-muted-foreground data-[state=active]:text-foreground data-[state=active]:shadow-none"
               value="runs"
             >
-              Execucoes
+              Execuções
             </TabsTrigger>
           )}
         </TabsList>
@@ -155,11 +155,11 @@ export const WorkspacePropertiesPanel = ({
       </Tabs>
 
       <DeleteDialog
-        description="Tem certeza que deseja excluir todas as execucoes? Essa acao nao pode ser desfeita."
+        description="Tem certeza que deseja excluir todas as execuções? Essa ação não pode ser desfeita."
         onConfirm={handleDeleteAllRuns}
         onOpenChange={setShowDeleteRunsAlert}
         open={showDeleteRunsAlert}
-        title="Excluir todas as execucoes"
+        title="Excluir todas as execuções"
       />
     </>
   );

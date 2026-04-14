@@ -84,7 +84,7 @@ export function DownloadButton({ state, actions }: DownloadButtonProps) {
       title={
         state.isDownloading
           ? "Preparando download..."
-          : "Exportar fluxo como codigo"
+          : "Exportar fluxo como código"
       }
       variant="secondary"
     >

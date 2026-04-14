@@ -392,12 +392,12 @@ export function ManualTemplateBuilder({
   }
 
   const canAddButtonType = (type: ButtonType): { ok: boolean; reason?: string } => {
-    if (!allowedButtonTypes.has(type)) return { ok: false, reason: 'Tipo nao permitido para esta categoria.' }
-    if (counts.total >= maxButtons) return { ok: false, reason: 'Limite de 10 botoes atingido.' }
-    if (type === 'URL' && counts.url >= 2) return { ok: false, reason: 'Limite de 2 botoes de URL.' }
-    if (type === 'PHONE_NUMBER' && counts.phone >= 1) return { ok: false, reason: 'Limite de 1 botao de telefone.' }
-    if (type === 'COPY_CODE' && counts.copyCode >= 1) return { ok: false, reason: 'Limite de 1 botao de copiar codigo.' }
-    if (type === 'OTP' && counts.otp >= 1) return { ok: false, reason: 'Limite de 1 botao OTP.' }
+    if (!allowedButtonTypes.has(type)) return { ok: false, reason: 'Tipo não permitido para esta categoria.' }
+    if (counts.total >= maxButtons) return { ok: false, reason: 'Limite de 10 botões atingido.' }
+    if (type === 'URL' && counts.url >= 2) return { ok: false, reason: 'Limite de 2 botões de URL.' }
+    if (type === 'PHONE_NUMBER' && counts.phone >= 1) return { ok: false, reason: 'Limite de 1 botão de telefone.' }
+    if (type === 'COPY_CODE' && counts.copyCode >= 1) return { ok: false, reason: 'Limite de 1 botão de copiar código.' }
+    if (type === 'OTP' && counts.otp >= 1) return { ok: false, reason: 'Limite de 1 botão OTP.' }
     return { ok: true }
   }
 
@@ -487,15 +487,15 @@ export function ManualTemplateBuilder({
   // Button validation
   const invalidButtonTypes = buttons.filter((b) => b?.type && !allowedButtonTypes.has(b.type)).map((b) => String(b?.type || ''))
   const buttonErrors: string[] = []
-  if (counts.total > maxButtons) buttonErrors.push('Maximo de 10 botoes no total.')
-  if (counts.url > 2) buttonErrors.push('Maximo de 2 botoes de URL.')
-  if (counts.phone > 1) buttonErrors.push('Maximo de 1 botao de telefone.')
-  if (counts.copyCode > 1) buttonErrors.push('Maximo de 1 botao de copiar codigo.')
-  if (isAuthCategory && counts.otp !== 1) buttonErrors.push('Authentication exige 1 botao OTP.')
+  if (counts.total > maxButtons) buttonErrors.push('Máximo de 10 botões no total.')
+  if (counts.url > 2) buttonErrors.push('Máximo de 2 botões de URL.')
+  if (counts.phone > 1) buttonErrors.push('Máximo de 1 botão de telefone.')
+  if (counts.copyCode > 1) buttonErrors.push('Máximo de 1 botão de copiar código.')
+  if (isAuthCategory && counts.otp !== 1) buttonErrors.push('Authentication exige 1 botão OTP.')
   if (!isAuthCategory && counts.otp > 0) buttonErrors.push('OTP e permitido apenas em Authentication.')
-  if (invalidButtonTypes.length) buttonErrors.push(`Botoes nao permitidos: ${invalidButtonTypes.join(', ')}.`)
-  if (ltoCopyCodeMissing) buttonErrors.push('Limited Time Offer exige botao COPY_CODE com exemplo.')
-  if (ltoCopyCodeTooLong) buttonErrors.push('Limited Time Offer: codigo do COPY_CODE deve ter ate 15 caracteres.')
+  if (invalidButtonTypes.length) buttonErrors.push(`Botões não permitidos: ${invalidButtonTypes.join(', ')}.`)
+  if (ltoCopyCodeMissing) buttonErrors.push('Limited Time Offer exige botão COPY_CODE com exemplo.')
+  if (ltoCopyCodeTooLong) buttonErrors.push('Limited Time Offer: código do COPY_CODE deve ter até 15 caracteres.')
   const requiresButtonText = new Set<ButtonType>([
     'QUICK_REPLY',
     'URL',
@@ -505,7 +505,7 @@ export function ManualTemplateBuilder({
     'OTP',
   ])
   const missingButtonText = buttons.some((b) => requiresButtonText.has(b?.type) && !String(b?.text || '').trim())
-  if (missingButtonText) buttonErrors.push('Preencha o texto dos botoes.')
+  if (missingButtonText) buttonErrors.push('Preencha o texto dos botões.')
 
   const carouselErrors = validateCarouselSpec(spec.carousel)
   const isButtonsValid =
@@ -774,7 +774,7 @@ export function ManualTemplateBuilder({
             <div className="mt-4">
               {canShowMediaSample ? (
                 <div className="mb-4 space-y-2">
-                  <div className="text-xs font-medium text-[var(--ds-text-secondary)]">Midia do cabecalho (opcional)</div>
+                  <div className="text-xs font-medium text-[var(--ds-text-secondary)]">Mídia do cabeçalho (opcional)</div>
                   <div className="text-xs text-[var(--ds-text-muted)]">
                     Se voce precisar, pode colar manualmente o identificador de midia usado como exemplo no template.
                   </div>

@@ -96,7 +96,7 @@ export function TurboConfigForm({
   return (
     <div className="mt-6 p-5 bg-[var(--ds-bg-elevated)] border border-[var(--ds-border-default)] rounded-2xl">
       <div className="flex items-center justify-between gap-3">
-        <div className="text-sm font-medium text-[var(--ds-text-primary)]">Configuracoes</div>
+        <div className="text-sm font-medium text-[var(--ds-text-primary)]">Configurações</div>
         <label className="flex items-center gap-2 text-sm text-[var(--ds-text-primary)]">
           <input
             type="checkbox"

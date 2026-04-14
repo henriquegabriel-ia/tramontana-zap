@@ -203,7 +203,7 @@ export const useSettingsAIController = () => {
       }
     } catch (error) {
       const message =
-        error instanceof Error ? error.message : 'Erro ao carregar configuracoes de IA'
+        error instanceof Error ? error.message : 'Erro ao carregar configurações de IA'
       setErrorMessage(message)
       toast.error(message)
     } finally {
@@ -260,11 +260,11 @@ export const useSettingsAIController = () => {
         prompts,
         fallback,
       })
-      toast.success('Configuracoes salvas')
+      toast.success('Configurações salvas')
       await loadConfig()
     } catch (error) {
       const message =
-        error instanceof Error ? error.message : 'Erro ao salvar configuracoes'
+        error instanceof Error ? error.message : 'Erro ao salvar configurações'
       setErrorMessage(message)
       toast.error(message)
     } finally {

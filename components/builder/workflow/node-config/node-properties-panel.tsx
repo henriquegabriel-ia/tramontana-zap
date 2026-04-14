@@ -103,7 +103,7 @@ export const NodePropertiesPanel = ({
               className="bg-transparent text-muted-foreground data-[state=active]:text-foreground data-[state=active]:shadow-none"
               value="code"
             >
-              Codigo
+              Código
             </TabsTrigger>
           )}
           {isOwner && (
@@ -111,7 +111,7 @@ export const NodePropertiesPanel = ({
               className="bg-transparent text-muted-foreground data-[state=active]:text-foreground data-[state=active]:shadow-none"
               value="runs"
             >
-              Execucoes
+              Execuções
             </TabsTrigger>
           )}
         </TabsList>
@@ -189,13 +189,13 @@ export const NodePropertiesPanel = ({
 
                   <div className="space-y-2">
                     <Label className="ml-1" htmlFor="description">
-                      Descricao
+                      Descrição
                     </Label>
                     <Input
                       disabled={isGenerating || !isOwner}
                       id="description"
                       onChange={(e) => onUpdateDescription(e.target.value)}
-                      placeholder="Descricao opcional"
+                      placeholder="Descrição opcional"
                       value={selectedNode.data.description || ""}
                     />
                   </div>
@@ -275,11 +275,11 @@ export const NodePropertiesPanel = ({
       </Tabs>
 
       <DeleteDialog
-        description="Tem certeza que deseja excluir todas as execucoes? Essa acao nao pode ser desfeita."
+        description="Tem certeza que deseja excluir todas as execuções? Essa ação não pode ser desfeita."
         onConfirm={handleDeleteAllRuns}
         onOpenChange={setShowDeleteRunsAlert}
         open={showDeleteRunsAlert}
-        title="Excluir todas as execucoes"
+        title="Excluir todas as execuções"
       />
 
       <DeleteDialog

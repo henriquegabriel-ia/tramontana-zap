@@ -7,10 +7,10 @@ export async function POST(request: NextRequest) {
     const { name, contactPhone, contactName, contactEmail } = body
 
     if (!name) {
-      return NextResponse.json({ error: 'Nome do negocio e obrigatorio' }, { status: 400 })
+      return NextResponse.json({ error: 'Nome do negócio é obrigatório' }, { status: 400 })
     }
 
-    // Busca configuracao do pipeline/stage
+    // Busca configuração do pipeline/stage
     const config = await getRDStationConfig()
     if (!config?.crmToken) {
       return NextResponse.json({ error: 'CRM do RD Station nao configurado' }, { status: 400 })

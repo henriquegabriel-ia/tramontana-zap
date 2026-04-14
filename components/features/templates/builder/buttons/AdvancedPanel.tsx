@@ -34,8 +34,8 @@ export function AdvancedPanel({
       <details>
         <summary className="cursor-pointer list-none select-none flex items-center justify-between">
           <div>
-            <div className="text-sm font-semibold text-[var(--ds-text-primary)]">Avancado</div>
-            <div className="text-xs text-[var(--ds-text-secondary)]">Opcoes menos comuns (LTO, Auth e Carousel).</div>
+            <div className="text-sm font-semibold text-[var(--ds-text-primary)]">Avançado</div>
+            <div className="text-xs text-[var(--ds-text-secondary)]">Opções menos comuns (LTO, Auth e Carousel).</div>
           </div>
           <div className="text-xs text-[var(--ds-text-muted)]">Abrir</div>
         </summary>
@@ -58,7 +58,7 @@ export function AdvancedPanel({
 
           {!isMarketing && !isAuthentication && (
             <div className="text-xs text-[var(--ds-text-muted)]">
-              Sem opcoes avancadas especificas para esta categoria.
+              Sem opções avançadas específicas para esta categoria.
             </div>
           )}
 

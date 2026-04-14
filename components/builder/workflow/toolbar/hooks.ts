@@ -113,7 +113,7 @@ export function useWorkflowHandlers({
     if (triggerType === "Manual") {
       const to = window.prompt("Telefone do destinatario (E.164)", "");
       if (!to) {
-        toast.error("Destinatario obrigatório para execucao manual");
+        toast.error("Destinatário obrigatório para execução manual");
         return;
       }
 

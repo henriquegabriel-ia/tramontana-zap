@@ -188,7 +188,7 @@ export function SendTemplatePanel({
 
   const autoFillHint = testContactLabel
     ? `Usando: ${testContactLabel}`
-    : "Configure um contato teste em Configuracoes.";
+    : "Configure um contato teste em Configurações.";
 
   const pickTokenForKey = (
     key: string,

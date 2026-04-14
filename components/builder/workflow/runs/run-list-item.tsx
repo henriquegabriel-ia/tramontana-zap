@@ -55,7 +55,7 @@ export function RunListItem({
         >
           <div className="mb-1 flex items-center gap-2">
             <span className="font-semibold text-sm">
-              Execucao #{totalExecutions - executionIndex}
+              Execução #{totalExecutions - executionIndex}
             </span>
           </div>
           <div className="flex items-center gap-2 font-mono text-muted-foreground text-xs">

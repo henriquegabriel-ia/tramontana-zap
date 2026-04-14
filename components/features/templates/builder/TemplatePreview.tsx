@@ -50,7 +50,7 @@ export function TemplatePreview({ spec, headerMediaPreview }: TemplatePreviewPro
 
   const prettyButtonLabel = (b: any): string => {
     const t = String(b?.type || '')
-    if (t === 'COPY_CODE') return b?.text || 'Copiar codigo'
+    if (t === 'COPY_CODE') return b?.text || 'Copiar código'
     if (t === 'QUICK_REPLY') return b?.text || 'Quick Reply'
     return b?.text || t
   }
@@ -58,7 +58,7 @@ export function TemplatePreview({ spec, headerMediaPreview }: TemplatePreviewPro
   const headerLabel = (() => {
     if (!header) return null
     if (header.format === 'TEXT') return header.text || ''
-    if (header.format === 'LOCATION') return 'LOCALIZACAO'
+    if (header.format === 'LOCATION') return 'LOCALIZAÇÃO'
     return `MIDIA (${header.format})`
   })()
 
@@ -74,7 +74,7 @@ export function TemplatePreview({ spec, headerMediaPreview }: TemplatePreviewPro
   return (
     <Container variant="default" padding="none" className="overflow-hidden">
       <div className="px-6 py-4 flex items-center justify-between border-b border-[var(--ds-border-default)]">
-        <div className="text-sm font-semibold text-[var(--ds-text-primary)]">Previa do modelo</div>
+        <div className="text-sm font-semibold text-[var(--ds-text-primary)]">Prévia do modelo</div>
         <button
           type="button"
           className="h-8 w-8 inline-flex items-center justify-center rounded-md border border-[var(--ds-border-default)] bg-[var(--ds-bg-elevated)] hover:bg-[var(--ds-bg-hover)] text-[var(--ds-text-secondary)]"
@@ -129,7 +129,7 @@ export function TemplatePreview({ spec, headerMediaPreview }: TemplatePreviewPro
                     {resolvedHeaderMediaPreview.format === 'IMAGE' ? (
                       <Image
                         src={resolvedHeaderMediaPreview.url}
-                        alt={resolvedHeaderMediaPreview.name || 'Midia do cabecalho'}
+                        alt={resolvedHeaderMediaPreview.name || 'Mídia do cabeçalho'}
                         width={360}
                         height={180}
                         unoptimized
@@ -165,7 +165,7 @@ export function TemplatePreview({ spec, headerMediaPreview }: TemplatePreviewPro
                   {bodyText ? (
                     <WhatsAppInlineText text={bodyText} />
                   ) : (
-                    <span className="text-slate-400">Digite o corpo para ver a previa.</span>
+                    <span className="text-slate-400">Digite o corpo para ver a prévia.</span>
                   )}
                 </div>
 

@@ -88,13 +88,13 @@ export function SendButtonsPanel({
           disabled={disabled}
           id="body"
           onChange={(value) => onUpdateConfig("body", value)}
-          placeholder="Escolha uma opcao"
+          placeholder="Escolha uma opção"
           rows={3}
           value={bodyValue}
         />
         {!hasBody && (
           <p className="text-xs text-destructive">
-            Corpo e obrigatorio.
+            Corpo é obrigatório.
           </p>
         )}
       </div>
@@ -120,9 +120,9 @@ export function SendButtonsPanel({
       </div>
 
       <div className="space-y-2">
-        <Label className="ml-1">Botoes *</Label>
+        <Label className="ml-1">Botões *</Label>
         <div className="space-y-2">
-          {["Botao 1", "Botao 2", "Botao 3 (opcional)"].map(
+          {["Botão 1", "Botão 2", "Botão 3 (opcional)"].map(
             (label, index) => (
               <div className="space-y-1" key={label}>
                 <Label className="text-xs text-muted-foreground" htmlFor={`button-title-${index}`}>
@@ -149,16 +149,16 @@ export function SendButtonsPanel({
         </div>
         {!hasButtons && (
           <p className="text-xs text-destructive">
-            Adicione pelo menos 1 botao.
+            Adicione pelo menos 1 botão.
           </p>
         )}
         {hasTooLongTitle && (
           <p className="text-xs text-destructive">
-            Cada botao deve ter no maximo 20 caracteres.
+            Cada botão deve ter no máximo 20 caracteres.
           </p>
         )}
         <p className="text-muted-foreground text-xs">
-          Maximo de 3 botoes. O ID e gerado automaticamente.
+          Máximo de 3 botões. O ID é gerado automaticamente.
         </p>
       </div>
 
@@ -177,13 +177,13 @@ export function SendButtonsPanel({
             }}
           />
           <span className="text-sm text-muted-foreground">
-            Mais opcoes (cabecalho e rodape)
+            Mais opções (cabeçalho e rodapé)
           </span>
         </div>
         {showAdvanced && (
           <div className="space-y-2">
             <div className="space-y-1">
-              <Label htmlFor="headerText">Texto do cabecalho</Label>
+              <Label htmlFor="headerText">Texto do cabeçalho</Label>
               <Input
                 disabled={disabled}
                 id="headerText"
@@ -195,7 +195,7 @@ export function SendButtonsPanel({
               />
             </div>
             <div className="space-y-1">
-              <Label htmlFor="footer">Rodape</Label>
+              <Label htmlFor="footer">Rodapé</Label>
               <Input
                 disabled={disabled}
                 id="footer"
@@ -207,7 +207,7 @@ export function SendButtonsPanel({
               />
               {footerTooLong && (
                 <p className="text-xs text-destructive">
-                  Rodape deve ter no maximo 60 caracteres.
+                  Rodapé deve ter no maximo 60 caracteres.
                 </p>
               )}
             </div>

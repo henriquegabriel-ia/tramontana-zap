@@ -47,12 +47,12 @@ function getInitialButtonState(type: ButtonType, previousButton: ButtonData): Bu
   }
 
   if (type === 'COPY_CODE') {
-    newButton.text = 'Copiar codigo'
+    newButton.text = 'Copiar código'
     newButton.example = 'CODE123'
   }
 
   if (type === 'OTP') {
-    newButton.text = 'Copiar codigo'
+    newButton.text = 'Copiar código'
     newButton.otp_type = 'COPY_CODE'
   }
 
@@ -158,7 +158,7 @@ export function CTAButtonList({
   return (
     <div className="space-y-3">
       <div className="text-xs text-[var(--ds-text-secondary)]">
-        Chamada para acao <span className="text-[var(--ds-text-muted)]">* Opcional</span>
+        Chamada para ação <span className="text-[var(--ds-text-muted)]">* Opcional</span>
       </div>
 
       <div className="space-y-4">
@@ -194,7 +194,7 @@ export function CTAButtonList({
                   <div className="space-y-4">
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                       <div className="space-y-1">
-                        <div className="text-xs font-medium text-[var(--ds-text-secondary)]">Tipo de acao</div>
+                        <div className="text-xs font-medium text-[var(--ds-text-secondary)]">Tipo de ação</div>
                         <Select
                           value={type}
                           onValueChange={(v) => handleTypeChange(idx, b, v as ButtonType)}
@@ -219,7 +219,7 @@ export function CTAButtonList({
                       </div>
 
                       <div className="space-y-1">
-                        <div className="text-xs font-medium text-[var(--ds-text-secondary)]">Texto do botao</div>
+                        <div className="text-xs font-medium text-[var(--ds-text-secondary)]">Texto do botão</div>
                         <div className="relative">
                           <Input
                             value={buttonText}
@@ -232,7 +232,7 @@ export function CTAButtonList({
                             {countChars(buttonText)}/{maxButtonText}
                           </div>
                           {hasTextError && (
-                            <div className="mt-1 text-xs text-amber-700 dark:text-amber-300">Informe o texto do botao.</div>
+                            <div className="mt-1 text-xs text-amber-700 dark:text-amber-300">Informe o texto do botão.</div>
                           )}
                         </div>
                       </div>
@@ -252,7 +252,7 @@ export function CTAButtonList({
         })}
 
         <div className="text-xs text-[var(--ds-text-muted)]">
-          Regras: URL max 2, Ligar max 1, Copiar codigo max 1, OTP max 1; Respostas rapidas ficam agrupadas.
+          Regras: URL max 2, Ligar max 1, Copiar código max 1, OTP max 1; Respostas rápidas ficam agrupadas.
         </div>
       </div>
     </div>

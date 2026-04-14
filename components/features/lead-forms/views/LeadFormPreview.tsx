@@ -17,7 +17,7 @@ export function LeadFormPreview({ title, collectEmail, fields }: LeadFormPreview
   return (
     <Container variant="subtle" padding="md">
       <div className="mb-3">
-        <p className="text-sm font-medium text-white">Pre-visualizacao</p>
+        <p className="text-sm font-medium text-white">Pré-visualização</p>
         <p className="text-xs text-slate-500">Assim vai aparecer para a pessoa que abrir o link publico.</p>
       </div>
 

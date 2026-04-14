@@ -24,7 +24,7 @@ export function BookingConfigSection({
 }: BookingConfigSectionProps) {
   if (calendarBookingLoading) {
     return (
-      <div className="mt-6 text-sm text-[var(--ds-text-secondary)]">Carregando configuracoes...</div>
+      <div className="mt-6 text-sm text-[var(--ds-text-secondary)]">Carregando configurações...</div>
     );
   }
 

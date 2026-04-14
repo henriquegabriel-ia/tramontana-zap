@@ -58,7 +58,7 @@ export const CampaignPerformancePanel: React.FC<CampaignPerformancePanelProps> =
         {metrics?.source === 'campaigns_fallback' && (metrics as any)?.hint && (
           <Alert variant="warning">
             <AlertDescription>
-              <div className="font-medium">Metricas avancadas indisponiveis</div>
+              <div className="font-medium">Métricas avançadas indisponíveis</div>
               <div className="mt-1 opacity-80">{(metrics as any).hint}</div>
             </AlertDescription>
           </Alert>
@@ -118,11 +118,11 @@ export const CampaignPerformancePanel: React.FC<CampaignPerformancePanelProps> =
                 <button
                   type="button"
                   className="w-full flex items-center justify-between gap-4 text-left"
-                  aria-label={isPerfTechOpen ? 'Recolher detalhes tecnicos' : 'Expandir detalhes tecnicos'}
+                  aria-label={isPerfTechOpen ? 'Recolher detalhes técnicos' : 'Expandir detalhes técnicos'}
                 >
                   <div>
-                    <div className="text-sm text-slate-300 font-medium">Detalhes tecnicos</div>
-                    <div className="text-xs text-slate-500">Config aplicada e identificadores (para diagnostico)</div>
+                    <div className="text-sm text-slate-300 font-medium">Detalhes técnicos</div>
+                    <div className="text-xs text-slate-500">Config aplicada e identificadores (para diagnóstico)</div>
                   </div>
                   <ChevronDown
                     size={16}
@@ -155,9 +155,9 @@ export const CampaignPerformancePanel: React.FC<CampaignPerformancePanelProps> =
 
                 <div className="mt-2 text-[11px] text-slate-500">
                   {perf?.trace_id ? (
-                    <span>ID da execucao: <span className="font-mono text-slate-400">{perf.trace_id}</span></span>
+                    <span>ID da execução: <span className="font-mono text-slate-400">{perf.trace_id}</span></span>
                   ) : (
-                    <span>ID da execucao: <span className="font-mono text-slate-400">—</span></span>
+                    <span>ID da execução: <span className="font-mono text-slate-400">—</span></span>
                   )}
                 </div>
               </CollapsibleContent>

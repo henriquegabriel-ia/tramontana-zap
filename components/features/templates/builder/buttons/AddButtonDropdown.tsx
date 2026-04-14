@@ -29,10 +29,10 @@ interface DropdownItemConfig {
 }
 
 const MAIN_ITEMS: DropdownItemConfig[] = [
-  { type: 'QUICK_REPLY', label: 'Resposta rapida', shortcut: 'ate 10' },
+  { type: 'QUICK_REPLY', label: 'Resposta rápida', shortcut: 'até 10' },
   { type: 'URL', label: 'Visitar site', shortcut: 'max 2' },
   { type: 'PHONE_NUMBER', label: 'Ligar', shortcut: 'max 1' },
-  { type: 'COPY_CODE', label: 'Copiar codigo', shortcut: 'max 1' },
+  { type: 'COPY_CODE', label: 'Copiar código', shortcut: 'max 1' },
 ]
 
 // Apenas tipos de botão que a Meta API realmente suporta em templates.
@@ -40,7 +40,7 @@ const MAIN_ITEMS: DropdownItemConfig[] = [
 // não são válidos para templates de mensagem e causam erro da Meta.
 const ADVANCED_ITEMS: DropdownItemConfig[] = [
   { type: 'FLOW', label: 'MiniApp (requer Flow ID)' },
-  { type: 'OTP', label: 'OTP (apenas Autenticacao)' },
+  { type: 'OTP', label: 'OTP (apenas Autenticação)' },
 ]
 
 export function AddButtonDropdown({ addButton, canAddButtonType }: AddButtonDropdownProps) {
@@ -52,13 +52,13 @@ export function AddButtonDropdown({ addButton, canAddButtonType }: AddButtonDrop
           className="border-[var(--ds-border-default)] bg-[var(--ds-bg-elevated)] hover:bg-[var(--ds-bg-hover)]"
         >
           <Plus className="w-4 h-4" />
-          Adicionar botao
+          Adicionar botão
           <ChevronDown className="w-4 h-4 opacity-70" />
         </Button>
       </DropdownMenuTrigger>
       <DropdownMenuContent align="end" className="bg-[var(--ds-bg-elevated)] border-[var(--ds-border-default)] text-[var(--ds-text-primary)] min-w-60">
         <DropdownMenuLabel className="text-xs text-[var(--ds-text-muted)] uppercase tracking-wider">
-          Acoes
+          Ações
         </DropdownMenuLabel>
         
         {MAIN_ITEMS.map((item) => (
@@ -77,7 +77,7 @@ export function AddButtonDropdown({ addButton, canAddButtonType }: AddButtonDrop
 
         <DropdownMenuSub>
           <DropdownMenuSubTrigger className="cursor-pointer hover:bg-[var(--ds-bg-hover)] focus:bg-[var(--ds-bg-hover)]">
-            Avancado
+            Avançado
           </DropdownMenuSubTrigger>
           <DropdownMenuSubContent className="bg-[var(--ds-bg-elevated)] border-[var(--ds-border-default)] text-[var(--ds-text-primary)] min-w-56">
             {ADVANCED_ITEMS.map((item) => (

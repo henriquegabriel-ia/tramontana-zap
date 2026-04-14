@@ -154,7 +154,7 @@ export const TemplateTable: React.FC<TemplateTableProps> = ({
               <th className="px-2 py-4 font-medium w-24">Categoria</th>
               <th className="px-3 py-4 font-medium">Conteudo</th>
               <th className="px-2 py-4 font-medium w-24">Atualizado</th>
-              <th className="px-2 py-4 font-medium text-right w-32">Acoes</th>
+              <th className="px-2 py-4 font-medium text-right w-32">Ações</th>
             </tr>
           </thead>
           <tbody className="divide-y divide-[var(--ds-border-default)]">

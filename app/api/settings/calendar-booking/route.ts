@@ -177,6 +177,6 @@ export async function POST(request: NextRequest) {
     return NextResponse.json({ ok: true, config: next })
   } catch (error) {
     console.error('Error saving calendar booking config:', error)
-    return NextResponse.json({ ok: false, error: 'Falha ao salvar configuracao' }, { status: 502 })
+    return NextResponse.json({ ok: false, error: 'Falha ao salvar configuração' }, { status: 502 })
   }
 }

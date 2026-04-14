@@ -1013,7 +1013,7 @@ export default function CampaignsNewRealPage() {
                       <div className="flex items-center justify-between">
                         <label className="text-xs uppercase tracking-widest text-[var(--ds-text-muted)]">Telefone de teste (settings)</label>
                         <a href="/settings#test-contact" className="text-xs text-purple-700 dark:text-purple-300">
-                          Editar em configuracoes
+                          Editar em configurações
                         </a>
                       </div>
                       <button

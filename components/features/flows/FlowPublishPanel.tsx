@@ -273,7 +273,7 @@ export function FlowPublishPanel({
                 <th className="px-4 py-4 font-medium">Status</th>
                 <th className="px-4 py-4 font-medium">ID Meta</th>
                 <th className="px-4 py-4 font-medium">Atualizado</th>
-                <th className="px-4 py-4 font-medium text-right">Acoes</th>
+                <th className="px-4 py-4 font-medium text-right">Ações</th>
               </tr>
             </thead>
             <tbody className="divide-y divide-white/10">

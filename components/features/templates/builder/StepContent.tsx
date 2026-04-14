@@ -201,7 +201,7 @@ export function StepContent({
         <div>
           <div className="text-base font-semibold text-[var(--ds-text-primary)]">Conteudo</div>
           <div className="text-xs text-[var(--ds-text-secondary)] mt-1">
-            Adicione um cabecalho, corpo de texto e rodape para o seu modelo. A Meta analisa variaveis e conteudo antes da aprovacao.
+            Adicione um cabeçalho, corpo de texto e rodapé para o seu modelo. A Meta analisa variáveis e conteúdo antes da aprovação.
           </div>
         </div>
         {hasInvalidNamed || hasDuplicateNamed || (positionalHeaderInvalid.length > 0) || (positionalBodyInvalid.length > 0) || footerHasVariables ? (
@@ -258,7 +258,7 @@ export function StepContent({
 
           {headerType === 'NONE' ? (
             <div className="mt-2 flex items-center justify-between rounded-xl border border-[var(--ds-border-default)] bg-[var(--ds-bg-elevated)] p-2">
-              <div className="text-xs text-[var(--ds-text-secondary)]">Sem cabecalho configurado.</div>
+              <div className="text-xs text-[var(--ds-text-secondary)]">Sem cabeçalho configurado.</div>
               <Button
                 type="button"
                 variant="outline"
@@ -271,7 +271,7 @@ export function StepContent({
                   )
                 }
               >
-                Adicionar cabecalho
+                Adicionar cabeçalho
               </Button>
             </div>
           ) : (
@@ -314,10 +314,10 @@ export function StepContent({
           )}
 
           {!isHeaderFormatValid ? (
-            <p className="text-xs text-amber-300 mt-1">Tipo de cabecalho invalido para templates.</p>
+            <p className="text-xs text-amber-300 mt-1">Tipo de cabeçalho invalido para templates.</p>
           ) : null}
           {ltoHeaderInvalid ? (
-            <p className="text-xs text-amber-300 mt-1">Limited Time Offer aceita apenas cabecalho IMAGE ou VIDEO.</p>
+            <p className="text-xs text-amber-300 mt-1">Limited Time Offer aceita apenas cabeçalho IMAGE ou VIDEO.</p>
           ) : null}
 
           {headerType === 'TEXT' ? (
@@ -336,23 +336,23 @@ export function StepContent({
                   updateHeader({ ...header, format: 'TEXT', text: cleaned })
                 }}
                 className="bg-[var(--ds-bg-elevated)] border-[var(--ds-border-default)] text-[var(--ds-text-primary)]"
-                placeholder="Texto do cabecalho"
+                placeholder="Texto do cabeçalho"
                 maxLength={60}
               />
               {headerLengthExceeded ? (
                 <p className="text-xs text-amber-700 dark:text-amber-300">Cabecalho excede 60 caracteres.</p>
               ) : null}
               {!isHeaderVariableValid ? (
-                <p className="text-xs text-amber-700 dark:text-amber-300">O cabecalho permite apenas 1 variavel.</p>
+                <p className="text-xs text-amber-700 dark:text-amber-300">O cabeçalho permite apenas 1 variavel.</p>
               ) : null}
               {namedHeaderChecks?.invalid.length ? (
                 <p className="text-xs text-amber-700 dark:text-amber-300">Variaveis devem ser minusculas com underscore (ex: first_name).</p>
               ) : null}
               {namedHeaderChecks?.duplicates.length ? (
-                <p className="text-xs text-amber-700 dark:text-amber-300">Nomes de variavel no cabecalho devem ser unicos.</p>
+                <p className="text-xs text-amber-700 dark:text-amber-300">Nomes de variavel no cabeçalho devem ser unicos.</p>
               ) : null}
               {headerTextMissing ? (
-                <p className="text-xs text-amber-700 dark:text-amber-300">Cabecalho de texto e obrigatorio.</p>
+                <p className="text-xs text-amber-700 dark:text-amber-300">Cabeçalho de texto é obrigatório.</p>
               ) : null}
               {positionalHeaderInvalid.length ? (
                 <p className="text-xs text-amber-700 dark:text-amber-300">
@@ -365,7 +365,7 @@ export function StepContent({
                 </p>
               ) : null}
               {headerEdgeParameter.starts || headerEdgeParameter.ends ? (
-                <p className="text-xs text-amber-700 dark:text-amber-300">O cabecalho nao pode comecar nem terminar com variavel.</p>
+                <p className="text-xs text-amber-700 dark:text-amber-300">O cabeçalho nao pode comecar nem terminar com variavel.</p>
               ) : null}
               <div className="flex items-center justify-end">
                 <Button
@@ -576,7 +576,7 @@ export function StepContent({
           {canShowMediaSample ? (
             <div className="mt-2 space-y-2">
               <div className="flex items-center justify-between">
-                <label className="text-xs font-medium text-[var(--ds-text-secondary)]">Midia do cabecalho</label>
+                <label className="text-xs font-medium text-[var(--ds-text-secondary)]">Midia do cabeçalho</label>
 
                 <div className="flex items-center gap-2">
                   {isUploadingHeaderMedia ? (
@@ -716,7 +716,7 @@ export function StepContent({
                 </div>
               ) : isHeaderMediaHandleMissing ? (
                 <p className="text-xs text-amber-700 dark:text-amber-300">
-                  {headerMediaPreview ? 'Finalize o envio da midia para continuar.' : 'Selecione um arquivo para o cabecalho.'}
+                  {headerMediaPreview ? 'Finalize o envio da midia para continuar.' : 'Selecione um arquivo para o cabeçalho.'}
                 </p>
               ) : null}
             </div>
@@ -743,7 +743,7 @@ export function StepContent({
                   update({ body: { ...(spec.body || {}), text: cleaned, example: example ? { body_text: example } : undefined } })
                 }}
                 className="bg-transparent border-none text-[var(--ds-text-primary)] min-h-24 focus-visible:ring-0 focus-visible:ring-offset-0"
-                placeholder="Digite o corpo (obrigatorio)"
+                placeholder="Digite o corpo (obrigatório)"
                 maxLength={bodyMaxLength}
               />
             </div>
@@ -799,14 +799,14 @@ export function StepContent({
             <div className="mt-2 text-xs text-amber-700 dark:text-amber-300">O corpo nao pode comecar nem terminar com variavel.</div>
           ) : null}
           {!bodyText.trim() ? (
-            <div className="mt-2 text-xs text-amber-700 dark:text-amber-300">O corpo e obrigatorio.</div>
+            <div className="mt-2 text-xs text-amber-700 dark:text-amber-300">O corpo é obrigatório.</div>
           ) : null}
         </div>
 
         {/* RODAPE */}
         <div className="pt-2">
           <div className="flex items-center justify-between">
-            <div className="text-sm font-semibold text-[var(--ds-text-primary)]">Rodape <span className="text-xs text-[var(--ds-text-muted)] font-normal">* Opcional</span></div>
+            <div className="text-sm font-semibold text-[var(--ds-text-primary)]">Rodapé <span className="text-xs text-[var(--ds-text-muted)] font-normal">* Opcional</span></div>
             <div className="text-xs text-[var(--ds-text-muted)]">{footerTextCount}/60</div>
           </div>
 
@@ -818,12 +818,12 @@ export function StepContent({
                 disabled={isLimitedTimeOffer && !spec.footer}
                 onClick={() => updateFooter(spec.footer ? null : { text: '' })}
               >
-                {spec.footer ? 'Remover rodape' : 'Adicionar rodape'}
+                {spec.footer ? 'Remover rodapé' : 'Adicionar rodapé'}
               </Button>
             </div>
 
             {isLimitedTimeOffer ? (
-              <div className="text-xs text-amber-700 dark:text-amber-300">Limited Time Offer nao permite rodape.</div>
+              <div className="text-xs text-amber-700 dark:text-amber-300">Limited Time Offer não permite rodapé.</div>
             ) : null}
 
             {spec.footer ? (
@@ -841,16 +841,16 @@ export function StepContent({
                   maxLength={60}
                 />
                 {footerLengthExceeded ? (
-                  <div className="text-xs text-amber-700 dark:text-amber-300">Rodape excede 60 caracteres.</div>
+                  <div className="text-xs text-amber-700 dark:text-amber-300">Rodapé excede 60 caracteres.</div>
                 ) : null}
                 {footerHasVariables ? (
-                  <div className="text-xs text-amber-700 dark:text-amber-300">Rodape nao permite variaveis.</div>
+                  <div className="text-xs text-amber-700 dark:text-amber-300">Rodapé não permite variáveis.</div>
                 ) : null}
                 {namedFooterChecks?.invalid.length ? (
-                  <div className="text-xs text-amber-700 dark:text-amber-300">Use apenas minusculas e underscore nas variaveis do rodape.</div>
+                  <div className="text-xs text-amber-700 dark:text-amber-300">Use apenas minúsculas e underscore nas variáveis do rodapé.</div>
                 ) : null}
                 {namedFooterChecks?.duplicates.length ? (
-                  <div className="text-xs text-amber-700 dark:text-amber-300">Nomes de variavel no rodape devem ser unicos.</div>
+                  <div className="text-xs text-amber-700 dark:text-amber-300">Nomes de variável no rodapé devem ser únicos.</div>
                 ) : null}
               </div>
             ) : null}

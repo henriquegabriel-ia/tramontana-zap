@@ -102,7 +102,7 @@ export function getFriendlyCopy(check: MetaDiagnosticsCheck): FriendlyCopy {
       return {
         title: 'Banco de dados (Supabase)',
         message: check.status === 'pass' ? 'OK. Banco conectado.' : 'Banco nao esta configurado corretamente.',
-        why: 'O app salva configuracoes e resultados de envio no Supabase.',
+        why: 'O app salva configurações e resultados de envio no Supabase.',
       }
 
     case 'infra_qstash':
@@ -125,7 +125,7 @@ export function getFriendlyCopy(check: MetaDiagnosticsCheck): FriendlyCopy {
               ? 'Parcialmente. A Meta diz que o envio esta limitado.'
               : overall === 'BLOCKED'
                 ? 'Nao. A Meta confirma bloqueio para envio.'
-                : 'Nao foi possivel confirmar pela Meta (Health Status indisponivel).',
+                : 'Nao foi possivel confirmar pela Meta (Health Status indisponível).',
         why: 'Esse e o "veredito oficial" da Meta sobre envio.',
       }
 
@@ -179,10 +179,10 @@ export function getFriendlyCopy(check: MetaDiagnosticsCheck): FriendlyCopy {
 
     case 'meta_waba_phone_link':
       return {
-        title: 'WABA e numero combinam?',
+        title: 'WABA e número combinam?',
         message:
           check.status === 'pass'
-            ? 'Sim. O numero aparece dentro do WABA.'
+            ? 'Sim. O número aparece dentro do WABA.'
             : check.status === 'fail'
               ? 'Nao. IDs podem estar trocados ou o token nao enxerga o ativo.'
               : 'Nao deu para confirmar.',
@@ -191,14 +191,14 @@ export function getFriendlyCopy(check: MetaDiagnosticsCheck): FriendlyCopy {
 
     case 'meta_phone':
       return {
-        title: 'Numero esta acessivel (qualidade/tier)',
-        message: check.status === 'pass' ? 'OK. Conseguimos ler dados do numero.' : 'Nao conseguimos ler o numero.',
-        why: 'Se o token nao tem acesso ao numero, o envio nao funciona.',
+        title: 'Número está acessível (qualidade/tier)',
+        message: check.status === 'pass' ? 'OK. Conseguimos ler dados do número.' : 'Não conseguimos ler o número.',
+        why: 'Se o token não tem acesso ao número, o envio não funciona.',
       }
 
     case 'meta_waba':
       return {
-        title: 'WABA esta acessivel',
+        title: 'WABA está acessível',
         message: check.status === 'pass' ? 'OK. Conseguimos ler dados do WABA.' : 'Nao conseguimos ler o WABA.',
         why: 'Se o token nao tem acesso ao WABA, nada do WhatsApp funciona.',
       }
@@ -212,7 +212,7 @@ export function getFriendlyCopy(check: MetaDiagnosticsCheck): FriendlyCopy {
 
     case 'internal_recent_failures':
       return {
-        title: 'Falhas recentes (historico)',
+        title: 'Falhas recentes (histórico)',
         message: check.message,
         why: 'Ajuda a ver padroes (pagamento, token, rate limit etc.).',
       }
@@ -254,7 +254,7 @@ export function topLineForSend(checks: MetaDiagnosticsCheck[]): TopLineResult {
   if (overall === 'LIMITED') return { label: 'Envio limitado', status: 'warn', detail: 'A Meta limitou o envio; pode afetar volume.' }
   if (overall === 'BLOCKED') return { label: 'Nao pode enviar', status: 'fail', detail: 'A Meta confirmou bloqueio.' }
   if (health?.status === 'fail') return { label: 'Nao pode enviar', status: 'fail', detail: 'Falha ao consultar Health Status.' }
-  return { label: 'Envio nao confirmado', status: 'info', detail: 'Health Status indisponivel.' }
+  return { label: 'Envio nao confirmado', status: 'info', detail: 'Health Status indisponível.' }
 }
 
 export function topLineForToken(checks: MetaDiagnosticsCheck[], data?: MetaDiagnosticsResponse): TopLineResult {

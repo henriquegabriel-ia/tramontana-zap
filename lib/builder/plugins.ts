@@ -254,7 +254,7 @@ const integrations: IntegrationPlugin[] = [
           },
           {
             key: "buttonParams",
-            label: "Parametros do botao (JSON)",
+            label: "Parâmetros do botão (JSON)",
             type: "template-textarea",
             placeholder: '[{"index":0,"params":[{"text":"https://example.com"}]}]',
             rows: 3,
@@ -369,7 +369,7 @@ const integrations: IntegrationPlugin[] = [
           },
           {
             key: "footer",
-            label: "Rodape",
+            label: "Rodapé",
             type: "text",
             placeholder: "Optional footer",
           },
@@ -419,7 +419,7 @@ const integrations: IntegrationPlugin[] = [
           },
           {
             key: "buttonText",
-            label: "Texto do botao",
+            label: "Texto do botão",
             type: "text",
             placeholder: "Options",
             required: true,
@@ -432,7 +432,7 @@ const integrations: IntegrationPlugin[] = [
           },
           {
             key: "footer",
-            label: "Rodape",
+            label: "Rodapé",
             type: "text",
             placeholder: "Optional footer",
           },

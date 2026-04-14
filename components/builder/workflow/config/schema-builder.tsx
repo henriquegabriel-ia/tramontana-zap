@@ -131,7 +131,7 @@ export function SchemaBuilder({
                   </SelectTrigger>
                   <SelectContent>
                     <SelectItem value="string">Texto</SelectItem>
-                    <SelectItem value="number">Numero</SelectItem>
+                    <SelectItem value="number">Número</SelectItem>
                     <SelectItem value="boolean">Booleano</SelectItem>
                     <SelectItem value="array">Array</SelectItem>
                     <SelectItem value="object">Objeto</SelectItem>
@@ -175,7 +175,7 @@ export function SchemaBuilder({
                   </SelectTrigger>
                   <SelectContent>
                     <SelectItem value="string">Texto</SelectItem>
-                    <SelectItem value="number">Numero</SelectItem>
+                    <SelectItem value="number">Número</SelectItem>
                     <SelectItem value="boolean">Booleano</SelectItem>
                     <SelectItem value="object">Objeto</SelectItem>
                   </SelectContent>

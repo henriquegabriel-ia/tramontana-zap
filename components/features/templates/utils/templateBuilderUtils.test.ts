@@ -295,7 +295,7 @@ describe('newButtonForType', () => {
   it('should create COPY_CODE button', () => {
     const btn = newButtonForType('COPY_CODE')
     expect(btn.type).toBe('COPY_CODE')
-    expect(btn.text).toBe('Copiar codigo')
+    expect(btn.text).toBe('Copiar código')
     expect(btn.example).toBe('CODE123')
   })
 
@@ -303,7 +303,7 @@ describe('newButtonForType', () => {
     const btn = newButtonForType('OTP')
     expect(btn.type).toBe('OTP')
     expect(btn.otp_type).toBe('COPY_CODE')
-    expect(btn.text).toBe('Copiar codigo')
+    expect(btn.text).toBe('Copiar código')
   })
 
   it('should create FLOW button', () => {

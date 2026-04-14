@@ -357,7 +357,7 @@ export const useSettingsController = () => {
       toast.success('Configuração de agendamento salva!');
     },
     onError: (err: Error) => {
-      toast.error(err?.message || 'Erro ao salvar configuracao de agendamento');
+      toast.error(err?.message || 'Erro ao salvar configuração de agendamento');
     },
   });
 

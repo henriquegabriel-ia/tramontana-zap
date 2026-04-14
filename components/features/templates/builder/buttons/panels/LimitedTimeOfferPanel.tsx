@@ -107,14 +107,14 @@ export function LimitedTimeOfferPanel({
           </div>
 
           <div className="text-xs text-[var(--ds-text-muted)]">
-            Regras: body max 600, cabecalho so imagem/video, sem rodape, COPY_CODE max 15.
+            Regras: body max 600, cabeçalho só imagem/vídeo, sem rodapé, COPY_CODE max 15.
           </div>
 
           {limitedTimeOfferTextTooLong && (
             <div className="text-xs text-amber-700 dark:text-amber-300">Texto do LTO deve ter ate 16 caracteres.</div>
           )}
           {limitedTimeOfferTextMissing && (
-            <div className="text-xs text-amber-700 dark:text-amber-300">Texto do LTO e obrigatorio.</div>
+            <div className="text-xs text-amber-700 dark:text-amber-300">Texto do LTO é obrigatório.</div>
           )}
           {limitedTimeOfferCategoryInvalid && (
             <div className="text-xs text-amber-700 dark:text-amber-300">Limited Time Offer so e permitido em Marketing.</div>

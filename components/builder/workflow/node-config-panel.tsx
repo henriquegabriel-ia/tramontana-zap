@@ -127,7 +127,7 @@ export const PanelInner = () => {
 
   const handleCopyWorkflowCode = useCallback(() => {
     navigator.clipboard.writeText(workflowCode);
-    toast.success("Codigo copiado");
+    toast.success("Código copiado");
   }, [workflowCode]);
 
   const handleDeleteNode = useCallback(() => {
