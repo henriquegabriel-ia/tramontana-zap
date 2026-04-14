@@ -320,6 +320,20 @@ export default function TemplatesPage() {
         </button>
 
         <button
+          onClick={() => setTab('projects')}
+          className={`rounded-full border px-4 py-2 text-sm font-medium transition-all flex items-center gap-2 ${activeTab === 'projects'
+            ? 'border-purple-400/40 bg-purple-500/10 text-[var(--ds-status-success-text)]'
+            : 'border-[var(--ds-border-default)] bg-[var(--ds-bg-elevated)] text-[var(--ds-text-secondary)] hover:text-[var(--ds-text-primary)]'
+            }`}
+        >
+          <LayoutGrid className="w-4 h-4" />
+          Projetos (Fábrica)
+          <span className="rounded-full bg-green-500/20 px-1 py-px text-[8px] font-semibold uppercase tracking-wider text-[var(--ds-status-success-text)] border border-green-500/30">
+            beta
+          </span>
+        </button>
+
+        <button
           onClick={() => setTab('flows')}
           className={`rounded-full border px-4 py-2 text-sm font-medium transition-all flex items-center gap-2 ${activeTab === 'flows'
             ? 'border-purple-400/40 bg-purple-500/10 text-[var(--ds-status-success-text)]'
@@ -342,20 +356,6 @@ export default function TemplatesPage() {
         >
           <FileText className="w-4 h-4" />
           Forms
-          <span className="rounded-full bg-green-500/20 px-1 py-px text-[8px] font-semibold uppercase tracking-wider text-[var(--ds-status-success-text)] border border-green-500/30">
-            beta
-          </span>
-        </button>
-
-        <button
-          onClick={() => setTab('projects')}
-          className={`rounded-full border px-4 py-2 text-sm font-medium transition-all flex items-center gap-2 ${activeTab === 'projects'
-            ? 'border-purple-400/40 bg-purple-500/10 text-[var(--ds-status-success-text)]'
-            : 'border-[var(--ds-border-default)] bg-[var(--ds-bg-elevated)] text-[var(--ds-text-secondary)] hover:text-[var(--ds-text-primary)]'
-            }`}
-        >
-          <LayoutGrid className="w-4 h-4" />
-          Projetos (Fábrica)
           <span className="rounded-full bg-green-500/20 px-1 py-px text-[8px] font-semibold uppercase tracking-wider text-[var(--ds-status-success-text)] border border-green-500/30">
             beta
           </span>
