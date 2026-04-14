@@ -119,21 +119,21 @@ const CompactSidebar = memo(function CompactSidebar({
           <ChevronRight size={14} aria-hidden="true" />
         </button>
         <div
-          className="flex h-9 w-9 items-center justify-center"
+          className="flex h-10 w-10 items-center justify-center mb-1"
           role="img"
           aria-label="Logo Tramontana Zap"
         >
-          <img src="/tramontana-logo-full.png" alt="Tramontana" className="h-8 object-contain" />
+          <img src="/tramontana-logo-full.png" alt="Tramontana" className="h-9 object-contain" />
         </div>
         <nav className="flex flex-1 flex-col items-center gap-1.5 pt-1" aria-label="Menu principal">
           {navItems.map((item) => {
             const isDisabled = item.disabled
             const isActive = pathname === item.path
-            const baseClassName = `group relative flex h-9 w-9 items-center justify-center rounded-lg border border-transparent text-[var(--ds-text-secondary)] transition-colors ${
+            const baseClassName = `group relative flex h-9 w-9 items-center justify-center rounded-lg border border-transparent text-[var(--ds-text-secondary)] transition-all duration-200 ${
               isDisabled
                 ? 'opacity-50 cursor-not-allowed'
-                : 'hover:border-[var(--ds-border-default)] hover:bg-[var(--ds-bg-hover)] hover:text-[var(--ds-text-primary)] focus-visible:ring-2 focus-visible:ring-primary-500/50 focus-visible:ring-offset-2 focus-visible:ring-offset-[var(--ds-bg-base)]'
-            } ${isActive ? 'bg-[var(--ds-bg-hover)] text-[var(--ds-text-primary)]' : ''}`
+                : 'hover:bg-primary-500/10 hover:text-primary-400 hover:shadow-[0_0_12px_rgba(104,51,189,0.25)] focus-visible:ring-2 focus-visible:ring-primary-500/50 focus-visible:ring-offset-2 focus-visible:ring-offset-[var(--ds-bg-base)]'
+            } ${isActive ? 'bg-primary-500/15 text-primary-400 shadow-[0_0_12px_rgba(104,51,189,0.2)]' : ''}`
 
             // Inbox usa badge dinâmico, outros usam badge estático
             const badge = item.path === '/inbox' ? (
@@ -236,13 +236,13 @@ const ExpandedSidebar = memo(function ExpandedSidebar({
       aria-label="Menu de navegação expandido"
     >
       <div className="flex h-full flex-col p-4">
-        <div className="h-16 flex items-center px-2 mb-6">
+        <div className="h-20 flex items-center justify-center px-2 mb-4">
           <div
-            className="flex-1 flex items-center"
+            className="flex-1 flex items-center justify-center"
             role="img"
             aria-label="Logo Tramontana Zap"
           >
-            <img src="/tramontana-logo-full.png" alt="Tramontana Consórcios" className="h-8 max-w-[160px] object-contain" />
+            <img src="/tramontana-logo-full.png" alt="Tramontana Consórcios" className="h-10 max-w-[170px] object-contain" />
           </div>
           <button
             type="button"
@@ -281,12 +281,12 @@ const ExpandedSidebar = memo(function ExpandedSidebar({
             {navItems.map((item) => {
               const isDisabled = item.disabled
               const isActive = pathname === item.path
-              const baseClassName = `flex items-center gap-3 px-4 py-3 rounded-xl transition-all duration-200 mb-1 ${
+              const baseClassName = `flex items-center gap-3 px-4 py-2.5 rounded-xl transition-all duration-200 mb-0.5 ${
                 isDisabled
                   ? 'opacity-50 cursor-not-allowed text-[var(--ds-text-muted)]'
                   : isActive
-                    ? 'bg-primary-500/10 text-primary-600 dark:text-primary-400 font-medium border border-primary-500/20 shadow-[0_0_15px_rgba(104,51,189,0.1)]'
-                    : 'text-[var(--ds-text-secondary)] hover:bg-[var(--ds-bg-hover)] hover:text-[var(--ds-text-primary)] focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-primary-500'
+                    ? 'bg-primary-500/12 text-primary-400 font-medium border border-primary-500/25 shadow-[0_0_20px_rgba(104,51,189,0.15)]'
+                    : 'text-[var(--ds-text-secondary)] border border-transparent hover:bg-primary-500/8 hover:text-primary-300 hover:border-primary-500/15 hover:shadow-[0_0_16px_rgba(104,51,189,0.12)] focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-primary-500'
               }`
 
               // Inbox usa badge dinâmico, outros usam badge estático

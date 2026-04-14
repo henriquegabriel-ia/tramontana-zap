@@ -17,6 +17,8 @@ function Card({ className, ...props }: React.ComponentProps<"div">) {
       className={cn(
         "bg-card text-card-foreground flex flex-col gap-6 rounded-xl border py-6",
         "[box-shadow:var(--ds-shadow-card)]",
+        "hover:[box-shadow:var(--ds-shadow-card-hover),0_0_20px_rgba(104,51,189,0.08)]",
+        "hover:border-primary-500/15",
         "[transition:var(--ds-transition-normal)]",
         className
       )}

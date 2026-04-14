@@ -54,8 +54,8 @@ const containerVariants = cva(
       },
       hover: {
         true: [
-          "hover:shadow-md",
-          "hover:border-[var(--ds-border-strong)]",
+          "hover:shadow-[0_4px_16px_rgba(104,51,189,0.1)]",
+          "hover:border-primary-500/20",
         ].join(" "),
         false: "",
       },
