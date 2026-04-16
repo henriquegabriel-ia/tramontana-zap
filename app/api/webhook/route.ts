@@ -1596,26 +1596,19 @@ export async function POST(request: NextRequest) {
               const db = getSupabaseAdmin()
               if (db) {
                 // Check if this phone has a recent campaign contact with status 'sent' or 'delivered' or 'read'
-                const normalizedPhone = normalizePhoneNumber(from) || from
+                // Match phone with and without + prefix
+                const phoneWithPlus = from.startsWith('+') ? from : `+${from}`
+                const phoneWithout = from.startsWith('+') ? from.slice(1) : from
                 const { data: campaignContact } = await db
                   .from('campaign_contacts')
                   .select('id, campaign_id, status, variant')
-                  .or(`phone.eq.${normalizedPhone},phone.eq.${from}`)
+                  .or(`phone.eq.${phoneWithPlus},phone.eq.${phoneWithout}`)
                   .in('status', ['sent', 'delivered', 'read'])
                   .order('sent_at', { ascending: false })
                   .limit(1)
                   .single()
 
                 if (campaignContact) {
-                  // Mark as replied so we don't auto-reply again
-                  const { data: alreadyReplied } = await db
-                    .from('campaign_contacts')
-                    .select('id')
-                    .eq('id', campaignContact.id)
-                    .eq('status', 'replied')
-                    .single()
-
-                  if (!alreadyReplied) {
                     // Send auto-reply (fire-and-forget)
                     sendWhatsAppMessage({
                       to: from,
