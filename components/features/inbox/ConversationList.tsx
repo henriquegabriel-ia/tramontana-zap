@@ -63,6 +63,13 @@ export function ConversationList({
   onLabelFilterChange,
 }: ConversationListProps) {
   const [showFilters, setShowFilters] = useState(false)
+  const [showOnlyUnread, setShowOnlyUnread] = useState(false)
+
+  // Filter conversations by unread
+  const filteredConversations = useMemo(() => {
+    if (!showOnlyUnread) return conversations
+    return conversations.filter(c => c.unread_count > 0)
+  }, [conversations, showOnlyUnread])
 
   // Active filter count
   const activeFilterCount = useMemo(() => {
@@ -70,8 +77,9 @@ export function ConversationList({
     if (statusFilter) count++
     if (modeFilter) count++
     if (labelFilter) count++
+    if (showOnlyUnread) count++
     return count
-  }, [statusFilter, modeFilter, labelFilter])
+  }, [statusFilter, modeFilter, labelFilter, showOnlyUnread])
 
   // Clear all filters
   const clearFilters = () => {
@@ -79,6 +87,7 @@ export function ConversationList({
     onModeFilterChange(null)
     onLabelFilterChange(null)
     onSearchChange('')
+    setShowOnlyUnread(false)
   }
 
   return (
@@ -225,14 +234,20 @@ export function ConversationList({
           </DropdownMenu>
         </div>
 
-        {/* Unread count - subtle, inline */}
+        {/* Unread filter toggle */}
         {totalUnread > 0 && (
-          <div className="flex items-center gap-1.5 mt-2 px-0.5">
+          <button
+            onClick={() => setShowOnlyUnread(prev => !prev)}
+            className={`flex items-center gap-1.5 mt-2 px-2 py-1 rounded-full text-[10px] transition-all ${
+              showOnlyUnread
+                ? 'bg-purple-500/20 text-purple-400 border border-purple-500/30'
+                : 'text-[var(--ds-text-muted)] hover:text-[var(--ds-text-secondary)]'
+            }`}
+          >
             <span className="w-1.5 h-1.5 rounded-full bg-purple-500 animate-pulse" />
-            <span className="text-[10px] text-[var(--ds-text-muted)]">
-              {totalUnread} {totalUnread === 1 ? 'não lida' : 'não lidas'}
-            </span>
-          </div>
+            {totalUnread} {totalUnread === 1 ? 'não lida' : 'não lidas'}
+            {showOnlyUnread && <span className="ml-0.5">✕</span>}
+          </button>
         )}
       </div>
 
@@ -251,7 +266,7 @@ export function ConversationList({
               </div>
             ))}
           </div>
-        ) : conversations.length === 0 ? (
+        ) : filteredConversations.length === 0 ? (
           // Empty state - minimal
           <div className="flex flex-col items-center justify-center h-48 text-center px-6">
             <div className="w-10 h-10 rounded-full bg-[var(--ds-bg-surface)]/50 flex items-center justify-center mb-2.5">
@@ -274,7 +289,7 @@ export function ConversationList({
         ) : (
           // Conversation items
           <div className="px-1.5 py-0.5">
-            {conversations.map((conversation) => (
+            {filteredConversations.map((conversation) => (
               <ConversationItem
                 key={conversation.id}
                 conversation={conversation}
