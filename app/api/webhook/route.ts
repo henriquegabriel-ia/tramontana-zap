@@ -45,6 +45,9 @@ import {
 // RD Station CRM integration (auto-deal on campaign reply)
 import { handleCampaignReply, getRDStationConfig } from '@/lib/rd-station'
 
+// Campaign auto-reply
+import { sendWhatsAppMessage } from '@/lib/whatsapp-send'
+
 // Get WhatsApp Access Token from centralized helper
 async function getWhatsAppAccessToken(): Promise<string | null> {
   const credentials = await getWhatsAppCredentials()
@@ -1583,6 +1586,59 @@ export async function POST(request: NextRequest) {
                 timestamp: message?.timestamp || null,
               },
             })
+          }
+
+          // =================================================================
+          // Campaign auto-reply: respond once on first campaign interaction
+          // =================================================================
+          if (text && from && !isOptOutKeyword(text)) {
+            try {
+              const db = getSupabaseAdmin()
+              if (db) {
+                // Check if this phone has a recent campaign contact with status 'sent' or 'delivered' or 'read'
+                const normalizedPhone = normalizePhoneNumber(from) || from
+                const { data: campaignContact } = await db
+                  .from('campaign_contacts')
+                  .select('id, campaign_id, status, variant')
+                  .or(`phone.eq.${normalizedPhone},phone.eq.${from}`)
+                  .in('status', ['sent', 'delivered', 'read'])
+                  .order('sent_at', { ascending: false })
+                  .limit(1)
+                  .single()
+
+                if (campaignContact) {
+                  // Mark as replied so we don't auto-reply again
+                  const { data: alreadyReplied } = await db
+                    .from('campaign_contacts')
+                    .select('id')
+                    .eq('id', campaignContact.id)
+                    .eq('status', 'replied')
+                    .single()
+
+                  if (!alreadyReplied) {
+                    // Send auto-reply (fire-and-forget)
+                    sendWhatsAppMessage({
+                      to: from,
+                      type: 'text',
+                      text: 'Ah, que ótimo. Já já um dos nossos analistas entrará em contato com você.',
+                    }).then((result) => {
+                      console.log('[Webhook] Campaign auto-reply sent:', { phone: maskPhone(from), success: result.success })
+                    }).catch((err) => {
+                      console.warn('[Webhook] Campaign auto-reply error (non-blocking):', err)
+                    })
+
+                    // Update status to prevent duplicate replies
+                    db.from('campaign_contacts')
+                      .update({ status: 'replied' })
+                      .eq('id', campaignContact.id)
+                      .then(() => {})
+                      .catch(() => {})
+                  }
+                }
+              }
+            } catch (autoReplyErr) {
+              console.warn('[Webhook] Campaign auto-reply check failed (non-blocking):', autoReplyErr)
+            }
           }
 
           // =================================================================
