@@ -194,6 +194,13 @@ export const useCampaignNewController = () => {
   const [precheckTotals, setPrecheckTotals] = useState<{ valid: number; skipped: number } | null>(null)
   const [precheckResult, setPrecheckResult] = useState<CampaignPrecheckResult | null>(null)
 
+  // A/B Testing state
+  const [abTestEnabled, setAbTestEnabled] = useState(false)
+  const [abSelectedTemplate, setAbSelectedTemplate] = useState<Template | null>(null)
+  const [abTemplateVars, setAbTemplateVars] = useState<{ header: TemplateVar[]; body: TemplateVar[] }>({ header: [], body: [] })
+  const [abTemplateButtonVars, setAbTemplateButtonVars] = useState<Record<string, string>>({})
+  const [abSplitRatio, setAbSplitRatio] = useState(50)
+
   // Aplicar em massa (bulk) um campo personalizado para desbloquear ignorados.
   const [bulkOpen, setBulkOpen] = useState(false)
   const [bulkKey, setBulkKey] = useState<string>('')
@@ -565,6 +572,16 @@ export const useCampaignNewController = () => {
     }
   }
 
+  // Build A/B template variables (simplified: uses same structure as main)
+  const buildAbTemplateVariables = () => {
+    if (!abSelectedTemplate || !abTestEnabled) return undefined
+    return {
+      header: abTemplateVars.header.map((item) => item.value.trim()),
+      body: abTemplateVars.body.map((item) => item.value.trim()),
+      ...(Object.keys(abTemplateButtonVars).length ? { buttons: abTemplateButtonVars } : {}),
+    }
+  }
+
   const resolveAudienceContacts = async (): Promise<Contact[]> => {
     if (audienceMode === 'teste') {
       const baseList: Contact[] = []
@@ -784,6 +801,11 @@ export const useCampaignNewController = () => {
         flowId,
         flowName,
         folderId: selectedFolderId,
+        // A/B Testing
+        abTestEnabled: abTestEnabled && !!abSelectedTemplate?.name,
+        abTemplateNameB: abTestEnabled ? abSelectedTemplate?.name : undefined,
+        abTemplateVariablesB: buildAbTemplateVariables(),
+        abSplitRatio,
       })
 
       router.push(`/campaigns/${campaign.id}`)
@@ -828,6 +850,11 @@ export const useCampaignNewController = () => {
         flowName,
         folderId: selectedFolderId,
         isDraft: true, // <-- Salva como rascunho
+        // A/B Testing
+        abTestEnabled: abTestEnabled && !!abSelectedTemplate?.name,
+        abTemplateNameB: abTestEnabled ? abSelectedTemplate?.name : undefined,
+        abTemplateVariablesB: buildAbTemplateVariables(),
+        abSplitRatio,
       })
 
       // Redireciona para a lista de campanhas (não para os detalhes)
@@ -1651,6 +1678,18 @@ export const useCampaignNewController = () => {
     setSelectedFolderId,
     folders,
     isFoldersLoading,
+
+    // A/B Testing
+    abTestEnabled,
+    setAbTestEnabled,
+    abSelectedTemplate,
+    setAbSelectedTemplate,
+    abTemplateVars,
+    setAbTemplateVars,
+    abTemplateButtonVars,
+    setAbTemplateButtonVars,
+    abSplitRatio,
+    setAbSplitRatio,
 
     // Launch
     isLaunching,

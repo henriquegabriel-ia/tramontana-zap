@@ -126,10 +126,18 @@ export async function POST(request: Request) {
       flowId: data.flowId,  // Flow/MiniApp reference (se o template usar Flow)
       flowName: data.flowName,
       folderId: data.folderId,  // Organização por pasta
+      abTestEnabled: data.abTestEnabled,
+      abTemplateNameB: data.abTemplateNameB,
+      abTemplateVariablesB: data.abTemplateVariablesB,
+      abSplitRatio: data.abSplitRatio,
     })
 
     // If contacts were provided, add them to campaign_contacts
     if (data.contacts && data.contacts.length > 0) {
+      // A/B Testing: assign variant based on split ratio
+      const abEnabled = data.abTestEnabled === true
+      const splitRatio = data.abSplitRatio ?? 50 // percentage for variant A
+
       await campaignContactDb.addContacts(
         campaign.id,
         data.contacts.map((c) => ({
@@ -139,6 +147,8 @@ export async function POST(request: Request) {
           email: c.email || null,
           // Snapshot Pattern: persist custom fields at campaign creation time
           custom_fields: c.custom_fields || {},
+          // A/B variant assignment: random based on split ratio
+          variant: abEnabled ? (Math.random() * 100 < splitRatio ? 'A' : 'B') : 'A',
         }))
       )
     }

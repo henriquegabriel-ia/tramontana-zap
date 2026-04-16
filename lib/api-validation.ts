@@ -124,6 +124,16 @@ export const CreateCampaignSchema = z.object({
   flowName: z.string().max(200).optional().nullable(),
   // Organização
   folderId: z.string().uuid().optional().nullable(),
+  // A/B Testing
+  abTestEnabled: z.boolean().optional().default(false),
+  abTemplateNameB: z.string().min(1).optional(),
+  abTemplateVariablesB: z.object({
+    header: z.array(z.string()),
+    headerMediaId: z.string().optional(),
+    body: z.array(z.string()),
+    buttons: z.record(z.string(), z.string()).optional()
+  }).optional(),
+  abSplitRatio: z.number().int().min(0).max(100).optional().default(50),
 })
 
 export const UpdateCampaignSchema = z.object({

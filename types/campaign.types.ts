@@ -109,6 +109,18 @@ export interface Campaign {
   selectedContactIds?: string[];
   /** Pending contacts for optimistic UI display */
   pendingContacts?: CampaignPendingContact[];
+
+  // ── A/B Testing ──────────────────────────────────────────────────────
+  /** Whether A/B testing is enabled for this campaign */
+  abTestEnabled?: boolean;
+  /** Template name for variant B */
+  abTemplateNameB?: string;
+  /** Template variables for variant B (same structure as main templateVariables) */
+  abTemplateVariablesB?: CampaignTemplateVariables;
+  /** Snapshot of template B at campaign creation time */
+  abTemplateSnapshotB?: unknown;
+  /** Split ratio: percentage of contacts assigned to variant A (0-100) */
+  abSplitRatio?: number;
 }
 
 /**
@@ -160,6 +172,8 @@ export interface Message {
   readAt?: string;
   /** Error message if failed */
   error?: string;
+  /** A/B test variant assigned to this message/contact */
+  variant?: 'A' | 'B';
 }
 
 // =============================================================================

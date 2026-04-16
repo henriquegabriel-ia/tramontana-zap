@@ -608,6 +608,98 @@ export default function CampaignsNewRealPage() {
                   </div>
                 </div>
               )}
+
+              {/* Teste A/B */}
+              {ctrl.templateSelected && (
+                <div className="rounded-2xl border border-[var(--ds-border-default)] bg-[var(--ds-bg-surface)] p-6 shadow-[0_10px_26px_rgba(0,0,0,0.3)]">
+                  <div className="flex items-center justify-between">
+                    <div className="flex items-center gap-3">
+                      <Layers size={18} className="text-purple-400" />
+                      <div>
+                        <h2 className="text-base font-semibold text-[var(--ds-text-primary)]">Teste A/B</h2>
+                        <p className="text-xs text-[var(--ds-text-muted)]">Compare dois templates para descobrir qual performa melhor.</p>
+                      </div>
+                    </div>
+                    <button
+                      type="button"
+                      onClick={() => ctrl.setAbTestEnabled(!ctrl.abTestEnabled)}
+                      className={`relative inline-flex h-6 w-11 items-center rounded-full transition-colors ${
+                        ctrl.abTestEnabled ? 'bg-purple-500' : 'bg-zinc-600'
+                      }`}
+                    >
+                      <span
+                        className={`inline-block h-4 w-4 rounded-full bg-white transition-transform ${
+                          ctrl.abTestEnabled ? 'translate-x-6' : 'translate-x-1'
+                        }`}
+                      />
+                    </button>
+                  </div>
+                  {ctrl.abTestEnabled && (
+                    <div className="mt-5 space-y-4">
+                      {/* Seleção do Template B */}
+                      <div>
+                        <label className="text-xs uppercase tracking-widest text-[var(--ds-text-muted)]">Template B</label>
+                        {ctrl.abSelectedTemplate ? (
+                          <div className="mt-2 flex items-center justify-between rounded-xl border border-[var(--ds-border-default)] bg-[var(--ds-bg-elevated)] px-4 py-3 text-sm">
+                            <div className="flex items-center gap-2">
+                              <span className="inline-flex h-5 w-5 items-center justify-center rounded-full border border-purple-600 dark:border-purple-400/40 text-[10px] text-purple-700 dark:text-purple-300">
+                                B
+                              </span>
+                              <span className="font-semibold text-[var(--ds-text-primary)]">{ctrl.abSelectedTemplate.name}</span>
+                            </div>
+                            <button
+                              type="button"
+                              onClick={() => ctrl.setAbSelectedTemplate(null)}
+                              className="text-xs text-purple-600 dark:text-purple-400/80 hover:text-purple-700 dark:text-purple-300"
+                            >
+                              Trocar
+                            </button>
+                          </div>
+                        ) : (
+                          <div className="mt-2 max-h-44 space-y-2 overflow-y-auto rounded-xl border border-[var(--ds-border-default)] bg-[var(--ds-bg-elevated)] p-3">
+                            {ctrl.templateOptions.length === 0 ? (
+                              <div className="text-xs text-[var(--ds-text-muted)]">Nenhum template encontrado.</div>
+                            ) : (
+                              ctrl.templateOptions
+                                .filter((t) => t.name !== ctrl.selectedTemplate?.name)
+                                .map((template) => (
+                                  <button
+                                    key={template.id}
+                                    type="button"
+                                    onClick={() => ctrl.setAbSelectedTemplate(template)}
+                                    className="w-full rounded-lg border border-[var(--ds-border-default)] bg-[var(--ds-bg-elevated)] px-3 py-2 text-left text-[var(--ds-text-secondary)] hover:border-purple-600 dark:hover:border-purple-400/40"
+                                  >
+                                    <div className="flex items-center justify-between">
+                                      <span className="font-semibold text-[var(--ds-text-primary)]">{template.name}</span>
+                                      <span className="text-[10px] uppercase text-[var(--ds-text-muted)]">{template.category}</span>
+                                    </div>
+                                  </button>
+                                ))
+                            )}
+                          </div>
+                        )}
+                      </div>
+                      {/* Split Ratio Slider */}
+                      <div>
+                        <label className="text-xs uppercase tracking-widest text-[var(--ds-text-muted)]">Divisao do publico</label>
+                        <div className="mt-2 flex items-center gap-4">
+                          <span className="text-xs font-semibold text-[var(--ds-text-primary)]">A: {ctrl.abSplitRatio}%</span>
+                          <input
+                            type="range"
+                            min={10}
+                            max={90}
+                            step={5}
+                            value={ctrl.abSplitRatio}
+                            onChange={(e) => ctrl.setAbSplitRatio(Number(e.target.value))}
+                            className="flex-1 accent-purple-500"
+                          />
+                          <span className="text-xs font-semibold text-[var(--ds-text-primary)]">B: {100 - ctrl.abSplitRatio}%</span>
+                        </div>
+                      </div>
+                    </div>
+                  )}
+                </div>
+              )}
             </div>
           )}
 
@@ -1458,6 +1550,26 @@ export default function CampaignsNewRealPage() {
                           <span className="truncate">{folder.name}</span>
                         </button>
                       ))}
+                    </div>
+                  </div>
+                </div>
+              )}
+
+              {/* Resumo A/B Testing (Step 4 review) */}
+              {ctrl.abTestEnabled && ctrl.abSelectedTemplate && (
+                <div className="rounded-2xl border border-purple-400/30 bg-purple-100 dark:bg-purple-500/10 p-6 shadow-[0_12px_30px_rgba(0,0,0,0.35)]">
+                  <div className="flex items-center gap-3 mb-4">
+                    <Layers size={18} className="text-purple-400" />
+                    <h2 className="text-base font-semibold text-[var(--ds-text-primary)]">Teste A/B Ativo</h2>
+                  </div>
+                  <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
+                    <div className="rounded-xl border border-[var(--ds-border-default)] bg-[var(--ds-bg-elevated)] p-4">
+                      <div className="text-xs uppercase tracking-widest text-[var(--ds-text-muted)]">Variante A ({ctrl.abSplitRatio}%)</div>
+                      <div className="mt-2 text-sm font-semibold text-[var(--ds-text-primary)]">{ctrl.selectedTemplate?.name}</div>
+                    </div>
+                    <div className="rounded-xl border border-[var(--ds-border-default)] bg-[var(--ds-bg-elevated)] p-4">
+                      <div className="text-xs uppercase tracking-widest text-[var(--ds-text-muted)]">Variante B ({100 - ctrl.abSplitRatio}%)</div>
+                      <div className="mt-2 text-sm font-semibold text-[var(--ds-text-primary)]">{ctrl.abSelectedTemplate.name}</div>
                     </div>
                   </div>
                 </div>

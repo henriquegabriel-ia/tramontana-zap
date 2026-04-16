@@ -270,6 +270,7 @@ interface Contact {
   name: string
   custom_fields?: Record<string, unknown>
   email?: string
+  variant?: 'A' | 'B'
 }
 
 interface CampaignWorkflowInput {
@@ -301,6 +302,18 @@ interface CampaignWorkflowInput {
     minIncreaseGapSec: number
     sendFloorDelayMs: number
   } | null
+  // A/B Testing
+  abTestEnabled?: boolean
+  abTemplateNameB?: string
+  abTemplateVariablesB?: { header: string[], headerMediaId?: string, body: string[], buttons?: Record<string, string> }
+  abTemplateSnapshotB?: {
+    name: string
+    language?: string
+    parameter_format?: 'positional' | 'named'
+    spec_hash?: string | null
+    fetched_at?: string | null
+    components?: any
+  }
 }
 
 async function claimPendingForSend(
@@ -510,7 +523,7 @@ async function updateContactStatus(
 // Each step is a separate HTTP request, bypasses Vercel 10s timeout
 const workflowHandler = serve<CampaignWorkflowInput>(
   async (context) => {
-    const { campaignId, templateName, contacts, templateVariables, phoneNumberId, accessToken, templateSnapshot, traceId: incomingTraceId, throttleConfig: payloadThrottleConfig } = context.requestPayload
+    const { campaignId, templateName, contacts, templateVariables, phoneNumberId, accessToken, templateSnapshot, traceId: incomingTraceId, throttleConfig: payloadThrottleConfig, abTestEnabled, abTemplateNameB, abTemplateVariablesB, abTemplateSnapshotB } = context.requestPayload
 
     const traceId = (incomingTraceId && String(incomingTraceId).trim().length > 0)
       ? String(incomingTraceId).trim()
@@ -1454,15 +1467,22 @@ const workflowHandler = serve<CampaignWorkflowInput>(
                 ? { ...precheck.values, headerMediaId: headerMediaIdForBatch }
                 : precheck.values
 
+            // A/B Testing: per-contact template selection based on variant
+            const isVariantB = abTestEnabled && contact.variant === 'B' && abTemplateNameB
+            const effectiveTemplateName = isVariantB ? abTemplateNameB! : templateName
+            const effectiveTemplateSnapshot = isVariantB && abTemplateSnapshotB ? abTemplateSnapshotB : null
+            // For variant B: use B-specific template variables, keeping precheck values as base
+            const effectiveValues = valuesForSend
+
             let whatsappPayload: any
             try {
-              const activeTemplate = refreshedTemplateForBatch || templateForBatch
+              const activeTemplate = effectiveTemplateSnapshot || refreshedTemplateForBatch || templateForBatch
               whatsappPayload = buildMetaTemplatePayload({
                 to: precheck.normalizedPhone,
-                templateName,
+                templateName: effectiveTemplateName,
                 language: (activeTemplate as any).language || 'pt_BR',
                 parameterFormat: (activeTemplate as any).parameter_format || (activeTemplate as any).parameterFormat || 'positional',
-                values: valuesForSend,
+                values: effectiveValues,
                 template: activeTemplate as any,
                 campaignId,
               })

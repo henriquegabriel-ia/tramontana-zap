@@ -9,6 +9,7 @@ export { CampaignPerformancePanel } from './CampaignPerformancePanel';
 export { CampaignTelemetryPanel } from './CampaignTelemetryPanel';
 export { CampaignFlowPanel } from './CampaignFlowPanel';
 export { MessageLogTable } from './MessageLogTable';
+export { CampaignABReport } from './CampaignABReport';
 
 // Types
 export type {

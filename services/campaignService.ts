@@ -34,6 +34,11 @@ interface CreateCampaignInput {
   folderId?: string | null;
   // Se true, salva como rascunho sem disparar
   isDraft?: boolean;
+  // A/B Testing
+  abTestEnabled?: boolean;
+  abTemplateNameB?: string;
+  abTemplateVariablesB?: { header: string[], body: string[], buttons?: Record<string, string> };
+  abSplitRatio?: number;
 }
 
 export interface CampaignListParams {
@@ -216,7 +221,7 @@ export const campaignService = {
   },
 
   create: async (input: CreateCampaignInput): Promise<Campaign> => {
-    const { name, templateName, recipients, selectedContacts, selectedContactIds, scheduledAt, templateVariables, flowId, flowName, folderId, isDraft } = input;
+    const { name, templateName, recipients, selectedContacts, selectedContactIds, scheduledAt, templateVariables, flowId, flowName, folderId, isDraft, abTestEnabled, abTemplateNameB, abTemplateVariablesB, abSplitRatio } = input;
 
     // 1. Create campaign in Database (source of truth) with contacts
     const response = await fetch('/api/campaigns', {
@@ -234,6 +239,11 @@ export const campaignService = {
         flowId,   // Flow/MiniApp ID (se template usar Flow)
         flowName, // Flow name para exibição
         folderId, // Organização por pasta
+        // A/B Testing
+        abTestEnabled,
+        abTemplateNameB,
+        abTemplateVariablesB,
+        abSplitRatio,
       }),
     });
 

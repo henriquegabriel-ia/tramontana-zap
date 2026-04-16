@@ -39,9 +39,83 @@ function isMissingTableError(err: any): boolean {
   return msg.includes('does not exist') || msg.includes('relation') && msg.includes('does not exist')
 }
 
+/**
+ * Query A/B variant-grouped metrics from campaign_contacts.
+ * Returns null when the campaign has no A/B test or query fails.
+ */
+async function queryVariantMetrics(campaignId: string) {
+  try {
+    // Check if campaign has A/B testing enabled
+    const { data: campaignData } = await supabase
+      .from('campaigns')
+      .select('ab_test_enabled, template_name, ab_template_name_b')
+      .eq('id', campaignId)
+      .single()
+
+    if (!campaignData?.ab_test_enabled) return null
+
+    // Query counts grouped by variant + status
+    const { data: rows, error } = await supabase
+      .rpc('get_ab_variant_metrics', { p_campaign_id: campaignId })
+
+    // Fallback: if RPC doesn't exist, do manual query
+    if (error) {
+      // Manual aggregation: query all contacts and group in JS
+      const { data: contacts, error: contactErr } = await supabase
+        .from('campaign_contacts')
+        .select('variant, status')
+        .eq('campaign_id', campaignId)
+
+      if (contactErr || !contacts) return null
+
+      const variants: Record<string, { templateName: string; sent: number; delivered: number; read: number; failed: number; skipped: number; total: number }> = {}
+
+      for (const c of contacts) {
+        const v = (c as any).variant || 'A'
+        if (!variants[v]) {
+          variants[v] = {
+            templateName: v === 'B' ? (campaignData.ab_template_name_b || '') : (campaignData.template_name || ''),
+            sent: 0, delivered: 0, read: 0, failed: 0, skipped: 0, total: 0,
+          }
+        }
+        variants[v].total++
+        const st = String((c as any).status || '').toLowerCase()
+        if (st === 'sent') variants[v].sent++
+        else if (st === 'delivered') variants[v].delivered++
+        else if (st === 'read') variants[v].read++
+        else if (st === 'failed') variants[v].failed++
+        else if (st === 'skipped') variants[v].skipped++
+      }
+
+      return { variants }
+    }
+
+    // Process RPC result
+    const variants: Record<string, any> = {}
+    for (const row of (rows || []) as any[]) {
+      const v = row.variant || 'A'
+      if (!variants[v]) {
+        variants[v] = {
+          templateName: v === 'B' ? (campaignData.ab_template_name_b || '') : (campaignData.template_name || ''),
+          sent: 0, delivered: 0, read: 0, failed: 0, skipped: 0, total: 0,
+        }
+      }
+      variants[v][row.status] = (variants[v][row.status] || 0) + Number(row.count || 0)
+      variants[v].total += Number(row.count || 0)
+    }
+
+    return { variants }
+  } catch {
+    return null
+  }
+}
+
 export async function GET(_req: Request, ctx: { params: Promise<{ id: string }> }) {
   const { id } = await ctx.params
   if (!id) return noStoreJson({ error: 'Missing campaign id' }, { status: 400 })
+
+  // A/B variant metrics (best-effort, added to all responses)
+  const abVariants = await queryVariantMetrics(id)
 
   // 1) Prefer métricas persistidas (run/batch) quando existir
   try {
@@ -87,6 +161,7 @@ export async function GET(_req: Request, ctx: { params: Promise<{ id: string }> 
         current: run,
         baseline: baseline || [],
         source: 'run_metrics',
+        ...(abVariants ? { abVariants: abVariants.variants } : {}),
       })
     }
 
@@ -127,6 +202,7 @@ export async function GET(_req: Request, ctx: { params: Promise<{ id: string }> 
         baseline: baseline || [],
         source: 'run_metrics',
         hint,
+        ...(abVariants ? { abVariants: abVariants.variants } : {}),
       })
     }
 
@@ -198,5 +274,6 @@ export async function GET(_req: Request, ctx: { params: Promise<{ id: string }> 
     baseline: baselineFallback,
     source: 'campaigns_fallback',
     hint: 'Métricas avançadas (run/batch) ainda não estão disponíveis. Aplique a migration 0008_add_campaign_performance_metrics.sql no Supabase e execute uma nova campanha para gerar o baseline por execução.',
+    ...(abVariants ? { abVariants: abVariants.variants } : {}),
   })
 }

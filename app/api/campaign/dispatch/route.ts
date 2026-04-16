@@ -21,6 +21,7 @@ interface DispatchContact {
   name: string
   email?: string
   custom_fields?: Record<string, unknown>
+  variant?: 'A' | 'B'
 }
 
 interface DispatchContactResolved {
@@ -29,6 +30,7 @@ interface DispatchContactResolved {
   name: string
   email?: string
   custom_fields?: Record<string, unknown>
+  variant?: 'A' | 'B'
 }
 
 // Ensure this route runs in Node.js (env access + better compatibility in dev)
@@ -206,7 +208,7 @@ export async function POST(request: NextRequest) {
   const [campaignResult, initialTemplate] = await Promise.all([
     supabase
       .from('campaigns')
-      .select('status, scheduled_date, template_variables, template_spec_hash')
+      .select('status, scheduled_date, template_variables, template_spec_hash, ab_test_enabled, ab_template_name_b, ab_template_variables_b, ab_template_snapshot_b, ab_split_ratio')
       .eq('id', campaignId)
       .single(),
     templateDb.getByName(templateName),
@@ -365,12 +367,37 @@ export async function POST(request: NextRequest) {
     console.warn('[Dispatch] Falha ao salvar snapshot do template na campanha (best-effort):', e)
   }
 
+  // A/B Testing: snapshot template B if enabled (best-effort)
+  try {
+    const abEnabled = Boolean((campaignRow as any).ab_test_enabled)
+    const abTemplateNameBRow = (campaignRow as any).ab_template_name_b as string | null
+    if (abEnabled && abTemplateNameBRow && !(campaignRow as any).ab_template_snapshot_b) {
+      const templateB = await templateDb.getByName(abTemplateNameBRow)
+      if (templateB) {
+        const snapshotB = {
+          name: templateB.name,
+          language: templateB.language,
+          parameter_format: (templateB as any).parameterFormat || 'positional',
+          spec_hash: (templateB as any).specHash ?? null,
+          fetched_at: (templateB as any).fetchedAt ?? null,
+          components: (templateB as any).components || (templateB as any).content || [],
+        }
+        await supabase
+          .from('campaigns')
+          .update({ ab_template_snapshot_b: snapshotB, updated_at: new Date().toISOString() })
+          .eq('id', campaignId)
+      }
+    }
+  } catch (e) {
+    console.warn('[Dispatch] Falha ao salvar snapshot do template B (best-effort):', e)
+  }
+
   // If no contacts provided, fetch from campaign_contacts (for cloned/scheduled campaigns)
   if (!contacts || !Array.isArray(contacts) || contacts.length === 0) {
-    // First get campaign contacts with their contact_id
+    // First get campaign contacts with their contact_id + variant
     const { data: existingContacts, error } = await supabase
       .from('campaign_contacts')
-      .select('phone, name, email, contact_id, custom_fields')
+      .select('phone, name, email, contact_id, custom_fields, variant')
       .eq('campaign_id', campaignId)
 
     if (error) {
@@ -388,7 +415,8 @@ export async function POST(request: NextRequest) {
       email: (row as any).email || undefined,
       contactId: (row as any).contact_id || undefined,
       // Snapshot Pattern: prefer campaign_contacts.custom_fields (works for temp_* and clones)
-      custom_fields: (row as any).custom_fields || {}
+      custom_fields: (row as any).custom_fields || {},
+      variant: (row as any).variant || 'A',
     }))
 
     console.log(`[Dispatch] Loaded ${contacts.length} contacts from database for campaign ${campaignId}`)
@@ -609,6 +637,7 @@ export async function POST(request: NextRequest) {
       email: c.email,
       custom_fields: c.custom_fields,
       contactId: contactId as string,
+      variant: c.variant || 'A',
     })
   }
 
@@ -979,7 +1008,13 @@ export async function POST(request: NextRequest) {
     const throttleSource = throttleConfigResult?.source ?? 'fallback'
     console.log(`[Dispatch] Throttle config source: ${throttleSource}`, throttleConfig ? JSON.stringify(throttleConfig) : 'null')
 
-    const workflowPayload = {
+    // A/B Testing: extract config from campaign row
+    const abTestEnabled = Boolean((campaignRow as any).ab_test_enabled)
+    const abTemplateNameB = (campaignRow as any).ab_template_name_b as string | null
+    const abTemplateVariablesB = (campaignRow as any).ab_template_variables_b as any | null
+    const abTemplateSnapshotB = (campaignRow as any).ab_template_snapshot_b as any | null
+
+    const workflowPayload: Record<string, unknown> = {
       campaignId,
       traceId,
       templateName,
@@ -997,6 +1032,14 @@ export async function POST(request: NextRequest) {
       accessToken,
       // Config de throttle passada do dispatch para evitar dependência de DB no QStash
       throttleConfig,
+    }
+
+    // A/B Testing: pass variant B config to workflow
+    if (abTestEnabled && abTemplateNameB) {
+      workflowPayload.abTestEnabled = true
+      workflowPayload.abTemplateNameB = abTemplateNameB
+      workflowPayload.abTemplateVariablesB = abTemplateVariablesB
+      workflowPayload.abTemplateSnapshotB = abTemplateSnapshotB
     }
 
     // BYPASS apenas em localhost REAL (dev local) - nunca em Vercel (preview ou prod)

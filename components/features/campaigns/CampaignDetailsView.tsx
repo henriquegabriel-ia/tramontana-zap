@@ -16,6 +16,7 @@ import {
   CampaignPerformancePanel,
   CampaignTelemetryPanel,
   CampaignFlowPanel,
+  CampaignABReport,
   MessageLogTable,
   PreparingCampaignView,
   CampaignDetailsViewProps,
@@ -211,6 +212,13 @@ export const CampaignDetailsView: React.FC<CampaignDetailsViewProps> = ({
         filterStatus={filterStatus}
         setFilterStatus={setFilterStatus}
         setIncludeReadInDelivered={setIncludeReadInDelivered}
+      />
+
+      {/* A/B Testing Report */}
+      <CampaignABReport
+        abTestEnabled={Boolean((campaign as any).abTestEnabled)}
+        abVariants={(metrics as any)?.abVariants}
+        mainTemplateName={campaign.templateName}
       />
 
       {/* Flow/MiniApp Panel - exibido apenas se a campanha usa Flow */}

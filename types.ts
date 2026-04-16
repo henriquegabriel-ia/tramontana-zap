@@ -123,6 +123,12 @@ export interface Campaign {
   folderId?: string | null;
   folder?: CampaignFolder | null;
   tags?: CampaignTag[];
+  // A/B Testing
+  abTestEnabled?: boolean;
+  abTemplateNameB?: string;
+  abTemplateVariablesB?: { header: string[], body: string[], buttons?: Record<string, string> };
+  abTemplateSnapshotB?: any;
+  abSplitRatio?: number;
 }
 
 export interface Contact {

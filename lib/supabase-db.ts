@@ -135,6 +135,10 @@ export const campaignDb = {
             cancelledAt: (row as any).cancelled_at ?? null,
             flowId: (row as any).flow_id ?? null,
             flowName: (row as any).flow_name ?? null,
+            // A/B Testing
+            abTestEnabled: (row as any).ab_test_enabled ?? false,
+            abTemplateNameB: (row as any).ab_template_name_b ?? undefined,
+            abSplitRatio: (row as any).ab_split_ratio ?? 50,
         }))
     },
 
@@ -276,6 +280,10 @@ export const campaignDb = {
                         updatedAt: folderData.updated_at,
                     } : null,
                     tags: tagsMap.get(row.id) || [],
+                    // A/B Testing
+                    abTestEnabled: (row as any).ab_test_enabled ?? false,
+                    abTemplateNameB: (row as any).ab_template_name_b ?? undefined,
+                    abSplitRatio: (row as any).ab_split_ratio ?? 50,
                 }
             }),
             total: count || 0,
@@ -318,6 +326,12 @@ export const campaignDb = {
             cancelledAt: (data as any).cancelled_at ?? null,
             flowId: (data as any).flow_id ?? null,
             flowName: (data as any).flow_name ?? null,
+            // A/B Testing
+            abTestEnabled: (data as any).ab_test_enabled ?? false,
+            abTemplateNameB: (data as any).ab_template_name_b ?? undefined,
+            abTemplateVariablesB: (data as any).ab_template_variables_b ?? undefined,
+            abTemplateSnapshotB: (data as any).ab_template_snapshot_b ?? undefined,
+            abSplitRatio: (data as any).ab_split_ratio ?? 50,
         }
     },
 
@@ -330,6 +344,10 @@ export const campaignDb = {
         flowId?: string | null
         flowName?: string | null
         folderId?: string | null
+        abTestEnabled?: boolean
+        abTemplateNameB?: string
+        abTemplateVariablesB?: { header: string[], headerMediaId?: string, body: string[], buttons?: Record<string, string> }
+        abSplitRatio?: number
     }): Promise<Campaign> => {
         const id = generateId()
         const now = new Date().toISOString()
@@ -340,28 +358,38 @@ export const campaignDb = {
         // eternamente em "Enviando" com tudo em pending.
         const status = campaign.scheduledAt ? CampaignStatus.SCHEDULED : CampaignStatus.DRAFT
 
+        const insertPayload: Record<string, unknown> = {
+            id,
+            name: campaign.name,
+            status,
+            template_name: campaign.templateName,
+            template_variables: campaign.templateVariables,
+            total_recipients: campaign.recipients,
+            sent: 0,
+            delivered: 0,
+            read: 0,
+            failed: 0,
+            skipped: 0,
+            created_at: now,
+            scheduled_date: campaign.scheduledAt,
+            started_at: null,
+            cancelled_at: null,
+            flow_id: campaign.flowId ?? null,
+            flow_name: campaign.flowName ?? null,
+            folder_id: campaign.folderId ?? null,
+        }
+
+        // A/B Testing fields (only set when enabled to avoid schema errors on older DBs)
+        if (campaign.abTestEnabled) {
+            insertPayload.ab_test_enabled = true
+            insertPayload.ab_template_name_b = campaign.abTemplateNameB ?? null
+            insertPayload.ab_template_variables_b = campaign.abTemplateVariablesB ?? null
+            insertPayload.ab_split_ratio = campaign.abSplitRatio ?? 50
+        }
+
         const { data, error } = await supabase
             .from('campaigns')
-            .insert({
-                id,
-                name: campaign.name,
-                status,
-                template_name: campaign.templateName,
-                template_variables: campaign.templateVariables,
-                total_recipients: campaign.recipients,
-                sent: 0,
-                delivered: 0,
-                read: 0,
-                failed: 0,
-                skipped: 0,
-                created_at: now,
-                scheduled_date: campaign.scheduledAt,
-                started_at: null,
-                cancelled_at: null,
-                flow_id: campaign.flowId ?? null,
-                flow_name: campaign.flowName ?? null,
-                folder_id: campaign.folderId ?? null,
-            })
+            .insert(insertPayload)
             .select()
             .single()
 
@@ -385,6 +413,10 @@ export const campaignDb = {
             cancelledAt: undefined,
             flowId: campaign.flowId ?? null,
             flowName: campaign.flowName ?? null,
+            abTestEnabled: campaign.abTestEnabled,
+            abTemplateNameB: campaign.abTemplateNameB,
+            abTemplateVariablesB: campaign.abTemplateVariablesB,
+            abSplitRatio: campaign.abSplitRatio,
         }
     },
 
@@ -1643,7 +1675,7 @@ export const leadFormDb = {
 export const campaignContactDb = {
     addContacts: async (
         campaignId: string,
-        contacts: { contactId: string, phone: string, name: string, email?: string | null, custom_fields?: Record<string, unknown> }[]
+        contacts: { contactId: string, phone: string, name: string, email?: string | null, custom_fields?: Record<string, unknown>, variant?: string }[]
     ): Promise<void> => {
         const rows = contacts.map(contact => ({
             id: generateId(),
@@ -1654,6 +1686,7 @@ export const campaignContactDb = {
             email: contact.email || null,
             custom_fields: contact.custom_fields || {},
             status: 'pending',
+            variant: contact.variant || 'A',
         }))
 
         const { error } = await supabase
