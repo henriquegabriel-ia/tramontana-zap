@@ -43,6 +43,9 @@ export const PUBLIC_ENDPOINTS = [
   '/api/campaign/dispatch', // QStash dispatch webhook (signature verified)
   '/api/attendants/validate', // Attendant token validation (public access)
   '/api/attendant',      // Attendant conversations (token-based auth)
+  '/api/inbox/conversations', // Inbox conversations (used by attendant view)
+  '/api/inbox/chat',     // Inbox chat/reply (used by attendant view)
+  '/api/mem0',           // AI memory (used by attendant view)
 ]
 
 // ============================================================================
