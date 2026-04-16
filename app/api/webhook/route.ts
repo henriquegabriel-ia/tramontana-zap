@@ -1595,40 +1595,46 @@ export async function POST(request: NextRequest) {
             try {
               const db = getSupabaseAdmin()
               if (db) {
-                // Check if this phone has a recent campaign contact with status 'sent' or 'delivered' or 'read'
-                // Match phone with and without + prefix
                 const phoneWithPlus = from.startsWith('+') ? from : `+${from}`
                 const phoneWithout = from.startsWith('+') ? from.slice(1) : from
-                const { data: campaignContact } = await db
+                console.log('[Webhook] Auto-reply check for:', maskPhone(from), 'formats:', maskPhone(phoneWithPlus), maskPhone(phoneWithout))
+
+                // Use array query (not .single()) to avoid error on multiple results
+                const { data: rows, error: queryErr } = await db
                   .from('campaign_contacts')
-                  .select('id, campaign_id, status, variant')
+                  .select('id, campaign_id, status')
                   .or(`phone.eq.${phoneWithPlus},phone.eq.${phoneWithout}`)
                   .in('status', ['sent', 'delivered', 'read'])
                   .order('sent_at', { ascending: false })
                   .limit(1)
-                  .single()
 
+                console.log('[Webhook] Auto-reply query result:', { rows: rows?.length ?? 0, error: queryErr?.message ?? null })
+
+                const campaignContact = rows?.[0]
                 if (campaignContact) {
-                  // Send auto-reply (fire-and-forget)
+                  console.log('[Webhook] Auto-reply sending to:', maskPhone(from))
+                  // Send auto-reply
                   sendWhatsAppMessage({
                     to: from,
                     type: 'text',
                     text: 'Ah, que ótimo. Já já um dos nossos analistas entrará em contato com você.',
                   }).then((result) => {
-                    console.log('[Webhook] Campaign auto-reply sent:', { phone: maskPhone(from), success: result.success })
+                    console.log('[Webhook] Campaign auto-reply result:', { phone: maskPhone(from), success: result.success, error: result.error })
                   }).catch((err) => {
-                    console.warn('[Webhook] Campaign auto-reply error (non-blocking):', err)
+                    console.warn('[Webhook] Campaign auto-reply error:', err)
                   })
 
-                  // Update status to prevent duplicate replies
+                  // Mark as replied to prevent duplicates
                   db.from('campaign_contacts')
                     .update({ status: 'replied' })
                     .eq('id', campaignContact.id)
-                    .then(() => {})
+                    .then(() => { console.log('[Webhook] Marked campaign_contact as replied:', campaignContact.id) })
+                } else {
+                  console.log('[Webhook] No active campaign contact found for auto-reply')
                 }
               }
             } catch (autoReplyErr) {
-              console.warn('[Webhook] Campaign auto-reply check failed (non-blocking):', autoReplyErr)
+              console.error('[Webhook] Campaign auto-reply check failed:', autoReplyErr)
             }
           }
 
