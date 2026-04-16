@@ -41,6 +41,8 @@ export const PUBLIC_ENDPOINTS = [
   '/api/flows',          // Workflow management (internal dashboard)
   '/api/flow-engine',    // Workflow execution engine (internal)
   '/api/campaign/dispatch', // QStash dispatch webhook (signature verified)
+  '/api/attendants/validate', // Attendant token validation (public access)
+  '/api/attendant',      // Attendant conversations (token-based auth)
 ]
 
 // ============================================================================
