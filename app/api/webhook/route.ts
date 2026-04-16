@@ -1632,7 +1632,6 @@ export async function POST(request: NextRequest) {
                       .update({ status: 'replied' })
                       .eq('id', campaignContact.id)
                       .then(() => {})
-                      .catch(() => {})
                   }
                 }
               }
