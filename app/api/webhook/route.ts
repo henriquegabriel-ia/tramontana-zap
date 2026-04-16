@@ -1609,23 +1609,22 @@ export async function POST(request: NextRequest) {
                   .single()
 
                 if (campaignContact) {
-                    // Send auto-reply (fire-and-forget)
-                    sendWhatsAppMessage({
-                      to: from,
-                      type: 'text',
-                      text: 'Ah, que ótimo. Já já um dos nossos analistas entrará em contato com você.',
-                    }).then((result) => {
-                      console.log('[Webhook] Campaign auto-reply sent:', { phone: maskPhone(from), success: result.success })
-                    }).catch((err) => {
-                      console.warn('[Webhook] Campaign auto-reply error (non-blocking):', err)
-                    })
+                  // Send auto-reply (fire-and-forget)
+                  sendWhatsAppMessage({
+                    to: from,
+                    type: 'text',
+                    text: 'Ah, que ótimo. Já já um dos nossos analistas entrará em contato com você.',
+                  }).then((result) => {
+                    console.log('[Webhook] Campaign auto-reply sent:', { phone: maskPhone(from), success: result.success })
+                  }).catch((err) => {
+                    console.warn('[Webhook] Campaign auto-reply error (non-blocking):', err)
+                  })
 
-                    // Update status to prevent duplicate replies
-                    db.from('campaign_contacts')
-                      .update({ status: 'replied' })
-                      .eq('id', campaignContact.id)
-                      .then(() => {})
-                  }
+                  // Update status to prevent duplicate replies
+                  db.from('campaign_contacts')
+                    .update({ status: 'replied' })
+                    .eq('id', campaignContact.id)
+                    .then(() => {})
                 }
               }
             } catch (autoReplyErr) {
