@@ -6,7 +6,7 @@
 
 import { NextRequest, NextResponse } from 'next/server'
 import { z } from 'zod'
-import { createClient } from '@/lib/supabase-server'
+import { getSupabaseAdmin } from '@/lib/supabase'
 import { cancelDebounce } from '@/lib/ai/agents/chat-agent'
 import type { ConversationMode } from '@/types'
 
@@ -26,7 +26,10 @@ export async function POST(
 ) {
   try {
     const { id } = await params
-    const supabase = await createClient()
+    const supabase = getSupabaseAdmin()
+    if (!supabase) {
+      return NextResponse.json({ error: 'Supabase não configurado' }, { status: 500 })
+    }
 
     // Validate conversation exists
     const { data: conversation, error: fetchError } = await supabase
@@ -139,7 +142,10 @@ export async function DELETE(
 ) {
   try {
     const { id } = await params
-    const supabase = await createClient()
+    const supabase = getSupabaseAdmin()
+    if (!supabase) {
+      return NextResponse.json({ error: 'Supabase não configurado' }, { status: 500 })
+    }
 
     // Validate conversation exists
     const { data: conversation, error: fetchError } = await supabase

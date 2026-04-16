@@ -10,7 +10,7 @@ import {
   type UIMessage,
 } from 'ai'
 import { z } from 'zod'
-import { createClient } from '@/lib/supabase-server'
+import { getSupabaseAdmin } from '@/lib/supabase'
 import { createLanguageModel, getProviderFromModel } from '@/lib/ai/provider-factory'
 import { DEFAULT_MODEL_ID } from '@/lib/ai/model'
 import { sendMessage as sendWhatsAppMessageToDB } from '@/lib/inbox/inbox-service'
@@ -65,7 +65,8 @@ const respondToolSchema = z.object({
 // =============================================================================
 
 async function getAgent(agentId: string): Promise<AIAgent | null> {
-  const supabase = await createClient()
+  const supabase = getSupabaseAdmin()
+  if (!supabase) return null
   const { data, error } = await supabase
     .from('ai_agents')
     .select('*')
@@ -122,7 +123,8 @@ async function persistAILog(params: {
   modelUsed: string
 }): Promise<string | undefined> {
   try {
-    const supabase = await createClient()
+    const supabase = getSupabaseAdmin()
+    if (!supabase) return undefined
     const { data, error } = await supabase
       .from('ai_agent_logs')
       .insert({
@@ -260,7 +262,8 @@ export async function POST(req: Request) {
 
             // Handle handoff if needed
             if (params.shouldHandoff) {
-              const supabase = await createClient()
+              const supabase = getSupabaseAdmin()
+              if (!supabase) return
 
               if (params.isUrgent) {
                 // URGENTE: mantém no bot, marca como urgente

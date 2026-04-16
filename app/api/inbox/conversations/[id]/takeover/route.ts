@@ -4,7 +4,7 @@
  */
 
 import { NextRequest, NextResponse } from 'next/server'
-import { createClient } from '@/lib/supabase-server'
+import { getSupabaseAdmin } from '@/lib/supabase'
 
 interface RouteContext {
   params: Promise<{ id: string }>
@@ -13,7 +13,10 @@ interface RouteContext {
 export async function POST(request: NextRequest, context: RouteContext) {
   try {
     const { id } = await context.params
-    const supabase = await createClient()
+    const supabase = getSupabaseAdmin()
+    if (!supabase) {
+      return NextResponse.json({ error: 'Supabase não configurado' }, { status: 500 })
+    }
 
     // Atualizar conversa para modo humano
     const { data: conversation, error } = await supabase
