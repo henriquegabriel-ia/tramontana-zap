@@ -134,6 +134,9 @@ export const CreateCampaignSchema = z.object({
     buttons: z.record(z.string(), z.string()).optional()
   }).optional(),
   abSplitRatio: z.number().int().min(0).max(100).optional().default(50),
+  // Auto-replies (Story 001)
+  quickReplyResponses: z.record(z.string(), z.string()).optional().nullable(),
+  fallbackResponse: z.string().max(4096).optional().nullable(),
 })
 
 export const UpdateCampaignSchema = z.object({

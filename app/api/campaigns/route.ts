@@ -130,6 +130,8 @@ export async function POST(request: Request) {
       abTemplateNameB: data.abTemplateNameB,
       abTemplateVariablesB: data.abTemplateVariablesB,
       abSplitRatio: data.abSplitRatio,
+      quickReplyResponses: data.quickReplyResponses,
+      fallbackResponse: data.fallbackResponse,
     })
 
     // If contacts were provided, add them to campaign_contacts

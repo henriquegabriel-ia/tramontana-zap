@@ -39,6 +39,9 @@ interface CreateCampaignInput {
   abTemplateNameB?: string;
   abTemplateVariablesB?: { header: string[], body: string[], buttons?: Record<string, string> };
   abSplitRatio?: number;
+  // Auto-replies (Story 001)
+  quickReplyResponses?: Record<string, string> | null;
+  fallbackResponse?: string | null;
 }
 
 export interface CampaignListParams {
@@ -221,7 +224,7 @@ export const campaignService = {
   },
 
   create: async (input: CreateCampaignInput): Promise<Campaign> => {
-    const { name, templateName, recipients, selectedContacts, selectedContactIds, scheduledAt, templateVariables, flowId, flowName, folderId, isDraft, abTestEnabled, abTemplateNameB, abTemplateVariablesB, abSplitRatio } = input;
+    const { name, templateName, recipients, selectedContacts, selectedContactIds, scheduledAt, templateVariables, flowId, flowName, folderId, isDraft, abTestEnabled, abTemplateNameB, abTemplateVariablesB, abSplitRatio, quickReplyResponses, fallbackResponse } = input;
 
     // 1. Create campaign in Database (source of truth) with contacts
     const response = await fetch('/api/campaigns', {
@@ -244,6 +247,9 @@ export const campaignService = {
         abTemplateNameB,
         abTemplateVariablesB,
         abSplitRatio,
+        // Auto-replies (Story 001)
+        quickReplyResponses,
+        fallbackResponse,
       }),
     });
 

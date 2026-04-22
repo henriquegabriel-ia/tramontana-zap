@@ -201,6 +201,10 @@ export const useCampaignNewController = () => {
   const [abTemplateButtonVars, setAbTemplateButtonVars] = useState<Record<string, string>>({})
   const [abSplitRatio, setAbSplitRatio] = useState(50)
 
+  // Auto-replies state (Story 001)
+  const [quickReplyResponses, setQuickReplyResponses] = useState<Record<string, string>>({})
+  const [fallbackResponse, setFallbackResponse] = useState<string>('')
+
   // Aplicar em massa (bulk) um campo personalizado para desbloquear ignorados.
   const [bulkOpen, setBulkOpen] = useState(false)
   const [bulkKey, setBulkKey] = useState<string>('')
@@ -582,6 +586,16 @@ export const useCampaignNewController = () => {
     }
   }
 
+  // Build auto-reply map: filtra entradas vazias, retorna null se ninguem configurou nada
+  const buildAutoReplyMap = (): Record<string, string> | null => {
+    const filtered = Object.fromEntries(
+      Object.entries(quickReplyResponses)
+        .map(([k, v]) => [k, String(v ?? '').trim()])
+        .filter(([_, v]) => v !== '')
+    )
+    return Object.keys(filtered).length > 0 ? filtered : null
+  }
+
   const resolveAudienceContacts = async (): Promise<Contact[]> => {
     if (audienceMode === 'teste') {
       const baseList: Contact[] = []
@@ -806,6 +820,9 @@ export const useCampaignNewController = () => {
         abTemplateNameB: abTestEnabled ? abSelectedTemplate?.name : undefined,
         abTemplateVariablesB: buildAbTemplateVariables(),
         abSplitRatio,
+        // Auto-replies (Story 001)
+        quickReplyResponses: buildAutoReplyMap(),
+        fallbackResponse: fallbackResponse.trim() || null,
       })
 
       router.push(`/campaigns/${campaign.id}`)
@@ -855,6 +872,9 @@ export const useCampaignNewController = () => {
         abTemplateNameB: abTestEnabled ? abSelectedTemplate?.name : undefined,
         abTemplateVariablesB: buildAbTemplateVariables(),
         abSplitRatio,
+        // Auto-replies (Story 001)
+        quickReplyResponses: buildAutoReplyMap(),
+        fallbackResponse: fallbackResponse.trim() || null,
       })
 
       // Redireciona para a lista de campanhas (não para os detalhes)
@@ -1690,6 +1710,12 @@ export const useCampaignNewController = () => {
     setAbTemplateButtonVars,
     abSplitRatio,
     setAbSplitRatio,
+
+    // Auto-replies (Story 001)
+    quickReplyResponses,
+    setQuickReplyResponses,
+    fallbackResponse,
+    setFallbackResponse,
 
     // Launch
     isLaunching,

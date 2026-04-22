@@ -139,6 +139,12 @@ export const campaignDb = {
             abTestEnabled: (row as any).ab_test_enabled ?? false,
             abTemplateNameB: (row as any).ab_template_name_b ?? undefined,
             abSplitRatio: (row as any).ab_split_ratio ?? 50,
+            // Auto-replies (Story 001)
+            quickReplyResponses: (row as any).quick_reply_responses ?? null,
+            fallbackResponse: (row as any).fallback_response ?? null,
+            autoReplySentCount: (row as any).auto_reply_sent_count ?? 0,
+            quickReplyMatchCount: (row as any).quick_reply_match_count ?? 0,
+            fallbackSentCount: (row as any).fallback_sent_count ?? 0,
         }))
     },
 
@@ -284,6 +290,12 @@ export const campaignDb = {
                     abTestEnabled: (row as any).ab_test_enabled ?? false,
                     abTemplateNameB: (row as any).ab_template_name_b ?? undefined,
                     abSplitRatio: (row as any).ab_split_ratio ?? 50,
+                    // Auto-replies (Story 001)
+                    quickReplyResponses: (row as any).quick_reply_responses ?? null,
+                    fallbackResponse: (row as any).fallback_response ?? null,
+                    autoReplySentCount: (row as any).auto_reply_sent_count ?? 0,
+                    quickReplyMatchCount: (row as any).quick_reply_match_count ?? 0,
+                    fallbackSentCount: (row as any).fallback_sent_count ?? 0,
                 }
             }),
             total: count || 0,
@@ -332,6 +344,12 @@ export const campaignDb = {
             abTemplateVariablesB: (data as any).ab_template_variables_b ?? undefined,
             abTemplateSnapshotB: (data as any).ab_template_snapshot_b ?? undefined,
             abSplitRatio: (data as any).ab_split_ratio ?? 50,
+            // Auto-replies (Story 001)
+            quickReplyResponses: (data as any).quick_reply_responses ?? null,
+            fallbackResponse: (data as any).fallback_response ?? null,
+            autoReplySentCount: (data as any).auto_reply_sent_count ?? 0,
+            quickReplyMatchCount: (data as any).quick_reply_match_count ?? 0,
+            fallbackSentCount: (data as any).fallback_sent_count ?? 0,
         }
     },
 
@@ -348,6 +366,8 @@ export const campaignDb = {
         abTemplateNameB?: string
         abTemplateVariablesB?: { header: string[], headerMediaId?: string, body: string[], buttons?: Record<string, string> }
         abSplitRatio?: number
+        quickReplyResponses?: Record<string, string> | null
+        fallbackResponse?: string | null
     }): Promise<Campaign> => {
         const id = generateId()
         const now = new Date().toISOString()
@@ -387,6 +407,14 @@ export const campaignDb = {
             insertPayload.ab_split_ratio = campaign.abSplitRatio ?? 50
         }
 
+        // Auto-replies (Story 001) — only set when provided to stay safe on older DBs
+        if (campaign.quickReplyResponses && Object.keys(campaign.quickReplyResponses).length > 0) {
+            insertPayload.quick_reply_responses = campaign.quickReplyResponses
+        }
+        if (campaign.fallbackResponse && campaign.fallbackResponse.trim() !== '') {
+            insertPayload.fallback_response = campaign.fallbackResponse.trim()
+        }
+
         const { data, error } = await supabase
             .from('campaigns')
             .insert(insertPayload)
@@ -417,6 +445,11 @@ export const campaignDb = {
             abTemplateNameB: campaign.abTemplateNameB,
             abTemplateVariablesB: campaign.abTemplateVariablesB,
             abSplitRatio: campaign.abSplitRatio,
+            quickReplyResponses: campaign.quickReplyResponses ?? null,
+            fallbackResponse: campaign.fallbackResponse ?? null,
+            autoReplySentCount: 0,
+            quickReplyMatchCount: 0,
+            fallbackSentCount: 0,
         }
     },
 

@@ -609,6 +609,69 @@ export default function CampaignsNewRealPage() {
                 </div>
               )}
 
+              {/* Respostas automáticas (Story 001) */}
+              {ctrl.templateSelected && ctrl.selectedTemplate && (() => {
+                const quickReplyButtons: string[] = (() => {
+                  const components = (ctrl.selectedTemplate as any)?.components
+                  if (!Array.isArray(components)) return []
+                  const buttonsComp = components.find((c: any) => String(c?.type || '').toUpperCase() === 'BUTTONS')
+                  if (!buttonsComp?.buttons) return []
+                  return buttonsComp.buttons
+                    .filter((b: any) => String(b?.type || '').toUpperCase() === 'QUICK_REPLY')
+                    .map((b: any) => String(b?.text || '').trim())
+                    .filter(Boolean)
+                })()
+
+                return (
+                  <div className="rounded-2xl border border-[var(--ds-border-default)] bg-[var(--ds-bg-surface)] p-6 shadow-[0_10px_26px_rgba(0,0,0,0.3)]">
+                    <div className="flex items-start gap-3 mb-4">
+                      <MessageSquare size={18} className="text-purple-400 mt-0.5" />
+                      <div>
+                        <h2 className="text-base font-semibold text-[var(--ds-text-primary)]">Respostas automáticas</h2>
+                        <p className="text-xs text-[var(--ds-text-muted)] mt-1">
+                          Configure uma resposta para cada botão e/ou uma resposta padrão para texto livre. Todos os campos são opcionais.
+                        </p>
+                      </div>
+                    </div>
+
+                    <div className="space-y-3">
+                      {quickReplyButtons.map((btnText) => (
+                        <div key={btnText}>
+                          <label className="text-xs text-[var(--ds-text-muted)] mb-1 block">
+                            Quando o cliente clicar em <span className="text-purple-400 font-medium">&ldquo;{btnText}&rdquo;</span>
+                          </label>
+                          <input
+                            type="text"
+                            value={ctrl.quickReplyResponses[btnText] ?? ''}
+                            onChange={(e) =>
+                              ctrl.setQuickReplyResponses({
+                                ...ctrl.quickReplyResponses,
+                                [btnText]: e.target.value,
+                              })
+                            }
+                            placeholder="Deixe em branco para não responder automaticamente"
+                            className="w-full rounded-xl border border-[var(--ds-border-default)] bg-[var(--ds-bg-elevated)] px-4 py-2 text-sm text-[var(--ds-text-primary)] placeholder:text-[var(--ds-text-muted)] focus:border-purple-500/50 focus:outline-none focus:ring-2 focus:ring-purple-500/30"
+                          />
+                        </div>
+                      ))}
+
+                      <div className={quickReplyButtons.length > 0 ? 'pt-3 border-t border-[var(--ds-border-default)]' : ''}>
+                        <label className="text-xs text-[var(--ds-text-muted)] mb-1 block">
+                          Quando o cliente responder com <span className="text-purple-400 font-medium">texto livre</span>
+                        </label>
+                        <input
+                          type="text"
+                          value={ctrl.fallbackResponse}
+                          onChange={(e) => ctrl.setFallbackResponse(e.target.value)}
+                          placeholder="Ex: Recebi sua mensagem. Em breve um analista entrará em contato."
+                          className="w-full rounded-xl border border-[var(--ds-border-default)] bg-[var(--ds-bg-elevated)] px-4 py-2 text-sm text-[var(--ds-text-primary)] placeholder:text-[var(--ds-text-muted)] focus:border-purple-500/50 focus:outline-none focus:ring-2 focus:ring-purple-500/30"
+                        />
+                      </div>
+                    </div>
+                  </div>
+                )
+              })()}
+
               {/* Teste A/B */}
               {ctrl.templateSelected && (
                 <div className="rounded-2xl border border-[var(--ds-border-default)] bg-[var(--ds-bg-surface)] p-6 shadow-[0_10px_26px_rgba(0,0,0,0.3)]">

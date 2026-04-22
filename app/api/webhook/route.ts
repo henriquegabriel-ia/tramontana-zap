@@ -1589,7 +1589,11 @@ export async function POST(request: NextRequest) {
           }
 
           // =================================================================
-          // Campaign auto-reply: respond once on first campaign interaction
+          // Campaign auto-reply (Story 001): responde conforme config da campanha
+          //   - quick_reply match (texto == botão) → envia resposta mapeada
+          //   - senão, fallback_response (se configurado)
+          //   - senão, nada
+          // Status do contato sempre vira 'replied' (para não disparar de novo).
           // =================================================================
           if (text && from && !isOptOutKeyword(text)) {
             try {
@@ -1597,12 +1601,11 @@ export async function POST(request: NextRequest) {
               if (db) {
                 const phoneWithPlus = from.startsWith('+') ? from : `+${from}`
                 const phoneWithout = from.startsWith('+') ? from.slice(1) : from
-                console.log('[Webhook] Auto-reply check for:', maskPhone(from), 'formats:', maskPhone(phoneWithPlus), maskPhone(phoneWithout))
+                console.log('[Webhook] Auto-reply check for:', maskPhone(from))
 
-                // Use array query (not .single()) to avoid error on multiple results
                 const { data: rows, error: queryErr } = await db
                   .from('campaign_contacts')
-                  .select('id, campaign_id, status')
+                  .select('id, campaign_id, status, campaigns(quick_reply_responses, fallback_response)')
                   .or(`phone.eq.${phoneWithPlus},phone.eq.${phoneWithout}`)
                   .in('status', ['sent', 'delivered', 'read'])
                   .order('sent_at', { ascending: false })
@@ -1612,23 +1615,61 @@ export async function POST(request: NextRequest) {
 
                 const campaignContact = rows?.[0]
                 if (campaignContact) {
-                  console.log('[Webhook] Auto-reply sending to:', maskPhone(from))
-                  // Send auto-reply
-                  sendWhatsAppMessage({
-                    to: from,
-                    type: 'text',
-                    text: 'Ah, que ótimo. Já já um dos nossos analistas entrará em contato com você.',
-                  }).then((result) => {
-                    console.log('[Webhook] Campaign auto-reply result:', { phone: maskPhone(from), success: result.success, error: result.error })
-                  }).catch((err) => {
-                    console.warn('[Webhook] Campaign auto-reply error:', err)
-                  })
+                  const campaignRel = (campaignContact as any).campaigns
+                  const campaign = Array.isArray(campaignRel) ? campaignRel[0] : campaignRel
+                  const qrMap: Record<string, string> | null = campaign?.quick_reply_responses ?? null
+                  const fallback: string | null = campaign?.fallback_response ?? null
 
-                  // Mark as replied to prevent duplicates
+                  // Matching: trim + lowercase, case-insensitive
+                  const received = String(text).trim().toLowerCase()
+                  let replyText: string | null = null
+                  let matchType: 'quick' | 'fallback' | null = null
+
+                  if (qrMap && typeof qrMap === 'object') {
+                    const matched = Object.entries(qrMap).find(
+                      ([key]) => String(key).trim().toLowerCase() === received
+                    )
+                    if (matched && String(matched[1] || '').trim() !== '') {
+                      replyText = String(matched[1])
+                      matchType = 'quick'
+                    }
+                  }
+                  if (!replyText && fallback && String(fallback).trim() !== '') {
+                    replyText = String(fallback)
+                    matchType = 'fallback'
+                  }
+
+                  // Sempre marca como replied (AC5): impede que respostas futuras acionem de novo
                   db.from('campaign_contacts')
                     .update({ status: 'replied' })
                     .eq('id', campaignContact.id)
                     .then(() => { console.log('[Webhook] Marked campaign_contact as replied:', campaignContact.id) })
+
+                  // Envia só se houver resposta configurada; incrementa contador só em sucesso
+                  if (replyText && matchType) {
+                    const campaignId = (campaignContact as any).campaign_id
+                    const finalMatchType = matchType
+                    console.log('[Webhook] Auto-reply sending to:', maskPhone(from), 'matchType:', finalMatchType)
+                    sendWhatsAppMessage({
+                      to: from,
+                      type: 'text',
+                      text: replyText,
+                    }).then((result) => {
+                      console.log('[Webhook] Campaign auto-reply result:', { phone: maskPhone(from), success: result.success, matchType: finalMatchType, error: result.error })
+                      if (result.success && campaignId) {
+                        db.rpc('increment_campaign_auto_reply_counters', {
+                          p_campaign_id: campaignId,
+                          p_match_type: finalMatchType,
+                        }).then(({ error }: any) => {
+                          if (error) console.warn('[Webhook] Counter RPC failed:', error.message)
+                        })
+                      }
+                    }).catch((err) => {
+                      console.warn('[Webhook] Campaign auto-reply error:', err)
+                    })
+                  } else {
+                    console.log('[Webhook] No auto-reply configured for this campaign; skipping send')
+                  }
                 } else {
                   console.log('[Webhook] No active campaign contact found for auto-reply')
                 }

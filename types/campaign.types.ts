@@ -121,6 +121,18 @@ export interface Campaign {
   abTemplateSnapshotB?: unknown;
   /** Split ratio: percentage of contacts assigned to variant A (0-100) */
   abSplitRatio?: number;
+
+  // ── Auto-replies (Story 001) ─────────────────────────────────────────
+  /** Map of quick_reply button text -> automatic response sent when client replies with that exact text */
+  quickReplyResponses?: Record<string, string> | null;
+  /** Automatic response sent when client replies with free text (not matching any quick_reply) */
+  fallbackResponse?: string | null;
+  /** Total auto-replies successfully sent (quick + fallback) */
+  autoReplySentCount?: number;
+  /** Auto-replies triggered by match in quick_reply button text */
+  quickReplyMatchCount?: number;
+  /** Auto-replies triggered by fallback (free text) */
+  fallbackSentCount?: number;
 }
 
 /**

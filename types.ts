@@ -129,6 +129,12 @@ export interface Campaign {
   abTemplateVariablesB?: { header: string[], body: string[], buttons?: Record<string, string> };
   abTemplateSnapshotB?: any;
   abSplitRatio?: number;
+  // Auto-replies (Story 001)
+  quickReplyResponses?: Record<string, string> | null;
+  fallbackResponse?: string | null;
+  autoReplySentCount?: number;
+  quickReplyMatchCount?: number;
+  fallbackSentCount?: number;
 }
 
 export interface Contact {
