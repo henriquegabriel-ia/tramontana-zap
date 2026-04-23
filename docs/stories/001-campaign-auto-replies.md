@@ -1,6 +1,6 @@
 # Story 001 — Respostas automáticas configuráveis por campanha
 
-**Status:** Ready for Review
+**Status:** Done ✅
 **Tipo:** Brownfield Enhancement
 **Epic:** (standalone)
 **Autor:** @pm (Morgan)
@@ -24,9 +24,25 @@
 ### Commits
 
 - `cef1955` — feat: auto-reply configurável + contadores (1ª versão)
-- `1daf0a9` — fix: queries separadas + await (correção real)
-- `9c67e5d` — chore: elevar logs para warn (diagnóstico, revertido depois)
-- `[próximo]` — chore: reverter warn → log
+- `1daf0a9` — fix: queries separadas + await
+- `9c67e5d` — chore: elevar logs para warn (diagnóstico)
+- `e5f31db` — chore: revert warn → log + story updated
+- `b68b4bf` — fix: delay 4.5s antes do auto-reply (rate limit Meta)
+- `57be707` — fix: mover auto-reply para antes do workflow builder
+- `1c5d205` — debug: webhook_debug_logs (feature permanente de observabilidade)
+- `5d11d88` — **fix: normalização telefone BR (bug do 9) — causa raiz** ✅
+
+### Validação E2E final
+
+```
+2026-04-23 02:48:00 — Click real do cliente recebido
+2026-04-23 02:48:00 — cc found via variantes (4 telefones)
+2026-04-23 02:48:00 — quick_reply matched
+2026-04-23 02:48:05 — send result: success TRUE (delay 4.5s)
+2026-04-23 02:48:05 — counter incremented (quick_reply_match_count=1)
+```
+
+Campanha `733a561c` — teste real end-to-end: ✅ PASSOU
 
 ### File List
 
