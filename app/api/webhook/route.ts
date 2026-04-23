@@ -1670,7 +1670,11 @@ export async function POST(request: NextRequest) {
 
                   // Envia só se houver resposta configurada
                   if (replyText && matchType) {
-                    console.log('[AutoReply] sending to:', maskPhone(from), 'matchType:', matchType, 'textPreview:', replyText.slice(0, 40))
+                    // Delay defensivo contra rate limit (1 msg / 6s Meta) e greeting automática do
+                    // WhatsApp Business que pode chegar simultaneamente ao click do botão.
+                    const AUTO_REPLY_DELAY_MS = 4500
+                    console.log('[AutoReply] scheduling send to:', maskPhone(from), 'matchType:', matchType, 'delayMs:', AUTO_REPLY_DELAY_MS, 'textPreview:', replyText.slice(0, 40))
+                    await new Promise((r) => setTimeout(r, AUTO_REPLY_DELAY_MS))
                     const sendResult = await sendWhatsAppMessage({
                       to: from,
                       type: 'text',
