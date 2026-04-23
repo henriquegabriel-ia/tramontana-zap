@@ -973,6 +973,129 @@ export async function POST(request: NextRequest) {
           }
 
           // =================================================================
+          // Campaign auto-reply (Story 001): responde conforme config da campanha
+          //   - quick_reply match (texto == botão) → envia resposta mapeada
+          //   - senão, fallback_response (se configurado)
+          //   - senão, nada
+          // Status do contato sempre vira 'replied' (para não disparar de novo).
+          // IMPORTANTE: este bloco roda ANTES do workflow builder (que tem `continue`
+          // em pending_conversation). Garante que a resposta automática da campanha
+          // tenha prioridade sobre qualquer workflow.
+          // =================================================================
+          console.log('[AutoReply] entering block — text:', text ? `"${text}"` : '(empty)', 'from:', maskPhone(from))
+          if (text && from && !isOptOutKeyword(text)) {
+            try {
+              const db = getSupabaseAdmin()
+              if (db) {
+                const phoneWithPlus = from.startsWith('+') ? from : `+${from}`
+                const phoneWithout = from.startsWith('+') ? from.slice(1) : from
+                console.log('[AutoReply] check phone:', maskPhone(from), 'text:', JSON.stringify(text))
+
+                // 1) Acha o campaign_contact (qualquer status exceto replied/failed — mais permissivo)
+                const { data: ccRows, error: ccErr } = await db
+                  .from('campaign_contacts')
+                  .select('id, campaign_id, status, sent_at')
+                  .or(`phone.eq.${phoneWithPlus},phone.eq.${phoneWithout}`)
+                  .in('status', ['pending', 'sent', 'delivered', 'read'])
+                  .order('sent_at', { ascending: false, nullsFirst: false })
+                  .limit(1)
+
+                if (ccErr) {
+                  console.log('[AutoReply] campaign_contacts query error:', ccErr.message)
+                }
+
+                const campaignContact = ccRows?.[0]
+                console.log('[AutoReply] cc found:', !!campaignContact, 'campaign_id:', campaignContact?.campaign_id, 'status:', campaignContact?.status)
+
+                if (campaignContact) {
+                  // 2) Busca config da campanha (query separada)
+                  const { data: campaignRow, error: campErr } = await db
+                    .from('campaigns')
+                    .select('id, quick_reply_responses, fallback_response')
+                    .eq('id', campaignContact.campaign_id)
+                    .single()
+
+                  if (campErr) {
+                    console.log('[AutoReply] campaigns query error:', campErr.message)
+                  }
+
+                  const qrMap: Record<string, string> | null = (campaignRow as any)?.quick_reply_responses ?? null
+                  const fallback: string | null = (campaignRow as any)?.fallback_response ?? null
+                  console.log('[AutoReply] campaign config:', { hasQuickReplies: !!qrMap, quickReplyKeys: qrMap ? Object.keys(qrMap) : [], hasFallback: !!fallback })
+
+                  const received = String(text).trim().toLowerCase()
+                  let replyText: string | null = null
+                  let matchType: 'quick' | 'fallback' | null = null
+
+                  if (qrMap && typeof qrMap === 'object') {
+                    const matched = Object.entries(qrMap).find(
+                      ([key]) => String(key).trim().toLowerCase() === received
+                    )
+                    if (matched && String(matched[1] || '').trim() !== '') {
+                      replyText = String(matched[1])
+                      matchType = 'quick'
+                      console.log('[AutoReply] quick_reply matched:', JSON.stringify(matched[0]))
+                    }
+                  }
+                  if (!replyText && fallback && String(fallback).trim() !== '') {
+                    replyText = String(fallback)
+                    matchType = 'fallback'
+                    console.log('[AutoReply] using fallback')
+                  }
+
+                  // AC5: sempre marca como replied (await para garantir)
+                  const { error: updErr } = await db
+                    .from('campaign_contacts')
+                    .update({ status: 'replied' })
+                    .eq('id', campaignContact.id)
+                  if (updErr) {
+                    console.log('[AutoReply] mark replied failed:', updErr.message)
+                  } else {
+                    console.log('[AutoReply] marked cc as replied:', campaignContact.id)
+                  }
+
+                  // Envia só se houver resposta configurada
+                  if (replyText && matchType) {
+                    // Delay defensivo contra rate limit (1 msg / 6s Meta) e greeting automática do
+                    // WhatsApp Business que pode chegar simultaneamente ao click do botão.
+                    const AUTO_REPLY_DELAY_MS = 4500
+                    console.log('[AutoReply] scheduling send to:', maskPhone(from), 'matchType:', matchType, 'delayMs:', AUTO_REPLY_DELAY_MS, 'textPreview:', replyText.slice(0, 40))
+                    await new Promise((r) => setTimeout(r, AUTO_REPLY_DELAY_MS))
+                    const sendResult = await sendWhatsAppMessage({
+                      to: from,
+                      type: 'text',
+                      text: replyText,
+                    })
+                    console.log('[AutoReply] send result:', { success: sendResult.success, error: sendResult.error })
+
+                    if (sendResult.success) {
+                      const { error: rpcErr } = await db.rpc('increment_campaign_auto_reply_counters', {
+                        p_campaign_id: campaignContact.campaign_id,
+                        p_match_type: matchType,
+                      })
+                      if (rpcErr) {
+                        console.log('[AutoReply] counter RPC failed:', rpcErr.message)
+                      } else {
+                        console.log('[AutoReply] counter incremented for campaign:', campaignContact.campaign_id, 'matchType:', matchType)
+                      }
+                    }
+                  } else {
+                    console.log('[AutoReply] no auto-reply configured for this campaign; skipping send')
+                  }
+                } else {
+                  console.log('[AutoReply] no eligible campaign_contact found')
+                }
+              } else {
+                console.log('[AutoReply] supabase admin not available')
+              }
+            } catch (autoReplyErr) {
+              console.error('[AutoReply] exception:', autoReplyErr)
+            }
+          } else {
+            console.log('[AutoReply] skipped — text empty or opt-out keyword')
+          }
+
+          // =================================================================
           // Workflow Builder (MVP): resume pending conversation if any
           // =================================================================
           const normalizedFrom = normalizePhoneNumber(from)
@@ -1588,124 +1711,8 @@ export async function POST(request: NextRequest) {
             })
           }
 
-          // =================================================================
-          // Campaign auto-reply (Story 001): responde conforme config da campanha
-          //   - quick_reply match (texto == botão) → envia resposta mapeada
-          //   - senão, fallback_response (se configurado)
-          //   - senão, nada
-          // Status do contato sempre vira 'replied' (para não disparar de novo).
-          // Refatorado: 2 queries separadas (sem join embutido) + awaits para
-          // garantir execução antes da serverless terminar.
-          // =================================================================
-          if (text && from && !isOptOutKeyword(text)) {
-            try {
-              const db = getSupabaseAdmin()
-              if (db) {
-                const phoneWithPlus = from.startsWith('+') ? from : `+${from}`
-                const phoneWithout = from.startsWith('+') ? from.slice(1) : from
-                console.log('[AutoReply] check phone:', maskPhone(from), 'text:', JSON.stringify(text))
-
-                // 1) Acha o campaign_contact (qualquer status exceto replied/failed — mais permissivo)
-                const { data: ccRows, error: ccErr } = await db
-                  .from('campaign_contacts')
-                  .select('id, campaign_id, status, sent_at')
-                  .or(`phone.eq.${phoneWithPlus},phone.eq.${phoneWithout}`)
-                  .in('status', ['pending', 'sent', 'delivered', 'read'])
-                  .order('sent_at', { ascending: false, nullsFirst: false })
-                  .limit(1)
-
-                if (ccErr) {
-                  console.log('[AutoReply] campaign_contacts query error:', ccErr.message)
-                }
-
-                const campaignContact = ccRows?.[0]
-                console.log('[AutoReply] cc found:', !!campaignContact, 'campaign_id:', campaignContact?.campaign_id, 'status:', campaignContact?.status)
-
-                if (campaignContact) {
-                  // 2) Busca config da campanha (query separada)
-                  const { data: campaignRow, error: campErr } = await db
-                    .from('campaigns')
-                    .select('id, quick_reply_responses, fallback_response')
-                    .eq('id', campaignContact.campaign_id)
-                    .single()
-
-                  if (campErr) {
-                    console.log('[AutoReply] campaigns query error:', campErr.message)
-                  }
-
-                  const qrMap: Record<string, string> | null = (campaignRow as any)?.quick_reply_responses ?? null
-                  const fallback: string | null = (campaignRow as any)?.fallback_response ?? null
-                  console.log('[AutoReply] campaign config:', { hasQuickReplies: !!qrMap, quickReplyKeys: qrMap ? Object.keys(qrMap) : [], hasFallback: !!fallback })
-
-                  const received = String(text).trim().toLowerCase()
-                  let replyText: string | null = null
-                  let matchType: 'quick' | 'fallback' | null = null
-
-                  if (qrMap && typeof qrMap === 'object') {
-                    const matched = Object.entries(qrMap).find(
-                      ([key]) => String(key).trim().toLowerCase() === received
-                    )
-                    if (matched && String(matched[1] || '').trim() !== '') {
-                      replyText = String(matched[1])
-                      matchType = 'quick'
-                      console.log('[AutoReply] quick_reply matched:', JSON.stringify(matched[0]))
-                    }
-                  }
-                  if (!replyText && fallback && String(fallback).trim() !== '') {
-                    replyText = String(fallback)
-                    matchType = 'fallback'
-                    console.log('[AutoReply] using fallback')
-                  }
-
-                  // AC5: sempre marca como replied (await para garantir)
-                  const { error: updErr } = await db
-                    .from('campaign_contacts')
-                    .update({ status: 'replied' })
-                    .eq('id', campaignContact.id)
-                  if (updErr) {
-                    console.log('[AutoReply] mark replied failed:', updErr.message)
-                  } else {
-                    console.log('[AutoReply] marked cc as replied:', campaignContact.id)
-                  }
-
-                  // Envia só se houver resposta configurada
-                  if (replyText && matchType) {
-                    // Delay defensivo contra rate limit (1 msg / 6s Meta) e greeting automática do
-                    // WhatsApp Business que pode chegar simultaneamente ao click do botão.
-                    const AUTO_REPLY_DELAY_MS = 4500
-                    console.log('[AutoReply] scheduling send to:', maskPhone(from), 'matchType:', matchType, 'delayMs:', AUTO_REPLY_DELAY_MS, 'textPreview:', replyText.slice(0, 40))
-                    await new Promise((r) => setTimeout(r, AUTO_REPLY_DELAY_MS))
-                    const sendResult = await sendWhatsAppMessage({
-                      to: from,
-                      type: 'text',
-                      text: replyText,
-                    })
-                    console.log('[AutoReply] send result:', { success: sendResult.success, error: sendResult.error })
-
-                    if (sendResult.success) {
-                      const { error: rpcErr } = await db.rpc('increment_campaign_auto_reply_counters', {
-                        p_campaign_id: campaignContact.campaign_id,
-                        p_match_type: matchType,
-                      })
-                      if (rpcErr) {
-                        console.log('[AutoReply] counter RPC failed:', rpcErr.message)
-                      } else {
-                        console.log('[AutoReply] counter incremented for campaign:', campaignContact.campaign_id, 'matchType:', matchType)
-                      }
-                    }
-                  } else {
-                    console.log('[AutoReply] no auto-reply configured for this campaign; skipping send')
-                  }
-                } else {
-                  console.log('[AutoReply] no eligible campaign_contact found')
-                }
-              } else {
-                console.log('[AutoReply] supabase admin not available')
-              }
-            } catch (autoReplyErr) {
-              console.error('[AutoReply] exception:', autoReplyErr)
-            }
-          }
+          // Bloco Campaign auto-reply foi movido para ANTES do workflow builder
+          // para evitar ser pulado por "continue" de pending_conversation.
 
           // =================================================================
           // RD Station: auto-create lead/deal on campaign reply (fire-and-forget)
