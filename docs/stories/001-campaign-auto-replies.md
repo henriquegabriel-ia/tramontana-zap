@@ -1,10 +1,59 @@
 # Story 001 — Respostas automáticas configuráveis por campanha
 
-**Status:** Draft
+**Status:** Ready for Review
 **Tipo:** Brownfield Enhancement
 **Epic:** (standalone)
 **Autor:** @pm (Morgan)
 **Data:** 2026-04-22
+
+## Dev Agent Record
+
+**Agent Model Used:** Opus 4.7 (1M context)
+
+### Completion Notes
+
+- ✅ Migration aplicada em produção (Supabase smartzap)
+- ✅ Types, API, Hook, Service, UI, Webhook implementados
+- ✅ Typecheck: exit 0
+- ✅ Build local: sucesso
+- ✅ Deploy em produção: commit `9c67e5d`
+- ✅ Validação E2E real via UI — campanha "Campanha 22 de abr." configurou "Quero saber mais!" → "Obrigado pelo seu contato.", disparou template, cliente clicou, auto-reply enviado, contadores incrementaram (`auto_reply_sent_count=1`, `quick_reply_match_count=1`), `campaign_contact.status` → `replied`.
+- ℹ️ Na 1ª iteração, bug de join embutido frágil (`.select('..., campaigns(...)')`) + fire-and-forget `.then()` cortado pela serverless. Corrigido no commit `1daf0a9`: 2 queries separadas + await.
+- ℹ️ Durante diagnóstico, elevei temporariamente `console.log` → `console.warn` por visibilidade no Vercel Hobby. Revertido no commit final.
+
+### Commits
+
+- `cef1955` — feat: auto-reply configurável + contadores (1ª versão)
+- `1daf0a9` — fix: queries separadas + await (correção real)
+- `9c67e5d` — chore: elevar logs para warn (diagnóstico, revertido depois)
+- `[próximo]` — chore: reverter warn → log
+
+### File List
+
+- `supabase/migrations/20260422000000_add_campaign_auto_replies.sql` (novo)
+- `docs/stories/001-campaign-auto-replies.md` (novo)
+- `types.ts` (modificado)
+- `types/campaign.types.ts` (modificado)
+- `lib/api-validation.ts` (modificado)
+- `lib/supabase-db.ts` (modificado)
+- `services/campaignService.ts` (modificado)
+- `app/api/campaigns/route.ts` (modificado)
+- `app/api/webhook/route.ts` (modificado)
+- `hooks/useCampaignNew.ts` (modificado)
+- `app/(dashboard)/campaigns/new/page.tsx` (modificado)
+
+### Change Log
+
+| Data | Autor | Descrição |
+|---|---|---|
+| 2026-04-22 22:30 | @pm (Morgan) | Draft da story |
+| 2026-04-22 22:35 | @architect (Aria) | Technical spec + migration + RPC |
+| 2026-04-22 22:43 | @dev (Dex) | Implementação 1ª versão (cef1955) |
+| 2026-04-22 22:50 | @dev (Dex) | Fix webhook queries separadas (1daf0a9) |
+| 2026-04-22 22:58 | @qa (Quinn) | Review CONCERNS — diagnóstico webhook |
+| 2026-04-22 23:00 | @dev (Dex) | Log level diagnóstico (9c67e5d) |
+| 2026-04-22 23:10 | @dev (Dex) | Validação E2E bem-sucedida, revert logs |
+
 
 ---
 
