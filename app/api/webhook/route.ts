@@ -1603,7 +1603,7 @@ export async function POST(request: NextRequest) {
               if (db) {
                 const phoneWithPlus = from.startsWith('+') ? from : `+${from}`
                 const phoneWithout = from.startsWith('+') ? from.slice(1) : from
-                console.log('[AutoReply] check phone:', maskPhone(from), 'text:', JSON.stringify(text))
+                console.warn('[AutoReply] check phone:', maskPhone(from), 'text:', JSON.stringify(text))
 
                 // 1) Acha o campaign_contact (qualquer status exceto replied/failed — mais permissivo)
                 const { data: ccRows, error: ccErr } = await db
@@ -1619,7 +1619,7 @@ export async function POST(request: NextRequest) {
                 }
 
                 const campaignContact = ccRows?.[0]
-                console.log('[AutoReply] cc found:', !!campaignContact, 'campaign_id:', campaignContact?.campaign_id, 'status:', campaignContact?.status)
+                console.warn('[AutoReply] cc found:', !!campaignContact, 'campaign_id:', campaignContact?.campaign_id, 'status:', campaignContact?.status)
 
                 if (campaignContact) {
                   // 2) Busca config da campanha (query separada)
@@ -1635,7 +1635,7 @@ export async function POST(request: NextRequest) {
 
                   const qrMap: Record<string, string> | null = (campaignRow as any)?.quick_reply_responses ?? null
                   const fallback: string | null = (campaignRow as any)?.fallback_response ?? null
-                  console.log('[AutoReply] campaign config:', { hasQuickReplies: !!qrMap, quickReplyKeys: qrMap ? Object.keys(qrMap) : [], hasFallback: !!fallback })
+                  console.warn('[AutoReply] campaign config:', { hasQuickReplies: !!qrMap, quickReplyKeys: qrMap ? Object.keys(qrMap) : [], hasFallback: !!fallback })
 
                   const received = String(text).trim().toLowerCase()
                   let replyText: string | null = null
@@ -1648,13 +1648,13 @@ export async function POST(request: NextRequest) {
                     if (matched && String(matched[1] || '').trim() !== '') {
                       replyText = String(matched[1])
                       matchType = 'quick'
-                      console.log('[AutoReply] quick_reply matched:', JSON.stringify(matched[0]))
+                      console.warn('[AutoReply] quick_reply matched:', JSON.stringify(matched[0]))
                     }
                   }
                   if (!replyText && fallback && String(fallback).trim() !== '') {
                     replyText = String(fallback)
                     matchType = 'fallback'
-                    console.log('[AutoReply] using fallback')
+                    console.warn('[AutoReply] using fallback')
                   }
 
                   // AC5: sempre marca como replied (await para garantir)
@@ -1665,18 +1665,18 @@ export async function POST(request: NextRequest) {
                   if (updErr) {
                     console.warn('[AutoReply] mark replied failed:', updErr.message)
                   } else {
-                    console.log('[AutoReply] marked cc as replied:', campaignContact.id)
+                    console.warn('[AutoReply] marked cc as replied:', campaignContact.id)
                   }
 
                   // Envia só se houver resposta configurada
                   if (replyText && matchType) {
-                    console.log('[AutoReply] sending to:', maskPhone(from), 'matchType:', matchType, 'textPreview:', replyText.slice(0, 40))
+                    console.warn('[AutoReply] sending to:', maskPhone(from), 'matchType:', matchType, 'textPreview:', replyText.slice(0, 40))
                     const sendResult = await sendWhatsAppMessage({
                       to: from,
                       type: 'text',
                       text: replyText,
                     })
-                    console.log('[AutoReply] send result:', { success: sendResult.success, error: sendResult.error })
+                    console.warn('[AutoReply] send result:', { success: sendResult.success, error: sendResult.error })
 
                     if (sendResult.success) {
                       const { error: rpcErr } = await db.rpc('increment_campaign_auto_reply_counters', {
@@ -1686,14 +1686,14 @@ export async function POST(request: NextRequest) {
                       if (rpcErr) {
                         console.warn('[AutoReply] counter RPC failed:', rpcErr.message)
                       } else {
-                        console.log('[AutoReply] counter incremented for campaign:', campaignContact.campaign_id, 'matchType:', matchType)
+                        console.warn('[AutoReply] counter incremented for campaign:', campaignContact.campaign_id, 'matchType:', matchType)
                       }
                     }
                   } else {
-                    console.log('[AutoReply] no auto-reply configured for this campaign; skipping send')
+                    console.warn('[AutoReply] no auto-reply configured for this campaign; skipping send')
                   }
                 } else {
-                  console.log('[AutoReply] no eligible campaign_contact found')
+                  console.warn('[AutoReply] no eligible campaign_contact found')
                 }
               } else {
                 console.warn('[AutoReply] supabase admin not available')
