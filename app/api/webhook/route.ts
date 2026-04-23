@@ -1014,15 +1014,29 @@ export async function POST(request: NextRequest) {
             try {
               const db = getSupabaseAdmin()
               if (db) {
-                const phoneWithPlus = from.startsWith('+') ? from : `+${from}`
-                const phoneWithout = from.startsWith('+') ? from.slice(1) : from
-                console.warn('[AutoReply] check phone:', maskPhone(from), 'text:', JSON.stringify(text))
+                // Gera variantes de telefone — cobre o "bug do 9" brasileiro: Meta pode enviar
+                // o número SEM o 9 (12 dígitos) mesmo que esteja salvo COM (13 dígitos), ou vice-versa.
+                const digits = String(from).replace(/\D/g, '')
+                const variants = new Set<string>([digits, `+${digits}`])
+                if (digits.startsWith('55') && digits.length === 12) {
+                  // 55 + DDD(2) + 8 dígitos → adiciona 9 depois do DDD
+                  const withNine = `${digits.slice(0, 4)}9${digits.slice(4)}`
+                  variants.add(withNine)
+                  variants.add(`+${withNine}`)
+                } else if (digits.startsWith('55') && digits.length === 13 && digits[4] === '9') {
+                  // 55 + DDD(2) + 9 + 8 dígitos → remove 9 para legacy
+                  const withoutNine = `${digits.slice(0, 4)}${digits.slice(5)}`
+                  variants.add(withoutNine)
+                  variants.add(`+${withoutNine}`)
+                }
+                const phoneVariants = Array.from(variants)
+                console.warn('[AutoReply] check phone:', maskPhone(from), 'variants:', phoneVariants.length, 'text:', JSON.stringify(text))
 
                 // 1) Acha o campaign_contact (qualquer status exceto replied/failed — mais permissivo)
                 const { data: ccRows, error: ccErr } = await db
                   .from('campaign_contacts')
                   .select('id, campaign_id, status, sent_at')
-                  .or(`phone.eq.${phoneWithPlus},phone.eq.${phoneWithout}`)
+                  .in('phone', phoneVariants)
                   .in('status', ['pending', 'sent', 'delivered', 'read'])
                   .order('sent_at', { ascending: false, nullsFirst: false })
                   .limit(1)
