@@ -46,6 +46,9 @@ export const PUBLIC_ENDPOINTS = [
   '/api/inbox/conversations', // Inbox conversations (used by attendant view)
   '/api/inbox/chat',     // Inbox chat/reply (used by attendant view)
   '/api/mem0',           // AI memory (used by attendant view)
+  '/api/integrations/rd-station/webhook', // RD Station webhook (auth via webhookSecret header)
+  '/api/integrations/rd-station/welcome', // RD Station boas-vindas (auth via webhookSecret header)
+  '/api/integrations/rd-station/callback', // RD Station OAuth callback
 ]
 
 // ============================================================================
