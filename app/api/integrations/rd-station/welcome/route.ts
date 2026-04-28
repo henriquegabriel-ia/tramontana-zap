@@ -1,6 +1,8 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { sendWhatsAppMessage } from '@/lib/whatsapp-send'
 import { getRDStationConfig } from '@/lib/rd-station'
+import { getSupabaseAdmin } from '@/lib/supabase'
+import { normalizePhoneNumber } from '@/lib/phone-formatter'
 
 const WELCOME_TEMPLATE = 'boas_vindas_tramontana'
 
@@ -70,6 +72,27 @@ export async function POST(request: NextRequest) {
           messageId: result.messageId,
           error: result.error,
         })
+
+        if (result.success) {
+          try {
+            const db = getSupabaseAdmin()
+            if (db) {
+              const normalized = normalizePhoneNumber(phone) || phone
+              const { error: insErr } = await db.from('welcome_dispatches').insert({
+                phone: normalized,
+                lead_email: lead.email || null,
+                lead_name: lead.name || null,
+                template_name: WELCOME_TEMPLATE,
+                message_id: result.messageId || null,
+              })
+              if (insErr) {
+                console.error('[RD Welcome] insert dispatch failed:', insErr.message)
+              }
+            }
+          } catch (err) {
+            console.error('[RD Welcome] insert dispatch exception:', err)
+          }
+        }
 
         results.push({
           email: lead.email,

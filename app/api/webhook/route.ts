@@ -48,6 +48,14 @@ import { handleCampaignReply, getRDStationConfig } from '@/lib/rd-station'
 // Campaign auto-reply
 import { sendWhatsAppMessage } from '@/lib/whatsapp-send'
 
+// Welcome auto-reply (lead que recebeu boas_vindas_tramontana e respondeu)
+const WELCOME_AUTO_REPLY_TEXT = `Perfeito! ✨
+Essa é uma mensagem automática, mas nosso time de especialistas está com seu contato e já já entrará em contato.
+
+Fique *atento a uma ligação no seu celular*, ela será rápida (cerca de 4 minutos) e é muito importante nesse momento.
+
+Até logo.✅`
+
 // Get WhatsApp Access Token from centralized helper
 async function getWhatsAppAccessToken(): Promise<string | null> {
   const credentials = await getWhatsAppCredentials()
@@ -986,6 +994,86 @@ export async function POST(request: NextRequest) {
           }
 
           // =================================================================
+          // Welcome auto-reply: responde mensagem fixa quando lead que recebeu
+          // template boas_vindas_tramontana via /api/integrations/rd-station/welcome
+          // responder qualquer coisa (botão ou texto livre). Roda antes do
+          // campaign auto-reply — se welcome bate, skipa campaign.
+          // Idempotente via UPDATE atômico de replied_at.
+          // =================================================================
+          let welcomeReplied = false
+          if (text && from && !isOptOutKeyword(text)) {
+            try {
+              const db = getSupabaseAdmin()
+              if (db) {
+                const digits = String(from).replace(/\D/g, '')
+                const variants = new Set<string>([digits, `+${digits}`])
+                if (digits.startsWith('55') && digits.length === 12) {
+                  const withNine = `${digits.slice(0, 4)}9${digits.slice(4)}`
+                  variants.add(withNine)
+                  variants.add(`+${withNine}`)
+                } else if (digits.startsWith('55') && digits.length === 13 && digits[4] === '9') {
+                  const withoutNine = `${digits.slice(0, 4)}${digits.slice(5)}`
+                  variants.add(withoutNine)
+                  variants.add(`+${withoutNine}`)
+                }
+                const phoneVariants = Array.from(variants)
+
+                const { data: welcomeRows, error: wErr } = await db
+                  .from('welcome_dispatches')
+                  .select('id, phone')
+                  .in('phone', phoneVariants)
+                  .is('auto_reply_sent_at', null)
+                  .order('sent_at', { ascending: false, nullsFirst: false })
+                  .limit(1)
+
+                if (wErr) {
+                  console.log('[WelcomeAutoReply] query error:', wErr.message)
+                }
+
+                const dispatch = welcomeRows?.[0]
+                if (dispatch) {
+                  const { data: claimed, error: claimErr } = await db
+                    .from('welcome_dispatches')
+                    .update({ replied_at: new Date().toISOString() })
+                    .eq('id', dispatch.id)
+                    .is('replied_at', null)
+                    .select('id')
+
+                  if (claimErr) {
+                    console.log('[WelcomeAutoReply] claim error:', claimErr.message)
+                  }
+
+                  if (claimed && claimed.length > 0) {
+                    console.log('[WelcomeAutoReply] dispatch claimed:', dispatch.id, 'phone:', maskPhone(from))
+                    await new Promise((r) => setTimeout(r, 4500))
+                    const sendResult = await sendWhatsAppMessage({
+                      to: from,
+                      type: 'text',
+                      text: WELCOME_AUTO_REPLY_TEXT,
+                    })
+                    console.log('[WelcomeAutoReply] send result:', { success: sendResult.success, error: sendResult.error })
+                    if (sendResult.success) {
+                      await db
+                        .from('welcome_dispatches')
+                        .update({
+                          auto_reply_sent_at: new Date().toISOString(),
+                          auto_reply_message_id: sendResult.messageId || null,
+                        })
+                        .eq('id', dispatch.id)
+                      welcomeReplied = true
+                    }
+                  } else {
+                    console.log('[WelcomeAutoReply] dispatch already claimed (race or duplicate webhook)')
+                    welcomeReplied = true
+                  }
+                }
+              }
+            } catch (err) {
+              console.error('[WelcomeAutoReply] exception:', err)
+            }
+          }
+
+          // =================================================================
           // Campaign auto-reply (Story 001): responde conforme config da campanha
           //   - quick_reply match (texto == botão) → envia resposta mapeada
           //   - senão, fallback_response (se configurado)
@@ -995,6 +1083,9 @@ export async function POST(request: NextRequest) {
           // em pending_conversation). Garante que a resposta automática da campanha
           // tenha prioridade sobre qualquer workflow.
           // =================================================================
+          if (welcomeReplied) {
+            console.log('[AutoReply] skipped — welcome auto-reply já respondeu')
+          } else {
           console.log('[AutoReply] entering block — text:', text ? `"${text}"` : '(empty)', 'from:', maskPhone(from))
 
           // Debug log no DB
@@ -1135,6 +1226,7 @@ export async function POST(request: NextRequest) {
           } else {
             console.log('[AutoReply] skipped — text empty or opt-out keyword')
           }
+          } // end if (!welcomeReplied)
 
           // =================================================================
           // Workflow Builder (MVP): resume pending conversation if any
