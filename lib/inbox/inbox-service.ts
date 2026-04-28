@@ -441,3 +441,71 @@ export async function syncCampaignTemplateToInbox(
     return null
   }
 }
+
+// =============================================================================
+// Generic outbound persistence (welcome, auto-reply, ad-hoc messages)
+// =============================================================================
+
+export interface PersistOutboundParams {
+  phone: string
+  content: string
+  messageType?: 'text' | 'template'
+  whatsappMessageId?: string | null
+  contactId?: string | null
+  payload?: Record<string, unknown>
+}
+
+/**
+ * Persiste uma mensagem outbound no inbox.
+ *
+ * Usado por endpoints que disparam mensagens fora do fluxo de campanha em massa
+ * (ex: /api/integrations/rd-station/welcome, auto-replies do webhook).
+ *
+ * - Idempotente quando whatsappMessageId é fornecido (evita duplicar via webhook retry).
+ * - Best-effort: catch + log, não propaga erro.
+ *
+ * @returns ID da mensagem criada, ID existente (idempotente) ou null em erro.
+ */
+export async function persistOutboundToInbox(
+  params: PersistOutboundParams
+): Promise<string | null> {
+  const {
+    phone,
+    content,
+    messageType = 'text',
+    whatsappMessageId = null,
+    contactId = null,
+    payload,
+  } = params
+
+  try {
+    if (whatsappMessageId) {
+      const existing = await findMessageByWhatsAppId(whatsappMessageId)
+      if (existing) return existing.id
+    }
+
+    const conversation = await getOrCreateConversation(
+      phone,
+      contactId || undefined,
+      undefined
+    )
+
+    const message = await createMessage({
+      conversation_id: conversation.id,
+      direction: 'outbound',
+      content,
+      message_type: messageType,
+      whatsapp_message_id: whatsappMessageId || undefined,
+      delivery_status: 'sent',
+      payload: payload || undefined,
+    })
+
+    return message.id
+  } catch (error) {
+    console.warn(
+      `[inbox-outbound] Failed to persist outbound for ${phone}:`,
+      error instanceof Error ? error.message : error
+    )
+    return null
+  }
+}

@@ -47,6 +47,7 @@ import { handleCampaignReply, getRDStationConfig } from '@/lib/rd-station'
 
 // Campaign auto-reply
 import { sendWhatsAppMessage } from '@/lib/whatsapp-send'
+import { persistOutboundToInbox } from '@/lib/inbox/inbox-service'
 
 // Welcome auto-reply (lead que recebeu boas_vindas_tramontana e respondeu)
 const WELCOME_AUTO_REPLY_TEXT = `Perfeito! ✨
@@ -1060,6 +1061,23 @@ export async function POST(request: NextRequest) {
                           auto_reply_message_id: sendResult.messageId || null,
                         })
                         .eq('id', dispatch.id)
+
+                      try {
+                        await persistOutboundToInbox({
+                          phone: from,
+                          content: WELCOME_AUTO_REPLY_TEXT,
+                          messageType: 'text',
+                          whatsappMessageId: sendResult.messageId || null,
+                          payload: {
+                            type: 'welcome_auto_reply',
+                            welcome_dispatch_id: dispatch.id,
+                            synced_at: new Date().toISOString(),
+                          },
+                        })
+                      } catch (err) {
+                        console.warn('[WelcomeAutoReply] persistOutbound failed:', err)
+                      }
+
                       welcomeReplied = true
                     }
                   } else {
@@ -1209,6 +1227,23 @@ export async function POST(request: NextRequest) {
                         console.log('[AutoReply] counter RPC failed:', rpcErr.message)
                       } else {
                         console.log('[AutoReply] counter incremented for campaign:', campaignContact.campaign_id, 'matchType:', matchType)
+                      }
+
+                      try {
+                        await persistOutboundToInbox({
+                          phone: from,
+                          content: replyText,
+                          messageType: 'text',
+                          whatsappMessageId: sendResult.messageId || null,
+                          payload: {
+                            type: 'campaign_auto_reply',
+                            campaign_id: campaignContact.campaign_id,
+                            match_type: matchType,
+                            synced_at: new Date().toISOString(),
+                          },
+                        })
+                      } catch (err) {
+                        console.warn('[AutoReply] persistOutbound failed:', err)
                       }
                     }
                   } else {

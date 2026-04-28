@@ -3,6 +3,8 @@ import { sendWhatsAppMessage } from '@/lib/whatsapp-send'
 import { getRDStationConfig } from '@/lib/rd-station'
 import { getSupabaseAdmin } from '@/lib/supabase'
 import { normalizePhoneNumber } from '@/lib/phone-formatter'
+import { persistOutboundToInbox } from '@/lib/inbox/inbox-service'
+import { renderTemplatePreviewText } from '@/lib/whatsapp/template-contract'
 
 const WELCOME_TEMPLATE = 'boas_vindas_tramontana'
 
@@ -74,10 +76,11 @@ export async function POST(request: NextRequest) {
         })
 
         if (result.success) {
+          const normalized = normalizePhoneNumber(phone) || phone
+
           try {
             const db = getSupabaseAdmin()
             if (db) {
-              const normalized = normalizePhoneNumber(phone) || phone
               const { error: insErr } = await db.from('welcome_dispatches').insert({
                 phone: normalized,
                 lead_email: lead.email || null,
@@ -91,6 +94,43 @@ export async function POST(request: NextRequest) {
             }
           } catch (err) {
             console.error('[RD Welcome] insert dispatch exception:', err)
+          }
+
+          try {
+            const db = getSupabaseAdmin()
+            let renderedContent = `[Template ${WELCOME_TEMPLATE}] Olá ${firstName}!`
+            if (db) {
+              const { data: tpl } = await db
+                .from('templates')
+                .select('name, language, components, content')
+                .eq('name', WELCOME_TEMPLATE)
+                .maybeSingle()
+              if (tpl) {
+                try {
+                  renderedContent = renderTemplatePreviewText(tpl as any, {
+                    body: [{ key: '1', text: firstName }],
+                  })
+                } catch {
+                  /* fallback to default renderedContent above */
+                }
+              }
+            }
+
+            await persistOutboundToInbox({
+              phone: normalized,
+              content: renderedContent,
+              messageType: 'template',
+              whatsappMessageId: result.messageId || null,
+              payload: {
+                type: 'welcome_template',
+                template_name: WELCOME_TEMPLATE,
+                first_name: firstName,
+                lead_email: lead.email || null,
+                synced_at: new Date().toISOString(),
+              },
+            })
+          } catch (err) {
+            console.error('[RD Welcome] persistOutbound exception:', err)
           }
         }
 
