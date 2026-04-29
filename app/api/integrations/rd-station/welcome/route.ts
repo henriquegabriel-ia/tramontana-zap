@@ -5,8 +5,9 @@ import { getSupabaseAdmin } from '@/lib/supabase'
 import { normalizePhoneNumber } from '@/lib/phone-formatter'
 import { persistOutboundToInbox } from '@/lib/inbox/inbox-service'
 import { renderTemplatePreviewText } from '@/lib/whatsapp/template-contract'
+import { getActiveSuppressionsByPhone } from '@/lib/phone-suppressions'
 
-const WELCOME_TEMPLATE = 'boas_vindas_tramontana'
+const WELCOME_TEMPLATE = 'cadastro_tramontana_utilidade_v2'
 
 interface RDLead {
   id?: string
@@ -57,6 +58,22 @@ export async function POST(request: NextRequest) {
         results.push({ email: lead.email, success: false, error: 'no phone' })
         sentFail++
         continue
+      }
+
+      const normalizedForCheck = normalizePhoneNumber(phone) || phone
+      try {
+        const suppressions = await getActiveSuppressionsByPhone([normalizedForCheck, phone])
+        if (suppressions.size > 0) {
+          console.log('[RD Welcome] phone suprimido (opt-out), pulando envio:', {
+            phone: maskPhone(phone),
+            email: lead.email,
+          })
+          results.push({ email: lead.email, phone: maskPhone(phone), success: false, error: 'phone suppressed (opt-out)' })
+          sentFail++
+          continue
+        }
+      } catch (suppErr) {
+        console.warn('[RD Welcome] falha ao checar suppression (best-effort, prosseguindo):', suppErr)
       }
 
       try {
