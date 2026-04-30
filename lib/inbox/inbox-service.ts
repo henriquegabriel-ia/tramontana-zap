@@ -28,6 +28,7 @@ import {
 } from './inbox-db'
 import { sendWhatsAppMessage } from '@/lib/whatsapp-send'
 import { getWhatsAppCredentials } from '@/lib/whatsapp-credentials'
+import { normalizePhoneNumber } from '@/lib/phone-formatter'
 import type {
   InboxConversation,
   InboxMessage,
@@ -484,8 +485,13 @@ export async function persistOutboundToInbox(
       if (existing) return existing.id
     }
 
+    // Normaliza para E.164 ('+55...') antes de bater na conversa, senão um phone
+    // raw vindo do webhook (ex.: '5521999000215') cria conversa-fantasma paralela
+    // à existente '+5521999000215'.
+    const normalizedPhone = normalizePhoneNumber(phone) || phone
+
     const conversation = await getOrCreateConversation(
-      phone,
+      normalizedPhone,
       contactId || undefined,
       undefined
     )
