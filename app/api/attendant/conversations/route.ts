@@ -106,10 +106,11 @@ export async function GET(request: Request) {
     const status = searchParams.get('status') // 'open' | 'closed' | null (all)
     const search = searchParams.get('search')
     const button = searchParams.get('button')
+    const template = searchParams.get('template')
     const limit = parseInt(searchParams.get('limit') || '50')
 
-    // Filtro por clique de botão: descobre quais conversas têm pelo menos uma
-    // mensagem inbound com source_type='button_reply' e button_payload casando.
+    // Filtro por clique de botão: conversas com pelo menos uma mensagem inbound
+    // com source_type='button_reply' e button_payload casando.
     let buttonConversationIds: string[] | null = null
     if (button && button.trim()) {
       const { data: msgs, error: msgErr } = await supabase
@@ -124,12 +125,40 @@ export async function GET(request: Request) {
       buttonConversationIds = Array.from(
         new Set((msgs || []).map((m) => m.conversation_id as string))
       )
-      if (buttonConversationIds.length === 0) {
-        return NextResponse.json({
-          conversations: [],
-          counts: { total: 0, urgent: 0, ai: 0, human: 0, resolved: 0 },
-        })
+    }
+
+    // Filtro por template recebido: conversas com pelo menos uma outbound
+    // do tipo template com payload->>'template_name' casando.
+    let templateConversationIds: string[] | null = null
+    if (template && template.trim()) {
+      const { data: msgs, error: msgErr } = await supabase
+        .from('inbox_messages')
+        .select('conversation_id')
+        .eq('direction', 'outbound')
+        .eq('message_type', 'template')
+        .eq('payload->>template_name', template.trim())
+      if (msgErr) {
+        console.error('[attendant-api] template filter query error:', msgErr.message)
+        return NextResponse.json({ error: msgErr.message }, { status: 500 })
       }
+      templateConversationIds = Array.from(
+        new Set((msgs || []).map((m) => m.conversation_id as string))
+      )
+    }
+
+    let combinedIds: string[] | null = null
+    if (buttonConversationIds && templateConversationIds) {
+      const tplSet = new Set(templateConversationIds)
+      combinedIds = buttonConversationIds.filter((id) => tplSet.has(id))
+    } else {
+      combinedIds = buttonConversationIds || templateConversationIds
+    }
+
+    if (combinedIds && combinedIds.length === 0) {
+      return NextResponse.json({
+        conversations: [],
+        counts: { total: 0, urgent: 0, ai: 0, human: 0, resolved: 0 },
+      })
     }
 
     // Query base
@@ -143,8 +172,8 @@ export async function GET(request: Request) {
       .order('last_message_at', { ascending: false, nullsFirst: false })
       .limit(limit)
 
-    if (buttonConversationIds) {
-      query = query.in('id', buttonConversationIds)
+    if (combinedIds) {
+      query = query.in('id', combinedIds)
     }
 
     // Filtro por status

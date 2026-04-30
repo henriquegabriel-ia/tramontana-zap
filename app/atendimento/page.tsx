@@ -7,14 +7,18 @@
  * Filtros por status: Todos, Urgente, IA, Humano
  */
 
-import { useState, useMemo } from 'react'
+import { useState, useMemo, useEffect } from 'react'
 import { useRouter } from 'next/navigation'
-import { Search, RefreshCw, LogOut, ShieldAlert, Loader2, Sparkles, User, AlertCircle, Sun, Moon, CheckCircle2 } from 'lucide-react'
-
-// Botões do template welcome filtráveis. Whitelist explícita.
-const ATTENDANT_BUTTON_TABS: Array<{ payload: string; label: string }> = [
-  { payload: 'Confirmar cadastro', label: 'Confirmou cadastro' },
-]
+import { Search, RefreshCw, LogOut, ShieldAlert, Loader2, Sparkles, User, AlertCircle, Sun, Moon, FileText, ChevronDown } from 'lucide-react'
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuTrigger,
+  DropdownMenuItem,
+  DropdownMenuLabel,
+  DropdownMenuSeparator,
+} from '@/components/ui/dropdown-menu'
+import { useTemplatesWithButtons } from '@/hooks/useTemplatesWithButtons'
 import { useAttendant } from '@/components/attendant/AttendantProvider'
 import { useTheme } from './layout'
 import {
@@ -354,6 +358,21 @@ export default function AtendimentoPage() {
   const [activeTab, setActiveTab] = useState<FilterTab>('all')
   const [searchQuery, setSearchQuery] = useState('')
   const [buttonFilter, setButtonFilter] = useState<string | null>(null)
+  const [templateFilter, setTemplateFilter] = useState<string | null>(null)
+
+  const { templates: templatesWithButtons, welcomeDefault } = useTemplatesWithButtons()
+  const activeTemplate = templateFilter ?? welcomeDefault
+  const activeTemplateMeta = useMemo(
+    () => templatesWithButtons.find((t) => t.name === activeTemplate),
+    [templatesWithButtons, activeTemplate]
+  )
+  const buttonTabs = activeTemplateMeta?.buttons ?? []
+
+  useEffect(() => {
+    if (buttonFilter && buttonTabs.length > 0 && !buttonTabs.includes(buttonFilter)) {
+      setButtonFilter(null)
+    }
+  }, [buttonFilter, buttonTabs])
 
   // Buscar conversas reais da API
   const {
@@ -366,6 +385,7 @@ export default function AtendimentoPage() {
     status: 'open',
     search: searchQuery || undefined,
     buttonPayload: buttonFilter || undefined,
+    templateName: templateFilter || undefined,
   })
 
   // Filtrar conversas por tab
@@ -520,30 +540,41 @@ export default function AtendimentoPage() {
       {/* Filter tabs */}
       <FilterTabs activeTab={activeTab} onTabChange={setActiveTab} counts={counts} />
 
-      {/* Abas por clique de botão (welcome flow) */}
+      {/* Filtro por template + abas dos botões daquele template */}
       <div
-        className="flex gap-1.5 px-4 py-2 overflow-x-auto scrollbar-hide"
+        className="flex gap-1.5 px-4 py-2 overflow-x-auto scrollbar-hide items-center"
         style={{ borderBottom: '1px solid var(--geist-border)' }}
       >
         <button
           type="button"
-          onClick={() => setButtonFilter(null)}
+          onClick={() => {
+            setTemplateFilter(null)
+            setButtonFilter(null)
+          }}
           className="flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-medium transition-all"
           style={{
-            backgroundColor: buttonFilter === null ? 'var(--geist-foreground)' : 'transparent',
-            color: buttonFilter === null ? 'var(--geist-background)' : 'var(--geist-foreground-secondary)',
-            border: buttonFilter === null ? 'none' : '1px solid var(--geist-border)',
+            backgroundColor: templateFilter === null && buttonFilter === null ? 'var(--geist-foreground)' : 'transparent',
+            color: templateFilter === null && buttonFilter === null ? 'var(--geist-background)' : 'var(--geist-foreground-secondary)',
+            border: templateFilter === null && buttonFilter === null ? 'none' : '1px solid var(--geist-border)',
           }}
         >
           Todas
         </button>
-        {ATTENDANT_BUTTON_TABS.map((tab) => {
-          const active = buttonFilter === tab.payload
+
+        {buttonTabs.map((btn) => {
+          const active = buttonFilter === btn
           return (
             <button
-              key={tab.payload}
+              key={btn}
               type="button"
-              onClick={() => setButtonFilter(active ? null : tab.payload)}
+              onClick={() => {
+                if (active) {
+                  setButtonFilter(null)
+                } else {
+                  setButtonFilter(btn)
+                  if (!templateFilter) setTemplateFilter(activeTemplate)
+                }
+              }}
               className="flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-medium transition-all"
               style={{
                 backgroundColor: active ? WHATSAPP_GREEN : 'transparent',
@@ -551,11 +582,71 @@ export default function AtendimentoPage() {
                 border: active ? 'none' : '1px solid var(--geist-border)',
               }}
             >
-              <CheckCircle2 size={14} />
-              {tab.label}
+              {btn}
             </button>
           )
         })}
+
+        <DropdownMenu>
+          <DropdownMenuTrigger asChild>
+            <button
+              type="button"
+              className="flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-medium transition-all"
+              style={{
+                backgroundColor: templateFilter ? 'var(--geist-purple, #7c3aed)' : 'transparent',
+                color: templateFilter ? '#ffffff' : 'var(--geist-foreground-secondary)',
+                border: templateFilter ? 'none' : '1px solid var(--geist-border)',
+              }}
+            >
+              <FileText size={14} />
+              <span className="max-w-[140px] truncate">
+                {templateFilter || (activeTemplateMeta ? `${activeTemplate} (padrão)` : 'Template')}
+              </span>
+              <ChevronDown size={14} />
+            </button>
+          </DropdownMenuTrigger>
+          <DropdownMenuContent align="start" className="w-72 max-h-80 overflow-y-auto">
+            <DropdownMenuLabel className="text-[10px] uppercase tracking-wide">
+              Template
+            </DropdownMenuLabel>
+            <DropdownMenuItem
+              onSelect={() => {
+                setTemplateFilter(null)
+                setButtonFilter(null)
+              }}
+              className="text-xs"
+            >
+              Sem filtro de template
+            </DropdownMenuItem>
+            <DropdownMenuSeparator />
+            {templatesWithButtons.length === 0 ? (
+              <div className="px-2 py-1.5 text-[11px] opacity-60">Nenhum template com botões</div>
+            ) : (
+              templatesWithButtons.map((tpl) => (
+                <DropdownMenuItem
+                  key={tpl.name}
+                  onSelect={() => {
+                    setTemplateFilter(tpl.name)
+                    setButtonFilter(null)
+                  }}
+                  className="text-xs flex flex-col items-start gap-0.5"
+                >
+                  <span className="font-medium truncate w-full">
+                    {tpl.name}
+                    {tpl.name === welcomeDefault && (
+                      <span className="ml-1 text-[9px]" style={{ color: WHATSAPP_GREEN }}>
+                        padrão
+                      </span>
+                    )}
+                  </span>
+                  <span className="text-[9px] opacity-60 truncate w-full">
+                    {tpl.buttons.join(' · ')}
+                  </span>
+                </DropdownMenuItem>
+              ))
+            )}
+          </DropdownMenuContent>
+        </DropdownMenu>
       </div>
 
       {/* Conversation list */}

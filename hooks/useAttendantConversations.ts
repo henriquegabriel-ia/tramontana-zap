@@ -41,6 +41,7 @@ interface UseAttendantConversationsOptions {
   status?: 'open' | 'closed'
   search?: string
   buttonPayload?: string
+  templateName?: string
   enabled?: boolean
   refetchInterval?: number
 }
@@ -52,12 +53,14 @@ interface UseAttendantConversationsOptions {
 async function fetchConversations(
   status?: string,
   search?: string,
-  buttonPayload?: string
+  buttonPayload?: string,
+  templateName?: string
 ): Promise<ConversationsResponse> {
   const params = new URLSearchParams()
   if (status) params.set('status', status)
   if (search) params.set('search', search)
   if (buttonPayload) params.set('button', buttonPayload)
+  if (templateName) params.set('template', templateName)
 
   const url = `/api/attendant/conversations${params.toString() ? `?${params}` : ''}`
   const response = await fetch(url)
@@ -78,13 +81,14 @@ export function useAttendantConversations(options: UseAttendantConversationsOpti
     status,
     search,
     buttonPayload,
+    templateName,
     enabled = true,
     refetchInterval = 10000, // Refetch a cada 10 segundos
   } = options
 
   const query = useQuery({
-    queryKey: ['attendant-conversations', status, search, buttonPayload],
-    queryFn: () => fetchConversations(status, search, buttonPayload),
+    queryKey: ['attendant-conversations', status, search, buttonPayload, templateName],
+    queryFn: () => fetchConversations(status, search, buttonPayload, templateName),
     enabled,
     refetchInterval,
     staleTime: 5000, // Considera dados frescos por 5 segundos

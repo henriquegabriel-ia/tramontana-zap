@@ -60,6 +60,8 @@ function InboxConversationPageContent({ conversationId }: { conversationId: stri
         onLabelFilterChange={inbox.onLabelFilterChange}
         buttonFilter={inbox.buttonFilter}
         onButtonFilterChange={inbox.onButtonFilterChange}
+        templateFilter={inbox.templateFilter}
+        onTemplateFilterChange={inbox.onTemplateFilterChange}
         // Conversation actions
         onModeToggle={inbox.onModeToggle}
         onCloseConversation={inbox.onCloseConversation}

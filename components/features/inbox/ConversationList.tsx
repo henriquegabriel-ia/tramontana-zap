@@ -10,16 +10,19 @@
  * - Clean filter UI
  */
 
-import React, { useState, useMemo } from 'react'
-import { Search, SlidersHorizontal, Bot, User, X, Inbox, CheckCircle2 } from 'lucide-react'
+import React, { useState, useMemo, useEffect } from 'react'
+import { Search, SlidersHorizontal, Bot, User, X, Inbox, ChevronDown, FileText } from 'lucide-react'
 import { cn } from '@/lib/utils'
 import { Input } from '@/components/ui/input'
-
-// Botões do template de boas-vindas (cadastro_tramontana_utilidade_v2) que viram aba.
-// Whitelist explícita: se subirmos novo template, atualizar aqui.
-const BUTTON_TABS: Array<{ payload: string; label: string }> = [
-  { payload: 'Confirmar cadastro', label: 'Confirmou cadastro' },
-]
+import {
+  DropdownMenu as TemplateDropdown,
+  DropdownMenuContent as TemplateDropdownContent,
+  DropdownMenuTrigger as TemplateDropdownTrigger,
+  DropdownMenuItem as TemplateDropdownItem,
+  DropdownMenuLabel as TemplateDropdownLabel,
+  DropdownMenuSeparator as TemplateDropdownSeparator,
+} from '@/components/ui/dropdown-menu'
+import { useTemplatesWithButtons } from '@/hooks/useTemplatesWithButtons'
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -52,6 +55,8 @@ export interface ConversationListProps {
   onLabelFilterChange: (labelId: string | null) => void
   buttonFilter: string | null
   onButtonFilterChange: (buttonPayload: string | null) => void
+  templateFilter: string | null
+  onTemplateFilterChange: (templateName: string | null) => void
 }
 
 export function ConversationList({
@@ -71,9 +76,28 @@ export function ConversationList({
   onLabelFilterChange,
   buttonFilter,
   onButtonFilterChange,
+  templateFilter,
+  onTemplateFilterChange,
 }: ConversationListProps) {
   const [showFilters, setShowFilters] = useState(false)
   const [showOnlyUnread, setShowOnlyUnread] = useState(false)
+
+  const { templates: templatesWithButtons, welcomeDefault } = useTemplatesWithButtons()
+  // Default = welcome quando o usuário ainda não escolheu nada explicitamente.
+  const activeTemplate = templateFilter ?? welcomeDefault
+  const activeTemplateMeta = useMemo(
+    () => templatesWithButtons.find((t) => t.name === activeTemplate),
+    [templatesWithButtons, activeTemplate]
+  )
+  const buttonTabs = activeTemplateMeta?.buttons ?? []
+
+  // Se o usuário trocar de template, descarta o botão antigo se ele não existir
+  // no novo template.
+  useEffect(() => {
+    if (buttonFilter && buttonTabs.length > 0 && !buttonTabs.includes(buttonFilter)) {
+      onButtonFilterChange(null)
+    }
+  }, [buttonFilter, buttonTabs, onButtonFilterChange])
 
   // Filter conversations by unread
   const filteredConversations = useMemo(() => {
@@ -97,6 +121,7 @@ export function ConversationList({
     onModeFilterChange(null)
     onLabelFilterChange(null)
     onButtonFilterChange(null)
+    onTemplateFilterChange(null)
     onSearchChange('')
     setShowOnlyUnread(false)
   }
@@ -261,25 +286,39 @@ export function ConversationList({
           </button>
         )}
 
-        {/* Abas por botão clicado (welcome flow). */}
+        {/* Bloco de filtro por template + abas dos botões daquele template. */}
         <div className="flex items-center gap-1 mt-2 overflow-x-auto">
+          {/* "Todas": limpa template + botão (volta a mostrar tudo). */}
           <button
-            onClick={() => onButtonFilterChange(null)}
+            onClick={() => {
+              onTemplateFilterChange(null)
+              onButtonFilterChange(null)
+            }}
             className={cn(
               'shrink-0 px-2.5 py-1 rounded-full text-[10px] font-medium transition-all',
-              buttonFilter === null
+              templateFilter === null && buttonFilter === null
                 ? 'bg-[var(--ds-bg-surface)] text-[var(--ds-text-primary)]'
                 : 'text-[var(--ds-text-muted)] hover:text-[var(--ds-text-secondary)] hover:bg-[var(--ds-bg-surface)]/50'
             )}
           >
             Todas
           </button>
-          {BUTTON_TABS.map((tab) => {
-            const active = buttonFilter === tab.payload
+
+          {/* Pills dos botões do template ativo. Clicar = filtra também por template
+              (caso esteja no default e o usuário ainda não tenha selecionado). */}
+          {buttonTabs.map((btn) => {
+            const active = buttonFilter === btn
             return (
               <button
-                key={tab.payload}
-                onClick={() => onButtonFilterChange(active ? null : tab.payload)}
+                key={btn}
+                onClick={() => {
+                  if (active) {
+                    onButtonFilterChange(null)
+                  } else {
+                    onButtonFilterChange(btn)
+                    if (!templateFilter) onTemplateFilterChange(activeTemplate)
+                  }
+                }}
                 className={cn(
                   'shrink-0 inline-flex items-center gap-1 px-2.5 py-1 rounded-full text-[10px] font-medium transition-all',
                   active
@@ -287,11 +326,74 @@ export function ConversationList({
                     : 'text-[var(--ds-text-muted)] hover:text-[var(--ds-text-secondary)] hover:bg-[var(--ds-bg-surface)]/50'
                 )}
               >
-                <CheckCircle2 className="h-3 w-3" />
-                {tab.label}
+                {btn}
               </button>
             )
           })}
+
+          {/* Dropdown: troca o template e, automaticamente, as pills mudam para
+              os botões do template selecionado. Ao escolher, lista filtra para
+              quem recebeu esse template. */}
+          <TemplateDropdown>
+            <TemplateDropdownTrigger asChild>
+              <button
+                className={cn(
+                  'shrink-0 inline-flex items-center gap-1 px-2.5 py-1 rounded-full text-[10px] font-medium transition-all',
+                  templateFilter
+                    ? 'bg-purple-500/15 text-purple-400 border border-purple-500/30'
+                    : 'text-[var(--ds-text-muted)] hover:text-[var(--ds-text-secondary)] hover:bg-[var(--ds-bg-surface)]/50 border border-[var(--ds-border-strong)]/40'
+                )}
+                title="Selecionar template"
+              >
+                <FileText className="h-3 w-3" />
+                <span className="max-w-[100px] truncate">
+                  {templateFilter || (activeTemplateMeta ? `${activeTemplate} (padrão)` : 'Template')}
+                </span>
+                <ChevronDown className="h-3 w-3" />
+              </button>
+            </TemplateDropdownTrigger>
+            <TemplateDropdownContent align="start" className="w-64 max-h-72 overflow-y-auto">
+              <TemplateDropdownLabel className="text-[10px] text-[var(--ds-text-muted)] uppercase tracking-wide">
+                Template
+              </TemplateDropdownLabel>
+              <TemplateDropdownItem
+                onSelect={() => {
+                  onTemplateFilterChange(null)
+                  onButtonFilterChange(null)
+                }}
+                className="text-xs"
+              >
+                Sem filtro de template
+              </TemplateDropdownItem>
+              <TemplateDropdownSeparator />
+              {templatesWithButtons.length === 0 ? (
+                <div className="px-2 py-1.5 text-[10px] text-[var(--ds-text-muted)]">
+                  Nenhum template com botões
+                </div>
+              ) : (
+                templatesWithButtons.map((tpl) => (
+                  <TemplateDropdownItem
+                    key={tpl.name}
+                    onSelect={() => {
+                      onTemplateFilterChange(tpl.name)
+                      onButtonFilterChange(null)
+                    }}
+                    className="text-xs flex flex-col items-start gap-0.5"
+                  >
+                    <span className="font-medium truncate w-full">
+                      {tpl.name}
+                      {tpl.name === welcomeDefault && (
+                        <span className="ml-1 text-[9px] text-emerald-400/80">padrão</span>
+                      )}
+                    </span>
+                    <span className="text-[9px] text-[var(--ds-text-muted)] truncate w-full">
+                      {tpl.buttons.join(' · ')}
+                    </span>
+                  </TemplateDropdownItem>
+                ))
+              )}
+            </TemplateDropdownContent>
+          </TemplateDropdown>
         </div>
       </div>
 

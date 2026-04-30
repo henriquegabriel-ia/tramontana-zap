@@ -13,6 +13,7 @@ const querySchema = z.object({
   label: z.string().uuid().optional(),
   search: z.string().optional(),
   button: z.string().min(1).max(100).optional(),
+  template: z.string().min(1).max(100).optional(),
   page: z.coerce.number().int().positive().default(1),
   limit: z.coerce.number().int().positive().max(100).default(20),
 })
@@ -27,6 +28,7 @@ export async function GET(request: NextRequest) {
       label: searchParams.get('label') || undefined,
       search: searchParams.get('search') || undefined,
       button: searchParams.get('button') || undefined,
+      template: searchParams.get('template') || undefined,
       page: searchParams.get('page') || 1,
       limit: searchParams.get('limit') || 20,
     })
@@ -44,6 +46,7 @@ export async function GET(request: NextRequest) {
       labelId: parsed.data.label,
       search: parsed.data.search,
       buttonPayload: parsed.data.button,
+      templateName: parsed.data.template,
       page: parsed.data.page,
       limit: parsed.data.limit,
     })

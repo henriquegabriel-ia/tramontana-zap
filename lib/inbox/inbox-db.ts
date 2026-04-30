@@ -48,6 +48,8 @@ export interface ConversationFilters {
   limit?: number
   /** Filtra conversas que tenham pelo menos uma mensagem inbound com este botão clicado. */
   buttonPayload?: string
+  /** Filtra conversas que receberam pelo menos uma outbound do tipo template com este nome. */
+  templateName?: string
 }
 
 export interface PaginatedConversations {
@@ -64,7 +66,7 @@ export async function getConversations(
   filters: ConversationFilters = {}
 ): Promise<PaginatedConversations> {
   const supabase = getClient()
-  const { status, mode, labelId, search, page = 1, limit = 20, buttonPayload } = filters
+  const { status, mode, labelId, search, page = 1, limit = 20, buttonPayload, templateName } = filters
 
   // Filtro por botão clicado: descobre quais conversation_ids têm mensagens
   // inbound com source_type='button_reply' e button_payload casando, e restringe
@@ -85,6 +87,39 @@ export async function getConversations(
     if (buttonConversationIds.length === 0) {
       return { conversations: [], total: 0, page, totalPages: 0 }
     }
+  }
+
+  // Filtro por template recebido: descobre quais conversation_ids receberam
+  // ao menos uma outbound do tipo template com payload->>'template_name' = templateName.
+  let templateConversationIds: string[] | null = null
+  if (templateName && templateName.trim()) {
+    const { data: msgs, error: msgErr } = await supabase
+      .from('inbox_messages')
+      .select('conversation_id')
+      .eq('direction', 'outbound')
+      .eq('message_type', 'template')
+      .eq('payload->>template_name', templateName.trim())
+    if (msgErr) {
+      throw new Error(`Failed to filter by template: ${msgErr.message}`)
+    }
+    templateConversationIds = Array.from(
+      new Set((msgs || []).map((m) => m.conversation_id as string))
+    )
+    if (templateConversationIds.length === 0) {
+      return { conversations: [], total: 0, page, totalPages: 0 }
+    }
+  }
+
+  // Se ambos foram aplicados, intersecciona.
+  let combinedConversationIds: string[] | null = null
+  if (buttonConversationIds && templateConversationIds) {
+    const tplSet = new Set(templateConversationIds)
+    combinedConversationIds = buttonConversationIds.filter((id) => tplSet.has(id))
+    if (combinedConversationIds.length === 0) {
+      return { conversations: [], total: 0, page, totalPages: 0 }
+    }
+  } else {
+    combinedConversationIds = buttonConversationIds || templateConversationIds
   }
 
   let query = supabase
@@ -109,8 +144,8 @@ export async function getConversations(
   if (search) {
     query = query.or(`phone.ilike.%${search}%,contact.name.ilike.%${search}%`)
   }
-  if (buttonConversationIds) {
-    query = query.in('id', buttonConversationIds)
+  if (combinedConversationIds) {
+    query = query.in('id', combinedConversationIds)
   }
 
   // Pagination

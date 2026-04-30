@@ -39,7 +39,8 @@ export function useInbox(options: UseInboxOptions = {}) {
   const [statusFilter, setStatusFilter] = useState<ConversationStatus | null>(null)
   const [modeFilter, setModeFilter] = useState<ConversationMode | null>(null)
   const [labelFilter, setLabelFilter] = useState<string | null>(null)
-  // Aba "Confirmou cadastro" → filtra conversas com mensagem button_reply do template welcome.
+  // Filtros do bloco "abas por botão de template": template selecionado + botão clicado.
+  const [templateFilter, setTemplateFilter] = useState<string | null>(null)
   const [buttonFilter, setButtonFilter] = useState<string | null>(null)
   const [page, setPage] = useState(1)
 
@@ -71,6 +72,7 @@ export function useInbox(options: UseInboxOptions = {}) {
     labelId: labelFilter ?? undefined,
     search: search || undefined,
     buttonPayload: buttonFilter ?? undefined,
+    templateName: templateFilter ?? undefined,
     initialData: options.initialData?.conversations,
   })
 
@@ -307,6 +309,8 @@ export function useInbox(options: UseInboxOptions = {}) {
     onLabelFilterChange: setLabelFilter,
     buttonFilter,
     onButtonFilterChange: setButtonFilter,
+    templateFilter,
+    onTemplateFilterChange: setTemplateFilter,
 
     // Conversation actions
     onModeToggle: handleModeToggle,
