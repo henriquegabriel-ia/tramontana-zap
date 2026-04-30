@@ -65,8 +65,11 @@ export function useInbox(options: UseInboxOptions = {}) {
     totalUnread,
     isLoading: isLoadingConversations,
     hasNextPage,
+    // Filtros de botão/template costumam render listas amplas (78+ no welcome).
+    // Sem paginação ainda, sobe o limite quando algum desses está ativo.
   } = useConversations({
     page,
+    limit: buttonFilter || templateFilter ? 100 : undefined,
     status: statusFilter ?? undefined,
     mode: modeFilter ?? undefined,
     labelId: labelFilter ?? undefined,
