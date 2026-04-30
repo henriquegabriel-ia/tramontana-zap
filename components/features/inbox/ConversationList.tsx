@@ -99,11 +99,13 @@ export function ConversationList({
     }
   }, [buttonFilter, buttonTabs, onButtonFilterChange])
 
-  // Filter conversations by unread
+  // Filter conversations by unread.
+  // Quando botão/template está ativo, ignora o "só não lidas" — esses filtros
+  // são de propósito (ver TODOS que clicaram), o filtro local confundiria.
   const filteredConversations = useMemo(() => {
-    if (!showOnlyUnread) return conversations
+    if (!showOnlyUnread || buttonFilter || templateFilter) return conversations
     return conversations.filter(c => c.unread_count > 0)
-  }, [conversations, showOnlyUnread])
+  }, [conversations, showOnlyUnread, buttonFilter, templateFilter])
 
   // Active filter count
   const activeFilterCount = useMemo(() => {
