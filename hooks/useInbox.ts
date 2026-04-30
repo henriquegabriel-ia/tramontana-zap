@@ -39,6 +39,8 @@ export function useInbox(options: UseInboxOptions = {}) {
   const [statusFilter, setStatusFilter] = useState<ConversationStatus | null>(null)
   const [modeFilter, setModeFilter] = useState<ConversationMode | null>(null)
   const [labelFilter, setLabelFilter] = useState<string | null>(null)
+  // Aba "Confirmou cadastro" → filtra conversas com mensagem button_reply do template welcome.
+  const [buttonFilter, setButtonFilter] = useState<string | null>(null)
   const [page, setPage] = useState(1)
 
   // Selected conversation ID (from URL or state)
@@ -68,6 +70,7 @@ export function useInbox(options: UseInboxOptions = {}) {
     mode: modeFilter ?? undefined,
     labelId: labelFilter ?? undefined,
     search: search || undefined,
+    buttonPayload: buttonFilter ?? undefined,
     initialData: options.initialData?.conversations,
   })
 
@@ -302,6 +305,8 @@ export function useInbox(options: UseInboxOptions = {}) {
     onModeFilterChange: setModeFilter,
     labelFilter,
     onLabelFilterChange: setLabelFilter,
+    buttonFilter,
+    onButtonFilterChange: setButtonFilter,
 
     // Conversation actions
     onModeToggle: handleModeToggle,

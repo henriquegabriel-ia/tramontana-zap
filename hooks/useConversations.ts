@@ -38,22 +38,23 @@ export interface UseConversationsParams {
   mode?: ConversationMode
   labelId?: string
   search?: string
+  buttonPayload?: string
   initialData?: InboxConversation[]
 }
 
 export function useConversations(params: UseConversationsParams = {}) {
   const queryClient = useQueryClient()
-  const { page = 1, limit = 20, status, mode, labelId, search, initialData } = params
+  const { page = 1, limit = 20, status, mode, labelId, search, buttonPayload, initialData } = params
 
   const queryParams: ConversationListParams = useMemo(
-    () => ({ page, limit, status, mode, labelId, search }),
-    [page, limit, status, mode, labelId, search]
+    () => ({ page, limit, status, mode, labelId, search, buttonPayload }),
+    [page, limit, status, mode, labelId, search, buttonPayload]
   )
 
   const queryKey = getConversationsQueryKey(queryParams)
 
   // Se temos initialData e estamos na página 1 sem filtros, usamos como dados iniciais
-  const isFirstPageNoFilters = page === 1 && !status && !mode && !labelId && !search
+  const isFirstPageNoFilters = page === 1 && !status && !mode && !labelId && !search && !buttonPayload
   const queryInitialData = isFirstPageNoFilters && initialData
     ? {
         conversations: initialData,

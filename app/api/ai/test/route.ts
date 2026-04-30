@@ -172,6 +172,8 @@ export async function POST(req: NextRequest) {
         ai_sentiment: null,
         ai_sources: null,
         payload: null,
+        source_type: 'text',
+        button_payload: null,
         created_at: new Date(Date.now() - (conversationHistory.length - i) * 60000).toISOString(),
       })
     }
@@ -190,6 +192,8 @@ export async function POST(req: NextRequest) {
       ai_sentiment: null,
       ai_sources: null,
       payload: null,
+      source_type: 'text',
+      button_payload: null,
       created_at: new Date().toISOString(),
     })
 

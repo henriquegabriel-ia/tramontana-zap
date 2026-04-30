@@ -105,7 +105,32 @@ export async function GET(request: Request) {
     const { searchParams } = new URL(request.url)
     const status = searchParams.get('status') // 'open' | 'closed' | null (all)
     const search = searchParams.get('search')
+    const button = searchParams.get('button')
     const limit = parseInt(searchParams.get('limit') || '50')
+
+    // Filtro por clique de botão: descobre quais conversas têm pelo menos uma
+    // mensagem inbound com source_type='button_reply' e button_payload casando.
+    let buttonConversationIds: string[] | null = null
+    if (button && button.trim()) {
+      const { data: msgs, error: msgErr } = await supabase
+        .from('inbox_messages')
+        .select('conversation_id')
+        .eq('source_type', 'button_reply')
+        .eq('button_payload', button.trim())
+      if (msgErr) {
+        console.error('[attendant-api] button filter query error:', msgErr.message)
+        return NextResponse.json({ error: msgErr.message }, { status: 500 })
+      }
+      buttonConversationIds = Array.from(
+        new Set((msgs || []).map((m) => m.conversation_id as string))
+      )
+      if (buttonConversationIds.length === 0) {
+        return NextResponse.json({
+          conversations: [],
+          counts: { total: 0, urgent: 0, ai: 0, human: 0, resolved: 0 },
+        })
+      }
+    }
 
     // Query base
     let query = supabase
@@ -117,6 +142,10 @@ export async function GET(request: Request) {
       `)
       .order('last_message_at', { ascending: false, nullsFirst: false })
       .limit(limit)
+
+    if (buttonConversationIds) {
+      query = query.in('id', buttonConversationIds)
+    }
 
     // Filtro por status
     if (status === 'open') {

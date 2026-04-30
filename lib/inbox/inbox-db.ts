@@ -46,6 +46,8 @@ export interface ConversationFilters {
   search?: string
   page?: number
   limit?: number
+  /** Filtra conversas que tenham pelo menos uma mensagem inbound com este botão clicado. */
+  buttonPayload?: string
 }
 
 export interface PaginatedConversations {
@@ -62,7 +64,28 @@ export async function getConversations(
   filters: ConversationFilters = {}
 ): Promise<PaginatedConversations> {
   const supabase = getClient()
-  const { status, mode, labelId, search, page = 1, limit = 20 } = filters
+  const { status, mode, labelId, search, page = 1, limit = 20, buttonPayload } = filters
+
+  // Filtro por botão clicado: descobre quais conversation_ids têm mensagens
+  // inbound com source_type='button_reply' e button_payload casando, e restringe
+  // a query principal a esses ids. Usa o índice parcial idx_inbox_messages_button_payload.
+  let buttonConversationIds: string[] | null = null
+  if (buttonPayload && buttonPayload.trim()) {
+    const { data: msgs, error: msgErr } = await supabase
+      .from('inbox_messages')
+      .select('conversation_id')
+      .eq('source_type', 'button_reply')
+      .eq('button_payload', buttonPayload.trim())
+    if (msgErr) {
+      throw new Error(`Failed to filter by button payload: ${msgErr.message}`)
+    }
+    buttonConversationIds = Array.from(
+      new Set((msgs || []).map((m) => m.conversation_id as string))
+    )
+    if (buttonConversationIds.length === 0) {
+      return { conversations: [], total: 0, page, totalPages: 0 }
+    }
+  }
 
   let query = supabase
     .from('inbox_conversations')
@@ -85,6 +108,9 @@ export async function getConversations(
   }
   if (search) {
     query = query.or(`phone.ilike.%${search}%,contact.name.ilike.%${search}%`)
+  }
+  if (buttonConversationIds) {
+    query = query.in('id', buttonConversationIds)
   }
 
   // Pagination

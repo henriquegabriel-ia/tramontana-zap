@@ -9,7 +9,12 @@
 
 import { useState, useMemo } from 'react'
 import { useRouter } from 'next/navigation'
-import { Search, RefreshCw, LogOut, ShieldAlert, Loader2, Sparkles, User, AlertCircle, Sun, Moon } from 'lucide-react'
+import { Search, RefreshCw, LogOut, ShieldAlert, Loader2, Sparkles, User, AlertCircle, Sun, Moon, CheckCircle2 } from 'lucide-react'
+
+// Botões do template welcome filtráveis. Whitelist explícita.
+const ATTENDANT_BUTTON_TABS: Array<{ payload: string; label: string }> = [
+  { payload: 'Confirmar cadastro', label: 'Confirmou cadastro' },
+]
 import { useAttendant } from '@/components/attendant/AttendantProvider'
 import { useTheme } from './layout'
 import {
@@ -348,6 +353,7 @@ export default function AtendimentoPage() {
   const { resolvedTheme, setTheme } = useTheme()
   const [activeTab, setActiveTab] = useState<FilterTab>('all')
   const [searchQuery, setSearchQuery] = useState('')
+  const [buttonFilter, setButtonFilter] = useState<string | null>(null)
 
   // Buscar conversas reais da API
   const {
@@ -359,6 +365,7 @@ export default function AtendimentoPage() {
   } = useAttendantConversations({
     status: 'open',
     search: searchQuery || undefined,
+    buttonPayload: buttonFilter || undefined,
   })
 
   // Filtrar conversas por tab
@@ -512,6 +519,44 @@ export default function AtendimentoPage() {
 
       {/* Filter tabs */}
       <FilterTabs activeTab={activeTab} onTabChange={setActiveTab} counts={counts} />
+
+      {/* Abas por clique de botão (welcome flow) */}
+      <div
+        className="flex gap-1.5 px-4 py-2 overflow-x-auto scrollbar-hide"
+        style={{ borderBottom: '1px solid var(--geist-border)' }}
+      >
+        <button
+          type="button"
+          onClick={() => setButtonFilter(null)}
+          className="flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-medium transition-all"
+          style={{
+            backgroundColor: buttonFilter === null ? 'var(--geist-foreground)' : 'transparent',
+            color: buttonFilter === null ? 'var(--geist-background)' : 'var(--geist-foreground-secondary)',
+            border: buttonFilter === null ? 'none' : '1px solid var(--geist-border)',
+          }}
+        >
+          Todas
+        </button>
+        {ATTENDANT_BUTTON_TABS.map((tab) => {
+          const active = buttonFilter === tab.payload
+          return (
+            <button
+              key={tab.payload}
+              type="button"
+              onClick={() => setButtonFilter(active ? null : tab.payload)}
+              className="flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-medium transition-all"
+              style={{
+                backgroundColor: active ? WHATSAPP_GREEN : 'transparent',
+                color: active ? '#ffffff' : 'var(--geist-foreground-secondary)',
+                border: active ? 'none' : '1px solid var(--geist-border)',
+              }}
+            >
+              <CheckCircle2 size={14} />
+              {tab.label}
+            </button>
+          )
+        })}
+      </div>
 
       {/* Conversation list */}
       <div className="flex-1 overflow-y-auto">

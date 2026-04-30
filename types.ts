@@ -593,6 +593,8 @@ export interface InboxMessage {
   ai_sentiment: Sentiment | null;
   ai_sources: Array<{ title: string; content: string }> | null;
   payload: Record<string, unknown> | null;
+  source_type: 'text' | 'button_reply' | 'list_reply' | 'media' | 'system';
+  button_payload: string | null;
   created_at: string;
 }
 
@@ -731,7 +733,11 @@ export interface CreateInboxMessageDTO {
   ai_sentiment?: Sentiment | null;
   ai_sources?: Array<{ title: string; content: string }> | null;
   payload?: Record<string, unknown>;
+  source_type?: InboxMessageSourceType;
+  button_payload?: string | null;
 }
+
+export type InboxMessageSourceType = 'text' | 'button_reply' | 'list_reply' | 'media' | 'system';
 
 export interface CreateAIAgentDTO {
   name: string;

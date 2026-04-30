@@ -153,6 +153,30 @@ function extractInboundText(message: any): string {
   return ''
 }
 
+// Identifica se a mensagem veio de um clique de botão/lista de template e
+// retorna o texto exato selecionado pelo usuário (usado como filtro no inbox).
+function extractInboundSource(message: any): {
+  sourceType: 'text' | 'button_reply' | 'list_reply'
+  buttonPayload: string | null
+} {
+  const buttonText = message?.button?.text
+  if (typeof buttonText === 'string' && buttonText.trim()) {
+    return { sourceType: 'button_reply', buttonPayload: buttonText.trim() }
+  }
+
+  const interactiveButtonTitle = message?.interactive?.button_reply?.title
+  if (typeof interactiveButtonTitle === 'string' && interactiveButtonTitle.trim()) {
+    return { sourceType: 'button_reply', buttonPayload: interactiveButtonTitle.trim() }
+  }
+
+  const interactiveListTitle = message?.interactive?.list_reply?.title
+  if (typeof interactiveListTitle === 'string' && interactiveListTitle.trim()) {
+    return { sourceType: 'list_reply', buttonPayload: interactiveListTitle.trim() }
+  }
+
+  return { sourceType: 'text', buttonPayload: null }
+}
+
 function isOptOutKeyword(textRaw: string): boolean {
   const t = String(textRaw || '')
     .trim()
@@ -959,8 +983,9 @@ export async function POST(request: NextRequest) {
           const from = message.from
           const messageType = message.type
           const text = extractInboundText(message)
+          const { sourceType, buttonPayload } = extractInboundSource(message)
           const phoneNumberId = change?.value?.metadata?.phone_number_id || null
-          console.log(`📩 Incoming message from ${from}: ${messageType}${text ? ` | text="${text}"` : ''}`)
+          console.log(`📩 Incoming message from ${from}: ${messageType}${text ? ` | text="${text}"` : ''}${sourceType !== 'text' ? ` | source=${sourceType}` : ''}`)
 
           // Debug log no DB (backup garantido pra debug de prod)
           try {
@@ -987,6 +1012,8 @@ export async function POST(request: NextRequest) {
               timestamp: message.timestamp,
               mediaUrl: message.image?.url || message.video?.url || message.audio?.url || message.document?.url || null,
               phoneNumberId: phoneNumberId || undefined,
+              sourceType,
+              buttonPayload,
             })
             console.log(`📥 Inbox: conversation=${inboxResult.conversationId}, message=${inboxResult.messageId}, ai=${inboxResult.triggeredAI}`)
           } catch (inboxError) {

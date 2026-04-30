@@ -296,6 +296,8 @@ export function useMessages(conversationId: string | null) {
         ai_sentiment: null,
         ai_sources: null,
         payload: null,
+        source_type: 'text',
+        button_payload: null,
       }
 
       queryClient.setQueryData(

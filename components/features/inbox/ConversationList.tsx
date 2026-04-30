@@ -11,9 +11,15 @@
  */
 
 import React, { useState, useMemo } from 'react'
-import { Search, SlidersHorizontal, Bot, User, X, Inbox } from 'lucide-react'
+import { Search, SlidersHorizontal, Bot, User, X, Inbox, CheckCircle2 } from 'lucide-react'
 import { cn } from '@/lib/utils'
 import { Input } from '@/components/ui/input'
+
+// Botões do template de boas-vindas (cadastro_tramontana_utilidade_v2) que viram aba.
+// Whitelist explícita: se subirmos novo template, atualizar aqui.
+const BUTTON_TABS: Array<{ payload: string; label: string }> = [
+  { payload: 'Confirmar cadastro', label: 'Confirmou cadastro' },
+]
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -44,6 +50,8 @@ export interface ConversationListProps {
   onModeFilterChange: (mode: ConversationMode | null) => void
   labelFilter: string | null
   onLabelFilterChange: (labelId: string | null) => void
+  buttonFilter: string | null
+  onButtonFilterChange: (buttonPayload: string | null) => void
 }
 
 export function ConversationList({
@@ -61,6 +69,8 @@ export function ConversationList({
   onModeFilterChange,
   labelFilter,
   onLabelFilterChange,
+  buttonFilter,
+  onButtonFilterChange,
 }: ConversationListProps) {
   const [showFilters, setShowFilters] = useState(false)
   const [showOnlyUnread, setShowOnlyUnread] = useState(false)
@@ -86,6 +96,7 @@ export function ConversationList({
     onStatusFilterChange(null)
     onModeFilterChange(null)
     onLabelFilterChange(null)
+    onButtonFilterChange(null)
     onSearchChange('')
     setShowOnlyUnread(false)
   }
@@ -249,6 +260,39 @@ export function ConversationList({
             {showOnlyUnread && <span className="ml-0.5">✕</span>}
           </button>
         )}
+
+        {/* Abas por botão clicado (welcome flow). */}
+        <div className="flex items-center gap-1 mt-2 overflow-x-auto">
+          <button
+            onClick={() => onButtonFilterChange(null)}
+            className={cn(
+              'shrink-0 px-2.5 py-1 rounded-full text-[10px] font-medium transition-all',
+              buttonFilter === null
+                ? 'bg-[var(--ds-bg-surface)] text-[var(--ds-text-primary)]'
+                : 'text-[var(--ds-text-muted)] hover:text-[var(--ds-text-secondary)] hover:bg-[var(--ds-bg-surface)]/50'
+            )}
+          >
+            Todas
+          </button>
+          {BUTTON_TABS.map((tab) => {
+            const active = buttonFilter === tab.payload
+            return (
+              <button
+                key={tab.payload}
+                onClick={() => onButtonFilterChange(active ? null : tab.payload)}
+                className={cn(
+                  'shrink-0 inline-flex items-center gap-1 px-2.5 py-1 rounded-full text-[10px] font-medium transition-all',
+                  active
+                    ? 'bg-emerald-500/15 text-emerald-400 border border-emerald-500/30'
+                    : 'text-[var(--ds-text-muted)] hover:text-[var(--ds-text-secondary)] hover:bg-[var(--ds-bg-surface)]/50'
+                )}
+              >
+                <CheckCircle2 className="h-3 w-3" />
+                {tab.label}
+              </button>
+            )
+          })}
+        </div>
       </div>
 
       {/* Conversation list - no ScrollArea wrapper for native feel */}

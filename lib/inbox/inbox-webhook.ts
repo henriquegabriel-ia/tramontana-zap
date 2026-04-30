@@ -67,6 +67,10 @@ export interface InboundMessagePayload {
   mediaUrl?: string | null
   /** Phone number ID that received the message */
   phoneNumberId?: string
+  /** Origem da mensagem (ex.: clique de botão num template). */
+  sourceType?: 'text' | 'button_reply' | 'list_reply' | 'media' | 'system'
+  /** Texto exato do botão clicado (apenas quando sourceType = button_reply/list_reply). */
+  buttonPayload?: string | null
 }
 
 export interface StatusUpdatePayload {
@@ -116,8 +120,12 @@ export async function handleInboundMessage(
           raw_type: payload.type,
           timestamp: payload.timestamp,
           phone_number_id: payload.phoneNumberId,
+          source_type: payload.sourceType || 'text',
+          button_payload: payload.buttonPayload || null,
         },
         p_contact_id: null, // Contact lookup done inside RPC if needed
+        p_source_type: payload.sourceType || 'text',
+        p_button_payload: payload.buttonPayload || null,
       })
 
       if (!error && data) {
@@ -235,7 +243,11 @@ async function handleInboundMessageLegacy(
       raw_type: payload.type,
       timestamp: payload.timestamp,
       phone_number_id: payload.phoneNumberId,
+      source_type: payload.sourceType || 'text',
+      button_payload: payload.buttonPayload || null,
     },
+    source_type: payload.sourceType || 'text',
+    button_payload: payload.buttonPayload || null,
   })
 
   // 3. Trigger AI

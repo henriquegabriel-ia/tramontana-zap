@@ -24,6 +24,8 @@ export interface ConversationListParams {
   mode?: ConversationMode
   labelId?: string
   search?: string
+  /** Filtra conversas que têm pelo menos uma resposta com botão batendo neste texto. */
+  buttonPayload?: string
 }
 
 export interface ConversationListResult {
@@ -83,6 +85,7 @@ async function listConversations(params: ConversationListParams = {}): Promise<C
   if (params.mode) searchParams.set('mode', params.mode)
   if (params.labelId) searchParams.set('label_id', params.labelId)
   if (params.search) searchParams.set('search', params.search)
+  if (params.buttonPayload) searchParams.set('button', params.buttonPayload)
 
   const response = await fetch(`/api/inbox/conversations?${searchParams.toString()}`)
   if (!response.ok) {

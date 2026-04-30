@@ -71,6 +71,8 @@ export interface InboxViewProps {
   onModeFilterChange: (mode: ConversationMode | null) => void
   labelFilter: string | null
   onLabelFilterChange: (labelId: string | null) => void
+  buttonFilter: string | null
+  onButtonFilterChange: (buttonPayload: string | null) => void
 
   // Conversation actions
   onModeToggle: () => void
@@ -119,6 +121,8 @@ export function InboxView({
   onModeFilterChange,
   labelFilter,
   onLabelFilterChange,
+  buttonFilter,
+  onButtonFilterChange,
   onModeToggle,
   onCloseConversation,
   onReopenConversation,
@@ -204,6 +208,8 @@ export function InboxView({
                   onModeFilterChange={onModeFilterChange}
                   labelFilter={labelFilter}
                   onLabelFilterChange={onLabelFilterChange}
+                  buttonFilter={buttonFilter}
+                  onButtonFilterChange={onButtonFilterChange}
                 />
               </ErrorBoundary>
             </div>
