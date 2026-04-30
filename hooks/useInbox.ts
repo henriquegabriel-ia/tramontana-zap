@@ -70,9 +70,13 @@ export function useInbox(options: UseInboxOptions = {}) {
   } = useConversations({
     page,
     limit: buttonFilter || templateFilter ? 100 : undefined,
-    status: statusFilter ?? undefined,
-    mode: modeFilter ?? undefined,
-    labelId: labelFilter ?? undefined,
+    // Quando o filtro de botão/template está ativo, ignoramos modo/status/label
+    // para sempre mostrar TODOS os matches do servidor — esses filtros são de
+    // intenção explícita ("ver quem clicou X"), e qualquer outro filtro
+    // antigo persistido no estado iria cortar a lista.
+    status: buttonFilter || templateFilter ? undefined : statusFilter ?? undefined,
+    mode: buttonFilter || templateFilter ? undefined : modeFilter ?? undefined,
+    labelId: buttonFilter || templateFilter ? undefined : labelFilter ?? undefined,
     search: search || undefined,
     buttonPayload: buttonFilter ?? undefined,
     templateName: templateFilter ?? undefined,

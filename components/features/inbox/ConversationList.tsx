@@ -80,7 +80,6 @@ export function ConversationList({
   onTemplateFilterChange,
 }: ConversationListProps) {
   const [showFilters, setShowFilters] = useState(false)
-  const [showOnlyUnread, setShowOnlyUnread] = useState(false)
 
   const { templates: templatesWithButtons, welcomeDefault } = useTemplatesWithButtons()
   // Default = welcome quando o usuário ainda não escolheu nada explicitamente.
@@ -99,13 +98,9 @@ export function ConversationList({
     }
   }, [buttonFilter, buttonTabs, onButtonFilterChange])
 
-  // Filter conversations by unread.
-  // Quando botão/template está ativo, ignora o "só não lidas" — esses filtros
-  // são de propósito (ver TODOS que clicaram), o filtro local confundiria.
-  const filteredConversations = useMemo(() => {
-    if (!showOnlyUnread || buttonFilter || templateFilter) return conversations
-    return conversations.filter(c => c.unread_count > 0)
-  }, [conversations, showOnlyUnread, buttonFilter, templateFilter])
+  // Lista da sidebar nunca corta o backend localmente — todos os filtros
+  // ficam no servidor.
+  const filteredConversations = conversations
 
   // Active filter count
   const activeFilterCount = useMemo(() => {
@@ -113,9 +108,8 @@ export function ConversationList({
     if (statusFilter) count++
     if (modeFilter) count++
     if (labelFilter) count++
-    if (showOnlyUnread) count++
     return count
-  }, [statusFilter, modeFilter, labelFilter, showOnlyUnread])
+  }, [statusFilter, modeFilter, labelFilter])
 
   // Clear all filters
   const clearFilters = () => {
@@ -125,7 +119,6 @@ export function ConversationList({
     onButtonFilterChange(null)
     onTemplateFilterChange(null)
     onSearchChange('')
-    setShowOnlyUnread(false)
   }
 
   return (
@@ -272,20 +265,12 @@ export function ConversationList({
           </DropdownMenu>
         </div>
 
-        {/* Unread filter toggle */}
+        {/* Indicador de não lidas (informativo, não mais clicável). */}
         {totalUnread > 0 && (
-          <button
-            onClick={() => setShowOnlyUnread(prev => !prev)}
-            className={`flex items-center gap-1.5 mt-2 px-2 py-1 rounded-full text-[10px] transition-all ${
-              showOnlyUnread
-                ? 'bg-purple-500/20 text-purple-400 border border-purple-500/30'
-                : 'text-[var(--ds-text-muted)] hover:text-[var(--ds-text-secondary)]'
-            }`}
-          >
+          <div className="flex items-center gap-1.5 mt-2 px-2 py-1 text-[10px] text-[var(--ds-text-muted)]">
             <span className="w-1.5 h-1.5 rounded-full bg-purple-500 animate-pulse" />
             {totalUnread} {totalUnread === 1 ? 'não lida' : 'não lidas'}
-            {showOnlyUnread && <span className="ml-0.5">✕</span>}
-          </button>
+          </div>
         )}
 
         {/* Bloco de filtro por template + abas dos botões daquele template. */}
